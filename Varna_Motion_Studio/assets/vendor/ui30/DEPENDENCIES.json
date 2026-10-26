@@ -1,0 +1,69 @@
+[
+  {
+    "name": "split.js",
+    "version": "1.6.5",
+    "source": "https://registry.npmjs.org/split.js/-/split.js-1.6.5.tgz",
+    "license": "MIT"
+  },
+  {
+    "name": "fuse.js",
+    "version": "7.1.0",
+    "source": "https://registry.npmjs.org/fuse.js/-/fuse.js-7.1.0.tgz",
+    "license": "Apache-2.0"
+  },
+  {
+    "name": "tom-select",
+    "version": "2.6.2",
+    "source": "https://registry.npmjs.org/tom-select/-/tom-select-2.6.2.tgz",
+    "license": "Apache-2.0"
+  },
+  {
+    "name": "driver.js",
+    "version": "1.4.0",
+    "source": "https://registry.npmjs.org/driver.js/-/driver.js-1.4.0.tgz",
+    "license": "MIT"
+  },
+  {
+    "name": "lucide-static",
+    "version": "1.57.0",
+    "source": "https://registry.npmjs.org/lucide-static/-/lucide-static-1.57.0.tgz",
+    "license": "ISC",
+    "icons": [
+      "audio-lines",
+      "type",
+      "layers",
+      "clapperboard",
+      "music-2",
+      "table-2",
+      "scan",
+      "upload",
+      "house",
+      "search",
+      "sliders-horizontal",
+      "panel-left",
+      "panel-right",
+      "wand-sparkles",
+      "layout-template",
+      "command",
+      "circle-help",
+      "arrow-right",
+      "chevron-left",
+      "x",
+      "rotate-ccw",
+      "maximize-2",
+      "check",
+      "star",
+      "palette",
+      "film",
+      "play",
+      "square",
+      "folder-open"
+    ]
+  },
+  {
+    "name": "tweakpane",
+    "version": "3.1.10",
+    "license": "MIT",
+    "source": "https://github.com/cocopon/tweakpane"
+  }
+]

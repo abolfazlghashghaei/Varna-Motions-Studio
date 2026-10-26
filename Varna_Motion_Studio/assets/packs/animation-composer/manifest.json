@@ -1,0 +1,13 @@
+{
+  "source": "user-supplied Animation Composer / Mister Horse packs",
+  "note": "Original proprietary .mhcitem/.aex assets are preserved as supplied. Varna R10 recreates 43 text-focused Composer-style motions with native After Effects text animators and smooth UI previews; proprietary .mhcitem decoding/execution is not performed.",
+  "counts": {
+    "items_2_mhcitem": 471,
+    "items_2_preview": 471,
+    "items_3_mhcitem": 347,
+    "items_3_preview": 347,
+    "aegraphic": 4,
+    "engine_files": 3
+  },
+  "native_text_motion_count": 43
+}

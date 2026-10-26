@@ -1,0 +1,15 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.resolve(__dirname,'..');
+const app=fs.readFileSync(path.join(root,'js/app.js'),'utf8');
+const eng=fs.readFileSync(path.join(root,'js/node-engine.js'),'utf8');
+const man=fs.readFileSync(path.join(root,'CSXS/manifest.xml'),'utf8');
+const inst=fs.readFileSync(path.join(root,'INSTALL_WINDOWS.ps1'),'utf8');
+assert(man.includes('<AutoVisible>true</AutoVisible>'),'panel lifecycle must stay compatible');
+assert(!/await loadFonts\(\).*await refreshModelList\(\)/s.test(app),'heavy font/model startup scan must be removed');
+assert(!/renderAll\(\);startPlayheadFollow\(\)/.test(app),'playhead poll must not start at boot');
+assert(app.includes("setTimeout(async()=>{try{const p=await host('ping')"),'light delayed host handshake missing');
+assert(app.includes("page==='text'"),'lazy text page behavior missing');
+assert(eng.includes('function killTree(child)'),'process tree cleanup missing');
+assert(eng.includes('api.shutdown=function()'),'shutdown cleanup missing');
+assert(!inst.includes('taskkill.exe')&&inst.includes('externalPathsModified = @()'),'installer must leave shared AI processes and paths alone');
+console.log('RC6 stable startup/memory checks passed');

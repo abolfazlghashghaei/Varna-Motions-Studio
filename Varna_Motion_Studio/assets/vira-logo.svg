@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vira by varnalabs">
+<defs><linearGradient id="v" x1="8" y1="7" x2="55" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#8EF3FF"/><stop offset=".52" stop-color="#7C66FF"/><stop offset="1" stop-color="#C14CFF"/></linearGradient></defs>
+<rect x="4" y="4" width="56" height="56" rx="18" fill="#0E1422" stroke="url(#v)" stroke-width="2"/>
+<path d="M15 19l16 29 18-29" fill="none" stroke="url(#v)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="49" cy="19" r="3" fill="#8EF3FF"/>
+</svg>
