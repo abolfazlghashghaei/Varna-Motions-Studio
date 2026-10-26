@@ -1,6 +1,14 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 cd /d "%~dp0"
+if exist "%~dp0..\PREPARE_GITHUB_DOWNLOAD.ps1" (
+    powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0..\PREPARE_GITHUB_DOWNLOAD.ps1"
+    if errorlevel 1 (
+        echo Package preparation failed. See the error above.
+        pause
+        exit /b 1
+    )
+)
 chcp 65001 >nul
 title Varna Motion Studio - Install
 

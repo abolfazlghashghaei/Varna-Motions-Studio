@@ -8,8 +8,8 @@
     },
     {
       "path": "INSTALL_WINDOWS.bat",
-      "bytes": 1291,
-      "sha256": "652e0bc1d1c2c2a702752ea42b9dc63c4aedf1fba1ce921d727593c438c07c4e"
+      "bytes": 1621,
+      "sha256": "b78ce96f550b3de5f18dc5771866bbcfd0d44009b368cc1b4207205983d982cc"
     },
     {
       "path": "INSTALL_WINDOWS.ps1",
