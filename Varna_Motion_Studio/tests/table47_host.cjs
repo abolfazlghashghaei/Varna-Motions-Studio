@@ -1,0 +1,22 @@
+const assert=require('node:assert/strict'),fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(__dirname,'..'),prefix=fs.readFileSync(__dirname+'/r14.cjs','utf8').split('(async()=>{try{')[0],sandbox={require,__dirname,console,Buffer,process,setTimeout,clearTimeout};vm.createContext(sandbox);vm.runInContext(prefix+';tableFixture={hostContext,Prop};',sandbox);
+sandbox.tableFixture.Prop.prototype.setValueAtKey=function(i,v){this.keys[i-1].v=JSON.parse(JSON.stringify(v));};
+const {H,c,ctx,call}=sandbox.tableFixture.hostContext();c.layers.addNull=()=>c.add('null');ctx.app.project.itemByID=id=>id===c.id?c:null;
+const browser={};vm.createContext(browser);vm.runInContext(fs.readFileSync(root+'/js/table-layout.js','utf8'),browser);
+const plain=x=>JSON.parse(JSON.stringify(x));
+for(const dir of ['ltr','rtl'])for(const merges of [[],[{r:0,c:0,rs:1,cs:2}],[{r:0,c:0,rs:2,cs:1}],[{r:0,c:0,rs:2,cs:2}]]){
+ const lines=plain(H._tableDividers([1,2],[3,1],merges,dir));assert.deepEqual(lines,plain(browser.VarnaTableDividers([1,2],[3,1],merges,dir)));
+ if(!merges.length){assert.equal(lines.length,2);assert.equal(Math.abs(lines[0][2]-lines[0][0]),1);assert.equal(lines[1][3]-lines[1][1],1);}
+ if(merges[0]?.rs===2&&merges[0]?.cs===2)assert.equal(lines.length,0);
+}
+let glass=[];H._aeGlassInfo=()=>({available:true});H._applyAEGlass=l=>glass.push(l);
+const p={compId:c.id,rows:[1,1],cols:[1,1],cells:[['الف','ب'],['ج','د']],merges:[{r:0,c:0,rs:1,cs:2}],unified:true,glassEngine:'aeGlass',line:3,stroke:'#123456',dividerOpacity:37,start:1,end:5,width:600,height:300,x:300,y:200,preview:true,animDuration:.6,surfaceEntry:'spring',motion:'rise',stagger:'rows',delay:.2};
+let r=call('buildVarnaTable',p);assert(r.ok,r.error);assert.equal(glass.length,1,'one glass surface');assert(!c._layers.some(l=>l.name.endsWith('_cell')));const handle=c._layers.find(l=>l.name.endsWith('_surface_control'));assert.deepEqual(plain(handle.property('ADBE Transform Group').property('ADBE Position').value),[300,200]);assert(c._layers.every(l=>l===handle||l.parent===handle));assert(c._layers.every(l=>l===handle||l.property('ADBE Transform Group').property('ADBE Opacity').expression.includes('parent.transform.opacity')),'shared fade affects children; AE does not inherit parent opacity automatically');assert.equal(handle.property('ADBE Transform Group').property('ADBE Scale').numKeys,3);
+const lines=c._layers.find(l=>l.name.endsWith('_dividers')).property('ADBE Root Vectors Group');assert.equal(lines.numProperties,2);for(let i=1;i<=2;i++){const stroke=lines.property(i).property('ADBE Vectors Group').property('ADBE Vector Graphic - Stroke');assert.equal(stroke.property('ADBE Vector Stroke Width').value,3);assert.equal(stroke.property('ADBE Vector Stroke Opacity').value,37);assert.deepEqual(plain(stroke.property('ADBE Vector Stroke Color').value),[18/255,52/255,86/255]);}
+const prior=[...c._layers],time=c.time,addText=c.layers.addText;c.layers.addText=()=>{throw Error('TEXT_FAILURE');};r=call('buildVarnaTable',p);assert.equal(r.ok,false);assert.equal(c._layers.length,prior.length);assert(prior.every((layer,i)=>c._layers[i]===layer),'failed replacement retains previous preview');c.layers.addText=addText;assert.equal(c.time,time,'automatic preview preserves playhead');
+for(const entry of ['soft','spring','float','stretch','none']){r=call('buildVarnaTable',{...p,surfaceEntry:entry});assert(r.ok,r.error);assert.equal(c._layers.filter(l=>l.name.endsWith('_surface_control')).length,1);}
+r=call('buildVarnaTable',{...p,unified:false});assert(r.ok,r.error);assert(c._layers.some(l=>l.name.endsWith('_cell')));assert(!c._layers.some(l=>l.name.endsWith('_surface_control')));
+// Cleanup uses the pinned destination, even when the active item is a folder.
+ctx.app.project.activeItem=null;r=call('removeVarnaTablePreview',{compId:c.id});assert(r.ok,r.error);assert.equal(c.numLayers,0);ctx.app.project.activeItem=c;
+r=call('buildVarnaTable',{...p,stagger:'rows',delay:8,cellSettings:{'0:0':{textStart:-4,textEnd:90}}});assert(r.ok,r.error);const text=c._layers.filter(l=>l.type==='text');assert.equal(text.length,1);assert(text.every(l=>l.inPoint>=1&&l.outPoint<=5));
+console.log('PASS Table RC47 host: shared surface, continuous merge-aware RTL/LTR dividers, opacity/color/width, placement, four entries, independent mode, serialized replacement rollback, pinned cleanup and bounded timing (AE model).');

@@ -11,3 +11,9 @@ Historical tests r7, r8, r10, r11, r12, r13 and local_ai remain excluded because
 `tests/rc45_browser.cjs` supplies browser interaction and viewport checks. It requires a separately installed Chromium/Playwright environment (VARNA_CHROMIUM points to the executable). No installed Chromium is available in the build environment; these checks are not counted as passed.
 
 Native Windows installation, Adobe expression evaluation, real template import/render, font shaping, effect compatibility, GPU performance and actual inference remain separate verification requirements.
+
+Table47 adds `table47_host.cjs` to the release gate. Run `node tests/table47_browser.cjs` separately with Playwright and Chromium (`VARNA_CHROMIUM`) for actual DOM, layout and drag/resize/live queue interaction. CEP is mocked; native Adobe rendering is separate. See TABLE47_README_FA.md.
+
+UI47 Fluent Glass: run `node tests/ui47_controls_browser.cjs` with Playwright/Chromium for actual numeric drag/type/slider/keyboard/cancel/bounds/disabled/dynamic-field and theme/viewport checks. Original specialized timeline/gradient handles remain intact. Adobe/CEP native execution is a separate validation boundary. See UI47_README_FA.md.
+
+Production47: `production47_core.cjs` is included in the release gate. `node tests/production47_browser.cjs` exercises every production route, staged background controls, review-only learning, actual right-click menus, explicit batch approval/cancel/stale rejection, undo/redo, protected words, sentence-edge one-to-many learning, license viewing and responsive layouts. Chromium is real; Adobe remains untested. Set VARNA_SCREENSHOT_DIR for browser screenshots. The R6 app expectation was updated from automatic pre-caption mutation to proposal-only review; its legacy explicit memory API and timing assertions remain.

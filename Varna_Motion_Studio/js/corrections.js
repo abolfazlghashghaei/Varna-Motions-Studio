@@ -57,5 +57,29 @@ function diffMarks(before,after){before=String(before||'');after=String(after||'
  let i=0,j=0,ai=0,bj=0;const marks=[];const flush=()=>{if(ai===i&&bj===j)return;if(bj<j){const start=b[bj].start,end=b[j-1].end;marks.push({start,end,from:ai<i?before.slice(a[ai].start,a[i-1].end):'',to:after.slice(start,end),source:'manual'});}ai=i;bj=j;};
  while(i<n&&j<m){if(a[i].key===b[j].key){flush();i++;j++;ai=i;bj=j;}else if(dp[i+1][j]>=dp[i][j+1])i++;else j++;}i=n;j=m;flush();return marks;
 }
-return {key,token,phrase,database,learn,rules,groups,applyText,protectedMask,suggest,inferredAuto,safeAuto,diffMarks};
+// Review is intentionally separate from applyText: exact context, the word itself,
+// approved aliases and nearby spellings all produce proposals, never mutations.
+function reviewMatches(text,input,options){
+ options=options||{};text=String(text||'');const lex=[],re=/\S+/g;let hit;while((hit=re.exec(text)))lex.push({raw:hit[0],key:token(hit[0]),start:hit.index,end:re.lastIndex});
+ const protectedWords=protectedMask(lex,options.protectedPhrases),excluded=new Set(options.excluded||[]),sources=[];
+ const pair=options.pair,goal=pair?phrase(pair.right):null;
+ for(const r of database(input).items){let wrong=r.wrong,right=r.right,left=null,next=null;
+  if(r.mode==='context'){const a=wrong.split(/\s+/),b=right.split(/\s+/);if(a.length<3||b.length<3||token(a[0])!==token(b[0])||token(a[a.length-1])!==token(b[b.length-1]))continue;left=token(a[0]);next=token(a[a.length-1]);wrong=a.slice(1,-1).join(' ');right=r.canonical||b.slice(1,-1).join(' ');}
+  if(goal&&phrase(right)!==goal)continue;if(excluded.has(r.wrongKey)||excluded.has(phrase(wrong)))continue;
+  sources.push({wrong,right,left,next,ruleKey:r.wrongKey,count:r.count||1});
+ }
+ if(pair&&pair.wrong&&pair.right&&!excluded.has(phrase(pair.wrong)))sources.push({wrong:pair.wrong,right:pair.right,ruleKey:phrase(pair.wrong),count:1});
+ const out=new Map();for(const rule of sources){const parts=phrase(rule.wrong).split(' ').filter(Boolean);if(!parts.length||parts.length>16)continue;
+  for(let i=0;i<=lex.length-parts.length;i++){if(parts.some((_,j)=>protectedWords.has(i+j)))continue;
+   const exact=parts.every((v,j)=>v===lex[i+j].key),near=!exact&&options.similar!==false&&parts.length===1&&parts[0].length>=3&&lex[i].key.length>=3&&!riskySingles.has(parts[0])&&!riskySingles.has(lex[i].key)&&!numeric(parts[0])&&!numeric(lex[i].key)&&Math.abs(parts[0].length-lex[i].key.length)<=1&&distance(parts[0],lex[i].key)===1;
+   if(!exact&&!near)continue;if(parts.some((_,j)=>j<parts.length-1&&/[،.!?؟؛][»”’\)\]}"']*$/.test(lex[i+j].raw)))continue;
+   const first=lex[i],last=lex[i+parts.length-1],pre=(first.raw.match(/^[«“‘(\[{"']+/)||[''])[0],post=(last.raw.match(/[،؛:,.!?؟…»”’\)\]}"']+$/)||[''])[0],right=pre+clean(rule.right)+post;
+   if(phrase(text.slice(first.start,last.end))===phrase(right))continue;
+   const reason=near?'similar':rule.left&&lex[i-1]?.key===rule.left&&lex[i+parts.length]?.key===rule.next?'context':'word';
+   const id=first.start+':'+last.end;let row=out.get(id);if(!row){row={start:first.start,end:last.end,wrong:text.slice(first.start,last.end),candidates:[]};out.set(id,row);}
+   const prior=row.candidates.find(c=>phrase(c.right)===phrase(right));if(!prior)row.candidates.push({right,reason,ruleKey:rule.ruleKey,count:rule.count});else if(reason==='context'||prior.reason==='similar'&&reason==='word'){prior.reason=reason;prior.ruleKey=rule.ruleKey;}
+  }
+ }return [...out.values()].sort((a,b)=>a.start-b.start||b.end-a.end).slice(0,options.limit||Infinity);
+}
+return {key,token,phrase,database,learn,rules,groups,applyText,reviewMatches,protectedMask,suggest,inferredAuto,safeAuto,diffMarks};
 });

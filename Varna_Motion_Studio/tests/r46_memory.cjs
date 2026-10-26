@@ -34,13 +34,13 @@ check('project entity locks prevent both phrase and fuzzy auto-edits',()=>{
  assert(engine.includes('C.protectedMask(words,opts.protectedPhrases||[])'));
  assert(engine.includes('w._entityLocked'));
 });
-check('manual subtitle edits learn two-sided context; boundary edits are manual',()=>{
+check('manual edits retain two-sided context plus a bare review alias; boundary edits remain manual',()=>{
  const app=fs.readFileSync(path.join(root,'js/app.js'),'utf8'),start=app.indexOf('function correctionTokenNorm('),end=app.indexOf('function correctionDb(',start);
  assert(start>=0&&end>start);
  const context={C,Set,Array};vm.createContext(context);
  vm.runInContext(app.slice(start,end)+';globalThis.pairs=correctionPairs;',context);
  const inside=Array.from(context.pairs('گفتم بوش کار','گفتم Bosch Pro 5 کار'));
- assert.equal(inside.length,1);assert.equal(inside[0].mode,'context');assert.equal(inside[0].autoApply,true);
+ assert.equal(inside.length,2);const contextual=inside.find(p=>p.mode==='context'),bare=inside.find(p=>p.wrong==='بوش');assert(contextual);assert.equal(contextual.autoApply,true);assert.equal(bare.right,'Bosch Pro 5');assert.equal(bare.autoApply,false);assert.equal(C.applyText('بوش رسید',C.learn({},inside)).text,'بوش رسید');assert.equal(C.reviewMatches('بوش رسید',C.learn({},inside))[0].candidates[0].right,'Bosch Pro 5');
  const edge=Array.from(context.pairs('بوش کار','Bosch Pro 5 کار'));
  assert.equal(edge[0].autoApply,false);
  assert.equal(C.applyText('بوش کار',C.learn({},edge)).text,'بوش کار');
