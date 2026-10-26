@@ -6,7 +6,7 @@ const fixture=new Function('require','__dirname','console','Buffer','process','s
 // RC44 reproduction: this publishes onto the evalFile receiver, not the global scope.
 const reproduced=vm.createContext({});assert.throws(()=>vm.runInContext('(function(){(function(root){root.VarnaKinetic40={};})(this);function render(){return VarnaKinetic40.resolve();}render();}).call({foreign:true});',reproduced,{timeout:1000}),/VarnaKinetic40/);
 ctx.VarnaKinetic40=undefined;ctx.$={global:vm.runInContext('this',ctx),fileName:'/Varna/host/ghaf_host.jsx'};const main=fs.readFileSync(root+'/host/ghaf_host.jsx','utf8');vm.runInContext('(function(){'+main+'\n}).call({foreign:true});',ctx);
-const H=ctx.VarnaHost43;ctx.VarnaKinetic40=undefined;assert.equal(typeof H._kinetic45.pieceBackground,'function');assert.equal(H._bridgeRevision,'rc47.1');
+const H=ctx.VarnaHost43;ctx.VarnaKinetic40=undefined;assert.equal(typeof H._kinetic45.pieceBackground,'function');assert.equal(H._bridgeRevision,'rc47.2');
 H._applyTextStyle=fixture.H._applyTextStyle;H._removeNativeBg=()=>{};H._removeTextBoxBg=()=>{};H._resetCaptionMotion=()=>{};const backgrounds=[],finalized=[];H._applyBg=(layer,b)=>{backgrounds.push({layer,b:plain(b)});return true;};H._applyBgVendorEffects=()=>{};H._finalizeBackground27=(layer,b,d)=>{finalized.push({layer,b:plain(b),d:plain(d)});};
 // Deliberate public-global damage must not affect the actual renderer.
 ctx.GHAFHost={};

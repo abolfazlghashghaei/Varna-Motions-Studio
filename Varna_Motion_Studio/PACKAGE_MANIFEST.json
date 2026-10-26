@@ -14457,6 +14457,11 @@
       "sha256": "d8d58a4562bbb5f72afe61c95a607c9c7a5c77a2ddf6f399c14c730bf1f6eb65"
     },
     {
+      "path": "css/liquid48.css",
+      "bytes": 9556,
+      "sha256": "fdc6a042ccb801ed46a29b727a8c00a5945048873dbeee296cdeaa7fb20a7ea5"
+    },
+    {
       "path": "css/production47.css",
       "bytes": 5835,
       "sha256": "22af9ad130f3ee4d0771b0484c4481e4accfcdb716af64cb64cf2a722b0b9a75"
@@ -14888,8 +14893,8 @@
     },
     {
       "path": "host/ghaf_host.jsx",
-      "bytes": 334813,
-      "sha256": "32875df51b6c2259c86f31c2df41a286399cdccecbf3270a5cdefd63a1fab1a6"
+      "bytes": 336672,
+      "sha256": "c08de3b7c600a5f0fb7e868c3219a3806567beaab89d82549564e92e1e27814e"
     },
     {
       "path": "host/incremental37.jsx",
@@ -14903,8 +14908,8 @@
     },
     {
       "path": "host/kinetic40.jsx",
-      "bytes": 11494,
-      "sha256": "5865ca84e9a2ba17e1a259e2e5bb3e48d876b2b8f4fbdc7bdd2d2e7b3108794a"
+      "bytes": 12167,
+      "sha256": "fb635ccf62e2b6eed71106c3ad3e8bd2dd01d98a2d280032616786ea7f4a0893"
     },
     {
       "path": "host/output35.jsx",
@@ -14953,13 +14958,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 204352,
-      "sha256": "7fd3c6319e3cd7a7e06e51335ce363180a00efe27df886168efca17b3b3477d0"
+      "bytes": 204388,
+      "sha256": "2413cd4755d5c1f7875ddc4348eadd9f3ef59d7e562a3578265c6e8cad7b9ea5"
     },
     {
       "path": "js/app.js",
-      "bytes": 304426,
-      "sha256": "c9a9fc44a7a2ff4c66eaf04ff5cc66bde5a8c85af1edeb48d63979505ebced4d"
+      "bytes": 304647,
+      "sha256": "02270f6c3db2629694d229777864e1a10262125c279207fffe2125ff1e6afed4"
     },
     {
       "path": "js/appearance-state.js",
@@ -14994,7 +14999,7 @@
     {
       "path": "js/cep-bridge.js",
       "bytes": 9494,
-      "sha256": "fca2562e1fcc2b6121cc3a361deefe345760fe44dc40f2376312d75edaa2dfbb"
+      "sha256": "3b2e5f2a51ed914108e41dfd6c0bcdbe4fe7aab65b5a8e83634db7564f01dc46"
     },
     {
       "path": "js/corrections.js",
@@ -15038,8 +15043,13 @@
     },
     {
       "path": "js/kinetic40.js",
-      "bytes": 8919,
-      "sha256": "12eeaa2bde6c82da950c09ca231a462ce14cc6a628efae0bd7112a37b0d28999"
+      "bytes": 9914,
+      "sha256": "5091804e06a1bceda6c98b63243a6fa02364072dbaf4894b7f88301f22341410"
+    },
+    {
+      "path": "js/liquid48.js",
+      "bytes": 7641,
+      "sha256": "241933b1b07436e0b882551d4f65bc1dd0dbb80970d57780315b4e7c4687772b"
     },
     {
       "path": "js/music-engine.js",
@@ -15103,8 +15113,8 @@
     },
     {
       "path": "js/scene40-ui.js",
-      "bytes": 29258,
-      "sha256": "93107d93962643f7d88d1759a70d70bdb7bc938d3b30c2afbbbc7980c09b03a7"
+      "bytes": 32528,
+      "sha256": "d487b146e708d7f60190a09f0154fd672a31a4c869e9eb13fd453992b75b4dbb"
     },
     {
       "path": "js/sfx-policy.js",
@@ -15153,8 +15163,8 @@
     },
     {
       "path": "js/table-designer.js",
-      "bytes": 41565,
-      "sha256": "b179cdf0187837ed41f440043b8b3c75369e3c4720230fd956dcd2a4df89abd9"
+      "bytes": 46201,
+      "sha256": "9051061405c7812482e6256ebcb08b8a1f5ff7c74ae2ddc1656a4558dc15ce9e"
     },
     {
       "path": "js/table-layout.js",
@@ -15235,6 +15245,16 @@
       "path": "tests/installer_package.cjs",
       "bytes": 3046,
       "sha256": "8a331232fab6c20ca891108629363eb5a1b0174e6bdbdd8fc7078cba48ec47a4"
+    },
+    {
+      "path": "tests/liquid48_browser.cjs",
+      "bytes": 9617,
+      "sha256": "fa4b6d136f43972230d5abfd0c7eb7d044185e6d88ce93fe0d1f2334e66da649"
+    },
+    {
+      "path": "tests/liquid48_host.cjs",
+      "bytes": 4361,
+      "sha256": "db7db7eb750ec717c68d77532666d6c4d9eba614a8ae47210424406f98648ec9"
     },
     {
       "path": "tests/local_ai.cjs",
@@ -15424,7 +15444,7 @@
     {
       "path": "tests/rc24_host.cjs",
       "bytes": 8476,
-      "sha256": "c0bdd49ecc69d586b480ac989adf47d8202252963248690dc0a947966719c1b5"
+      "sha256": "a25ea537e90dc06bf14edae3bdb8ed7160a8a159633b66bfb35a41ff0ed89624"
     },
     {
       "path": "tests/rc24_ui.cjs",
@@ -15649,7 +15669,7 @@
     {
       "path": "tests/rc45_host.cjs",
       "bytes": 5211,
-      "sha256": "6b5575fcc730d914d382b7e2aea92b953936d03b418fc06d3639a192673d115a"
+      "sha256": "f440da64e69deb8c2fb161589953645170349a1758c565576259979863f28214"
     },
     {
       "path": "tests/rc46_host.cjs",
@@ -15733,8 +15753,8 @@
     },
     {
       "path": "tests/run-release.cjs",
-      "bytes": 2042,
-      "sha256": "9e29b4884343680a1d17cc9160945d316c034edd8b0c070b4ee64a6a3b19bfe9"
+      "bytes": 2062,
+      "sha256": "c3714aced374f9379246d9fea667a24bedfd29da13075ffd428fd34a387436f8"
     },
     {
       "path": "tests/table47_browser.cjs",
@@ -15753,8 +15773,8 @@
     },
     {
       "path": "tests/ui.cjs",
-      "bytes": 6193,
-      "sha256": "5190be9debe22ab9cfdb171bb7dd6ff7f96a84f4c5677c85fa7fa5272be4211a"
+      "bytes": 6850,
+      "sha256": "aa77717f448c64bca8abb7a630f22c0be1d4c36226c9ae3cecb5481365c9d6ab"
     },
     {
       "path": "tests/ui47_controls_browser.cjs",

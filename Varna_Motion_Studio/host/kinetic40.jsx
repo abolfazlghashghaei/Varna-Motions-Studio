@@ -17,7 +17,7 @@ GHAFHost._createKinetic40=function(c,g,name){
   var texts=[],data=[],measures=[],backgrounds=[],base=GHAFJSON.parse(GHAFJSON.stringify(g.style||{})),selected=g.highlight37&&(g.highlight37.rawIndices38||g.highlight37.indices)||[];
   for(i=0;i<scene.pieces.length;i++){
    var p=scene.pieces[i],st=GHAFJSON.parse(GHAFJSON.stringify(base)),bg=VarnaKinetic40.pieceBackground(g.bg||{},p);backgrounds.push(bg);
-   st.justifyMode='none';st.align=0;st.maxLines=0;st.fitWidthPct=100;st.boxWidthPct=100;st.rtl=/[\u0600-\u06ff]/.test(p.text);if(p.fontPS)st.fontPS=p.fontPS;if(p.color){st.fill=p.color;st.fillMode='solid';}
+   st.justifyMode='none';st.align=0;st.maxLines=0;st.fitWidthPct=100;st.boxWidthPct=100;st.rtl=/[\u0600-\u06ff]/.test(p.text);if(p.fontPS)st.fontPS=p.fontPS;if(p.look48.tracking!=null)st.tracking=p.look48.tracking;if(p.look48.stroke!=='inherit'){st.stroke=p.look48.stroke==='on';st.strokeHex=p.look48.strokeHex;st.strokeWidth=p.look48.strokeWidth;}if(p.color){st.fill=p.color;st.fillMode='solid';}
    // Measure complete native text first; create its background once after final placement.
    var d={id:String(g.id)+'_'+i,text:GHAFHost._rtlText40(p.text,st.rtl),rawText:p.text,start:0,end:copy.duration,style:st,bg:{enabled:false},anim:{mode:'simple',preset:'none',outPreset:'none',typeSound:false,syncMode:'separate'},highlight37:null},l=GHAFHost._createTextLayer(copy,d,'قطعه '+(i+1)+' · '+p.text),r=l.sourceRectAtTime(0,false);
    texts.push(l);data.push(d);var factor=1,pad=bg.enabled?Math.max(0,Number(bg.padding)||0)*2:0;
@@ -31,14 +31,15 @@ GHAFHost._createKinetic40=function(c,g,name){
    var pacing=Math.max(copy.frameDuration,Math.min(available,Math.max(copy.frameDuration,(next-p.start)*span)));
    var reveal=Math.max(.03,Math.min(motion.duration*Math.max(1,(p.to-p.from)*.65),pacing*.85));
    d.start=p.start*span;d.end=Math.max(d.start+copy.frameDuration,Math.min(copy.duration,p.end*span));
-   d.style.size=Math.max(1,(Number(base.size)||72)*pos.scale);if(Number(base.leading)>0)d.style.leading=Number(base.leading)*pos.scale;
+   d.style.size=Math.max(1,(Number(base.size)||72)*pos.scale);if(d.style.stroke)d.style.strokeWidth=(Number(d.style.strokeWidth)||2)*pos.scale;if(Number(base.leading)>0)d.style.leading=Number(base.leading)*pos.scale;
    d.style.x=pos.x/c.width*100;d.style.y=pos.y/c.height*100;d.bg=GHAFJSON.parse(GHAFJSON.stringify(backgrounds[i]));if(d.bg.enabled&&d.bg.padding!=null)d.bg.padding=Number(d.bg.padding)*pos.scale;if(d.bg.enabled&&d.bg.round!=null)d.bg.round=Number(d.bg.round)*pos.scale;
    l.inPoint=d.start;l.outPoint=d.end;GHAFHost._resetCaptionMotion(l,d);GHAFHost._applyTextStyle(l,d.style,d.text);
    var rr=l.sourceRectAtTime(d.start,false),tr=l.property('ADBE Transform Group');tr.property('ADBE Anchor Point').setValue([rr.left+rr.width/2,rr.top+rr.height/2]);tr.property('ADBE Rotate Z').setValue(pos.rotation);
    d.anim={mode:'simple',preset:kind==='type'?'none':kind,outPreset:motion.out==='none'?'none':'mirror:'+motion.out,inDur:reveal,outDur:Math.min(motion.outDuration,available*.4),strength:Math.max(12,d.style.size*.5),typeSound:false,syncMode:'separate',word39:{preset:kind==='type'?'type':'none',order:'forward',timing:'even',duration:reveal,distance:30,colorMode:'static',colorTarget:'important'}};
    GHAFHost._addAnimMarkers(l,d,d.anim);GHAFHost._animTransform(l,d,d.anim);GHAFHost._applyOutro(l,d,d.anim);
+   if(kind==='spring'){var springExpr=GHAFHost._markerProgressExpr('IN','IN',d.start,d.start+reveal,false)+"var u=q>=1?1:1-Math.exp(-7*q)*Math.cos(12*q);var sf=.88+.12*u;";if(motion.out==='pop')springExpr+=GHAFHost._markerProgressExpr('OUT','OUT',Math.max(d.start,d.end-d.anim.outDur),d.end,false)+'sf*=1-.14*q;';tr.property('ADBE Scale').expression=springExpr+'[value[0]*sf,value[1]*sf];';}
    var local=[];if(scene.config.useKeywords)for(var j=0;j<selected.length;j++)if(Number(selected[j])>=p.from&&Number(selected[j])<p.to)local.push(Number(selected[j])-p.from);
-   d.highlight37={indices:local,color:g.highlight37&&g.highlight37.color||'#F8CB67',scale:g.highlight37&&g.highlight37.scale||100};GHAFHost._highlight37(l,d.highlight37,d);
+   d.highlight37={indices:local,color:p.color||g.highlight37&&g.highlight37.color||'#F8CB67',scale:g.highlight37&&g.highlight37.scale||100};GHAFHost._highlight37(l,d.highlight37,d);
    if(!GHAFHost._applyBg(l,d.bg))throw Error('BACKGROUND_APPLY_FAILED');GHAFHost._applyBgVendorEffects(l,d.bg);l.parent=handle;
    GHAFHost._finalizeBackground27(l,d.bg,d);
    // Independent backgrounds keep design rotation and follow the scene handle.
