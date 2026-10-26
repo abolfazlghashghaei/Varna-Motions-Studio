@@ -1,0 +1,1 @@
+PASS Chromium: 26 presets, preset reset, filtering, five themes, speed selector, limits, CPU-only, global correction, punctuation, word boundaries, one undo/redo, alias families, caption search, memory preference persistence, 48 responsive page/size combinations. No page errors. Host and models mocked.

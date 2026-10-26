@@ -1,0 +1,116 @@
+
+SUITE core.cjs
+PASS Selected contiguous words become ONE segment, untouched runs stay together
+PASS No selection and stale IDs never split the whole caption
+PASS SelectedEach only splits chosen words; undo restores merge
+PASS Merged captions split only chosen runs and preserve motion
+PASS Changing caption clears prior word selection
+PASS Global animation undo restores defaults as well as group state
+PASS Kashida fits 2 lines under increasing density without dropping words
+PASS Export carries requested line limit and fitted font size
+PASS Mixed Persian English and numbers are bidi-isolated only for render
+PASS Extracting one middle word keeps chronological position
+PASS Host and client scripts parse
+PASS Preview waits for a complete, stable file before read; delayed generation and cleanup
+PASS Cancelled preview stops polling
+PASS HTTP split UTF-8 bytes preserve Persian ژ
+TOTAL 14
+
+SUITE host.cjs
+PASS native motion, text fit, external motion paths removed
+
+SUITE regression_43.cjs
+PASS large Ctrl+M selection preserves edited tokens
+PASS manual-after caption respects free gap without shifting originals
+PASS synced motion/background undo as one transaction
+TOTAL 3
+
+SUITE timeline_import.cjs
+PASS short caption timing, undo, selected/all source text keys, style-only key merge
+
+SUITE ui.cjs
+PASS UI initialization, draft preview does not commit, explicit apply, separate captions, control restoration, native input undo, caption undo/redo
+
+SUITE r5.cjs
+PASS R5 table styles/range, independent text timing, correction memory normalization, anchored synthetic word timing
+
+SUITE r6.cjs
+PASS R6 AE-native unified theme, stable dual-handle time rail, pre-caption Whisper correction memory
+
+SUITE r9_recovery.cjs
+R9 recovery static checks: PASS
+
+SUITE r14.cjs
+PASS timing: replace/split/merge preserve all future anchors
+PASS timing: inserted token uses silence; contiguous edit never ripples later words
+PASS state: anchored edit undo and redo restore word data and IDs
+PASS memory: bare aliases remain manual; two-sided context and project isolation
+PASS model discovery: changed folders invalidate stale models and ambiguous projectors
+PASS SFX scanning: ui is token-based, duration is read from actual WAV
+PASS SFX learning: replacements penalize old choices; reset clears feedback
+PASS source loudness: real FFmpeg measurement, including visible source interval
+PASS host: missing method and malformed payload report errors
+PASS ExtendScript JSON fallback: Unicode roundtrip, malformed JSON and code rejected
+PASS SFX host model: exact nonzero start/end alignment; per-cue failures; wrong comp rejected
+PASS audio host model: duck overlap merged; no cumulative gain; manual keys, expressions and edited easing preserved
+PASS table host model: 3x3 RTL merged cells, independent text time/font/color and actual outer corners
+PASS output transaction: failed new captions preserve old output and roll back partial layers
+PASS batched output: rollback preserves previous layers and commit replaces only after all batches
+PASS preview transaction: old preview retained on failure; successful layers are guide and cleanup leaves user layers
+PASS CEP bridge: queued calls; timeout blocks mutations; explicit reconnect restores calls
+TOTAL 17 behavioral checks; AE assertions use a simulated host.
+
+SUITE r14_policy.cjs
+PASS SFX policy: ambient isolation, cue duration/strength, caption exclusion, off/soft/strong beat thresholds (12 assertions)
+
+SUITE r14_local_ai.cjs
+PASS 4.5 batch lifecycle: one model load across separated caption jobs; automatic release after complete batch and after failure.
+PASS local AI orchestration: loopback-only, occupied port, UTF-8 paths, hidden child, API-key/model identity, serialized requests, resource restart, bounded CPU/batch/reply, CPU-only, RAM preflight, process priority, automatic post-job unload, owned-process cleanup; fake inference engine
+
+SUITE r44.cjs
+PASS alias families, deduplication and canonical re-correction
+PASS ambiguous corrections require a choice
+PASS Persian normalization, punctuation, boundaries and phrase matching
+PASS unknown variants are reviewed, not silently replaced
+PASS canonical reversal removes self edges
+PASS contextual split preserves later audio anchor and id
+PASS hardware profiles, bounded batches, response limits and GPU zero
+PASS resource signature triggers only necessary reloads
+PASS project canonical rule resolves global alias without modifying global db
+TOTAL 9 correction/resource checks
+
+SUITE rc2.cjs
+PASS RC2: RAM auto-release, motion double-click scope, text glow/gradient, Solid/Text Glow backgrounds, Apple Liquid Glass, Playhead follow, shortcuts, independent gradient rim
+
+SUITE rc3.cjs
+PASS RC3: long-text fast layout and SRT synthetic word timing/split
+
+SUITE r45.cjs
+PASS 4.5 host model: independent native gradient channels, angle/scale/stops/radial geometry, malformed-number bounds, reverse/dither, removal, glow alpha and zero intensity/radius.
+PASS 4.5 bridge: one outstanding read, soft timeout without blocking writes, no poll pile-up, late response recovery, queued-action priority, invalid read ignored.
+
+SUITE rc4.cjs
+PASS RC4: self-healing host, long-output batching/fallback, safe contextual correction memory
+
+SUITE rc6.cjs
+RC6 stable startup/memory checks passed
+
+SUITE rc7.cjs
+RC7 live marker/layer timing checks passed
+
+SUITE r46_memory.cjs
+PASS direct and old imported unsafe rules stay manual even with an explicit auto flag
+PASS two anchors permit a one-to-many brand correction only in the same phrase
+PASS bare spelling aliases are retained for review, not applied blindly
+PASS manual subtitle edits learn two-sided context; boundary edits are manual
+PASS direct selection borrows context only from a unique occurrence
+PASS word-level memory respects pauses/punctuation and a one-off call never saves memory
+TOTAL 6 safe correction checks
+
+SUITE rc8.cjs
+PASS RC8 strict context, SRT word movement/order, exceptions, state compression/bundle, AE project folder roundtrip, preview/shortcuts
+
+SUITE rc5.cjs
+PASS RC5: correction provenance, conservative timing/sentences, manual/TV platform guides, output safety
+
+Release gate: 21/21 suites passed. Adobe runtime and visual review are separate gates.

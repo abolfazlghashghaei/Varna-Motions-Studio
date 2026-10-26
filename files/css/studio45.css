@@ -1,0 +1,29 @@
+/* RC45: stable section routing and a compact phrase inspector. */
+body[data-ui-size44] .studio31-switcher{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden;gap:3px!important;scrollbar-width:thin;padding:3px 0 6px!important;scroll-padding-inline:8px}
+body[data-ui-size44] .studio31-switcher button{display:inline-flex;align-items:center;justify-content:center;gap:4px!important;flex:0 0 auto!important;white-space:nowrap!important;padding:4px 7px!important;min-height:24px!important;font-size:var(--ui44-label)!important;border:1px solid transparent!important}
+body[data-ui-size44] .studio31-switcher button[aria-current=true]{color:var(--u-accent)!important;background:var(--u-soft)!important;border-color:var(--u-line)!important}
+.section-icon45{display:inline-flex;flex:none}.section-icon45 svg{width:13px;height:13px}
+body[data-ui-size44] .workspace{padding:8px 10px!important}
+body[data-ui-size44] .kinetic-grid40{grid-template-columns:minmax(0,1.2fr) minmax(190px,.8fr);gap:12px;align-items:start}
+body[data-ui-size44] .scene-settings40 .control{margin:4px 0!important;gap:3px!important}
+body[data-ui-size44] .scene-settings40>.form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+body[data-ui-size44] .scene-settings40 textarea{min-height:70px!important;max-height:140px;line-height:1.7!important}
+body[data-ui-size44] .scene-preview40{top:6px}
+body[data-ui-size44] #kineticStudio40>.card-title{margin-bottom:5px!important}
+.scene-actions45{display:flex;position:sticky;top:0;z-index:5;padding:6px 0;margin:0 0 8px!important;background:var(--u-panel);border-bottom:1px solid var(--u-line);gap:5px!important;flex-wrap:wrap}
+body[data-ui-size44] .scene-piece-options40.piece-inspector45{display:block;padding:0;border:0;margin:0}
+body[data-ui-size44] .piece-inspector45 details{padding:6px 8px;margin:6px 0;border:1px solid var(--u-line);border-radius:6px}
+body[data-ui-size44] .piece-inspector45 summary{font-size:var(--ui44-label)!important;font-weight:600;padding:2px 0;cursor:pointer}
+body[data-ui-size44] .piece-inspector45 .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;margin-bottom:4px!important}
+body[data-ui-size44] .piece-inspector45 input[type=color]{width:100%!important;height:var(--ui44-control)!important}
+body[data-ui-size44] .piece-bg-fields45{grid-column:1/-1;border:0;margin:0;padding:0;min-width:0}
+.piece-bg-fields45:disabled{opacity:.45}
+body[data-ui-size44] .piece-picker45{border-top:1px solid var(--u-line);padding-top:8px;margin-top:10px!important}
+#sceneStage40{isolation:isolate}.scene-bg45{position:absolute;z-index:1;pointer-events:none;transform-origin:center}.scene-piece40{z-index:2}.scene-piece40.selected45{border:1px dashed var(--u-accent)!important}
+body[data-ui-size44] .scene-transport40{gap:5px;flex-wrap:wrap}
+body[data-ui-size44] .studio40-page .context40{gap:6px;margin:6px 0}.context40 small{font-size:10px}.context40 .control{flex:1 1 170px}
+#previewStatus45{overflow-wrap:anywhere}.preview-error45{color:#ffacac!important}
+body[data-ui-size44] .studio40-page .template-grid38{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))!important;gap:6px}
+body[data-ui-size44] .studio40-page .template-card38{padding:5px!important}
+@media(max-width:720px){body[data-ui-size44] .kinetic-grid40{grid-template-columns:minmax(0,1fr)}body[data-ui-size44] .scene-preview40{position:static;grid-row:1;max-width:250px;width:100%;margin:auto}body[data-ui-size44] .scene-settings40 .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:350px){body[data-ui-size44] .scene-settings40 .form-grid,body[data-ui-size44] .piece-inspector45 .form-grid{grid-template-columns:minmax(0,1fr)!important}body[data-ui-size44] .workspace{padding:5px!important}.section-icon45{display:none}body[data-ui-size44] .studio40-page .template-grid38{grid-template-columns:repeat(2,minmax(0,1fr))!important}.scene-actions45{position:static}}
