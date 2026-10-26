@@ -1,6 +1,12 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 cd /d "%~dp0"
+if not exist "%~dp0INSTALL_WINDOWS.ps1" (
+    echo Incomplete or nested update folder detected. The original installer is missing here.
+    echo Use REPAIR_AND_INSTALL_WINDOWS.bat from the package layout repair ZIP.
+    pause
+    exit /b 1
+)
 if exist "%~dp0..\PREPARE_GITHUB_DOWNLOAD.ps1" (
     powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0..\PREPARE_GITHUB_DOWNLOAD.ps1"
     if errorlevel 1 (

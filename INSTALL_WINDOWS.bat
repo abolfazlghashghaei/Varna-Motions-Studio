@@ -1,6 +1,12 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 cd /d "%~dp0"
+if not exist "%~dp0Varna_Motion_Studio\INSTALL_WINDOWS.ps1" (
+    echo Incomplete or nested update folder detected. The original installer is missing here.
+    echo Use REPAIR_AND_INSTALL_WINDOWS.bat from the package layout repair ZIP.
+    pause
+    exit /b 1
+)
 echo VARNA RC47 - LIQUID48
 echo Close After Effects before installing.
 echo Preparing files from the GitHub download...
