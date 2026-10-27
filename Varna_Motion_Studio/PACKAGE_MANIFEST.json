@@ -15108,8 +15108,8 @@
     },
     {
       "path": "integrations/premiere/premiere52.jsx",
-      "bytes": 4859,
-      "sha256": "d66c93155d057ec0202b119deac3fa5e16b6eb5b512706f162162890c87ff5e3"
+      "bytes": 4944,
+      "sha256": "f410ddfc8177cc1c9d129a67e6193c0a301e8a958774e7da485ada4d4e0b4445"
     },
     {
       "path": "integrations/resolve/Video_Studio.py",
@@ -16058,8 +16058,8 @@
     },
     {
       "path": "tests/studio52_core.cjs",
-      "bytes": 3609,
-      "sha256": "08246aded11bca0f0c78a2ebf23277fb4ca7fbbcec9d9c1c7b22acccd56ec130"
+      "bytes": 4220,
+      "sha256": "919b256e3ccce40c56b5903e8369f95165945f6cb555115f639b4a373631c7c4"
     },
     {
       "path": "tests/table47_browser.cjs",
