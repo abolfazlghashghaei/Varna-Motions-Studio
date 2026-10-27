@@ -152,6 +152,8 @@ function Test-PackageEntry([string]$relative,[string]$root) {
     return $full
 }
 function Include-Entry([string]$relative) {
+    # Shared interface dependencies are required at every installation level.
+    if ($relative.StartsWith('assets/vendor/ui30/') -or $relative.StartsWith('assets/vendor/rebound49/') -or $relative.StartsWith('assets/vendor/conjure49/')) { return $true }
     if ($Level -eq 'Core' -and $relative.StartsWith('assets/sfx/') -and $relative -ne 'assets/sfx/ghaf_type_click.wav') { return $false }
     if ($Level -ne 'Max' -and $relative.StartsWith('assets/packs/')) { return $false }
     if ($Level -ne 'Max' -and $relative.StartsWith('assets/vendor/')) { return $false }

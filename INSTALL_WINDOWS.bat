@@ -7,7 +7,7 @@ if not exist "%~dp0Varna_Motion_Studio\INSTALL_WINDOWS.ps1" (
     pause
     exit /b 1
 )
-echo VARNA RC47 - LIQUID48
+echo VARNA RC47 - FINALIZE49
 echo Close After Effects before installing.
 echo Preparing files from the GitHub download...
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0PREPARE_GITHUB_DOWNLOAD.ps1"

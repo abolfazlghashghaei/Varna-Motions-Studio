@@ -7,7 +7,7 @@ const inst=fs.readFileSync(path.join(root,'INSTALL_WINDOWS.ps1'),'utf8');
 assert(man.includes('<AutoVisible>true</AutoVisible>'),'panel lifecycle must stay compatible');
 assert(!/await loadFonts\(\).*await refreshModelList\(\)/s.test(app),'heavy font/model startup scan must be removed');
 assert(!/renderAll\(\);startPlayheadFollow\(\)/.test(app),'playhead poll must not start at boot');
-assert(app.includes("setTimeout(async()=>{try{const p=await host('ping')"),'light delayed host handshake missing');
+assert(/setTimeout\(async\(\)=>\{(?:let bootError='';)?try\{const p=await host\('ping'\)/.test(app),'light delayed host handshake missing');
 assert(app.includes("page==='text'"),'lazy text page behavior missing');
 assert(eng.includes('function killTree(child)'),'process tree cleanup missing');
 assert(eng.includes('api.shutdown=function()'),'shutdown cleanup missing');
