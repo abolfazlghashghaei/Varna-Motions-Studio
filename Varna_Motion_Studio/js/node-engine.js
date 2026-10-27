@@ -468,7 +468,7 @@
   api.measureAudio=async function(file,ffmpeg){
     if(!exists(file))throw Error('فایل صوتی پیدا نشد: '+file);ffmpeg=ffmpeg||api.defaults.ffmpeg;if(!exists(ffmpeg))throw Error('FFmpeg پیدا نشد');
     const nul=process.platform==='win32'?'NUL':'/dev/null';const r=await api.spawn(ffmpeg,['-hide_banner','-nostats','-i',file,'-af','volumedetect','-f','null',nul]);const txt=(r.stderr||'')+'\n'+(r.stdout||'');
-    const mean=/mean_volume:\s*(-?[0-9.]+)\s*dB/i.exec(txt),max=/max_volume:\s*(-?[0-9.]+)\s*dB/i.exec(txt);return {mean:mean?+mean[1]:null,max:max?+max[1]:null};
+    const mean=/mean_volume:\s*(-?[0-9.]+)\s*dB/i.exec(txt),max=/max_volume:\s*(-?[0-9.]+)\s*dB/i.exec(txt);const duration=/Duration:\s*(\d+):(\d+):([\d.]+)/.exec(txt);return {mean:mean?+mean[1]:null,max:max?+max[1]:null,duration:duration?+duration[1]*3600+(+duration[2])*60+(+duration[3]):null};
   };
   api.measureLoudness=async function(file,ffmpeg,range={}){
     if(!exists(file))throw Error('فایل صوتی پیدا نشد: '+file);ffmpeg=ffmpeg||api.defaults.ffmpeg;if(!exists(ffmpeg))throw Error('FFmpeg پیدا نشد');

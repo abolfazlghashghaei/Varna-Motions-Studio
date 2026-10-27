@@ -1,6 +1,6 @@
 const assert=require('assert/strict'),vm=require('vm'),fs=require('fs'),path=require('path'),root=path.resolve(__dirname,'..');
 const h={app:{effects:[],version:'fixture',beginUndoGroup(){},endUndoGroup(){}},File:function(p){this.fsName=p;},console};vm.createContext(h);vm.runInContext(fs.readFileSync(root+'/host/ghaf_host.jsx','utf8'),h);
-assert.equal(h.GHAFHost._bridgeRevision,'rc47.2');
+assert.equal(h.GHAFHost._bridgeRevision,'rc47.3');
 const typing=(text,time,a={},markerEnd=2)=>vm.runInNewContext(h.GHAFHost._typingExpression({inDur:2,...a}),{value:text,time,inPoint:0,outPoint:6,thisLayer:{marker:{numKeys:1,key(){return {comment:'IN',time:markerEnd}}}},Math});
 assert.equal(typing('سلام',0),'س');assert.equal(typing('سلام',2),'سلام');assert.equal(typing('سلام',.7),'سل');assert.equal(typing('سلام',1.4),'سلا');
 assert.equal(typing('سلام',.8,{startOffset:1}), '');assert.equal(typing('سلام',1,{startOffset:1}), 'س');

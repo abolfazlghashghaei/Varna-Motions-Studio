@@ -11,8 +11,8 @@ function update(){
 }
 function finish(){if(boot.phase!=='loading')return;boot.phase='ready';const root=document.getElementById('startup49');root.hidden=true;const shell=document.querySelector('.app-shell');shell.inert=false;shell.removeAttribute('aria-hidden');document.dispatchEvent(new CustomEvent('varna:startup49',{detail:{error}}));}
 document.addEventListener('DOMContentLoaded',()=>{
- const shell=document.querySelector('.app-shell');shell.inert=true;shell.setAttribute('aria-hidden','true');
- const root=document.getElementById('startup49');root.tabIndex=-1;root.focus();
+ const shell=document.querySelector('.app-shell'),loading=boot.phase!=='ready';shell.inert=loading;if(loading)shell.setAttribute('aria-hidden','true');else shell.removeAttribute('aria-hidden');
+ const root=document.getElementById('startup49');root.tabIndex=-1;if(loading)root.focus();
  document.getElementById('startupContinue49').onclick=()=>location.reload();
  setTimeout(()=>{if(boot.phase==='loading'){document.getElementById('startupStatus49').textContent='اتصال به افتر بیشتر طول کشید';document.getElementById('startupContinue49').hidden=false;}},10000);
  update();

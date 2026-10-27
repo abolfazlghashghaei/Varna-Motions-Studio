@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 const root=path.join(__dirname,'..'),read=n=>fs.readFileSync(path.join(root,n),'utf8');
 const M=require('../js/music-engine.js');
 const p=M.plan({comp:{duration:34},events:[]},{duration:30,kind:'sfx'});
-const graph=M.graphFor(p,{workflow:'minimax'});
+assert.throws(()=>M.graphFor(p,{workflow:'minimax'}),/EFFECT_MODEL_REQUIRED/);const graph=M.graphFor({...p,kind:'music'},{workflow:'minimax'});
 assert.equal(graph['4'].inputs.lyrics,''); // Native MiniMax instrumental requests have no lyric text.
 assert.match(graph['4'].inputs.caption,/no speech, no vocals or lyrics/);
 assert.equal(graph['9'].class_type,'SaveAudioAdvanced');

@@ -15,3 +15,5 @@ The successful route was extracting the complete package into a new folder and r
 Continue from this released payload. Preserve the corrected installer layout, verified component restoration, package checksums, complete vendor assets and Liquid48 features. Do not replace or move the existing release tag when developing subsequent changes.
 
 The confirmation establishes successful installation. It does not establish that all interface behavior, Adobe rendering, fonts, effects or GPU performance have been checked by the user.
+
+On 2026-10-27 the user approved the appearance and logo of Finalize49 (`cfe3e65`, tag `v4.5.0-rc.47-finalize49`). Subsequent Production50 work keeps that appearance as the default and addresses the user's reported production issues. This visual approval does not certify the new native rendering or audio-generation changes.
