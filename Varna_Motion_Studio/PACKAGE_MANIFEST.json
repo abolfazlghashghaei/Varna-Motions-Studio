@@ -22,6 +22,11 @@
       "sha256": "d17862eb11753c754dc53e7d59b998e02c80514f13e6e6b0532f7ef227493d00"
     },
     {
+      "path": "LAUNCH_EDITOR_WINDOWS.bat",
+      "bytes": 362,
+      "sha256": "32abfc6cfd664f0fae26a528898d2d67bb9b7353cdf0c9aed457bf04d2611d60"
+    },
+    {
       "path": "PRODUCTION50_FA.md",
       "bytes": 6925,
       "sha256": "5d07564bedf65d8d9a7de5e36cc202512f250357f2c0170467764c5a4b5a7787"
@@ -120,6 +125,11 @@
       "path": "RELEASE_RC32_FA.md",
       "bytes": 4121,
       "sha256": "c25a0e830bfe13f25a9e96e95f2fe05de32e6e97db79e809712cdbebd63c2502"
+    },
+    {
+      "path": "STUDIO51_FA.md",
+      "bytes": 4334,
+      "sha256": "8175e2cab7f2d7945ad2bf5da9dcb3fe528be801d81bf0ccef977c3e8352f622"
     },
     {
       "path": "TABLE47_README_FA.md",
@@ -14507,6 +14517,11 @@
       "sha256": "3f5d6001fcd37674d85e9abe11a1f66cf59987256207051f1858a93b44b3b76f"
     },
     {
+      "path": "css/editor51.css",
+      "bytes": 10575,
+      "sha256": "49de578815fd867a4c4baa541f0aa60d94a83bc8908da58e73b7822b3a317f0f"
+    },
+    {
       "path": "css/finalize49.css",
       "bytes": 8392,
       "sha256": "b79964ab4bf69e6d84fe760e858017c690435bb64eb13122458efd97767e6476"
@@ -14543,8 +14558,8 @@
     },
     {
       "path": "css/production50.css",
-      "bytes": 4010,
-      "sha256": "04df47540dfb968076b696439a175d57fb77ca3c8b8a4d5dc252b050ecf6520b"
+      "bytes": 4618,
+      "sha256": "58aa8b61188d707f280b7f559cecc860d52d65b32cc3d60c9a9a2f2290810717"
     },
     {
       "path": "css/project-brain.css",
@@ -14952,6 +14967,11 @@
       "sha256": "d89fd9b18c2c71769cda64bd26dc2c59f5a68e4161639eb6afabad65d8baf67e"
     },
     {
+      "path": "editor.html",
+      "bytes": 693,
+      "sha256": "bdfc2d32621a38f32b95e7ef9d8164ccc888b950248f77c45c2643350b65e7b7"
+    },
+    {
       "path": "host/appearance25.jsx",
       "bytes": 5879,
       "sha256": "3a7220448c656df5396137b4aed51c861bbe95ea9bf21c271f871ea6e0034066"
@@ -14972,9 +14992,14 @@
       "sha256": "5503d718abc2a268dbbef99bc3ba196192599164c1bf36709f6c6582e0635a8f"
     },
     {
+      "path": "host/editor51.jsx",
+      "bytes": 6095,
+      "sha256": "11bb84f76d10bae4e0114255992570313a3a050358c9b25e7a4aaa953eb54954"
+    },
+    {
       "path": "host/ghaf_host.jsx",
-      "bytes": 349824,
-      "sha256": "dd1a292ba2a63bee945c4c4456bfa1ab85a63422eb8e399450ad11290287117f"
+      "bytes": 355960,
+      "sha256": "dc923195e209fc3ab012d84f97c5fca8a310cd088cd51b09d8d20102a94553c1"
     },
     {
       "path": "host/incremental37.jsx",
@@ -15048,8 +15073,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 205689,
-      "sha256": "fa89e7129f0806126be9b8624cc30fc1d69b7c831a40e2e2294463ca7f8d2f0c"
+      "bytes": 205908,
+      "sha256": "198211eb96ffa8a21b4294996956a08115685db03941c558a36514640706d94b"
     },
     {
       "path": "js/app.js",
@@ -15070,6 +15095,11 @@
       "path": "js/audio50.js",
       "bytes": 17618,
       "sha256": "47a5c0d1d390d14e86bf9cdfee819671cdad43dc50b8d08e851f8703da6fb8df"
+    },
+    {
+      "path": "js/audio51.js",
+      "bytes": 2856,
+      "sha256": "389d34021bade35cb08c634659b90555109b38bbaa815dfc7de08a714c411ef2"
     },
     {
       "path": "js/brand-assets27.js",
@@ -15094,7 +15124,7 @@
     {
       "path": "js/cep-bridge.js",
       "bytes": 9494,
-      "sha256": "e32f067a4e8c9f3e9d30fbe8a4f7f11456b8ae3527777d8c0dc98b590cb1dd34"
+      "sha256": "ee202e96bd7acc823a50adc6cf9d321935eb8ab7c70c6cfe839aa0b031b2dcbe"
     },
     {
       "path": "js/corrections.js",
@@ -15110,6 +15140,16 @@
       "path": "js/credits47.js",
       "bytes": 38863,
       "sha256": "2364814e125af32c556f3dc764942ee8571ecc45972df21772244751c53199ea"
+    },
+    {
+      "path": "js/editor51-core.js",
+      "bytes": 10999,
+      "sha256": "200358701c0ac3215da2b3cf0d8dfa0d8d4b0c674a42b9dcfa1c805890e349d1"
+    },
+    {
+      "path": "js/editor51.js",
+      "bytes": 55336,
+      "sha256": "00eeac4b3a1714cec23c93e26ccfe2cfbd2d15f5ddd9f91e804951a622086c0b"
     },
     {
       "path": "js/finalize49.js",
@@ -15163,13 +15203,13 @@
     },
     {
       "path": "js/node-engine.js",
-      "bytes": 69120,
-      "sha256": "64def084fc4eda677795284305086c0caadb69619ca51190334742a35c64ec70"
+      "bytes": 69274,
+      "sha256": "6afd127c580c9a512bbdca883cf16cedc18fcf61ee2b62fa4b933ab338bdaca8"
     },
     {
       "path": "js/numeric37.js",
-      "bytes": 9746,
-      "sha256": "4315722343a3cf92323624fd039c4b59fe62e5a84ca9d41768d36507351dbe21"
+      "bytes": 9754,
+      "sha256": "8b7a67dc7fe8731a9719d04f839da725ace4f1e3ab097b800e1b29e9c8cc19a8"
     },
     {
       "path": "js/output35.js",
@@ -15282,6 +15322,11 @@
       "sha256": "7583e3eac6000f255f3de4e2afdbaf11e2774fbf627b7675d161799bbe20496a"
     },
     {
+      "path": "js/studio51.js",
+      "bytes": 1938,
+      "sha256": "2a50d2830b782d3e34c3ad27beac4dbd8f3534d625f6f45ae359484168fd6948"
+    },
+    {
       "path": "js/table-designer.js",
       "bytes": 46706,
       "sha256": "83f4c4bf9ec110e3add831f45ca4f2c2607db953f9eb1058106d2ad0d90bf590"
@@ -15384,7 +15429,7 @@
     {
       "path": "tests/liquid48_host.cjs",
       "bytes": 4361,
-      "sha256": "9f421c99e8275b841bcb7c78704da47dcefd5caacfabc3540297a8e23b044d7d"
+      "sha256": "68b7dc7209561f725878fccda425dfe64a8adfa29ccb99d12747a14c4278b7ef"
     },
     {
       "path": "tests/local_ai.cjs",
@@ -15594,7 +15639,7 @@
     {
       "path": "tests/rc24_host.cjs",
       "bytes": 8476,
-      "sha256": "8dee2815860958cbac58d5b4e4efa8245a897cdba93e49742036bf6d943a1894"
+      "sha256": "1d1561f9eab8a8bf6be87acd1b970266f5f1373107f770a60f20cf8e26eb18b4"
     },
     {
       "path": "tests/rc24_ui.cjs",
@@ -15819,7 +15864,7 @@
     {
       "path": "tests/rc45_host.cjs",
       "bytes": 5211,
-      "sha256": "5fb7a25c9ccd3905996678f5ae276bf4e6dd1c354b98dd9c30a45e5ad90e5561"
+      "sha256": "c2d7a68a01ca9ad94f447eb2dd23f0fd437cea450eb400c90888cd169f8a8b07"
     },
     {
       "path": "tests/rc46_host.cjs",
@@ -15903,8 +15948,33 @@
     },
     {
       "path": "tests/run-release.cjs",
-      "bytes": 2194,
-      "sha256": "f2bba5501c14fd301b19df3cee8d075b7a56967591a3460e9f0d045071d0cad4"
+      "bytes": 2278,
+      "sha256": "fb9b9f31a7e7bdd9785e24ccd8475ccaa4e39da247c7b02114b4c8f0f5fa7195"
+    },
+    {
+      "path": "tests/studio51_browser.cjs",
+      "bytes": 9726,
+      "sha256": "74b5e6f29700c27faeaac20e32df2c236bda498e28071034371e2ec0e7cf23fc"
+    },
+    {
+      "path": "tests/studio51_core.cjs",
+      "bytes": 3608,
+      "sha256": "416aeaa7a58f9143cd05c5256f0631093a117b233a5dcf08b10f225484d99ac1"
+    },
+    {
+      "path": "tests/studio51_engine.cjs",
+      "bytes": 2187,
+      "sha256": "0658eed4e07675e93e8a144a72520cab76a9ad0003e737e38d403dbc3035588c"
+    },
+    {
+      "path": "tests/studio51_host.cjs",
+      "bytes": 3503,
+      "sha256": "5098f21692ab573cc9675aee03c5e5897841ba56ffcbaeff6a518a425217760e"
+    },
+    {
+      "path": "tests/studio51_server.cjs",
+      "bytes": 3957,
+      "sha256": "33a6b20520a629ab403fbee0ef992fd5d29c2c84c90970329497cc925a14a02b"
     },
     {
       "path": "tests/table47_browser.cjs",
@@ -15945,6 +16015,11 @@
       "path": "tools/build_manifest.py",
       "bytes": 1169,
       "sha256": "5b3fb6fb1d75cc588b0964aad0b12d9c477f0e5a1e485b214a14fcff58c9fcb9"
+    },
+    {
+      "path": "tools/editor51-server.cjs",
+      "bytes": 6116,
+      "sha256": "e67173410b0c727527f5aaa147668835cbad009f4c3d24bfbddd6eec084936dd"
     }
   ]
 }

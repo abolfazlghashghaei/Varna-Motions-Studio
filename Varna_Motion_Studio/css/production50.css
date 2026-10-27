@@ -29,3 +29,10 @@ body.liquid48 .card.ai-sound50{background:radial-gradient(ellipse at 5% 0%,rgba(
 .audio-cue50>audio{width:100%;min-width:0;height:36px}
 @media(max-width:430px){.audio-heading50{gap:9px}.audio-heading50 h2{font-size:17px}.audio-heading50>b{display:none}.audio-range50{grid-template-columns:minmax(0,1fr)}.native-grid50{grid-template-columns:minmax(0,1fr)}.audio-cue50{grid-template-columns:minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.native-style50{transition:none;transform:none!important}}
+.audio-engine51{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-block:0 12px}
+#audioDirection51,#audioVideo51{border:1px solid var(--u-line);border-radius:12px;margin-block:14px;padding:12px;background:rgba(9,20,31,.2)}
+#audioDirection51 summary,#audioVideo51 summary{cursor:pointer;padding-block:5px;font-size:12px}
+#audioDirection51 .form-grid{margin-top:12px}
+#audioEngineStatus51{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;color:#ffd5ba;max-height:150px;overflow:auto;direction:ltr;text-align:left}
+.audio-video-body51{padding-top:12px}
+#page-music>.context40{display:none}
