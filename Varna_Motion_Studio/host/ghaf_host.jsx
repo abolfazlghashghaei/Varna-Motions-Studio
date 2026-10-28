@@ -1793,7 +1793,7 @@ GHAFHost.createSafeZone=function(encoded){
 GHAFHost.removeSafeZone=function(){var c=GHAFHost._activeComp();if(!c)return GHAFHost._ok({removed:0});var list=GHAFHost._safeLayers(c);GHAFHost._deleteLayers(list);return GHAFHost._ok({removed:list.length});};
 GHAFHost.setSafeZoneVisible=function(encoded){var p=GHAFHost._parse(encoded),c=GHAFHost._activeComp();if(!c)return GHAFHost._err('NO_COMP');try{var list=GHAFHost._safeLayers(c);for(var i=0;i<list.length;i++){var locked=list[i].locked;list[i].locked=false;list[i].enabled=p.visible!==false;list[i].locked=locked;}return GHAFHost._ok({visible:p.visible!==false});}catch(e){return GHAFHost._err(String(e));}};
 
-GHAFHost._bridgeRevision='rc47.6';GHAFHost._tableRevision=1;
+GHAFHost._bridgeRevision='rc47.7';GHAFHost._tableRevision=1;
 
 /* RC27: explicit ownership, exact guide geometry, independent surfaces, portable brand assets. */
 GHAFHost._typingExpression=function(a){
@@ -2426,7 +2426,7 @@ GHAFHost._production50=1;
 (function(){
 function color(s){return GHAFHost._hex(String(s||'#FFFFFF'));}
 function finite(v,low,high){v=Number(v);if(!isFinite(v)||v<low||v>high)throw Error('INVALID_GRAPHIC_VALUE');return v;}
-  GHAFHost._graphicValue52=function(l,name,relative){var list=(l.keys52||{})[name]||[],out=Number(l[name]),n;if(!list.length)return out;out=Number(list[0].value);for(n=0;n<list.length;n++){var ka=list[n],kb=list[n+1];if(relative>=ka.time)out=Number(ka.value);if(kb&&relative>=ka.time&&relative<kb.time){var curves={linear:[0,0,1,1],smooth:[.42,0,.58,1],out:[.16,1,.3,1],"in":[.7,0,.84,0],spring:[.25,1.45,.5,1],snappy:[.2,.85,.25,1],"float":[.2,.5,.3,1]},curve=curves[kb.ease||'smooth']||curves.smooth,t=(relative-ka.time)/(kb.time-ka.time),lo=0,hi=1,u=0;for(var z=0;z<14;z++){u=(lo+hi)/2;var xx=3*(1-u)*(1-u)*u*curve[0]+3*(1-u)*u*u*curve[2]+u*u*u;if(xx<t)lo=u;else hi=u;}var yy=3*(1-u)*(1-u)*u*curve[1]+3*(1-u)*u*u*curve[3]+u*u*u;return Number(ka.value)+(Number(kb.value)-Number(ka.value))*yy;}}return out;}
+  GHAFHost._graphicValue52=function(l,name,relative){var list=(l.keys52||{})[name]||[],out=Number(l[name]),n;if(!list.length)return out;out=Number(list[0].value);for(n=0;n<list.length;n++){var ka=list[n],kb=list[n+1];if(relative>=ka.time)out=Number(ka.value);if(kb&&relative>=ka.time&&relative<kb.time){var curves={linear:[0,0,1,1],smooth:[.42,0,.58,1],out:[.16,1,.3,1],"in":[.7,0,.84,0],spring:[.25,1.45,.5,1],snappy:[.2,.85,.25,1],"float":[.2,.5,.3,1]},curve=(Object.prototype.toString.call(kb.ease)==='[object Array]'&&kb.ease.length===4)?kb.ease:(curves[kb.ease||'smooth']||curves.smooth),t=(relative-ka.time)/(kb.time-ka.time),lo=0,hi=1,u=0;for(var z=0;z<14;z++){u=(lo+hi)/2;var xx=3*(1-u)*(1-u)*u*curve[0]+3*(1-u)*u*u*curve[2]+u*u*u;if(xx<t)lo=u;else hi=u;}var yy=3*(1-u)*(1-u)*u*curve[1]+3*(1-u)*u*u*curve[3]+u*u*u;return Number(ka.value)+(Number(kb.value)-Number(ka.value))*yy;}}return out;}
 ;
 GHAFHost._buildGraphics52=function(c,layers){
  var i,j,l,shape,group,rect,fill,stroke,tr,text;

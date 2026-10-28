@@ -1,0 +1,34 @@
+/* Reuse the actual production pages. A linked editor and panel share approved caption state. */
+(function(w){'use strict';let active=null;const names={text:'Text',ai:'Review',translate:'Translate',kinetic:'Typography',motion:'Motion',bg:'Background',table:'Table',music:'Sound AI',sfx:'SFX & mix',brand:'Brand',safe:'Safe area',easing49:'Curves',assistant49:'Assistant',settings:'Settings',output:'Build',resources:'Resources',director:'Director',tools:'Tools',info:'Info'};
+function attach(api){if(!w.GHAFState)return;const S=w.GHAFState,C=w.VarnaEdit51,root=api.root,main=root.querySelector('.edit51-main'),registry=[...document.querySelectorAll('.page[id^=page-]')].filter(page=>!['page-home','page-broll'].includes(page.id)).map(page=>{const id=page.id.slice(5);return [id,names[id]||page.querySelector('h1')?.textContent||id];});root.classList.add('production-tools54');
+const portal=document.createElement('section');portal.className='edit54-production';portal.hidden=true;portal.innerHTML='<header><strong></strong><select aria-label="Active caption"></select><button type="button" aria-label="Close production tools">×</button></header><div class="edit54-production-content"></div>';main.append(portal);const content=portal.lastElementChild,holder=new Map();let current=null,timer=null,linked=false,inSync=false,lastPanel='',lastEditor='',outsidePage=w.VarnaUI.current();
+const panelSignature=()=>JSON.stringify(S.exportGroups());
+const overlays=new Map();
+function takeOverlays(){for(const el of document.querySelectorAll('.app-shell .ghaf-modal,.app-shell .modal-backdrop')){const marker=document.createComment('production54 overlay return');el.before(marker);overlays.set(el,marker);el.classList.add('production-overlay54');root.append(el);}}
+function returnOverlays(){for(const [el,marker]of overlays){el.hidden=true;el.classList.remove('production-overlay54');marker.parentNode?.insertBefore(el,marker);marker.remove();}overlays.clear();}
+function picker(){const select=portal.querySelector('select');select.replaceChildren();for(const g of S.groups){const option=document.createElement('option');option.value=g.id;option.textContent=S.text(g).slice(0,65);select.append(option);}select.value=S.selectedId||'';select.dataset.userContent='true';}
+function adopt(){
+ const source=api.project().captions,signature=JSON.stringify(source);if(signature===lastEditor)return;
+ const caps=source.slice().sort((a,b)=>a.start-b.start),selected=S.current()?.sourceCaption54;
+ if(caps.length){
+  S.importManualCaptions(caps);
+  S.groups.forEach((g,i)=>{
+   const c=caps[i],native=C.nativeCaption(c);g.sourceCaption54=c.id;g.styleOverride=native.style;g.bgOverride=native.bg;g.animOverride=native.anim;
+   if(native.timing38?.length)g.sceneTiming40={text:c.text,quality:'word',words:native.timing38.map(t=>({text:t.text,start:(t.start-c.start)/(c.end-c.start),end:(t.end-c.start)/(c.end-c.start)}))};
+  });
+  const prior=S.groups.find(g=>g.sourceCaption54===selected);if(prior)S.select(prior.id);
+ }else{S.pushUndo();S.groups=[];S.words=[];S.baselineGroups=[];S.baselineWords=[];S.selectedWordIds.clear();S.selectedId=null;}
+ S.saveSettings();w.VarnaActions.refresh();lastEditor=signature;lastPanel=panelSignature();if(current)picker();
+}
+function sync(){if(root.hidden||!linked||inSync)return;const signature=panelSignature();if(signature===lastPanel)return;inSync=true;try{const groups=S.exportGroups();api.advanced.change(p=>{p.captions=C.captions(groups).map(c=>{const g=S.groups.find(g=>g.id===c.native?.id);if(g?.sourceCaption54)c.id=g.sourceCaption54;else if(g)g.sourceCaption54=c.id;return c;});});lastPanel=signature;lastEditor=JSON.stringify(api.project().captions);}catch(e){api.advanced.status(e.message);}finally{inSync=false;}}
+function restore(){if(current)sync();clearTimeout(timer);for(const [page,marker]of holder){marker.parentNode?.insertBefore(page,marker);marker.remove();}holder.clear();portal.hidden=true;main.classList.remove('production-open54');current=null;root.querySelectorAll('[data-production54]').forEach(b=>b.setAttribute('aria-selected','false'));}
+function open(id){restore();const page=document.getElementById('page-'+id);if(!page)return;if(!linked){if(!api.project().captions.length&&S.groups.length){api.readNative();for(const c of api.project().captions){const g=S.groups.find(g=>g.id===c.native?.id);if(g)g.sourceCaption54=c.id;}lastEditor=JSON.stringify(api.project().captions);lastPanel=panelSignature();}else adopt();linked=true;}else if(JSON.stringify(api.project().captions)!==lastEditor)adopt();current=id;const marker=document.createComment('production54 return');page.before(marker);holder.set(page,marker);content.append(page);portal.hidden=false;main.classList.add('production-open54');w.VarnaUI.open(id);portal.querySelector('strong').textContent=registry.find(row=>row[0]===id)?.[1]||id;picker();root.querySelector('[data-production54="'+id+'"]')?.setAttribute('aria-selected','true');if(id==='table')document.getElementById('tableReadTimeline')?.click();sync();}
+portal.querySelector('select').onchange=e=>{S.select(Number(e.target.value));w.VarnaActions.refresh();};portal.querySelector('button').onclick=restore;
+for(const event of ['change','input','click'])content.addEventListener(event,()=>{clearTimeout(timer);timer=setTimeout(sync,80);});
+for(const event of ['change','input','click'])root.addEventListener(event,e=>{if(e.target.closest('.production-overlay54')){clearTimeout(timer);timer=setTimeout(sync,80);}});
+content.addEventListener('click',async e=>{if(!e.target.closest('#btnTranscribe')||w.GHAFNode?.available)return;e.preventDefault();e.stopImmediatePropagation();await api.advanced.transcribe();adopt();},true);
+const bar=document.createElement('nav');bar.className='edit54-production-tabs';bar.setAttribute('aria-label','All production tools');for(const [id,label]of registry){const b=document.createElement('button');b.type='button';b.dataset.production54=id;b.textContent=label;b.onclick=()=>open(id);bar.append(b);}root.querySelector('.edit51-pages').after(bar);
+root.addEventListener('varna:editor-document54',()=>{if(!linked||inSync)return;if(panelSignature()!==lastPanel)sync();else adopt();});
+root.addEventListener('varna:editor-suspend54',()=>{restore();if(linked)adopt();returnOverlays();w.VarnaUI.open(outsidePage);active=null;});root.addEventListener('varna:editor-resume54',()=>{outsidePage=w.VarnaUI.current();active=api;takeOverlays();if(linked)sync();});root.querySelector('.edit51-pages').addEventListener('click',restore);
+active=api;takeOverlays();const dispose=api.dispose;api.dispose=()=>{restore();returnOverlays();if(active===api)active=null;const shell=document.querySelector('.app-shell');if(shell){shell.inert=false;shell.removeAttribute('aria-hidden');}dispose();};api.production54={open,restore,sync};}
+w.VarnaProduction54={attach,context:()=>active&&!active.root.hidden?active:null};})(window);

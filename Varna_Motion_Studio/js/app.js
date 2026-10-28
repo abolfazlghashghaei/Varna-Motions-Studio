@@ -39,7 +39,7 @@ const GHAFPageProgress=(()=>{
 })();
 window.GHAFPageProgress=GHAFPageProgress;
 
-function extensionFile(rel){try{let base=decodeURIComponent(String(location.pathname||'')).replace(/\\/g,'/').replace(/\/index\.html$/i,'');if(/^\/[A-Za-z]:/.test(base))base=base.slice(1);return (base+'/'+String(rel||'').replace(/^\/+/,'' )).replace(/\//g,'\\');}catch(e){return '';}}
+function extensionFile(rel){try{let base=decodeURIComponent(String(location.pathname||'')).replace(/\\/g,'/').replace(/\/(?:index|premiere|resolve|editor)\.html$/i,'');if(/^\/[A-Za-z]:/.test(base))base=base.slice(1);return (base+'/'+String(rel||'').replace(/^\/+/,'' )).replace(/\//g,'\\');}catch(e){return '';}}
 const aiPrompts={
  spelling:'غلط‌های املایی و نگارشی متن فارسی را اصلاح کن. معنی، لحن، نام برندها و اطلاعات را تغییر نده. فقط متن اصلاح‌شده را برگردان.',
  punct:'نیم‌فاصله، فاصله‌گذاری و علائم نگارشی فارسی را اصلاح کن. محتوا را بازنویسی نکن. فقط متن نهایی را برگردان.',

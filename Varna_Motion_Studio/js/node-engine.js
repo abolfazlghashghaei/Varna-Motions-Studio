@@ -47,7 +47,7 @@
   api.exists=exists;
   api.installProfile=function(){
     try{
-      let base=decodeURIComponent(String(global.location&&global.location.pathname||'')).replace(/^\/([A-Za-z]:)/,'$1').replace(/[\\/]index\.html$/i,'');
+      let base=decodeURIComponent(String(global.location&&global.location.pathname||'')).replace(/^\/([A-Za-z]:)/,'$1').replace(/[\\/](?:index|premiere|resolve|editor)\.html$/i,'');
       let file=path.join(base,'INSTALL_PROFILE.json');
       if(exists(file)){let data=JSON.parse(fs.readFileSync(file,'utf8').replace(/^\uFEFF/,''));if(['Core','Studio','Max'].includes(data.level))return data;}
       return {level:'Unknown',packs:[],version:''};

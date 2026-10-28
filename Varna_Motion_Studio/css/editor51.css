@@ -16,3 +16,6 @@
 html[lang=en] .edit51,html[lang=en] .edit51-pane,html[lang=en] .edit51-toolbar,html[lang=en] .edit51-pages{direction:ltr}
 html[lang=en] .edit51 input[type=number]{direction:ltr}
 .studio52-more{position:relative}.studio52-more summary{cursor:pointer;list-style:none;padding:5px 10px;border:1px solid var(--e-line);border-radius:8px}.studio52-more[open]{background:var(--e-panel);border:1px solid var(--e-line);border-radius:9px}.studio52-more[open]>button{display:block;margin:5px;white-space:nowrap}
+
+/* The shell itself must obey hidden, just like its descendants. */
+.edit51[hidden]{display:none!important;pointer-events:none!important}

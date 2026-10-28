@@ -2,6 +2,7 @@
 (function(w){'use strict';
 const $=s=>document.querySelector(s),B=w.GHAFBridge;let loading=null;
 async function invoke(method,args={}){
+ if(w.VarnaHost54?.active()&&w.VarnaHostRuntime54&&!w.VarnaStudioTarget54?.())return w.VarnaHostRuntime54.studio(method,args);
  if(!w.__adobe_cep__||!w.require)throw Error('این ابزار را داخل After Effects اجرا کن.');
  const path=w.require('path'),raw=w.__adobe_cep__.getSystemPath('extension'),root=/^file:/i.test(raw)?w.require('url').fileURLToPath(raw):raw,file=path.join(root,'host','studio49.jsx');
  const script='(function(){try{if(!$.global.VarnaStudio49||$.global.VarnaStudio49.revision!==1)$.evalFile(new File('+JSON.stringify(file)+'));return $.global.VarnaStudio49.dispatch('+JSON.stringify(method)+','+JSON.stringify(args)+');}catch(e){return JSON.stringify({ok:false,error:{message:String(e)}});}})()';

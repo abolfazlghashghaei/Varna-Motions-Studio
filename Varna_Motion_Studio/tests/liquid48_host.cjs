@@ -14,5 +14,5 @@ for(const direction of ['rtl','ltr'])for(const align of ['left','center','right'
  const expectedX=align==='left'?240+36:align==='right'?240+564-box.width:540-box.width/2,expectedY=verticalAlign==='top'?450+22.5:verticalAlign==='bottom'?450+277.5-box.height:600-box.height/2;
  assert(Math.abs(position[0]+box.left-expectedX)<1e-8,align+' physical x '+direction);assert(Math.abs(position[1]+box.top-expectedY)<1e-8,verticalAlign+' physical y '+direction);
 }
-assert(JSON.parse(H.dispatch('removeVarnaTablePreview',encodeURIComponent(JSON.stringify({compId:c.id})))).ok);assert.equal(c.numLayers,0);assert.equal(H._bridgeRevision,'rc47.6');
+assert(JSON.parse(H.dispatch('removeVarnaTablePreview',encodeURIComponent(JSON.stringify({compId:c.id})))).ok);assert.equal(c.numLayers,0);assert.equal(H._bridgeRevision,'rc47.7');
 console.log('PASS Liquid48 native model: 18 actual table text placements across RTL/LTR; independent word tracking/strokes/colors/gradient angle; spring expression and outro; explicit color precedence; validation, nonmutating payloads and cleanup. Adobe pixels untested.');
