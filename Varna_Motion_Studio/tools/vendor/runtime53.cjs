@@ -12675,7 +12675,7 @@ var init_dist = __esm({
       }
       /**
           Can be called multiple times. Useful if you for example add additional items at a later time.
-      
+
           @returns A promise that settles when the queue becomes empty.
           */
       async onEmpty() {
@@ -12686,9 +12686,9 @@ var init_dist = __esm({
       }
       /**
           @returns A promise that settles when the queue size is less than the given limit: `queue.size < limit`.
-      
+
           If you want to avoid having the queue grow beyond a certain size you can `await queue.onSizeLessThan()` before adding a new item.
-      
+
           Note that this only limits the number of items waiting to start. There could still be up to `concurrency` jobs already running that this call does not include in its calculation.
           */
       async onSizeLessThan(limit) {
@@ -12699,7 +12699,7 @@ var init_dist = __esm({
       }
       /**
           The difference with `.onEmpty` is that `.onIdle` guarantees that all work from the queue has finished. `.onEmpty` merely signals that the queue is empty, but it could mean that some promises haven't completed yet.
-      
+
           @returns A promise that settles when the queue becomes empty, and all promises have completed; `queue.size === 0 && queue.pending === 0`.
           */
       async onIdle() {
@@ -12716,7 +12716,7 @@ var init_dist = __esm({
       }
       /**
           Size of the queue, filtered by the given options.
-      
+
           For example, this can be used to find the number of items remaining in the queue with a specific priority level.
           */
       sizeBy(options) {
