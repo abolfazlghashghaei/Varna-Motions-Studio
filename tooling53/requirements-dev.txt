@@ -1,0 +1,2 @@
+# Optional official schema interoperability check; not required by the installed plugin.
+opentimelineio==0.18.1

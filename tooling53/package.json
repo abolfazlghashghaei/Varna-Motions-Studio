@@ -1,0 +1,27 @@
+{
+  "name": "varna-engineering53",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "build:runtime": "node build-runtime.mjs",
+    "dev": "vite --host 127.0.0.1",
+    "test:release": "node run-checks.mjs",
+    "test:browser": "node run-checks.mjs --browser",
+    "typecheck": "tsc --noEmit --skipLibCheck --target ES2020 contracts.ts"
+  },
+  "dependencies": {
+    "p-queue": "7.4.1",
+    "pino": "9.6.0",
+    "ws": "8.18.3",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "playwright": "1.62.1",
+    "typescript": "5.8.3",
+    "vite": "6.3.6",
+    "vitest": "3.2.4"
+  }
+}

@@ -1,7 +1,7 @@
 /* Actual production music adapter with local HTTP/process primitives; no model/GPU claims. */
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),vm=require('node:vm'),http=require('node:http'),{EventEmitter}=require('node:events');
 const source=fs.readFileSync(path.join(__dirname,'../js/music-engine.js'),'utf8'),temp=fs.mkdtempSync(path.join(os.tmpdir(),'varna-engine47-'));
-function load(overrides,env={}){const w={require:name=>overrides[name]||require(name)},ctx={window:w,module:{exports:{}},process:{env},Buffer,URL,console,setTimeout:(fn,ms)=>setTimeout(fn,Math.min(ms,10)),clearTimeout};vm.createContext(ctx);vm.runInContext(source,ctx,{filename:'music-engine.js'});return ctx.module.exports;}
+function load(overrides,env={}){const w={require:name=>overrides[name]||require(name),location:{href:require('node:url').pathToFileURL(path.join(__dirname,'../index.html')).href}},ctx={window:w,module:{exports:{}},process:{env},Buffer,URL,console,setTimeout:(fn,ms)=>setTimeout(fn,Math.min(ms,10)),clearTimeout};vm.createContext(ctx);vm.runInContext(source,ctx,{filename:'music-engine.js'});return ctx.module.exports;}
 async function startupDiagnostics(){
  const main=path.join(temp,'ComfyUI','main.py'),python=path.join(temp,'python_embeded','python.exe');for(const p of [main,python]){fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,'fixture');}
  const offline={request(){const req=new EventEmitter();req.write=()=>{};req.end=()=>setImmediate(()=>req.emit('error',Error('offline fixture')));req.destroy=e=>req.emit('error',e||Error('closed'));return req;}};

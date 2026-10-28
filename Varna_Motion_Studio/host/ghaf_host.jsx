@@ -1793,7 +1793,7 @@ GHAFHost.createSafeZone=function(encoded){
 GHAFHost.removeSafeZone=function(){var c=GHAFHost._activeComp();if(!c)return GHAFHost._ok({removed:0});var list=GHAFHost._safeLayers(c);GHAFHost._deleteLayers(list);return GHAFHost._ok({removed:list.length});};
 GHAFHost.setSafeZoneVisible=function(encoded){var p=GHAFHost._parse(encoded),c=GHAFHost._activeComp();if(!c)return GHAFHost._err('NO_COMP');try{var list=GHAFHost._safeLayers(c);for(var i=0;i<list.length;i++){var locked=list[i].locked;list[i].locked=false;list[i].enabled=p.visible!==false;list[i].locked=locked;}return GHAFHost._ok({visible:p.visible!==false});}catch(e){return GHAFHost._err(String(e));}};
 
-GHAFHost._bridgeRevision='rc47.5';GHAFHost._tableRevision=1;
+GHAFHost._bridgeRevision='rc47.6';GHAFHost._tableRevision=1;
 
 /* RC27: explicit ownership, exact guide geometry, independent surfaces, portable brand assets. */
 GHAFHost._typingExpression=function(a){
@@ -2458,7 +2458,8 @@ GHAFHost.buildEditTimeline51=function(encoded){
  var p=GHAFHost._parse(encoded),made=[],comp=null,folder=null,i,j,a,c,t,item,layer,files={},sources={},tracks={},duration=.1,ordered=[],captions=p.captions||[];
  try{
   if(p.format!=='varna-edit'||Number(p.version)!==1)throw Error('فرمت پروژه معتبر نیست.');
-  var width=num(p.width,160,3840,'width'),height=num(p.height,90,3840,'height'),fps=num(p.fps,12,60,'fps');
+  var width=num(p.width,160,7680,'width'),height=num(p.height,90,7680,'height'),fps=num(p.fps,12,120,'fps');
+  if(width*height>7680*4320)throw Error('RESOLUTION_BUDGET_EXCEEDED');
   if(!p.assets||!p.tracks||!p.clips||p.clips.length>10000||captions.length>10000)throw Error('ساختار پروژه معتبر نیست.');
   for(i=0;i<p.tracks.length;i++){t=p.tracks[i];tracks[String(t.id)]=t;}
   for(i=0;i<p.assets.length;i++){a=p.assets[i];files[String(a.id)]=a;}

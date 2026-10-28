@@ -5,7 +5,8 @@ GHAFHost.buildEditTimeline51=function(encoded){
  var p=GHAFHost._parse(encoded),made=[],comp=null,folder=null,i,j,a,c,t,item,layer,files={},sources={},tracks={},duration=.1,ordered=[],captions=p.captions||[];
  try{
   if(p.format!=='varna-edit'||Number(p.version)!==1)throw Error('فرمت پروژه معتبر نیست.');
-  var width=num(p.width,160,3840,'width'),height=num(p.height,90,3840,'height'),fps=num(p.fps,12,60,'fps');
+  var width=num(p.width,160,7680,'width'),height=num(p.height,90,7680,'height'),fps=num(p.fps,12,120,'fps');
+  if(width*height>7680*4320)throw Error('RESOLUTION_BUDGET_EXCEEDED');
   if(!p.assets||!p.tracks||!p.clips||p.clips.length>10000||captions.length>10000)throw Error('ساختار پروژه معتبر نیست.');
   for(i=0;i<p.tracks.length;i++){t=p.tracks[i];tracks[String(t.id)]=t;}
   for(i=0;i<p.assets.length;i++){a=p.assets[i];files[String(a.id)]=a;}
