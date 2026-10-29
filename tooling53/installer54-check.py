@@ -5,7 +5,7 @@ pwsh=os.environ.get('VARNA_PWSH') or shutil.which('pwsh');archive=os.environ.get
 if not pwsh or not archive:raise RuntimeError('Set VARNA_PWSH and VARNA_RUNTIME_ZIP54 to verified development tools')
 with tempfile.TemporaryDirectory(prefix='installer54-') as temp:
     temp=pathlib.Path(temp);source=temp/'Source';source.mkdir()
-    for name in ['js','css','tools','integrations','assets/fonts','assets/templates38','assets/sfx','assets/vendor/ui30','assets/vendor/rebound49','assets/vendor/conjure49']:
+    for name in ['js','css','tools','integrations','assets/fonts','assets/text55','assets/templates38','assets/sfx','assets/vendor/ui30','assets/vendor/rebound49','assets/vendor/conjure49']:
         shutil.copytree(payload/name,source/name)
     for name in ['plugin.html','premiere.html','resolve.html','editor.html','PACKAGE_MANIFEST.json','assets/varna-logo.svg']:
         (source/name).parent.mkdir(parents=True,exist_ok=True);shutil.copy2(payload/name,source/name)
@@ -20,7 +20,7 @@ with tempfile.TemporaryDirectory(prefix='installer54-') as temp:
         assert (r.returncode==0)==ok,r.stdout+r.stderr
         return r
     run('Resolve');target=temp/'Local/VarnaMotionStudio/Hosts/Resolve'
-    for name in ['resolve.html','js/host54-runtime.js','js/render54.js','assets/fonts/Vazirmatn.woff2','assets/vendor/ui30/tom-select/tom-select.css']:
+    for name in ['assets/text55/fa.dic','assets/text55/en.dic','js/text55-core.js','js/text55-worker.js','js/text55-ui.js','resolve.html','js/host54-runtime.js','js/render54.js','assets/fonts/Vazirmatn.woff2','assets/vendor/ui30/tom-select/tom-select.css']:
         assert (target/name).is_file(),name
     assert not (target/'editor.html').exists() and not (target/'js/editor51.js').exists()
     utility=temp/'Roaming/Blackmagic Design/DaVinci Resolve/Support/Fusion/Scripts/Utility'

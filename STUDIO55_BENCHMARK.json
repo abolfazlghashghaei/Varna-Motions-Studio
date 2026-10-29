@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "corpusSHA256": "67c967f74e515173d2b60dfc06282dff1633a0b5d6b2c7f8f31bd75c7e840b54",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "cpu": "AMD EPYC 9V74 80-Core Processor"
+  },
+  "dictionaryInitMs": 1743.182013,
+  "memoryMiB": {
+    "heapBefore": 8.128837585449219,
+    "heapAfter": 180.02696228027344,
+    "heapDelta": 171.89812469482422,
+    "rss": 284.078125
+  },
+  "spelling": {
+    "samples": 61,
+    "tp": 22,
+    "fp": 0,
+    "fn": 1,
+    "tn": 38,
+    "precision": 1,
+    "recall": 0.9565217391304348,
+    "falsePositiveRate": 0,
+    "top1": 0.9130434782608695,
+    "top5": 0.9130434782608695
+  },
+  "finglish": {
+    "samples": 15,
+    "top1": 0.7333333333333333,
+    "top5": 0.8666666666666667
+  },
+  "latencyMs": {
+    "cold": {
+      "median": 0.011636999999836917,
+      "p95": 3.0457870000000185,
+      "max": 10.198495000000094
+    },
+    "cached": {
+      "median": 0.001671999999871332,
+      "p95": 0.026749999999992724,
+      "max": 0.09599400000001879
+    }
+  },
+  "failures": [
+    {
+      "token": "دووست",
+      "expected": "دوست",
+      "suggestions": []
+    },
+    {
+      "token": "موسقی",
+      "expected": "موسیقی",
+      "suggestions": [
+        "موسعی",
+        "موثقی",
+        "موسسی",
+        "موسمی",
+        "موسوی",
+        "موسی"
+      ]
+    }
+  ],
+  "finglishFailures": [
+    {
+      "token": "dostet",
+      "expected": "دوستت",
+      "suggestions": []
+    },
+    {
+      "token": "kojaei",
+      "expected": "کجایی",
+      "suggestions": []
+    }
+  ],
+  "limits": [
+    "Small authored development corpus, not independent evaluation or an estimate of production accuracy.",
+    "Node/Linux timing; no Windows CPU, browser-worker transfer or mobile measurement.",
+    "Finglish is a limited authored lexicon; unseen transliterations are not guaranteed.",
+    "No neural model or automatic grammar correction. Native Hunspell is not bundled; nspell is a compatible JS implementation."
+  ]
+}

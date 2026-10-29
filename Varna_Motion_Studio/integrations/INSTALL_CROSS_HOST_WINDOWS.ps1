@@ -10,7 +10,7 @@ foreach($entry in $package.files){
   $known[$r]=$entry
 }
 foreach($required in @('plugin.html','premiere.html','resolve.html','editor.html','js/plugin53.js','js/titles53.js','tools/vendor/runtime53.cjs','integrations/resolve/Motion_Tools.py','assets/fonts/Vazirmatn.woff2')){if(!$known.ContainsKey($required)){throw ('Incomplete manifest: '+$required)}}
-foreach($dir in @('js','css','tools','integrations','assets/fonts','assets/templates38','assets/sfx','assets/vendor/ui30','assets/vendor/rebound49','assets/vendor/conjure49')){
+foreach($dir in @('js','css','tools','integrations','assets/fonts','assets/text55','assets/templates38','assets/sfx','assets/vendor/ui30','assets/vendor/rebound49','assets/vendor/conjure49')){
   foreach($file in Get-ChildItem -LiteralPath (Join-Path $payload $dir) -File -Recurse -Force){
     $relative=$file.FullName.Substring($payload.Length+1).Replace('\','/')
     if($relative -like 'assets/templates38/source-projects/*'){continue}
@@ -20,7 +20,7 @@ foreach($dir in @('js','css','tools','integrations','assets/fonts','assets/templ
 foreach($entry in $package.files) {
   $r=[string]$entry.path
   if($r -like 'assets/templates38/source-projects/*'){continue}
-  if($r -cmatch '^assets/vendor/.*/(?:LICENSE|NOTICE|UPSTREAM)(?:\.[^/]*)?$' -or $r -match '^(js/|css/|tools/|integrations/|premiere\.html$|editor\.html$|resolve\.html$|plugin\.html$|assets/(fonts/|templates38/|sfx/|vendor/(ui30/|rebound49/|conjure49/))|assets/varna-logo\.svg$)') {
+  if($r -cmatch '^assets/vendor/.*/(?:LICENSE|NOTICE|UPSTREAM)(?:\.[^/]*)?$' -or $r -match '^(js/|css/|tools/|integrations/|premiere\.html$|editor\.html$|resolve\.html$|plugin\.html$|assets/(fonts/|text55/|templates38/|sfx/|vendor/(ui30/|rebound49/|conjure49/))|assets/varna-logo\.svg$)') {
     $file=Join-Path $payload $r
     if(!(Test-Path -LiteralPath $file -PathType Leaf) -or (Get-Item -LiteralPath $file -Force).Length -ne $entry.bytes -or (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash -ne $entry.sha256) { throw ('Package verification failed: '+$r) }
   }
@@ -29,12 +29,12 @@ function Copy-SharedTools53([string]$destination) {
   New-Item -ItemType Directory -Path $destination -Force | Out-Null
   foreach($name in @('js','css','tools','integrations')) { Copy-Item -LiteralPath (Join-Path $payload $name) -Destination $destination -Recurse -Force }
   # No NLE entry, controls or stylesheet are installed in either other host.
-  if($HostApp -ne 'Editor'){foreach($name in @('js\editor51.js','js\studio51.js','js\studio52.js','js\nle53.js','js\timeline53-core.js','js\ai52-ui.js','js\production54.js','css\editor51.css','css\nle53.css')) {
+  if($HostApp -ne 'Editor'){foreach($name in @('js\editor51.js','js\studio51.js','js\studio52.js','js\nle53.js','js\timeline53-core.js','js\ai52-ui.js','js\production54.js','js\layout55.js','css\layout55.css','css\editor51.css','css\nle53.css')) {
     $owned=Join-Path $destination $name
     if(Test-Path -LiteralPath $owned){Remove-Item -LiteralPath $owned -Force}
   }}
   New-Item -ItemType Directory -Path (Join-Path $destination 'assets') -Force | Out-Null
-  foreach($asset in @('sfx')){Copy-Item -LiteralPath (Join-Path $payload ('assets\'+$asset)) -Destination (Join-Path $destination 'assets') -Recurse -Force}
+  foreach($asset in @('sfx','text55')){Copy-Item -LiteralPath (Join-Path $payload ('assets\'+$asset)) -Destination (Join-Path $destination 'assets') -Recurse -Force}
   $templates=Join-Path $destination 'assets\templates38'
   New-Item -ItemType Directory -Path $templates -Force | Out-Null
   foreach($child in Get-ChildItem -LiteralPath (Join-Path $payload 'assets\templates38') -Force){if($child.Name -ne 'source-projects'){Copy-Item -LiteralPath $child.FullName -Destination $templates -Recurse -Force}}

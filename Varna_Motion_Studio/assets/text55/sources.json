@@ -1,0 +1,54 @@
+{
+  "dictionaryRepository": "https://github.com/wooorm/dictionaries",
+  "commit": "8cfea406b505e4d7df52d5a19bce525df98c54ab",
+  "files": [
+    {
+      "path": "fa.aff",
+      "url": "https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries/fa/index.aff",
+      "bytes": 5440,
+      "sha256": "dba0980816354ad969aa46dda0c040eeebda4a9381be331e17eae8647a2a1e1c"
+    },
+    {
+      "path": "fa.dic",
+      "url": "https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries/fa/index.dic",
+      "bytes": 2575990,
+      "sha256": "314f31e059994f26e8016c834b14dfd10f74834b3f623a6040265b8f2a9dddab"
+    },
+    {
+      "path": "fa-license",
+      "url": "https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries/fa/license",
+      "bytes": 582,
+      "sha256": "7429736f069a84049bcfbee436e5cea3a3fd9b98348d880d9e43ebcf39721989"
+    },
+    {
+      "path": "fa-readme.md",
+      "url": "https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries/fa/readme.md",
+      "bytes": 2973,
+      "sha256": "ad18c0da7f21b9811889ba11a4d8ceed85e2a4bb6a1efad35ba8d8a7a95efbc3"
+    },
+    {
+      "path": "en.aff",
+      "url": "https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries/en/index.aff",
+      "bytes": 3086,
+      "sha256": "8ae1f19d4840d957728ad90555d5a8dff6cc5c046279c95ff0c00fc0a0136c7b"
+    },
+    {
+      "path": "en.dic",
+      "url": "https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries/en/index.dic",
+      "bytes": 551762,
+      "sha256": "f0b1a234bd178bdd01875b2a392a9647f888b8fe879f79c52aae62c2759b3647"
+    },
+    {
+      "path": "en-license",
+      "url": "https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries/en/license",
+      "bytes": 15731,
+      "sha256": "2a7e8d8ae9e8facc84818546ae2a8d83aec5e9c80a675ff789acd1c338b53b3d"
+    },
+    {
+      "path": "en-readme.md",
+      "url": "https://raw.githubusercontent.com/wooorm/dictionaries/8cfea406b505e4d7df52d5a19bce525df98c54ab/dictionaries/en/readme.md",
+      "bytes": 2998,
+      "sha256": "064712519703612d893383416e7b658943bfd71187824afa71d5bc1bb86273e9"
+    }
+  ]
+}
