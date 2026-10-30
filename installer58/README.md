@@ -11,3 +11,5 @@ python installer58/build.py --commit FULL_40_HEX_COMMIT --archive downloaded.zip
 Application/runtime is a required shared component. AE, Premiere, Resolve, personal server and extended AE/local-AI components are selections. Extended AE/local-AI implies AE. Host backups and runtime verification reuse the existing tested installers. There is no all-components atomic rollback. Local-AI installation is the existing official NVIDIA portable path and checks existing health instead of silently accepting an invalid engine.
 
 The personal server and optional internet-tunnel shortcuts are written only when that component is chosen. Existing pairing/configuration is retained. Source package and verified downloads remain in the user profile for repair/reuse. See ../connect58/README_FA.md.
+
+Published EXE payload is pinned in payload-lock58.json. It intentionally downloads that reviewed PC source commit; the Android APK can receive independent client fixes in a later release commit without changing the server protocol.

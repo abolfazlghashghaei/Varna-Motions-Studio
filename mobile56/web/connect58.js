@@ -99,20 +99,35 @@
                     "GET",
                     "/v1/jobs/" + id + "/result",
                   );
-                  if (operation === "proxy")
-                    await w.MobileApp.importMedia(result);
-                  else if (operation === "transcribe")
-                    await receiveText(
-                      "srt",
-                      JSON.parse(MobileNative.readText(result.id)).value,
+                  if (operation === "ae.build")
+                    out.textContent = T(
+                      "Project created as a new AE composition",
+                      "پروژه در یک کامپوزیشن جدید افتر ساخته شد",
                     );
-                  out.textContent =
-                    operation === "ae.build"
-                      ? T(
-                          "Project created as a new AE composition",
-                          "پروژه در یک کامپوزیشن جدید افتر ساخته شد",
-                        )
-                      : T("Result imported", "نتیجه وارد شد");
+                  else {
+                    const entry = { operation, result };
+                    const list = pendingResults();
+                    list.push(entry);
+                    localStorage.setItem(
+                      "pending-results58",
+                      JSON.stringify(list.slice(-20)),
+                    );
+                    out.textContent = T(
+                      "Result ready. Choose Import result to add it to the current project.",
+                      "نتیجه آماده است؛ برای افزودن به پروژهٔ جاری «ورود نتیجه» را بزن.",
+                    );
+                    body.append(
+                      button(T("Import result", "ورود نتیجه"), () =>
+                        applyResult(entry),
+                      ),
+                    );
+                    status(
+                      T(
+                        "Result ready · open Connections to import it",
+                        "نتیجه آماده است؛ از بخش اتصال واردش کن",
+                      ),
+                    );
+                  }
                   return;
                 }
                 await new Promise((r) => setTimeout(r, 1000));
@@ -124,6 +139,34 @@
           })();
         });
       }
+      function pendingResults() {
+        try {
+          const rows = JSON.parse(
+            localStorage.getItem("pending-results58") || "[]",
+          );
+          return Array.isArray(rows)
+            ? rows.filter((x) => x.result?.id).slice(-20)
+            : [];
+        } catch (e) {
+          return [];
+        }
+      }
+      async function applyResult(entry) {
+        if (entry.operation === "proxy")
+          await w.MobileApp.importMedia(entry.result);
+        else
+          await receiveText(
+            "srt",
+            JSON.parse(MobileNative.readText(entry.result.id)).value,
+          );
+        localStorage.setItem(
+          "pending-results58",
+          JSON.stringify(
+            pendingResults().filter((x) => x.result.id !== entry.result.id),
+          ),
+        );
+        document.getElementById("sheet").close();
+      }
       sheet(T("Processing & connection", "پردازش و اتصال"), (body) => {
         const cloud = document.createElement("p");
         cloud.className = "note";
@@ -132,6 +175,14 @@
           "سرور اصلی · اطلاعات اتصال هنوز تنظیم نشده",
         );
         body.append(cloud);
+        for (const entry of pendingResults())
+          body.append(
+            button(
+              T("Import ready result · ", "ورود نتیجهٔ آماده · ") +
+                entry.operation,
+              () => applyResult(entry),
+            ),
+          );
         const title = document.createElement("h3");
         title.textContent = T("Personal computer", "سیستم شخصی");
         body.append(title);
