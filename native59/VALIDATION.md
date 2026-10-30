@@ -7,7 +7,7 @@ Version 0.4.0-native59 / code 5901, Android API 29–35, arm64-v8a and x86_64. S
 | Gate | Result and scope |
 | --- | --- |
 | Desktop regression | 100/100 suites passed; native Adobe/Resolve/Windows execution remains separate. |
-| Windows source package | 3,301 payload sizes/SHA-256 values verified; parser passed for all modified PowerShell scripts. |
+| Windows source package | 3,302 payload sizes/SHA-256 values verified; parser passed for all modified PowerShell scripts. |
 | Downloader | Actual loopback HTTP 5 MiB transfer: resumed partial bytes, restarted when Range was ignored, exact size/SHA, measured speed/%/ETA. |
 | Engine repair | Actual production function invoked against a controlled archive/extractor/health fixture: stale GHAF does not skip repair, old models preserved, failed stage not activated, verified download retained. Python/Torch/7zr-on-Windows are modeled, not executed. |
 | Personal-server BAT | Actual filesystem orchestration against fixtures: service/core/FFmpeg layout, shared-runtime delegation, preserved token/model settings and reinstall backup. Windows shortcut COM and runtime installation are modeled. |

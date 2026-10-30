@@ -16487,6 +16487,11 @@
       "sha256": "c6134615b4c7a38569a03d8e28271a9c4f462badd294eb1d0a21680a7d41f53f"
     },
     {
+      "path": "tools/vendor/7zr59-LGPL2.1.txt",
+      "bytes": 26530,
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    {
       "path": "tools/vendor/7zr59-LICENSE.txt",
       "bytes": 6190,
       "sha256": "dac8389b6bc39339537bc351772106afe7951cb242cdf03e855b67c3a683deb1"
