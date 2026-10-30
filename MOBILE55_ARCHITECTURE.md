@@ -1,3 +1,5 @@
+> Historical Studio55 research note. For the current Android release and migration specification, see [Mobile57](mobile56/docs/ARCHITECTURE57_FA.md) and [mobile README](mobile56/README.md).
+
 # Mobile and shared effect architecture — research boundary
 
 Studio55 adds desktop offline text and workspace docking. It does **not** contain a tested Android APK, iOS IPA, native mobile renderer, or a mobile AE Glass implementation. The mobile platform priority has not been confirmed. These are engineering decisions and acceptance gates for that separate build, not shipped features.

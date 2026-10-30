@@ -1,17 +1,26 @@
-# Varna Mobile — Android preview 0.1
+# Varna Mobile — Android preview 0.2
 
-An installable Android application with a dedicated touch editor. This is the first Android preview, not a port of every desktop feature. iOS is not built in this release.
+An installable Android application with a dedicated touch editor. This is the second Android preview, not a port of every desktop feature. iOS is not built in this release.
 
 ## Install
 
-Android 10 or later, with an up-to-date Android System WebView (Chromium 110+ recommended). Download `Varna-Mobile-0.1.0-preview.apk` from this release, open it on the phone and permit installation from the browser/file manager if Android asks. No After Effects, Windows installer, account or running server is required. The APK is signed with a dedicated preview certificate; no signing key is included in the source or APK.
+Android 10 or later, with an up-to-date Android System WebView (Chromium 110+ recommended). Download `Varna-Mobile-0.2.0-preview.apk` from this release, open it on the phone and permit installation from the browser/file manager if Android asks. No After Effects, Windows installer, account or running server is required. The APK is signed with a dedicated preview certificate; no signing key is included in the source or APK.
+
+## New in Mobile57
+
+- A separate caption engine with sentence/karaoke/reveal/single-word modes, editable ordered word times, active-word color, outline, line spacing and saved caption styles. Estimated times are explicitly labeled; no ASR is claimed.
+- WebVTT import/export, versioned `.varna` project JSON with integer timeline ticks and legacy migration, plus valid-snapshot autosave recovery.
+- Track locking/reordering, compatible clip track selection, frame/edge snapping, live preview dragging and stored local waveform peaks for bounded media.
+- Shared composition frame plan for the existing renderer, fewer retained inactive decoders, nonblocking sequential Android encoding requests and request timeouts. PNG/Base64 transfer remains a temporary export bridge.
+- Glass-inspired light/dark touch design.
+- [Persian engineering specification](docs/ARCHITECTURE57_FA.md), [pinned dependency review](docs/DEPENDENCIES57.md) and [formal project schema](shared/varna-project-v1.schema.json). Flutter/Rust/Media3/wgpu are migration targets, not libraries already inside the APK.
 
 ## Included
 
 - Persian/English touch layout in portrait and landscape.
 - Local video, image and audio import through the system document picker. Imported files are copied to app-private storage.
 - Multiple video/audio tracks, draggable playhead and clips, trim handles, split, duplicate, delete, mute, Undo/Redo, zoom, source trim, transform and basic color controls.
-- Text and SRT import/export, built-in Persian font, per-word styles and animations, reusable typography presets.
+- Text and SRT/WebVTT import/export, built-in Persian font, per-word styles and animations, reusable typography presets.
 - Animated shapes, titles, unified glass tables, continuous separators/alignment and size keyframes. Preview and exported pixels use the same shared Canvas compositor.
 - Optional offline word review beside text: bundled Persian/English dictionaries, amber suggestions, explicit approval, personal words and locally learned accepted pairs. Turning it off terminates the worker. It does not silently replace spelling or Finglish.
 - Autosaved project and portable project JSON; external media must be relinked when moving between devices.
@@ -42,7 +51,7 @@ Extract into an SDK directory containing `android-35/android.jar` and `android-1
 python mobile56/tools/build-apk.py
 ```
 
-The build makes no network requests and uses no Gradle dependency resolution. Output is `mobile56/build/Varna-Mobile-0.1.0-preview.apk`; build outputs and signing keys are ignored. Signing by a different key requires uninstalling the preview before installing your own build. Build ZIP timestamps and signatures are not claimed byte-reproducible; bundled source/asset hashes are independently checked.
+The build makes no network requests and uses no Gradle dependency resolution. Output is `mobile56/build/Varna-Mobile-0.2.0-preview.apk`; build outputs and signing keys are ignored. Signing by a different key requires uninstalling the preview before installing your own build. Build ZIP timestamps and signatures are not claimed byte-reproducible; bundled source/asset hashes are independently checked.
 
 ## Validation
 
@@ -52,4 +61,4 @@ The build makes no network requests and uses no Gradle dependency resolution. Ou
 NODE_PATH=tooling53/node_modules node mobile56/tests/browser.cjs
 ```
 
-It runs a local-only test server, imports the real video, verifies split/Undo, approved/offline review, per-word style, table width keyframes, project/media reload, portrait/landscape layout and a measured non-silent WebM export. `tools/verify-apk.py` verifies every packaged web file against the build input, permission absence and native bytecode presence. Use `apksigner verify --verbose` for the signature. `VALIDATION.md` records tested and untested boundaries.
+It runs a local-only test server, imports the real video, verifies split/Undo, approved/offline review, per-word style, table width keyframes, project/media reload, portrait/landscape layout and a measured non-silent WebM export. `tools/verify-apk.py` verifies every packaged web file against the build input, permission absence and native bytecode presence. Use `apksigner verify --verbose` for the signature. `VALIDATION57.md` records this release; `VALIDATION.md` is the previous Mobile56 report. New tests: `tests/engines57.cjs`, `tests/studio57-browser.cjs` and `tests/parity57.cjs`.

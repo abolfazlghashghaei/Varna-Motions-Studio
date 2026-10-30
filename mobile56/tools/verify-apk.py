@@ -1,6 +1,6 @@
 from pathlib import Path
 import zipfile,hashlib,os,subprocess
-root=Path(__file__).resolve().parents[1];build=root/'build';apk=build/'Varna-Mobile-0.1.0-preview.apk'
+root=Path(__file__).resolve().parents[1];build=root/'build';apk=build/'Varna-Mobile-0.2.0-preview.apk'
 with zipfile.ZipFile(apk) as z:
  assert z.testzip() is None
  for source in (build/'web').rglob('*'):

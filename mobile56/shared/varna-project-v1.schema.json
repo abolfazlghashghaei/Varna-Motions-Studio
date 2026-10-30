@@ -1,0 +1,398 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:varna:project:v1",
+  "title": "Varna Project v1",
+  "type": "object",
+  "required": [
+    "format",
+    "version",
+    "timebase",
+    "project",
+    "assets",
+    "tracks",
+    "clips",
+    "captions",
+    "layers"
+  ],
+  "properties": {
+    "format": {
+      "const": "varna-project"
+    },
+    "version": {
+      "const": 1
+    },
+    "timebase": {
+      "type": "object",
+      "required": [
+        "numerator",
+        "denominator"
+      ],
+      "properties": {
+        "numerator": {
+          "const": 1
+        },
+        "denominator": {
+          "const": 720000
+        }
+      },
+      "additionalProperties": false
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "name",
+        "width",
+        "height",
+        "frameRate"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 160,
+          "maximum": 7680
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 90,
+          "maximum": 7680
+        },
+        "frameRate": {
+          "type": "object",
+          "required": [
+            "numerator",
+            "denominator"
+          ],
+          "properties": {
+            "numerator": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 120000
+            },
+            "denominator": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1001
+            }
+          }
+        }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "name",
+          "duration"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "video",
+              "image",
+              "audio"
+            ]
+          },
+          "duration": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Source media metadata duration in seconds, not timeline time."
+          }
+        }
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "kind": {
+            "enum": [
+              "video",
+              "audio"
+            ]
+          },
+          "locked": {
+            "type": "boolean"
+          },
+          "muted": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "clips": {
+      "type": "array",
+      "maxItems": 10000,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "assetId",
+          "trackId",
+          "startTicks",
+          "inTicks",
+          "outTicks",
+          "gain"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "assetId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "trackId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "startTicks": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 62208000000
+          },
+          "inTicks": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 62208000000
+          },
+          "outTicks": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 62208000000
+          },
+          "gain": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 3
+          }
+        }
+      }
+    },
+    "captions": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "startTicks",
+          "endTicks",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "startTicks": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 62208000000
+          },
+          "endTicks": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 62208000000
+          },
+          "keys52": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "timeTicks",
+                  "value"
+                ],
+                "properties": {
+                  "timeTicks": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 62208000000
+                  },
+                  "value": {
+                    "type": "number"
+                  },
+                  "ease": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        },
+                        "minItems": 4,
+                        "maxItems": 4
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 10000
+          },
+          "words": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "text",
+                "startTicks",
+                "endTicks"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "startTicks": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 62208000000
+                },
+                "endTicks": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 62208000000
+                },
+                "style": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "caption57": {
+            "type": "object",
+            "properties": {
+              "mode": {
+                "enum": [
+                  "sentence",
+                  "karaoke",
+                  "reveal",
+                  "single"
+                ]
+              },
+              "timingSource": {
+                "enum": [
+                  "estimated",
+                  "manual",
+                  "imported",
+                  "asr"
+                ]
+              },
+              "activeColor": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "startTicks",
+          "endTicks"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "startTicks": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 62208000000
+          },
+          "endTicks": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 62208000000
+          },
+          "keys52": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "timeTicks",
+                  "value"
+                ],
+                "properties": {
+                  "timeTicks": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 62208000000
+                  },
+                  "value": {
+                    "type": "number"
+                  },
+                  "ease": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        },
+                        "minItems": 4,
+                        "maxItems": 4
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Cross-reference uniqueness, ordered word intervals, end > start, device capability limits and render semantics are additionally validated by the engine. Effect durations retain documented seconds units in style parameters."
+}

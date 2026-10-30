@@ -5,13 +5,15 @@ Signing requires MOBILE56_KEYSTORE, MOBILE56_STORE_PASS and optionally MOBILE56_
 Never generates or stores signing credentials in the repository.
 """
 from pathlib import Path
-import os,subprocess,sys,zipfile,hashlib,json
+import os,subprocess,sys,zipfile,hashlib,json,shutil
 ROOT=Path(__file__).resolve().parents[2];M=ROOT/'mobile56';B=M/'build';B.mkdir(exist_ok=True)
 sdk=Path(os.environ['ANDROID56_SDK']);tools=sdk/'android-15';android=sdk/'android-35/android.jar'
 def run(*args):subprocess.run([str(a) for a in args],check=True)
 run(sys.executable,M/'tools/bundle.py')
 for f in ['aapt2','zipalign','d8','apksigner']:(tools/f).chmod(0o755)
-for name in ['gen','classes','dex']:(B/name).mkdir(exist_ok=True)
+for name in ['gen','classes','dex']:
+ if (B/name).exists():shutil.rmtree(B/name)
+ (B/name).mkdir()
 run(tools/'aapt2','compile','--dir',M/'android/res','-o',B/'res.zip')
 run(tools/'aapt2','link','-I',android,'--manifest',M/'android/AndroidManifest.xml','--java',B/'gen','--min-sdk-version','29','--target-sdk-version','35','-A',B/'web','-o',B/'base.apk',B/'res.zip')
 sources=sorted((M/'android/src').rglob('*.java'))+sorted((B/'gen').rglob('*.java'))
@@ -23,7 +25,7 @@ with zipfile.ZipFile(B/'base.apk') as src,zipfile.ZipFile(B/'unsigned.apk','w') 
  for info in src.infolist():dst.writestr(info,src.read(info.filename))
  for dex in sorted((B/'dex').glob('*.dex')):dst.write(dex,dex.name,zipfile.ZIP_DEFLATED)
 run(tools/'zipalign','-p','-f','4',B/'unsigned.apk',B/'aligned.apk')
-output=B/'Varna-Mobile-0.1.0-preview.apk'
+output=B/'Varna-Mobile-0.2.0-preview.apk'
 run(tools/'apksigner','sign','--ks',os.environ['MOBILE56_KEYSTORE'],'--ks-key-alias',os.environ.get('MOBILE56_KEY_ALIAS','varna-mobile-preview'),'--ks-pass','env:MOBILE56_STORE_PASS','--out',output,B/'aligned.apk')
 run(tools/'apksigner','verify','--verbose',output)
 run(tools/'aapt2','dump','badging',output)
