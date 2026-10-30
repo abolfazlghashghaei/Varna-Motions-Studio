@@ -40,6 +40,7 @@ Section -Install
 InitPluginsDir
 SetOutPath "$PLUGINSDIR"
 File "Install58.ps1"
+File "Invoke-Checked58.ps1"
 DetailPrint "Downloading and verifying the complete pinned release. This may take several minutes."
 nsExec::ExecToLog 'powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "$PLUGINSDIR\Install58.ps1" -ArchiveUrl "${ARCHIVE_URL}" -ArchiveSha256 "${ARCHIVE_SHA256}" -ArchiveBytes ${ARCHIVE_BYTES} -Components "$Options"'
 Pop $0

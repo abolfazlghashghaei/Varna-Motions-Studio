@@ -9,3 +9,5 @@ Passed: actual browser video import/automatic timeline placement, attached decod
 Not run: Honor 90 execution of this APK; Windows EXE wizard and complete installation on Windows hardware; actual AE processing; whisper model accuracy; public HTTPS tunnel end-to-end. These cannot be inferred from browser/compiler tests. Main-server service remains unconfigured, as requested. Personal server supports the advertised proxy, transcription (with local tools configured) and new-comp delivery operations, not a full remote desktop or every AEX effect.
 
 Internet access uses an optional official, checksum-pinned Cloudflare quick tunnel, a third-party service. No firewall/port-forwarding rules are modified. See README_FA.md for requirements, setup, limits and retained data.
+
+Bootstrap revision 1: nested PowerShell scripts that use exit N are invoked through a checked helper. An actual PowerShell test proved exit 7 stops the bootstrap and exit 0 continues; preparation/AE failure cannot be reported as overall success. Use Varna-Setup-Connect58-1.exe.
