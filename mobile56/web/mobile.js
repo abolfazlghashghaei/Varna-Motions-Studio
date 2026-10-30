@@ -74,7 +74,11 @@
                   ),
                 );
               },
-              method === "finishExport" ? 300000 : 60000,
+              method === "server58"
+                ? 1800000
+                : method === "finishExport"
+                  ? 300000
+                  : 60000,
             );
       pending.set(id, { resolve, reject, timer });
       try {
@@ -104,9 +108,10 @@
       );
     }
   }
-  let initial;
+  let initial, recovered58;
   try {
-    initial = Project.recover(localStorage, M.validate)?.project || M.fresh();
+    recovered58 = Project.recover(localStorage, M.validate)?.project;
+    initial = M.fresh();
   } catch (e) {
     initial = M.fresh();
   }
@@ -154,6 +159,7 @@
         m.gain?.disconnect();
         m.el.removeAttribute("src");
         m.el.load?.();
+        m.el.remove();
         media.delete(id);
       }
     }
@@ -167,13 +173,25 @@
     const el = document.createElement(
       asset.kind === "image" ? "img" : asset.kind,
     );
+    el.crossOrigin = "anonymous";
+    document.getElementById("mediaDeck58").append(el);
     el.src = cached.url;
     el.preload = "auto";
+    el.setAttribute("playsinline", "");
+    el.setAttribute("webkit-playsinline", "");
     el.playsInline = true;
     m = { el, kind: asset.kind, assetId: c.assetId };
     el.addEventListener(asset.kind === "image" ? "load" : "loadeddata", () => {
       if (!playing && !exporting) draw();
     });
+    el.addEventListener("error", () =>
+      status(
+        T(
+          "This media could not be decoded. Try H.264 MP4 or make a proxy on your personal server.",
+          "این رسانه قابل رمزگشایی نیست؛ MP4 با H.264 یا پراکسی سرور شخصی را امتحان کن.",
+        ),
+      ),
+    );
     media.set(c.id, m);
     return m;
   }
@@ -359,6 +377,8 @@
               : "video",
       el = document.createElement(kind === "image" ? "img" : kind);
     el.preload = "metadata";
+    el.crossOrigin = "anonymous";
+    document.getElementById("mediaDeck58").append(el);
     const data = await new Promise((resolve, reject) => {
       const timer = setTimeout(
         () =>
@@ -372,6 +392,7 @@
       function finish(err) {
         clearTimeout(timer);
         el.onload = el.onloadedmetadata = el.onerror = null;
+        el.remove();
         err
           ? reject(err)
           : resolve({
@@ -417,6 +438,10 @@
           mobile56: native ? { url: data.url, nativeId: data.id } : null,
         });
     });
+    if (!prior) {
+      addAsset(id);
+      await seek(time);
+    }
     analysisChain = analysisChain.then(async () => {
       try {
         const wave = await w.VarnaMediaAnalysis57.waveform(data);
@@ -435,8 +460,8 @@
     });
     status(
       T(
-        "Media ready. Tap to add to the timeline.",
-        "رسانه آماده است؛ برای افزودن به تایم‌لاین روی آن بزن.",
+        "Media added to the timeline. Press play.",
+        "رسانه به تایم‌لاین اضافه شد؛ پخش را بزن.",
       ),
     );
   }
@@ -2049,6 +2074,21 @@
     translate();
   };
   $("#projectMenu").onclick = projectMenu;
+  $("#connection58").onclick = () =>
+    w.VarnaConnect58.open({
+      T,
+      sheet,
+      field,
+      button,
+      request,
+      native,
+      project: p,
+      assets,
+      change,
+      status,
+      receiveText,
+      pick,
+    });
   $("#formatBadge").onclick = projectMenu;
   $("#export").onclick = exportMenu;
   $("#play").onclick = () => safely(play);
@@ -2330,5 +2370,32 @@
       timeline();
       translate();
       draw();
+      if (recovered58)
+        sheet(T("Start editing", "شروع تدوین"), (body) => {
+          body.append(
+            button(
+              T("New project", "پروژهٔ جدید"),
+              () => {
+                recovered58 = null;
+                $("#sheet").close();
+              },
+              "primary",
+            ),
+          );
+          body.append(
+            button(
+              T("Continue previous project", "ادامهٔ پروژهٔ قبلی"),
+              async () => {
+                H.load(recovered58);
+                recovered58 = null;
+                await restore();
+                timeline();
+                inspector();
+                await seek(0);
+                $("#sheet").close();
+              },
+            ),
+          );
+        });
     });
 })(window);

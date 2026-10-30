@@ -938,3 +938,5 @@ html[data-theme="light"] .preset57 {
     min-height: 44px;
   }
 }
+
+#mediaDeck58{position:fixed;left:-4px;top:-4px;width:2px;height:2px;opacity:.001;overflow:hidden;pointer-events:none}#mediaDeck58 video,#mediaDeck58 audio{width:2px;height:2px} .connection-status58{overflow-wrap:anywhere;font-size:12px}

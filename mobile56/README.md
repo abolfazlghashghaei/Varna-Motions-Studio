@@ -1,10 +1,17 @@
-# Varna Mobile — Android preview 0.2
+# Varna Mobile — Android preview 0.3
 
-An installable Android application with a dedicated touch editor. This is the second Android preview, not a port of every desktop feature. iOS is not built in this release.
+An installable Android application with a dedicated touch editor. This is the third Android preview, not a port of every desktop feature. iOS is not built in this release.
 
 ## Install
 
-Android 10 or later, with an up-to-date Android System WebView (Chromium 110+ recommended). Download `Varna-Mobile-0.2.0-preview.apk` from this release, open it on the phone and permit installation from the browser/file manager if Android asks. No After Effects, Windows installer, account or running server is required. The APK is signed with a dedicated preview certificate; no signing key is included in the source or APK.
+Android 10 or later, with an up-to-date Android System WebView (Chromium 110+ recommended). Download `Varna-Mobile-0.3.0-preview.apk` from this release, open it on the phone and permit installation from the browser/file manager if Android asks. No After Effects, Windows installer, account or running server is required. The APK is signed with a dedicated preview certificate; no signing key is included in the source or APK.
+
+## New in Connect58
+
+- Import now places media directly on the timeline; decoder elements stay attached to the Android WebView, and media byte ranges support suffix/open-ended requests.
+- Startup offers New or Continue instead of automatically loading the last project.
+- Main-server placeholder and explicit personal-computer connection, with authenticated upload, proxy/transcription jobs and project delivery to a connected AE panel. See [setup](../connect58/README_FA.md).
+- APK adds only INTERNET permission; remote job execution is opt-in. Device playback and the full Windows/Adobe workflow still need hardware testing.
 
 ## New in Mobile57
 
@@ -34,7 +41,7 @@ There are no Whisper/LLM/music-generation model weights, native Adobe AEX/AE Gla
 
 ## Offline architecture
 
-`android/` is a Java Android shell, local WebView asset/media service, document picker, H.264 frame encoder, PCM audio mixer/AAC encoder and read-only export content provider. `web/` is the phone UI and shared-document adapter. The app declares **no INTERNET, broad storage or microphone permission**. Assets and dictionary workers load from a private intercepted HTTPS origin. Only user-selected media is imported. No telemetry or runtime downloads are used.
+`android/` is a Java Android shell, local WebView asset/media service, document picker, H.264 frame encoder, PCM audio mixer/AAC encoder and read-only export content provider. `web/` is the phone UI and shared-document adapter. The app requests INTERNET for explicitly chosen personal-server connections; broad storage and microphone permissions are not requested. Core editing remains local. Assets and dictionary workers load from a private intercepted HTTPS origin. Only user-selected media is imported. There is no telemetry. Personal-server media transfer starts only when the user selects an operation.
 
 Shared renderers and dictionary assets are copied by `tools/bundle.py` from `../Varna_Motion_Studio`; hashes are recorded in the generated `shared/shared-manifest.json`. All dictionary, nspell and font notices are included in Settings → Licenses. Original upstream dictionary/engine sources and reproducible bundle inputs are in `assets/text55/sources.json` and `tooling53/text55-build` in the repository. No native Hunspell, neural language model, GPL multimedia framework or external editor is added by this mobile shell.
 
@@ -51,7 +58,7 @@ Extract into an SDK directory containing `android-35/android.jar` and `android-1
 python mobile56/tools/build-apk.py
 ```
 
-The build makes no network requests and uses no Gradle dependency resolution. Output is `mobile56/build/Varna-Mobile-0.2.0-preview.apk`; build outputs and signing keys are ignored. Signing by a different key requires uninstalling the preview before installing your own build. Build ZIP timestamps and signatures are not claimed byte-reproducible; bundled source/asset hashes are independently checked.
+The build makes no network requests and uses no Gradle dependency resolution. Output is `mobile56/build/Varna-Mobile-0.3.0-preview.apk`; build outputs and signing keys are ignored. Signing by a different key requires uninstalling the preview before installing your own build. Build ZIP timestamps and signatures are not claimed byte-reproducible; bundled source/asset hashes are independently checked.
 
 ## Validation
 

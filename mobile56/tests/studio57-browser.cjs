@@ -26,7 +26,7 @@ const server = require("./server.cjs");
     await p
       .locator("#filePicker")
       .setInputFiles("/workspace/artifacts/mobile56-fixture.mp4");
-    await p.locator(".asset").click();
+    await p.waitForFunction(()=>MobileApp.project().clips.length===1);
     await p.locator(".waveform57").waitFor();
     assert.equal(
       await p.evaluate(() =>
@@ -167,6 +167,7 @@ const server = require("./server.cjs");
       };
     });
     await p.reload();
+    await p.getByRole("button",{name:"Continue previous project",exact:true}).click();
     await p.waitForFunction(() => window.MobileApp);
     await p.evaluate(() => {
       MobileApp.change((doc) => {

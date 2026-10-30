@@ -25,7 +25,7 @@ with zipfile.ZipFile(B/'base.apk') as src,zipfile.ZipFile(B/'unsigned.apk','w') 
  for info in src.infolist():dst.writestr(info,src.read(info.filename))
  for dex in sorted((B/'dex').glob('*.dex')):dst.write(dex,dex.name,zipfile.ZIP_DEFLATED)
 run(tools/'zipalign','-p','-f','4',B/'unsigned.apk',B/'aligned.apk')
-output=B/'Varna-Mobile-0.2.0-preview.apk'
+output=B/'Varna-Mobile-0.3.0-preview.apk'
 run(tools/'apksigner','sign','--ks',os.environ['MOBILE56_KEYSTORE'],'--ks-key-alias',os.environ.get('MOBILE56_KEY_ALIAS','varna-mobile-preview'),'--ks-pass','env:MOBILE56_STORE_PASS','--out',output,B/'aligned.apk')
 run(tools/'apksigner','verify','--verbose',output)
 run(tools/'aapt2','dump','badging',output)

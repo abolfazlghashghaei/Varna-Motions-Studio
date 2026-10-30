@@ -18,8 +18,8 @@
     },
     {
       "path": "INSTALL_WINDOWS.ps1",
-      "bytes": 33804,
-      "sha256": "d17862eb11753c754dc53e7d59b998e02c80514f13e6e6b0532f7ef227493d00"
+      "bytes": 34162,
+      "sha256": "63f0d2fa38a4ec40f836c9d5db1f2a69fb3ad3b1762f14d82a7e41ace7262146"
     },
     {
       "path": "LAUNCH_EDITOR_WINDOWS.bat",
@@ -15093,8 +15093,8 @@
     },
     {
       "path": "editor.html",
-      "bytes": 207300,
-      "sha256": "0e9f0b006a061b4f4bd3094538de856d97e2c9a08dded08463796b831325f378"
+      "bytes": 207339,
+      "sha256": "38664beb9f33d7aff8512c9c08ec19cc75261a6342f2407f11d344a7e97710d4"
     },
     {
       "path": "host/appearance25.jsx",
@@ -15203,8 +15203,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 207029,
-      "sha256": "77edf8b39bcf0c3bca2b69d3816a500a4b9fdb17fc5cca20af64ba9095471ee9"
+      "bytes": 207068,
+      "sha256": "5aa0e69b7d4bdf8baf7b9f3c1a8709e8dade735c2a4b7221fe74c65b47c7d10a"
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
@@ -15467,6 +15467,11 @@
       "sha256": "f07c4c828d89a3ed5983febe6d8649393f5e37a613665dd00b91b6ecc4f4c076"
     },
     {
+      "path": "js/phone58.js",
+      "bytes": 1770,
+      "sha256": "2903c2c7170e72478450834e1057bc45c12642f4c30c68210ddc53cd8011d9f5"
+    },
+    {
       "path": "js/plugin53.js",
       "bytes": 22195,
       "sha256": "5afdb363614b2eee50fc61ac47b293818ba52277e85188c38a911bb88ab4cd9d"
@@ -15723,13 +15728,13 @@
     },
     {
       "path": "premiere.html",
-      "bytes": 206630,
-      "sha256": "69a0f8858f40ede0b841dc7c585e012d09ab556af77909dccb47279ba809aa1c"
+      "bytes": 206669,
+      "sha256": "1a030a5bb357163de75bb3e00e646ebf615d6b5efb9ea72fca92a05e4bcf2ee1"
     },
     {
       "path": "resolve.html",
-      "bytes": 206628,
-      "sha256": "7d8a4d904d83a42b75ddaf65a4d3aa21b2ccbb627169b8d11c3f684c8d751850"
+      "bytes": 206667,
+      "sha256": "f2f05cd363e8d5a95f991ce10a168ccf833e44bcde1cdc87f346f38eb734d778"
     },
     {
       "path": "tests/README.md",

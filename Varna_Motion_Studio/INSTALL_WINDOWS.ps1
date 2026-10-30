@@ -1,5 +1,6 @@
 ﻿param(
     [switch]$Uninstall,
+    [switch]$RequireHealthyEngine,
     [ValidateSet('Core','Studio','Max')][string]$Level = 'Studio',
     [string]$ProgressPath = ''
 )
@@ -296,11 +297,13 @@ function Ensure-ComfyPortable {
     }
     if (Test-RunningVarnaEngine) { return 'موتور مشترک وارنا در حال اجراست؛ دانلود موتور تکراری انجام نمی‌شود.' }
     if ($sharedPresent) {
+        if($RequireHealthyEngine){throw 'Existing local engine failed its health check. No duplicate engine was installed. Repair the configured engine first.'}
         Set-InstallStatus 47 'engine-check' 'پوشهٔ موتور مشترک در GHAF\Core وجود دارد. آزمون سلامت کامل نشد؛ نصب پنل ادامه می‌یابد و موتور دیگری دانلود نمی‌شود.'
         return 'موتور مشترک موجود است ولی سلامت آن تأیید نشد؛ موتور تازه دریافت نشد. اجرای موتور موجود را جداگانه بررسی کنید.'
     }
     $sharedConfig = Join-Path $env:LOCALAPPDATA 'GHAF\Config\extra_model_paths.yaml'
     if ($suspected.Count -eq 0 -and (Test-Path -LiteralPath $sharedConfig -PathType Leaf)) { [void]$suspected.Add((Join-Path $env:LOCALAPPDATA 'GHAF')) }
+    if ($suspected.Count -and $RequireHealthyEngine) { throw 'An existing local engine was found but could not be verified. No duplicate engine was installed.' }
     if ($suspected.Count) { return ('موتور نصب‌شده یافت شد، اما سلامت آن تأیید نشد. نصب پنل ادامه یافت و موتور دیگری دانلود نشد. محل بررسی: ' + ($suspected -join ' ؛ ')) }
     $gpu = @(Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'NVIDIA' })
     if (!$gpu.Count) { throw 'موتور وارنا پیدا نشد و نسخهٔ خودکار این بسته به کارت NVIDIA نیاز دارد.' }

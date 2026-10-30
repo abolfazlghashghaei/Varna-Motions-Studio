@@ -1,6 +1,6 @@
 from pathlib import Path
 import zipfile,hashlib,os,subprocess
-root=Path(__file__).resolve().parents[1];build=root/'build';apk=build/'Varna-Mobile-0.2.0-preview.apk'
+root=Path(__file__).resolve().parents[1];build=root/'build';apk=build/'Varna-Mobile-0.3.0-preview.apk'
 with zipfile.ZipFile(apk) as z:
  assert z.testzip() is None
  for source in (build/'web').rglob('*'):
@@ -10,6 +10,6 @@ with zipfile.ZipFile(apk) as z:
 tools=Path(os.environ['ANDROID56_SDK'])/'android-15'
 subprocess.run([str(tools/'apksigner'),'verify','--verbose',str(apk)],check=True)
 permissions=subprocess.check_output([str(tools/'aapt2'),'dump','permissions',str(apk)],text=True)
-assert 'uses-permission' not in permissions,permissions
-print('PASS APK exact bundled assets, dictionaries, font/notices, bytecode, signature and zero requested permissions; not a device execution test.')
+assert permissions.count('uses-permission')==1 and 'android.permission.INTERNET' in permissions,permissions
+print('PASS APK exact bundled assets, dictionaries, font/notices, bytecode, signature and only the requested INTERNET permission; not a device execution test.')
 print('SHA256',hashlib.sha256(apk.read_bytes()).hexdigest())

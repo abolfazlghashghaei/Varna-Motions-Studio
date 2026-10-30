@@ -43,7 +43,7 @@ const server = require("./server.cjs");
     await page
       .locator("#filePicker")
       .setInputFiles("/workspace/artifacts/mobile56-fixture.mp4");
-    await page.locator(".asset").click();
+    await page.waitForFunction(()=>MobileApp.project().clips.length===1);
     await page.evaluate(() => MobileApp.seek(0.8));
     assert.equal(
       await page.evaluate(() => MobileApp.project().clips.length),
@@ -178,6 +178,7 @@ const server = require("./server.cjs");
       "Output audio is not silent",
     );
     await page.reload();
+    await page.getByRole("button",{name:"Continue previous project",exact:true}).click();
     await page.waitForFunction(
       () => window.MobileApp && MobileApp.project().clips.length === 1,
     );
