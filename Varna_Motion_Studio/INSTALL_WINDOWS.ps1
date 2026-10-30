@@ -5,7 +5,9 @@
     [string]$ProgressPath = ''
 )
 $ErrorActionPreference = 'Stop'
+[Net.ServicePointManager]::SecurityProtocol=[Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 $src = $PSScriptRoot
+Import-Module (Join-Path $src 'tools\Download59.psm1') -Force
 $extensions = Join-Path $env:APPDATA 'Adobe\CEP\extensions'
 $dst = Join-Path $extensions 'VarnaMotionStudio'
 $recovery = Join-Path $env:APPDATA 'VarnaMotionStudio\Backups'
@@ -23,7 +25,8 @@ function Set-InstallStatus([int]$percent,[string]$phase,[string]$message) {
             [IO.File]::WriteAllText($ProgressPath,$json,(New-Object System.Text.UTF8Encoding($false)))
         } catch { }
     }
-    Write-Host $message
+    Write-Host ('[{0}% | {1}] {2}' -f $percent,$phase,$message)
+    if($env:VARNA_INSTALL_LOG){Add-Content -LiteralPath $env:VARNA_INSTALL_LOG -Encoding UTF8 -Value ((Get-Date -Format o)+' ['+$phase+'] '+$message)}
 }
 function Get-VarnaInstallations {
     $result = @()
@@ -167,13 +170,16 @@ function Test-VarnaEngine([string]$base) {
     $stdout = Join-Path $recovery ('engine-probe-' + [guid]::NewGuid().ToString('N') + '.out')
     $stderr = $stdout + '.err'
     $script = $stdout + '.py'
+    $healthy59=$false
     try {
         [IO.File]::WriteAllText($script,"import sys`nsys.path.insert(0, sys.argv[1])`nimport torch, folder_paths`nprint('VARNA_ENGINE_OK')`n")
         $probe = Start-Process -FilePath $python -ArgumentList ('"' + $script + '" "' + $appDir + '"') -WorkingDirectory $appDir -WindowStyle Hidden -PassThru -RedirectStandardOutput $stdout -RedirectStandardError $stderr
         if (!$probe.WaitForExit(90000)) { $probe.Kill(); return $false }
-        return $probe.ExitCode -eq 0 -and (Get-Content -LiteralPath $stdout -Raw -ErrorAction SilentlyContinue) -match 'VARNA_ENGINE_OK'
+        $healthy59=$probe.ExitCode -eq 0 -and (Get-Content -LiteralPath $stdout -Raw -ErrorAction SilentlyContinue) -match 'VARNA_ENGINE_OK'
+        if(!$healthy59){Write-Host ('Engine diagnostic: '+$stderr);Get-Content -LiteralPath $stderr -Tail 20 -ErrorAction SilentlyContinue|ForEach-Object {Write-Host $_}}
+        return $healthy59
     } catch { return $false }
-    finally { Remove-Item -LiteralPath $stdout,$stderr,$script -Force -ErrorAction SilentlyContinue }
+    finally {if($healthy59){Remove-Item -LiteralPath $stdout,$stderr -Force -ErrorAction SilentlyContinue};Remove-Item -LiteralPath $script -Force -ErrorAction SilentlyContinue}
 }
 function Get-VarnaEngineCandidates {
     $roots = New-Object System.Collections.ArrayList
@@ -214,31 +220,7 @@ function Test-RunningVarnaEngine {
     return $false
 }
 function Receive-VarnaEngine([string]$uri,[string]$target,[long]$expected) {
-    Add-Type -AssemblyName System.Net.Http
-    $client = New-Object System.Net.Http.HttpClient
-    $client.Timeout = [TimeSpan]::FromHours(3)
-    $response = $null; $inputStream = $null; $outputStream = $null
-    try {
-        $response = $client.GetAsync($uri,[System.Net.Http.HttpCompletionOption]::ResponseHeadersRead).GetAwaiter().GetResult()
-        $response.EnsureSuccessStatusCode() | Out-Null
-        $total = if ($expected -gt 0) { $expected } else { [long]$response.Content.Headers.ContentLength }
-        $inputStream = $response.Content.ReadAsStreamAsync().GetAwaiter().GetResult()
-        $outputStream = [IO.File]::Open($target,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None)
-        $buffer = New-Object byte[] (1024*1024); [long]$received=0; $last=-1
-        while (($count=$inputStream.Read($buffer,0,$buffer.Length)) -gt 0) {
-            $outputStream.Write($buffer,0,$count); $received += $count
-            $pct = if ($total -gt 0) { [int](100*$received/$total) } else { 0 }
-            if ($pct -ge $last+2 -or $last -lt 0) {
-                $last=$pct
-                $of = if ($total -gt 0) { (' / {0:N1}' -f ($total/1MB)) } else { '' }
-                Set-InstallStatus ([int](47+25*$pct/100)) 'engine-download' ('موتور وارنا: {0:N1}{1} MiB · {2}%' -f ($received/1MB),$of,$pct)
-            }
-        }
-        if ($expected -gt 0 -and $received -ne $expected) { throw 'اندازهٔ دریافت موتور وارنا با فایل رسمی یکسان نیست.' }
-    } finally {
-        if ($outputStream) { $outputStream.Dispose() }; if ($inputStream) { $inputStream.Dispose() }
-        if ($response) { $response.Dispose() }; $client.Dispose()
-    }
+ Receive-VarnaFile59 -Uri $uri -Target $target -ExpectedBytes $expected -Label 'Local AI engine'
 }
 function Get-AEEffectPath {
     $keys = @(Get-ChildItem 'HKLM:\SOFTWARE\Adobe\After Effects' -ErrorAction SilentlyContinue | Sort-Object { try { [version]$_.PSChildName } catch { [version]'0.0' } } -Descending)
@@ -296,43 +278,38 @@ function Ensure-ComfyPortable {
         [void]$suspected.Add($candidate)
     }
     if (Test-RunningVarnaEngine) { return 'موتور مشترک وارنا در حال اجراست؛ دانلود موتور تکراری انجام نمی‌شود.' }
-    if ($sharedPresent) {
-        if($RequireHealthyEngine){throw 'Existing local engine failed its health check. No duplicate engine was installed. Repair the configured engine first.'}
-        Set-InstallStatus 47 'engine-check' 'پوشهٔ موتور مشترک در GHAF\Core وجود دارد. آزمون سلامت کامل نشد؛ نصب پنل ادامه می‌یابد و موتور دیگری دانلود نمی‌شود.'
-        return 'موتور مشترک موجود است ولی سلامت آن تأیید نشد؛ موتور تازه دریافت نشد. اجرای موتور موجود را جداگانه بررسی کنید.'
-    }
-    $sharedConfig = Join-Path $env:LOCALAPPDATA 'GHAF\Config\extra_model_paths.yaml'
-    if ($suspected.Count -eq 0 -and (Test-Path -LiteralPath $sharedConfig -PathType Leaf)) { [void]$suspected.Add((Join-Path $env:LOCALAPPDATA 'GHAF')) }
-    if ($suspected.Count -and $RequireHealthyEngine) { throw 'An existing local engine was found but could not be verified. No duplicate engine was installed.' }
-    if ($suspected.Count) { return ('موتور نصب‌شده یافت شد، اما سلامت آن تأیید نشد. نصب پنل ادامه یافت و موتور دیگری دانلود نشد. محل بررسی: ' + ($suspected -join ' ؛ ')) }
+    if($sharedPresent -or $suspected.Count){Set-InstallStatus 47 'engine-repair' 'An incomplete engine was found. Its files/models will be preserved while a separate verified engine is prepared.'}
     $gpu = @(Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'NVIDIA' })
     if (!$gpu.Count) { throw 'موتور وارنا پیدا نشد و نسخهٔ خودکار این بسته به کارت NVIDIA نیاز دارد.' }
-    $sevenZip = Get-Command 7z.exe -ErrorAction SilentlyContinue
-    if (!$sevenZip) { $possible = Join-Path $env:ProgramFiles '7-Zip\7z.exe'; if (Test-Path -LiteralPath $possible) { $sevenZip = @{ Source = $possible } } }
-    $tar = Get-Command tar.exe -ErrorAction SilentlyContinue
-    if (!$sevenZip -and !$tar) { throw 'موتور وارنا پیدا نشد؛ برای استخراج نسخهٔ خودکار 7-Zip یا tar سازگار لازم است.' }
-    $uri = 'https://api.github.com/repos/comfyanonymous/ComfyUI/releases/latest'
+    $sevenZip=@{Source=(Join-Path $src 'tools\vendor\7zr59.exe')}
+    if(!(Test-Path -LiteralPath $sevenZip.Source -PathType Leaf)){throw 'The complete package is required: bundled verified 7zr extractor is missing.'}
+    $uri = 'https://api.github.com/repos/Comfy-Org/ComfyUI/releases/latest'
     $release = Invoke-RestMethod -Uri $uri -Headers @{ 'User-Agent'='VarnaMotionStudio-Installer' } -TimeoutSec 40
     $asset = @($release.assets | Where-Object { $_.name -eq 'ComfyUI_windows_portable_nvidia.7z' } | Select-Object -First 1)[0]
     if (!$asset -or [string]$asset.digest -notmatch '^sha256:[0-9a-fA-F]{64}$') { throw 'فایل رسمی موتور وارنا یا هش اعتبارسنجی در دسترس نیست.' }
-    $download = Join-Path $recovery ('ComfyUI-' + $stamp + '.7z')
+    $cache59=Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio\Downloads59';New-Item -ItemType Directory $cache59 -Force|Out-Null
+    $download = Join-Path $cache59 (([string]$asset.digest).Substring(7)+'.7z')
+    $root=Join-Path $env:LOCALAPPDATA ('VarnaMotionStudio\Engines59\'+[string]$release.tag_name)
     $unpack = Join-Path $recovery ('comfy-stage-' + $stamp)
     try {
         Set-InstallStatus 47 'engine-download' 'دریافت نسخهٔ رسمی موتور وارنا برای NVIDIA…'
-        Receive-VarnaEngine $asset.browser_download_url $download ([long]$asset.size)
+        Receive-VarnaFile59 -Uri $asset.browser_download_url -Target $download -ExpectedBytes ([long]$asset.size) -Sha256 ([string]$asset.digest).Substring(7) -Label 'Local AI engine'
         if ((Get-Item -LiteralPath $download).Length -ne [long]$asset.size -or (Get-FileHash -LiteralPath $download -Algorithm SHA256).Hash -ne ([string]$asset.digest).Substring(7)) { throw 'اعتبارسنجی فایل موتور وارنا ناموفق بود.' }
         New-Item -ItemType Directory -Path $unpack -Force | Out-Null
-        if ($sevenZip) { & $sevenZip.Source x "-o$unpack" '-y' $download | Out-Null }
-        else { & $tar.Source -xf $download -C $unpack }
-        if ($LASTEXITCODE -ne 0 -or !(Test-Path -LiteralPath (Join-Path $unpack 'ComfyUI_windows_portable\ComfyUI\main.py'))) { throw 'استخراج بستهٔ موتور وارنا ناموفق بود.' }
-        New-Item -ItemType Directory -Path (Split-Path $root -Parent) -Force | Out-Null
-        if (Test-Path -LiteralPath $root) { Move-Item -LiteralPath $root -Destination (Join-Path $recovery ('incomplete-engine-' + $stamp)) -ErrorAction Stop }
-        if (!(Test-VarnaEngine (Join-Path $unpack 'ComfyUI_windows_portable'))) { throw 'موتور وارنا استخراج شد اما آزمون اجرا ناموفق بود.' }
-        Move-Item -LiteralPath (Join-Path $unpack 'ComfyUI_windows_portable') -Destination $root -ErrorAction Stop
+        Set-InstallStatus 74 'engine-extract' 'Extracting the verified engine with the bundled 7z tool...'
+        & $sevenZip.Source x "-o$unpack" '-y' $download
+        if($LASTEXITCODE -ne 0){throw ('Engine extraction failed with code '+$LASTEXITCODE)}
+        $candidate59=@(Get-ChildItem -LiteralPath $unpack -Directory|Where-Object {(Test-Path -LiteralPath (Join-Path $_.FullName 'ComfyUI\main.py')) -and (Test-Path -LiteralPath (Join-Path $_.FullName 'python_embeded\python.exe'))}|Select-Object -First 1)
+        if($candidate59.Count -ne 1){throw 'Extracted engine layout is unsupported; original engines remain unchanged.'}
+        Set-InstallStatus 88 'engine-health' 'Testing embedded Python, PyTorch and ComfyUI before activation...'
+        if(!(Test-VarnaEngine $candidate59[0].FullName)){throw 'Extracted engine did not pass its health check. Original files and the verified download are preserved.'}
+        New-Item -ItemType Directory -Path (Split-Path $root -Parent) -Force|Out-Null
+        if(Test-Path -LiteralPath $root){Move-Item -LiteralPath $root -Destination ($root+'.backup-'+$stamp)}
+        Move-Item -LiteralPath $candidate59[0].FullName -Destination $root -ErrorAction Stop
         Save-VarnaEngineLocation $root
         return 'موتور وارنا نصب شد؛ مدل‌های صدا جداگانه بررسی می‌شوند.'
     } finally {
-        Remove-Item -LiteralPath $download -Force -ErrorAction SilentlyContinue
+        # Keep the verified/partial engine archive so retries do not restart a multi-GB download.
         Remove-Item -LiteralPath $unpack -Recurse -Force -ErrorAction SilentlyContinue
     }
 }

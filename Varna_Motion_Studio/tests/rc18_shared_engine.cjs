@@ -11,8 +11,9 @@ try{
 assert(installer.includes('sys.path.insert(0, sys.argv[1])'),'the Python probe must import modules from the actual engine directory');
 assert(installer.includes('Get-VarnaEngineCandidates')&&installer.includes('Save-VarnaEngineLocation $candidate'));
 assert(installer.includes("$sharedRoot = Join-Path $env:LOCALAPPDATA 'GHAF\\Core'"));
-assert(installer.includes('if ($sharedPresent) {')&&installer.indexOf('if ($sharedPresent) {')<installer.indexOf("$uri = 'https://api.github.com"),'an existing shared directory must prevent the download regardless of probe outcome');
-assert(installer.indexOf('if ($suspected.Count) { return')<installer.indexOf("$uri = 'https://api.github.com"),'an unverified existing engine must prevent a duplicate download');
+assert(installer.includes("VarnaMotionStudio\\Engines59\\"),'incomplete engines must be repaired in a separate staged installation');
+assert(installer.includes("if($sharedPresent -or $suspected.Count)"),'suspected engines must be reported without silently skipping repair');
+assert(installer.indexOf('if(!(Test-VarnaEngine $candidate59[0].FullName))')<installer.indexOf('Move-Item -LiteralPath $candidate59[0].FullName'),'new engine must pass health before activation');
 assert(!installer.includes('C:\\Users\\ghashghaei'),'account names must not be fixed');
 assert(installer.indexOf('if (Test-RunningVarnaEngine)')<installer.indexOf("$uri = 'https://api.github.com"));
-console.log('PASS RC18 shared engine: Qaf runtime reuse, corrected health probe and no duplicate download on uncertain installations');
+console.log('PASS RC18 shared engine: Qaf runtime reuse, corrected health probe, reuse of healthy engines and staged repair of incomplete engines');

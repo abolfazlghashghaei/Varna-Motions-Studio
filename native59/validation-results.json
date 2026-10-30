@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-30",
+  "desktopSuites": {
+    "passed": 100,
+    "total": 100
+  },
+  "androidEmulator": {
+    "api": 29,
+    "abi": "x86_64",
+    "webView": "74.0.3729.185",
+    "acceleration": "TCG / SwiftShader",
+    "nativeMp4Preview": true,
+    "burstSeek": true,
+    "cancelPreparingPlayback": true,
+    "nativeMp4Export": {
+      "codec": "h264",
+      "audio": "aac",
+      "width": 320,
+      "height": 240,
+      "durationSeconds": 0.512
+    }
+  },
+  "apk": {
+    "bytes": 9102558,
+    "sha256": "720d7aa6b1504b922e4477cdd9acc0840cc5784f31b5182ea8f154e392873135",
+    "debuggable": false,
+    "abis": [
+      "arm64-v8a",
+      "x86_64"
+    ],
+    "zipAndElf16KiBAlignment": true
+  },
+  "notValidated": [
+    "Physical Honor 90",
+    "Native Windows ComfyUI installation",
+    "Real ASR inference/model quality",
+    "Full CapCut parity",
+    "Zero-copy GPU preview",
+    "iOS"
+  ]
+}

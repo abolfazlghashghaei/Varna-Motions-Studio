@@ -1,6 +1,7 @@
 ﻿param([ValidateSet('Premiere','Resolve','Editor')][string]$HostApp='Premiere',[string]$RuntimeArchive='')
 $ErrorActionPreference='Stop'
 $payload=Split-Path $PSScriptRoot -Parent
+Import-Module (Join-Path $payload 'tools\Download59.psm1') -Force
 $package=Get-Content -LiteralPath (Join-Path $payload 'PACKAGE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 if($package.version -ne '4.5.0-rc.47' -or @($package.files).Count -lt 100){throw 'Invalid package manifest'}
 $known=@{}
@@ -64,7 +65,8 @@ if($HostApp -ne 'Premiere'){
       Write-Host ('Downloading official verified Motion Tools runtime: '+[math]::Round($spec.bytes/1MB)+' MB')
       [Net.ServicePointManager]::SecurityProtocol=[Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
       $download=$archive+'.download'
-      try{(New-Object Net.WebClient).DownloadFile($spec.url,$download);Move-Item -LiteralPath $download -Destination $archive -Force}finally{if(Test-Path -LiteralPath $download){Remove-Item -LiteralPath $download -Force}}
+      try{Receive-VarnaFile59 -Uri $spec.url -Target $download -ExpectedBytes ([long]$spec.bytes) -Sha256 $spec.sha256 -Label 'Shared application runtime';Move-Item -LiteralPath $download -Destination $archive -Force}finally{# Retain incomplete downloads for resume.
+}
     }
     if(!(Test-Path -LiteralPath $archive) -or (Get-Item -LiteralPath $archive -Force).Length -ne $spec.bytes -or (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash -ne $spec.sha256){throw 'Official runtime checksum failed. No plugin activation was attempted.'}
     $extract=$runtime+'.stage-'+[guid]::NewGuid().ToString('N')

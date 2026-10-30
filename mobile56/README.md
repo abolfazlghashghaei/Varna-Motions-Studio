@@ -1,10 +1,14 @@
-# Varna Mobile — Android preview 0.3
+# Varna Mobile — Android preview 0.4
 
-An installable Android application with a dedicated touch editor. This is the third Android preview, not a port of every desktop feature. iOS is not built in this release.
+An installable Android application with a dedicated touch editor. This is the fourth Android preview, not a port of every desktop feature. iOS is not built in this release.
 
 ## Install
 
-Android 10 or later, with an up-to-date Android System WebView (Chromium 110+ recommended). Download `Varna-Mobile-0.3.0-preview.apk` from this release, open it on the phone and permit installation from the browser/file manager if Android asks. No After Effects, Windows installer, account or running server is required. The APK is signed with a dedicated preview certificate; no signing key is included in the source or APK.
+Android 10 or later, with an up-to-date Android System WebView (Chromium 110+ recommended). Download `Varna-Mobile-0.4.0-preview.apk` from this release, open it on the phone and permit installation from the browser/file manager if Android asks. No After Effects, Windows installer, account or running server is required. The APK is signed with a dedicated preview certificate; no signing key is included in the source or APK.
+
+## New in Native59
+
+Real Media3 1.5.1 decoding, native seeking/playback clock, coalesced playhead requests and real Whisper v1.8.3 JNI libraries (arm64/x86_64). Native MP4 preview/play/seek and H.264/AAC export have now run successfully in an Android emulator. Physical Honor 90 remains untested. Model weights are optional and separately verified; real speech inference is not yet validated. See [Native59 details](../native59/README_FA.md).
 
 ## New in Connect58
 
@@ -20,7 +24,7 @@ Android 10 or later, with an up-to-date Android System WebView (Chromium 110+ re
 - Track locking/reordering, compatible clip track selection, frame/edge snapping, live preview dragging and stored local waveform peaks for bounded media.
 - Shared composition frame plan for the existing renderer, fewer retained inactive decoders, nonblocking sequential Android encoding requests and request timeouts. PNG/Base64 transfer remains a temporary export bridge.
 - Glass-inspired light/dark touch design.
-- [Persian engineering specification](docs/ARCHITECTURE57_FA.md), [pinned dependency review](docs/DEPENDENCIES57.md) and [formal project schema](shared/varna-project-v1.schema.json). Flutter/Rust/Media3/wgpu are migration targets, not libraries already inside the APK.
+- [Persian engineering specification](docs/ARCHITECTURE57_FA.md), [pinned dependency review](docs/DEPENDENCIES57.md) and [formal project schema](shared/varna-project-v1.schema.json). Flutter/Rust/wgpu remain migration targets; Media3 is now inside the APK.
 
 ## Included
 
@@ -35,7 +39,7 @@ Android 10 or later, with an up-to-date Android System WebView (Chromium 110+ re
 
 ## Scope and limits
 
-Native MediaCodec export is implemented and compiled, but **this APK has not yet been executed on a physical Android device or Android emulator**. Device codec support, audio synchronization, performance and thermal behavior still need device validation. Browser tests verify the shared compositor and a real WebM export, not the Android MP4 codec.
+Native Media3 preview and MediaCodec H.264/AAC export have run in an Android emulator. Physical-device codec support, audio synchronization, performance and thermal behavior still need device validation. This snapshot-to-Canvas bridge is not a zero-copy GPU renderer.
 
 There are no Whisper/LLM/music-generation model weights, native Adobe AEX/AE Glass binaries, desktop host controls, ComfyUI service, or full desktop template catalog in this preview. Canvas glass is its own renderer. Desktop project import is limited to supported shared features; it is not a guarantee of native AE effect equivalence. Export runs in the foreground and cancels if the app is backgrounded. Decoded audio is mixed in memory (up to 64 source clips); long/high-resolution projects can be slow on phones. Imported copies remain in app storage; uninstalling/clearing data removes them. Save exported files and project/media backups first. Custom fonts, proxy generation, project-media cleanup, background rendering and iOS are later work.
 
@@ -58,7 +62,7 @@ Extract into an SDK directory containing `android-35/android.jar` and `android-1
 python mobile56/tools/build-apk.py
 ```
 
-The build makes no network requests and uses no Gradle dependency resolution. Output is `mobile56/build/Varna-Mobile-0.3.0-preview.apk`; build outputs and signing keys are ignored. Signing by a different key requires uninstalling the preview before installing your own build. Build ZIP timestamps and signatures are not claimed byte-reproducible; bundled source/asset hashes are independently checked.
+The build uses no Gradle dependency resolution. On a cold cache it retrieves exact checksum-pinned Maven artifacts; a prepared MEDIA59_CACHE makes subsequent builds offline. JNI binaries are committed and hash-checked; source/build inputs are documented in native59/source-lock.json. Output is `mobile56/build/Varna-Mobile-0.4.0-preview.apk`; build outputs and signing keys are ignored. Signing by a different key requires uninstalling the preview before installing your own build. Build ZIP timestamps and signatures are not claimed byte-reproducible; bundled source/asset hashes are independently checked.
 
 ## Validation
 

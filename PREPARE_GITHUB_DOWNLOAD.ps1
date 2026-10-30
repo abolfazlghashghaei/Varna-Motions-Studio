@@ -1,5 +1,6 @@
 ﻿# Prepare GitHub source archives without changing the plugin's manifest or trust checks.
 $ErrorActionPreference = 'Stop'
+Import-Module (Join-Path $PSScriptRoot 'Varna_Motion_Studio\tools\Download59.psm1') -Force
 $phase = 'reading the package manifest'
 $tempFile = $null
 $client = $null
@@ -44,9 +45,9 @@ try {
         $phase = 'downloading the Git LFS component'
         Write-Host ('Downloading a required package component (' + [math]::Round([long]$entry.bytes / 1MB) + ' MB) from GitHub...')
         [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target))
-        $client = New-Object Net.WebClient
-        if ($download.header) { foreach ($header in $download.header.PSObject.Properties) { $client.Headers[$header.Name] = [string]$header.Value } }
-        $client.DownloadFile($uri, $tempFile)
+        $headers59=@{};if($download.header){foreach($header in $download.header.PSObject.Properties){$headers59[$header.Name]=[string]$header.Value}}
+        Receive-VarnaFile59 -Uri $uri.AbsoluteUri -Target $tempFile -ExpectedBytes ([long]$entry.bytes) -Sha256 ([string]$entry.sha256) -Headers $headers59 -Label 'Required package component'
+
     } else { Write-Host 'Reusing the verified component download.' }
     $phase = 'verifying the component checksum'
     if ((Get-Item -LiteralPath $tempFile).Length -ne [long]$entry.bytes -or (Get-FileHash -LiteralPath $tempFile -Algorithm SHA256).Hash -ne [string]$entry.sha256) { throw 'Component checksum mismatch.' }
@@ -65,5 +66,5 @@ try {
     exit 1
 } finally {
     if ($client) { $client.Dispose() }
-    if (!$cacheVerified -and $tempFile -and (Test-Path -LiteralPath $tempFile)) { Remove-Item -LiteralPath $tempFile -Force -ErrorAction SilentlyContinue }
+    # Partial downloads are retained for a verified Range retry.
 }

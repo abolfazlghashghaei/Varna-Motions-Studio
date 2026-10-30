@@ -18,8 +18,8 @@
     },
     {
       "path": "INSTALL_WINDOWS.ps1",
-      "bytes": 34162,
-      "sha256": "63f0d2fa38a4ec40f836c9d5db1f2a69fb3ad3b1762f14d82a7e41ace7262146"
+      "bytes": 32997,
+      "sha256": "0aba58c9b10c17c6ba27da853be61d00baddd15cb4316bfdd59f58f414e1d24f"
     },
     {
       "path": "LAUNCH_EDITOR_WINDOWS.bat",
@@ -15208,8 +15208,8 @@
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
-      "bytes": 12572,
-      "sha256": "20d8529dce49d7b24a54bf6498931a6f90e921da04297f15fcfe8d5332370748"
+      "bytes": 12685,
+      "sha256": "1ec15e1dbaed1cd824d18bac9756eef05f5107e557e07189cd870c1d9201366f"
     },
     {
       "path": "integrations/effects/COMPATIBILITY.json",
@@ -15948,8 +15948,8 @@
     },
     {
       "path": "tests/rc18_shared_engine.cjs",
-      "bytes": 2228,
-      "sha256": "760fd2c6cba81f44ae393dca9e720059dfc914db1abe0d24bcbb25e1813370dc"
+      "bytes": 2299,
+      "sha256": "17bc18245d52741c67bf3477309a5770457eaec0221fde62629f6869b8779ae5"
     },
     {
       "path": "tests/rc19_engine_diagnostics.cjs",
@@ -16437,6 +16437,11 @@
       "sha256": "fdb08546776ec6228b03e8d02b40d4ab3255bae5f401adba7ff5dad927ac5c9c"
     },
     {
+      "path": "tools/Download59.psm1",
+      "bytes": 4668,
+      "sha256": "a18ce0b45c9e4f652651264e59cd7a1bd2a071cd3d6aa1d25bed212f01b2dc70"
+    },
+    {
       "path": "tools/ai52.cjs",
       "bytes": 4418,
       "sha256": "def636a6ebd88fecda51206b7b878ed3480658067d3a4acc391efac0b0f19391"
@@ -16480,6 +16485,16 @@
       "path": "tools/resolve54.cjs",
       "bytes": 2100,
       "sha256": "c6134615b4c7a38569a03d8e28271a9c4f462badd294eb1d0a21680a7d41f53f"
+    },
+    {
+      "path": "tools/vendor/7zr59-LICENSE.txt",
+      "bytes": 6190,
+      "sha256": "dac8389b6bc39339537bc351772106afe7951cb242cdf03e855b67c3a683deb1"
+    },
+    {
+      "path": "tools/vendor/7zr59.exe",
+      "bytes": 602624,
+      "sha256": "9bf582b894dfa665f852d7e9112b02290a1c303c2d95a21fcdc41ffcb03143b7"
     },
     {
       "path": "tools/vendor/LICENSES53.txt",

@@ -8,6 +8,10 @@
     Timeline = VarnaTimeline57,
     $ = (s) => document.querySelector(s),
     native = !!w.MobileNative,
+    nativePlayback59 =
+      native &&
+      typeof w.MobileNative.nativeFrame59 === "function" &&
+      typeof w.MobileNative.probe59 === "function",
     media = new Map(),
     assets = new Map(),
     pending = new Map(),
@@ -30,7 +34,11 @@
     audioContext = null,
     mix = null,
     snapping = true,
-    seekRevision = 0;
+    seekRevision = 0,
+    seekBusy59 = false,
+    seekQueued59 = null,
+    nativePlayRevision59 = 0,
+    preparingPlay59 = false;
   const T = (en, fa) => (lang === "en" ? en : fa);
   function status(text) {
     $("#status").textContent = text;
@@ -74,7 +82,12 @@
                   ),
                 );
               },
-              method === "server58"
+              [
+                "server58",
+                "downloadModel59",
+                "transcribe59",
+                "importModel59",
+              ].includes(method)
                 ? 1800000
                 : method === "finishExport"
                   ? 300000
@@ -91,7 +104,10 @@
     });
   }
   function pause() {
+    nativePlayRevision59++;
+    preparingPlay59 = false;
     playing = false;
+    if (nativePlayback59) MobileNative.pause59();
     cancelAnimationFrame(raf);
     for (const m of media.values()) m.el.pause?.();
     $("#play").textContent = "▶";
@@ -170,6 +186,16 @@
     const asset = p().assets.find((a) => a.id === c.assetId),
       cached = assets.get(c.assetId);
     if (!asset || !cached) return null;
+    if (nativePlayback59 && asset.kind !== "image") {
+      m = {
+        el: new Image(),
+        kind: "native",
+        sourceKind: asset.kind,
+        nativeId: asset.mobile56?.nativeId || cached.id,
+      };
+      media.set(c.id, m);
+      return m;
+    }
     const el = document.createElement(
       asset.kind === "image" ? "img" : asset.kind,
     );
@@ -212,10 +238,75 @@
   function active(c, t) {
     return w.VarnaComposition57.active(p(), c, t);
   }
+  async function nativeFrames59(t, run, revision) {
+    const clips = p().clips.filter((c) => active(c, t));
+    MobileNative.active59(JSON.stringify(clips.map((c) => c.id)));
+    let anchor = null;
+    for (const c of clips) {
+      if (run && (!playing || revision !== nativePlayRevision59)) break;
+      const m = runtime(c);
+      if (m?.kind === "image") {
+        if (!m.el.complete) await m.el.decode();
+        continue;
+      }
+      if (!m?.nativeId) continue;
+      const fade = Math.max(
+        0,
+        Math.min(
+          1,
+          c.fadeIn ? (t - c.start) / c.fadeIn : 1,
+          c.fadeOut ? (C.end(c) - t) / c.fadeOut : 1,
+        ),
+      );
+      const frame = await request(
+        "nativeFrame59",
+        c.id,
+        m.nativeId,
+        c.in + t - c.start,
+        run,
+        c.gain * fade,
+        exporting,
+      );
+      if (run && (!playing || revision !== nativePlayRevision59)) return null;
+      if (frame.image) {
+        m.el.src = frame.image;
+        await m.el.decode();
+      }
+      if (anchor == null && Number.isFinite(frame.position))
+        anchor = c.start + frame.position - c.in;
+    }
+    return anchor;
+  }
+  function queueSeek59(target, revision) {
+    return new Promise((resolve, reject) => {
+      if (seekQueued59) seekQueued59.resolve();
+      seekQueued59 = { target, revision, resolve, reject };
+      if (!seekBusy59) drainSeek59();
+    });
+  }
+  async function drainSeek59() {
+    seekBusy59 = true;
+    while (seekQueued59) {
+      const q = seekQueued59;
+      seekQueued59 = null;
+      try {
+        await nativeFrames59(q.target, false);
+        if (q.revision === seekRevision) draw();
+        q.resolve();
+      } catch (e) {
+        q.reject(e);
+      }
+    }
+    seekBusy59 = false;
+  }
   async function seek(t) {
     const revision = ++seekRevision;
     pause();
     time = C.clamp(t, 0, C.duration(p()));
+    if (nativePlayback59) {
+      await queueSeek59(time, revision);
+      return;
+    }
     const waits = [];
     for (const c of p().clips) {
       if (!active(c, time)) continue;
@@ -300,7 +391,8 @@
     if (media.size > 8) pruneMedia();
   }
   async function play() {
-    if (playing) return pause();
+    if (playing || preparingPlay59) return pause();
+    if (nativePlayback59) return playNative59();
     if (time >= C.duration(p()) - 0.02) time = 0;
     await seek(time);
     sound();
@@ -327,6 +419,52 @@
       raf = requestAnimationFrame(loop);
     };
     loop();
+  }
+  async function playNative59() {
+    try {
+      if (time >= C.duration(p()) - 0.02) time = 0;
+      status(T("Preparing native playback…", "آماده‌سازی پخش بومی…"));
+      const preparation = seek(time);
+      const revision = ++nativePlayRevision59;
+      preparingPlay59 = true;
+      await preparation;
+      if (revision !== nativePlayRevision59) return;
+      preparingPlay59 = false;
+      playing = true;
+      const first = await nativeFrames59(time, true, revision);
+      if (!playing || revision !== nativePlayRevision59) return;
+      if (first != null) time = first;
+      clock = performance.now();
+      clockTime = time;
+      $("#play").textContent = "Ⅱ";
+      status(T("Native Media3 playback", "پخش بومی Media3"));
+      const tick = async () => {
+        if (!playing || revision !== nativePlayRevision59) return;
+        try {
+          let target = clockTime + (performance.now() - clock) / 1000;
+          if (target >= C.duration(p())) {
+            time = C.duration(p());
+            pause();
+            draw();
+            return;
+          }
+          const anchor = await nativeFrames59(target, true, revision);
+          if (!playing || revision !== nativePlayRevision59) return;
+          time = Math.min(C.duration(p()), anchor == null ? target : anchor);
+          clockTime = time;
+          clock = performance.now();
+          draw();
+          raf = requestAnimationFrame(tick);
+        } catch (e) {
+          pause();
+          status(e.message);
+        }
+      };
+      tick();
+    } catch (e) {
+      pause();
+      status(e.message);
+    }
   }
   async function initDB() {
     return new Promise((resolve) => {
@@ -365,6 +503,15 @@
     });
   }
   async function metadata(info) {
+    if (
+      nativePlayback59 &&
+      !String(info.type || "").startsWith("image/") &&
+      !/\.(png|jpe?g|webp)$/i.test(info.name)
+    ) {
+      const data = await request("probe59", info.id);
+      if (!(data.duration > 0)) throw Error("Invalid native media duration");
+      return { ...info, ...data };
+    }
     const type = info.type || "",
       kind = type.startsWith("image/")
         ? "image"
@@ -983,6 +1130,12 @@
         button(T("+ Text", "+ متن"), addCaption, "primary"),
         button(T("Import SRT", "ورود SRT"), () => pick("srt")),
       );
+      if (native && typeof MobileNative.speechState59 === "function")
+        actions.append(
+          button(T("Auto captions · local", "زیرنویس خودکار · محلی"), () =>
+            Speech59.open(),
+          ),
+        );
       if (kind !== "caption") {
         note(
           T(
@@ -2345,6 +2498,16 @@
     });
   }
 
+  const Speech59 = w.VarnaSpeech59({
+    T,
+    sheet,
+    button,
+    request,
+    rpc,
+    project: p,
+    change,
+    status,
+  });
   const UI57 = w.VarnaMobileTools57({
     T,
     p,

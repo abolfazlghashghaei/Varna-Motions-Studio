@@ -7,9 +7,11 @@ if not exist "%~dp0Varna_Motion_Studio\INSTALL_WINDOWS.ps1" (
     pause
     exit /b 1
 )
-echo VARNA RC47 - CONNECT58
+echo VARNA RC47 - NATIVE59
 echo Close After Effects before installing.
 echo Preparing files from the GitHub download...
+set "VARNA_INSTALL_LOG=%~dp0INSTALL_DETAILS.log"
+echo Detailed download and install log: "%VARNA_INSTALL_LOG%"
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0PREPARE_GITHUB_DOWNLOAD.ps1"
 if errorlevel 1 goto failed
 call "%~dp0Varna_Motion_Studio\INSTALL_WINDOWS.bat"
