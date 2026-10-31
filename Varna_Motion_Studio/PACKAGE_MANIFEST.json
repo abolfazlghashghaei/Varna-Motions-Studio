@@ -18,8 +18,8 @@
     },
     {
       "path": "INSTALL_WINDOWS.ps1",
-      "bytes": 32997,
-      "sha256": "0aba58c9b10c17c6ba27da853be61d00baddd15cb4316bfdd59f58f414e1d24f"
+      "bytes": 33471,
+      "sha256": "6426fb70f96036a9816344d49f01f8027942e74d870ad72c3b49518bd437fa42"
     },
     {
       "path": "LAUNCH_EDITOR_WINDOWS.bat",
@@ -15208,8 +15208,8 @@
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
-      "bytes": 12685,
-      "sha256": "1ec15e1dbaed1cd824d18bac9756eef05f5107e557e07189cd870c1d9201366f"
+      "bytes": 12872,
+      "sha256": "4755c88d87eacbb2ae260dbdc346d1073a89bece665024185287e3e3239d586d"
     },
     {
       "path": "integrations/effects/COMPATIBILITY.json",
@@ -15283,8 +15283,8 @@
     },
     {
       "path": "js/app.js",
-      "bytes": 307471,
-      "sha256": "e1b9cacc6434196026acbf892cd2f06e50aa16091396b490a34579fb1f631a67"
+      "bytes": 307641,
+      "sha256": "a815cee2df9f57ae90bebab2d9de117418cea016dd71e09090a2b9c4b128ee40"
     },
     {
       "path": "js/appearance-state.js",
@@ -15473,8 +15473,8 @@
     },
     {
       "path": "js/plugin53.js",
-      "bytes": 22195,
-      "sha256": "5afdb363614b2eee50fc61ac47b293818ba52277e85188c38a911bb88ab4cd9d"
+      "bytes": 22284,
+      "sha256": "b9b5af7526947ee65c72a2c416f49c693579febb2059a66539e3e4b261ae4765"
     },
     {
       "path": "js/premiere52.js",
@@ -16440,6 +16440,11 @@
       "path": "tools/Download59.psm1",
       "bytes": 4668,
       "sha256": "a18ce0b45c9e4f652651264e59cd7a1bd2a071cd3d6aa1d25bed212f01b2dc70"
+    },
+    {
+      "path": "tools/Profile60.ps1",
+      "bytes": 1065,
+      "sha256": "383fd3c25a7652004a5e01adc9bca5e8c60f967e64bbab8ae204ef4c8f8bd6b8"
     },
     {
       "path": "tools/ai52.cjs",

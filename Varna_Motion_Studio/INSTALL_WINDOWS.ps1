@@ -1,5 +1,7 @@
 ﻿param(
     [switch]$Uninstall,
+    [switch]$EngineOnly,
+    [ValidateSet('Legacy','WithEngine','WithoutEngine')][string]$EngineMode = 'Legacy',
     [switch]$RequireHealthyEngine,
     [ValidateSet('Core','Studio','Max')][string]$Level = 'Studio',
     [string]$ProgressPath = ''
@@ -173,12 +175,19 @@ function Test-VarnaEngine([string]$base) {
     $healthy59=$false
     try {
         [IO.File]::WriteAllText($script,"import sys`nsys.path.insert(0, sys.argv[1])`nimport torch, folder_paths`nprint('VARNA_ENGINE_OK')`n")
-        $probe = Start-Process -FilePath $python -ArgumentList ('"' + $script + '" "' + $appDir + '"') -WorkingDirectory $appDir -WindowStyle Hidden -PassThru -RedirectStandardOutput $stdout -RedirectStandardError $stderr
-        if (!$probe.WaitForExit(90000)) { $probe.Kill(); return $false }
-        $healthy59=$probe.ExitCode -eq 0 -and (Get-Content -LiteralPath $stdout -Raw -ErrorAction SilentlyContinue) -match 'VARNA_ENGINE_OK'
+        $info=New-Object Diagnostics.ProcessStartInfo
+        $info.FileName=$python;$info.Arguments=('"'+$script+'" "'+$appDir+'"');$info.WorkingDirectory=$appDir
+        $info.UseShellExecute=$false;$info.CreateNoWindow=$true;$info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
+        $probe=New-Object Diagnostics.Process;$probe.StartInfo=$info;[void]$probe.Start()
+        $outTask=$probe.StandardOutput.ReadToEndAsync();$errTask=$probe.StandardError.ReadToEndAsync()
+        if(!$probe.WaitForExit(90000)){$probe.Kill();Write-Host 'Engine health probe timed out after 90 seconds';return $false}
+        $outText=$outTask.GetAwaiter().GetResult();$errText=$errTask.GetAwaiter().GetResult()
+        [IO.File]::WriteAllText($stdout,$outText);[IO.File]::WriteAllText($stderr,$errText)
+        Write-Host ('Engine health exit code: '+$probe.ExitCode)
+        $healthy59=$probe.ExitCode -eq 0 -and $outText -match 'VARNA_ENGINE_OK'
         if(!$healthy59){Write-Host ('Engine diagnostic: '+$stderr);Get-Content -LiteralPath $stderr -Tail 20 -ErrorAction SilentlyContinue|ForEach-Object {Write-Host $_}}
         return $healthy59
-    } catch { return $false }
+    } catch { Write-Host ('Engine health error: '+$_.Exception.Message); return $false }
     finally {if($healthy59){Remove-Item -LiteralPath $stdout,$stderr -Force -ErrorAction SilentlyContinue};Remove-Item -LiteralPath $script -Force -ErrorAction SilentlyContinue}
 }
 function Get-VarnaEngineCandidates {
@@ -372,6 +381,7 @@ try {
             }
         } catch { Write-Warning "Previous ownership profile was not readable: $profileFile" }
     }
+    if($EngineOnly){ Ensure-ComfyPortable | Write-Host; exit 0 }
     $vendorPlan = @()
     if ($Level -eq 'Max') {
         $vendorPlan = @(Get-VendorInstallPlan $src)
@@ -399,7 +409,7 @@ try {
         }
     }
     $comfyState = 'موتور وارنا: وضعیت نسخهٔ موجود بررسی شد.'
-    if ($Level -eq 'Max') { $comfyState = Ensure-ComfyPortable }
+    if ($EngineMode -eq 'WithEngine' -or ($EngineMode -eq 'Legacy' -and $Level -eq 'Max')) { $comfyState = Ensure-ComfyPortable }
     $audioState = 'مدل‌ها در محل اصلی خود باقی می‌مانند؛ مسیرشان در پنل تنظیم می‌شود.'
     New-Item -ItemType Directory -Path $stage -Force | Out-Null
     $index = 0
@@ -413,8 +423,9 @@ try {
         $index++
         if ($index % 50 -eq 0 -or $index -eq $selected.Count) { Set-InstallStatus ([int](73 + 17 * $index / $selected.Count)) 'stage' ("Prepared $index / $($selected.Count) files") }
     }
+    & (Join-Path $src 'tools\Profile60.ps1') -Target $stage -Enabled ($EngineMode -ne 'WithoutEngine')
     Copy-Item -LiteralPath $manifestFile -Destination $stage -ErrorAction Stop
-    $profile = @{ version = $package.version; level = $Level; packs = @('core'); externalPathsModified = @(); externalComponents = @() }
+    $profile = @{ engineMode=$EngineMode; version = $package.version; level = $Level; packs = @('core'); externalPathsModified = @(); externalComponents = @() }
     if ($Level -ne 'Core') { $profile.packs += 'sfx' }
     if ($Level -eq 'Max') { $profile.packs += 'composer'; $profile.packs += 'textyle-presets'; $profile.packs += 'ae-glass' }
     $profile | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $stage 'INSTALL_PROFILE.json') -Encoding UTF8

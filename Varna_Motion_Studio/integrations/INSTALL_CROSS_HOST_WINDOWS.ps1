@@ -1,4 +1,4 @@
-﻿param([ValidateSet('Premiere','Resolve','Editor')][string]$HostApp='Premiere',[string]$RuntimeArchive='')
+﻿param([ValidateSet('Premiere','Resolve','Editor')][string]$HostApp='Premiere',[string]$RuntimeArchive='',[ValidateSet('Legacy','WithEngine','WithoutEngine')][string]$EngineMode='Legacy')
 $ErrorActionPreference='Stop'
 $payload=Split-Path $PSScriptRoot -Parent
 Import-Module (Join-Path $payload 'tools\Download59.psm1') -Force
@@ -86,6 +86,7 @@ $backup=$target+'.backup-'+(Get-Date -Format 'yyyyMMdd-HHmmss')+'-'+[guid]::NewG
 $activated54=$false
 try {
   Copy-SharedTools53 $staged
+  & (Join-Path $payload 'tools\Profile60.ps1') -Target $staged -Enabled ($EngineMode -ne 'WithoutEngine')
   @{level='Studio';version='4.5.0-rc.47';build='Studio54';host=$HostApp;packs=@('shared-production','sfx')} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $staged 'INSTALL_PROFILE.json') -Encoding UTF8
   if($HostApp -eq 'Resolve'){Copy-Item -LiteralPath (Join-Path $payload 'resolve.html') -Destination $staged}
   if($HostApp -eq 'Editor'){Copy-Item -LiteralPath (Join-Path $payload 'editor.html') -Destination $staged}
