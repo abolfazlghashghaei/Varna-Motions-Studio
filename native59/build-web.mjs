@@ -1,3 +1,0 @@
-import fs from 'node:fs';import path from 'node:path';import {createRequire} from 'node:module';
-const require=createRequire(new URL('../tooling53/package.json',import.meta.url)),esbuild=require('esbuild'),root=path.resolve('mobile56/build/web');const manifest=[];
-async function walk(dir){for(const file of fs.readdirSync(dir)){const p=path.join(dir,file);if(fs.statSync(p).isDirectory())await walk(p);else if(file.endsWith('.js')){const input=fs.readFileSync(p,'utf8'),out=await esbuild.transform(input,{target:'chrome74',legalComments:'eof'});fs.writeFileSync(p,out.code);manifest.push({path:path.relative(root,p),target:'chrome74'});}}}await walk(root);fs.writeFileSync(path.join(root,'compatibility59.json'),JSON.stringify({compiler:esbuild.version,files:manifest},null,2));

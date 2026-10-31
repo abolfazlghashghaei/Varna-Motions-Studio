@@ -1,2 +1,0 @@
-const esbuild=require('esbuild'),path=require('node:path');
-esbuild.buildSync({entryPoints:[path.join(__dirname,'engine.cjs')],bundle:true,platform:'browser',format:'iife',globalName:'VarnaText55',target:'chrome80',minify:true,legalComments:'eof',outfile:path.join(__dirname,'../../Varna_Motion_Studio/js/text55-core.js'),footer:{js:'if(typeof module==="object" && module.exports)module.exports=VarnaText55;'}});

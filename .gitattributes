@@ -1,4 +1,0 @@
-/Varna_Motion_Studio/assets/vendor/Railcut/Railcut/bin/mac/ffmpeg filter=lfs diff=lfs merge=lfs -text
-
-# Preserve upstream dictionary bytes, including their original final blank lines.
-/Varna_Motion_Studio/assets/text55/*.aff -whitespace

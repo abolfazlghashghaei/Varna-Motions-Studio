@@ -1,9 +1,0 @@
-{
-  "name": "Whisper base multilingual GGML",
-  "bytes": 147951465,
-  "sha1": "465707469ff3a37a2b9b8d8f89f2f99de7299dac",
-  "sha1Source": "https://github.com/ggml-org/whisper.cpp/blob/v1.8.3/models/README.md",
-  "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin?download=true",
-  "distribution": "Optional download or verified file import; not bundled",
-  "runtime": "whisper.cpp v1.8.3 native CPU"
-}

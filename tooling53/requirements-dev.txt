@@ -1,5 +1,0 @@
-# Optional official schema interoperability check; not required by the installed plugin.
-opentimelineio==0.18.1
-
-# Optional execution of the native Lua connector against a Resolve SDK model.
-lupa==2.6
