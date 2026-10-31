@@ -16,6 +16,27 @@ function Find-Engines60([string]$Root){
   $queue.Enqueue($path)
  }}
 }
+# Never use recursive deletion on a tree that may contain model junctions.
+function Remove-EngineTree602 {
+ param([Parameter(Mandatory=$true)][string]$Path,[switch]$Root)
+ $item=Get-Item -LiteralPath $Path -Force -ErrorAction Stop
+ if($item.Attributes -band [IO.FileAttributes]::ReparsePoint){
+  if($Root){throw ('Engine root changed to a link; scan again: '+$Path)}
+  # Nonrecursive native deletion unlinks the entry; it never enumerates its target.
+  if($item.Attributes -band [IO.FileAttributes]::Directory){[IO.Directory]::Delete($Path,$false)}else{[IO.File]::Delete($Path)}
+  Write-Host ('Disconnected link; target preserved: '+$Path)
+  return
+ }
+ if($item.PSIsContainer){
+  foreach($child in @(Get-ChildItem -LiteralPath $Path -Force -ErrorAction Stop)){
+   Remove-EngineTree602 -Path $child.FullName
+  }
+  # Refuse a late substitution or newly added content instead of traversing it.
+  $current=Get-Item -LiteralPath $Path -Force -ErrorAction Stop
+  if($current.Attributes -band [IO.FileAttributes]::ReparsePoint){throw ('Directory changed during deletion: '+$Path)}
+  [IO.Directory]::Delete($Path,$false)
+ }else{[IO.File]::Delete($Path)}
+}
 Write-Host '1. Preflight: close Adobe applications; inventory only, no files changed.'
 if(Get-Process AfterFX,'Adobe Premiere Pro',Resolve -ErrorAction SilentlyContinue){throw 'Close After Effects, Premiere and Resolve first.'}
 Write-Host 'Scanning branded engine installations; inaccessible folders are skipped and junctions are never followed...'
@@ -44,9 +65,7 @@ if($Action -eq 'Uninstall'){
   if($engine.Portable -and (!(Test-Path (Join-Path $path 'ComfyUI\main.py')) -or !(Test-Path (Join-Path $path 'python_embeded\python.exe')))){throw ('Engine layout changed; scan again: '+$path)}
   if((Get-Item -LiteralPath $path).Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Engine path changed to a link'}
   if(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue|Where-Object {$_.ExecutablePath -and $_.ExecutablePath.StartsWith($path+'\',[StringComparison]::OrdinalIgnoreCase)}){throw ('Stop the running engine first: '+$path)}
-  $check=New-Object 'System.Collections.Generic.Queue[string]';$check.Enqueue($path)
-  while($check.Count){foreach($item in Get-ChildItem -LiteralPath $check.Dequeue() -Force -ErrorAction Stop){if($item.Attributes -band [IO.FileAttributes]::ReparsePoint){throw ('Linked files/models detected; remove or disconnect links manually first: '+$item.FullName)};if($item.PSIsContainer){$check.Enqueue($item.FullName)}}}
-  Remove-Item -LiteralPath $path -Recurse -Force -ErrorAction Stop
+  Remove-EngineTree602 -Path $path -Root
   Write-Host ('Deleted: '+$path)
  }
  $pointer=Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio\engine-root.txt'
