@@ -26,7 +26,13 @@ if($Action -eq 'Uninstall'){
 }
 $state=[ordered]@{action=$Action;host=$HostApp;mode=$Mode;engines=$engines;packageManifest=(Test-Path (Join-Path $payload 'PACKAGE_MANIFEST.json'));nvidia=@(Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue|Where-Object Name -match NVIDIA).Count -gt 0}
 $state|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $report -Encoding UTF8
-Write-Host ('Inventory: '+$report);$engines|Format-Table Path,Portable,Models -AutoSize|Out-Host
+$state['existingAEPanel']=Test-Path (Join-Path $env:APPDATA 'Adobe\CEP\extensions\VarnaMotionStudio')
+$state['existingPremierePanel']=Test-Path (Join-Path $env:APPDATA 'Adobe\CEP\extensions\com.varnalabs.editstudio.premiere')
+$state['existingResolveTools']=Test-Path (Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio\Hosts\Resolve')
+$state['bundledExtractor']=Test-Path (Join-Path $payload 'tools\vendor\7zr59.exe')
+$state|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $report -Encoding UTF8
+Start-Transcript -Path ($report+'.log') -Append|Out-Null
+Write-Host ('Inventory: '+$report);$state|Format-List|Out-Host;$engines|Format-Table Path,Portable,Models -AutoSize|Out-Host
 if($Action -eq 'Uninstall'){
  Write-Host 'These engine folders, including their models, will be permanently deleted. Other Varna panels/projects are not selected.'
  if(!$engines.Count){Write-Host 'No validated branded ComfyUI engines found.';return}
@@ -53,7 +59,7 @@ Write-Host '2. Verify and prepare package components.'
 & (Join-Path $package 'PREPARE_GITHUB_DOWNLOAD.ps1');if($LASTEXITCODE){throw 'Package preparation failed'}
 Write-Host '3. Install/repair selected profile. Valid shared engines and downloads are reused.'
 if($HostApp -eq 'AE'){
- & (Join-Path $payload 'INSTALL_WINDOWS.ps1') -Level Studio -EngineMode $Mode
+ & (Join-Path $payload 'INSTALL_WINDOWS.ps1') -Level Max -EngineMode $Mode
  if($LASTEXITCODE){throw 'Panel/engine step failed; read its diagnostic'}
 }else{
  if($Mode -eq 'WithEngine'){
