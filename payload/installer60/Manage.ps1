@@ -34,8 +34,13 @@ function Remove-EngineTree602 {
   # Refuse a late substitution or newly added content instead of traversing it.
   $current=Get-Item -LiteralPath $Path -Force -ErrorAction Stop
   if($current.Attributes -band [IO.FileAttributes]::ReparsePoint){throw ('Directory changed during deletion: '+$Path)}
+  if($current.Attributes -band [IO.FileAttributes]::ReadOnly){[IO.File]::SetAttributes($Path,($current.Attributes -band (-bnot [IO.FileAttributes]::ReadOnly)))}
   [IO.Directory]::Delete($Path,$false)
- }else{[IO.File]::Delete($Path)}
+ }else{
+  # Git pack/index files are routinely ReadOnly on Windows. Never change link-target attributes.
+  if($item.Attributes -band [IO.FileAttributes]::ReadOnly){[IO.File]::SetAttributes($Path,($item.Attributes -band (-bnot [IO.FileAttributes]::ReadOnly)))}
+  try{[IO.File]::Delete($Path)}catch [UnauthorizedAccessException]{throw ('Access denied after clearing Read-only: '+$Path+'. Close programs using this file, or run the uninstaller as Administrator. Ownership/ACLs were not changed.')}
+ }
 }
 Write-Host '1. Preflight: close Adobe applications; inventory only, no files changed.'
 if(Get-Process AfterFX,'Adobe Premiere Pro',Resolve -ErrorAction SilentlyContinue){throw 'Close After Effects, Premiere and Resolve first.'}
@@ -53,7 +58,7 @@ $state['existingResolveTools']=Test-Path (Join-Path $env:LOCALAPPDATA 'VarnaMoti
 $state['bundledExtractor']=Test-Path (Join-Path $payload 'tools\vendor\7zr59.exe')
 $state|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $report -Encoding UTF8
 Start-Transcript -Path ($report+'.log') -Append|Out-Null
-Write-Host ('Inventory: '+$report);$state|Format-List|Out-Host;$engines|Format-Table Path,Portable,Models -AutoSize|Out-Host
+Write-Host ('Inventory: '+$report);if($Action -ne 'Uninstall'){$state|Format-List|Out-Host}else{Write-Host 'Standalone engine removal: installation payload/extractor is not required.'};$engines|Format-Table Path,Portable,Models -AutoSize|Out-Host
 if($Action -eq 'Uninstall'){
  Write-Host 'These engine folders, including their models, will be permanently deleted. Other Varna panels/projects are not selected.'
  if(!$engines.Count){Write-Host 'No validated branded ComfyUI engines found.';return}

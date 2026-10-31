@@ -9,12 +9,17 @@ try {
  New-Item -ItemType Directory $outside,$models -Force|Out-Null
  [IO.File]::WriteAllText((Join-Path $outside 'KEEP.bin'),'USER MODEL')
  [IO.File]::WriteAllText((Join-Path $engine 'owned.txt'),'engine')
+ $git=Join-Path $engine 'ComfyUI/.git/objects/pack';New-Item -ItemType Directory $git -Force|Out-Null
+ $idx=Join-Path $git 'pack-fixture.idx';[IO.File]::WriteAllText($idx,'GIT PACK INDEX')
+ [IO.File]::SetAttributes($idx,([IO.File]::GetAttributes($idx) -bor [IO.FileAttributes]::ReadOnly))
+ [IO.File]::SetAttributes((Join-Path $outside 'KEEP.bin'),[IO.FileAttributes]::ReadOnly)
  $kind=if($env:OS -eq 'Windows_NT'){'Junction'}else{'SymbolicLink'}
  New-Item -ItemType $kind -Path (Join-Path $models 'SEEDVR2') -Target $outside|Out-Null
  New-Item -ItemType SymbolicLink -Path (Join-Path $models 'file-model') -Target (Join-Path $outside 'KEEP.bin')|Out-Null
  Remove-EngineTree602 -Path $engine -Root
  if(Test-Path $engine){throw 'Engine not removed'}
  if([IO.File]::ReadAllText((Join-Path $outside 'KEEP.bin')) -ne 'USER MODEL'){throw 'External model changed'}
+ if(!([IO.File]::GetAttributes((Join-Path $outside 'KEEP.bin')) -band [IO.FileAttributes]::ReadOnly)){throw 'External model attributes changed'}
  $rootLink=Join-Path $base 'root-link';New-Item -ItemType $kind -Path $rootLink -Target $outside|Out-Null
  $rejected=$false;try{Remove-EngineTree602 -Path $rootLink -Root}catch{$rejected=$true}
  if(!$rejected -or !(Test-Path (Join-Path $outside 'KEEP.bin'))){throw 'Root-link protection failed'}
@@ -23,7 +28,7 @@ try {
   Remove-EngineTree602 -Path $broken
   if(Get-Item -LiteralPath $broken -Force -ErrorAction SilentlyContinue){throw 'Broken link remained'}
  }
- Write-Host ('PASS602 real filesystem: engine removed; external model bytes preserved; root link refused. Link type: '+$kind)
+ Write-Host ('PASS603 real filesystem: read-only Git pack removed; engine removed; external model bytes preserved; root link refused. Link type: '+$kind)
 }finally{
  # Test cleanup also avoids following links.
  if(Test-Path $base){Remove-EngineTree602 -Path $base -Root}
