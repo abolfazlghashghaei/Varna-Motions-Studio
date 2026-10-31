@@ -15209,7 +15209,7 @@
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
       "bytes": 12872,
-      "sha256": "4755c88d87eacbb2ae260dbdc346d1073a89bece665024185287e3e3239d586d"
+      "sha256": "35338277aef13ae9e0d31b4dac635377f04e233055eadbca7c077d18c795e38e"
     },
     {
       "path": "integrations/effects/COMPATIBILITY.json",
