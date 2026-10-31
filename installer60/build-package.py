@@ -11,6 +11,7 @@ for name in ['1_INSTALL_AE.bat','2_INSTALL_Premiere.bat','3_INSTALL_Resolve.bat'
 for folder in ['Varna_Motion_Studio','installer60']:
  shutil.copytree(source/folder,target/'payload'/folder,ignore=shutil.ignore_patterns('__pycache__','build-package.py'))
 shutil.copy2(source/'PREPARE_GITHUB_DOWNLOAD.ps1',target/'payload/PREPARE_GITHUB_DOWNLOAD.ps1')
+shutil.copy2(source/'VarnaDownload.psm1',target/'payload/VarnaDownload.psm1')
 # GitHub archive uses the already published, recoverable LFS pointer for this Mac-only binary.
 p='Varna_Motion_Studio/assets/vendor/Railcut/Railcut/bin/mac/ffmpeg'
 (target/'payload'/p).write_bytes(subprocess.check_output(['git','show','HEAD:'+p],cwd=source))
