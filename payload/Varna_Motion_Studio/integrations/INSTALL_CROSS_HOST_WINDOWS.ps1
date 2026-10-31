@@ -86,7 +86,6 @@ $backup=$target+'.backup-'+(Get-Date -Format 'yyyyMMdd-HHmmss')+'-'+[guid]::NewG
 $activated54=$false
 try {
   Copy-SharedTools53 $staged
-  & (Join-Path $payload 'tools\Profile60.ps1') -Target $staged -Enabled ($EngineMode -ne 'WithoutEngine')
   @{level='Studio';version='4.5.0-rc.47';build='Studio54';host=$HostApp;packs=@('shared-production','sfx')} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $staged 'INSTALL_PROFILE.json') -Encoding UTF8
   if($HostApp -eq 'Resolve'){Copy-Item -LiteralPath (Join-Path $payload 'resolve.html') -Destination $staged}
   if($HostApp -eq 'Editor'){Copy-Item -LiteralPath (Join-Path $payload 'editor.html') -Destination $staged}
@@ -96,6 +95,7 @@ try {
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'premiere\CSXS\manifest.xml') -Destination (Join-Path $staged 'CSXS\manifest.xml')
   }
   if(Test-Path -LiteralPath $target){Move-Item -LiteralPath $target -Destination $backup}
+  & (Join-Path $payload 'tools\Profile60.ps1') -Target $staged -Enabled ($EngineMode -ne 'WithoutEngine')
   try { Move-Item -LiteralPath $staged -Destination $target;$activated54=$true } catch { if(Test-Path -LiteralPath $backup){Move-Item -LiteralPath $backup -Destination $target};throw }
   if($HostApp -eq 'Premiere') {
     if($env:OS -eq 'Windows_NT'){foreach($version in @(11,12,13)) { $key='HKCU:\Software\Adobe\CSXS.'+$version;New-Item -Path $key -Force | Out-Null;New-ItemProperty -Path $key -Name PlayerDebugMode -Value '1' -PropertyType String -Force | Out-Null }}
