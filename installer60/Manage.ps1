@@ -20,6 +20,10 @@ Write-Host '1. Preflight: close Adobe applications; inventory only, no files cha
 if(Get-Process AfterFX,'Adobe Premiere Pro',Resolve -ErrorAction SilentlyContinue){throw 'Close After Effects, Premiere and Resolve first.'}
 Write-Host 'Scanning branded engine installations; inaccessible folders are skipped and junctions are never followed...'
 $engines=@(Find-Engines60 $ScanRoot)
+if($Action -eq 'Uninstall'){
+ $cache=Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio\Downloads59'
+ if(Test-Path -LiteralPath $cache -PathType Container){$engines+= [pscustomobject]@{Path=$cache;Portable=$false;Models=$false;Cache=$true}}
+}
 $state=[ordered]@{action=$Action;host=$HostApp;mode=$Mode;engines=$engines;packageManifest=(Test-Path (Join-Path $payload 'PACKAGE_MANIFEST.json'));nvidia=@(Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue|Where-Object Name -match NVIDIA).Count -gt 0}
 $state|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $report -Encoding UTF8
 Write-Host ('Inventory: '+$report);$engines|Format-Table Path,Portable,Models -AutoSize|Out-Host
@@ -31,6 +35,7 @@ if($Action -eq 'Uninstall'){
  foreach($engine in $engines){
   # Revalidate after confirmation; do not expand deletion to any parent directory.
   $path=$engine.Path
+  if($engine.Portable -and (!(Test-Path (Join-Path $path 'ComfyUI\main.py')) -or !(Test-Path (Join-Path $path 'python_embeded\python.exe')))){throw ('Engine layout changed; scan again: '+$path)}
   if((Get-Item -LiteralPath $path).Attributes -band [IO.FileAttributes]::ReparsePoint){throw 'Engine path changed to a link'}
   if(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue|Where-Object {$_.ExecutablePath -and $_.ExecutablePath.StartsWith($path+'\',[StringComparison]::OrdinalIgnoreCase)}){throw ('Stop the running engine first: '+$path)}
   $check=New-Object 'System.Collections.Generic.Queue[string]';$check.Enqueue($path)
