@@ -18,8 +18,8 @@
     },
     {
       "path": "INSTALL_WINDOWS.ps1",
-      "bytes": 33471,
-      "sha256": "6426fb70f96036a9816344d49f01f8027942e74d870ad72c3b49518bd437fa42"
+      "bytes": 34177,
+      "sha256": "74efa0ba54f7da937e717c5c10955b3f408899a29b633a7a2a53a291cdb7cfbf"
     },
     {
       "path": "LAUNCH_EDITOR_WINDOWS.bat",
@@ -14218,8 +14218,8 @@
     },
     {
       "path": "assets/vendor/Railcut/Railcut/bin/mac/ffmpeg",
-      "bytes": 154561504,
-      "sha256": "bd0e6d750d109705de23e9eca7fb0feaf0e8e234a1c1eedd8df2420f27fc18cf"
+      "bytes": 134,
+      "sha256": "4dc0640b0aaa4985523be9e404f13a5cef6bce03f82638697698919e26009580"
     },
     {
       "path": "assets/vendor/Railcut/Railcut/bin/win/ffmpeg.exe",
@@ -15208,8 +15208,8 @@
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
-      "bytes": 12872,
-      "sha256": "35338277aef13ae9e0d31b4dac635377f04e233055eadbca7c077d18c795e38e"
+      "bytes": 12996,
+      "sha256": "9cee69e46ace4ca7fa7b0b82bd887c130da606bee9b99d90975e7cfbe24aeaef"
     },
     {
       "path": "integrations/effects/COMPATIBILITY.json",
@@ -16438,8 +16438,8 @@
     },
     {
       "path": "tools/Download59.psm1",
-      "bytes": 4668,
-      "sha256": "a18ce0b45c9e4f652651264e59cd7a1bd2a071cd3d6aa1d25bed212f01b2dc70"
+      "bytes": 5858,
+      "sha256": "07b0578fa14541db31dd3ff413752103ac70bc9d3dc743c7791cd2a204a550e3"
     },
     {
       "path": "tools/Profile60.ps1",

@@ -158,6 +158,8 @@ function Test-PackageEntry([string]$relative,[string]$root) {
     return $full
 }
 function Include-Entry([string]$relative) {
+    # Windows never installs the Mac-only LFS ffmpeg binary.
+    if($relative -eq 'assets/vendor/Railcut/Railcut/bin/mac/ffmpeg'){return $false}
     # Shared interface dependencies are required at every installation level.
     if ($relative.StartsWith('assets/vendor/ui30/') -or $relative.StartsWith('assets/vendor/rebound49/') -or $relative.StartsWith('assets/vendor/conjure49/')) { return $true }
     if ($Level -eq 'Core' -and $relative.StartsWith('assets/sfx/') -and $relative -ne 'assets/sfx/ghaf_type_click.wav') { return $false }
@@ -310,8 +312,10 @@ function Ensure-ComfyPortable {
         if($LASTEXITCODE -ne 0){throw ('Engine extraction failed with code '+$LASTEXITCODE)}
         $candidate59=@(Get-ChildItem -LiteralPath $unpack -Directory|Where-Object {(Test-Path -LiteralPath (Join-Path $_.FullName 'ComfyUI\main.py')) -and (Test-Path -LiteralPath (Join-Path $_.FullName 'python_embeded\python.exe'))}|Select-Object -First 1)
         if($candidate59.Count -ne 1){throw 'Extracted engine layout is unsupported; original engines remain unchanged.'}
+        if($env:VARNA_CANCEL_FILE -and (Test-Path -LiteralPath $env:VARNA_CANCEL_FILE)){throw 'CANCELLED after engine extraction; previous engine preserved'}
         Set-InstallStatus 88 'engine-health' 'Testing embedded Python, PyTorch and ComfyUI before activation...'
         if(!(Test-VarnaEngine $candidate59[0].FullName)){throw 'Extracted engine did not pass its health check. Original files and the verified download are preserved.'}
+        if($env:VARNA_CANCEL_FILE -and (Test-Path -LiteralPath $env:VARNA_CANCEL_FILE)){throw 'CANCELLED before engine activation; previous engine preserved'}
         New-Item -ItemType Directory -Path (Split-Path $root -Parent) -Force|Out-Null
         if(Test-Path -LiteralPath $root){Move-Item -LiteralPath $root -Destination ($root+'.backup-'+$stamp)}
         Move-Item -LiteralPath $candidate59[0].FullName -Destination $root -ErrorAction Stop
@@ -408,7 +412,7 @@ try {
             else { $vendorPlan += $groups[$component] }
         }
     }
-    $comfyState = 'موتور وارنا: وضعیت نسخهٔ موجود بررسی شد.'
+    $comfyState = if($EngineMode -eq 'WithoutEngine'){'Without-engine profile: no AI engine installed or started; generation modules omitted.'}else{'Local engine has not been requested at this profile level.'}
     if ($EngineMode -eq 'WithEngine' -or ($EngineMode -eq 'Legacy' -and $Level -eq 'Max')) { $comfyState = Ensure-ComfyPortable }
     $audioState = 'مدل‌ها در محل اصلی خود باقی می‌مانند؛ مسیرشان در پنل تنظیم می‌شود.'
     New-Item -ItemType Directory -Path $stage -Force | Out-Null
@@ -432,6 +436,7 @@ try {
     [xml]$cepManifest = Get-Content -LiteralPath (Join-Path $stage 'CSXS\manifest.xml') -Raw -Encoding UTF8
     if ($cepManifest.ExtensionManifest.ExtensionBundleId -ne 'com.varnalabs.motionstudio') { throw 'CEP extension identity does not match Varna.' }
     New-Item -ItemType Directory -Path $extensions -Force | Out-Null
+    if($env:VARNA_CANCEL_FILE -and (Test-Path -LiteralPath $env:VARNA_CANCEL_FILE)){throw 'CANCELLED before panel activation'}
     Set-InstallStatus 93 'switch' 'Package checked. Archiving old Varna extensions before activation.'
     foreach ($path in $existing) { Save-Previous $path 'previous-panel' }
     Move-Item -LiteralPath $stage -Destination $dst -ErrorAction Stop
