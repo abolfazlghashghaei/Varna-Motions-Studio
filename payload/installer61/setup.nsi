@@ -41,7 +41,8 @@ Abort
 ${EndIf}
 FunctionEnd
 Section
-SetOutPath "$INSTDIR"
+InitPluginsDir
+SetOutPath "$PLUGINSDIR"
 File "Gui61.ps1"
 File "GuiLauncher61.ps1"
 File "Backend61.ps1"
@@ -52,15 +53,10 @@ File "Invoke61.ps1"
 File "package-lock61.json"
 File "README_FA.md"
 File "NOTICES.txt"
-SetOutPath "$INSTDIR\assets"
+SetOutPath "$PLUGINSDIR\assets"
 File "assets/varna.ico"
 File "assets/sidebar.png"
-SetOutPath "$INSTDIR"
-${If} $EXEPATH != "$INSTDIR\Setup.exe"
-CopyFiles /SILENT "$EXEPATH" "$INSTDIR\Setup.exe"
-${EndIf}
-InitPluginsDir
-nsExec::ExecToLog '"$PSExe" -NoLogo -NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "$INSTDIR\GuiLauncher61.ps1" -ResultPath "$PLUGINSDIR\result.ini"'
+nsExec::ExecToLog '"$PSExe" -NoLogo -NoProfile -STA -WindowStyle Hidden -ExecutionPolicy Bypass -File "$PLUGINSDIR\GuiLauncher61.ps1" -ResultPath "$PLUGINSDIR\result.ini"'
 Pop $0
 ${If} $0 != 0
 ReadINIStr $1 "$PLUGINSDIR\result.ini" "Result" "Changed"
@@ -69,6 +65,37 @@ SetErrorLevel 1
 Abort
 ${EndIf}
 SetErrorLevel 1
+${EndIf}
+SetOutPath "$INSTDIR"
+ClearErrors
+CopyFiles /SILENT "$PLUGINSDIR\Gui61.ps1" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\GuiLauncher61.ps1" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\Backend61.ps1" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\Core61.psm1" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\Download61.psm1" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\EngineCleanup61.psm1" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\Invoke61.ps1" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\package-lock61.json" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\README_FA.md" "$INSTDIR"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\NOTICES.txt" "$INSTDIR"
+IfErrors failed_manager_copy
+SetOutPath "$INSTDIR\assets"
+CopyFiles /SILENT "$PLUGINSDIR\assets\varna.ico" "$INSTDIR\assets"
+IfErrors failed_manager_copy
+CopyFiles /SILENT "$PLUGINSDIR\assets\sidebar.png" "$INSTDIR\assets"
+IfErrors failed_manager_copy
+${If} $EXEPATH != "$INSTDIR\Setup.exe"
+CopyFiles /SILENT "$EXEPATH" "$INSTDIR\Setup.exe"
+IfErrors failed_manager_copy
 ${EndIf}
 WriteUninstaller "$INSTDIR\Uninstall.exe"
 WriteRegStr HKCU "Software\VarnaStudio\Setup61" "Path" "$INSTDIR"
@@ -85,6 +112,12 @@ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\VarnaStudi
 CreateDirectory "$SMPROGRAMS\Varna Studio"
 CreateShortCut "$SMPROGRAMS\Varna Studio\Setup and repair.lnk" "$INSTDIR\Setup.exe"
 CreateShortCut "$SMPROGRAMS\Varna Studio\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+Goto manager_done
+failed_manager_copy:
+MessageBox MB_ICONSTOP "Selected host changes may be complete, but the maintenance manager could not be saved. Rerun this EXE to repair. Logs are in LocalAppData\VarnaMotionStudio\Logs61."
+SetErrorLevel 1
+Abort
+manager_done:
 SectionEnd
 Function un.onInit
 ${IfNot} ${AtLeastWin10}

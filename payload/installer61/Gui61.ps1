@@ -15,20 +15,20 @@ $form.Icon=New-Object Drawing.Icon((Join-Path $PSScriptRoot 'assets\varna.ico'))
 $sidebar=New-Object Windows.Forms.Panel;$sidebar.Dock='Left';$sidebar.Width=190;$sidebar.BackColor=[Drawing.ColorTranslator]::FromHtml('#101E2C');$form.Controls.Add($sidebar)
 $picture=New-Object Windows.Forms.PictureBox;$picture.Dock='Fill';$picture.SizeMode='Zoom';$picture.Image=[Drawing.Image]::FromFile((Join-Path $PSScriptRoot 'assets\sidebar.png'));$sidebar.Controls.Add($picture)
 $brand=New-Object Windows.Forms.Label;$brand.Text="VARNA`r`nSTUDIO";$brand.Font=New-Object Drawing.Font('Segoe UI',19,[Drawing.FontStyle]::Bold);$brand.Height=110;$brand.Dock='Top';$brand.TextAlign='MiddleCenter';$sidebar.Controls.Add($brand)
-$ver=New-Object Windows.Forms.Label;$ver.Text="SETUP 61`r`nINSTALL  /  REPAIR  /  REMOVE";$ver.Height=70;$ver.Dock='Bottom';$ver.TextAlign='MiddleCenter';$ver.ForeColor=$muted;$ver.Font=New-Object Drawing.Font('Segoe UI',8);$sidebar.Controls.Add($ver)
+$ver=New-Object Windows.Forms.Label;$ver.Text="SETUP 61 · PREVIEW`r`nINSTALL  /  REPAIR  /  REMOVE";$ver.Height=70;$ver.Dock='Bottom';$ver.TextAlign='MiddleCenter';$ver.ForeColor=$muted;$ver.Font=New-Object Drawing.Font('Segoe UI',8);$sidebar.Controls.Add($ver)
 $main=New-Object Windows.Forms.TableLayoutPanel;$main.Dock='Fill';$main.Padding=New-Object Windows.Forms.Padding(20,12,20,12);$main.ColumnCount=1;$main.RowCount=7
 foreach($height in @(58,170,47,86,34)){[void]$main.RowStyles.Add((New-Object Windows.Forms.RowStyle([Windows.Forms.SizeType]::Absolute,$height)))}
 [void]$main.RowStyles.Add((New-Object Windows.Forms.RowStyle([Windows.Forms.SizeType]::Percent,100)));[void]$main.RowStyles.Add((New-Object Windows.Forms.RowStyle([Windows.Forms.SizeType]::Absolute,46)))
 $form.Controls.Add($main);$main.BringToFront()
 function Label61([string]$text){$v=New-Object Windows.Forms.Label;$v.Text=$text;$v.AutoSize=$false;$v.ForeColor=$fg;$v.Dock='Fill';$v.TextAlign='MiddleLeft';return $v}
-function Button61([string]$text){$b=New-Object Windows.Forms.Button;$b.Text=$text;$b.FlatStyle='Flat';$b.FlatAppearance.BorderColor=$accent;$b.BackColor=$card;$b.ForeColor=$fg;$b.Height=34;$b.Width=140;$b.Margin=New-Object Windows.Forms.Padding(0,3,10,3);return $b}
+function Button61([string]$text){$b=New-Object Windows.Forms.Button;$b.Text=$text;$b.FlatStyle='Flat';$b.FlatAppearance.BorderColor=$accent;$b.BackColor=$card;$b.ForeColor=$fg;$b.FlatAppearance.MouseOverBackColor=[Drawing.ColorTranslator]::FromHtml('#244456');$b.FlatAppearance.MouseDownBackColor=[Drawing.ColorTranslator]::FromHtml('#315C66');$b.Height=34;$b.Width=140;$b.Margin=New-Object Windows.Forms.Padding(0,3,10,3);return $b}
 $header=New-Object Windows.Forms.TableLayoutPanel;$header.Dock='Fill';$header.ColumnCount=2;[void]$header.ColumnStyles.Add((New-Object Windows.Forms.ColumnStyle([Windows.Forms.SizeType]::Percent,100)));[void]$header.ColumnStyles.Add((New-Object Windows.Forms.ColumnStyle([Windows.Forms.SizeType]::Absolute,115)))
 $title=Label61 '';$title.Font=New-Object Drawing.Font('Segoe UI',17,[Drawing.FontStyle]::Bold);$header.Controls.Add($title,0,0)
-$language=New-Object Windows.Forms.ComboBox;$language.DropDownStyle='DropDownList';$language.Items.AddRange(@('فارسی','English'));$language.SelectedIndex=0;$language.Dock='Fill';$header.Controls.Add($language,1,0);$main.Controls.Add($header,0,0)
+$language=New-Object Windows.Forms.ComboBox;$language.DropDownStyle='DropDownList';$language.BackColor=$card;$language.ForeColor=$fg;$language.FlatStyle='Flat';$language.Items.AddRange(@('فارسی','English'));$language.SelectedIndex=0;$language.Dock='Fill';$header.Controls.Add($language,1,0);$main.Controls.Add($header,0,0)
 $options=New-Object Windows.Forms.TableLayoutPanel;$options.Dock='Fill';$options.BackColor=$card;$options.Padding=New-Object Windows.Forms.Padding(12);$options.ColumnCount=2;$options.RowCount=4
 [void]$options.ColumnStyles.Add((New-Object Windows.Forms.ColumnStyle([Windows.Forms.SizeType]::Percent,48)));[void]$options.ColumnStyles.Add((New-Object Windows.Forms.ColumnStyle([Windows.Forms.SizeType]::Percent,52)))
 for($i=0;$i -lt 4;$i++){[void]$options.RowStyles.Add((New-Object Windows.Forms.RowStyle([Windows.Forms.SizeType]::Percent,25)))}
-$action=New-Object Windows.Forms.ComboBox;$action.DropDownStyle='DropDownList';$action.Dock='Fill';$options.Controls.Add($action,0,0)
+$action=New-Object Windows.Forms.ComboBox;$action.DropDownStyle='DropDownList';$action.BackColor=$card;$action.ForeColor=$fg;$action.FlatStyle='Flat';$action.Dock='Fill';$options.Controls.Add($action,0,0)
 $mode=Label61 '';$mode.ForeColor=$muted;$options.Controls.Add($mode,1,0)
 $hostPanel=New-Object Windows.Forms.FlowLayoutPanel;$hostPanel.Dock='Fill';$hostPanel.WrapContents=$false
 $hostChecks=@{}
@@ -39,9 +39,9 @@ $clearCache=New-Object Windows.Forms.CheckBox;$clearCache.Dock='Fill';$clearCach
 $info=Label61 '';$info.ForeColor=$muted;$info.Font=New-Object Drawing.Font('Segoe UI',9);$options.Controls.Add($info,0,3);$options.SetColumnSpan($info,2)
 $main.Controls.Add($options,0,1)
 $buttons=New-Object Windows.Forms.FlowLayoutPanel;$buttons.Dock='Fill';$buttons.WrapContents=$false
-$inspect=Button61 '';$start=Button61 '';$cancel=Button61 '';$openLogs=Button61 '';$cancel.Enabled=$false
+$inspect=Button61 '';$start=Button61 '';$cancel=Button61 '';$openLogs=Button61 '';$guide=Button61 '';$guide.Width=95;$cancel.Enabled=$false
 $start.BackColor=$accent;$start.ForeColor=$bg
-foreach($b in @($inspect,$start,$cancel,$openLogs)){$buttons.Controls.Add($b)};$main.Controls.Add($buttons,0,2)
+foreach($b in @($inspect,$start,$cancel,$openLogs,$guide)){$buttons.Controls.Add($b)};$main.Controls.Add($buttons,0,2)
 $transfer=New-Object Windows.Forms.TableLayoutPanel;$transfer.Dock='Fill';$transfer.RowCount=3
 $downloadInfo=Label61 '';$downloadInfo.ForeColor=$accent;$downloadInfo.Font=New-Object Drawing.Font('Segoe UI',10,[Drawing.FontStyle]::Bold)
 $downloadBar=New-Object Windows.Forms.ProgressBar;$downloadBar.Dock='Fill';$downloadBar.Height=12
@@ -57,7 +57,7 @@ function Localize61 {
  $action.Enabled=$InitialAction -ne 'Remove'
  foreach($label in @($title,$mode,$info,$note,$status)){$label.RightToLeft=if($script:lang -eq 'fa'){'Yes'}else{'No'};$label.TextAlign=if($script:lang -eq 'fa'){'MiddleRight'}else{'MiddleLeft'}}
  $title.Text=T 'Your studio. Your setup.' 'نصب و نگهداری استودیوی شما'
- $inspect.Text=T 'Check system' 'بررسی سیستم';$start.Text=T 'Continue' 'ادامه';$cancel.Text=T 'Cancel operation' 'لغو عملیات';$openLogs.Text=T 'Open logs' 'نمایش گزارش‌ها';$close.Text=T 'Close' 'بستن'
+ $inspect.Text=T 'Check system' 'بررسی سیستم';$start.Text=T 'Continue' 'ادامه';$cancel.Text=T 'Cancel operation' 'لغو عملیات';$openLogs.Text=T 'Open logs' 'نمایش گزارش‌ها';$close.Text=T 'Close' 'بستن';$guide.Text=T 'Guide' 'راهنما'
  $downloadInfo.Text=T 'Downloads: measured bytes, speed and remaining time appear here.' 'دانلود: حجم، سرعت و زمان باقی‌ماندهٔ واقعی اینجا نمایش داده می‌شود.'
  $note.Text=T 'Per-user setup. User settings and models are kept unless explicitly selected for removal.' 'نصب برای حساب فعلی؛ تنظیمات و مدل‌ها بدون انتخاب صریح حذف نمی‌شوند.'
  Mode61
@@ -115,7 +115,8 @@ $timer.Add_Tick({
 })
 $inspect.Add_Click({Begin61 'Inspect'});$start.Add_Click({Begin61 (Action61)})
 $cancel.Add_Click({if($script:job){[IO.File]::WriteAllText($script:cancelPath,'cancel');$cancel.Enabled=$false;$status.Text=T 'Cancellation requested. Waiting for a safe checkpoint; partial downloads are kept.' 'درخواست لغو ثبت شد؛ تا نقطهٔ امن منتظر بمان. فایل نیمه‌کاره حفظ می‌شود.'}})
-$openLogs.Add_Click({Start-Process explorer.exe -ArgumentList $(if($script:session){$script:session}else{$logsRoot})})
+$openLogs.Add_Click({$path=if($script:session){$script:session}else{$logsRoot};Start-Process explorer.exe -ArgumentList ('"'+$path+'"')})
+$guide.Add_Click({Start-Process notepad.exe -ArgumentList ('"'+(Join-Path $PSScriptRoot 'README_FA.md')+'"')})
 $close.Add_Click({$form.Close()})
 $language.Add_SelectedIndexChanged({$script:lang=if($language.SelectedIndex -eq 0){'fa'}else{'en'};Localize61})
 $action.Add_SelectedIndexChanged({$script:scanReady=$false;Mode61});$engine.Add_CheckedChanged({$script:scanReady=$false})

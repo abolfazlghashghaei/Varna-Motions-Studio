@@ -33,6 +33,7 @@ try{
    if($h -eq 'AE' -and (Test-OwnedHost61 $h $paths[$h])){try{$p=Get-Content (Join-Path $paths[$h] 'INSTALL_PROFILE.json') -Raw -Encoding UTF8|ConvertFrom-Json;$owned=@($p.externalComponents)}catch{Write-Host 'External ownership profile unavailable; external files preserved.'}}
    $saved=Move-OwnedHost61 $h $paths[$h] $recovery
    if($saved){
+    [void]$completed.Add($h)
     foreach($record in $owned){if($record.path -and $record.sha256 -and (Test-Path -LiteralPath $record.path -PathType Leaf)){
      $item=Get-Item -LiteralPath $record.path -Force
      if(!($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -and (Get-FileHash -LiteralPath $record.path).Hash -eq $record.sha256){Move-Item -LiteralPath $record.path -Destination (Join-Path $recovery ([guid]::NewGuid().ToString('N')+'-'+$item.Name)) -ErrorAction Stop}else{Write-Host ('Changed/shared external file preserved: '+$record.path)}
@@ -40,7 +41,6 @@ try{
     if($h -eq 'Resolve' -and $oldReceipt){foreach($record in @($oldReceipt.resolveFiles)){
      if($record.path -and (Test-Path -LiteralPath $record.path -PathType Leaf) -and (Get-FileHash -LiteralPath $record.path).Hash -eq $record.sha256){Move-Item -LiteralPath $record.path -Destination (Join-Path $recovery ([guid]::NewGuid().ToString('N')+'-'+(Split-Path $record.path -Leaf))) -ErrorAction Stop}
     }}
-    [void]$completed.Add($h)
    }
   }
   foreach($path in @($request.enginePaths)){

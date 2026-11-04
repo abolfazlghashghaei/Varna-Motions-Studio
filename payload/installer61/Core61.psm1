@@ -1,8 +1,14 @@
 ﻿$ErrorActionPreference='Stop'
+function Commit-AtomicFile61([string]$Temporary,[string]$Destination){
+ for($attempt=0;$attempt -lt 10;$attempt++){
+  try{if(Test-Path -LiteralPath $Destination){[IO.File]::Replace($Temporary,$Destination,[NullString]::Value)}else{[IO.File]::Move($Temporary,$Destination)};return}
+  catch [IO.IOException]{if($attempt -eq 9){throw};Start-Sleep -Milliseconds 50}
+ }
+}
 function Write-Status61([string]$Path,[string]$Phase,[string]$Message,[object]$Data=$null){
  $value=@{phase=$Phase;message=$Message;data=$Data;time=(Get-Date -Format o)}|ConvertTo-Json -Depth 12
  $tmp=$Path+'.tmp';[IO.File]::WriteAllText($tmp,$value,(New-Object Text.UTF8Encoding($false)))
- if(Test-Path -LiteralPath $Path){[IO.File]::Replace($tmp,$Path,[NullString]::Value)}else{[IO.File]::Move($tmp,$Path)}
+ Commit-AtomicFile61 $tmp $Path
  Write-Host ('['+$Phase+'] '+$Message)
 }
 function Assert-NotCancelled61 {
@@ -78,6 +84,6 @@ function Save-Receipt61([string]$Path,[string]$HostName,[string]$Mode,[string]$C
  if($HostName -eq 'Resolve'){$receipt.resolveFiles=@($ResolveFiles)}
  New-Item -ItemType Directory (Split-Path $Path -Parent) -Force|Out-Null
  $tmp=$Path+'.tmp';$receipt|ConvertTo-Json -Depth 12|Set-Content -LiteralPath $tmp -Encoding UTF8
- if(Test-Path -LiteralPath $Path){[IO.File]::Replace($tmp,$Path,[NullString]::Value)}else{[IO.File]::Move($tmp,$Path)}
+ Commit-AtomicFile61 $tmp $Path
 }
 Export-ModuleMember -Function Save-Receipt61

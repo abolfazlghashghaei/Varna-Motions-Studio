@@ -1,5 +1,5 @@
 from pathlib import Path
-import argparse,hashlib,json,zipfile,subprocess,os,shutil,struct
+import argparse,hashlib,json,zipfile,subprocess,os,shutil,struct,re
 p=argparse.ArgumentParser();p.add_argument('--commit',required=True);p.add_argument('--archive',required=True);p.add_argument('--compiler',required=True);p.add_argument('--nsis-dir',required=True);args=p.parse_args()
 root=Path(__file__).resolve().parent;archive=Path(args.archive)
 assert len(args.commit)==40 and all(c in '0123456789abcdef' for c in args.commit)
@@ -15,5 +15,6 @@ sha=hashlib.sha256(archive.read_bytes()).hexdigest();meta={'commit':args.commit,
 env=os.environ.copy();env['NSISDIR']=args.nsis_dir
 subprocess.run([args.compiler,'-WX','-V3',str(root/'setup.nsi')],cwd=root,env=env,check=True)
 f=root/'build/Varna-Studio-Setup-61.exe';b=f.read_bytes();assert b[:2]==b'MZ';pe=struct.unpack_from('<I',b,0x3c)[0];assert b[pe:pe+4]==b'PE\0\0'
-result={'file':f.name,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'source':meta,'authenticode':'unsigned','nativeWindowsUiExecuted':False}
+inputs={name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in re.findall(r'^File "([^"]+)"', (root/'setup.nsi').read_text(), re.M)}
+result={'embeddedFiles':inputs,'file':f.name,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'source':meta,'authenticode':'unsigned','nativeWindowsUiExecuted':False}
 (root/'build/release61.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
