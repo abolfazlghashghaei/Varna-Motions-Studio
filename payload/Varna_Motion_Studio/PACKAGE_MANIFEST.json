@@ -14218,8 +14218,8 @@
     },
     {
       "path": "assets/vendor/Railcut/Railcut/bin/mac/ffmpeg",
-      "bytes": 134,
-      "sha256": "4dc0640b0aaa4985523be9e404f13a5cef6bce03f82638697698919e26009580"
+      "bytes": 154561504,
+      "sha256": "bd0e6d750d109705de23e9eca7fb0feaf0e8e234a1c1eedd8df2420f27fc18cf"
     },
     {
       "path": "assets/vendor/Railcut/Railcut/bin/win/ffmpeg.exe",
@@ -16453,8 +16453,8 @@
     },
     {
       "path": "tools/build_manifest.py",
-      "bytes": 1169,
-      "sha256": "5b3fb6fb1d75cc588b0964aad0b12d9c477f0e5a1e485b214a14fcff58c9fcb9"
+      "bytes": 1828,
+      "sha256": "42391d71fffb35145f8f8fecc60e9075ddbfd293c88dc7be34866c3f1c6b5463"
     },
     {
       "path": "tools/comfy53.cjs",
