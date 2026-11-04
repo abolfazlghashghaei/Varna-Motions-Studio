@@ -1,0 +1,3 @@
+const http=require('http');const data=Buffer.alloc(5*1024*1024,61);
+http.createServer((req,res)=>{if(req.url==='/stall'){res.writeHead(200,{'Content-Length':data.length});res.write(data.subarray(0,65536));return;}if(req.url==='/headers')return;
+ const offset=req.headers.range?Number(req.headers.range.match(/\d+/)[0]):0;res.writeHead(offset?206:200,{'Content-Length':data.length-offset,...(offset?{'Content-Range':`bytes ${offset}-${data.length-1}/${data.length}`}:{})});let at=offset;const interval=setInterval(()=>{if(at>=data.length){clearInterval(interval);res.end();return;}const end=Math.min(at+262144,data.length);res.write(data.subarray(at,end));at=end;},80);res.on('close',()=>clearInterval(interval));}).listen(8661,'127.0.0.1');

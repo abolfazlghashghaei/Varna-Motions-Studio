@@ -94,6 +94,7 @@ try {
     New-Item -ItemType Directory -Path (Join-Path $staged 'CSXS') -Force | Out-Null
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'premiere\CSXS\manifest.xml') -Destination (Join-Path $staged 'CSXS\manifest.xml')
   }
+  if($env:VARNA_CANCEL_FILE -and (Test-Path -LiteralPath $env:VARNA_CANCEL_FILE)){throw 'CANCELLED before host activation'}
   if(Test-Path -LiteralPath $target){Move-Item -LiteralPath $target -Destination $backup}
   & (Join-Path $payload 'tools\Profile60.ps1') -Target $staged -Enabled ($EngineMode -ne 'WithoutEngine')
   try { Move-Item -LiteralPath $staged -Destination $target;$activated54=$true } catch { if(Test-Path -LiteralPath $backup){Move-Item -LiteralPath $backup -Destination $target};throw }
