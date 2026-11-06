@@ -71,7 +71,7 @@ function Mode61 {
  $remove=(Action61) -eq 'Remove';$clearCache.Visible=$remove
  $engine.Text=if($remove){T 'Also remove Varna engine and its models' 'حذف موتور وارنا و مدل‌های آن'}else{T 'Add Varna engine for sound generation' 'افزودن موتور وارنا برای ساخت صدا (اختیاری)'}
  $clearCache.Text=T 'Delete downloaded setup files' 'حذف فایل‌های دانلودشدهٔ نصب'
- $mode.Text=if($remove){T 'Only selected, recognized components are removed.' 'فقط مؤلفه‌های انتخاب‌شده و شناخته‌شده حذف می‌شوند.'}else{T 'Choose the application, then click Install.' 'نرم‌افزار مقصد را انتخاب کن، سپس نصب را بزن.'}
+ $mode.Text=if($remove){T 'Choose the items you want to remove.' 'مواردی را که می‌خواهی حذف شوند انتخاب کن.'}else{T 'Choose the application, then click Install.' 'نرم‌افزار مقصد را انتخاب کن، سپس نصب را بزن.'}
  $info.Text=if($remove){T 'Engine removal requires a scan and confirmation of exact paths; linked model targets are preserved.' 'حذف موتور نیاز به اسکن و تأیید مسیرها دارد؛ مقصد لینک مدل‌ها حفظ می‌شود.'}else{T 'Text, motion and tables work without Varna engine. Sound generation needs NVIDIA and a separate model.' 'متن، موشن و جدول به موتور نیاز ندارند. ساخت صدا به NVIDIA و مدل جدا نیاز دارد.'}
 }
 function FailureText62([string]$message){
@@ -79,6 +79,7 @@ function FailureText62([string]$message){
  'Close .*applications|Close these'{return (T 'Close Adobe/Resolve applications and try again.' 'افتر، پریمیر و داوینچی را ببند و دوباره تلاش کن.')}
  'requires NVIDIA'{return (T 'Varna engine needs NVIDIA. Disable the engine option to install the other tools.' 'موتور وارنا به NVIDIA نیاز دارد؛ برای نصب بقیهٔ ابزارها، تیک موتور را بردار.')}
  'checksum|verification failed'{return (T 'Downloaded files did not pass validation. Retry to receive a verified copy.' 'سلامت فایل دانلودشده تأیید نشد؛ دوباره تلاش کن تا نسخهٔ سالم دریافت شود.')}
+ 'timed out|connection|resolve host|Response status code'{return (T 'Download could not connect. Check the internet and retry; partial files are kept.' 'اتصال دانلود برقرار نشد؛ اینترنت را بررسی و دوباره تلاش کن. فایل نیمه‌کاره حفظ شده است.')}
  'Access.*denied|UnauthorizedAccess'{return (T 'Windows denied file access. Close programs using the files and inspect the saved log.' 'ویندوز اجازهٔ تغییر فایل را نداد؛ برنامه‌های مرتبط را ببند و گزارش خطا را بررسی کن.')}
  'Incomplete package|dependency'{return (T 'Setup files are incomplete. Download the current installer again.' 'فایل‌های نصب کامل نیستند؛ نسخهٔ جدید نصب‌کننده را دوباره دریافت کن.')}
  'Unrecognized existing'{return (T 'An unknown installation was found and preserved. See technical details.' 'یک نصب ناشناخته پیدا شد و برای حفظ فایل‌ها تغییر نکرد؛ جزئیات فنی را ببین.')}
@@ -138,7 +139,7 @@ $timer.Add_Tick({
   $text='';foreach($file in @($script:outPath,$script:errPath)){if(Test-Path -LiteralPath $file){$stream=[IO.File]::Open($file,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::ReadWrite);try{$reader=New-Object IO.StreamReader($stream,[Text.Encoding]::UTF8,$true);$text+=$reader.ReadToEnd()}finally{if($reader){$reader.Dispose()}else{$stream.Dispose()}}}}
   if($text -ne $script:lastText){$script:lastText=$text;$details.Text=if($text.Length -gt 120000){$text.Substring($text.Length-120000)}else{$text};$details.SelectionStart=$details.TextLength;$details.ScrollToCaret()}
   $transfers=[regex]::Matches($text,'(?m)([^\r\n|]+)\s*\|\s*([\d.,]+) / ([\d.,]+) MiB \| (\d+)% \| ([\d.,]+) MiB/s \| ETA ([\d:]+)')
-  if($transfers.Count){$m=$transfers[$transfers.Count-1];$downloadInfo.Text=$m.Groups[1].Value.Trim()+' | '+$m.Groups[2].Value+' / '+$m.Groups[3].Value+' MiB | '+$m.Groups[5].Value+' MiB/s | ETA '+$m.Groups[6].Value;$downloadBar.Value=[Math]::Min(100,[int]$m.Groups[4].Value)}
+  if($transfers.Count){$m=$transfers[$transfers.Count-1];$downloadInfo.Text=(T 'Download' 'دانلود')+' | '+$m.Groups[2].Value+' / '+$m.Groups[3].Value+' MiB | '+$m.Groups[5].Value+' MiB/s | '+(T 'Remaining ' 'باقی‌مانده ')+$m.Groups[6].Value;$downloadBar.Value=[Math]::Min(100,[int]$m.Groups[4].Value)}
   $stages=[regex]::Matches($text,'(?m)^\[(\d+)% \| ([^\]]+)\] ([^\r\n]+)');if($stages.Count){$stageInfo.Text=(T 'Current stage: ' 'پیشرفت مرحلهٔ جاری: ')+$stages[$stages.Count-1].Groups[1].Value+'%'}
   $state=$null;if(Test-Path -LiteralPath $script:statusPath){$state=Get-Content -LiteralPath $script:statusPath -Raw -Encoding UTF8|ConvertFrom-Json;$status.Text=FriendlyStatus62 $state}
   if(!$script:job.HasExited){return}

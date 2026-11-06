@@ -1,0 +1,27 @@
+{
+  "embeddedFiles": {
+    "Gui61.ps1": "cfc25854e46f6a1581fdfe97f8202b8df4113302ba3724c1e13bd15e128863c8",
+    "GuiLauncher61.ps1": "eec9d7c6b8e770cde1b5b83ba58183285437a5269d309d967601d4bfce2bb985",
+    "Backend61.ps1": "7d9f8c91a4d7b22a86a39b1d739d43ea0906124bd932ed10bdeea11896c34968",
+    "Core61.psm1": "59d53b29afeb606fb67f416c41b9f8c7c0da21ddc80de1c2e348ca887d767c69",
+    "Download61.psm1": "07b0578fa14541db31dd3ff413752103ac70bc9d3dc743c7791cd2a204a550e3",
+    "EngineCleanup61.psm1": "67387d8ca0945eb6ad0ea8b48fd1241ab582ca27780ecdc6a84e11932d3d48a0",
+    "Invoke61.ps1": "b0d4e1d679d4d51bb01fed2ad7e6b20c7c910f627db1c85969660a5a52dee135",
+    "package-lock61.json": "e2a975121f5ceeee58faa56cf5c75e82170a02f5eddd4b4acde46c18d173d8b6",
+    "README_FA.md": "abbf2d378ac1243dd49bf4df16657dd5ef85c91e92e3ed20f76dfa0816921d9a",
+    "NOTICES.txt": "b2ffaf52d00bd8914568853129bf00374a71ae778b3d3c22c928a4290c4037fb",
+    "assets/varna.ico": "69ccfbeb2acbfbf2f041c62fb1ff78abd29becd48e11e8939c9cda4a55d516ae",
+    "assets/sidebar.png": "bea102b7eb50a0e001a1b4f0eab61855b215b3313397d4b46aef7383081cca0b"
+  },
+  "file": "Varna-Studio-Setup-62.exe",
+  "bytes": 199287,
+  "sha256": "9f64b49295432479f2db075a2bf0d0fba4750db743222fc918d8773aa5623fb1",
+  "source": {
+    "commit": "49983a9bd394a9759e9b93898783fa1d887ffd94",
+    "url": "https://github.com/abolfazlghashghaei/Varna-Motions-Studio/archive/49983a9bd394a9759e9b93898783fa1d887ffd94.zip",
+    "sha256": "c1039c0b78788d23699916ec35991972a80e1fee979ce1a5cc276d7f59f588d3",
+    "bytes": 212394584
+  },
+  "authenticode": "unsigned",
+  "nativeWindowsUiExecuted": false
+}
