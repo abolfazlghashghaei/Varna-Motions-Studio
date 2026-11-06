@@ -1,5 +1,6 @@
 ﻿param([ValidateSet('Premiere','Resolve','Editor')][string]$HostApp='Premiere',[string]$RuntimeArchive='',[ValidateSet('Legacy','WithEngine','WithoutEngine')][string]$EngineMode='Legacy')
 $ErrorActionPreference='Stop'
+if($HostApp -eq 'Editor'){throw 'The editing workspace has been removed from this release.'}
 $payload=Split-Path $PSScriptRoot -Parent
 Import-Module (Join-Path $payload 'tools\Download59.psm1') -Force
 $package=Get-Content -LiteralPath (Join-Path $payload 'PACKAGE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
