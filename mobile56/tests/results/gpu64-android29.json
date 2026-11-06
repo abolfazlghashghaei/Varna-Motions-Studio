@@ -1,0 +1,80 @@
+{
+  "executionEnvironment": {
+    "androidApi": "29",
+    "device": "Android SDK built for x86_64",
+    "hardware": "ranchu",
+    "benchmark": false
+  },
+  "gate": {
+    "file": "GpuGate64_1793995892001.mp4",
+    "frames": 6,
+    "layers": 2,
+    "width": 320,
+    "height": 240,
+    "fps": 24,
+    "elapsedMs": 3361,
+    "cpuReadbacks": 0,
+    "renderer": "native EGL / external OES / encoder Surface",
+    "glesVersion": "OpenGL ES 3.0 (OpenGL ES 3.0 SwiftShader 4.0.0.1)",
+    "colorScope": "SDR BT.601 acceptance fixtures; production BT.709 conversion still pending",
+    "scope": "rendering acceptance gate; video only; not full MVP"
+  },
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 320,
+        "height": 240,
+        "color_space": "smpte170m",
+        "color_transfer": "bt709",
+        "color_primaries": "smpte170m",
+        "r_frame_rate": "24/1",
+        "nb_read_frames": "6"
+      }
+    ],
+    "format": {
+      "duration": "0.250000"
+    }
+  },
+  "samples": {
+    "topLeft": [
+      251,
+      251,
+      0
+    ],
+    "middleLeft": [
+      252,
+      0,
+      0
+    ],
+    "topRight": [
+      2,
+      0,
+      253
+    ],
+    "bottomRight": [
+      1,
+      254,
+      255
+    ]
+  },
+  "validation": {
+    "invalidScene": true,
+    "missingMedia": true,
+    "cancellationDuringRender": true,
+    "cancelledFileRemoved": true,
+    "repeatedJob": true
+  },
+  "limitations": [
+    "video-only debug gate",
+    "no production timeline integration",
+    "production BT.709 color conversion pending",
+    "no audio sync or Honor 90 benchmark"
+  ],
+  "artifact": {
+    "path": "mobile56/tests/results/gpu64-two-layer.mp4",
+    "sha256": "b5de2a7fcc6f4b0b83ec0e56fc31b2261e0bfb193c545d5ce9ca7497d6ab9695"
+  }
+}
