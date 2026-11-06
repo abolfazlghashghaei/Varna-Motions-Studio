@@ -40,7 +40,7 @@ with zipfile.ZipFile(B/'base.apk') as src,zipfile.ZipFile(B/'unsigned.apk','w') 
  for dex in sorted((B/'dex').glob('*.dex')):dst.write(dex,dex.name,zipfile.ZIP_DEFLATED)
  for lib in (ROOT/'native59/libs').glob('*/*.so'):dst.write(lib,'lib/'+str(lib.relative_to(ROOT/'native59/libs')),zipfile.ZIP_STORED)
 run(tools/'zipalign','-P','16','-f','4',B/'unsigned.apk',B/'aligned.apk')
-output=B/'Varna-Mobile-0.5.0-ui63.apk'
+output=B/'Varna-Mobile-0.6.0-native65.apk'
 run(tools/'apksigner','sign','--ks',os.environ['MOBILE56_KEYSTORE'],'--ks-key-alias',os.environ.get('MOBILE56_KEY_ALIAS','varna-mobile-preview'),'--ks-pass','env:MOBILE56_STORE_PASS','--out',output,B/'aligned.apk')
 run(tools/'apksigner','verify','--verbose',output)
 run(tools/'aapt2','dump','badging',output)

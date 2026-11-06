@@ -91,7 +91,10 @@
   }
   function split(p, id, t) {
     const type = kind(p, id);
-    if (type === "clip") return C.split(p, id, t).id;
+    if (type === "clip") {
+      const index=p.clips.findIndex(c=>c.id===id),next=C.split(p,id,t);
+      p.clips=p.clips.filter(c=>c.id!==next.id);p.clips.splice(index+1,0,next);return next.id;
+    }
     if (type === "caption") {
       const next = w.VarnaCaptions57.split(row(p, id), t, C.id());
       p.captions.push(next);

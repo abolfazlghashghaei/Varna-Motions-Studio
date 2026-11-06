@@ -1,0 +1,111 @@
+{
+  "renderer": {
+    "file": "Video_1794000391268.mp4",
+    "frames": 24,
+    "durationUs": 1000000,
+    "audioEntries": 1,
+    "encoderDelaySamples": 2048,
+    "renderer": "native EGL / encoder Surface",
+    "videoFrameBridgeCalls": 0,
+    "elapsedMs": 15316,
+    "color": "SDR BT.601"
+  },
+  "previewSamples": {
+    "left": [
+      255,
+      255,
+      1
+    ],
+    "right": [
+      0,
+      254,
+      255
+    ],
+    "image": [
+      0,
+      254,
+      0
+    ]
+  },
+  "previewRect": [
+    119,
+    112,
+    242,
+    181
+  ],
+  "clock": "AudioTrack 48000 Hz",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 320,
+        "height": 240,
+        "nb_read_frames": "24"
+      },
+      {
+        "codec_name": "aac",
+        "nb_read_frames": "45"
+      }
+    ],
+    "format": {
+      "duration": "1.000000"
+    }
+  },
+  "audio": {
+    "start": 0.2501041666666667,
+    "end": 0.4998958333333333,
+    "flashStart": 0.25,
+    "flashEnd": 0.5,
+    "expectedStart": 0.25,
+    "expectedEnd": 0.5
+  },
+  "verified": [
+    "actual native surface screenshot",
+    "video/image/audio import",
+    "two video layers and image",
+    "burst seek",
+    "AudioTrack playback clock",
+    "real Android touch drag through native surface",
+    "split and Undo",
+    "native PNG snapshot",
+    "caption compatibility export",
+    "actual H264/AAC output",
+    "decoded output pixels",
+    "audio onset/offset within one frame",
+    "repeated home/editor navigation",
+    "queued early Edit tap while project storage initializes"
+  ],
+  "limitations": [
+    "software emulator, not Honor 90 performance test",
+    "SDR BT601",
+    "3-minute MVP limit",
+    "advanced text/effects remain compatibility mode"
+  ],
+  "executionEnvironment": {
+    "androidApi": 29,
+    "model": "Android SDK built for x86_64",
+    "hardware": "ranchu",
+    "physicalHonor90": false,
+    "performanceBenchmark": false
+  },
+  "artifacts": {
+    "media.mp4": "25476cc73333e46570048a8161a2771ab4c87dbd2993db0c2d95721cc4d8c982",
+    "android-preview.png": "72969fa3536ad4c45e08ef9c0e04f68b01cad06bdfe3dce4abc791ba21953e4b",
+    "caption-compatible.mp4": "8e8bf3192faac5f952284f804b933642487c21f1369643251671486619ec4e88",
+    "frame.png": "a24d036e0b733a8091d2757e8c7ad2b0e9a66e7ed599685545b0d88688641471"
+  },
+  "compatibilityAudio": {
+    "start": 0.2501041666666667,
+    "end": 0.4998958333333333,
+    "expectedStart": 0.25,
+    "expectedEnd": 0.5
+  },
+  "release": {
+    "version": "0.6.0-native65",
+    "versionCode": 6501,
+    "sha256": "b15ec4b935612da9a54533f215ae4f3bc02c66a99c8237e93ade2a7487b2bbf0",
+    "debuggable": false
+  }
+}

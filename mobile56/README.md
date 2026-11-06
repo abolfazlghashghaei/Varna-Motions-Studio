@@ -1,3 +1,13 @@
+# Current Android release — Native65
+
+Version **0.6.0-native65**, Android 10+, same application ID and signing identity as earlier mobile builds. Download the signed APK from `releases/Varna-Mobile-0.6.0-native65.apk`. Install as an update; uninstalling first deletes app-private media and projects.
+
+The media MVP now includes native layered video/image preview, AudioTrack clock and streaming audio mixing, direct-surface H.264/AAC MP4 export, touch transforms and preserved caption/effect compatibility mode. Limits remain 1080p/30fps, 3-minute exports and SDR BT.601. Physical Honor 90 performance has not been certified. See [Native65 details](docs/NATIVE65.md), root [architecture](../ARCHITECTURE.md) and [open work](../TODO.md).
+
+Speech models are separate optional downloads/imports. The offline text-review switch and existing approved corrections remain independent.
+
+---
+
 # Varna Mobile — Android preview 0.4
 
 An installable Android application with a dedicated touch editor. This is the fourth Android preview, not a port of every desktop feature. iOS is not built in this release.

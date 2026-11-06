@@ -16,7 +16,7 @@
     assets = new Map(),
     pending = new Map(),
     waveforms = new Map();
-  let analysisChain = Promise.resolve();
+  let analysisChain = Promise.resolve(), editor65 = null;
   let project,
     selected = null,
     tab = "media",
@@ -87,6 +87,8 @@
                 "downloadModel59",
                 "transcribe59",
                 "importModel59",
+                "openPreview65",
+                "exportScene65",
               ].includes(method)
                 ? 1800000
                 : method === "finishExport"
@@ -107,6 +109,7 @@
     nativePlayRevision59++;
     preparingPlay59 = false;
     playing = false;
+    editor65?.pause();
     if (nativePlayback59) MobileNative.pause59();
     cancelAnimationFrame(raf);
     for (const m of media.values()) m.el.pause?.();
@@ -148,7 +151,9 @@
     if (redraw) inspector();
   }
   function draw() {
-    M.frame(p(), time, $("#preview").getContext("2d"), (c) => runtime(c)?.el);
+    const native65 = editor65?.refresh();
+    if (!native65) M.frame(p(), time, $("#preview").getContext("2d"), (c) => runtime(c)?.el);
+    else { const canvas=$("#preview"); if(canvas.width!==p().width)canvas.width=p().width;if(canvas.height!==p().height)canvas.height=p().height;editor65.layout(); }
     $("#empty").hidden = !!(
       p().clips.length ||
       p().captions.length ||
@@ -303,6 +308,10 @@
     const revision = ++seekRevision;
     pause();
     time = C.clamp(t, 0, C.duration(p()));
+    if (editor65?.eligible() && !exporting) {
+      try { const data=await editor65.seek(time); if(revision===seekRevision){time=data.time;draw();} return; }
+      catch(error) { if(revision!==seekRevision)return;status(error.message); }
+    }
     if (nativePlayback59) {
       await queueSeek59(time, revision);
       return;
@@ -392,6 +401,13 @@
   }
   async function play() {
     if (playing || preparingPlay59) return pause();
+    if (editor65?.eligible()) {
+      if(time>=C.duration(p())-.02)time=0;
+      const revision=++nativePlayRevision59;preparingPlay59=true;
+      try { await editor65.seek(time);if(revision!==nativePlayRevision59)return;await editor65.play();if(revision!==nativePlayRevision59)editor65.pause(); }
+      finally { preparingPlay59=false; }
+      return;
+    }
     if (nativePlayback59) return playNative59();
     if (time >= C.duration(p()) - 0.02) time = 0;
     await seek(time);
@@ -503,6 +519,11 @@
     });
   }
   async function metadata(info) {
+    if (native && typeof MobileNative.probeMedia65 === "function" && !/\.(svg|gif)$/i.test(info.name||"")) {
+      const data=await request("probeMedia65",info.id);
+      if(!(data.duration>0))throw Error("Invalid media duration");
+      return {...info,...data};
+    }
     if (
       nativePlayback59 &&
       !String(info.type || "").startsWith("image/") &&
@@ -581,6 +602,7 @@
           duration: data.duration,
           width: data.width,
           height: data.height,
+          rotation: data.rotation || 0,
           bytes: data.bytes,
           mobile56: native ? { url: data.url, nativeId: data.id } : null,
         });
@@ -717,17 +739,15 @@
     render();
   }
   function addAsset(id) {
-    const asset = p().assets.find((a) => a.id === id),
-      track = p().tracks.find(
-        (t) =>
-          t.kind === (asset.kind === "audio" ? "audio" : "video") && !t.locked,
-      );
-    if (!track) throw Error("No unlocked matching track");
-    change((doc) => {
-      selected = C.add(doc, id, track.id, time).id;
+    const asset=p().assets.find(a=>a.id===id),kind=asset.kind==="audio"?"audio":"video",length=asset.kind==="image"?Math.min(5,asset.duration):asset.duration;
+    const overlapping=p().clips.filter(c=>c.start<time+length&&C.end(c)>time&&p().tracks.find(t=>t.id===c.trackId)?.kind===kind);
+    const firstLayer=overlapping.length?Math.min(...overlapping.map(c=>p().tracks.findIndex(t=>t.id===c.trackId))):Infinity;
+    let track=p().tracks.find((t,index)=>t.kind===kind&&!t.locked&&!t.muted&&(kind==="audio"||index<firstLayer)&&!p().clips.some(c=>c.trackId===t.id&&c.start<time+length&&C.end(c)>time));
+    change(doc=>{
+      if(!track){if(doc.tracks.length>=32)throw Error(T("Track limit reached","حد تعداد لایه‌ها پر شده است"));track={id:"track_"+C.id(),kind,name:T(kind==="audio"?"Audio":"Video",kind==="audio"?"صدا":"ویدیو")+" "+(doc.tracks.filter(t=>t.kind===kind).length+1),locked:false,muted:false};const at=doc.tracks.findIndex(t=>t.kind===kind);doc.tracks.splice(at<0?doc.tracks.length:at,0,track);}
+      selected=C.add(doc,id,track.id,time).id;
     });
-    tab = "style";
-    inspector();
+    tab="style";inspector();
   }
   function addCaption() {
     change((doc) => {
@@ -2047,6 +2067,7 @@
           "primary",
         ),
         button("PNG", async () => {
+          if(editor65?.eligible()&&editor65.active()){const file=await request("snapshotPreview65");MobileNative.share(file);return;}
           draw();
           await download(
             await new Promise((r) => $("#preview").toBlob(r, "image/png")),
@@ -2089,10 +2110,15 @@
     const progress = $("#renderProgress"),
       out = $("#renderStatus");
     progress.value = 0;
-    let recorder, stream;
+    let recorder, stream, shareFile65;
     try {
       await document.fonts.ready;
-      if (native) {
+      if (native && editor65?.eligible()) {
+        const result=await editor65.export();
+        if(cancelled)throw Error(T("Export cancelled","خروجی لغو شد"));
+        status(T("Native MP4 saved","MP4 بومی ذخیره شد"));
+        shareFile65=result.file;
+      } else if (native) {
         const audio = M.audio(p()).map((c) => ({
           ...c,
           assetId:
@@ -2132,7 +2158,7 @@
             "MP4 ذخیره شد؛ محل ذخیره یا اشتراک را انتخاب کن.",
           ),
         );
-        MobileNative.share(file);
+        shareFile65=file;
       } else {
         if (!w.MediaRecorder || !$("#preview").captureStream)
           throw Error("MediaRecorder unavailable");
@@ -2200,11 +2226,12 @@
       await seek(old);
       inspector();
     }
+    if(shareFile65&&!cancelled)MobileNative.share(shareFile65);
   }
   function cancelExport() {
     cancelled = true;
     pause();
-    if (native) MobileNative.cancelExport();
+    if (native) {MobileNative.cancelExport();if(typeof MobileNative.cancelScene65==="function")MobileNative.cancelScene65();}
   }
   $("#cancelRender").onclick = cancelExport;
   $("#renderDialog").addEventListener("cancel", (e) => {
@@ -2414,10 +2441,12 @@
         value = kind === "caption" ? target.style : target;
       value.x = C.clamp(x + dx, kind === "caption" ? 0 : -100, 100);
       value.y = C.clamp(y + dy, kind === "caption" ? 0 : -100, 100);
-      M.frame(draft, time, canvas.getContext("2d"), (c) => runtime(c)?.el);
+      if(editor65?.active()&&kind==="clip")MobileNative.transformPreview65(selectedId,value.x,value.y);
+      else M.frame(draft, time, canvas.getContext("2d"), (c) => runtime(c)?.el);
     };
     canvas.onpointermove = move;
     canvas.onpointercancel = () => {
+      if(editor65?.active())MobileNative.clearTransform65();
       canvas.onpointermove = null;
       draw();
     };
@@ -2437,6 +2466,7 @@
     project: () => C.clone(p()),
     history: H,
     ready: false,
+    renderer: () => editor65?.active() ? "native65" : "compatibility",
     savedProject: () => C.clone(recovered58 || p()),
     async continueProject() {
       if (recovered58) {
@@ -2576,6 +2606,12 @@
     Timeline,
     download,
     play,
+  });
+  if (w.VarnaNativeEditor65) editor65=w.VarnaNativeEditor65({
+    project:p,assets,time:()=>time,exporting:()=>exporting,request,status,draw,label:T,pause,
+    recover(t){safely(()=>seek(t));},
+    update(data){time=C.clamp(data.time,0,C.duration(p()));playing=!!data.playing;$("#play").textContent=playing?"Ⅱ":"▶";draw();},
+    progress(data){const total=data.total||1;const labels={"audio preparation":T("Preparing audio","آماده‌سازی صدا"),"audio calibration":T("Checking audio timing","بررسی زمان‌بندی صدا"),"audio encoding":T("Encoding audio","ساخت صدا"),"video":T("Rendering video","ساخت تصویر")};$("#renderProgress").value=data.current/total;$("#renderStatus").textContent=(labels[data.stage]||data.stage)+" · "+data.current+" / "+data.total;}
   });
   install57();
   initDB()

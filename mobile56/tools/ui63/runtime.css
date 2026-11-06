@@ -31,3 +31,7 @@ html[data-theme=light] #shell63 #editorRuntime dialog{background:#edf7ff;color:#
 #shell63 #home #varnaMarkHint{display:none}
 #shell63 #editorRuntime input[type=range]{accent-color:#a1e7f7}
 #shell63 #editorRuntime #tabs .active{border-color:#a1e7f7;color:#c2f4ff}
+
+#shell63 #editorRuntime #renderer65{font-size:9px;direction:ltr;white-space:nowrap;color:#b0dfed;flex-shrink:0;max-width:108px;overflow:hidden;text-overflow:ellipsis}
+
+#shell63 #editorRuntime footer button{min-height:24px;height:24px;flex-shrink:0}
