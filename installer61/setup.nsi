@@ -4,7 +4,7 @@ Unicode true
 !include "x64.nsh"
 !include "WinVer.nsh"
 Name "Varna Studio Setup & Maintenance"
-OutFile "build/Varna-Studio-Setup-61.exe"
+OutFile "build/Varna-Studio-Setup-62.exe"
 InstallDir "$LOCALAPPDATA\VarnaMotionStudio\Setup61"
 InstallDirRegKey HKCU "Software\VarnaStudio\Setup61" "Path"
 RequestExecutionLevel user
@@ -13,11 +13,11 @@ SilentUnInstall silent
 SetCompressor /SOLID lzma
 Icon "assets/varna.ico"
 UninstallIcon "assets/varna.ico"
-VIProductVersion "4.5.0.61"
+VIProductVersion "4.5.0.62"
 VIAddVersionKey /LANG=1033 "ProductName" "Varna Studio Setup & Maintenance"
 VIAddVersionKey /LANG=1033 "CompanyName" "Varna Studio"
 VIAddVersionKey /LANG=1033 "FileDescription" "Graphical installer, repair and removal manager"
-VIAddVersionKey /LANG=1033 "FileVersion" "61.0"
+VIAddVersionKey /LANG=1033 "FileVersion" "62.0"
 VIAddVersionKey /LANG=1033 "LegalCopyright" "Varna Studio"
 Var Mutex
 Var PSExe
@@ -101,7 +101,7 @@ WriteUninstaller "$INSTDIR\Uninstall.exe"
 WriteRegStr HKCU "Software\VarnaStudio\Setup61" "Path" "$INSTDIR"
 WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\VarnaStudio61" "DisplayName" "Varna Studio — Setup & Maintenance"
 WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\VarnaStudio61" "Publisher" "Varna Studio"
-WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\VarnaStudio61" "DisplayVersion" "4.5 RC47 / Setup61"
+WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\VarnaStudio61" "DisplayVersion" "4.5 RC47 / Setup62"
 WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\VarnaStudio61" "InstallLocation" "$INSTDIR"
 WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\VarnaStudio61" "DisplayIcon" "$INSTDIR\assets\varna.ico"
 WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\VarnaStudio61" "UninstallString" '"$INSTDIR\Uninstall.exe"'

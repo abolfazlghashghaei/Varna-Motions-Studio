@@ -3,7 +3,7 @@ const $=s=>document.querySelector(s),all=s=>Array.from(document.querySelectorAll
 const paths={timeline:'M3 6h18M3 12h18M3 18h18M7 3v18M11 8h7m-7 6h4',wave:'M4 10v4m4-8v12m4-15v18m4-15v12m4-8v4',text:'M5 5h14M12 5v14M8 19h8',glass:'M5 5h14v14H5zM8 8h8m-8 4h4',motion:'m8 5 11 7-11 7z',video:'M3 5h18v14H3zM9 8l6 4-6 4z',music:'M9 17V6l10-2v11M9 17c0 4-6 4-6 1s6-4 6-1m10-2c0 4-6 4-6 1s6-4 6-1',table:'M4 4h16v16H4zM4 10h16M10 4v16',safe:'M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5M8 8h8v8H8z',export:'M12 15V3m-4 4 4-4 4 4M4 14v7h16v-7'};
 all('[data-icon]').forEach(e=>e.innerHTML='<svg viewBox="0 0 24 24"><path d="'+paths[e.dataset.icon]+'"/></svg>');
 let current='home',history=[],goingBack=false;const tabSets=new Map();
-function nav(name){$('.nav-item[data-page="'+name+'"]')?.click();}
+function nav(name){if(name==='broll')name='home';$('.nav-item[data-page="'+name+'"]')?.click();}
 all('.nav-item[data-page]').forEach(button=>button.addEventListener('click',()=>{const name=button.dataset.page;if(name!==current&&!goingBack)history.push(current);current=name;document.body.dataset.page=name;$('#workspaceBack').hidden=name==='home';$('#workspace').scrollTop=0;$('#headerOptions').open=false;document.dispatchEvent(new CustomEvent('varna:page',{detail:{name}}));}));
 all('[data-launch]').forEach(button=>button.addEventListener('click',()=>nav(button.dataset.launch)));
 function back(){if(current==='home')return;goingBack=true;nav(history.pop()||'home');goingBack=false;}

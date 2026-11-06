@@ -14,7 +14,7 @@ sha=hashlib.sha256(archive.read_bytes()).hexdigest();meta={'commit':args.commit,
 (root/'package-lock61.json').write_text(json.dumps(meta,indent=2)+'\n');(root/'build').mkdir(exist_ok=True)
 env=os.environ.copy();env['NSISDIR']=args.nsis_dir
 subprocess.run([args.compiler,'-WX','-V3',str(root/'setup.nsi')],cwd=root,env=env,check=True)
-f=root/'build/Varna-Studio-Setup-61.exe';b=f.read_bytes();assert b[:2]==b'MZ';pe=struct.unpack_from('<I',b,0x3c)[0];assert b[pe:pe+4]==b'PE\0\0'
+f=root/'build/Varna-Studio-Setup-62.exe';b=f.read_bytes();assert b[:2]==b'MZ';pe=struct.unpack_from('<I',b,0x3c)[0];assert b[pe:pe+4]==b'PE\0\0'
 inputs={name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in re.findall(r'^File "([^"]+)"', (root/'setup.nsi').read_text(), re.M)}
 result={'embeddedFiles':inputs,'file':f.name,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'source':meta,'authenticode':'unsigned','nativeWindowsUiExecuted':False}
 (root/'build/release61.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

@@ -313,7 +313,7 @@ function Ensure-ComfyPortable {
         $candidate59=@(Get-ChildItem -LiteralPath $unpack -Directory|Where-Object {(Test-Path -LiteralPath (Join-Path $_.FullName 'ComfyUI\main.py')) -and (Test-Path -LiteralPath (Join-Path $_.FullName 'python_embeded\python.exe'))}|Select-Object -First 1)
         if($candidate59.Count -ne 1){throw 'Extracted engine layout is unsupported; original engines remain unchanged.'}
         if($env:VARNA_CANCEL_FILE -and (Test-Path -LiteralPath $env:VARNA_CANCEL_FILE)){throw 'CANCELLED after engine extraction; previous engine preserved'}
-        Set-InstallStatus 88 'engine-health' 'Testing embedded Python, PyTorch and ComfyUI before activation...'
+        Set-InstallStatus 88 'engine-health' 'Checking Varna engine before activation...'
         if(!(Test-VarnaEngine $candidate59[0].FullName)){throw 'Extracted engine did not pass its health check. Original files and the verified download are preserved.'}
         if($env:VARNA_CANCEL_FILE -and (Test-Path -LiteralPath $env:VARNA_CANCEL_FILE)){throw 'CANCELLED before engine activation; previous engine preserved'}
         New-Item -ItemType Directory -Path (Split-Path $root -Parent) -Force|Out-Null
@@ -388,7 +388,7 @@ try {
     if($EngineOnly){ Ensure-ComfyPortable | Write-Host; exit 0 }
     $vendorPlan = @()
     if ($Level -eq 'Max') {
-        $vendorPlan = @(Get-VendorInstallPlan $src)
+        $vendorPlan = @(Get-VendorInstallPlan $src | Where-Object { $_.Source -notmatch '[\\/]Railcut[\\/]' })
         # Decide per component before writing anything: never mix two vendor versions.
         $groups = @{}
         foreach ($entry in $vendorPlan) {
