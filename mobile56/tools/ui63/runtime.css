@@ -1,0 +1,33 @@
+/* The supplied mobile design, fitted to the real device and rendering runtime. */
+html,body{width:100%;height:100%;margin:0;overflow:hidden;font-family:Vazir,system-ui,sans-serif;background:#07111e;color:#f4f9ff}*{box-sizing:border-box}
+#shell63{width:100%;height:100%;border-radius:0;overflow:hidden;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+#shell63 button{font-family:inherit;touch-action:manipulation;min-height:44px}#shell63 button:disabled{opacity:.45;cursor:default}
+#shell63 .view{height:100%;min-height:0}#shell63 .main-scroll{min-height:0;overflow:auto;overscroll-behavior:contain}#shell63 .bottom{flex-shrink:0}
+#shell63 .server-card{position:relative;margin:12px 0;padding:20px}#shell63 .server-card p{font-size:13px;line-height:1.9;color:#bdcfe0}
+#shell63 #editorRuntime{width:100%;height:100%;min-height:0;padding:0;--accent:#a2e8f7;--muted:#a2bacd;--line:#ceeaff29;--card:#ffffff0a;background:transparent;grid-template-rows:58px minmax(0,1fr) 32px}
+#shell63 #editorRuntime .top,#shell63 #editorRuntime .tools,#shell63 #editorRuntime .timeline-panel,#shell63 #editorRuntime footer{background:linear-gradient(135deg,#c2eaff16,#80c4ff06);backdrop-filter:blur(18px);border-color:var(--line)}
+#shell63 #editorRuntime button{background:linear-gradient(135deg,#ffffff18,#ffffff05);border:1px solid var(--line);border-radius:13px}
+#shell63 #editorRuntime button.primary,#shell63 #editorRuntime .play{background:linear-gradient(110deg,#b9faff,#82d9f7);color:#091622}
+#shell63 #editorRuntime .logo{color:#b1edff;-webkit-text-fill-color:initial;background:none}
+#shell63 #editorRuntime .identity{gap:4px}#shell63 #editorRuntime .identity b{letter-spacing:1px}#shell63 #editorRuntime .identity small{max-width:70px}
+#shell63 #editorRuntime .top{padding:4px;gap:3px}#shell63 #editorRuntime .top .icon{min-width:32px;padding:4px;font-size:18px}#shell63 #editorRuntime #export{padding:6px 9px}
+#shell63 #editorRuntime .canvas-wrap{background:#04080d;isolation:isolate}#shell63 #editorRuntime #tabs{gap:3px}#shell63 #editorRuntime #tabs button{padding:5px}
+#shell63 #editorRuntime #inspector{padding-bottom:16px}#shell63 #editorRuntime dialog{background:#10243a;color:#f4f9ff;border:1px solid #beeaff66;box-shadow:0 20px 70px #0009}
+#shell63 #editorRuntime #sheet:not([open]),#shell63 #editorRuntime #renderDialog:not([open]){display:none}
+#shell63 button:focus-visible{outline:2px solid #a9f1ff;outline-offset:2px}
+html[data-theme=light] #shell63{background:radial-gradient(ellipse at 20% 0%,#c2efff,#e6eff8 70%)!important;color:#122c46}
+html[data-theme=light] #shell63 .glass,html[data-theme=light] #shell63 .glass-btn{background:linear-gradient(135deg,#ffffffbd,#c7e5fa8c)!important;color:#16324c}
+html[data-theme=light] #shell63 #editorRuntime{color:#142c44;--muted:#4b647b;--line:#18364f33}
+html[data-theme=light] #shell63 #editorRuntime dialog{background:#edf7ff;color:#142c44}
+@media(min-width:700px){#shell63 #home .main-scroll,#shell63 #projects .main-scroll,#shell63 #servers .main-scroll{width:min(100%,900px);margin:auto}#shell63 .quick{grid-template-columns:repeat(4,1fr)}#shell63 .categories{grid-template-columns:repeat(6,1fr)}}
+@media(orientation:landscape){#shell63 #editorRuntime{grid-template-rows:50px minmax(0,1fr) 26px}}
+@media(prefers-reduced-motion:reduce){#shell63 *{animation:none!important;transition:none!important}}
+#shell63{background:radial-gradient(ellipse at 20% 0%,#30415a 0%,#142239 32%,#07111e 75%)!important;font-family:Vazir,system-ui,sans-serif}
+#shell63 #home .welcome h1{position:absolute;right:18px;left:auto;bottom:62px;width:52%;margin:0;text-align:right;font-size:20px!important}
+#shell63 #home .welcome .eyebrow{position:absolute;right:18px;top:22px;font-size:8px}
+#shell63 #home .welcome .hero-rc47-tag{position:absolute;right:18px;top:44px;width:48%;font-size:9px;line-height:1.8}
+#shell63 #home .welcome button.accent{position:absolute;right:18px;bottom:18px;min-height:44px}
+#shell63 #home .welcome:after{display:none}
+#shell63 #home #varnaMarkHint{display:none}
+#shell63 #editorRuntime input[type=range]{accent-color:#a1e7f7}
+#shell63 #editorRuntime #tabs .active{border-color:#a1e7f7;color:#c2f4ff}

@@ -2000,8 +2000,8 @@
       const note = document.createElement("p");
       note.className = "note";
       note.textContent = T(
-        "Android preview 0.2 · Text, graphics and media are processed on device. Imported files are copied into app storage. Project files reference media; keep originals when transferring. Native AE plugins, AI music and speech models are not included.",
-        "پیش‌نمایش اندروید ۰٫۲ · متن، گرافیک و رسانه روی دستگاه پردازش می‌شوند. فایل‌های واردشده در حافظهٔ اپ کپی می‌شوند. برای انتقال پروژه، فایل‌های اصلی را هم نگه دار. پلاگین‌های بومی افتر و مدل‌های ساخت موسیقی/تشخیص گفتار در این نسخه نیستند.",
+        "Mobile 0.5 · Media, text and graphics run on device. Project files reference media; keep originals when transferring. Local speech requires a separate model. Native Adobe effects and AI music engines are not bundled.",
+        "موبایل ۰٫۵ · متن، گرافیک و رسانه روی دستگاه پردازش می‌شوند. برای انتقال پروژه، رسانه‌های اصلی را هم نگه دار. تشخیص گفتار محلی به مدل جداگانه نیاز دارد؛ افکت‌های بومی افتر و موتور موسیقی همراه اپ نیستند.",
       );
       body.append(note);
       body.append(
@@ -2436,6 +2436,56 @@
   w.MobileApp = {
     project: () => C.clone(p()),
     history: H,
+    ready: false,
+    savedProject: () => C.clone(recovered58 || p()),
+    async continueProject() {
+      if (recovered58) {
+        H.load(recovered58); recovered58 = null;
+        await restore(); timeline(); inspector(); await seek(0);
+      }
+    },
+    newProject() {
+      sheet(T("New project", "پروژهٔ جدید"), body => {
+        body.append(button(T("Save current project file", "ذخیرهٔ فایل پروژهٔ فعلی"), () =>
+          download(new Blob([JSON.stringify(Project.pack(recovered58 || p()))], {type:"application/json"}), "Project.varna")));
+        body.append(button(T("Create new · Undo available", "ساخت پروژهٔ خالی · قابل بازگشت"), () => {
+          pause(); recovered58 = null; H.load(M.fresh()); time=0; selected=null; tab="media";
+          save(); timeline(); inspector(); render(); $("#sheet").close();
+        }, "primary"));
+      });
+    },
+    openBrand() {
+      let brand;
+      try { brand=JSON.parse(localStorage.getItem("mobile63-brand")); } catch (_) {}
+      brand=Object.assign({name:"",color:"#ffffff",background:"#10243a"},brand||{});
+      sheet(T("Brand kit", "کیت برند"), body => {
+        const form=document.createElement("div");form.className="form";body.append(form);
+        field(form,"Brand name","نام برند",brand.name,v=>brand.name=v,{type:"text",wide:true});
+        field(form,"Text color","رنگ متن",brand.color,v=>brand.color=v,{type:"color"});
+        field(form,"Background","پس‌زمینه",brand.background,v=>brand.background=v,{type:"color"});
+        body.append(button(T("Save on this device","ذخیره روی همین دستگاه"),()=>{localStorage.setItem("mobile63-brand",JSON.stringify(brand));status(T("Brand saved","برند ذخیره شد"));}));
+        body.append(button(T("Apply to selected text","اعمال روی متن انتخاب‌شده"),()=>{
+          const c=p().captions.find(c=>c.id===selected);
+          if(!c){status(T("Select a text layer first","ابتدا یک لایهٔ متن انتخاب کن"));return;}
+          change(doc=>{const text=doc.captions.find(c=>c.id===selected);text.style.color=brand.color;text.style.bg=brand.background;});
+          $("#sheet").close();
+        }));
+      });
+    },
+    openProject: projectMenu,
+    openExport: exportMenu,
+    openConnection: () => $("#connection58").click(),
+    setTab(value) { if (!["media","text","graphics","style","audio"].includes(value)) return; tab=value; inspector(); },
+    addCaption,
+    addGraphic,
+    openPresets() { if (!p().captions.some(c=>c.id===selected)) addCaption(); UI57.presets(); },
+    openSpeech: () => Speech59.open(),
+    appearance() {
+      sheet(T("Appearance", "ظاهر و زبان"), body => {
+        body.append(button(T("Toggle light / dark", "تغییر تم روشن / تیره"), () => $("#theme57").click()));
+        body.append(button(T("Switch language", "تغییر زبان"), () => $("#language").click()));
+      });
+    },
     importMedia,
     seek,
     play,
@@ -2458,6 +2508,7 @@
         $("#sheet").close();
         return;
       }
+      if (w.MobileShell63) {w.MobileShell63.show("home");return;}
       projectMenu();
     },
     state: () => ({ time, selected, tab, exporting, playing, spellEnabled }),
@@ -2533,32 +2584,7 @@
       timeline();
       translate();
       draw();
-      if (recovered58)
-        sheet(T("Start editing", "شروع تدوین"), (body) => {
-          body.append(
-            button(
-              T("New project", "پروژهٔ جدید"),
-              () => {
-                recovered58 = null;
-                $("#sheet").close();
-              },
-              "primary",
-            ),
-          );
-          body.append(
-            button(
-              T("Continue previous project", "ادامهٔ پروژهٔ قبلی"),
-              async () => {
-                H.load(recovered58);
-                recovered58 = null;
-                await restore();
-                timeline();
-                inspector();
-                await seek(0);
-                $("#sheet").close();
-              },
-            ),
-          );
-        });
+      w.MobileApp.ready = true;
+      document.dispatchEvent(new CustomEvent("mobile-ready63"));
     });
 })(window);

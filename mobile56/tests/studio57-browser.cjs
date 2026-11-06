@@ -18,7 +18,8 @@ const server = require("./server.cjs");
     p.on("pageerror", (e) => errors.push(e.message));
     p.setDefaultTimeout(20000);
     await p.goto("http://127.0.0.1:8560");
-    await p.waitForFunction(() => window.MobileApp);
+    await p.waitForFunction(() => window.MobileApp?.ready);
+    await p.locator("#home .quick [data-action=editor]").click();
     await p.locator("#language").click();
     await p
       .getByRole("button", { name: "+ Import media", exact: true })
@@ -167,7 +168,8 @@ const server = require("./server.cjs");
       };
     });
     await p.reload();
-    await p.getByRole("button",{name:"Continue previous project",exact:true}).click();
+    await p.waitForFunction(() => window.MobileApp?.ready);
+    await p.locator("#home .quick [data-action=editor]").click();
     await p.waitForFunction(() => window.MobileApp);
     await p.evaluate(() => {
       MobileApp.change((doc) => {

@@ -29,7 +29,8 @@ const server = require("./server.cjs");
     });
     page.setDefaultTimeout(15000);
     await page.goto("http://127.0.0.1:8560");
-    await page.waitForFunction(() => window.MobileApp);
+    await page.waitForFunction(() => window.MobileApp?.ready);
+    await page.locator("#home .quick [data-action=editor]").click();
     await page.locator("#language").click();
     assert.equal(await page.locator("html").getAttribute("dir"), "ltr");
     assert.equal(
@@ -178,7 +179,8 @@ const server = require("./server.cjs");
       "Output audio is not silent",
     );
     await page.reload();
-    await page.getByRole("button",{name:"Continue previous project",exact:true}).click();
+    await page.waitForFunction(() => window.MobileApp?.ready);
+    await page.locator("#home .quick [data-action=editor]").click();
     await page.waitForFunction(
       () => window.MobileApp && MobileApp.project().clips.length === 1,
     );

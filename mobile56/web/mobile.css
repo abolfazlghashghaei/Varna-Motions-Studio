@@ -2,17 +2,17 @@
   font-family: Vazir;
   src: url("shared/Vazirmatn.woff2");
 }
-* {
+#editorRuntime * {
   box-sizing: border-box;
 }
-html,
-body {
+#editorRuntime,
+#editorRuntime {
   margin: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-body {
+#editorRuntime {
   --bg: #111019;
   --card: #1b1a25;
   --line: #ffffff14;
@@ -29,14 +29,14 @@ body {
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
-button,
-input,
-select,
-textarea {
+#editorRuntime button,
+#editorRuntime input,
+#editorRuntime select,
+#editorRuntime textarea {
   font: inherit;
   color: inherit;
 }
-button {
+#editorRuntime button {
   border: 1px solid var(--line);
   border-radius: 10px;
   background: #252332;
@@ -45,30 +45,30 @@ button {
   padding: 8px 14px;
   touch-action: manipulation;
 }
-button:active {
+#editorRuntime button:active {
   transform: scale(0.97);
 }
-button:disabled {
+#editorRuntime button:disabled {
   opacity: 0.4;
   pointer-events: none;
 }
-button.primary {
+#editorRuntime button.primary {
   background: var(--accent);
   color: #20183c;
   font-weight: 700;
 }
-.compact {
+#editorRuntime .compact {
   min-height: 36px;
   padding: 7px 15px;
 }
-.icon {
+#editorRuntime .icon {
   background: transparent;
   border: 0;
   min-width: 39px;
   padding: 7px;
   font-size: 19px;
 }
-.top {
+#editorRuntime .top {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -76,18 +76,18 @@ button.primary {
   border-bottom: 1px solid var(--line);
   direction: ltr;
 }
-.identity {
+#editorRuntime .identity {
   display: flex;
   align-items: center;
   gap: 9px;
   flex: 1;
   min-width: 0;
 }
-.identity b {
+#editorRuntime .identity b {
   font-size: 13px;
   letter-spacing: 3px;
 }
-.identity small {
+#editorRuntime .identity small {
   display: block;
   max-width: 130px;
   overflow: hidden;
@@ -96,28 +96,28 @@ button.primary {
   font-size: 9px;
   color: var(--muted);
 }
-.logo {
+#editorRuntime .logo {
   font: 900 34px system-ui;
   color: #b6a1ff;
   background: linear-gradient(120deg, #c1a7ff, #81e2d9);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-main {
+#editorRuntime main {
   display: grid;
   grid-template-rows: minmax(185px, 1fr) 185px minmax(150px, 0.7fr);
   min-height: 0;
   gap: 1px;
   background: #0c0b12;
 }
-.monitor {
+#editorRuntime .monitor {
   min-height: 0;
   display: flex;
   flex-direction: column;
   background: radial-gradient(ellipse at 20% 20%, #252036, #14131e 70%);
   padding: 5px 12px;
 }
-.monitor-label {
+#editorRuntime .monitor-label {
   display: flex;
   align-items: center;
   gap: 7px;
@@ -127,13 +127,13 @@ main {
   height: 25px;
   flex: none;
 }
-.dot {
+#editorRuntime .dot {
   width: 5px;
   height: 5px;
   background: #98dfc4;
   border-radius: 50%;
 }
-.monitor-label button {
+#editorRuntime .monitor-label button {
   margin-inline-start: auto;
   min-height: 23px;
   border: 0;
@@ -144,7 +144,7 @@ main {
   letter-spacing: 0;
   direction: ltr;
 }
-.canvas-wrap {
+#editorRuntime .canvas-wrap {
   flex: 1;
   min-height: 0;
   position: relative;
@@ -153,7 +153,7 @@ main {
   align-items: center;
   overflow: hidden;
 }
-canvas {
+#editorRuntime canvas {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -162,7 +162,7 @@ canvas {
   box-shadow: 0 8px 25px #0004;
   touch-action: none;
 }
-.empty {
+#editorRuntime .empty {
   position: absolute;
   inset: 0;
   display: flex;
@@ -175,20 +175,20 @@ canvas {
   padding: 15px;
   pointer-events: none;
 }
-.empty b {
+#editorRuntime .empty b {
   font-size: 22px;
 }
-.empty span {
+#editorRuntime .empty span {
   font-size: 11px;
   color: var(--muted);
 }
-.empty button {
+#editorRuntime .empty button {
   pointer-events: auto;
 }
-.empty[hidden] {
+#editorRuntime .empty[hidden] {
   display: none;
 }
-.transport {
+#editorRuntime .transport {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -197,12 +197,12 @@ canvas {
   flex: none;
   direction: ltr;
 }
-.transport .icon {
+#editorRuntime .transport .icon {
   font-size: 12px;
   min-height: 35px;
   min-width: 34px;
 }
-.transport .play {
+#editorRuntime .transport .play {
   font-size: 17px;
   border-radius: 50%;
   width: 34px;
@@ -211,17 +211,17 @@ canvas {
   background: #e9e3ff;
   color: #261f3b;
 }
-.transport output {
+#editorRuntime .transport output {
   font: 10px monospace;
   color: #c5c1d4;
   min-width: 60px;
 }
-.divider {
+#editorRuntime .divider {
   height: 14px;
   width: 1px;
   background: var(--line);
 }
-.timeline-panel {
+#editorRuntime .timeline-panel {
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -229,7 +229,7 @@ canvas {
   border-block: 1px solid var(--line);
   direction: ltr;
 }
-.timeline-top {
+#editorRuntime .timeline-top {
   height: 37px;
   display: flex;
   align-items: center;
@@ -238,16 +238,16 @@ canvas {
   font-size: 9px;
   flex: none;
 }
-.timeline-top b {
+#editorRuntime .timeline-top b {
   letter-spacing: 1px;
   color: #bbb5ce;
 }
-.timeline-top button {
+#editorRuntime .timeline-top button {
   min-height: 25px;
   font-size: 9px;
   padding: 4px 8px;
 }
-.zoom {
+#editorRuntime .zoom {
   margin-left: auto;
   display: flex;
   align-items: center;
@@ -255,35 +255,35 @@ canvas {
   width: 110px;
   color: var(--muted);
 }
-input[type="range"] {
+#editorRuntime input[type="range"] {
   accent-color: #b29df3;
   width: 100%;
   min-width: 0;
 }
-.timeline-top output {
+#editorRuntime .timeline-top output {
   color: var(--muted);
 }
-#timelineScroll {
+#editorRuntime #timelineScroll {
   overflow: auto;
   flex: 1;
   min-height: 0;
   position: relative;
   overscroll-behavior: contain;
 }
-#timeline {
+#editorRuntime #timeline {
   position: relative;
   min-height: 100%;
   direction: ltr;
   padding-bottom: 8px;
 }
-.ruler {
+#editorRuntime .ruler {
   height: 25px;
   position: relative;
   margin-left: 55px;
   cursor: crosshair;
   touch-action: none;
 }
-.ruler span {
+#editorRuntime .ruler span {
   position: absolute;
   font: 9px monospace;
   color: #79748d;
@@ -292,12 +292,12 @@ input[type="range"] {
   padding-left: 4px;
   height: 20px;
 }
-.track {
+#editorRuntime .track {
   height: 43px;
   border-top: 1px solid #ffffff09;
   position: relative;
 }
-.track-name {
+#editorRuntime .track-name {
   position: sticky;
   left: 0;
   z-index: 4;
@@ -310,13 +310,13 @@ input[type="range"] {
   background: #1f1c29;
   font: 9px system-ui;
 }
-.track-name button {
+#editorRuntime .track-name button {
   font-size: 8px;
   padding: 1px;
   min-height: 22px;
   border-radius: 4px;
 }
-.clip {
+#editorRuntime .clip {
   position: absolute;
   top: 5px;
   height: 32px;
@@ -331,38 +331,38 @@ input[type="range"] {
   touch-action: none;
   user-select: none;
 }
-.clip.audio {
+#editorRuntime .clip.audio {
   background: #274f4c;
   border-color: #3b7772;
 }
-.clip.title {
+#editorRuntime .clip.title {
   background: #4a3e60;
   border-color: #8464a4;
 }
-.clip.graphic {
+#editorRuntime .clip.graphic {
   background: #35455b;
   border-color: #627a9b;
 }
-.clip.selected {
+#editorRuntime .clip.selected {
   outline: 2px solid #e2ceff;
   outline-offset: 1px;
 }
-.trim {
+#editorRuntime .trim {
   position: absolute;
   top: 0;
   bottom: 0;
   width: 11px;
   background: #ffffff22;
 }
-.trim.left {
+#editorRuntime .trim.left {
   left: 0;
   cursor: w-resize;
 }
-.trim.right {
+#editorRuntime .trim.right {
   right: 0;
   cursor: e-resize;
 }
-.playhead {
+#editorRuntime .playhead {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -371,7 +371,7 @@ input[type="range"] {
   z-index: 5;
   pointer-events: none;
 }
-.playhead:before {
+#editorRuntime .playhead:before {
   content: "";
   position: absolute;
   left: -5px;
@@ -381,20 +381,20 @@ input[type="range"] {
   background: #d5b2ff;
   clip-path: polygon(0 0, 100% 0, 100% 55%, 50% 100%, 0 55%);
 }
-.tools {
+#editorRuntime .tools {
   display: flex;
   flex-direction: column;
   min-height: 0;
   background: var(--bg);
 }
-#tabs {
+#editorRuntime #tabs {
   display: flex;
   justify-content: space-around;
   flex-shrink: 0;
   border-bottom: 1px solid var(--line);
   padding: 3px 5px;
 }
-#tabs button {
+#editorRuntime #tabs button {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -408,37 +408,37 @@ input[type="range"] {
   min-height: 48px;
   color: #858096;
 }
-#tabs small {
+#editorRuntime #tabs small {
   font-size: 9px;
 }
-#tabs .active {
+#editorRuntime #tabs .active {
   color: #d2bfff;
   border-bottom: 2px solid #bd9fff;
 }
-#inspector {
+#editorRuntime #inspector {
   padding: 12px;
   overflow: auto;
   min-height: 0;
   flex: 1;
 }
-.form {
+#editorRuntime .form {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
-.form .wide {
+#editorRuntime .form .wide {
   grid-column: 1/-1;
 }
-label.field {
+#editorRuntime label.field {
   display: flex;
   flex-direction: column;
   gap: 6px;
   font-size: 10px;
   color: var(--muted);
 }
-input:not([type="range"]):not([type="checkbox"]),
-select,
-textarea {
+#editorRuntime input:not([type="range"]):not([type="checkbox"]),
+#editorRuntime select,
+#editorRuntime textarea {
   min-height: 39px;
   padding: 8px;
   border: 1px solid #ffffff14;
@@ -448,45 +448,45 @@ textarea {
   width: 100%;
   outline: none;
 }
-input:focus,
-textarea:focus,
-select:focus {
+#editorRuntime input:focus,
+#editorRuntime textarea:focus,
+#editorRuntime select:focus {
   border-color: #a78cd5;
 }
-input[type="color"] {
+#editorRuntime input[type="color"] {
   padding: 3px !important;
 }
-textarea {
+#editorRuntime textarea {
   resize: vertical;
   min-height: 72px;
   line-height: 1.7;
 }
-input[type="checkbox"] {
+#editorRuntime input[type="checkbox"] {
   accent-color: #bd9aff;
   width: 18px;
   height: 18px;
 }
-.switch {
+#editorRuntime .switch {
   display: flex;
   align-items: center;
   gap: 8px;
   min-height: 36px;
 }
-.actions {
+#editorRuntime .actions {
   display: flex;
   gap: 7px;
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
-.actions button {
+#editorRuntime .actions button {
   font-size: 11px;
 }
-.asset-grid {
+#editorRuntime .asset-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
   gap: 9px;
 }
-.asset {
+#editorRuntime .asset {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -494,69 +494,69 @@ input[type="checkbox"] {
   overflow: hidden;
   min-height: 68px;
 }
-.asset b {
+#editorRuntime .asset b {
   font-size: 11px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
 }
-.asset small {
+#editorRuntime .asset small {
   font-size: 9px;
   color: var(--muted);
 }
-.note {
+#editorRuntime .note {
   font-size: 11px;
   line-height: 1.8;
   color: var(--muted);
   margin: 6px 0 12px;
 }
-.selection-label {
+#editorRuntime .selection-label {
   margin: 0 0 10px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.selection-label small {
+#editorRuntime .selection-label small {
   margin-inline-start: auto;
   color: var(--muted);
   font-size: 10px;
 }
-.word-list {
+#editorRuntime .word-list {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
   margin-bottom: 10px;
 }
-.word-list button {
+#editorRuntime .word-list button {
   min-height: 30px;
   padding: 4px 9px;
   font-size: 12px;
 }
-.word-list .selected {
+#editorRuntime .word-list .selected {
   border-color: #cfb2ff;
   background: #4f3c69;
 }
-.alert-token {
+#editorRuntime .alert-token {
   border-bottom: 2px dashed #f5bd69 !important;
   background: #b6812220 !important;
 }
-.text-check {
+#editorRuntime .text-check {
   border: 1px solid #514467;
   border-radius: 8px;
   padding: 8px;
   margin-bottom: 10px;
 }
-.text-check.found {
+#editorRuntime .text-check.found {
   border-color: #dca451;
   background: #b6812210;
 }
-.text-check output {
+#editorRuntime .text-check output {
   display: block;
   font-size: 10px;
   color: #dcb66e;
 }
-footer {
+#editorRuntime footer {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -566,19 +566,19 @@ footer {
   font-size: 9px;
   color: var(--muted);
 }
-footer span {
+#editorRuntime footer span {
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-footer button {
+#editorRuntime footer button {
   min-height: 20px;
   padding: 1px 7px;
   font: 10px system-ui;
   border: 0;
 }
-dialog {
+#editorRuntime dialog {
   background: #211d2c;
   color: #ece8f9;
   border: 1px solid #6d5e88;
@@ -590,118 +590,118 @@ dialog {
   margin: auto auto 0;
   box-shadow: 0 -15px 70px #0008;
 }
-dialog::backdrop {
+#editorRuntime dialog::backdrop {
   background: #05030cab;
   backdrop-filter: blur(4px);
 }
-dialog header {
+#editorRuntime dialog header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
 }
-dialog h3 {
+#editorRuntime dialog h3 {
   font-size: 13px;
 }
-#sheetBody {
+#editorRuntime #sheetBody {
   padding-bottom: 15px;
 }
-#renderDialog {
+#editorRuntime #renderDialog {
   display: none;
 }
-#renderDialog[open] {
+#editorRuntime #renderDialog[open] {
   display: grid;
   gap: 16px;
 }
-progress {
+#editorRuntime progress {
   width: 100%;
   accent-color: #b799f1;
 }
-.row-review {
+#editorRuntime .row-review {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin: 10px 0;
 }
-.status-good {
+#editorRuntime .status-good {
   color: #90d6bb;
 }
-button:focus-visible {
+#editorRuntime button:focus-visible {
   outline: 2px solid #d9c0ff;
   outline-offset: 2px;
 }
 @media (orientation: landscape) and (min-width: 650px) {
-  body {
+  #editorRuntime {
     grid-template-rows: 54px minmax(0, 1fr) 26px;
   }
-  main {
+  #editorRuntime main {
     grid-template-columns: minmax(0, 1fr) minmax(230px, 0.65fr);
     grid-template-rows: minmax(140px, 1fr) 145px;
   }
-  .monitor {
+  #editorRuntime .monitor {
     grid-column: 1;
     grid-row: 1;
   }
-  .timeline-panel {
+  #editorRuntime .timeline-panel {
     grid-column: 1/-1;
     grid-row: 2;
   }
-  .tools {
+  #editorRuntime .tools {
     grid-column: 2;
     grid-row: 1;
     border-inline-start: 1px solid var(--line);
   }
-  .top {
+  #editorRuntime .top {
     padding: 4px 12px;
   }
-  .form {
+  #editorRuntime .form {
     gap: 7px;
   }
-  #tabs small {
+  #editorRuntime #tabs small {
     font-size: 8px;
   }
 }
 @media (max-height: 650px) and (orientation: portrait) {
-  main {
+  #editorRuntime main {
     grid-template-rows: minmax(130px, 1fr) 145px minmax(125px, 0.7fr);
   }
-  body {
+  #editorRuntime {
     grid-template-rows: 55px minmax(0, 1fr) 25px;
   }
-  .top {
+  #editorRuntime .top {
     padding: 4px 8px;
   }
-  .empty b {
+  #editorRuntime .empty b {
     font-size: 17px;
   }
 }
-html[dir="ltr"] .form,
-html[dir="ltr"] .tools {
+html[dir="ltr"] #editorRuntime .form,
+html[dir="ltr"] #editorRuntime .tools {
   direction: ltr;
 }
-main,
-main > section,
-.top,
-.tools,
-.timeline-panel,
-#timelineScroll {
+#editorRuntime main,
+#editorRuntime main > section,
+#editorRuntime .top,
+#editorRuntime .tools,
+#editorRuntime .timeline-panel,
+#editorRuntime #timelineScroll {
   min-width: 0;
   max-width: 100%;
 }
-.top {
+#editorRuntime .top {
   width: 100%;
 }
-#tabs {
+#editorRuntime #tabs {
   min-width: 0;
 }
-canvas {
+#editorRuntime canvas {
   aspect-ratio: auto;
 }
-#timelineScroll {
+#editorRuntime #timelineScroll {
   direction: ltr;
 }
 /* Mobile57: the material belongs to the UI; project glass is rendered separately. */
-body {
+#editorRuntime {
   --bg: #11121a;
   --card: #ffffff0a;
   --line: #d9dfff20;
@@ -712,73 +712,73 @@ body {
     radial-gradient(ellipse at 92% 72%, #17485266, transparent 55%), #11121a;
   grid-template-rows: 60px minmax(0, 1fr) 32px;
 }
-.top,
-.timeline-panel,
-.tools,
-footer,
-dialog {
+#editorRuntime .top,
+#editorRuntime .timeline-panel,
+#editorRuntime .tools,
+#editorRuntime footer,
+#editorRuntime dialog {
   background: linear-gradient(135deg, #ffffff0c, #ffffff03);
   backdrop-filter: blur(20px) saturate(135%);
   -webkit-backdrop-filter: blur(20px) saturate(135%);
   border-color: var(--line);
   box-shadow: inset 0 1px 0 #ffffff0a;
 }
-main {
+#editorRuntime main {
   background: transparent;
   gap: 6px;
   padding: 0 7px;
 }
-.monitor {
+#editorRuntime .monitor {
   background: linear-gradient(155deg, #ffffff04, #00000012);
   border-radius: 16px;
 }
-.timeline-panel,
-.tools {
+#editorRuntime .timeline-panel,
+#editorRuntime .tools {
   border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden;
 }
-.top {
+#editorRuntime .top {
   border: 0;
 }
-.timeline-top {
+#editorRuntime .timeline-top {
   gap: 5px;
   padding: 0 7px;
 }
-.timeline-top b {
+#editorRuntime .timeline-top b {
   font-size: 8px;
 }
-#snap57 {
+#editorRuntime #snap57 {
   font-size: 18px;
   min-width: 27px;
   padding: 0 5px;
 }
-#snap57[aria-pressed="true"] {
+#editorRuntime #snap57[aria-pressed="true"] {
   color: #d3bcff;
   border-color: #bca5f3;
   background: #8563bc33;
 }
-.zoom {
+#editorRuntime .zoom {
   width: 85px;
 }
-.track-name {
+#editorRuntime .track-name {
   width: 55px;
   background: #232032d9;
   backdrop-filter: blur(10px);
 }
-.track-settings57 {
+#editorRuntime .track-settings57 {
   max-width: 36px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.locked57 .clip {
+#editorRuntime .locked57 .clip {
   opacity: 0.55;
 }
-.clip {
+#editorRuntime .clip {
   border-radius: 7px;
   box-shadow: inset 0 1px 0 #ffffff20;
 }
-.clip .waveform57 {
+#editorRuntime .clip .waveform57 {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -786,85 +786,85 @@ main {
   opacity: 0.4;
   pointer-events: none;
 }
-.clip .clip-name57 {
+#editorRuntime .clip .clip-name57 {
   position: relative;
   z-index: 1;
   text-shadow: 0 1px 3px #000;
 }
-.transport .play {
+#editorRuntime .transport .play {
   background: linear-gradient(135deg, #e8dcff, #a4ded5);
   color: #221a31;
 }
-.icon {
+#editorRuntime .icon {
   font-variant-emoji: text;
 }
-#tabs button {
+#editorRuntime #tabs button {
   min-height: 52px;
 }
-#tabs .active {
+#editorRuntime #tabs .active {
   border-radius: 10px 10px 0 0;
   background: linear-gradient(#b797ed12, #b797ed22);
 }
-.text-check {
+#editorRuntime .text-check {
   background: #b19ad20a;
 }
-.text-check.found {
+#editorRuntime .text-check.found {
   background: #ffbf5015;
   border-color: #e9b560;
 }
-.caption-studio57 {
+#editorRuntime .caption-studio57 {
   padding-block: 12px;
   border-top: 1px solid var(--line);
 }
-.word-time-row57 {
+#editorRuntime .word-time-row57 {
   display: grid;
   grid-template-columns: minmax(60px, 1fr) 1fr 1fr;
   gap: 9px;
   align-items: center;
   margin-bottom: 12px;
 }
-.word-time-row57 b {
+#editorRuntime .word-time-row57 b {
   overflow-wrap: anywhere;
 }
-.word-time57 {
+#editorRuntime .word-time57 {
   border: 1px solid #ba99eb44;
   border-radius: 12px;
   padding: 10px;
   margin-bottom: 12px;
 }
-.word-time57 button {
+#editorRuntime .word-time57 button {
   font-size: 10px;
 }
-.preset-grid57 {
+#editorRuntime .preset-grid57 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
-.preset57 {
+#editorRuntime .preset57 {
   min-height: 85px;
   background: linear-gradient(140deg, #ffffff0f, #66429422);
   font-weight: 700;
   color: var(--preset-color);
   border: 1px solid #ffffff24;
 }
-.key-row57 {
+#editorRuntime .key-row57 {
   display: flex;
   align-items: center;
   gap: 8px;
   padding-block: 7px;
   border-bottom: 1px solid var(--line);
 }
-.key-row57 span {
+#editorRuntime .key-row57 span {
   flex: 1;
   font: 11px monospace;
 }
-.key-row57 button {
+#editorRuntime .key-row57 button {
   min-height: 32px;
 }
-.asset {
+#editorRuntime .asset {
   background: linear-gradient(140deg, #ffffff09, #00000014);
 }
-html[data-theme="light"] body {
+html[data-theme="light"] #editorRuntime {
   --bg: #e9e9f0;
   --card: #ffffff77;
   --line: #22223a25;
@@ -875,68 +875,68 @@ html[data-theme="light"] body {
     radial-gradient(ellipse at 10% 20%, #e2d6f8, transparent 65%),
     radial-gradient(ellipse at 90% 70%, #ceebe4, transparent 60%), #ececf2;
 }
-html[data-theme="light"] .top,
-html[data-theme="light"] .tools,
-html[data-theme="light"] .timeline-panel,
-html[data-theme="light"] footer {
+html[data-theme="light"] #editorRuntime .top,
+html[data-theme="light"] #editorRuntime .tools,
+html[data-theme="light"] #editorRuntime .timeline-panel,
+html[data-theme="light"] #editorRuntime footer {
   background: #ffffff55;
 }
-html[data-theme="light"] button {
+html[data-theme="light"] #editorRuntime button {
   background: #ffffff88;
   color: #363146;
 }
-html[data-theme="light"] button.primary {
+html[data-theme="light"] #editorRuntime button.primary {
   background: #7353ae;
   color: #fff;
 }
-html[data-theme="light"] input:not([type="checkbox"]):not([type="range"]),
-html[data-theme="light"] select,
-html[data-theme="light"] textarea {
+html[data-theme="light"] #editorRuntime input:not([type="checkbox"]):not([type="range"]),
+html[data-theme="light"] #editorRuntime select,
+html[data-theme="light"] #editorRuntime textarea {
   background: #ffffffa0;
   color: #282137;
   border-color: #4c416633;
 }
-html[data-theme="light"] dialog {
+html[data-theme="light"] #editorRuntime dialog {
   background: #f0ecf6eb;
   color: #282137;
 }
-html[data-theme="light"] .track-name {
+html[data-theme="light"] #editorRuntime .track-name {
   background: #e6dfeddb;
   color: #31243f;
 }
-html[data-theme="light"] .clip {
+html[data-theme="light"] #editorRuntime .clip {
   color: #fff;
 }
-html[data-theme="light"] #tabs .active {
+html[data-theme="light"] #editorRuntime #tabs .active {
   color: #60388c;
 }
-html[data-theme="light"] .timeline-top b {
+html[data-theme="light"] #editorRuntime .timeline-top b {
   color: #60536c;
 }
-html[data-theme="light"] .ruler span {
+html[data-theme="light"] #editorRuntime .ruler span {
   color: #73657f;
 }
-html[data-theme="light"] .transport output {
+html[data-theme="light"] #editorRuntime .transport output {
   color: #645471;
 }
-html[data-theme="light"] .text-check output {
+html[data-theme="light"] #editorRuntime .text-check output {
   color: #846025;
 }
-html[data-theme="light"] .preset57 {
+html[data-theme="light"] #editorRuntime .preset57 {
   background: #40324e;
   color: var(--preset-color);
 }
 @media (orientation: landscape) and (min-width: 650px) {
-  body {
+  #editorRuntime {
     grid-template-rows: 50px minmax(0, 1fr) 26px;
   }
-  main {
+  #editorRuntime main {
     gap: 5px;
     grid-template-rows: minmax(140px, 1fr) 140px;
   }
-  #tabs button {
+  #editorRuntime #tabs button {
     min-height: 44px;
   }
 }
 
-#mediaDeck58{position:fixed;left:-4px;top:-4px;width:2px;height:2px;opacity:.001;overflow:hidden;pointer-events:none}#mediaDeck58 video,#mediaDeck58 audio{width:2px;height:2px} .connection-status58{overflow-wrap:anywhere;font-size:12px}
+#editorRuntime #mediaDeck58{position:fixed;left:-4px;top:-4px;width:2px;height:2px;opacity:.001;overflow:hidden;pointer-events:none}#editorRuntime #mediaDeck58 video,#editorRuntime #mediaDeck58 audio{width:2px;height:2px} #editorRuntime .connection-status58{overflow-wrap:anywhere;font-size:12px}

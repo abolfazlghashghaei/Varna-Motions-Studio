@@ -15,7 +15,8 @@ const { chromium } = require("playwright"),
       acceptDownloads: true,
     });
     await p.goto("http://127.0.0.1:8560");
-    await p.waitForFunction(() => window.MobileApp);
+    await p.waitForFunction(() => window.MobileApp?.ready);
+    await p.locator("#home .quick [data-action=editor]").click();
     await p.evaluate(() => {
       MobileApp.change((doc) => {
         doc.width = 320;
