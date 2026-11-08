@@ -162,7 +162,7 @@ function Include-Entry([string]$relative) {
     if($relative -eq 'assets/vendor/Railcut/Railcut/bin/mac/ffmpeg'){return $false}
     # Shared interface dependencies are required at every installation level.
     if ($relative.StartsWith('assets/vendor/ui30/') -or $relative.StartsWith('assets/vendor/rebound49/') -or $relative.StartsWith('assets/vendor/conjure49/')) { return $true }
-    if ($Level -eq 'Core' -and $relative.StartsWith('assets/sfx/') -and $relative -ne 'assets/sfx/ghaf_type_click.wav') { return $false }
+    if ($Level -eq 'Core' -and $relative.StartsWith('assets/sfx/') -and $relative -ne 'assets/sfx/ghaf_type_click.wav' -and -not $relative.StartsWith('assets/sfx/entry66/')) { return $false }
     if ($Level -ne 'Max' -and $relative.StartsWith('assets/packs/')) { return $false }
     if ($Level -ne 'Max' -and $relative.StartsWith('assets/vendor/')) { return $false }
     return $true

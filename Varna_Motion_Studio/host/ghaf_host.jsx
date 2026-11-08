@@ -1058,6 +1058,7 @@ GHAFHost.buildOutput = function(encoded){
             for(var i=0;i<groups.length;i++){var g=groups[i],mv=new MarkerValue(String(g.text||""));mv.chapter="GHAF "+(i+1);mp.setValueAtTime(Number(g.start||0),mv);var next=i+1<groups.length?Number(groups[i+1].start):c.duration;if(Number(g.end)<next-c.frameDuration*.5){var blank=new MarkerValue("");mp.setValueAtTime(Number(g.end),blank);}}
             l.property("ADBE Text Properties").property("ADBE Text Document").expression='var m=thisLayer.marker;if(m.numKeys<1)"";else{var n=m.nearestKey(time).index;if(m.key(n).time>time)n--;n<1?"":m.key(n).comment;}';
             if(p.jsonComment)try{l.comment="GHAF_CAPTIONS_JSON="+GHAFJSON.stringify(groups);}catch(ec){}
+            for(var cue66=0;cue66<groups.length;cue66++){var soundCfg66=(groups[cue66].anim||{}).entrySound66;if(soundCfg66&&soundCfg66.enabled===true)GHAFHost._entrySound66(l,groups[cue66],soundCfg66,true);}
             GHAFHost._finishOutputBlock35(c,GHAFHost._newLayers(c,before),{start:0,end:c.duration},null);if(p.clearOld)GHAFHost._deleteLayers(oldOutput);app.endUndoGroup();return GHAFHost._ok({created:1});
         }
         var order=[],i;if(mode==="separateLast"){for(i=groups.length-1;i>=0;i--)order.push(i);}else{for(i=0;i<groups.length;i++)order.push(i);}
@@ -1260,6 +1261,7 @@ GHAFHost.refreshCaptionStyles=function(encoded){
    l.enabled=true;GHAFHost._removeTextSolidOpacity(l);if(p.updateMotion)GHAFHost._resetCaptionMotion(l,g);GHAFHost._applyTextStyle(l,g.style||{},g.text||'');if(p.updateMotion){var aa=g.anim||{};GHAFHost._addAnimMarkers(l,g,aa);if(aa.textyleIn)GHAFHost._textylePreset(l,aa.textyleIn,'IN',aa);else GHAFHost._animTransform(l,g,aa);if(aa.textyleOut)GHAFHost._textylePreset(l,aa.textyleOut,'OUT',aa);else GHAFHost._applyOutro(l,g,aa);}var bg=g.bg||{},measure=GHAFHost._prepareTypingBounds(l,g,bg);
    if(!GHAFHost._applyBg(l,bg))throw Error('BACKGROUND_APPLY_FAILED: '+l.name);
    GHAFHost._syncPersistedVendorEffects(l,(g.style||{}).vendorEffects||[]);if((g.style||{}).aeGlassText)GHAFHost._applyAEGlassText(l,bg,g.style||{});GHAFHost._applyBgVendorEffects(l,bg);GHAFHost._linkTypingBounds(l,measure);
+   GHAFHost._entrySound66(l,g,(g.anim||{}).entrySound66);
    updated++;
   }
   return GHAFHost._ok({updated:updated,skipped:skipped});
@@ -1451,6 +1453,21 @@ GHAFHost._tableSurfaceEntry=function(layer,kind,start,end){
  if(kind==='float'){pos.setValueAtTime(start,[v[0],v[1]+42]);pos.setValueAtTime(end,v);GHAFHost._varnaEase(pos,[start,end]);}
  GHAFHost._varnaEase(sc,kind==='spring'||kind==='stretch'?[start,mid,end]:[start,end]);
 };
+GHAFHost._tableMotion66=function(layer,p,exit){
+ var tr=layer.property('ADBE Transform Group'),mode=String(p.ease66||'smooth'),kind=String(p.exit66||'none'),duration=Number(p.exitDuration66),names=['ADBE Opacity','ADBE Position','ADBE Scale'],i,j,prop;
+ if(!isFinite(duration))duration=.25;
+ if(exit&&kind!=='none'&&duration>0){
+  var end=layer.outPoint,start=Math.max(layer.inPoint,end-Math.min(duration,(end-layer.inPoint)*.4)),op=tr.property('ADBE Opacity');
+  op.setValueAtTime(start,op.valueAtTime(start,false));op.setValueAtTime(end,0);
+  if(kind==='shrink'){prop=tr.property('ADBE Scale');var sv=prop.valueAtTime(start,false);prop.setValueAtTime(start,sv);prop.setValueAtTime(end,[sv[0]*.9,sv[1]*.9]);}
+  if(kind==='drop'){prop=tr.property('ADBE Position');var pv=prop.valueAtTime(start,false);prop.setValueAtTime(start,pv);prop.setValueAtTime(end,[pv[0],pv[1]+36]);}
+ }
+ for(i=0;i<names.length;i++){prop=tr.property(names[i]);for(j=1;j<=prop.numKeys;j++){
+  if(mode==='linear')prop.setInterpolationTypeAtKey(j,KeyframeInterpolationType.LINEAR,KeyframeInterpolationType.LINEAR);
+  else{var influence=mode==='snappy'?88:mode==='gentle'?48:72,e=new KeyframeEase(0,influence),dims=prop.isSpatial?1:(prop.value instanceof Array?prop.value.length:1),ease=[];for(var d=0;d<dims;d++)ease.push(e);prop.setTemporalEaseAtKey(j,ease,ease);prop.setInterpolationTypeAtKey(j,KeyframeInterpolationType.BEZIER,KeyframeInterpolationType.BEZIER);}
+ }}
+};
+
 GHAFHost.buildVarnaTable=function(encoded){
     var p=GHAFHost._parse(encoded),c=GHAFHost._tableComp(p);if(!c)return GHAFHost._err('NO_COMP');var oldPreview=[];for(var op=1;op<=c.numLayers;op++)if(String(c.layer(op).name).indexOf('__VARNA_TABLE_PREVIEW__')===0)oldPreview.push(c.layer(op));var rows=p.rows||[],cols=p.cols||[],cells=p.cells||[],nr=rows.length,nc=cols.length;if(nr<1||nc<1||nr*nc>400||cells.length!==nr)return GHAFHost._err('INVALID_GRID');
     var rw=[],cw=[],rh=0,ct=0,i,j;for(i=0;i<nr;i++){if(!cells[i]||cells[i].length!==nc||!isFinite(Number(rows[i]))||Number(rows[i])<=0)return GHAFHost._err('INVALID_ROW');rh+=Number(rows[i]);}for(j=0;j<nc;j++){if(!isFinite(Number(cols[j]))||Number(cols[j])<=0)return GHAFHost._err('INVALID_COLUMN');ct+=Number(cols[j]);}
@@ -1462,6 +1479,7 @@ GHAFHost.buildVarnaTable=function(encoded){
     var unified=p.unified===true,centerX=isFinite(Number(p.x))&&p.x!=null?Number(p.x):c.width/2,centerY=isFinite(Number(p.y))&&p.y!=null?Number(p.y):c.height/2,dx=centerX-c.width/2,dy=centerY-c.height/2,dividerOpacity=Math.max(0,Math.min(100,p.dividerOpacity==null?100:Number(p.dividerOpacity))),surfaceEntry=String(p.surfaceEntry||'soft');if(!/^(none|soft|spring|float|stretch)$/.test(surfaceEntry))return GHAFHost._err('INVALID_SURFACE_ENTRY');
     function markerAt(v){if(v===''||v==null)return null;var ix=Number(v);return markers[ix]&&isFinite(Number(markers[ix].time))?Number(markers[ix].time):null;}
     function clampTime(v,a,b){v=Number(v);if(!isFinite(v))return a;return Math.max(a,Math.min(b,v));}
+    if(!/^(smooth|gentle|snappy|linear)$/.test(String(p.ease66||'smooth'))||!/^(none|fade|shrink|drop)$/.test(String(p.exit66||'none')))return GHAFHost._err('INVALID_TABLE_CURVE_OR_EXIT');
     if(aeGlassTable&&!GHAFHost._aeGlassInfo().available)return GHAFHost._err('AE Glass در After Effects نصب یا بارگذاری نشده است');
     app.beginUndoGroup('VarnaLabs Create Table');try{
         if(liquidGlass&&!aeGlassTable){try{var adj=c.layers.addSolid([1,1,1],tag+'_glass_blur',c.width,c.height,1,c.duration);created.push(adj);adj.adjustmentLayer=true;adj.inPoint=start;adj.outPoint=end;var masks=adj.property('ADBE Mask Parade'),mask=masks.addProperty('ADBE Mask Atom'),sp=new Shape(),lx=(c.width-width)/2,ty=(c.height-height)/2;sp=GHAFHost._varnaCellShape(width,height,roundMode==='none'?0:roundness,'outerCorners',true,true,true,true);for(var vi=0;vi<sp.vertices.length;vi++){sp.vertices[vi][0]+=c.width/2;sp.vertices[vi][1]+=c.height/2;}mask.property('ADBE Mask Shape').setValue(sp);try{mask.property('ADBE Mask Feather').setValue([1,1]);}catch(eMF){}var fx=adj.property('ADBE Effect Parade'),bl=fx.addProperty('ADBE Gaussian Blur 2');try{bl.property(1).setValue(22);}catch(eB){}try{bl.property(3).setValue(1);}catch(eE){}try{var td=fx.addProperty('ADBE Turbulent Displace');td.name='VARNA Table Lens Refraction';GHAFHost._setNamed(td,['Amount'],Math.max(0,glassLensing*.025+glassWave*.012));GHAFHost._setNamed(td,['Size'],Math.max(80,150-glassWave*.45));GHAFHost._setNamed(td,['Complexity'],1);}catch(eTD){}adj.shy=true;}catch(eGlass){}}
@@ -1486,6 +1504,8 @@ GHAFHost.buildVarnaTable=function(encoded){
         if(line>0){var segments=GHAFHost._tableDividers(rows,cols,merges,direction),lines=c.layers.addShape();created.push(lines);lines.name=tag+'_dividers';lines.inPoint=start;lines.outPoint=end;lines.property('ADBE Transform Group').property('ADBE Position').setValue([c.width/2,c.height/2]);var lr=lines.property('ADBE Root Vectors Group');for(var si=0;si<segments.length;si++){var sg=segments[si],lg=lr.addProperty('ADBE Vector Group').property('ADBE Vectors Group'),lp=lg.addProperty('ADBE Vector Shape - Group'),path=new Shape();path.vertices=[[sg[0]*width-width/2,sg[1]*height-height/2],[sg[2]*width-width/2,sg[3]*height-height/2]];path.inTangents=[[0,0],[0,0]];path.outTangents=[[0,0],[0,0]];path.closed=false;lp.property('ADBE Vector Shape').setValue(path);var ls=lg.addProperty('ADBE Vector Graphic - Stroke');ls.property('ADBE Vector Stroke Color').setValue(border);ls.property('ADBE Vector Stroke Width').setValue(line);ls.property('ADBE Vector Stroke Opacity').setValue(dividerOpacity);}}
         // Shared controller moves the whole glass plane, dividers and text together.
         if(unified){var handle=c.layers.addNull();created.push(handle);handle.name=tag+'_surface_control';handle.inPoint=start;handle.outPoint=end;handle.property('ADBE Transform Group').property('ADBE Position').setValue([c.width/2,c.height/2]);for(var hi=0;hi<created.length-1;hi++){created[hi].parent=handle;created[hi].property('ADBE Transform Group').property('ADBE Opacity').expression='value * parent.transform.opacity / 100';}handle.property('ADBE Transform Group').property('ADBE Position').setValue([centerX,centerY]);GHAFHost._tableSurfaceEntry(handle,surfaceEntry,start,Math.min(end,start+anim));}else{for(var pi=0;pi<created.length;pi++){var pp=created[pi].property('ADBE Transform Group').property('ADBE Position'),pv=pp.value; if(dx||dy){if(pp.numKeys){for(var pk=1;pk<=pp.numKeys;pk++){var kv=pp.keyValue(pk);pp.setValueAtKey(pk,[kv[0]+dx,kv[1]+dy]);}}else pp.setValue([pv[0]+dx,pv[1]+dy]);}}}
+        for(var anim66=0;anim66<created.length;anim66++){var target66=created[anim66];GHAFHost._tableMotion66(target66,p,!unified||/_surface_control$/.test(target66.name));}
+        if(!p.preview&&p.entrySound66&&p.entrySound66.enabled===true){var textOwners66=created.slice(0);for(var si66=0;si66<textOwners66.length;si66++){var textOwner66=textOwners66[si66];if(!/_text$/.test(textOwner66.name))continue;var cues66=GHAFHost._entrySound66(textOwner66,{text:String(textOwner66.property('ADBE Text Properties').property('ADBE Text Document').value.text),start:textOwner66.inPoint,end:textOwner66.outPoint},p.entrySound66);for(var ci66=0;ci66<cues66.length;ci66++)created.push(cues66[ci66]);}}
         for(var gi=0;gi<created.length;gi++){created[gi].guideLayer=!!p.preview;created[gi].shy=!!p.preview;}GHAFHost._deleteLayers(oldPreview);if(!p.preview)c.time=start;app.endUndoGroup();return GHAFHost._ok({layers:created.length,tag:tag,start:start,end:end});
     }catch(e){for(i=created.length-1;i>=0;i--)try{created[i].remove();}catch(ignore){}app.endUndoGroup();return GHAFHost._err(e.toString());}
 };
@@ -1793,7 +1813,7 @@ GHAFHost.createSafeZone=function(encoded){
 GHAFHost.removeSafeZone=function(){var c=GHAFHost._activeComp();if(!c)return GHAFHost._ok({removed:0});var list=GHAFHost._safeLayers(c);GHAFHost._deleteLayers(list);return GHAFHost._ok({removed:list.length});};
 GHAFHost.setSafeZoneVisible=function(encoded){var p=GHAFHost._parse(encoded),c=GHAFHost._activeComp();if(!c)return GHAFHost._err('NO_COMP');try{var list=GHAFHost._safeLayers(c);for(var i=0;i<list.length;i++){var locked=list[i].locked;list[i].locked=false;list[i].enabled=p.visible!==false;list[i].locked=locked;}return GHAFHost._ok({visible:p.visible!==false});}catch(e){return GHAFHost._err(String(e));}};
 
-GHAFHost._bridgeRevision='rc47.7';GHAFHost._tableRevision=1;
+GHAFHost._bridgeRevision='rc47.8-workbench66';GHAFHost._tableRevision=1;
 
 /* RC27: explicit ownership, exact guide geometry, independent surfaces, portable brand assets. */
 GHAFHost._typingExpression=function(a){
@@ -2283,7 +2303,7 @@ GHAFHost._createKinetic40=function(c,g,name){
   var t=layer.property('ADBE Transform Group');t.property('ADBE Anchor Point').setValue([c.width/2,c.height/2]);t.property('ADBE Position').setValue([c.width/2,c.height/2]);t.property('ADBE Scale').setValue([100,100]);layer.stretch=100;/* The child duration already equals the cue span; native playback needs no Time Remap. */GHAFHost._kineticDestination40=c;return layer;
  }catch(e){if(layer)try{layer.remove();}catch(ignore){}if(copy)try{if(copy.usedIn.length===0)copy.remove();}catch(ignore2){}throw e;}
 };
-GHAFHost._captionBlock40=function(c,root){var out=[root],meta=GHAFHost._buildMeta37?GHAFHost._buildMeta37(root):null;for(var i=1;i<=c.numLayers;i++){var l=c.layer(i);if(l===root)continue;var m=GHAFHost._buildMeta37?GHAFHost._buildMeta37(l):null;if(meta&&m&&meta.block===m.block){out.push(l);continue;}if(/^__GHAF_NATIVE_BG__|^__GHAF_GLASS_BLUR__|^__GHAF_TEMPLATE_BG__|^__GHAF_TYPE_MEASURE__|^__VARNA_BG_ANCHOR__/.test(String(l.name||''))&&(l.parent===root||String(l.name).slice(-String(root.name).length)===String(root.name)))out.push(l);}return out;};
+GHAFHost._captionBlock40=function(c,root){var out=[root],meta=GHAFHost._buildMeta37?GHAFHost._buildMeta37(root):null;for(var i=1;i<=c.numLayers;i++){var l=c.layer(i);if(l===root)continue;var m=GHAFHost._buildMeta37?GHAFHost._buildMeta37(l):null;if(meta&&m&&meta.block===m.block){out.push(l);continue;}if(/^__GHAF_NATIVE_BG__|^__GHAF_GLASS_BLUR__|^__GHAF_TEMPLATE_BG__|^__GHAF_TYPE_MEASURE__|^__VARNA_BG_ANCHOR__|^VARNA_ENTRY66_/.test(String(l.name||''))&&(l.parent===root||String(l.name).slice(-String(root.name).length)===String(root.name)))out.push(l);}return out;};
 GHAFHost.openKineticCaption40=function(encoded){var p=GHAFHost._parse(encoded),c=GHAFHost._outputComp36(p);if(!c)return GHAFHost._err('NO_COMP');for(var i=1;i<=c.numLayers;i++){var l=c.layer(i);if(String(l.comment||'').split('\n')[0]==='VARNA_CAPTION_ID:'+p.id&&l.source instanceof CompItem&&String(l.source.comment||'').indexOf('VARNA_KINETIC40_INSTANCE:')===0){l.source.openInViewer();return GHAFHost._ok({name:l.source.name,opened:true});}}return GHAFHost._err('ابتدا خروجی این صحنه را بساز.');};
 (function(){var create=GHAFHost._createCaption,remove=GHAFHost._deleteLayers,refresh=GHAFHost.refreshCaptionStyles,target=GHAFHost._outputComp36,list=GHAFHost.getOutputComps36;
 GHAFHost._createCaption=function(c,g,name){if(g.anim&&g.anim.kinetic40&&g.anim.kinetic40.enabled!==false)return GHAFHost._createKinetic40(c,g,name);return create(c,g,name);};
@@ -2497,6 +2517,30 @@ GHAFHost.buildEditTimeline51=function(encoded){
 })();
 
 /* EDITOR51_END */
+/* Original packaged entry sounds. Preview never generates audio layers. */
+GHAFHost._isEntry66=function(layer){return /(^|\r?\n)VARNA_ENTRY66(\r?\n|$)/.test(String(layer.comment||''));};
+GHAFHost._entrySound66=function(owner,g,config,append){
+ var cfg=config||{},c=owner.containingComp,previous=[],i;
+ for(i=1;i<=c.numLayers;i++){var child=c.layer(i);if(!append&&child.parent===owner&&GHAFHost._isEntry66(child))previous.push(child);}
+ if(cfg.enabled!==true||/^__/.test(String(owner.name))){GHAFHost._deleteLayers(previous);return [];}
+ var preset=String(cfg.preset||'soft');if(!/^(soft|pop|air|chime)$/.test(preset))throw Error('INVALID_ENTRY_SOUND');
+ var root=new File(GHAFHost._filePath).parent.parent,file=new File(root.fsName+'/assets/sfx/entry66/'+preset+'.wav');if(!file.exists)throw Error('ENTRY_SOUND_MISSING: '+preset);
+ var source=GHAFHost._findFootageByFile(file.fsName);if(!source)source=app.project.importFile(new ImportOptions(file));if(!source||!source.hasAudio)throw Error('ENTRY_SOUND_INVALID');
+ var begin=Math.max(0,Number(g.start)||0),end=Math.min(c.duration,Number(g.end)),times=[begin],db=Number(cfg.db),made=[];
+ if(!isFinite(db))db=-22;db=Math.max(-48,Math.min(0,db));if(!(end>begin))throw Error('ENTRY_SOUND_TIME_INVALID');
+ if(cfg.timing==='words'){
+  var words=String(g.rawText||g.text||'').match(/\S+/g)||[],timing=g.timing38||[];times=[];
+  if(words.length>64)throw Error('برای صدای کلمه‌ای، کپشن را به حداکثر ۶۴ کلمه تقسیم کن.');
+  var motionTimes=g.word39&&g.word39.times&&g.word39.times.length===words.length?g.word39.times:null;
+  for(i=0;i<words.length;i++){var at=motionTimes&&isFinite(Number(motionTimes[i][0]))?begin+(end-begin)*Number(motionTimes[i][0]):timing.length===words.length&&isFinite(Number(timing[i].start))?Number(timing[i].start):begin+(end-begin)*i/Math.max(1,words.length);if(at>=begin&&at<end)times.push(at);}
+ }
+ try{for(i=0;i<times.length;i++){var l=c.layers.add(source);made.push(l);l.name='VARNA_ENTRY66_'+owner.name+'_'+i;l.comment='VARNA_ENTRY66';l.startTime=times[i];l.inPoint=times[i];l.outPoint=Math.min(end,times[i]+Math.max(c.frameDuration,Number(source.duration)||.1));l.property('ADBE Audio Group').property('ADBE Audio Levels').setValue([db,db]);l.parent=owner;l.shy=true;}
+ GHAFHost._deleteLayers(previous);return made;
+ }catch(e){GHAFHost._deleteLayers(made);throw e;}
+};
+(function(){var outputs=GHAFHost._outputLayers;GHAFHost._outputLayers=function(c){var result=outputs(c),owners={},i;for(i=0;i<result.length;i++)owners['L'+(result[i].id==null?result[i].index:result[i].id)]=true;for(i=1;i<=c.numLayers;i++){var l=c.layer(i),parent=l.parent;if(GHAFHost._isEntry66(l)&&parent&&owners['L'+(parent.id==null?parent.index:parent.id)])result.push(l);}return result;};})();
+(function(){var create=GHAFHost._createCaption;GHAFHost._createCaption=function(c,g,name){var layer=create(c,g,name);if(!/^__/.test(String(name))&&(g.anim||{}).entrySound66&&g.anim.entrySound66.enabled===true)GHAFHost._entrySound66(layer,g,g.anim.entrySound66);return layer;};})();
+
 /* Only publish readiness after every adapter has completed initialization. */
 /* Never publish a partial adapter or rely on its error helper to report boot failure. */
 if(!VarnaKinetic40||typeof VarnaKinetic40.resolve!=='function'||typeof VarnaKinetic40.pieceBackground!=='function')throw Error('HOST_KINETIC_INITIALIZATION_INCOMPLETE');

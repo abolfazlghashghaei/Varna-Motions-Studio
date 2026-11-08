@@ -1,7 +1,7 @@
 (function(w){'use strict';
 function init(){
 const paths={
- home:'M3 10 12 3l9 7v10H3Z M9 20v-7h6v7',
+ home:'M3 3h7v7H3Z M14 3h7v7h-7Z M3 14h7v7H3Z M14 14h7v7h-7Z',
  text:'M4 5h16M12 5v15M8 20h8 M4 10h3M17 10h3',
  background:'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M3 15l5-5 7 7 3-3 3 3 M16 7h.01',
  table:'M3 4h18v16H3Z M3 9h18M3 14h18M9 4v16M15 4v16',
@@ -20,7 +20,7 @@ const paths={
 function icon(name){const el=document.createElement('span');el.className='varna-icon48';el.setAttribute('aria-hidden','true');el.innerHTML='<svg viewBox="0 0 24 24" focusable="false"><path d="'+(paths[name]||paths.settings)+'"/></svg>';return el;}
 w.VarnaIcons48={icon};document.body.classList.add('liquid48');
 const names=['home','text','background','table','video','sound','brand','settings','info'];
-document.querySelectorAll('.production-main47>button').forEach((b,i)=>{const label=document.createElement('span');label.className='nav-label48';label.textContent=b.textContent;b.replaceChildren(icon(b.dataset.flow47||names[i]),label);b.title=label.textContent;b.setAttribute('aria-label',label.textContent);});
+document.querySelectorAll('.production-main47>button').forEach((b,i)=>{const label=document.createElement('span');label.className='nav-label48';label.textContent=b.textContent;b.replaceChildren(icon(b.dataset.flow47||(b.id==='openVarnaInfo47'?'info':'home')),label);b.title=label.textContent;b.setAttribute('aria-label',label.textContent);});
 document.querySelectorAll('#page-home .launcher-tile').forEach((b,i)=>{const title=b.querySelector('strong');if(!title)return;const name=Object.keys(w.VarnaProduction47.flows)[i];b.replaceChildren(icon(name),title);b.setAttribute('aria-label',title.textContent);});
 document.querySelectorAll('[data-align-icon48]').forEach(b=>b.replaceChildren(icon(b.dataset.alignIcon48)));
 const head=document.querySelector('#page-home .page-head');if(head)head.remove();

@@ -1,5 +1,85 @@
 /* Interface localization only. Project content, media names and native identifiers are never translated. */
 (function(w){'use strict';const dictionary=Object.fromEntries(`
+ابزارها|Tools
+جست‌وجوی ابزار|Search tools
+آهنربای مرکز و لبه‌ها · Alt برای حرکت آزاد|Snap to center & edges · hold Alt to bypass
+صفحه‌های تنظیمات جدول|Table settings pages
+بخش تنظیمات|Settings section
+خط‌مشی جمله‌بندی|Sentence grouping policy
+ابتدا متن وارد کن.|Import text first.
+ابتدا جمله‌بندی را خاموش کن؛ سپس بازسازی را بزن.|Disable sentence grouping before rebuilding.
+مرزبندی با نشانه‌گذاری و مکث اعمال شد؛ گرامر یا واژگان بازنویسی نشد.|Boundaries use punctuation and pauses; grammar and vocabulary are unchanged.
+نسخهٔ اصلی برگشت؛ ویرایش نسخهٔ جمله‌بندی‌شده حفظ شد.|Original restored; edits to the segmented version are retained.
+متن اصلی تغییر کرده؛ برای حفظ ویرایش‌ها، «بازسازی از نسخهٔ اصلی» را بزن.|The original changed. Use Rebuild from original to regenerate the edited branch explicitly.
+نمونهٔ صدا؛ پیش‌نمایش خودکار افتر بی‌صداست.|Sound sample; automatic AE visual previews remain silent.
+صدا با تایم ورود در خروجی ساخته می‌شود.|Entry sound will be included in final output.
+صدای ورود خاموش شد.|Entry sound disabled.
+تایپ روی کامپوزیشن افتر آماده است؛ با پخش تایم‌لاین ببین.|Typewriter is ready in the AE composition. Play the timeline to view it.
+فونت و رنگ|Font & color
+تایپوگرافی کلمه‌ای|Word typography
+استایل‌ها و قالب‌ها|Styles & templates
+موشن آماده و شخصی|Stock & custom motion
+ارسال متن خانه‌ها به افتر|Send cell text to AE
+فونت کل جدول|Table font
+ورود حرفه‌ای جدول|Table entrance preset
+فنری نرم · الهام از iOS|Soft spring · iOS inspired
+آبشاری · الهام از Material|Cascade · Material inspired
+شناور سینمایی|Cinematic float
+کشش سطح مشترک|Shared surface stretch
+تنظیم دستی|Manual settings
+منحنی کلیدهای جدول|Table keyframe curve
+خروج جدول|Table exit
+جمع‌شدن نرم|Soft shrink
+پایین‌رفتن|Drop
+مدت خروج · ثانیه|Exit duration · seconds
+نرم|Smooth
+شناور|Float
+سریع و قاطع|Snappy
+خطی|Linear
+پیش‌نمایش افتر|AE preview
+ساخت جدول|Build table
+پیش‌نمایش زنده|Live preview
+کنترل‌های پیش‌نمایش و فریم افتر|Preview & AE frame options
+تنظیمات جدول|Table settings
+بخش تنظیمات جدول|Table settings page
+جمله‌بندی آفلاین · حفظ نسخهٔ اصلی|Offline segmentation · keep original
+حد واژه در هر بخش|Words per segment
+مکث مرزی · ثانیه|Boundary pause · seconds
+بازسازی از نسخهٔ اصلی|Rebuild from original
+به‌روزرسانی متن در افتر|Text update in After Effects
+پس از مکث در نوشتن|After a typing pause
+پس از خروج از کادر متن|After leaving the text field
+صدای ورود متن|Text entry sound
+صدای ورود متن خانه‌ها|Table cell entry sound
+صدای ورود روشن باشد|Enable entry sound
+حس صدا|Sound character
+نرم · Soft|Soft
+پاپ · Pop|Pop
+هوا · Air|Air
+زنگ نرم · Chime|Chime
+شدت · dB|Level · dB
+جای صدا|Cue placement
+یک بار با ورود کپشن|Once at caption entry
+با زمان ورود هر کلمه · حداکثر ۶۴|At each word entry · up to 64
+شنیدن نمونه|Listen
+اعمال به محدودهٔ موشن|Apply to motion scope
+شیشهٔ نرم|Soft glass
+رنگ ساده|Solid color
+رنگ حجمی + شیشه|Volumetric color + glass
+حرکت بک‌گراند|Background motion
+شیشه|Glass
+تحریری|Editorial
+پخش|Broadcast
+مینیمال|Minimal
+درخشان|Neon
+شخصی|Personal
+تنظیمات همین کلمه|Selected word settings
+دستهٔ تنظیمات کلمه|Word settings category
+ظاهر و موقعیت|Appearance & position
+فاصلهٔ حروف و دورخط|Tracking & stroke
+ورود و خروج متن|Text entrance & exit
+فاصلهٔ حروف|Tracking
+فاصلهٔ سطرها|Leading
 استودیوی ویدیو|Video Studio
 رسانه · تدوین · گرافیک · خروجی|Media · edit · graphics · export
 لایه‌ها، کی‌فریم و متریال|Layers, keyframes & materials
@@ -384,7 +464,7 @@ const persian53=text=>labels53[text]||simplify(text);
 const originals=new WeakMap(),attributes=new WeakMap();let lang=localStorage.getItem('VARNA_LANGUAGE52')==='en'?'en':'fa',pending=new Set(),queued=false;
 const protectedSelector='#offlineText55,#text55Dialog,script,style,pre,code,textarea,input,canvas,#varnaInfo47,#wordList,#reviewText,#correctionTextPreview,.caption-row,.scene-piece40,.scene-preview40,.preview-text50,#tableEditor,#tablePreview,#brandList,#brandAssetsList,#brandShortcut,#startupBrandSelect49,#brollFiles,.edit51-bin,.edit51-caption-list,.edit51-word,.edit51-clip,#fontSelect,#cellFontPS,#modelSelect,[data-user-content]';
 function simplify(text){return text.replace(/\s+وارنا(?=\s|$)/g,'').replace(/^وارنا\s+(?=استودیو)/,'').trim();}
-function english(text){const simple=simplify(text);return dictionary[text]||dictionary[simple]||simple.replace(/(\d+)\s*ثانیه/g,'$1 s').replace(/(\d+)\s*مورد/g,'$1 items').replace(/(\d+)\s*کپشن/g,'$1 captions');}
+function english(text){const simple=simplify(text);if(dictionary[text]||dictionary[simple])return dictionary[text]||dictionary[simple];if(text.includes(' · '))return text.split(' · ').map(english).join(' · ');return simple.replace(/(\d+)\s*ثانیه/g,'$1 s').replace(/(\d+)\s*مورد/g,'$1 items').replace(/(\d+)\s*کپشن/g,'$1 captions');}
 function translate(root=document.body){if(!root||root.closest?.(protectedSelector))return;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while((node=walker.nextNode())){if(node.parentElement?.closest(protectedSelector))continue;const current=node.nodeValue,record=originals.get(node);let raw=record&&current===record.last?record.raw:current;if(!raw.trim())continue;const space=raw.match(/^\s*/)[0],trail=raw.match(/\s*$/)[0],label=raw.trim(),value=space+(lang==='en'?english(label):persian53(label))+trail;originals.set(node,{raw,last:value});if(value!==current)node.nodeValue=value;}
 for(const el of root.querySelectorAll?.('[title],[placeholder],[aria-label]')||[]){if(el.closest('script,style,#varnaInfo47,[data-user-content]'))continue;const records=attributes.get(el)||{};for(const attr of ['title','placeholder','aria-label']){const current=el.getAttribute(attr);if(current==null)continue;const record=records[attr],raw=record&&current===record.last?record.raw:current,value=lang==='en'?english(raw):persian53(raw);records[attr]={raw,last:value};if(value!==current)el.setAttribute(attr,value);}attributes.set(el,records);}}
 function set(value){lang=value==='en'?'en':'fa';localStorage.setItem('VARNA_LANGUAGE52',lang);document.documentElement.lang=lang;document.documentElement.dir=lang==='en'?'ltr':'rtl';document.body.dataset.language52=lang;translate();document.querySelectorAll('button[data-language52]').forEach(b=>b.textContent=lang==='en'?'فارسی':'English');document.dispatchEvent(new CustomEvent('varna:language52',{detail:{language:lang}}));}

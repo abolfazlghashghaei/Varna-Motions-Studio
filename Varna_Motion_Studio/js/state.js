@@ -38,9 +38,9 @@
   function saveSettings(){try{localStorage.setItem('GHAF_Studio_2_Settings',JSON.stringify(S.settings));}catch(e){}}
   function loadSettings(){try{const x=JSON.parse(localStorage.getItem('GHAF_Studio_2_Settings')||'null');if(x)deepMerge(S.settings,x);/* R13: legacy external-provider settings are intentionally retired. */delete S.settings.lm;if(S.settings.translate){delete S.settings.translate.base;delete S.settings.translate.model;delete S.settings.translate.provider;}if(!['simple','native'].includes(S.settings.anim.mode))S.settings.anim=clone(DEFAULT_SETTINGS.anim);}catch(e){}return S.settings;}
   function deepMerge(a,b){for(const k in b){if(k==='__proto__'||k==='constructor'||k==='prototype')continue;if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k])&&a[k]&&typeof a[k]==='object')deepMerge(a[k],b[k]);else a[k]=b[k];}return a;}
-  function snapshot(){return {groups:clone(S.groups),words:clone(S.words),selectedWordIds:[...S.selectedWordIds],selectedId:S.selectedId,nextGroup:S.nextGroup,settings:clone(S.settings),baselineGroups:S.baselineGroups,baselineWords:S.baselineWords};}
+  function snapshot(){return {sentence66:clone(S.projectBrain.sentence66||null),groups:clone(S.groups),words:clone(S.words),selectedWordIds:[...S.selectedWordIds],selectedId:S.selectedId,nextGroup:S.nextGroup,settings:clone(S.settings),baselineGroups:S.baselineGroups,baselineWords:S.baselineWords};}
   function pushUndo(){S.undoStack.push(snapshot());if(S.undoStack.length>S.maxHist)S.undoStack.shift();S.redoStack=[];}
-  function restore(x){S.groups=clone(x.groups);if(x.words)S.words=clone(x.words);S.selectedWordIds=new Set(x.selectedWordIds||[]);S.selectedId=x.selectedId;S.nextGroup=x.nextGroup;if(Array.isArray(x.baselineGroups))S.baselineGroups=x.baselineGroups;if(Array.isArray(x.baselineWords))S.baselineWords=x.baselineWords;if(x.settings){S.settings=clone(x.settings);saveSettings();}}
+  function restore(x){if(x.sentence66)S.projectBrain.sentence66=clone(x.sentence66);else delete S.projectBrain.sentence66;S.groups=clone(x.groups);if(x.words)S.words=clone(x.words);S.selectedWordIds=new Set(x.selectedWordIds||[]);S.selectedId=x.selectedId;S.nextGroup=x.nextGroup;if(Array.isArray(x.baselineGroups))S.baselineGroups=x.baselineGroups;if(Array.isArray(x.baselineWords))S.baselineWords=x.baselineWords;if(x.settings){S.settings=clone(x.settings);saveSettings();}}
   function undo(){if(!S.undoStack.length)return false;S.redoStack.push(snapshot());restore(S.undoStack.pop());return true;}
   function redo(){if(!S.redoStack.length)return false;S.undoStack.push(snapshot());restore(S.redoStack.pop());return true;}
   function word(id){return S.words.find(w=>w.id===id)||null;}
@@ -183,6 +183,7 @@
     return S.groups;
   }
   function initWords(words){
+    delete S.projectBrain.sentence66;
     S.words=clone(words||[]).map(w=>Object.assign({},w,{text:cleanVisibleText(w.text),editedText:null})).filter(w=>w.text);
     S.nextGroup=1;S.groups=[];S.undoStack=[];S.redoStack=[];S.selectedWordIds.clear();
     regroup();S.undoStack=[];S.redoStack=[];S.baselineGroups=clone(S.groups);S.baselineWords=clone(S.words);return S.groups;
@@ -302,7 +303,7 @@
     S.groups.sort((a,b)=>groupStart(a)-groupStart(b));S.selectedWordIds.clear();return target;
   }
   function resetToOriginal(){
-    pushUndo();
+    pushUndo();delete S.projectBrain.sentence66;
     S.words=clone(S.baselineWords||S.words||[]);S.groups=clone(S.baselineGroups||[]);S.nextGroup=Math.max(1,...S.groups.map(g=>+g.id||0))+1;
     S.selectedId=S.groups[0]?.id||null;S.selectedWordIds.clear();S.pendingAI=[];S.pendingTranslation=[];S.translationOriginal.clear();
     return S.groups;
@@ -367,7 +368,7 @@
     var g=newAuto(ids);g.preserve=true;g.textOverride=txt;g.importedTiming=true;return g;
   }
   function importManualCaptions(items){
-    if(!Array.isArray(items)||!items.length)return false;pushUndo();S.groups=[];S.words=[];S.nextGroup=1;S.selectedWordIds.clear();
+    if(!Array.isArray(items)||!items.length)return false;pushUndo();delete S.projectBrain.sentence66;S.groups=[];S.words=[];S.nextGroup=1;S.selectedWordIds.clear();
     var nextIdRef={value:1};items.forEach(function(x){var start=Math.max(0,+x.start||0),end=(+x.end>start)?+x.end:start+2;S.groups.push(makeTimedImportedGroup(x.text||x.rawText||'',start,end,nextIdRef));});
     S.words.sort(function(a,b){return a.start-b.start||a.id-b.id;});S.groups.sort(function(a,b){return groupStart(a)-groupStart(b);});S.selectedId=S.groups[0]?S.groups[0].id:null;S.baselineGroups=clone(S.groups);S.baselineWords=clone(S.words);return true;
   }
