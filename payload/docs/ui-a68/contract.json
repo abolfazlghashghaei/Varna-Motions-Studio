@@ -1,0 +1,52 @@
+{
+  "baseline": "4d96e0b",
+  "entries": {
+    "index": {
+      "ids": 899,
+      "unchanged": true,
+      "duplicates": false
+    },
+    "premiere": {
+      "ids": 899,
+      "unchanged": true,
+      "duplicates": false
+    },
+    "resolve": {
+      "ids": 899,
+      "unchanged": true,
+      "duplicates": false
+    }
+  },
+  "unchanged": {
+    "premiere.html": "e68744400a2781fa0af947394ab661bbd6552c08",
+    "resolve.html": "f5d2bed3ae484145358450695cf64ec077b132a7",
+    "host/ghaf_host.jsx": "0105be975d3e01e56aaa87297bf6ce0a45965e01",
+    "js/production50.js": "7d25ac709c006384a91689ceadda4061a07a9602",
+    "js/app.js": "f490a65d31f3300666a9a9942f8981a0909c69a1",
+    "tests/ui47_controls_browser.cjs": "0b5a0dc2b278d4a57ace02d01289eb71d2dd555b",
+    "tests/table47_browser.cjs": "247bb08c908e91b7914c698f99a30b183aaacda6",
+    "tests/run-release.cjs": "648577f48745aa397bf16010a875422febad5cb6"
+  },
+  "release": {
+    "passed": 86,
+    "total": 100,
+    "sameFailures": true,
+    "failures": [
+      "production50_core.cjs",
+      "rc21_companions_shots.cjs",
+      "rc24_ui.cjs",
+      "rc25_ui.cjs",
+      "rc26_app_actions.cjs",
+      "rc35_app.cjs",
+      "rc36_app.cjs",
+      "rc37_captions.cjs",
+      "rc41_app.cjs",
+      "rc45_app.cjs",
+      "rc46_scene.cjs",
+      "rc47_app.cjs",
+      "studio51_server.cjs",
+      "ui.cjs"
+    ]
+  },
+  "cssBridgeImportantDeclarations": 73
+}

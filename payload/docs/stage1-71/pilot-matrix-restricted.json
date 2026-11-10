@@ -1,0 +1,274 @@
+{
+  "scope": [
+    "table",
+    "kinetic"
+  ],
+  "widths": [
+    250,
+    320,
+    400,
+    620,
+    900,
+    1400
+  ],
+  "heights": [
+    400,
+    700,
+    1000
+  ],
+  "zooms": [
+    1,
+    1.25,
+    1.5,
+    2
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "languages": [
+    "fa",
+    "en"
+  ],
+  "cases": 576,
+  "states": 864,
+  "failures": [],
+  "pageErrors": [],
+  "source": {
+    "index.html": "57e3fe14dde650a0f09c1b7e20aa51abfcc3c9d0833f87ef844078cd82c88ef1",
+    "css/ui/cep70.css": "9b808d5f1b7dece9a3d66b879c82a6905f217b083a005be51619a227823f50d3",
+    "js/cep70.js": "8f8da7aa2391bd5fcb323a1b68fbbffc5d963d485c168287060e4e48a777ad90",
+    "css/ui/pilot-b69.css": "05e30e7f826e9875b580579d9543436d957f34c3b93bf0f13e0d291d0bc5e8b7",
+    "js/pilot-b69.js": "2211768f88c9676174bfe0b652da85a5bef61a9f8db5f3b2e860731fb8a17177",
+    "js/ui-shell.js": "7b5dddd0947b01ed98bb7d788deee175cbe3ab6f646da928f13077b486c2fb77",
+    "js/sections67.js": "b8c564e0d635093fcb77ff9236b96c4affae63b813118280d2431c5a0c174f2e",
+    "js/table-pages66.js": "c4246a977ecf2727278c9b91f200e0996b0959d052dab072ba2cbc0ae0e71293",
+    "js/table-designer.js": "3b6312c5c0fe5d9b2b0db02afefb1e6a3baf01e0d3dab612dd1ed46086378c02",
+    "js/production47.js": "0fef613336cf7631b5f56962a9fc10d140107819bd4336b430a0c34781f2722f"
+  },
+  "actualBrowser": "154.0.8037.57",
+  "compatibilityProfile": "chromium99-disabled",
+  "profileStats": {
+    "rules": 24,
+    "declarations": 16,
+    "stylesheets": 140,
+    "removals": [
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "background",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 8%,var(--r6-surface,#fff))"
+      },
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "border-color",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 35%,var(--r6-line,#ccd6dc))"
+      },
+      {
+        "file": "css/project-brain.css",
+        "line": 17,
+        "rule": ".director-item:has(input:checked)"
+      },
+      {
+        "file": "css/liquid-ui.css",
+        "line": 5,
+        "property": "background",
+        "value": "linear-gradient(145deg,color-mix(in srgb,var(--u-panel) 91%,transparent),rgba(255,255,255,.025))"
+      },
+      {
+        "file": "css/workflow-ui.css",
+        "line": 20,
+        "rule": "body .workflow-step>.card>.card-title:has(.card-icon)"
+      },
+      {
+        "file": "css/appearance25.css",
+        "line": 10,
+        "rule": "body #page-text .stack>.card:has(#fontSelect)"
+      },
+      {
+        "file": "css/upgrades27.css",
+        "line": 2,
+        "rule": ".asset-row label:has(input[type=checkbox])"
+      },
+      {
+        "file": "assets/vendor/ui30/tom-select/tom-select.css",
+        "line": 238,
+        "property": "background",
+        "value": "color-mix(#fff, #d0d0d0, 85%)"
+      },
+      {
+        "file": "css/studio37.css",
+        "line": 108,
+        "rule": "body .font-family-control,body .control:has(textarea)"
+      },
+      {
+        "file": "css/fluent-glass47.css",
+        "line": 38,
+        "rule": "body .inline-control:has(>.numeric37)"
+      },
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "background",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 8%,var(--r6-surface,#fff))"
+      },
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "border-color",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 35%,var(--r6-line,#ccd6dc))"
+      },
+      {
+        "file": "css/liquid-ui.css",
+        "line": 5,
+        "property": "background",
+        "value": "linear-gradient(145deg,color-mix(in srgb,var(--u-panel) 91%,transparent),rgba(255,255,255,.025))"
+      },
+      {
+        "file": "css/project-brain.css",
+        "line": 17,
+        "rule": ".director-item:has(input:checked)"
+      },
+      {
+        "file": "css/workflow-ui.css",
+        "line": 20,
+        "rule": "body .workflow-step>.card>.card-title:has(.card-icon)"
+      },
+      {
+        "file": "css/appearance25.css",
+        "line": 10,
+        "rule": "body #page-text .stack>.card:has(#fontSelect)"
+      },
+      {
+        "file": "css/upgrades27.css",
+        "line": 2,
+        "rule": ".asset-row label:has(input[type=checkbox])"
+      },
+      {
+        "file": "assets/vendor/ui30/tom-select/tom-select.css",
+        "line": 238,
+        "property": "background",
+        "value": "color-mix(#fff, #d0d0d0, 85%)"
+      },
+      {
+        "file": "css/studio37.css",
+        "line": 108,
+        "rule": "body .font-family-control,body .control:has(textarea)"
+      },
+      {
+        "file": "css/fluent-glass47.css",
+        "line": 38,
+        "rule": "body .inline-control:has(>.numeric37)"
+      },
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "background",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 8%,var(--r6-surface,#fff))"
+      },
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "border-color",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 35%,var(--r6-line,#ccd6dc))"
+      },
+      {
+        "file": "css/workflow-ui.css",
+        "line": 20,
+        "rule": "body .workflow-step>.card>.card-title:has(.card-icon)"
+      },
+      {
+        "file": "css/liquid-ui.css",
+        "line": 5,
+        "property": "background",
+        "value": "linear-gradient(145deg,color-mix(in srgb,var(--u-panel) 91%,transparent),rgba(255,255,255,.025))"
+      },
+      {
+        "file": "css/project-brain.css",
+        "line": 17,
+        "rule": ".director-item:has(input:checked)"
+      },
+      {
+        "file": "css/appearance25.css",
+        "line": 10,
+        "rule": "body #page-text .stack>.card:has(#fontSelect)"
+      },
+      {
+        "file": "css/upgrades27.css",
+        "line": 2,
+        "rule": ".asset-row label:has(input[type=checkbox])"
+      },
+      {
+        "file": "assets/vendor/ui30/tom-select/tom-select.css",
+        "line": 238,
+        "property": "background",
+        "value": "color-mix(#fff, #d0d0d0, 85%)"
+      },
+      {
+        "file": "css/studio37.css",
+        "line": 108,
+        "rule": "body .font-family-control,body .control:has(textarea)"
+      },
+      {
+        "file": "css/fluent-glass47.css",
+        "line": 38,
+        "rule": "body .inline-control:has(>.numeric37)"
+      },
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "background",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 8%,var(--r6-surface,#fff))"
+      },
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "border-color",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 35%,var(--r6-line,#ccd6dc))"
+      },
+      {
+        "file": "css/workflow-ui.css",
+        "line": 20,
+        "rule": "body .workflow-step>.card>.card-title:has(.card-icon)"
+      },
+      {
+        "file": "css/appearance25.css",
+        "line": 10,
+        "rule": "body #page-text .stack>.card:has(#fontSelect)"
+      },
+      {
+        "file": "css/liquid-ui.css",
+        "line": 5,
+        "property": "background",
+        "value": "linear-gradient(145deg,color-mix(in srgb,var(--u-panel) 91%,transparent),rgba(255,255,255,.025))"
+      },
+      {
+        "file": "css/project-brain.css",
+        "line": 17,
+        "rule": ".director-item:has(input:checked)"
+      },
+      {
+        "file": "css/upgrades27.css",
+        "line": 2,
+        "rule": ".asset-row label:has(input[type=checkbox])"
+      },
+      {
+        "file": "assets/vendor/ui30/tom-select/tom-select.css",
+        "line": 238,
+        "property": "background",
+        "value": "color-mix(#fff, #d0d0d0, 85%)"
+      },
+      {
+        "file": "css/studio37.css",
+        "line": 108,
+        "rule": "body .font-family-control,body .control:has(textarea)"
+      },
+      {
+        "file": "css/fluent-glass47.css",
+        "line": 38,
+        "rule": "body .inline-control:has(>.numeric37)"
+      }
+    ]
+  }
+}

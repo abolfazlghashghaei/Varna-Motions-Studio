@@ -1,0 +1,294 @@
+{
+  "baseline": "b350500",
+  "native": "Not exercised",
+  "screenshots": [
+    {
+      "page": "table",
+      "language": "fa",
+      "theme": "dark",
+      "width": 250,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/dark/table-250.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "fa",
+      "theme": "dark",
+      "width": 250,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/dark/kinetic-250.png"
+    },
+    {
+      "page": "table",
+      "language": "fa",
+      "theme": "dark",
+      "width": 400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/dark/table-400.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "fa",
+      "theme": "dark",
+      "width": 400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/dark/kinetic-400.png"
+    },
+    {
+      "page": "table",
+      "language": "fa",
+      "theme": "dark",
+      "width": 620,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/dark/table-620.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "fa",
+      "theme": "dark",
+      "width": 620,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/dark/kinetic-620.png"
+    },
+    {
+      "page": "table",
+      "language": "fa",
+      "theme": "dark",
+      "width": 1400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/dark/table-1400.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "fa",
+      "theme": "dark",
+      "width": 1400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/dark/kinetic-1400.png"
+    },
+    {
+      "page": "table",
+      "language": "fa",
+      "theme": "light",
+      "width": 250,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/light/table-250.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "fa",
+      "theme": "light",
+      "width": 250,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/light/kinetic-250.png"
+    },
+    {
+      "page": "table",
+      "language": "fa",
+      "theme": "light",
+      "width": 400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/light/table-400.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "fa",
+      "theme": "light",
+      "width": 400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/light/kinetic-400.png"
+    },
+    {
+      "page": "table",
+      "language": "fa",
+      "theme": "light",
+      "width": 620,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/light/table-620.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "fa",
+      "theme": "light",
+      "width": 620,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/light/kinetic-620.png"
+    },
+    {
+      "page": "table",
+      "language": "fa",
+      "theme": "light",
+      "width": 1400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/light/table-1400.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "fa",
+      "theme": "light",
+      "width": 1400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/fa/light/kinetic-1400.png"
+    },
+    {
+      "page": "table",
+      "language": "en",
+      "theme": "dark",
+      "width": 250,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/dark/table-250.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "en",
+      "theme": "dark",
+      "width": 250,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/dark/kinetic-250.png"
+    },
+    {
+      "page": "table",
+      "language": "en",
+      "theme": "dark",
+      "width": 400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/dark/table-400.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "en",
+      "theme": "dark",
+      "width": 400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/dark/kinetic-400.png"
+    },
+    {
+      "page": "table",
+      "language": "en",
+      "theme": "dark",
+      "width": 620,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/dark/table-620.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "en",
+      "theme": "dark",
+      "width": 620,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/dark/kinetic-620.png"
+    },
+    {
+      "page": "table",
+      "language": "en",
+      "theme": "dark",
+      "width": 1400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/dark/table-1400.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "en",
+      "theme": "dark",
+      "width": 1400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/dark/kinetic-1400.png"
+    },
+    {
+      "page": "table",
+      "language": "en",
+      "theme": "light",
+      "width": 250,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/light/table-250.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "en",
+      "theme": "light",
+      "width": 250,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/light/kinetic-250.png"
+    },
+    {
+      "page": "table",
+      "language": "en",
+      "theme": "light",
+      "width": 400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/light/table-400.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "en",
+      "theme": "light",
+      "width": 400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/light/kinetic-400.png"
+    },
+    {
+      "page": "table",
+      "language": "en",
+      "theme": "light",
+      "width": 620,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/light/table-620.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "en",
+      "theme": "light",
+      "width": 620,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/light/kinetic-620.png"
+    },
+    {
+      "page": "table",
+      "language": "en",
+      "theme": "light",
+      "width": 1400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/light/table-1400.png"
+    },
+    {
+      "page": "kinetic",
+      "language": "en",
+      "theme": "light",
+      "width": 1400,
+      "height": 700,
+      "scale": 1,
+      "file": "before/en/light/kinetic-1400.png"
+    }
+  ]
+}

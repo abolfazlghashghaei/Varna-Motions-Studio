@@ -1,0 +1,22 @@
+{
+  "sourceCommit": "0c91a2e418cb89083620a9206c00451aff5f82a0",
+  "platform": "Windows",
+  "verifiedFiles": 3341,
+  "excludedMacOnlyFile": "assets/vendor/Railcut/Railcut/bin/mac/ffmpeg",
+  "allRetainedPluginBytesUnchanged": true,
+  "nativeWindowsInstallerTested": false,
+  "largestFiles": [
+    [
+      32412125,
+      "assets/templates38/source-projects/Creative-Subtitle-Caption-Styles.aep"
+    ],
+    [
+      24397328,
+      "assets/templates38/hooks/project.aep"
+    ],
+    [
+      13893632,
+      "assets/templates38/source-projects/.Creative-Subtitle-Caption-Styles.aep.nZC9Re"
+    ]
+  ]
+}

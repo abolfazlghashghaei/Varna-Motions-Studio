@@ -1,0 +1,3 @@
+/* This worker receives bundled dictionaries from the UI; it never contacts a service. */
+let engine55;
+self.onmessage=function(event){const {id,method,data}=event.data;try{let result;if(method==='init'){engine55=VarnaText55.create(data);result=true;}else if(!engine55)throw Error('Offline dictionaries are not ready');else if(method==='inspect')result=engine55.inspect(data.text,data.options);else if(method==='userWords'){engine55.setUserWords(data);result=true;}else throw Error('Unknown offline text operation');self.postMessage({id,result});}catch(e){self.postMessage({id,error:String(e.message||e)});}};

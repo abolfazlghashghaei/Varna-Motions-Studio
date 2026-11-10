@@ -1,0 +1,4 @@
+# Delivery bytes must match PACKAGE_MANIFEST.json, including Windows CRLF and vendor signatures.
+* -text
+*.bat whitespace=cr-at-eol
+*.ps1 whitespace=cr-at-eol

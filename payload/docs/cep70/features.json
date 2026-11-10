@@ -1,0 +1,672 @@
+{
+  "target": "CEP 12 / Chromium 99",
+  "actualBrowser": "154.0.8037.57",
+  "nativeCEFTested": false,
+  "browserCompatDataRevision": "07c659514f0e1f528b16146f07778537d9178d5b",
+  "features": [
+    {
+      "feature": "css.at-rules.layer",
+      "usage": "A68/B69/CEP70",
+      "decision": "Retained; runtime floor is Chromium 99.",
+      "chrome": {
+        "version_added": "99"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/at-rules/layer.json",
+      "sourceSha256": "d6a8135d44837ffb07d6ad7e92cefe7e48f5dd33b436158a73a3929397cf8fa1"
+    },
+    {
+      "feature": "css.at-rules.container",
+      "usage": "B69 before change",
+      "decision": "Removed. ResizeObserver writes panel data-size; attribute selectors are the only layout path.",
+      "chrome": {
+        "version_added": "105"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/at-rules/container.json",
+      "sourceSha256": "6680d65041c68d0d0f157fb4189c29b9b97f0cc6240b4c2f886aa4f34962be5a"
+    },
+    {
+      "feature": "css.selectors.has",
+      "usage": "Inherited legacy CSS",
+      "decision": "Optional native rule only; equivalent data attributes and MutationObserver are used when unavailable.",
+      "chrome": {
+        "version_added": "105"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/selectors/has.json",
+      "sourceSha256": "60f5293efe37ee1eb84c6d325c3915cd7e2523726208e1e564b1f6982522a413"
+    },
+    {
+      "feature": "css.types.color.color-mix",
+      "usage": "Inherited legacy CSS",
+      "decision": "Optional decoration only; solid token surfaces, borders and warning text when unavailable.",
+      "chrome": {
+        "version_added": "111"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/types/color.json",
+      "sourceSha256": "6094a7a4f42ce5a0385e358b3cb9213d4192ee3863d10043678da83d116d54e7"
+    },
+    {
+      "feature": "css.selectors.nesting",
+      "usage": "Not used",
+      "decision": "No nested selector syntax; an @layer containing regular rules is not CSS selector nesting.",
+      "chrome": [
+        {
+          "version_added": "120"
+        },
+        {
+          "version_added": "112",
+          "version_removed": "120",
+          "partial_implementation": true,
+          "notes": "Does not support nested rules that start with a type selector."
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/selectors/nesting.json",
+      "sourceSha256": "c4a1b252a0fe385ba77e7e3c8c6536f2e43fc7cb4af087bed5ade7dfeed8b30a"
+    },
+    {
+      "feature": "css.types.length.viewport_percentage_units_dynamic",
+      "usage": "B69 before change",
+      "decision": "Removed dvh; use vh for the CEP viewport.",
+      "chrome": {
+        "version_added": "108"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/types/length.json",
+      "sourceSha256": "9596d6bc8c0f9180e08bdc3539ea24e648ea982e73f4669ddd2e9e109734d100"
+    },
+    {
+      "feature": "css.types.length.container_query_length_units",
+      "usage": "Not used",
+      "decision": "No container units.",
+      "chrome": {
+        "version_added": "105"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/types/length.json",
+      "sourceSha256": "9596d6bc8c0f9180e08bdc3539ea24e648ea982e73f4669ddd2e9e109734d100"
+    },
+    {
+      "feature": "css.types.length.viewport_percentage_units_small",
+      "usage": "Not used",
+      "decision": "No svh/svw.",
+      "chrome": {
+        "version_added": "108"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/types/length.json",
+      "sourceSha256": "9596d6bc8c0f9180e08bdc3539ea24e648ea982e73f4669ddd2e9e109734d100"
+    },
+    {
+      "feature": "css.types.length.viewport_percentage_units_large",
+      "usage": "Not used",
+      "decision": "No lvh/lvw.",
+      "chrome": {
+        "version_added": "108"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/types/length.json",
+      "sourceSha256": "9596d6bc8c0f9180e08bdc3539ea24e648ea982e73f4669ddd2e9e109734d100"
+    },
+    {
+      "feature": "css.properties.custom-property",
+      "usage": "A68/B69/CEP70",
+      "decision": "Root UI scale and design tokens.",
+      "chrome": {
+        "version_added": "49"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/custom-property.json",
+      "sourceSha256": "8e07c0b453c23a950154729573a32007a94ba48f2ec4dfdbc65c5d0852d76904"
+    },
+    {
+      "feature": "css.types.clamp",
+      "usage": "B69",
+      "decision": "Bounded popup and chooser sizes.",
+      "chrome": {
+        "version_added": "79"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/types/clamp.json",
+      "sourceSha256": "d95160c95140483d491305d0b681297a1b6f3d7bae7792be3c64e614e1dc428c"
+    },
+    {
+      "feature": "css.types.min",
+      "usage": "B69",
+      "decision": "Responsive grid and minimum targets.",
+      "chrome": {
+        "version_added": "79"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/types/min.json",
+      "sourceSha256": "1979ef43eaa1fba2ec3d6ef5ad2065ed8bcc6b4279031350d2acee95e3b13863"
+    },
+    {
+      "feature": "css.types.max",
+      "usage": "B69",
+      "decision": "12px text and 32px target floors.",
+      "chrome": {
+        "version_added": "79"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/types/max.json",
+      "sourceSha256": "7fd5a08d9193d565d5a4a1c5cf36e43a94f3d61b7604d021233dafab8153d624"
+    },
+    {
+      "feature": "css.selectors.is",
+      "usage": "B69/CEP70",
+      "decision": "Grouped selectors, no post-99 dependency.",
+      "chrome": [
+        {
+          "version_added": "88"
+        },
+        {
+          "alternative_name": ":-webkit-any()",
+          "version_added": "12",
+          "notes": "Doesn't support combinators."
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/selectors/is.json",
+      "sourceSha256": "59adc544f8ca7ad06cb19b0a2456dce14570a4a7705c241fcc59e5699c77f74d"
+    },
+    {
+      "feature": "css.selectors.where",
+      "usage": "A68",
+      "decision": "Low-specificity normalization.",
+      "chrome": {
+        "version_added": "88"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/selectors/where.json",
+      "sourceSha256": "bd373027c7a6539762fa97f47970b381c5783d3670a4242f9d6d93e1ab0c0708"
+    },
+    {
+      "feature": "css.selectors.not.selector_list",
+      "usage": "Inherited loaded CSS",
+      "decision": "Selector list exclusion.",
+      "chrome": {
+        "version_added": "88"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/selectors/not.json",
+      "sourceSha256": "55ff7822676f909f613c5f2ac5a4d3b77fbabf3038162aa4eae1b9dbe64e5c71"
+    },
+    {
+      "feature": "css.selectors.scope",
+      "usage": "B69 JS querySelector",
+      "decision": "Direct-child queries.",
+      "chrome": {
+        "version_added": "27"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/selectors/scope.json",
+      "sourceSha256": "6f25f80365dd921d046674526f767e046c4c17994a1148721ecfe2ae6475d93c"
+    },
+    {
+      "feature": "css.selectors.attribute.case_insensitive_modifier",
+      "usage": "B69 JS querySelector",
+      "decision": "Case-insensitive font identifier selection.",
+      "chrome": {
+        "version_added": "49"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/selectors/attribute.json",
+      "sourceSha256": "090c5eb2681301f704f285f25c3620a0712746a32de6169473f2305558b2d16f"
+    },
+    {
+      "feature": "css.selectors.focus-visible",
+      "usage": "A68/inherited",
+      "decision": "Keyboard focus styles.",
+      "chrome": {
+        "version_added": "86"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/selectors/focus-visible.json",
+      "sourceSha256": "1bdb0031896f8289baa3a69d75d2d2bf6c99d2e0be5cbd9a25ec2a5c7eb8c683"
+    },
+    {
+      "feature": "css.properties.grid-template-columns",
+      "usage": "B69",
+      "decision": "Grid, minmax, repeat and auto-fit.",
+      "chrome": {
+        "version_added": "57"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/grid-template-columns.json",
+      "sourceSha256": "de4d275382f4a4b03cc507b9043bd8688b4131cb01fbb61ab4c3daa0e3ea5358"
+    },
+    {
+      "feature": "css.properties.gap.grid_context",
+      "usage": "B69",
+      "decision": "Grid gap; unprefixed gap needs 66; grid-gap alias existed in 57.",
+      "chrome": [
+        {
+          "version_added": "66"
+        },
+        {
+          "alternative_name": "grid-gap",
+          "version_added": "57"
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/gap.json",
+      "sourceSha256": "28ed0ad9cc8b8f890655ab5f20ac13fb1d007593341f26d34f2471bda468114b"
+    },
+    {
+      "feature": "css.properties.gap.flex_context",
+      "usage": "B69",
+      "decision": "Wrapping controls and navigation gap.",
+      "chrome": {
+        "version_added": "84"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/gap.json",
+      "sourceSha256": "28ed0ad9cc8b8f890655ab5f20ac13fb1d007593341f26d34f2471bda468114b"
+    },
+    {
+      "feature": "css.properties.flex-wrap",
+      "usage": "B69/CEP70",
+      "decision": "Wrap labels and controls.",
+      "chrome": [
+        {
+          "version_added": "29"
+        },
+        {
+          "prefix": "-webkit-",
+          "version_added": "21"
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/flex-wrap.json",
+      "sourceSha256": "2e4855d22e7d8edc1823d72ba11d31092818e5bfb9da29579f9deefd38d6c935"
+    },
+    {
+      "feature": "css.properties.display.contents",
+      "usage": "B69",
+      "decision": "Header wrapper. Native accessibility behavior needs host inspection.",
+      "chrome": {
+        "version_added": "65"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/display.json",
+      "sourceSha256": "70c7a7a61bca801d6d5da10802557999172d782e10adb4aa7045f5d0d1f59b8e"
+    },
+    {
+      "feature": "css.properties.min-inline-size",
+      "usage": "B69",
+      "decision": "Zero minimum width to allow shrinking.",
+      "chrome": {
+        "version_added": "57"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/min-inline-size.json",
+      "sourceSha256": "7d9358ae86d6157579d2665a95863983ff63b100a3fcb6f3b73bebbfd7f47625"
+    },
+    {
+      "feature": "css.properties.block-size",
+      "usage": "B69",
+      "decision": "Logical sizes; vh fallback.",
+      "chrome": [
+        {
+          "version_added": "57"
+        },
+        {
+          "alternative_name": "-webkit-logical-height",
+          "version_added": "8"
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/block-size.json",
+      "sourceSha256": "63ac462e078f5dec5b5b89d909ff98049208f5db9b9860d5e0352b5379250422"
+    },
+    {
+      "feature": "css.properties.inset-block-start",
+      "usage": "B69",
+      "decision": "Logical switch positioning.",
+      "chrome": {
+        "version_added": "87"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/inset-block-start.json",
+      "sourceSha256": "a82d3e5c5e97a5a15b2b9ce38d6cd22e61de9fe69d21e372312fb7fd3617ef96"
+    },
+    {
+      "feature": "css.properties.inset",
+      "usage": "B69",
+      "decision": "Popup/surface positioning.",
+      "chrome": {
+        "version_added": "87"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/inset.json",
+      "sourceSha256": "45a19904fcdbe9d4794c4465e808a71f4baad8d516a5eec30ff968b429fe0d8d"
+    },
+    {
+      "feature": "css.properties.overflow.clip",
+      "usage": "B69",
+      "decision": "Non-horizontal-scrolling workspace.",
+      "chrome": {
+        "version_added": "90"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/overflow.json",
+      "sourceSha256": "9f0fbb42fe988a7e14c6d9530e7fe8fd36457b111ad5f7990679f7487853b427"
+    },
+    {
+      "feature": "css.properties.overflow-wrap.anywhere",
+      "usage": "B69",
+      "decision": "Wrap long labels.",
+      "chrome": {
+        "version_added": "80"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/overflow-wrap.json",
+      "sourceSha256": "0935544deae8e7ee1d271bcdcbd31326ec58807e89845cb68ec86f3c0eaeea26"
+    },
+    {
+      "feature": "css.properties.aspect-ratio",
+      "usage": "Inherited previews/B69 JS",
+      "decision": "Project aspect ratio, not fixed monitor size.",
+      "chrome": {
+        "version_added": "88"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/aspect-ratio.json",
+      "sourceSha256": "e8cdf9a679a47b01d11180c2b2ba18ced95712d194df809266558e742d349bb6"
+    },
+    {
+      "feature": "css.properties.scroll-padding-block",
+      "usage": "B69",
+      "decision": "Scroll reveal padding.",
+      "chrome": {
+        "version_added": "69"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/scroll-padding-block.json",
+      "sourceSha256": "c170d6d21c843023ef8a064135e11d659ba39040b3ec1cae58f22e02aab67c61"
+    },
+    {
+      "feature": "css.properties.overscroll-behavior",
+      "usage": "B69",
+      "decision": "Contain only. Partial support 63-143; layout does not rely on non-overflow overscroll behavior.",
+      "chrome": [
+        {
+          "version_added": "144"
+        },
+        {
+          "version_added": "63",
+          "version_removed": "144",
+          "partial_implementation": true,
+          "notes": "The property has no effect on scroll containers that have no scrollable overflow."
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/overscroll-behavior.json",
+      "sourceSha256": "6c0343116f62fed51f6944db176062c4d2e157faa2ca195043d5edb986c28cd8"
+    },
+    {
+      "feature": "css.properties.backdrop-filter",
+      "usage": "Inherited glass surfaces",
+      "decision": "Optional optical effect. Real CEF GPU/compositor unverified.",
+      "chrome": {
+        "version_added": "76"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/backdrop-filter.json",
+      "sourceSha256": "ded99c632da2ec5c1a757a710e7348f802e27826124189cde691b206af70b7cf"
+    },
+    {
+      "feature": "css.properties.unicode-bidi.isolate",
+      "usage": "B69",
+      "decision": "Bidi isolation without editing authored text.",
+      "chrome": [
+        {
+          "version_added": "48"
+        },
+        {
+          "prefix": "-webkit-",
+          "version_added": "16",
+          "notes": [
+            "Before Chrome 47, `-webkit-isolate` could lock up the browser.",
+            "Since Chrome 19, the syntax from a previous version of the specification, where the `isolate` keyword could be used together with `bidi-override`, is allowed."
+          ]
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/unicode-bidi.json",
+      "sourceSha256": "407614908591d54f25c9202413ab788ba57615e3aeb49108dbdad058251b4f1b"
+    },
+    {
+      "feature": "css.properties.appearance",
+      "usage": "B69",
+      "decision": "Unprefixed none for mirrored native select.",
+      "chrome": [
+        {
+          "version_added": "84"
+        },
+        {
+          "prefix": "-webkit-",
+          "version_added": "1"
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/css/properties/appearance.json",
+      "sourceSha256": "b43322c1b518c48ccc252f22079962632239d615c9903272bdfb19f733ef12d1"
+    },
+    {
+      "feature": "html.elements.details",
+      "usage": "B69",
+      "decision": "Native disclosures.",
+      "chrome": {
+        "version_added": "12"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/html/elements/details.json",
+      "sourceSha256": "ad96eb0f962d776fe7d088a77e5bc38f2fba936cfb536f98182917aef18786fb"
+    },
+    {
+      "feature": "html.elements.dialog",
+      "usage": "B69",
+      "decision": "Native page chooser.",
+      "chrome": {
+        "version_added": "37"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/html/elements/dialog.json",
+      "sourceSha256": "75ad95be2efc106537662f2ba8b0ef49c0d73d0b66af03dc7ec26c4c9d33fe21"
+    },
+    {
+      "feature": "api.ResizeObserver",
+      "usage": "B69",
+      "decision": "Measure actual shell width, not monitor width.",
+      "chrome": {
+        "version_added": "64"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/ResizeObserver.json",
+      "sourceSha256": "124b02bac4c06908db12d2f8ae1e6fe466a6010daddbaceecacd677b9876f970"
+    },
+    {
+      "feature": "api.MutationObserver",
+      "usage": "B69/CEP70",
+      "decision": "Coalesced UI and unsupported relational-selector adapters.",
+      "chrome": [
+        {
+          "version_added": "26"
+        },
+        {
+          "prefix": "WebKit",
+          "version_added": "18"
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/MutationObserver.json",
+      "sourceSha256": "568120f444be7287895e2feba3a5a7c4c597e4d789736699c00085ac4d023fa1"
+    },
+    {
+      "feature": "api.CSS.supports_static",
+      "usage": "CEP70",
+      "decision": "Feature detection with failure-safe try/catch.",
+      "chrome": {
+        "version_added": "28"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/CSS.json",
+      "sourceSha256": "e0fa600e41608edbe20f239fa6611837142343cc85c36aaa7cfc9b29caa84975"
+    },
+    {
+      "feature": "javascript.operators.optional_chaining",
+      "usage": "B69/CEP70",
+      "decision": "Existing syntax supported since 80.",
+      "chrome": {
+        "version_added": "80",
+        "notes": "A call with a non-final spread argument in an optional chain fails in Chrome 80 through 90. See [bug 42201552](https://crbug.com/42201552)."
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/javascript/operators/optional_chaining.json",
+      "sourceSha256": "2529dc2b967c6c1280e4b11ca9d956d2e717ff78bff1beb1f1ceffc2763da433"
+    },
+    {
+      "feature": "javascript.operators.nullish_coalescing",
+      "usage": "Inherited UI",
+      "decision": "Supported since 80.",
+      "chrome": {
+        "version_added": "80"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/javascript/operators/nullish_coalescing.json",
+      "sourceSha256": "e907c839da284043ef31aaef78b3177d45b8e3172381cca5c7e15aec666183a4"
+    },
+    {
+      "feature": "javascript.builtins.Array.flatMap",
+      "usage": "Inherited UI/test helper",
+      "decision": "Supported since 69.",
+      "chrome": {
+        "version_added": "69"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/javascript/builtins/Array.json",
+      "sourceSha256": "2a614dd53d1d3855389c8a4813184f494ffece915abd632e51aa1072e0cc5770"
+    },
+    {
+      "feature": "javascript.builtins.Object.entries",
+      "usage": "B69",
+      "decision": "Page catalog.",
+      "chrome": {
+        "version_added": "54"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/javascript/builtins/Object.json",
+      "sourceSha256": "bb5be3440245ecfdfd400407340e636487c60ab06755cd8e3221ba128c5edbbb"
+    },
+    {
+      "feature": "javascript.builtins.Object.fromEntries",
+      "usage": "Inherited UI",
+      "decision": "Supported since 73.",
+      "chrome": {
+        "version_added": "73"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/javascript/builtins/Object.json",
+      "sourceSha256": "bb5be3440245ecfdfd400407340e636487c60ab06755cd8e3221ba128c5edbbb"
+    },
+    {
+      "feature": "api.Element.append",
+      "usage": "B69/CEP70",
+      "decision": "Move original live nodes; no clones.",
+      "chrome": {
+        "version_added": "54"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.Element.before",
+      "usage": "B69",
+      "decision": "Preserve original slots.",
+      "chrome": {
+        "version_added": "54"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.Element.after",
+      "usage": "B69",
+      "decision": "Restore original nodes.",
+      "chrome": {
+        "version_added": "54"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.Element.replaceWith",
+      "usage": "B69",
+      "decision": "UI-only bidi wrappers.",
+      "chrome": {
+        "version_added": "54"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.Element.remove",
+      "usage": "CEP70",
+      "decision": "Remove temporary capability probe.",
+      "chrome": {
+        "version_added": "24"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.Element.toggleAttribute",
+      "usage": "B69",
+      "decision": "UI state flags.",
+      "chrome": {
+        "version_added": "69"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.Element.closest",
+      "usage": "B69/CEP70",
+      "decision": "Control ancestor lookup.",
+      "chrome": {
+        "version_added": "41"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.Element.matches",
+      "usage": "B69",
+      "decision": "UI selection.",
+      "chrome": [
+        {
+          "version_added": "33"
+        },
+        {
+          "alternative_name": "webkitMatchesSelector",
+          "version_added": "4"
+        }
+      ],
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.HTMLElement.focus.options_preventScroll_parameter",
+      "usage": "B69",
+      "decision": "Restore active fields without scroll jumps.",
+      "chrome": {
+        "version_added": "64"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/HTMLElement.json",
+      "sourceSha256": "3689caa2749ea92408a6c5dda54cf389b1d4c40d5b1265ca4203bf321a269563"
+    },
+    {
+      "feature": "api.Element.scrollIntoView.options_parameter",
+      "usage": "B69",
+      "decision": "Reveal active disclosure with block nearest.",
+      "chrome": {
+        "version_added": "61"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/Element.json",
+      "sourceSha256": "e4635e3d4c1061ff4161a87205b926a89a7f571516cb166989df205c8b743bb9"
+    },
+    {
+      "feature": "api.NodeList.forEach",
+      "usage": "Inherited UI",
+      "decision": "Supported since 51.",
+      "chrome": {
+        "version_added": "51"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/NodeList.json",
+      "sourceSha256": "bffb18471f1db507877eb9fb1ff1a442d34d7fd0a1832169c41bcc69ca4e6f6b"
+    },
+    {
+      "feature": "api.HTMLDialogElement.showModal",
+      "usage": "B69",
+      "decision": "Page chooser, keyboard focus and Escape.",
+      "chrome": {
+        "version_added": "37"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/HTMLDialogElement.json",
+      "sourceSha256": "62d53fd9e4d0046be9083b27eb70a418cec83591fb6a44b5c79d7a31eafa6f4f"
+    },
+    {
+      "feature": "api.CanvasRenderingContext2D.roundRect",
+      "usage": "Inherited titles53/studio52 only",
+      "decision": "Native method is guarded; ctx.rect is the existing alternative. Not called unconditionally by the pilot.",
+      "chrome": {
+        "version_added": "99"
+      },
+      "source": "https://github.com/mdn/browser-compat-data/blob/07c659514f0e1f528b16146f07778537d9178d5b/api/CanvasRenderingContext2D.json",
+      "sourceSha256": "bbc0f7bb5f9ed9337aaef87589c44f52d5450e9256cb3d49db0a39596827fc92"
+    }
+  ],
+  "syntaxNotes": [
+    "ES2015 const/let/arrow/default params/destructuring/template literals/Map/Set and ordinary DOM/event/Canvas2D APIs precede Chromium 99.",
+    "No native Chromium 99 syntax/runtime validation was possible; modern syntax and guarded API detection were audited, not fully emulated."
+  ]
+}

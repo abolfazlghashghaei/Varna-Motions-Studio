@@ -1,0 +1,20 @@
+{
+  "commit": "0c91a2e418cb89083620a9206c00451aff5f82a0",
+  "label": "UI71 current review build; remaining normalization is not complete",
+  "build_date": "2026-11-10",
+  "timezone": "Asia/Tehran",
+  "scope": [
+    "AE table pilot",
+    "AE typography pilot",
+    "CEP capability fallbacks",
+    "short-panel layout"
+  ],
+  "plugin_manifest_files": 3341,
+  "models_bundled": false,
+  "native_windows_installer_tested": false,
+  "native_CEF99_tested": false,
+  "previous_release_gate_failures": 14,
+  "packaging_change": "Windows-only delivery: the Mac-only ffmpeg is omitted; every remaining product file retains its original SHA-256. Preparation verifies all 3341 files locally. Core installer and panel code unchanged.",
+  "platform": "Windows",
+  "excluded_mac_path": "assets/vendor/Railcut/Railcut/bin/mac/ffmpeg"
+}

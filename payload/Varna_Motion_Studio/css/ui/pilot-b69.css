@@ -1,0 +1,173 @@
+/* Stage B pilot only. Loaded before stage A: important layer order is intentional.
+   Legacy unlayered !important and the temporary A68 bridge otherwise pin sizes,
+   paging, overflow and summaries. These groups document the required exceptions.
+   Stage D must merge ownership after screenshot/rule coverage; no old sheet is deleted. */
+@layer varna-pilot-b69 {
+  /* Root scaling is UI-only, bounded by the original 12px legibility floor. */
+  /* ghaf.css pins html to an unlayered 13px; important is needed for this scoped root owner. */
+  html[data-flat69] {font-size:var(--panel-root69,14px) !important;}
+  body[data-flat69] {
+    --ui-font-min:max(.857143rem,12px);--ui-font-note:max(.857143rem,12px);
+    --ui-font-label:max(.928571rem,12px);--ui-font-body:1rem;
+    --ui-font-section:1.142857rem;--ui-font-title:1.285714rem;
+    --ui-control-min:max(2.285714rem,32px);--ui-control-height:max(2.571429rem,32px);
+    --ui-hit-size:max(2.285714rem,32px);--ui-card-space:.857143rem;
+    --ui-space-1:.285714rem;--ui-space-2:.571429rem;--ui-space-3:.857143rem;--ui-space-4:1.142857rem;
+    --ui-radius-card:.857143rem;--ui-radius-control:.571429rem;
+    min-inline-size:0 !important;
+  }
+  /* Replace the fixed-height shell, duplicate routing and fixed right rail only on pilot pages. */
+  body[data-flat69] .app-shell {
+    display:grid !important;grid-template-columns:var(--panel-columns71,minmax(0,1fr)) !important;
+    grid-template-rows:var(--panel-rows71,auto minmax(0,1fr) auto auto) !important;
+    grid-template-areas:var(--panel-areas71,'top' 'work' 'action69' 'nav69') !important;
+    inline-size:100% !important;block-size:100vh !important;height:100vh !important;
+    min-inline-size:0 !important;min-block-size:0 !important;
+  }
+  body[data-flat69] :is(.nav-rail,.bottom-dock,#production47,.workspace-pager67,#tablePages66,.studio30-toolbar,.workflow-back,#captionCounter,.workspace-heading small,.workspace-heading #currentPageEyebrow,.workspace-heading .build31,#page-table>.workflow-tabs,#brandShortcut,#homeShortcut,#studio30Density){display:none !important;}
+  body[data-flat69] .workspace {
+    grid-area:work !important;overflow-y:auto !important;overflow-x:clip !important;
+    min-inline-size:0 !important;min-block-size:0 !important;padding:var(--panel-work-padding71,.857143rem) !important;
+    scroll-padding-block:.857143rem;overscroll-behavior:contain;
+  }
+  body[data-flat69] .topbar {
+    display:flex !important;flex-wrap:wrap !important;align-items:center !important;gap:.285714rem !important;
+    height:auto !important;min-height:0 !important;max-height:none !important;padding:var(--panel-header-padding71,.428571rem .571429rem) !important;
+    min-inline-size:0 !important;position:relative !important;
+  }
+  body[data-flat69] .workspace-heading{display:var(--panel-heading71,flex) !important;flex:1 1 5rem !important;min-width:0 !important;max-width:none !important;margin:0 !important;}
+  body[data-flat69] .workspace-heading strong{display:block !important;white-space:normal !important;overflow:visible !important;text-overflow:clip !important;}
+  body[data-flat69] .window-actions{display:contents !important;}
+  body[data-flat69] #studio30Search{display:inline-flex !important;inline-size:auto !important;min-width:var(--ui-hit-size) !important;max-width:none !important;}
+  body[data-flat69] #headerOptions{margin:0 !important;}
+  /* Flatten old explicit page/card sizing. Dynamic [hidden] and workflow-tab-hidden stay authoritative. */
+  body[data-flat69] [data-flat69].page {max-width:none !important;min-width:0 !important;width:100% !important;zoom:1 !important;}
+  body[data-flat69] [data-flat69] :is(.page-head,.eyebrow,.head-icon){display:none !important;}
+  body[data-flat69] [data-flat69] :is(.table-pro-layout,.stack,.studio40-content,.kinetic-grid40,.scene-settings40){display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:.857143rem !important;min-width:0 !important;}
+  body[data-flat69] [data-flat69] :is(.card,.context40,.cell-inspector,.table-text-motion-box){
+    width:auto !important;height:auto !important;min-width:0 !important;max-width:100% !important;
+    margin:0 !important;padding:.857143rem !important;box-sizing:border-box;overflow:visible !important;
+  }
+  body[data-flat69] [data-flat69] .card {border:0 !important;box-shadow:none !important;background:transparent !important;}
+  body[data-flat69] [data-flat69] .card-title{flex-wrap:wrap !important;height:auto !important;min-height:0 !important;gap:.571429rem !important;}
+  body[data-flat69] [data-flat69] :is(.form-grid,.table-corner-row,.table-appearance-grid,.table-timing-simple){display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:.857143rem !important;margin:0 !important;align-items:start !important;}
+  body[data-flat69] [data-flat69] :is(.control,.inline-control,.featured-control){min-width:0 !important;max-width:100% !important;width:auto !important;margin:0 !important;grid-column:auto !important;}
+  /* Old panels hide closed details/summaries. Native disclosures must remain operable. */
+  body[data-flat69] [data-flat69] details {display:block !important;margin:.571429rem 0 !important;padding:.571429rem !important;border:1px solid var(--ui-color-border) !important;border-radius:.571429rem !important;}
+  body[data-flat69] [data-flat69] details>summary {display:list-item !important;cursor:pointer;font-size:var(--ui-font-body) !important;min-height:var(--ui-hit-size) !important;line-height:1.6 !important;padding:.285714rem !important;white-space:normal !important;}
+  body[data-flat69] [data-flat69] details>summary[hidden]{display:none !important;}
+  body[data-flat69] [data-flat69] details.flat-section69{margin:0 !important;padding:.571429rem !important;background:var(--ui-color-surface);}
+  body[data-flat69] [data-flat69] .flat-section69>summary{font-weight:700;}
+  body[data-flat69] #page-kinetic .piece-inspector45>details:not([open]){display:block !important;}
+  body[data-flat69] #pieceSection66,body[data-flat69] .flat-category69{display:none !important;}
+  /* Flexible controls override 25–100px widths/heights, ellipsis and nowrap in legacy controls. */
+  body[data-flat69] :is(button,summary,input:not([type=hidden]),select,textarea):not(.scene-piece40):not(.table-stage-resize) {
+    box-sizing:border-box;max-inline-size:100% !important;min-block-size:var(--ui-hit-size) !important;
+  }
+  body[data-flat69] :is(button,summary):not(.scene-piece40):not(.table-stage-resize){min-inline-size:var(--ui-hit-size) !important;white-space:normal !important;overflow-wrap:anywhere;line-height:1.5 !important;height:auto !important;max-height:none !important;}
+  body[data-flat69] [data-flat69] :is(button,select,input:not([type=checkbox]):not([type=radio]),textarea):not(.scene-piece40):not(.table-stage-resize){min-width:0 !important;width:auto !important;}
+  body[data-flat69] [data-flat69] :is(input,select,textarea){inline-size:100% !important;}
+  body[data-flat69] [data-flat69] :is(input[type=checkbox],input[type=radio]){inline-size:1rem !important;min-height:0 !important;flex:none;}
+  body[data-flat69] :is(.switch-row,.check,.chip){display:flex !important;align-items:center;min-height:var(--ui-hit-size) !important;white-space:normal !important;}
+  body[data-flat69] [data-flat69] :is(.action-inline,.button-row,.chip-grid,.word-chips48,.word-presets39,.table-style-gallery,.table-range-labels,.align-panel48,.scene-transport40,.workflow-tabs){
+    display:flex !important;flex-wrap:wrap !important;gap:.571429rem !important;min-width:0 !important;overflow:visible !important;max-width:100% !important;max-height:none !important;height:auto !important;
+  }
+  body[data-flat69] [data-flat69] :is(.action-inline,.button-row,.word-presets39,.table-style-gallery)>button{flex:1 1 8rem !important;}
+  body[data-flat69] [data-flat69] .workflow-tabs{margin:.571429rem 0 !important;}
+  body[data-flat69] [data-flat69] .workflow-tabs>button{flex:1 1 8rem !important;}
+  body[data-flat69] [data-flat69] :is(.control>span,.control>small,.hint,output,b,strong,.mini-badge){white-space:normal !important;overflow-wrap:anywhere;word-break:normal;text-overflow:clip !important;max-width:100%;}
+/* Prevent the legacy switch track from shrinking below its translated thumb. */
+  body[data-flat69] .switch{flex:none !important;inline-size:2.5rem !important;block-size:1.428571rem !important;}
+  body[data-flat69] .switch::after{inline-size:1rem !important;block-size:1rem !important;inset-block-start:.142857rem !important;right:.142857rem !important;}
+  body[data-flat69] input:checked+.switch::after{right:calc(100% - 1.142857rem) !important;}
+  body[data-flat69] [data-flat69] .numeric37{display:flex !important;flex-wrap:wrap !important;inline-size:100% !important;height:auto !important;min-height:var(--ui-hit-size) !important;padding:0 !important;gap:.285714rem !important;}
+  body[data-flat69] [data-flat69] .numeric37>.numeric37-value{flex:1 1 4rem !important;inline-size:0 !important;width:0 !important;height:auto !important;min-width:2.285714rem !important;}
+  body[data-flat69] [data-flat69] .numeric37>.numeric37-handle{flex:0 0 var(--ui-hit-size) !important;inline-size:var(--ui-hit-size) !important;min-width:var(--ui-hit-size) !important;}
+  body[data-flat69] [data-flat69] .numeric37>.numeric37-slider{flex:1 1 5rem !important;inline-size:0 !important;width:0 !important;min-width:2.285714rem !important;height:auto !important;}
+  /* Limited previews keep the composition's native aspect ratio. No artwork font/coordinate rules. */
+  body[data-flat69] [data-flat69] .flat-layout69{display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:.857143rem !important;align-items:start;}
+  body[data-flat69] #page-table .table-dock66{display:block !important;position:static !important;}
+  body[data-flat69] [data-flat69] .flat-preview69{min-width:0;align-self:start;}
+  body[data-flat69] [data-flat69] .mini-preview-toggle{border:0 !important;padding:0 !important;}
+  body[data-flat69] #page-table #tablePreviewStage{max-width:100% !important;margin-inline:auto;}
+  body[data-flat69] #page-kinetic #sceneStage40{width:var(--scene-inline69,100%) !important;max-width:100% !important;height:auto !important;min-height:0 !important;}
+  body[data-flat69] #page-kinetic .scene-preview40{position:static !important;}
+  body[data-flat69] #page-table .table-editor-wrap{max-height:none !important;min-height:0 !important;overflow:visible !important;}
+  body[data-flat69] [data-flat69] .table-range-labels>*{min-width:0 !important;flex:1 1 5rem !important;white-space:normal !important;}
+  body[data-flat69] [data-flat69] .table-range-labels .duration-pill{overflow-wrap:anywhere;}
+  body[data-flat69] [data-flat69] .table-range-editor{min-width:0 !important;padding:.285714rem !important;}
+  body[data-flat69] [data-flat69] .select-value69{font-size:var(--ui-font-label) !important;}
+  /* Very narrow physical panels must let every field wrap, including color and timing editors. */
+  body[data-flat69] [data-flat69] :is(.color-editor,.clean-color-editor){display:flex !important;flex-wrap:wrap !important;height:auto !important;min-width:0 !important;gap:.285714rem !important;}
+  body[data-flat69] [data-flat69] :is(.color-editor,.clean-color-editor)>*{flex:1 1 3rem !important;min-width:0 !important;max-width:100% !important;}
+  body[data-flat69] [data-flat69] .table-range-labels small{overflow-wrap:anywhere !important;}
+  body[data-flat69] [data-flat69] .switch-row{flex-wrap:wrap !important;}
+  body[data-flat69] [data-flat69] .switch-row>span:last-child{min-width:0;flex:1 1 4rem;overflow-wrap:anywhere;line-height:1.6;}
+  body[data-flat69] [data-flat69] :is(.hint,#tableTimingHelp){overflow-wrap:anywhere !important;}
+  body[data-flat69] #tableEditor{min-width:0 !important;width:100% !important;}
+  body[data-flat69] #tableEditor input{font-size:var(--ui-font-min) !important;min-height:var(--ui-hit-size) !important;padding:.285714rem !important;}
+  body[data-flat69] #page-table .flat-section69>article>.card-title b{display:none !important;}
+  body[data-flat69] #tableDockActions66{display:flex !important;flex-wrap:wrap !important;}
+  /* The single main action is a non-scrolling shell row, equivalent to a sticky footer. */
+  body[data-flat69] .flat-actions69{grid-area:action69;display:flex;flex-wrap:wrap;align-items:center;justify-content:end;gap:.571429rem;padding:var(--panel-action-padding71,.571429rem .857143rem);background:var(--ui-color-surface);border-block-start:1px solid var(--ui-color-border);z-index:8;min-width:0;}
+  body[data-flat69] .flat-actions69>button{margin:0 !important;flex:1 1 0 !important;min-width:0 !important;width:auto !important;padding:var(--panel-action-button-padding71,.571429rem) !important;}
+  .flat-status69{position:relative;flex:none;}
+  .flat-status69>summary[data-error69=true]{color:var(--ui-color-danger);}
+  .flat-status69>summary{display:flex;align-items:center;justify-content:center;list-style:none;text-align:center;cursor:pointer;}
+  .flat-status69>summary svg{inline-size:1.285714rem;block-size:1.285714rem;pointer-events:none;}
+  .flat-status-popup69{position:fixed;inset-inline:.571429rem;bottom:6rem;max-block-size:clamp(4rem,40vh,20rem);overflow:auto;padding:.857143rem;background:var(--ui-color-surface);border:1px solid var(--ui-color-border);border-radius:.571429rem;box-shadow:0 .571429rem 2rem #0005;z-index:20;overflow-wrap:anywhere;}
+  body[data-flat69] .flat-status-popup69>[role=status]{margin:0 !important;max-height:none !important;overflow:visible !important;white-space:normal !important;}
+  .flat-actions69,.flat-nav69{display:none;}
+  body[data-flat69] .flat-nav69{grid-area:nav69;display:flex;flex-wrap:wrap;gap:.285714rem;padding:var(--panel-nav-padding71,.285714rem .571429rem);background:var(--ui-color-surface);border-block-start:1px solid var(--ui-color-border);z-index:8;min-width:0;}
+  body[data-flat69] .flat-nav69>button{display:flex;flex:1 1 0;min-width:var(--ui-hit-size) !important;align-items:center;justify-content:center;gap:.285714rem;padding:.285714rem !important;color:var(--ui-color-muted) !important;border:1px solid transparent !important;background:transparent !important;border-radius:.571429rem;}
+  body[data-flat69] .app-shell[data-panel-micro69=true] .workspace-heading{display:none !important;}
+  body[data-flat69] .app-shell[data-panel-micro69=true] .flat-nav69>button:is([data-page69=home],[data-page69=text]){display:none;}
+  body[data-flat69] .flat-nav69>button[aria-current=page]{background:var(--ui-color-soft) !important;color:var(--ui-color-accent) !important;border-color:var(--ui-color-border) !important;}
+  .flat-nav-icon69{display:flex;align-items:center;justify-content:center;}
+  .flat-nav-icon69 svg{inline-size:1.285714rem;block-size:1.285714rem;}
+  .flat-return69{display:none;}
+  body[data-flat69] :is(.header-options-panel,.flat-chooser69){min-width:0 !important;max-width:calc(100vw - 1.142857rem) !important;max-height:calc(100vh - 1.142857rem) !important;overflow:auto !important;}
+  .flat-chooser69{inline-size:clamp(12rem,80%,32rem);border:1px solid var(--ui-color-border);border-radius:.857143rem;padding:.857143rem;background:var(--ui-color-surface);color:var(--ui-color-text);}
+  .flat-chooser-grid69{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr));gap:.571429rem;margin-block-start:.857143rem;}
+  .flat-chooser-grid69 button{font:inherit;min-height:var(--ui-hit-size);padding:.571429rem;color:var(--ui-color-text);background:var(--ui-color-field);border:1px solid var(--ui-color-border);border-radius:.571429rem;}
+  body[data-flat69] :is(select,output,kbd,bdi,[dir=auto],.control>span){unicode-bidi:isolate;}
+/* A long selected value is painted once, wrapped over the original native select.
+     The select keeps its ID, native picker, keyboard and handlers; no custom option engine. */
+  .select-shell69{display:grid;min-inline-size:0;inline-size:100%;}
+  body[data-flat69] [data-flat69] .select-shell69>select{grid-area:1/1;block-size:100% !important;align-self:stretch;}
+  body[data-flat69] [data-flat69] .select-shell69[data-wrapped69]>select{color:transparent !important;appearance:none !important;}
+  body[data-flat69] [data-flat69] .select-shell69[data-wrapped69]>select>option{color:var(--ui-color-text) !important;background:var(--ui-color-field) !important;}
+  .select-shell69[data-wrapped69]::after{content:'⌄';grid-area:1/1;align-self:center;justify-self:end;padding-inline:.571429rem;pointer-events:none;color:var(--ui-color-text);}
+  .select-shell69>.select-value69{grid-area:1/1;pointer-events:none;align-self:center;min-width:0;padding:.428571rem;padding-inline-end:2rem;box-sizing:border-box;}
+  .select-value69{display:block;overflow-wrap:anywhere;line-height:1.6;font-size:var(--ui-font-min);}
+  .select-value69[hidden]{display:none;}
+  /* CEP 12 / Chromium 99: ResizeObserver sets data-size on the panel itself.
+     This is the only layout path in every browser, not a container-query fallback. */
+  body[data-flat69] .app-shell[data-size=wide] [data-flat69] :is(.form-grid,.table-corner-row,.table-appearance-grid,.table-timing-simple){grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  body[data-flat69] .app-shell[data-size=wide] [data-flat69] .flat-layout69{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) !important;}
+  body[data-flat69] .app-shell[data-size=compact] .flat-nav-label69{display:none;}
+  body[data-flat69] .app-shell[data-size=compact] [data-flat69] :is(.action-inline,.button-row,.workflow-tabs)>button{flex-basis:100% !important;}
+  /* Short-panel chrome shares the existing important owners through variables.
+     No extra important rules, smaller UI text, cloned actions or new stylesheet.
+     All 22 destinations remain available through the original All pages dialog. */
+  body[data-flat69] .app-shell[data-panel-short71=true]{
+    --panel-columns71:minmax(0,1fr) auto;--panel-rows71:auto minmax(0,1fr) auto;
+    --panel-areas71:'top top' 'work work' 'action69 nav69';--panel-heading71:none;
+    --panel-header-padding71:0;--panel-action-padding71:0;
+    --panel-action-button-padding71:0 .285714rem;--panel-nav-padding71:0;
+    --panel-work-padding71:.142857rem;
+    --ui-hit-size:32px;--ui-control-min:32px;--ui-control-height:32px;
+  }
+  body[data-flat69] .app-shell[data-panel-short71=true] .flat-nav69>button:not([data-more69]),
+  body[data-flat69] .app-shell[data-panel-short71=true] .flat-nav-label69{display:none;}
+  /* At high zoom the effective CSS width may be 125px. Reduce padding, never type or targets. */
+  body[data-flat69] .app-shell[data-panel-micro69=true] .workspace{padding:.142857rem !important;}
+  body[data-flat69] .app-shell[data-panel-micro69=true] [data-flat69] :is(.card,details,.context40){padding:.142857rem !important;}
+  body[data-flat69] .app-shell[data-panel-micro69=true] [data-flat69] :is(.cell-inspector,.table-text-motion-box,.table-editor-wrap){padding:0 !important;}
+  body[data-flat69] #tableEditor.compact-list69{display:flex !important;flex-direction:column;block-size:auto !important;height:auto !important;}
+  body[data-flat69] #tableEditor.compact-list69 .table-cell{display:flex;flex-direction:column;inline-size:100%;}
+  body[data-flat69] #tableEditor.compact-list69 .table-cell::before{content:attr(data-cell-label69);font-size:var(--ui-font-min);line-height:1.6;color:var(--ui-color-muted);unicode-bidi:isolate;}
+  body[data-flat69] #tableEditor.compact-list69 .table-resize-handle{display:none !important;}
+  /* Author-controlled hidden state must outrank our grid/disclosure normalization. */
+  body[data-flat69] [data-flat69] [hidden]{display:none !important;}
+}

@@ -1,0 +1,438 @@
+{
+  "baseline": "23a8f28",
+  "scope": "35 statically linked AE stylesheets; comments, dynamic styles, JS inline styles and imports are excluded from declaration counts.",
+  "stylesheets": {
+    "before": 35,
+    "after": 35
+  },
+  "before": {
+    "important": 3029,
+    "smallLiteral": 325
+  },
+  "after": {
+    "important": 3029,
+    "smallLiteral": 325
+  },
+  "files": [
+    {
+      "file": "css/ghaf.css",
+      "before": {
+        "important": 11,
+        "smallLiteral": 49
+      },
+      "after": {
+        "important": 11,
+        "smallLiteral": 49
+      },
+      "sha256": "1bd723610836d9aa8df4c20ff0eb8aa98b724acfdb36a34a0cb09ea9d852e401"
+    },
+    {
+      "file": "css/varna-ui.css",
+      "before": {
+        "important": 953,
+        "smallLiteral": 70
+      },
+      "after": {
+        "important": 953,
+        "smallLiteral": 70
+      },
+      "sha256": "ec4edfcb8756eaccbdbcd0ee7130c99d777c2623fe51b12c9e7625eaedd75645"
+    },
+    {
+      "file": "css/studio44.css",
+      "before": {
+        "important": 355,
+        "smallLiteral": 27
+      },
+      "after": {
+        "important": 355,
+        "smallLiteral": 27
+      },
+      "sha256": "0e17b71ea8e10b328443402f57cf288b441cf8917261733fcbe28b2e0788d0ed"
+    },
+    {
+      "file": "css/liquid-ui.css",
+      "before": {
+        "important": 33,
+        "smallLiteral": 5
+      },
+      "after": {
+        "important": 33,
+        "smallLiteral": 5
+      },
+      "sha256": "d8d58a4562bbb5f72afe61c95a607c9c7a5c77a2ddf6f399c14c730bf1f6eb65"
+    },
+    {
+      "file": "css/project-brain.css",
+      "before": {
+        "important": 5,
+        "smallLiteral": 3
+      },
+      "after": {
+        "important": 5,
+        "smallLiteral": 3
+      },
+      "sha256": "1ca89d3ddea7e61c5e14c49a09ccaa1f5274edba8d55b4aae246d893af5e8755"
+    },
+    {
+      "file": "css/standardization-ui.css",
+      "before": {
+        "important": 204,
+        "smallLiteral": 20
+      },
+      "after": {
+        "important": 204,
+        "smallLiteral": 20
+      },
+      "sha256": "7dbec5e5598f6593e497de37e36351f640afdddaa14eb4fe7a1d9f235a263789"
+    },
+    {
+      "file": "css/workflow-ui.css",
+      "before": {
+        "important": 115,
+        "smallLiteral": 5
+      },
+      "after": {
+        "important": 115,
+        "smallLiteral": 5
+      },
+      "sha256": "c9f3a3c0ed69489086e41828ba0113ef854f10ef8dc930fc5270a9ace60c2d1b"
+    },
+    {
+      "file": "css/workflow24.css",
+      "before": {
+        "important": 15,
+        "smallLiteral": 6
+      },
+      "after": {
+        "important": 15,
+        "smallLiteral": 6
+      },
+      "sha256": "daae4a2cea81f38149c5847e9faa1111e8841aa26f5ff4392183413029b934ad"
+    },
+    {
+      "file": "css/appearance25.css",
+      "before": {
+        "important": 11,
+        "smallLiteral": 0
+      },
+      "after": {
+        "important": 11,
+        "smallLiteral": 0
+      },
+      "sha256": "3f5d6001fcd37674d85e9abe11a1f66cf59987256207051f1858a93b44b3b76f"
+    },
+    {
+      "file": "css/stability26.css",
+      "before": {
+        "important": 6,
+        "smallLiteral": 1
+      },
+      "after": {
+        "important": 6,
+        "smallLiteral": 1
+      },
+      "sha256": "9a07aa92c4dd1780567f751a61338d2ea1dd460eb8a5ef6c36fd4aaceb021165"
+    },
+    {
+      "file": "css/upgrades27.css",
+      "before": {
+        "important": 0,
+        "smallLiteral": 4
+      },
+      "after": {
+        "important": 0,
+        "smallLiteral": 4
+      },
+      "sha256": "1df1feec92c7b44c4f63ee5228d940b7c7f9dd09db8d005ac460573414c890e2"
+    },
+    {
+      "file": "css/studio28.css",
+      "before": {
+        "important": 61,
+        "smallLiteral": 25
+      },
+      "after": {
+        "important": 61,
+        "smallLiteral": 25
+      },
+      "sha256": "b20b7f0744839b3ecf53b684c7dfd1a87a29a9b0e69d3611362e108d9f21957e"
+    },
+    {
+      "file": "css/fixes29.css",
+      "before": {
+        "important": 22,
+        "smallLiteral": 2
+      },
+      "after": {
+        "important": 22,
+        "smallLiteral": 2
+      },
+      "sha256": "372247849185398bab4e45da55040b6a7b2cd75fc21417048fdc9f690ffa9a2a"
+    },
+    {
+      "file": "assets/vendor/ui30/tom-select/tom-select.css",
+      "before": {
+        "important": 40,
+        "smallLiteral": 0
+      },
+      "after": {
+        "important": 40,
+        "smallLiteral": 0
+      },
+      "sha256": "9927adfdda16f802eed295c3dd0f4845cfb3db2038b62324546a3b6a96a15624"
+    },
+    {
+      "file": "css/studio30.css",
+      "before": {
+        "important": 127,
+        "smallLiteral": 18
+      },
+      "after": {
+        "important": 127,
+        "smallLiteral": 18
+      },
+      "sha256": "e330162ac0061c63444278c7b5923659a98c1b1e112b81fc639e657ebd3c685d"
+    },
+    {
+      "file": "css/studio31.css",
+      "before": {
+        "important": 19,
+        "smallLiteral": 8
+      },
+      "after": {
+        "important": 19,
+        "smallLiteral": 8
+      },
+      "sha256": "b11f19735c762e29fcfb8286cc186854d35448d9bb5246b68d31ab4487db8c9a"
+    },
+    {
+      "file": "css/studio37.css",
+      "before": {
+        "important": 169,
+        "smallLiteral": 29
+      },
+      "after": {
+        "important": 169,
+        "smallLiteral": 29
+      },
+      "sha256": "29a162da330afafa1fa43c2b61fd7fcb6aa4c15f361304aab5e4c22a32d7000b"
+    },
+    {
+      "file": "css/studio38.css",
+      "before": {
+        "important": 2,
+        "smallLiteral": 8
+      },
+      "after": {
+        "important": 2,
+        "smallLiteral": 8
+      },
+      "sha256": "9e826111ecfc2a7e549595135f727ec213ae0e723caab2d8e088604a73706294"
+    },
+    {
+      "file": "css/studio39.css",
+      "before": {
+        "important": 1,
+        "smallLiteral": 1
+      },
+      "after": {
+        "important": 1,
+        "smallLiteral": 1
+      },
+      "sha256": "37b82646b09c77b812206134ed467b4365b2ad85e5e6229a37a4ae62cb5b285a"
+    },
+    {
+      "file": "css/studio40.css",
+      "before": {
+        "important": 2,
+        "smallLiteral": 1
+      },
+      "after": {
+        "important": 2,
+        "smallLiteral": 1
+      },
+      "sha256": "d601b4160846c287c0c2160c9a27ec1e12337be57b34d2f345579a27599b28dc"
+    },
+    {
+      "file": "css/workspace44.css",
+      "before": {
+        "important": 35,
+        "smallLiteral": 2
+      },
+      "after": {
+        "important": 35,
+        "smallLiteral": 2
+      },
+      "sha256": "789e55c708a63d84cead335b638b46a07b80955f78f6340ff8a4e635393f0199"
+    },
+    {
+      "file": "css/studio45.css",
+      "before": {
+        "important": 39,
+        "smallLiteral": 1
+      },
+      "after": {
+        "important": 39,
+        "smallLiteral": 1
+      },
+      "sha256": "5862bd9cb2b68373909814d40debaef72e55351cc62be2a4e91bcedd32ca61c6"
+    },
+    {
+      "file": "css/fluent-glass47.css",
+      "before": {
+        "important": 137,
+        "smallLiteral": 1
+      },
+      "after": {
+        "important": 137,
+        "smallLiteral": 1
+      },
+      "sha256": "7781304bf093f86d3106435b22ac9416f47294bac2215053807bbd94d6ccfb62"
+    },
+    {
+      "file": "css/production47.css",
+      "before": {
+        "important": 27,
+        "smallLiteral": 7
+      },
+      "after": {
+        "important": 27,
+        "smallLiteral": 7
+      },
+      "sha256": "22af9ad130f3ee4d0771b0484c4481e4accfcdb716af64cb64cf2a722b0b9a75"
+    },
+    {
+      "file": "css/liquid48.css",
+      "before": {
+        "important": 78,
+        "smallLiteral": 2
+      },
+      "after": {
+        "important": 78,
+        "smallLiteral": 2
+      },
+      "sha256": "fdc6a042ccb801ed46a29b727a8c00a5945048873dbeee296cdeaa7fb20a7ea5"
+    },
+    {
+      "file": "css/finalize49.css",
+      "before": {
+        "important": 68,
+        "smallLiteral": 1
+      },
+      "after": {
+        "important": 68,
+        "smallLiteral": 1
+      },
+      "sha256": "b79964ab4bf69e6d84fe760e858017c690435bb64eb13122458efd97767e6476"
+    },
+    {
+      "file": "css/production50.css",
+      "before": {
+        "important": 12,
+        "smallLiteral": 2
+      },
+      "after": {
+        "important": 12,
+        "smallLiteral": 2
+      },
+      "sha256": "58aa8b61188d707f280b7f559cecc860d52d65b32cc3d60c9a9a2f2290810717"
+    },
+    {
+      "file": "css/i18n52.css",
+      "before": {
+        "important": 3,
+        "smallLiteral": 0
+      },
+      "after": {
+        "important": 3,
+        "smallLiteral": 0
+      },
+      "sha256": "91a22854cabdb29c73fc08c926fe95f1623b730a5647d77a0df4ace65ae6b047"
+    },
+    {
+      "file": "css/text55.css",
+      "before": {
+        "important": 2,
+        "smallLiteral": 1
+      },
+      "after": {
+        "important": 2,
+        "smallLiteral": 1
+      },
+      "sha256": "c9d30bfcd719aca12d9aef3f25a446d1bb6e96e4d995c59bf1630d0dfc5fbf20"
+    },
+    {
+      "file": "css/workbench66.css",
+      "before": {
+        "important": 58,
+        "smallLiteral": 14
+      },
+      "after": {
+        "important": 58,
+        "smallLiteral": 14
+      },
+      "sha256": "e37f0da26ca40a36743a73d7bb2967bd209d936c17f23eea76fc7e58d7ce00b4"
+    },
+    {
+      "file": "css/workspace67.css",
+      "before": {
+        "important": 113,
+        "smallLiteral": 12
+      },
+      "after": {
+        "important": 113,
+        "smallLiteral": 12
+      },
+      "sha256": "54d164872686b592aa005d453f7f81058206a718b679e7edab314ca12688869d"
+    },
+    {
+      "file": "css/ui/tokens.css",
+      "before": {
+        "important": 0,
+        "smallLiteral": 0
+      },
+      "after": {
+        "important": 0,
+        "smallLiteral": 0
+      },
+      "sha256": "a1b7f24c9fba4b07f4d94673088482c2d74938310b6e5a3692ca490297bff475"
+    },
+    {
+      "file": "css/ui/cep70.css",
+      "before": {
+        "important": 6,
+        "smallLiteral": 0
+      },
+      "after": {
+        "important": 6,
+        "smallLiteral": 0
+      },
+      "sha256": "9b808d5f1b7dece9a3d66b879c82a6905f217b083a005be51619a227823f50d3"
+    },
+    {
+      "file": "css/ui/pilot-b69.css",
+      "before": {
+        "important": 227,
+        "smallLiteral": 0
+      },
+      "after": {
+        "important": 227,
+        "smallLiteral": 0
+      },
+      "sha256": "05e30e7f826e9875b580579d9543436d957f34c3b93bf0f13e0d291d0bc5e8b7"
+    },
+    {
+      "file": "css/ui/stage-a68.css",
+      "before": {
+        "important": 73,
+        "smallLiteral": 0
+      },
+      "after": {
+        "important": 73,
+        "smallLiteral": 0
+      },
+      "sha256": "bffa03ae302ba2fd21057c15ae95229d5284a13cc8429524d9bc43525a962397"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+<signatures>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#" Id="PackageSignature">
+<SignedInfo>
+<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+<Reference Type="http://www.w3.org/2000/09/xmldsig#Manifest" URI="#PackageContents">
+<Transforms>
+<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+</Transforms>
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<DigestValue>hxn98IiU6Cxqp6hY9gdJmIyoVF9QTBj3sOiKkubMIl0=</DigestValue>
+</Reference>
+</SignedInfo>
+<SignatureValue Id="PackageSignatureValue">HPDTuD/AMfy89cBRVOmqDxXyKKgOBssvf8dt8V2+KNUUzu16SzjtHcKLSXPAq1oq
+ZH8dEE4lUqQokoCtyYwQC4mLnWu9gFl2N3bbbe3vy7OynlfMiq40RdOll59t5qNH
+AlDphjl3Z804vLymDLYjOMCi7/C0dTTtUXRs3k/dUHo=</SignatureValue>
+
+<KeyInfo>
+<X509Data>
+<X509Certificate>MIIB4zCCAUwCCQCFaryEHgCouDANBgkqhkiG9w0BAQsFADA2MQswCQYDVQQGEwJV
+UzELMAkGA1UECAwCQ0ExDDAKBgNVBAoMA0NHUDEMMAoGA1UEAwwDQ0dQMB4XDTI2
+MDExMzE5NTI0MVoXDTM3MDQwMTE5NTI0MVowNjELMAkGA1UEBhMCVVMxCzAJBgNV
+BAgMAkNBMQwwCgYDVQQKDANDR1AxDDAKBgNVBAMMA0NHUDCBnzANBgkqhkiG9w0B
+AQEFAAOBjQAwgYkCgYEA1ZiJzBIDihroDCbVyCbYvQqokC9Y0lEbgwkWRJ9lBdKA
+XNtQyMy2txs/weRD6g0Fn/m7ALIigTDfADe/nAH3jmXotRmT4svW4JPhChVK7eHh
+gn4g/R9nhqWk0APfFC0A/0Zwn2YuoXZLpAqosl6mCACkhpKe91xIYpvCQ1qp8HUC
+AwEAATANBgkqhkiG9w0BAQsFAAOBgQAIqXSbZy+sWEZryKdsRYWbOwleuLcjDHhq
+5yfdw4rsXPFPl9uNJIQza+sDuvwHJBYaMKG+c0uUr4OSRXnFeBDyn/Zk1k8EgNoQ
+85AFHqegyiOTorrgt3eojerg0NpKwR+4+QBD3DvcfHj2WeM1Nl9wPkItJhxAywi6
+HCC/1Ffu+g==
+</X509Certificate>
+</X509Data>
+</KeyInfo>
+<Object>
+<Manifest Id="PackageContents">
+<Reference URI="mimetype"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>b07Onu9cTlGK1WpvgtFOlfk+Tl0HscuNIt6GZtesPX8=</DigestValue></Reference><Reference URI="bin/mac/ffmpeg"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>vQ5tdQ0QlwXeI+nsp/sP6vDo4jShwe7djfJCDyf8GM8=</DigestValue></Reference><Reference URI="bin/README.md"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>iPa/94Zf4wTCh8imVS7wFgkmvILXx4dni1Gw3Y7EyW0=</DigestValue></Reference><Reference URI="bin/win/ffmpeg.exe"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>Uns7Q4qYRDFNJquCfDs4pqCXo5HfohI7aH3kE28TA20=</DigestValue></Reference><Reference URI="css/main.css"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>SBJjJfniRxD9cgHrL6NaKNcaw61BxGhT2QIvZ/lGxEk=</DigestValue></Reference><Reference URI="css/styles.css"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>3SyC1l73MjXJH5iXQOttBDdobu3d+RX1pMXk4GAmkPI=</DigestValue></Reference><Reference URI="CSXS/manifest.xml"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>h2UxmNAdZ5TxjawfpQ7WuePfmHbWxdGp232j+t+oig4=</DigestValue></Reference><Reference URI="icons/icon-dark.png"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>8qpiZizavoVNoRBiH/stALok2XMr+OlWIQy7FU4KCak=</DigestValue></Reference><Reference URI="icons/icon-light.png"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>8qpiZizavoVNoRBiH/stALok2XMr+OlWIQy7FU4KCak=</DigestValue></Reference><Reference URI="index.html"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>xNA4xgVmOSGCe6NstVM/p/ON3WgBlIo/E4rzcYOZ1nQ=</DigestValue></Reference><Reference URI="js/CSInterface.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>cBwJOqA18IqLrMCtE+3qhYQQaIBdkwHpEo2uH1O+/1g=</DigestValue></Reference><Reference URI="js/main.js"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>xfa9SNdnnkhz0YN+1MTBVinjdD/0Q53uv7fE/jerYFU=</DigestValue></Reference><Reference URI="jsx/hostscript.jsx"><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>guBiLikunP7gyJnRVAQAa5lluqY3m4QhlmAcggWxEtQ=</DigestValue></Reference></Manifest>
+</Object>
+</Signature>
+</signatures>

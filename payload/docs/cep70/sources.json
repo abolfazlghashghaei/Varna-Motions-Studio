@@ -1,0 +1,26 @@
+{
+  "adobe": {
+    "url": "https://github.com/Adobe-CEP/CEP-Resources/blob/ab5e4e3e53a42fad08e1225a22a991bb1ffe73f6/CEP_12.x/Documentation/CEP%2012%20HTML%20Extension%20Cookbook.md",
+    "revision": "ab5e4e3e53a42fad08e1225a22a991bb1ffe73f6",
+    "finding": "CEP 12 uses CEF/Chromium branch 99 and Node.js 17.7.1; After Effects 25.0 is listed for CEP 12."
+  },
+  "bcdRevision": "07c659514f0e1f528b16146f07778537d9178d5b",
+  "blockedBrowserDownloads": [
+    {
+      "url": "https://storage.googleapis.com/chromium-browser-snapshots/Linux_x64/961656/chrome-linux.zip",
+      "result": "HTTP 403 or proxy tunnel 403; no binary executed"
+    },
+    {
+      "url": "https://commondatastorage.googleapis.com/chromium-browser-snapshots/Linux_x64/961656/chrome-linux.zip",
+      "result": "HTTP 403 or proxy tunnel 403; no binary executed"
+    },
+    {
+      "url": "https://playwright.azureedge.net/builds/chromium/956323/chromium-linux.zip",
+      "result": "HTTP 403 or proxy tunnel 403; no binary executed"
+    },
+    {
+      "url": "https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/956323/chromium-linux.zip",
+      "result": "HTTP 403 or proxy tunnel 403; no binary executed"
+    }
+  ]
+}

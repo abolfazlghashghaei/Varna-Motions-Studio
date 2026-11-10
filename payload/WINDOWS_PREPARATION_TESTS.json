@@ -1,0 +1,31 @@
+{
+  "runtime": "PowerShell 7 on Linux with OS environment set for preparation-only tests; not a native Windows install",
+  "validPayloadLog": "WINDOWS_PREPARATION_SUCCESS.log",
+  "rejectionCases": [
+    {
+      "case": "corrupt product bytes rejected",
+      "exitCode": 1,
+      "error": "Package preparation stopped: Package checksum mismatch: CSXS/manifest.xml"
+    },
+    {
+      "case": "missing product file rejected",
+      "exitCode": 1,
+      "error": "Package preparation stopped: Cannot find path '/tmp/varna-ui71-windows-delivery/payload/Varna_Motion_Studio/CSXS/manifest.xml' because it does not exist."
+    },
+    {
+      "case": "traversal path rejected",
+      "exitCode": 1,
+      "error": "Package preparation stopped: Unsafe or duplicate manifest path: ../outside"
+    },
+    {
+      "case": "duplicate path rejected",
+      "exitCode": 1,
+      "error": "Package preparation stopped: Unsafe or duplicate manifest path: CSXS/manifest.xml"
+    },
+    {
+      "case": "wrong platform rejected",
+      "exitCode": 1,
+      "error": "Package preparation stopped: Unexpected Windows review manifest."
+    }
+  ]
+}

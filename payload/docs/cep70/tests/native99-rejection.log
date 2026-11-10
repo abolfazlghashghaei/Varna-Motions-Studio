@@ -1,0 +1,12 @@
+AssertionError [ERR_ASSERTION]: --native99 must run an actual 99 binary; UA spoofing is not accepted
+
+154 !== 99
+
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/cep70_browser.cjs:11:147 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 154,
+  expected: 99,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

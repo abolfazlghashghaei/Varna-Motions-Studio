@@ -1,0 +1,80 @@
+{
+  "baseline": "b350500",
+  "scope": [
+    "table",
+    "kinetic"
+  ],
+  "entries": {
+    "index": {
+      "staticIds": 899,
+      "unchanged": true,
+      "duplicateIds": false,
+      "htmlClassesUnchanged": true,
+      "stylesheets": 34
+    },
+    "premiere": {
+      "staticIds": 899,
+      "unchanged": true,
+      "duplicateIds": false,
+      "htmlClassesUnchanged": true,
+      "stylesheets": 29
+    },
+    "resolve": {
+      "staticIds": 899,
+      "unchanged": true,
+      "duplicateIds": false,
+      "htmlClassesUnchanged": true,
+      "stylesheets": 29
+    }
+  },
+  "unchanged": {
+    "premiere.html": "f28cba7fe642d4f6e3353bc45d2c25cd9c649ac0236227d684807a879e706036",
+    "resolve.html": "273e46725ece5589ab8b718abc10dd7ad3f6e482ec09927c301b955afecd04e6",
+    "host/ghaf_host.jsx": "de681d05c76e052a2edaf4256a8355efe27dd5b8ff0f498895ee37ed13386169",
+    "js/app.js": "ddd297042309b9f331c73a364a477393e268180c4444529e9f558c0d693c6148",
+    "js/production50.js": "f933952334e1dcd0c793c722cfbb2c0a184a88796734cfee659b4cc54a37b499",
+    "css/ui/tokens.css": "a1b7f24c9fba4b07f4d94673088482c2d74938310b6e5a3692ca490297bff475",
+    "css/ui/stage-a68.css": "bffa03ae302ba2fd21057c15ae95229d5284a13cc8429524d9bc43525a962397",
+    "js/ui-tokens68.js": "15439dbc2af3fb15e1a5227e16ab683f4bcd35b3cd622105d8810d2da757f577",
+    "tests/ui47_controls_browser.cjs": "943a207baf871e34bb4994c4242d2d47498e371c1ea368d94030cc2041894933",
+    "tests/table47_browser.cjs": "b896ca7271a779840115a86b31316cbbfd90169cabb42891d337455221bf4a50",
+    "tests/run-release.cjs": "186dd280f3b6a8a4cc64cecf32f0cb007c2a909639869b4984253a6bd0b9c430",
+    "tests/ui68_tokens_browser.cjs": "1b4b450189e35ced52299ce8a85634981d5fd4bd1e2dc63927024f0d3ccb6b3f"
+  },
+  "css": {
+    "newFile": "css/ui/pilot-b69.css",
+    "importantDeclarations": 229,
+    "legacyFilesRemoved": []
+  },
+  "runtime": {
+    "index.html": "0735033db379f0b041dac7e093de48dc99b2d63f72c9a410818e85f1c4883375",
+    "css/ui/pilot-b69.css": "c94024d438c3d998e875bc715d524593bcc42b9795257fd78c7d2d20e19f45b2",
+    "js/pilot-b69.js": "7a388dd9edef9d5dbe01c0194cbf41ae378cb8427e7cf7bb50e2e92f7f6e912a",
+    "js/ui-shell.js": "7b5dddd0947b01ed98bb7d788deee175cbe3ab6f646da928f13077b486c2fb77",
+    "js/sections67.js": "b8c564e0d635093fcb77ff9236b96c4affae63b813118280d2431c5a0c174f2e",
+    "js/table-pages66.js": "c4246a977ecf2727278c9b91f200e0996b0959d052dab072ba2cbc0ae0e71293",
+    "js/table-designer.js": "3b6312c5c0fe5d9b2b0db02afefb1e6a3baf01e0d3dab612dd1ed46086378c02",
+    "js/production47.js": "0fef613336cf7631b5f56962a9fc10d140107819bd4336b430a0c34781f2722f"
+  },
+  "release": {
+    "passed": 86,
+    "total": 100,
+    "sameFailures": true,
+    "failures": [
+      "production50_core.cjs",
+      "rc21_companions_shots.cjs",
+      "rc24_ui.cjs",
+      "rc25_ui.cjs",
+      "rc26_app_actions.cjs",
+      "rc35_app.cjs",
+      "rc36_app.cjs",
+      "rc37_captions.cjs",
+      "rc41_app.cjs",
+      "rc45_app.cjs",
+      "rc46_scene.cjs",
+      "rc47_app.cjs",
+      "studio51_server.cjs",
+      "ui.cjs"
+    ]
+  }
+}
