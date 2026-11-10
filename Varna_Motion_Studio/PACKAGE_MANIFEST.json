@@ -14752,9 +14752,14 @@
       "sha256": "c9d30bfcd719aca12d9aef3f25a446d1bb6e96e4d995c59bf1630d0dfc5fbf20"
     },
     {
+      "path": "css/ui/cep70.css",
+      "bytes": 1585,
+      "sha256": "9b808d5f1b7dece9a3d66b879c82a6905f217b083a005be51619a227823f50d3"
+    },
+    {
       "path": "css/ui/pilot-b69.css",
-      "bytes": 18877,
-      "sha256": "c94024d438c3d998e875bc715d524593bcc42b9795257fd78c7d2d20e19f45b2"
+      "bytes": 18371,
+      "sha256": "2451243ab57313e72ea7012d27d4ffb81dec30d8f8df556579efc7ce182c4354"
     },
     {
       "path": "css/ui/stage-a68.css",
@@ -15278,8 +15283,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 196776,
-      "sha256": "0735033db379f0b041dac7e093de48dc99b2d63f72c9a410818e85f1c4883375"
+      "bytes": 196864,
+      "sha256": "57e3fe14dde650a0f09c1b7e20aa51abfcc3c9d0833f87ef844078cd82c88ef1"
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
@@ -15395,6 +15400,11 @@
       "path": "js/cep-bridge.js",
       "bytes": 9558,
       "sha256": "ab242f93ac9f56bf683e5cd08c6d9e7ba2cef76be1e0f561986078620258123e"
+    },
+    {
+      "path": "js/cep70.js",
+      "bytes": 2548,
+      "sha256": "8f8da7aa2391bd5fcb323a1b68fbbffc5d963d485c168287060e4e48a777ad90"
     },
     {
       "path": "js/commands54.js",
@@ -15533,8 +15543,8 @@
     },
     {
       "path": "js/pilot-b69.js",
-      "bytes": 23759,
-      "sha256": "7a388dd9edef9d5dbe01c0194cbf41ae378cb8427e7cf7bb50e2e92f7f6e912a"
+      "bytes": 23809,
+      "sha256": "8bccdcc40e4722b6d13bb086531cb0dc70a5ab87f31525cd51a898d576ae727c"
     },
     {
       "path": "js/plugin53.js",
@@ -15832,6 +15842,11 @@
       "sha256": "1e0fd326feff0120dc298b0e7ff5520e5255c79a4cac4787a5c20500a1c3a668"
     },
     {
+      "path": "tests/cep70_browser.cjs",
+      "bytes": 7518,
+      "sha256": "c47bc4b548b81bf97dcb31e321382f84064f840b934e3e5fca61f66914984ea4"
+    },
+    {
       "path": "tests/core.cjs",
       "bytes": 6209,
       "sha256": "c7ab8f45330ce65a604c65e1cf4e1c7271e93e7a3b8be1d774a05a9adb869848"
@@ -15852,9 +15867,14 @@
       "sha256": "27fb987df8f82d6e0bc365e6b10156f8a400475b11933d66c5f1a0d0d0f3c8f7"
     },
     {
+      "path": "tests/helpers/cep70-profile.cjs",
+      "bytes": 3134,
+      "sha256": "acf8785de74501c067bc4d22949dd1967eb24f9cacbec0f5f321512d9fe08bf1"
+    },
+    {
       "path": "tests/helpers/panel69.cjs",
-      "bytes": 6946,
-      "sha256": "20ba825cbc09e4d25591482f14e9ce29547a5a4e73c283dae74cf03fbc689bde"
+      "bytes": 7474,
+      "sha256": "d3b30f52ee0719a83f21a6916b1027e3efe8bf4598d8596c1c5aee9cbad2df8f"
     },
     {
       "path": "tests/host.cjs",
@@ -16563,8 +16583,8 @@
     },
     {
       "path": "tests/ui69_pilot_browser.cjs",
-      "bytes": 4921,
-      "sha256": "b932d2127771cefc357f317689dbeacc58a9c3d617fd224637410d007e01e8f4"
+      "bytes": 5076,
+      "sha256": "8abc0da1b1fb4b21a36cf07a3e2f320bcfd67cdd3bc1fe8a58bf257938651c65"
     },
     {
       "path": "tests/ui69_screenshots.cjs",

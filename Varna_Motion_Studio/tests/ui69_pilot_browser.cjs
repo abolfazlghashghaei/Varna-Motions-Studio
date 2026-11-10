@@ -5,11 +5,11 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const {root,launch,prepare,measure}=require('./helpers/panel69.cjs');
 const values=(key,fallback)=>process.env[key]?process.env[key].split(',').map(Number):fallback;
 const report={scope:['table','kinetic'],widths:values('B69_WIDTHS',[250,320,400,620,900,1400]),heights:values('B69_HEIGHTS',[400,700,1000]),zooms:values('B69_ZOOMS',[1,1.25,1.5,2]),themes:['light','dark'],languages:['fa','en'],cases:0,states:0,failures:[],pageErrors:[]};
-const snapshot=()=>Object.fromEntries(['index.html','css/ui/pilot-b69.css','js/pilot-b69.js','js/ui-shell.js','js/sections67.js','js/table-pages66.js','js/table-designer.js','js/production47.js'].map(file=>[file,require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex')]));
+const snapshot=()=>Object.fromEntries(['index.html','css/ui/cep70.css','js/cep70.js','css/ui/pilot-b69.css','js/pilot-b69.js','js/ui-shell.js','js/sections67.js','js/table-pages66.js','js/table-designer.js','js/production47.js'].map(file=>[file,require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex')]));
 report.source=snapshot();
 const out=process.env.B69_REPORT||'/tmp/varna-ui69-matrix.json';
 async function settle(p){await p.waitForTimeout(90);await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(r)))));}
-(async()=>{const h=await launch();try{
+(async()=>{const h=await launch();try{report.actualBrowser=await h.browser.version();report.compatibilityProfile=h.profile;
  const baseline=JSON.parse(fs.readFileSync(path.resolve(root,'../docs/ux-audit68/source-inventory.json')));
  for(const entry of ['index','premiere','resolve']){const html=fs.readFileSync(path.join(root,entry+'.html'),'utf8'),ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(ids.length,899);assert.equal(new Set(ids).size,899);assert.deepEqual(ids.sort(),baseline[entry].ids);if(entry!=='index')assert(!html.includes('pilot-b69'));}
  for(const zoom of report.zooms){
@@ -40,6 +40,7 @@ async function settle(p){await p.waitForTimeout(90);await p.evaluate(()=>new Pro
   }
   console.log('Matrix zoom '+zoom+': '+report.cases+' page cases, '+report.failures.length+' failures');await context.close();
  }
+ report.profileStats=h.profileStats;
  assert.deepEqual(snapshot(),report.source,'runtime files changed during the matrix');
  fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify(report,null,2)+'\n');assert.deepEqual(report.pageErrors,[],'browser errors');assert.equal(report.failures.length,0,'matrix failures; see '+out);
  console.log('PASS B69: '+report.cases+' page cases / '+report.states+' expanded states; 899 IDs; no horizontal overflow, clipped UI text, intersecting controls or undersized text/targets; main actions visible; at most two navigation levels. Two-page pilot only.');

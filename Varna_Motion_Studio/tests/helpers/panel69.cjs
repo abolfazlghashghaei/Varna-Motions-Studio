@@ -2,14 +2,16 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'../..');
 async function launch(options={}){
+ const cep99=options.cep99||process.env.VARNA_CEP70_PROFILE==='chromium99',stats={rules:0,declarations:0,stylesheets:0},profile=cep99?require('./cep70-profile.cjs'):null;
  const overlay=new Map();if(options.baseline){if(!/^[a-f0-9]{7,40}$/.test(options.baseline))throw Error('Expected commit SHA');const {execFileSync}=require('node:child_process');for(const file of ['index.html','js/ui-shell.js','js/production47.js','js/sections67.js','js/table-pages66.js','js/table-designer.js'])overlay.set(path.join(root,file),execFileSync('git',['show',options.baseline+':Varna_Motion_Studio/'+file],{cwd:root,maxBuffer:8*1024*1024}));}
- const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+decodeURIComponent(req.url.split('?')[0]));if(!file.startsWith(root+path.sep))return res.writeHead(403).end();const read=overlay.has(file)?callback=>callback(null,overlay.get(file)):callback=>fs.readFile(file,callback);read((error,body)=>{if(error)return res.writeHead(404).end();res.setHeader('Content-Type',({'.js':'text/javascript','.css':'text/css','.html':'text/html','.svg':'image/svg+xml','.png':'image/png','.woff2':'font/woff2','.webm':'video/webm'})[path.extname(file)]||'application/octet-stream');res.end(body);});});
+ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+decodeURIComponent(req.url.split('?')[0]));if(!file.startsWith(root+path.sep))return res.writeHead(403).end();const read=overlay.has(file)?callback=>callback(null,overlay.get(file)):callback=>fs.readFile(file,callback);read((error,body)=>{if(error)return res.writeHead(404).end();res.setHeader('Content-Type',({'.js':'text/javascript','.css':'text/css','.html':'text/html','.svg':'image/svg+xml','.png':'image/png','.woff2':'font/woff2','.webm':'video/webm'})[path.extname(file)]||'application/octet-stream');if(profile&&path.extname(file)==='.css'){stats.stylesheets++;res.end(profile.transform(body.toString(),stats,path.relative(root,file)));}else res.end(body);});});
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
  const browser=await chromium.launch({executablePath:process.env.VARNA_CHROMIUM||'/usr/bin/chromium',headless:true,args:['--no-sandbox']});
- return {browser,url:'http://127.0.0.1:'+server.address().port+'/index.html',async close(){await browser.close();await new Promise(resolve=>server.close(resolve));}};
+ return {browser,profile:cep99?'chromium99-disabled':'native',profileStats:stats,url:'http://127.0.0.1:'+server.address().port+'/index.html',async close(){await browser.close();await new Promise(resolve=>server.close(resolve));}};
 }
-async function prepare(page,url){
+async function prepare(page,url,options={}){
  await page.emulateMedia({reducedMotion:'reduce'});
+ if(options.cep99||process.env.VARNA_CEP70_PROFILE==='chromium99')await page.addInitScript(require('./cep70-profile.cjs').disableFeatures);
  await page.addInitScript(()=>{let seed=691;Math.random=()=>((seed=(seed*1664525+1013904223)>>>0)/4294967296);});
  await page.goto(url);await page.waitForSelector('#brandWelcome49[open]');await page.click('#startupNewBrand49');
  await page.evaluate(()=>{

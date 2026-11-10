@@ -1,0 +1,56 @@
+{
+  "scope": [
+    "table",
+    "kinetic"
+  ],
+  "widths": [
+    250,
+    320,
+    400,
+    620,
+    900,
+    1400
+  ],
+  "heights": [
+    400,
+    700,
+    1000
+  ],
+  "zooms": [
+    1,
+    1.25,
+    1.5,
+    2
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "languages": [
+    "fa",
+    "en"
+  ],
+  "cases": 576,
+  "states": 864,
+  "failures": [],
+  "pageErrors": [],
+  "source": {
+    "index.html": "57e3fe14dde650a0f09c1b7e20aa51abfcc3c9d0833f87ef844078cd82c88ef1",
+    "css/ui/cep70.css": "9b808d5f1b7dece9a3d66b879c82a6905f217b083a005be51619a227823f50d3",
+    "js/cep70.js": "8f8da7aa2391bd5fcb323a1b68fbbffc5d963d485c168287060e4e48a777ad90",
+    "css/ui/pilot-b69.css": "2451243ab57313e72ea7012d27d4ffb81dec30d8f8df556579efc7ce182c4354",
+    "js/pilot-b69.js": "8bccdcc40e4722b6d13bb086531cb0dc70a5ab87f31525cd51a898d576ae727c",
+    "js/ui-shell.js": "7b5dddd0947b01ed98bb7d788deee175cbe3ab6f646da928f13077b486c2fb77",
+    "js/sections67.js": "b8c564e0d635093fcb77ff9236b96c4affae63b813118280d2431c5a0c174f2e",
+    "js/table-pages66.js": "c4246a977ecf2727278c9b91f200e0996b0959d052dab072ba2cbc0ae0e71293",
+    "js/table-designer.js": "3b6312c5c0fe5d9b2b0db02afefb1e6a3baf01e0d3dab612dd1ed46086378c02",
+    "js/production47.js": "0fef613336cf7631b5f56962a9fc10d140107819bd4336b430a0c34781f2722f"
+  },
+  "actualBrowser": "154.0.8037.57",
+  "compatibilityProfile": "native",
+  "profileStats": {
+    "rules": 0,
+    "declarations": 0,
+    "stylesheets": 0
+  }
+}

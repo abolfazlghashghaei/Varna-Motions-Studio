@@ -18,11 +18,10 @@
   }
   /* Replace the fixed-height shell, duplicate routing and fixed right rail only on pilot pages. */
   body[data-flat69] .app-shell {
-    container:varna-panel69 / inline-size;
     display:grid !important;grid-template-columns:minmax(0,1fr) !important;
     grid-template-rows:auto minmax(0,1fr) auto auto !important;
     grid-template-areas:'top' 'work' 'action69' 'nav69' !important;
-    inline-size:100% !important;block-size:100dvh !important;height:100vh !important;
+    inline-size:100% !important;block-size:100vh !important;height:100vh !important;
     min-inline-size:0 !important;min-block-size:0 !important;
   }
   body[data-flat69] :is(.nav-rail,.bottom-dock,#production47,.workspace-pager67,#tablePages66,.studio30-toolbar,.workflow-back,#captionCounter,.workspace-heading small,.workspace-heading #currentPageEyebrow,.workspace-heading .build31,#page-table>.workflow-tabs,#brandShortcut,#homeShortcut,#studio30Density){display:none !important;}
@@ -141,12 +140,12 @@
   .select-shell69>.select-value69{grid-area:1/1;pointer-events:none;align-self:center;min-width:0;padding:.428571rem;padding-inline-end:2rem;box-sizing:border-box;}
   .select-value69{display:block;overflow-wrap:anywhere;line-height:1.6;font-size:var(--ui-font-min);}
   .select-value69[hidden]{display:none;}
-  /* ResizeObserver mirrors these same panel breakpoints for CEP 12 (Chromium 99).
-     Modern browsers use the container queries below; both paths have identical rules. */
-  body[data-flat69] .app-shell[data-panel-band69=wide] [data-flat69] :is(.form-grid,.table-corner-row,.table-appearance-grid,.table-timing-simple){grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
-  body[data-flat69] .app-shell[data-panel-band69=wide] [data-flat69] .flat-layout69{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) !important;}
-  body[data-flat69] .app-shell[data-panel-band69=compact] .flat-nav-label69{display:none;}
-  body[data-flat69] .app-shell[data-panel-band69=compact] [data-flat69] :is(.action-inline,.button-row,.workflow-tabs)>button{flex-basis:100% !important;}
+  /* CEP 12 / Chromium 99: ResizeObserver sets data-size on the panel itself.
+     This is the only layout path in every browser, not a container-query fallback. */
+  body[data-flat69] .app-shell[data-size=wide] [data-flat69] :is(.form-grid,.table-corner-row,.table-appearance-grid,.table-timing-simple){grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  body[data-flat69] .app-shell[data-size=wide] [data-flat69] .flat-layout69{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) !important;}
+  body[data-flat69] .app-shell[data-size=compact] .flat-nav-label69{display:none;}
+  body[data-flat69] .app-shell[data-size=compact] [data-flat69] :is(.action-inline,.button-row,.workflow-tabs)>button{flex-basis:100% !important;}
   /* At high zoom the effective CSS width may be 125px. Reduce padding, never type or targets. */
   body[data-flat69] .app-shell[data-panel-micro69=true] .workspace{padding:.142857rem !important;}
   body[data-flat69] .app-shell[data-panel-micro69=true] [data-flat69] :is(.card,details,.context40){padding:.142857rem !important;}
@@ -155,13 +154,6 @@
   body[data-flat69] #tableEditor.compact-list69 .table-cell{display:flex;flex-direction:column;inline-size:100%;}
   body[data-flat69] #tableEditor.compact-list69 .table-cell::before{content:attr(data-cell-label69);font-size:var(--ui-font-min);line-height:1.6;color:var(--ui-color-muted);unicode-bidi:isolate;}
   body[data-flat69] #tableEditor.compact-list69 .table-resize-handle{display:none !important;}
-  @container varna-panel69 (width < 340px){
-    .flat-nav-label69{display:none;}
-  }
-  @container varna-panel69 (width > 640px){
-    body[data-flat69] [data-flat69] :is(.form-grid,.table-corner-row,.table-appearance-grid,.table-timing-simple){grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
-    body[data-flat69] [data-flat69] .flat-layout69{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) !important;}
-  }
   /* Author-controlled hidden state must outrank our grid/disclosure normalization. */
   body[data-flat69] [data-flat69] [hidden]{display:none !important;}
 }

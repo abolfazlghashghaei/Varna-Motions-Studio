@@ -60,7 +60,7 @@ const globalControls=[$('#btnRefreshPreview'),$('#btnGoOutput'),$('#livePreviewG
 let active=false,mode='',lastBand='',moving=false;
 function size(){const current=document.body.dataset.uiSize44;document.documentElement.style.setProperty('--panel-root69',({tiny:12,compact:13,standard:14,large:16,xlarge:18}[current]||14)+'px');}
 function fitScene(){if(!active||w.VarnaUI.current()!=='kinetic'||!scenePreview.open)return;const stage=$('#sceneStage40'),ratio=stage.style.aspectRatio.split('/').map(Number),aspect=ratio[0]/ratio[1];if(!Number.isFinite(aspect)||aspect<=0)return;const cap=Math.min(innerHeight*.22,parseFloat(getComputedStyle(document.documentElement).fontSize)*13),width=Math.max(1,Math.min(stage.parentElement.clientWidth,cap*aspect));const value=width+'px';if(stage.style.getPropertyValue('--scene-inline69')!==value)stage.style.setProperty('--scene-inline69',value);}
-function layout(){const width=shell.getBoundingClientRect().width,band=width<340?'compact':width<=640?'regular':'wide';shell.dataset.panelBand69=band;shell.dataset.panelMicro69=String(width<180);
+function layout(){const width=shell.getBoundingClientRect().width,band=width<340?'compact':width<=640?'regular':'wide';shell.dataset.panelBand69=band;shell.dataset.size=band==='regular'?'normal':band;shell.dataset.panelMicro69=String(width<180);
  if(band!==lastBand){for(const preview of [tablePreviewShell,scenePreview])if(!preview.dataset.touched69)preview.open=band!=='compact';lastBand=band;}
  size();fitScene();if(active&&w.VarnaUI.current()==='table')w.VarnaTable50?.render?.();
 }
