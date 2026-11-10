@@ -1,0 +1,47 @@
+{
+  "scope": [
+    "table",
+    "kinetic"
+  ],
+  "widths": [
+    250,
+    320,
+    400,
+    620,
+    900,
+    1400
+  ],
+  "heights": [
+    400,
+    700,
+    1000
+  ],
+  "zooms": [
+    1,
+    1.25,
+    1.5,
+    2
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "languages": [
+    "fa",
+    "en"
+  ],
+  "cases": 576,
+  "states": 864,
+  "failures": [],
+  "pageErrors": [],
+  "source": {
+    "index.html": "0735033db379f0b041dac7e093de48dc99b2d63f72c9a410818e85f1c4883375",
+    "css/ui/pilot-b69.css": "c94024d438c3d998e875bc715d524593bcc42b9795257fd78c7d2d20e19f45b2",
+    "js/pilot-b69.js": "7a388dd9edef9d5dbe01c0194cbf41ae378cb8427e7cf7bb50e2e92f7f6e912a",
+    "js/ui-shell.js": "7b5dddd0947b01ed98bb7d788deee175cbe3ab6f646da928f13077b486c2fb77",
+    "js/sections67.js": "b8c564e0d635093fcb77ff9236b96c4affae63b813118280d2431c5a0c174f2e",
+    "js/table-pages66.js": "c4246a977ecf2727278c9b91f200e0996b0959d052dab072ba2cbc0ae0e71293",
+    "js/table-designer.js": "3b6312c5c0fe5d9b2b0db02afefb1e6a3baf01e0d3dab612dd1ed46086378c02",
+    "js/production47.js": "0fef613336cf7631b5f56962a9fc10d140107819bd4336b430a0c34781f2722f"
+  }
+}

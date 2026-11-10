@@ -35,6 +35,7 @@ class Pager{
  }
  apply(items){const chosen=new Set(items);for(const el of this.units)el.classList.toggle(this.hidden,!chosen.has(el));for(const [p,children]of this.parents)p.classList.toggle(this.hidden,!children.some(el=>chosen.has(el)));}
  refresh(target){
+  if(this.page.dataset.flat69){this.clear();return;}
   if(this.busy)return;this.busy=true;
   try{
    this.clear();const workspace=document.querySelector('#workspace');workspace.scrollTop=0;
