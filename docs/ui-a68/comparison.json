@@ -1,0 +1,30 @@
+{
+  "before": {
+    "dark": {
+      "smallText": 193,
+      "shortButtons": 62,
+      "contrastCandidates": 3,
+      "horizontalOverflow": 0
+    },
+    "light": {
+      "smallText": 193,
+      "shortButtons": 62,
+      "contrastCandidates": 25,
+      "horizontalOverflow": 0
+    }
+  },
+  "after": {
+    "dark": {
+      "smallText": 0,
+      "shortButtons": 0,
+      "contrastCandidates": 0,
+      "horizontalOverflow": 0
+    },
+    "light": {
+      "smallText": 0,
+      "shortButtons": 0,
+      "contrastCandidates": 0,
+      "horizontalOverflow": 0
+    }
+  }
+}

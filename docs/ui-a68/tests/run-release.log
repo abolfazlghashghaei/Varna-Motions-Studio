@@ -1,0 +1,550 @@
+
+SUITE text55_core.cjs
+PASS offline Persian/English spelling, Finglish approval, protected English/code/names, punctuation spans, personal dictionary removal, safe normalization, stale range and caret mapping.
+
+SUITE core.cjs
+PASS Selected contiguous words become ONE segment, untouched runs stay together
+PASS No selection and stale IDs never split the whole caption
+PASS SelectedEach only splits chosen words; undo restores merge
+PASS Merged captions split only chosen runs and preserve motion
+PASS Changing caption clears prior word selection
+PASS Global animation undo restores defaults as well as group state
+PASS Kashida fits 2 lines under increasing density without dropping words
+PASS Export carries requested line limit and fitted font size
+PASS Mixed Persian English and numbers are bidi-isolated only for render
+PASS Extracting one middle word keeps chronological position
+PASS Host and client scripts parse
+PASS Preview waits for a complete, stable file before read; delayed generation and cleanup
+PASS Cancelled preview stops polling
+PASS HTTP split UTF-8 bytes preserve Persian ژ
+TOTAL 14
+
+SUITE host.cjs
+PASS native motion, text fit, external motion paths removed
+
+SUITE regression_43.cjs
+PASS large Ctrl+M selection preserves edited tokens
+PASS manual-after caption respects free gap without shifting originals
+PASS synced motion/background undo as one transaction
+TOTAL 3
+
+SUITE timeline_import.cjs
+PASS short caption timing, undo, selected/all source text keys, style-only key merge
+
+SUITE ui.cjs
+AssertionError [ERR_ASSERTION]: Font list must initialize
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/ui.cjs:19:148 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED ui.cjs
+
+SUITE r5.cjs
+PASS R5 table styles/range, independent text timing, correction memory normalization, anchored synthetic word timing
+
+SUITE r6.cjs
+PASS R6 AE-native unified theme, stable dual-handle time rail, legacy explicit memory API and review-only transcript proposals
+
+SUITE r9_recovery.cjs
+R9 recovery static checks: PASS
+
+SUITE r14.cjs
+PASS timing: replace/split/merge preserve all future anchors
+PASS timing: inserted token uses silence; contiguous edit never ripples later words
+PASS state: anchored edit undo and redo restore word data and IDs
+PASS memory: bare aliases remain manual; two-sided context and project isolation
+PASS model discovery: changed folders invalidate stale models and ambiguous projectors
+PASS SFX scanning: ui is token-based, duration is read from actual WAV
+PASS SFX learning: replacements penalize old choices; reset clears feedback
+PASS source loudness: real FFmpeg measurement, including visible source interval
+PASS host: missing method and malformed payload report errors
+PASS ExtendScript JSON fallback: Unicode roundtrip, malformed JSON and code rejected
+PASS SFX host model: exact nonzero start/end alignment; per-cue failures; wrong comp rejected
+PASS audio host model: duck overlap merged; no cumulative gain; manual keys, expressions and edited easing preserved
+PASS table host model: 3x3 RTL merged cells, independent text time/font/color and actual outer corners
+PASS AE Glass table: absent effect blocks cleanly; installed effect reaches frame and cell Shape
+PASS output transaction: failed new captions preserve old output and roll back partial layers
+PASS batched output: rollback preserves previous layers and commit replaces only after all batches
+PASS preview transaction: old preview retained on failure; successful layers are guide and cleanup leaves user layers
+PASS CEP bridge: queued calls; timeout blocks mutations; explicit reconnect restores calls
+TOTAL 18 behavioral checks; AE assertions use a simulated host.
+
+SUITE r14_policy.cjs
+PASS SFX policy: ambient isolation, cue duration/strength, caption exclusion, off/soft/strong beat thresholds (12 assertions)
+
+SUITE r14_local_ai.cjs
+PASS 4.5 batch lifecycle: one model load across separated caption jobs; automatic release after complete batch and after failure.
+PASS local AI orchestration: loopback-only, occupied port, UTF-8 paths, hidden child, API-key/model identity, serialized requests, resource restart, bounded CPU/batch/reply, CPU-only, RAM preflight, process priority, automatic post-job unload, owned-process cleanup; fake inference engine
+
+SUITE r44.cjs
+PASS alias families, deduplication and canonical re-correction
+PASS ambiguous corrections require a choice
+PASS Persian normalization, punctuation, boundaries and phrase matching
+PASS unknown variants are reviewed, not silently replaced
+PASS canonical reversal removes self edges
+PASS contextual split preserves later audio anchor and id
+PASS hardware profiles, bounded batches, response limits and GPU zero
+PASS resource signature triggers only necessary reloads
+PASS project canonical rule resolves global alias without modifying global db
+TOTAL 9 correction/resource checks
+
+SUITE rc2.cjs
+PASS RC2: RAM auto-release, motion double-click scope, text glow/gradient, Solid/Text Glow backgrounds, Apple Liquid Glass, Playhead follow, shortcuts, independent gradient rim
+
+SUITE rc3.cjs
+PASS RC3: long-text fast layout and SRT synthetic word timing/split
+
+SUITE r45.cjs
+PASS 4.5 host model: independent native gradient channels, angle/scale/stops/radial geometry, malformed-number bounds, reverse/dither, removal, glow alpha and zero intensity/radius.
+PASS 4.5 bridge: one outstanding read, soft timeout without blocking writes, no poll pile-up, late response recovery, queued-action priority, invalid read ignored.
+
+SUITE rc4.cjs
+PASS RC4: self-healing host, long-output batching/fallback, safe contextual correction memory
+
+SUITE rc6.cjs
+RC6 stable startup/memory checks passed
+
+SUITE rc7.cjs
+RC7 live marker/layer timing checks passed
+
+SUITE r46_memory.cjs
+PASS direct and old imported unsafe rules stay manual even with an explicit auto flag
+PASS two anchors permit a one-to-many brand correction only in the same phrase
+PASS bare spelling aliases are retained for review, not applied blindly
+PASS project entity locks prevent both phrase and fuzzy auto-edits
+PASS manual edits retain two-sided context plus a bare review alias; boundary edits remain manual
+PASS direct selection borrows context only from a unique occurrence
+PASS word-level memory respects pauses/punctuation and a one-off call never saves memory
+TOTAL 7 safe correction checks
+
+SUITE rc8.cjs
+PASS RC8 strict context, SRT word movement/order, exceptions, state compression/bundle, AE project folder roundtrip, preview/shortcuts
+
+SUITE rc5.cjs
+PASS RC5: correction provenance, conservative timing/sentences, manual/TV platform guides, output safety
+
+SUITE rc6_brain.cjs
+PASS RC6 Project Brain plan, quiet captions, human approval, manual overrides, undo, project persistence, install levels
+
+SUITE rc10_integrations.cjs
+PASS direct AE Glass detection/application, 750 FFX assets, isolated Textyle application, old gallery removal
+
+SUITE rc11_music.cjs
+PASS RC11: local-only YuE endpoint, edit-aware plan, complete audio graph, AE Glass binary and text/music UI
+
+SUITE rc13_ae_music.cjs
+PASS RC12: separate AE Glass background, ACE graphs, workflow catalog and model controls
+
+SUITE rc15_fixes.cjs
+PASS RC25 state: standalone/combined materials preserve geometry, separate text/background optics, brand persistence, one-step Undo, immutable transcript timing and selected-layout guard
+PASS RC25 host: fixed final-size box without hiding background, smooth glyph-size geometry, isolated measurement helpers, separate Cosmic color and Glassary optical layers
+PASS RC25 update: actual refreshCaptionStyles enables and removes the Source Text typing expression on existing output layers
+PASS RC25 reusable brands: project-independent registry merges without losing saved identities
+PASS RC15: typed geometry, optics overlay, MiniMax, audio progress and shared engine
+
+SUITE rc16_fixes.cjs
+PASS RC16: automatic engine detection, model path registration, centered shortcuts and visible error
+
+SUITE rc18_audio_glass.cjs
+PASS RC18: model folder discovery, shared settings preservation, manual music plan, glass and UI wiring
+
+SUITE rc18_maintenance.cjs
+PASS RC18 maintenance: conservative correction, per-occurrence approval, preview race guards, installer validation and continuous corners
+
+SUITE rc18_music_lifecycle.cjs
+PASS RC18 audio lifecycle: automatic folder/inventory discovery, complete models, local power control and simplified UI
+
+SUITE rc18_shared_engine.cjs
+PASS RC18 shared engine: Qaf runtime reuse, corrected health probe, reuse of healthy engines and staged repair of incomplete engines
+
+SUITE rc19_engine_diagnostics.cjs
+PASS RC19 engine diagnostics: real cause, exit code, full log, UTF-8
+
+SUITE rc19_port_background.cjs
+PASS RC19: occupied port fallback and visible AE background selection
+
+SUITE rc22_integrated.cjs
+PASS RC22: persisted effects, native ScriptUI handlers, template timing/font preservation, undo and preview retention
+
+SUITE rc24_host.cjs
+PASS RC24: prefix geometry timing, natural cadence, unicode clusters, custom-control serialization, independent solid opacity, original Glassary command and saved workspaces
+PASS RC24: text-review preview is audio-only and seeking does not reopen the video viewer
+PASS RC24: glass helper isolation, preserved motion transforms, RTL write-on ordering and stale CEP host recovery
+
+SUITE rc24_ui.cjs
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(calls.some(x=>x[0]==='open'&&x[1]==='railcut'))
+
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/rc24_ui.cjs:33:298 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc24_ui.cjs
+
+SUITE rc25_appearance.cjs
+PASS RC25 state: standalone/combined materials preserve geometry, separate text/background optics, brand persistence, one-step Undo, immutable transcript timing and selected-layout guard
+PASS RC25 host: fixed final-size box without hiding background, smooth glyph-size geometry, isolated measurement helpers, separate Cosmic color and Glassary optical layers
+PASS RC25 update: actual refreshCaptionStyles enables and removes the Source Text typing expression on existing output layers
+PASS RC25 reusable brands: project-independent registry merges without losing saved identities
+
+SUITE rc25_ui.cjs
+PASS RC25 DOM: typing and box-growth toggles, output motion update, one-engine-at-a-time controls, brand actions and separate letter settings
+PASS RC25 effect editor: switching categories preserves drafts and Apply writes edited parameters
+PASS RC25 Orb: every original CSS/JS URL resolves to an existing client asset, encoded spaces, correct extension root, unchanged licence interface and error diagnostics
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(calls.some(x=>x[0]==='open'&&x[1]==='railcut'))
+
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/rc24_ui.cjs:33:298 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc25_ui.cjs
+
+SUITE rc26_stability.cjs
+PASS RC26 preview: stable layer identities for unchanged groups, partial rebuild, rollback, eight OFF/ON cycles without duplicate helpers and no forced viewer
+PASS RC26 Glassary: original Geometry Bridge names retained, legacy renamed effect repaired, unchanged values not rewritten and schema uses the original shape conversion
+PASS RC26 CEP: heavy preview/native effect operations get the long timeout; ordinary reads receive a 60-second budget for busy hosts
+
+SUITE rc26_app_actions.cjs
+AssertionError [ERR_ASSERTION]: Font list must initialize
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/ui.cjs:19:148 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc26_app_actions.cjs
+
+SUITE rc26_safe.cjs
+PASS RC26 social guides: 14 profile layouts, escaped editable identity, zero opacity, custom margins, generated asset and no sample photo inside composition overlays
+PASS RC26 native safe zone: full-frame guide scaling, locked replacement/removal, shared visibility, rollback preserving previous guides and dimension rollback
+
+SUITE rc27_features.cjs
+PASS RC27: independent background entry/exit timing, capsule radius and circular tangents, brand asset validation
+
+SUITE rc28_safe.cjs
+PASS RC28: official Meta/Google geometry and scaling, TikTok stepped LTR/RTL and four caption variants, >45% margins, reference viewport transform, calibrated icon positions and reference exclusion
+PASS RC28: button reservations preserve independent source geometry
+
+SUITE rc29_composition.cjs
+PASS RC29 composition: actual comp reference, full native audio path, work-area offsets, disabled picture/enabled sound, OutputModule reacquisition, queue restoration and owned cleanup on render failure
+
+SUITE rc29_music.cjs
+PASS RC29: genre identity over stale instrument selection, instrumental MiniMax payload, conflicting vocal instructions removed, schema compatibility and typed seeds, detailed engine errors, Persian/English font queries and conservative vocal-evidence rejection
+
+SUITE rc33_extendscript.cjs
+PASS RC33: ES3 syntax for all 22 host files, reserved-word regression reproduced/rejected, combined host synchronized
+
+SUITE rc34_loader.cjs
+PASS loader: absolute module bootstrap from unrelated cwd, Persian/URL path, Windows drive fallback, original dependency error and no removed color engine
+
+SUITE rc35_output.cjs
+PASS RC35: 19 captions in both processing/stack directions across former 8-item boundaries, individual unchanged groups, helper block order/locks, renderable flags/solo, strict expression/style errors, rollback preserves old text and anchor, commit cleans old helpers
+
+SUITE rc35_app.cjs
+AssertionError [ERR_ASSERTION]: Font list must initialize
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/ui.cjs:19:148 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc35_app.cjs
+
+SUITE rc36_output.cjs
+PASS RC36: output target fallback while project-data folder has focus, explicit comp session, stale target rejection, selected comp fallback, no focus theft and complete color feature removal
+
+SUITE rc36_app.cjs
+AssertionError [ERR_ASSERTION]: Font list must initialize
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/ui.cjs:19:148 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc36_app.cjs
+
+SUITE rc37_captions.cjs
+AssertionError [ERR_ASSERTION]: Font list must initialize
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/ui.cjs:19:148 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc37_captions.cjs
+
+SUITE rc37_output.cjs
+PASS RC37 output: identical block reuse, one-caption replacement, chronological/reverse stacking, deleted caption cleanup, failed/cancelled build rollback, missing helper rebuild, native emphasis ranges, shared stack parent, standalone host sync
+
+SUITE rc38_semantic.cjs
+PASS RC38 semantic: context-aware indexed prompt, meaningful negation/brand selection retention, strict schema/index/budget validation and one repair, no heuristic fallback, cancellation/manual/stale result protection, one undo, real authenticated local chat transport and release of model job
+
+SUITE rc38_templates.cjs
+PASS RC38 templates: 100 original MOGRT projects/thumbnails/control inventories + 15 captions/5 hooks, asset hashes, lazy source reuse, prioritized text slots, independent recursive copies/expression links, original source preservation, timing/active-word controls, failure and output cleanup
+
+SUITE rc39_words.cjs
+PASS RC39 words: corpus rarity/stopwords/brands/protected phrases/negation, seeded useful variation, speech/reverse/uniform timing, original template colors on native text, exact whole-word selector indices, all seven native motion styles, active color and trimming retime, full-source typing and removal
+
+SUITE rc39_engine.cjs
+PASS RC39 engine: actual HTTP readiness/authenticated chat through controlled child, GPU-memory failure diagnostics retained, one CPU/smaller-context recovery and cached reuse, unsupported architecture and generic exit preserve stderr without blind retries
+
+SUITE rc40_kinetic.cjs
+PASS RC40 kinetic: exact phrase partition, protected names, no dropped text, speech/cue/even timing, cumulative/single holds, six bounded layouts, actual host renderer routing, editable full-source text with independent entry and shared control, retiming, hidden private destinations, cleanup and creation failure rollback
+
+SUITE rc40_templates.cjs
+PASS RC40 templates: every original color role preserved by default, explicit single-role RGBA override only, source untouched, native-to-full-template and full-template-to-native replacement, staged failure retains old output and removes temporary graph
+
+SUITE rc41_bridge.cjs
+PASS RC41 bridge: physically one native call across soft timeout and late replies, no parallel reconnect/retry, safe idle wait/expiry, exclusive output gates background reads/vendor scripts/polls, actions drain a pending playhead read
+
+SUITE rc41_output.cjs
+PASS RC41 output: read-only preflight without plugin instantiation, installed-effect metadata, explicit nonmutating light profile, indexed layer difference and ID-less fallback, late begin/build safely aborted with previous output retained, late commit receipt recovers success without duplicate build or rollback
+
+SUITE rc41_app.cjs
+AssertionError [ERR_ASSERTION]: Font list must initialize
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/ui.cjs:19:148 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc41_app.cjs
+
+SUITE rc42_boot.cjs
+PASS RC42 compatibility: conservative regex delimiter guard, 1200 RTL scanner equivalence cases and readiness after the final host extension
+
+SUITE rc43_host.cjs
+PASS RC43 host: RC36 direct loading; global/local-scope cold and manifest startup; atomic initialization failures; missing _err repair; alias-independent closures; real native-text preview before/after 64 sequential captions in both orders; 1 host load, 1 caption/request, 1 physical call at a time; user layers preserved. Adobe runtime remains untested.
+
+SUITE rc44_controls.cjs
+PASS RC44 controls: compatible default, exact reversible emphasis-only payload, settings persistence/reset/undo/redo, zero disabled model work, rejection of in-flight result, reenabled suggestions
+
+SUITE rc45_host.cjs
+PASS RC45 host: reported RC44 scope failure reproduced; real local-scope host with absent/poisoned global engine; independent phrase fonts/backgrounds/entry/exit/delay/lifetime; nonmutating payloads; explicit preview seek versus automatic refresh; reuse, cleanup and failed creation rollback
+
+SUITE rc45_app.cjs
+AssertionError [ERR_ASSERTION]: Font list must initialize
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/ui.cjs:19:148 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc45_app.cjs
+
+SUITE rc46_host.cjs
+PASS RC46 native-constraint model: legacy last-key remap failure reproduced; actual production text styling/reset/layout/native preview and independent background without renderer stubs; hidden 2D/null/unsupported/separated transform channels; native cue duration; transactional preview replacement/rollback; method+line error diagnostics. Adobe runtime remains untested.
+
+SUITE rc46_scene.cjs
+scene40-ui.js:19
+ const sectionLabel=document.createElement('label');sectionLabel.className='control';sectionLabel.innerHTML='<span>تنظیمات همین کلمه</span><select id="pieceSection66" aria-label="دستهٔ تنظیمات کلمه"></select>';box.before(sectionLabel);const sectionSelect=sectionLabel.querySelector('select');sectionSelect.onchange=()=>{pieceSection66=sectionSelect.value;for(const el of box.children)el.open=el.dataset.section66===pieceSection66;};
+                                                                                                                                                                                                                      ^
+
+TypeError: box.before is not a function
+    at rows (scene40-ui.js:19:215)
+    at sync (scene40-ui.js:49:1042)
+    at scene40-ui.js:61:3150
+    at scene40-ui.js:62:3
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at Object.<anonymous> (/workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/rc46_scene.cjs:18:122)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+
+Node.js v24.19.0
+FAILED rc46_scene.cjs
+
+SUITE rc47_templates.cjs
+PASS RC47 native templates: all120 bundled catalog assets verified; legacy group setValue failure reproduced; real adapter filters structural/compositing/readonly leaves, validates stable identities/routes, repairs old unsupported snapshots, replaces active-word automation only, preserves unrelated controls/source, rolls back invalid private graphs, resolves external dependencies by owning asset, and cleans private peers only after the last retained output is removed. Adobe runtime untested.
+
+SUITE rc47_templates_ui.cjs
+PASS RC47 template UI: complete production handlers, editable-only/distinct controls, typed values+alpha, selected/all/reset, direct color-role guard, one-time saved-role restoration, stale/failed import isolation, empty-project guard. Browser/Adobe pixels untested.
+
+SUITE rc47_ui.cjs
+PASS RC47 workspace: actual motion toggle fieldsets preserve values, keyword/preflight/manual gates, five sizes+auto breakpoints+preferences, spacing reset, narrow popover calculation, Escape focus, native error and repair-note propagation. Browser pixels untested.
+
+SUITE rc47_host.cjs
+PASS RC47 host/core: ES3 project-state read without Array.some; sparse/invalid metadata rejected; asynchronous malformed CEP envelopes settle and queue recovers; explicit destinations survive folder focus; actual kinetic frame preview cleans dependencies on repeated end and stage failure; actual output commit with null reply recovers its receipt without retry or abort. Adobe runtime untested.
+
+SUITE rc47_state.cjs
+PASS RC47 state: disabled typography uses ordinary fitting/stacking; stale partition export repair is nonmutating and explicit; exact phrase decorations/protected grouping preserved; valid artwork/keyword-off remain intact; import undo/redo restores matching reset baseline
+
+SUITE rc47_appearance.cjs
+PASS RC47 appearance: actual native background/style/typing hooks; repeated independent-background finalization is idempotent; explicit disabled background removes owned surfaces/anchors; fixed typing measurements are replaced; user shapes preserved; native refusal reports failure. Adobe rendering remains untested.
+
+SUITE rc47_engine.cjs
+PASS RC47 production music adapter: unclassified stderr cause reaches error message; noisy startup banners filtered while full diagnostic retained; classified port cause wins; generated-file rename failure rejects and cleans partial audio; subsequent job succeeds without a stuck active state. No real models/GPU tested.
+
+SUITE rc47_app.cjs
+AssertionError [ERR_ASSERTION]: Font list must initialize
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/ui.cjs:19:148 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+FAILED rc47_app.cjs
+
+SUITE rc18_panel_engine_corrections.cjs
+PASS RC18 panel: word-only review, right-click, shortcut registration and engine exit details
+
+SUITE rc21_companions_shots.cjs
+node:internal/assert/utils:77
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(html.includes('id="'+id+'"'))
+
+    at Object.<anonymous> (/workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/rc21_companions_shots.cjs:7:149)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+FAILED rc21_companions_shots.cjs
+
+SUITE production47_core.cjs
+PASS Production47 review: two-neighbour context, standalone word, near spellings, explicit conflicting choices, exclusions, punctuation, multiword replacements, protected names and nonmutating proposals.
+
+SUITE table47_host.cjs
+PASS Table RC47 host: shared surface, continuous merge-aware RTL/LTR dividers, opacity/color/width, placement, four entries, independent mode, serialized replacement rollback, pinned cleanup and bounded timing, global/cell fonts, curve validation and keyed exits (AE model).
+
+SUITE installer_package.cjs
+PASS installer: 3330 source checksums, visible BAT launchers, ownership boundary and rollback
+
+SUITE liquid48_host.cjs
+PASS Liquid48 native model: 18 actual table text placements across RTL/LTR; independent word tracking/strokes/colors/gradient angle; spring expression and outro; explicit color precedence; validation, nonmutating payloads and cleanup. Adobe pixels untested.
+
+SUITE finalize49_core.cjs
+PASS brand defaults, unchanged existing captions, optional New, persistence and actual transcript reset
+PASS actual attributed ease conversion/readback, Hold preservation, input rejection, private host namespace, composition context, script execution/failure/undo groups
+PASS actual AI client for three provider payloads and code extraction; no external service called
+
+SUITE production50_core.cjs
+node:assert:152
+  throw new AssertionError(obj);
+  ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+102 !== 12
+
+    at Object.<anonymous> (/workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/production50_core.cjs:3:8)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 102,
+  expected: 12,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+FAILED production50_core.cjs
+
+SUITE production50_preview.cjs
+PASS actual primary live-preview renderer: user-deleted AE-invalid objects, off/on recreation, recreation without toggle, three repeated cycles, identity reuse and preservation of unrelated user layers.
+PASS actual primary caption renderer converts legacy template state to user-owned native text without any project import or payload mutation.
+
+SUITE production50_audio.cjs
+PASS actual local audio adapter: music-only models refuse ambience without submitting a job; real YuE/MiniMax payloads carry selected genre/instrument/seed/steps/model-specific guidance and native instrumental conventions; automatic effects routing selects Stable Audio; completed HTTP history downloads exact WAV bytes without partial files. No model/GPU quality tested.
+
+SUITE music_duration_instrumental.cjs
+PASS music engine: headless startup, model settings, instrumental conditioning and full timeline duration
+
+SUITE studio51_core.cjs
+PASS Studio51 core: real source trims/split, same-track ripple, lock/compatibility boundaries, atomic failed edit, undo/redo, still timing, Persian SRT round trip, per-word native styles, preserved native payload, invalid project rejection, exact primary host embedding.
+
+SUITE studio51_engine.cjs
+PASS Studio51 engine: discovered Qwen2.5 Vision projector never attached to Qwen3.5 text, type, translation or manual text; explicit Vision retains projector; Vision/text role transitions checked against actual spawned arguments and authenticated readiness.
+
+SUITE studio51_host.cjs
+PASS Studio51 actual primary adapter in AE model: new composition dimensions/duration, exact source in/out alignment, contain transform and position, native user subtitle, reused source footage, file preflight, failed-caption rollback preserves all pre-existing items. Native Adobe runtime still untested.
+
+SUITE studio51_server.cjs
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+404 !== 200
+
+    at /workspace/Varna-Motions-Studio/Varna_Motion_Studio/tests/studio51_server.cjs:5:161
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 404,
+  expected: 200,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+FAILED studio51_server.cjs
+
+SUITE studio52_core.cjs
+PASS Studio52: atomic layer validation/history, independent width/height interpolation with fixed roundness, frame-baked native Size keys, generated Text+ background/entrance, strict Premiere JSON fallback, video-track MOGRT ticks and occupied-track protection. Native applications/inference remain untested.
+
+SUITE studio52_ai.cjs
+PASS Studio52 AI service policy: strict known-caption ids/JSON, contextual word review, translation role boundary, actual music planner preserves genre/instruments/model, detected-vocal/silent/invalid-length rejection. Model inference and audio bytes are controlled fixtures, not quality passes.
+
+SUITE studio53_core.cjs
+PASS Studio53 core: keyed split preserves motion continuity/source identity, invalid edits roll back, OTIO keeps source ranges, strict host capabilities and editor-free other-host entrypoints.
+
+SUITE studio53_jobs.cjs
+PASS Studio53 jobs: actual WebSocket progress, foreign-job isolation, reconnect/history, persistent recovery, job-scoped cancel, legacy safe cancel, lost-job detection without duplicate submission, loopback/schema validation, redacted log.
+
+SUITE studio53_engine.cjs
+PASS Studio53 engine: actual H264/H265/ProRes/PCM/MP3/AAC encoded and probed, real proxy, measured scene cut, Resolve service excludes NLE, token-protected journal and readable licenses.
+
+SUITE studio54_core.cjs
+PASS Studio54 core: stable caption identity, full settings conversion, custom shape-size curves, atomic reviewed commands, merged/timed/independent table cells, exact native Premiere video-track insertion/ownership and full host UI control coverage.
+
+SUITE studio54_resolve.cjs
+PASS Resolve native bus: real files, nonce/session checks, disconnected/stale status, bounded timeout, no automatic duplicate operations, owned-request cleanup and operation whitelist.
+
+Release gate: 86/100 suites passed. Adobe runtime and visual review are separate gates.
