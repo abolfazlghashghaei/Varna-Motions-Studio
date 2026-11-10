@@ -17,6 +17,8 @@ This file records incomplete requirements explicitly. Workbench66 is one impleme
 
 ## Unfinished requirements
 
+Progress continues in [TODO_WORKBENCH67.md](TODO_WORKBENCH67.md). This list records the Workbench66 baseline; shared backgrounds, cross-caption boundaries and history sharing have since been implemented with the limits described there.
+
 - [ ] Native AE QA: inspect every font/preset, shared glass optics, continuous dividers, comp switching, deleted-preview recreation and audio mix. Reason: After Effects/Windows is unavailable in this environment; modeled API tests cannot establish these results.
 - [ ] General table keyframe/property editor with handles, repeated/bidirectional cycles, sectional entry/exit and editable curves. Reason: this batch exposes authored native animation combinations and fixed curve families, not a general keyframe engine.
 - [ ] Paginate every remaining panel at short/narrow CEP sizes and keep their contextual previews accessible. Reason: this batch fully pages table settings and the native style library, and categorizes word controls; other large panels still scroll. Do not hide inaccessible controls with overflow:hidden. Extreme small sizes/expanded advanced table disclosures also need further layout QA.

@@ -1034,6 +1034,7 @@ GHAFHost.beginOutputSession=function(encoded){
  if(GHAFHost._outputSession){var old=GHAFHost._outputSession;var aborted=GHAFJSON.parse(GHAFHost.abortOutputSession(encodeURIComponent(GHAFJSON.stringify({token:old.token}))));if(!aborted.ok)return GHAFHost._err('OUTPUT_CLEANUP_FAILED');}
  var token=String(new Date().getTime())+'_'+Math.floor(Math.random()*1000000);
  GHAFHost._outputSession={token:token,comp:c,previous:GHAFHost._outputLayers(c),created:[],count:0,expected:Number(p.expected||0),clearOld:p.clearOld===true,tail:null};
+ if(p.reflowGroups67){app.beginUndoGroup('Varna Stage Shared Background');try{var surfaces67=GHAFHost._reflowStage67(c,p.reflowGroups67,false);GHAFHost._outputSession.created=surfaces67;GHAFHost._outputSession.reflowReady67=true;}catch(e){GHAFHost._outputSession=null;return GHAFHost._err(String(e));}finally{app.endUndoGroup();}}
  return GHAFHost._ok({token:token});
 };
 GHAFHost.commitOutputSession=function(encoded){
@@ -1050,6 +1051,7 @@ GHAFHost.buildOutput = function(encoded){
     app.beginUndoGroup("GHAF Studio Output");
     try{
         var before=GHAFHost._layerSet(c),oldOutput=GHAFHost._outputLayers(c),outputTail=p.sessionToken?session.tail:null;
+        var hasReflow67=false;for(var gr67=0;gr67<groups.length;gr67++)if(GHAFHost._reflowEnabled67(groups[gr67]))hasReflow67=true;if(hasReflow67){if(p.sessionToken&&!session.reflowReady67)throw Error('REFLOW_REQUIRES_SESSION_GRAPH');if(!p.sessionToken)GHAFHost._reflowStage67(c,groups,false);groups=GHAFHost._reflowGroups67(groups);}
         if(mode==="marker"){
             var base=groups[0],bst=base.style||{},l=null;
             if(bst.justify){var bw=c.width*Math.max(.3,Math.min(1,Number(bst.boxWidthPct||82)/100));l=c.layers.addBoxText([bw,Math.max(100,c.height*.45)]);}else l=c.layers.addText("");
@@ -1783,6 +1785,7 @@ GHAFHost.updateLivePreview=function(encoded){
  function present(layer){for(var i=0;i<old.length;i++)if(old[i]===layer)return true;return false;}
  function retained(layer){for(var i=0;i<keep.length;i++)if(keep[i]===layer)return true;return false;}
  app.beginUndoGroup('Varna Preview');try{
+  var reflowSource67=groups;GHAFHost._reflowValidate67(groups);groups=GHAFHost._reflowGroups67(groups);
   for(var i=0;i<groups.length;i++){var g=groups[i];g.anim=g.anim||{};g.anim.typeSound=false;var key=String(g.id==null?i:g.id),signature=GHAFJSON.stringify(g),record=null;
    for(var j=0;j<records.length;j++)if(records[j].key===key&&records[j].signature===signature){var valid=records[j].layers.length>0;for(var k=0;k<records[j].layers.length;k++)if(!present(records[j].layers[k]))valid=false;if(valid)record=records[j];break;}
    if(record){reused++;next.push(record);for(j=0;j<record.layers.length;j++)keep.push(record.layers[j]);continue;}
@@ -1790,7 +1793,8 @@ GHAFHost.updateLivePreview=function(encoded){
    for(j=0;j<fresh.length;j++){var layer=fresh[j];layer.locked=false;layer.enabled=true;layer.guideLayer=true;layer.shy=true;layer.comment=String(layer.comment||'')+'\nVARNA_LIVE_OWNER';keep.push(layer);}
    next.push({key:key,signature:signature,layers:fresh});changed++;
   }
-  var stale=[];for(i=0;i<previous.length;i++)if(!retained(previous[i]))stale.push(previous[i]);GHAFHost._deleteLayers(stale);GHAFHost._livePreviewRecords[String(c.id)]=next;if(p.seekPreview45===true&&groups.length){var focus=groups[0],st=Math.max(0,Number(focus.start)||0),en=Math.min(c.duration,Number(focus.end)||st+c.frameDuration);c.time=Math.max(0,Math.min(c.duration-c.frameDuration,st+Math.min(.6,Math.max(c.frameDuration,(en-st)*.55))));}if(p.focusViewer!==false)c.openInViewer();return GHAFHost._ok({created:groups.length,changed:changed,reused:reused,followTimeline:true,compId:c.id});
+  var shared67=GHAFHost._reflowStage67(c,reflowSource67,true);for(var sr67=0;sr67<shared67.length;sr67++)keep.push(shared67[sr67]);
+  var stale=[];for(i=0;i<previous.length;i++)if(!retained(previous[i]))stale.push(previous[i]);GHAFHost._deleteLayers(stale);GHAFHost._livePreviewRecords[String(c.id)]=next;if(p.seekPreview45===true&&groups.length){var focus=groups[0];for(var focus67=0;focus67<groups.length;focus67++)if(String(groups[focus67].id)===String(p.focusGroupId67))focus=groups[focus67];var st=Math.max(0,Number(focus.start)||0),en=Math.min(c.duration,Number(focus.end)||st+c.frameDuration);c.time=Math.max(0,Math.min(c.duration-c.frameDuration,st+Math.min(.6,Math.max(c.frameDuration,(en-st)*.55))));}if(p.focusViewer!==false)c.openInViewer();return GHAFHost._ok({created:groups.length,changed:changed,reused:reused,followTimeline:true,compId:c.id});
  }catch(e){GHAFHost._deleteLayers(GHAFHost._newLayers(c,old));return GHAFHost._err(String(e));}finally{app.endUndoGroup();}
 };
 
@@ -1813,7 +1817,7 @@ GHAFHost.createSafeZone=function(encoded){
 GHAFHost.removeSafeZone=function(){var c=GHAFHost._activeComp();if(!c)return GHAFHost._ok({removed:0});var list=GHAFHost._safeLayers(c);GHAFHost._deleteLayers(list);return GHAFHost._ok({removed:list.length});};
 GHAFHost.setSafeZoneVisible=function(encoded){var p=GHAFHost._parse(encoded),c=GHAFHost._activeComp();if(!c)return GHAFHost._err('NO_COMP');try{var list=GHAFHost._safeLayers(c);for(var i=0;i<list.length;i++){var locked=list[i].locked;list[i].locked=false;list[i].enabled=p.visible!==false;list[i].locked=locked;}return GHAFHost._ok({visible:p.visible!==false});}catch(e){return GHAFHost._err(String(e));}};
 
-GHAFHost._bridgeRevision='rc47.8-workbench66';GHAFHost._tableRevision=1;
+GHAFHost._bridgeRevision='rc47.9-workbench67';GHAFHost._tableRevision=1;
 
 /* RC27: explicit ownership, exact guide geometry, independent surfaces, portable brand assets. */
 GHAFHost._typingExpression=function(a){
@@ -2541,6 +2545,49 @@ GHAFHost._entrySound66=function(owner,g,config,append){
 (function(){var outputs=GHAFHost._outputLayers;GHAFHost._outputLayers=function(c){var result=outputs(c),owners={},i;for(i=0;i<result.length;i++)owners['L'+(result[i].id==null?result[i].index:result[i].id)]=true;for(i=1;i<=c.numLayers;i++){var l=c.layer(i),parent=l.parent;if(GHAFHost._isEntry66(l)&&parent&&owners['L'+(parent.id==null?parent.index:parent.id)])result.push(l);}return result;};})();
 (function(){var create=GHAFHost._createCaption;GHAFHost._createCaption=function(c,g,name){var layer=create(c,g,name);if(!/^__/.test(String(name))&&(g.anim||{}).entrySound66&&g.anim.entrySound66.enabled===true)GHAFHost._entrySound66(layer,g,g.anim.entrySound66);return layer;};})();
 
+/* REFLOW67_SHARED_BEGIN */
+var VarnaReflow67=/* ES3 shared geometry: native preview and export evaluate the same transition. */
+(function(root,factory){var api=factory();if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.VarnaReflow67=api;return api;})(typeof window!=='undefined'?window:this,function factoryReflow67(){
+function num(v,d,a,b){v=Number(v);return Math.max(a,Math.min(b,isFinite(v)?v:d));}
+function config(v){v=v||{};return {enabled:v.enabled===true,duration:num(v.duration,.32,.03,2),gap:num(v.gap,.15,0,2),curve:/^(smooth|spring|linear)$/.test(v.curve)?v.curve:'spring'};}
+function progress(u,curve){u=Math.max(0,Math.min(1,u));if(curve==='linear')return u;if(curve==='spring')return u>=1?1:1-Math.exp(-8*u)*Math.cos(10*u);return u*u*(3-2*u);}
+function runs(entries){var list=entries.slice(0),out=[],run=null,i;list.sort(function(a,b){return a.start-b.start||a.order-b.order;});for(i=0;i<list.length;i++){
+ var e=list[i],cfg=config(e.config);if(!(e.end>e.start)||e.bounds.length!==4)throw Error('INVALID_REFLOW_BOUNDS');for(var k=0;k<4;k++)if(!isFinite(Number(e.bounds[k])))throw Error('INVALID_REFLOW_BOUNDS');if(e.bounds[0]<=0||e.bounds[1]<=0)throw Error('INVALID_REFLOW_BOUNDS');
+ if(!run||run.signature!==e.signature||e.start<run.end-.0001||e.start-run.end>cfg.gap){run={signature:e.signature,config:cfg,start:e.start,end:e.end,points:[]};out.push(run);}run.end=e.end;run.points.push({time:e.start,end:e.end,bounds:e.bounds.slice(0),id:e.id,config:cfg});
+ }return out;}
+function at(run,time){var points=run.points;if(!points.length)throw Error('EMPTY_REFLOW');var lo=0,hi=points.length-1,index=0;while(lo<=hi){var mid=Math.floor((lo+hi)/2);if(points[mid].time<=time){index=mid;lo=mid+1;}else hi=mid-1;}
+ var point=points[index],target=point.bounds;if(index===0)return target.slice(0);var duration=Math.min((point.config||run.config).duration,(point.end-point.time)*.45),u=progress((time-point.time)/Math.max(.001,duration),(point.config||run.config).curve),from=points[index-1].bounds,result=[];for(var i=0;i<4;i++)result.push(from[i]+(target[i]-from[i])*u);result[0]=Math.max(2,result[0]);result[1]=Math.max(2,result[1]);return result;
+}
+function expression(run,stringify){return '('+factoryReflow67.toString()+')().at('+stringify({config:run.config,points:run.points})+',time)';}
+return {config:config,progress:progress,runs:runs,at:at,expression:expression};
+});
+/* Shared native background staging. It never deletes the prior output before success. */
+GHAFHost._reflowEnabled67=function(g){return !!(g.bg&&g.bg.enabled&&g.bg.reflow67&&g.bg.reflow67.enabled===true);};
+GHAFHost._reflowGroups67=function(groups){var out=[];for(var i=0;i<groups.length;i++){var g=GHAFJSON.parse(GHAFJSON.stringify(groups[i]));if(GHAFHost._reflowEnabled67(g))g.bg.enabled=false;out.push(g);}return out;};
+GHAFHost._reflowOwned67=function(c,preview){var out=[];for(var i=1;i<=c.numLayers;i++){var l=c.layer(i),comment=String(l.comment||'');if(comment.indexOf('VARNA_REFLOW67')>=0&&(/VARNA_LIVE_OWNER/.test(comment)===!!preview))out.push(l);}return out;};
+GHAFHost._reflowSignature67=function(bg){var copy=GHAFJSON.parse(GHAFJSON.stringify(bg));delete copy.reflow67;delete copy.followTyping;return GHAFJSON.stringify(copy);};
+GHAFHost._reflowValidate67=function(groups){for(var i=0;i<groups.length;i++){var g=groups[i];if(!GHAFHost._reflowEnabled67(g))continue;var anim=g.anim||{},style=String(g.bg.style||'solid');if(anim.kinetic40&&anim.kinetic40.enabled!==false||anim.template38||anim.smartTemplate)throw Error('سطح پیوسته برای متن بومی است؛ برای صحنه یا قالب، بک‌گراند هر عبارت را انتخاب کن.');if(!/^(solid|liquid|aeGlass|cosmic|glassary)$/.test(style))throw Error('این متریال از سطح پیوسته پشتیبانی نمی‌کند.');if(!isFinite(Number(g.start))||!isFinite(Number(g.end))||Number(g.end)<=Number(g.start))throw Error('INVALID_REFLOW_TIME');}};
+GHAFHost._reflowStage67=function(c,groups,preview){GHAFHost._reflowValidate67(groups);var before=GHAFHost._layerSet(c),entries=[],materials={},made=[],tag=String(new Date().getTime())+'_'+Math.floor(Math.random()*1000000),i;
+ try{
+  for(i=0;i<groups.length;i++){var g=groups[i];if(!GHAFHost._reflowEnabled67(g))continue;var measureBefore=GHAFHost._layerSet(c),copy=GHAFJSON.parse(GHAFJSON.stringify(g));copy.anim={mode:'simple',preset:'none',outPreset:'none',typeSound:false};copy.bg={enabled:false};copy.style=copy.style||{};copy.style.aeGlassText=false;copy.style.vendorEffects=[];copy.style.glowEnabled=false;
+   try{var text=GHAFHost._createTextLayer(c,copy,'__VARNA_REFLOW_MEASURE67__'+i),r=text.sourceRectAtTime(text.inPoint,false),tr=text.property('ADBE Transform Group'),position=tr.property('ADBE Position').valueAtTime(text.inPoint,false),scale=tr.property('ADBE Scale').valueAtTime(text.inPoint,false),anchor=tr.property('ADBE Anchor Point').valueAtTime(text.inPoint,false),signature=GHAFHost._reflowSignature67(g.bg),bounds=[r.width*scale[0]/100,r.height*scale[1]/100,position[0]+(r.left+r.width/2-anchor[0])*scale[0]/100,position[1]+(r.top+r.height/2-anchor[1])*scale[1]/100];materials[signature]=g.bg;entries.push({id:g.id,order:i,start:Math.max(0,Number(g.start)),end:Math.min(c.duration,Number(g.end)),signature:signature,bounds:bounds,config:g.bg.reflow67});}
+   finally{GHAFHost._deleteLayers(GHAFHost._newLayers(c,measureBefore));}
+  }
+  var runs=VarnaReflow67.runs(entries);
+  for(var ri=0;ri<runs.length;ri++){var run=runs[ri],bg=GHAFJSON.parse(GHAFJSON.stringify(materials[run.signature])),startLayers=GHAFHost._layerSet(c),carrier=c.layers.addText(''),first=run.points[0].bounds;carrier.name='__VARNA_BG_ANCHOR__GHAF_CAP_REFLOW67_'+tag+'_'+ri;carrier.inPoint=run.start;carrier.outPoint=run.end;carrier.enabled=false;carrier.guideLayer=true;carrier.shy=true;carrier.locked=false;var ct=carrier.property('ADBE Transform Group');ct.property('ADBE Anchor Point').setValue([0,0]);ct.property('ADBE Scale').setValue([100,100]);ct.property('ADBE Position').setValue([first[2],first[3]]);var evaluate=VarnaReflow67.expression(run,GHAFJSON.stringify);ct.property('ADBE Position').expression='var q='+evaluate+';[q[2],q[3]];';var control=carrier.property('ADBE Effect Parade').addProperty('ADBE Point Control');control.name='VARNA_REFLOW_SIZE67';control.property(1).setValue([first[0],first[1]]);control.property(1).expression='var q='+evaluate+';[q[0],q[1]];';
+   bg.engine='native';bg.independentMotion=true;bg.markerDriven=false;bg.followTyping=false;delete bg.reflow67;delete bg._typingExpand;if(!GHAFHost._applyBg(carrier,bg))throw Error('REFLOW_BACKGROUND_FAILED');GHAFHost._applyBgVendorEffects(carrier,bg);var surface=GHAFHost._nativeBgFor(carrier);surface.locked=false;surface.property('ADBE Transform Group').property('ADBE Position').setValue([Number(bg.offsetX)||0,Number(bg.offsetY)||0]);GHAFHost._backgroundMotion27(surface,bg);
+   var fresh=GHAFHost._newLayers(c,startLayers),rect='function rect67(t){var s=thisComp.layer('+GHAFJSON.stringify(carrier.name)+').effect("VARNA_REFLOW_SIZE67")(1);return {left:-s[0]/2,top:-s[1]/2,width:s[0],height:s[1]};}\n';
+   function scan(group,depth){if(!group||depth>24)return;for(var k=1;k<=group.numProperties;k++){var prop=group.property(k);if(prop.numProperties)scan(prop,depth+1);else if(prop.expression){var expression=String(prop.expression),pattern=/((?:thisLayer\.)?parent|t)\.sourceRectAtTime\(time,\s*false\)/g;if(pattern.test(expression))prop.expression=rect+expression.replace(pattern,'rect67($1)');}}}
+   for(var fi=0;fi<fresh.length;fi++){var layer=fresh[fi];layer.locked=false;layer.comment=String(layer.comment||'')+'\nVARNA_REFLOW67'+(preview?'\nVARNA_LIVE_OWNER':'');if(layer!==carrier){scan(layer,0);layer.guideLayer=!!preview;layer.enabled=true;}made.push(layer);}carrier.locked=true;
+  }
+  return made;
+ }catch(e){GHAFHost._deleteLayers(GHAFHost._newLayers(c,before));throw e;}
+};
+GHAFHost._reflowPlace67=function(c,layers,groups){var ids={},tail=null,i;for(i=0;i<groups.length;i++)ids['C'+groups[i].id]=true;for(i=1;i<=c.numLayers;i++){var l=c.layer(i),m=/^VARNA_CAPTION_ID:([^\r\n]+)/.exec(String(l.comment||''));if(m&&ids['C'+m[1]])tail=l;}if(!tail)return;var ordered=layers.slice(0);ordered.sort(function(a,b){return a.index-b.index;});for(i=0;i<ordered.length;i++){var locked=ordered[i].locked;ordered[i].locked=false;ordered[i].moveAfter(tail);tail=ordered[i];ordered[i].locked=locked;}};
+/* Refresh receives the complete panel graph, while only requested text styles change. */
+(function(){var refresh=GHAFHost.refreshCaptionStyles;GHAFHost.refreshCaptionStyles=function(encoded){var p=GHAFHost._parse(encoded),c=GHAFHost._activeComp();if(!c)return refresh(encoded);var context=p.allGroups67||p.groups||[],old=GHAFHost._reflowOwned67(c,false),enabled=false,i;for(i=0;i<context.length;i++)if(GHAFHost._reflowEnabled67(context[i]))enabled=true;if(!enabled&&!old.length)return refresh(encoded);if(old.length&&!p.allGroups67) return GHAFHost._err('REFLOW_REQUIRES_COMPLETE_GRAPH');
+ var present={},actual=[];for(i=1;i<=c.numLayers;i++){var m=/^VARNA_CAPTION_ID:([^\r\n]+)/.exec(String(c.layer(i).comment||''));if(m)present['C'+m[1]]=true;}for(i=0;i<context.length;i++)if(present['C'+context[i].id])actual.push(context[i]);var made=[];app.beginUndoGroup('Varna Shared Background');try{made=GHAFHost._reflowStage67(c,actual,false);var input={};for(var key in p)input[key]=p[key];input.groups=GHAFHost._reflowGroups67(p.groups||[]);var result=GHAFJSON.parse(refresh(encodeURIComponent(GHAFJSON.stringify(input))));if(!result.ok)throw Error(result.error);GHAFHost._reflowPlace67(c,made,actual);GHAFHost._deleteLayers(old);return GHAFJSON.stringify(result);}catch(e){GHAFHost._deleteLayers(made);return GHAFHost._err(String(e));}finally{app.endUndoGroup();}};})();
+/* REFLOW67_SHARED_END */
 /* Only publish readiness after every adapter has completed initialization. */
 /* Never publish a partial adapter or rely on its error helper to report boot failure. */
 if(!VarnaKinetic40||typeof VarnaKinetic40.resolve!=='function'||typeof VarnaKinetic40.pieceBackground!=='function')throw Error('HOST_KINETIC_INITIALIZATION_INCOMPLETE');

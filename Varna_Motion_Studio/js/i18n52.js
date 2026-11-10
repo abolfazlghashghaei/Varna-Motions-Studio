@@ -1,5 +1,38 @@
 /* Interface localization only. Project content, media names and native identifiers are never translated. */
 (function(w){'use strict';const dictionary=Object.fromEntries(`
+ویرایش|Edit
+زمان‌بندی|Timing
+کلمه‌ها|Words
+طرح‌های آماده|Presets
+خطوط|Dividers
+مدل|Model
+منبع|Source
+دستهٔ تنظیمات|Settings category
+قلم|Font
+جای‌گذاری|Position
+جلوه‌ها|Effects
+کپشن‌ها|Captions
+جمله‌بندی|Sentences
+ساخت موشن|Custom motion
+سطح پیوسته|Continuous surface
+سطح|Surface
+ساختار|Structure
+محتوا|Content
+تراز|Alignment
+فونت|Font
+انتخاب فونت متن|Choose text font
+انتخاب فونت خانه|Choose cell font
+ماتی نوارها · ٪|Toolbar opacity · %
+سطح پیوسته بین کپشن‌ها|Continuous surface between captions
+مدت تغییر اندازه · ثانیه|Resize duration · seconds
+منحنی تغییر اندازه|Resize curve
+فاصلهٔ قابل اتصال · ثانیه|Maximum connecting gap · seconds
+انیمیشن نمونه|Motion sample
+نمونهٔ حرکت سطح پیوسته|Continuous surface motion sample
+فریم واقعی افتر|Capture AE frame
+فریم واقعی کامپوزیشن افتر|Captured AE composition frame
+کشسان|Elastic
+خطی|Linear
 ابزارها|Tools
 جست‌وجوی ابزار|Search tools
 آهنربای مرکز و لبه‌ها · Alt برای حرکت آزاد|Snap to center & edges · hold Alt to bypass

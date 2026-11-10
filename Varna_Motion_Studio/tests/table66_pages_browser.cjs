@@ -7,14 +7,22 @@ for(const size of [{width:900,height:700},{width:700,height:620},{width:760,heig
  await page.setViewportSize(size);
  for(let stage=0;stage<5;stage++){
   await page.evaluate(stage=>VarnaProduction47.go('table',stage,0),stage);await page.waitForTimeout(450);
-  const count=await page.evaluate(()=>VarnaTablePages66.count());assert(count>0);await page.locator('#tablePageJump66').selectOption('0');
-  for(let n=0;n<100;n++){
-   assert(await page.locator('#tablePreviewStage').isVisible());
-   const bounds=await page.evaluate(()=>{const r=document.querySelector('.table-pro-layout').getBoundingClientRect(),w=document.querySelector('#workspace').getBoundingClientRect(),dock=document.querySelector('.table-dock66').getBoundingClientRect();return {bottom:r.bottom,limit:w.bottom,dock:dock.bottom,height:r.height};});
-   if(bounds.bottom>bounds.limit+2){await page.screenshot({path:"/tmp/table66-failure.png"});console.log(await page.evaluate(()=>Array.from(document.querySelector(".table-dock66").children).map(x=>({tag:x.tagName,id:x.id,cls:x.className,min:getComputedStyle(x).minHeight,rect:[x.getBoundingClientRect().top,x.getBoundingClientRect().height],display:getComputedStyle(x).display,open:x.open}))));}
-   assert(bounds.bottom<=bounds.limit+2,JSON.stringify({size,stage,n,count,bounds}));
-   if(await page.locator('#tablePageNext66').isDisabled())break;await page.locator('#tablePageNext66').click();if(n===99)throw Error('Pager did not terminate');
+  const sections=await page.evaluate(()=>VarnaTablePages66.sections());assert(sections.length>0);
+  const expected=await page.evaluate(()=>{const root=document.querySelector('.table-pro-layout');root.querySelectorAll('.table-paged-out66').forEach(el=>el.classList.remove('table-paged-out66'));const ids=Array.from(root.querySelectorAll('input:not([type=hidden])[id],select[id],button[id],textarea[id]')).filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden').map(el=>el.id);VarnaTablePages66.refresh();return ids;}),seen=new Set();
+  for(let category=0;category<sections.length;category++){
+   if(size.width>=800)await page.locator('#tablePages66 [role=tab]').nth(category).click();else await page.locator('#tablePageJump66').selectOption(String(category));
+   const count=await page.evaluate(()=>VarnaTablePages66.count());
+   for(let n=0;n<count;n++){
+    if(n)await page.locator('#tablePageNext66').click();
+    assert(await page.locator('#tablePreviewStage').isVisible());
+    for(const id of await page.evaluate(()=>Array.from(document.querySelector('.table-pro-layout').querySelectorAll('[id]')).filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden').map(el=>el.id)))seen.add(id);
+    const bounds=await page.evaluate(()=>{const r=document.querySelector('.table-pro-layout').getBoundingClientRect(),w=document.querySelector('#workspace').getBoundingClientRect();return {bottom:r.bottom,limit:w.bottom};});
+    if(bounds.bottom>bounds.limit+2)await page.screenshot({path:'/tmp/table66-failure.png'});
+    assert(bounds.bottom<=bounds.limit+2,JSON.stringify({size,stage,category,n,count,bounds}));
+   }
   }
+  assert.deepEqual(expected.filter(id=>!seen.has(id)),[],'Unreachable table controls at stage '+stage);
+
  }
 }
 await page.evaluate(()=>VarnaUI.reveal(document.querySelector('#tableFontPS66')));assert(await page.locator('#tableFontPS66').isVisible());

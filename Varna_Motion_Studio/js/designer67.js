@@ -1,0 +1,22 @@
+/* Presentation changes preserve the original controls and native handlers. */
+(function(w){'use strict';const $=s=>document.querySelector(s);document.body.classList.add('designer67');
+const colorCanvas=document.createElement('canvas'),colorCtx=colorCanvas.getContext('2d');
+function palette(){const computed=getComputedStyle(document.body),base=computed.getPropertyValue('--u-panel').trim()||'#172133';colorCtx.fillStyle='#172133';colorCtx.fillStyle=base;colorCtx.fillRect(0,0,1,1);const rgb=Array.from(colorCtx.getImageData(0,0,1,1).data).slice(0,3).join(',');document.body.style.setProperty('--surface67','rgba('+rgb+',.94)');document.body.style.setProperty('--surface-soft67','rgba('+rgb+',.84)');}
+palette();document.addEventListener('varna:palette50',palette);new MutationObserver(palette).observe(document.body,{attributes:true,attributeFilter:['data-theme']});
+for(const [id,glyph,title]of [['productionPrevious47','‹','مرحلهٔ قبل'],['productionNext47','›','مرحلهٔ بعد']]){const el=$('#'+id);el.textContent=glyph;el.title=title;el.setAttribute('aria-label',title);}
+const sceneCommit=$('#sceneApply40')?.closest('.button-row');if(sceneCommit){sceneCommit.id='sceneCommit67';$('#page-kinetic').append(sceneCommit);}
+$('#sceneWords48')?.addEventListener('click',()=>requestAnimationFrame(()=>w.VarnaUI.reveal($('#scenePieceSelect45'))));
+const motionApply=$('#motionApply')?.closest('.action-inline'),motionScope=$('#animScope')?.closest('.card');if(motionApply&&motionScope)motionScope.append(motionApply);
+const fontPickers=new Map();let pending=false;
+for(const [id,title]of [['fontSelect','انتخاب فونت متن'],['quickFont','انتخاب فونت'],['cellFontPS','انتخاب فونت خانه']]){
+ const select=$('#'+id),browser=$('#'+id+'Search')?.closest('.font31-browser');if(!select||!browser)continue;
+ const trigger=document.createElement('button');trigger.type='button';trigger.className='font-trigger67';trigger.id=id+'Trigger67';trigger.setAttribute('aria-haspopup','dialog');const name=document.createElement('span'),chevron=document.createElement('span');name.dataset.userContent='true';chevron.textContent='⌄';chevron.setAttribute('aria-hidden','true');trigger.append(name,chevron);browser.before(trigger);
+ const dialog=document.createElement('dialog');dialog.className='font-dialog67';dialog.setAttribute('aria-label',title);const head=document.createElement('header'),heading=document.createElement('b'),close=document.createElement('button');heading.textContent=title;close.type='button';close.className='btn tiny';close.textContent='×';close.setAttribute('aria-label','بستن');head.append(heading,close);dialog.append(head,browser);document.body.append(dialog);
+ const picker={select,browser,trigger,name,dialog,open(){if(!dialog.open)dialog.showModal();const input=browser.querySelector('input[type=search]');input.focus({preventScroll:true});input.select();},close(){dialog.close();trigger.focus({preventScroll:true});},sync(){const label=select.selectedOptions?.[0]?.textContent||select.value||'پیش‌فرض';if(name.textContent!==label)name.textContent=label;}};fontPickers.set(id,picker);
+ trigger.onclick=()=>picker.open();close.onclick=()=>picker.close();dialog.addEventListener('cancel',e=>{e.preventDefault();e.stopPropagation();picker.close();});dialog.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();e.stopPropagation();picker.close();}});browser.addEventListener('click',e=>{if(e.target.closest('.font31-choose'))picker.close();});select.addEventListener('change',()=>picker.sync());new MutationObserver(()=>picker.sync()).observe(select,{childList:true});picker.sync();
+}
+function sync(){if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;for(const p of fontPickers.values())p.sync();});}document.addEventListener('varna:page',sync);document.addEventListener('click',sync);document.addEventListener('change',sync);
+const reveal=w.VarnaUI.reveal;w.VarnaUI.reveal=function(el){for(const p of fontPickers.values())if(el===p.select||p.browser.contains(el)){reveal(p.trigger);p.open();return;}reveal(el);};
+const fontLabel=$('#fontSelectTrigger67')?.closest('.control')?.querySelector(':scope>span');if(fontLabel)fontLabel.textContent='فونت';const themeLabel=$('#themeGlass50')?.closest('.control')?.querySelector(':scope>span');if(themeLabel)themeLabel.textContent='ماتی نوارها · ٪';
+w.VarnaDesigner67={refresh:sync,fontPickers,showFont:id=>fontPickers.get(id)?.open()};
+})(window);
