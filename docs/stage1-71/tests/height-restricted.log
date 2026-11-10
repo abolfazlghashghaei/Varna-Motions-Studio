@@ -1,0 +1,5 @@
+Height gate zoom 1: 288 states; 0 failures
+Height gate zoom 1.25: 576 states; 0 failures
+Height gate zoom 1.5: 864 states; 0 failures
+Height gate zoom 2: 1152 states; 0 failures
+PASS UI71 chromium99-disabled: 1152 states, usable content >=50%, shared footer, original status/action and all 22 destinations retained. Native CEF untested.

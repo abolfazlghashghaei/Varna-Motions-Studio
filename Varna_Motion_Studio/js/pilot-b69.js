@@ -27,7 +27,8 @@ for(const d of all('details.advanced-panel',tableRoot))d.open=false;
 const weights=accordion('اندازهٔ ستون و ردیف انتخاب‌شده','Selected column & row size',false);table.querySelector('.cell-inspector').append(weights);
 for(const [axis,fa,english]of [['column','عرض نسبی ستون','Column relative width'],['row','ارتفاع نسبی ردیف','Row relative height']]){const field=element('label','control');field.append(label(element('span'),fa,english));const input=element('input');input.type='number';input.min='.05';input.max='100';input.step='.05';input.value='1';input.dataset.weight69=axis;input.setAttribute('aria-label',en()?english:fa);field.append(input);weights.append(field);input.addEventListener('change',()=>{w.VarnaTable50.setSelectedWeight69(axis,input.value);syncEditor();});}
 const editor=$('#tableEditor');
-function syncEditor(){if(!active||w.VarnaUI.current()!=='table')return;const values=w.VarnaTable50.selectedWeights69();editor.classList.toggle('compact-list69',editor.clientWidth/values.columns<32);for(const input of all('[data-weight69]'))if(document.activeElement!==input)input.value=values[input.dataset.weight69];for(const cell of all('.table-cell',editor)){const row=+cell.dataset.row+1,column=+cell.dataset.col+1;cell.dataset.cellLabel69=en()?'Row '+row+' · Column '+column:'ردیف '+row+' · ستون '+column;}}
+// Reserve four pixels for cell borders/insets in addition to the 32px input target.
+function syncEditor(){if(!active||w.VarnaUI.current()!=='table')return;const values=w.VarnaTable50.selectedWeights69();editor.classList.toggle('compact-list69',editor.clientWidth/values.columns<36);for(const input of all('[data-weight69]'))if(document.activeElement!==input)input.value=values[input.dataset.weight69];for(const cell of all('.table-cell',editor)){const row=+cell.dataset.row+1,column=+cell.dataset.col+1;cell.dataset.cellLabel69=en()?'Row '+row+' · Column '+column:'ردیف '+row+' · ستون '+column;}}
 // Scene/line is the single in-page tab row. All settings below it are disclosures.
 const scene=$('#kineticStudio40'),sceneSettings=scene.querySelector('.scene-settings40');
 const firstGrid=sceneSettings.querySelector(':scope > .form-grid');wrap(firstGrid,'چیدمان و ورود عبارت‌ها','Layout & entrance',true);
@@ -39,7 +40,7 @@ const sceneGrid=scene.querySelector('.kinetic-grid40');sceneGrid.classList.add('
 const lineCard=$('#wordMotion39');wrap($('#wordPresets39'),'حرکت آماده','Motion presets',true);wrap(lineCard.querySelector('.form-grid'),'تنظیمات حرکت و رنگ','Motion & color settings',true);const linePreview=wrap($('#wordPreview39'),'پیش‌نمایش حرکت','Motion preview',false);linePreview.classList.add('flat-preview69');
 // Status and the original main action live outside the scrolling workspace.
 const actionBar=element('div','flat-actions69');actionBar.setAttribute('role','region');actionBar.setAttribute('aria-label','Page action');$('#workspace').after(actionBar);
-const statusDetails=element('details','flat-status69'),statusSummary=element('summary');statusSummary.textContent='ⓘ';statusSummary.setAttribute('aria-label','وضعیت ساخت');statusDetails.append(statusSummary);const statusPopup=element('div','flat-status-popup69');statusDetails.append(statusPopup);actionBar.append(statusDetails);
+const statusDetails=element('details','flat-status69'),statusSummary=element('summary');statusSummary.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></svg>';statusSummary.setAttribute('aria-label','وضعیت ساخت');statusDetails.append(statusSummary);const statusPopup=element('div','flat-status-popup69');statusDetails.append(statusPopup);actionBar.append(statusDetails);
 const actions=new Map();
 for(const [key,button,status]of [['table',$('#tableBuild'),$('#tableStatus')],['scene',$('#sceneApply40'),$('#sceneStatus40')],['line',$('#applyWord39'),$('#wordStatus39')]]){
  const slot=element('div','flat-action-slot69');button.before(slot);actions.set(key,{slot,button,status,homeStatus:status.parentElement});button.dataset.primary69='true';
@@ -48,7 +49,7 @@ for(const [key,button,status]of [['table',$('#tableBuild'),$('#tableStatus')],['
 const nav=element('nav','flat-nav69');nav.setAttribute('aria-label','Pages');nav.dataset.navigationLevel69='1';shell.append(nav);
 const pageLinks=[['home','خانه','Home','house'],['text','متن','Text','type'],['table','جدول','Table','table-2'],['kinetic','تایپوگرافی','Typography','kinetic44']];
 for(const [name,fa,english,icon]of pageLinks){const b=element('button');b.type='button';b.dataset.page69=name;b.title=fa;b.setAttribute('aria-label',fa);const mark=element('span','flat-nav-icon69');mark.setAttribute('aria-hidden','true');mark.innerHTML=w.VarnaIcons30?.[icon]||w.VarnaIcons30?.layers||'';const text=label(element('span','flat-nav-label69'),fa,english);b.append(mark,text);b.onclick=()=>w.VarnaUI.open(name);nav.append(b);}
-const more=element('button');more.type='button';more.setAttribute('aria-haspopup','dialog');more.dataset.more69='true';more.innerHTML='<span class="flat-nav-icon69" aria-hidden="true">•••</span>';more.append(label(element('span','flat-nav-label69'),'همهٔ بخش‌ها','All pages'));nav.append(more);
+const more=element('button');more.type='button';more.setAttribute('aria-haspopup','dialog');more.dataset.more69='true';more.innerHTML='<span class="flat-nav-icon69" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span>';more.append(label(element('span','flat-nav-label69'),'همهٔ بخش‌ها','All pages'));nav.append(more);
 const chooser=element('dialog','flat-chooser69');chooser.setAttribute('aria-label','Pages');const close=label(element('button'),'بستن','Close');close.type='button';chooser.append(close);const chooserGrid=element('div','flat-chooser-grid69');chooser.append(chooserGrid);document.body.append(chooser);
 const pageNames={home:['خانه','Home'],text:['متن','Text'],table:['جدول','Table'],kinetic:['تایپوگرافی','Typography'],motion:['موشن','Motion'],templates:['قالب‌ها','Templates'],sfx:['کتابخانهٔ صدا','Sound library'],music:['ساخت صدا','Generate audio'],audio:['ساخت زیرنویس','Transcription'],ai:['اصلاح متن','Text correction'],bg:['پس‌زمینه','Background'],brand:['برند','Brand'],director:['دستیار پروژه','Project assistant'],easing49:['منحنی حرکت','Easing'],assistant49:['دستیار اسکریپت','Script assistant'],safe:['محدودهٔ امن','Safe area'],keywords:['کلمات مهم','Keywords'],translate:['ترجمه','Translation'],tools:['ابزارها','Tools'],resources:['منابع سیستم','System resources'],output:['خروجی','Output'],settings:['تنظیمات','Settings']};
 for(const [name,[fa,english]]of Object.entries(pageNames)){const b=label(element('button'),fa,english);b.type='button';b.dataset.destination69=name;b.onclick=()=>{chooser.close();w.VarnaUI.open(name);};chooserGrid.append(b);}
@@ -59,10 +60,16 @@ const liveLabel=$('#livePreviewGlobal').closest('label').querySelector('span:las
 const globalControls=[$('#btnRefreshPreview'),$('#btnGoOutput'),$('#livePreviewGlobal').closest('label'),$('.bottom-dock .active-caption-mini'),$('.bottom-dock .dock-actions')].map(node=>{const slot=element('span','flat-return69');node.before(slot);return {node,slot};});
 let active=false,mode='',lastBand='',moving=false;
 function size(){const current=document.body.dataset.uiSize44;document.documentElement.style.setProperty('--panel-root69',({tiny:12,compact:13,standard:14,large:16,xlarge:18}[current]||14)+'px');}
+// Preserve both live footer nodes; share their grid row when available height is scarce.
+// The threshold follows the user's UI scale, not the monitor or a new CSS feature.
+function shortLayout(){const short=active&&innerHeight<32*parseFloat(getComputedStyle(document.documentElement).fontSize);
+ shell.dataset.panelShort71=String(short);
+ const parent=short?$('.topbar'):actionBar;if(statusDetails.parentElement!==parent)parent.append(statusDetails);
+}
 function fitScene(){if(!active||w.VarnaUI.current()!=='kinetic'||!scenePreview.open)return;const stage=$('#sceneStage40'),ratio=stage.style.aspectRatio.split('/').map(Number),aspect=ratio[0]/ratio[1];if(!Number.isFinite(aspect)||aspect<=0)return;const cap=Math.min(innerHeight*.22,parseFloat(getComputedStyle(document.documentElement).fontSize)*13),width=Math.max(1,Math.min(stage.parentElement.clientWidth,cap*aspect));const value=width+'px';if(stage.style.getPropertyValue('--scene-inline69')!==value)stage.style.setProperty('--scene-inline69',value);}
 function layout(){const width=shell.getBoundingClientRect().width,band=width<340?'compact':width<=640?'regular':'wide';shell.dataset.panelBand69=band;shell.dataset.size=band==='regular'?'normal':band;shell.dataset.panelMicro69=String(width<180);
  if(band!==lastBand){for(const preview of [tablePreviewShell,scenePreview])if(!preview.dataset.touched69)preview.open=band!=='compact';lastBand=band;}
- size();fitScene();if(active&&w.VarnaUI.current()==='table')w.VarnaTable50?.render?.();
+ size();shortLayout();fitScene();if(active&&w.VarnaUI.current()==='table')w.VarnaTable50?.render?.();
 }
 for(const preview of [tablePreviewShell,scenePreview]){preview.querySelector('summary').addEventListener('click',()=>preview.dataset.touched69='true');preview.addEventListener('toggle',()=>{if(preview.open)requestAnimationFrame(()=>w.dispatchEvent(new Event('resize')));});}
 function restoreActions(){for(const a of actions.values()){if(a.button.parentElement===actionBar)a.slot.after(a.button);if(a.status.parentElement===statusPopup)a.homeStatus.append(a.status);}}
@@ -141,7 +148,7 @@ new MutationObserver(()=>requestAnimationFrame(syncEditor)).observe(editor,{chil
 document.addEventListener('click',()=>requestAnimationFrame(syncEditor));
 new MutationObserver(records=>{if(records.some(r=>r.target.matches?.('select,option')||r.target.closest?.('select')))scheduleSelect();}).observe($('#workspace'),{childList:true,subtree:true});
 document.addEventListener('change',scheduleSelect);document.addEventListener('toggle',scheduleSelect,true);document.addEventListener('varna:page',scheduleSelect);
-new MutationObserver(()=>{size();}).observe(document.body,{attributes:true,attributeFilter:['data-ui-size44']});
+new MutationObserver(()=>{size();shortLayout();}).observe(document.body,{attributes:true,attributeFilter:['data-ui-size44']});
 new MutationObserver(()=>requestAnimationFrame(sync)).observe($('#wordMotion39'),{attributes:true,attributeFilter:['class']});
 document.addEventListener('varna:page',()=>requestAnimationFrame(sync));document.addEventListener('varna:language52',()=>requestAnimationFrame(localize));
 document.addEventListener('click',e=>{if(e.target.closest('[data-typo40]'))requestAnimationFrame(sync);});

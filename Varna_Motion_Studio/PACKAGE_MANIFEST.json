@@ -14758,8 +14758,8 @@
     },
     {
       "path": "css/ui/pilot-b69.css",
-      "bytes": 18371,
-      "sha256": "2451243ab57313e72ea7012d27d4ffb81dec30d8f8df556579efc7ce182c4354"
+      "bytes": 19677,
+      "sha256": "05e30e7f826e9875b580579d9543436d957f34c3b93bf0f13e0d291d0bc5e8b7"
     },
     {
       "path": "css/ui/stage-a68.css",
@@ -15543,8 +15543,8 @@
     },
     {
       "path": "js/pilot-b69.js",
-      "bytes": 23809,
-      "sha256": "8bccdcc40e4722b6d13bb086531cb0dc70a5ab87f31525cd51a898d576ae727c"
+      "bytes": 24673,
+      "sha256": "2211768f88c9676174bfe0b652da85a5bef61a9f8db5f3b2e860731fb8a17177"
     },
     {
       "path": "js/plugin53.js",
@@ -16590,6 +16590,16 @@
       "path": "tests/ui69_screenshots.cjs",
       "bytes": 2152,
       "sha256": "8f31c6a7ad81d3728c169c9616ad17e5355d9aee7204bf7867dbd80b24eafac6"
+    },
+    {
+      "path": "tests/ui71_height_browser.cjs",
+      "bytes": 6134,
+      "sha256": "0bff4adf319764827e13f2439f5a5f45fc7cf9b71ff1eb7f7d9c531dc5470dfd"
+    },
+    {
+      "path": "tests/ui71_screenshots.cjs",
+      "bytes": 2600,
+      "sha256": "a34aa0f76c358f0de8160f9a93781469f7600ded4a770241fd29e07e60c60f28"
     },
     {
       "path": "tests/vendor/acorn/LICENSE",

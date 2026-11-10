@@ -18,24 +18,24 @@
   }
   /* Replace the fixed-height shell, duplicate routing and fixed right rail only on pilot pages. */
   body[data-flat69] .app-shell {
-    display:grid !important;grid-template-columns:minmax(0,1fr) !important;
-    grid-template-rows:auto minmax(0,1fr) auto auto !important;
-    grid-template-areas:'top' 'work' 'action69' 'nav69' !important;
+    display:grid !important;grid-template-columns:var(--panel-columns71,minmax(0,1fr)) !important;
+    grid-template-rows:var(--panel-rows71,auto minmax(0,1fr) auto auto) !important;
+    grid-template-areas:var(--panel-areas71,'top' 'work' 'action69' 'nav69') !important;
     inline-size:100% !important;block-size:100vh !important;height:100vh !important;
     min-inline-size:0 !important;min-block-size:0 !important;
   }
   body[data-flat69] :is(.nav-rail,.bottom-dock,#production47,.workspace-pager67,#tablePages66,.studio30-toolbar,.workflow-back,#captionCounter,.workspace-heading small,.workspace-heading #currentPageEyebrow,.workspace-heading .build31,#page-table>.workflow-tabs,#brandShortcut,#homeShortcut,#studio30Density){display:none !important;}
   body[data-flat69] .workspace {
     grid-area:work !important;overflow-y:auto !important;overflow-x:clip !important;
-    min-inline-size:0 !important;min-block-size:0 !important;padding:.857143rem !important;
+    min-inline-size:0 !important;min-block-size:0 !important;padding:var(--panel-work-padding71,.857143rem) !important;
     scroll-padding-block:.857143rem;overscroll-behavior:contain;
   }
   body[data-flat69] .topbar {
     display:flex !important;flex-wrap:wrap !important;align-items:center !important;gap:.285714rem !important;
-    height:auto !important;min-height:0 !important;max-height:none !important;padding:.428571rem .571429rem !important;
+    height:auto !important;min-height:0 !important;max-height:none !important;padding:var(--panel-header-padding71,.428571rem .571429rem) !important;
     min-inline-size:0 !important;position:relative !important;
   }
-  body[data-flat69] .workspace-heading{display:flex !important;flex:1 1 5rem !important;min-width:0 !important;max-width:none !important;margin:0 !important;}
+  body[data-flat69] .workspace-heading{display:var(--panel-heading71,flex) !important;flex:1 1 5rem !important;min-width:0 !important;max-width:none !important;margin:0 !important;}
   body[data-flat69] .workspace-heading strong{display:block !important;white-space:normal !important;overflow:visible !important;text-overflow:clip !important;}
   body[data-flat69] .window-actions{display:contents !important;}
   body[data-flat69] #studio30Search{display:inline-flex !important;inline-size:auto !important;min-width:var(--ui-hit-size) !important;max-width:none !important;}
@@ -102,22 +102,23 @@
   body[data-flat69] [data-flat69] :is(.color-editor,.clean-color-editor)>*{flex:1 1 3rem !important;min-width:0 !important;max-width:100% !important;}
   body[data-flat69] [data-flat69] .table-range-labels small{overflow-wrap:anywhere !important;}
   body[data-flat69] [data-flat69] .switch-row{flex-wrap:wrap !important;}
-  body[data-flat69] [data-flat69] .switch-row>span:last-child{min-width:0;flex:1 1 4rem;overflow-wrap:anywhere;}
+  body[data-flat69] [data-flat69] .switch-row>span:last-child{min-width:0;flex:1 1 4rem;overflow-wrap:anywhere;line-height:1.6;}
   body[data-flat69] [data-flat69] :is(.hint,#tableTimingHelp){overflow-wrap:anywhere !important;}
   body[data-flat69] #tableEditor{min-width:0 !important;width:100% !important;}
   body[data-flat69] #tableEditor input{font-size:var(--ui-font-min) !important;min-height:var(--ui-hit-size) !important;padding:.285714rem !important;}
   body[data-flat69] #page-table .flat-section69>article>.card-title b{display:none !important;}
   body[data-flat69] #tableDockActions66{display:flex !important;flex-wrap:wrap !important;}
   /* The single main action is a non-scrolling shell row, equivalent to a sticky footer. */
-  body[data-flat69] .flat-actions69{grid-area:action69;display:flex;flex-wrap:wrap;align-items:center;justify-content:end;gap:.571429rem;padding:.571429rem .857143rem;background:var(--ui-color-surface);border-block-start:1px solid var(--ui-color-border);z-index:8;min-width:0;}
-  body[data-flat69] .flat-actions69>button{margin:0 !important;flex:1 1 0 !important;min-width:0 !important;width:auto !important;padding:.571429rem !important;}
+  body[data-flat69] .flat-actions69{grid-area:action69;display:flex;flex-wrap:wrap;align-items:center;justify-content:end;gap:.571429rem;padding:var(--panel-action-padding71,.571429rem .857143rem);background:var(--ui-color-surface);border-block-start:1px solid var(--ui-color-border);z-index:8;min-width:0;}
+  body[data-flat69] .flat-actions69>button{margin:0 !important;flex:1 1 0 !important;min-width:0 !important;width:auto !important;padding:var(--panel-action-button-padding71,.571429rem) !important;}
   .flat-status69{position:relative;flex:none;}
   .flat-status69>summary[data-error69=true]{color:var(--ui-color-danger);}
-  .flat-status69>summary{list-style:none;text-align:center;cursor:pointer;}
+  .flat-status69>summary{display:flex;align-items:center;justify-content:center;list-style:none;text-align:center;cursor:pointer;}
+  .flat-status69>summary svg{inline-size:1.285714rem;block-size:1.285714rem;pointer-events:none;}
   .flat-status-popup69{position:fixed;inset-inline:.571429rem;bottom:6rem;max-block-size:clamp(4rem,40vh,20rem);overflow:auto;padding:.857143rem;background:var(--ui-color-surface);border:1px solid var(--ui-color-border);border-radius:.571429rem;box-shadow:0 .571429rem 2rem #0005;z-index:20;overflow-wrap:anywhere;}
   body[data-flat69] .flat-status-popup69>[role=status]{margin:0 !important;max-height:none !important;overflow:visible !important;white-space:normal !important;}
   .flat-actions69,.flat-nav69{display:none;}
-  body[data-flat69] .flat-nav69{grid-area:nav69;display:flex;flex-wrap:wrap;gap:.285714rem;padding:.285714rem .571429rem;background:var(--ui-color-surface);border-block-start:1px solid var(--ui-color-border);z-index:8;min-width:0;}
+  body[data-flat69] .flat-nav69{grid-area:nav69;display:flex;flex-wrap:wrap;gap:.285714rem;padding:var(--panel-nav-padding71,.285714rem .571429rem);background:var(--ui-color-surface);border-block-start:1px solid var(--ui-color-border);z-index:8;min-width:0;}
   body[data-flat69] .flat-nav69>button{display:flex;flex:1 1 0;min-width:var(--ui-hit-size) !important;align-items:center;justify-content:center;gap:.285714rem;padding:.285714rem !important;color:var(--ui-color-muted) !important;border:1px solid transparent !important;background:transparent !important;border-radius:.571429rem;}
   body[data-flat69] .app-shell[data-panel-micro69=true] .workspace-heading{display:none !important;}
   body[data-flat69] .app-shell[data-panel-micro69=true] .flat-nav69>button:is([data-page69=home],[data-page69=text]){display:none;}
@@ -146,6 +147,19 @@
   body[data-flat69] .app-shell[data-size=wide] [data-flat69] .flat-layout69{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) !important;}
   body[data-flat69] .app-shell[data-size=compact] .flat-nav-label69{display:none;}
   body[data-flat69] .app-shell[data-size=compact] [data-flat69] :is(.action-inline,.button-row,.workflow-tabs)>button{flex-basis:100% !important;}
+  /* Short-panel chrome shares the existing important owners through variables.
+     No extra important rules, smaller UI text, cloned actions or new stylesheet.
+     All 22 destinations remain available through the original All pages dialog. */
+  body[data-flat69] .app-shell[data-panel-short71=true]{
+    --panel-columns71:minmax(0,1fr) auto;--panel-rows71:auto minmax(0,1fr) auto;
+    --panel-areas71:'top top' 'work work' 'action69 nav69';--panel-heading71:none;
+    --panel-header-padding71:0;--panel-action-padding71:0;
+    --panel-action-button-padding71:0 .285714rem;--panel-nav-padding71:0;
+    --panel-work-padding71:.142857rem;
+    --ui-hit-size:32px;--ui-control-min:32px;--ui-control-height:32px;
+  }
+  body[data-flat69] .app-shell[data-panel-short71=true] .flat-nav69>button:not([data-more69]),
+  body[data-flat69] .app-shell[data-panel-short71=true] .flat-nav-label69{display:none;}
   /* At high zoom the effective CSS width may be 125px. Reduce padding, never type or targets. */
   body[data-flat69] .app-shell[data-panel-micro69=true] .workspace{padding:.142857rem !important;}
   body[data-flat69] .app-shell[data-panel-micro69=true] [data-flat69] :is(.card,details,.context40){padding:.142857rem !important;}
