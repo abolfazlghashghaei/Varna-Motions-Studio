@@ -74,14 +74,14 @@ function layout(){const width=shell.getBoundingClientRect().width,band=width<340
 for(const preview of [tablePreviewShell,scenePreview]){preview.querySelector('summary').addEventListener('click',()=>preview.dataset.touched69='true');preview.addEventListener('toggle',()=>{if(preview.open)requestAnimationFrame(()=>w.dispatchEvent(new Event('resize')));});}
 function restoreActions(){for(const a of actions.values()){if(a.button.parentElement===actionBar)a.slot.after(a.button);if(a.status.parentElement===statusPopup)a.homeStatus.append(a.status);}}
 function sync(){if(moving)return;moving=true;try{
- const name=w.VarnaUI.current(),enabled=['table','kinetic'].includes(name),wasActive=active;active=enabled;
- document.documentElement.toggleAttribute('data-flat69',enabled);document.body.toggleAttribute('data-flat69',enabled);
- if(enabled){clearPaging(name==='table'?table:kinetic);globalControls.forEach(x=>{if(x.node.parentElement!==tools)tools.append(x.node);});}
+ const name=w.VarnaUI.current(),pilot=['table','kinetic'].includes(name),enabled=pilot||document.documentElement.hasAttribute('data-ui77'),wasActive=active;active=enabled;
+ document.documentElement.toggleAttribute('data-flat69',pilot);document.body.toggleAttribute('data-flat69',pilot);
+ if(enabled){clearPaging($('#page-'+name));globalControls.forEach(x=>{if(x.node.parentElement!==tools)tools.append(x.node);});}
  else {globalControls.forEach(x=>{if(x.node.parentElement===tools)x.slot.after(x.node);});liveLabel.textContent=liveLabelOriginal;delete liveLabel.dataset.labelFa69;delete liveLabel.dataset.labelEn69;if(wasActive){const heading=$('#page-'+name+' .page-head h1');$('#currentPageTitle').textContent=heading?.textContent||pageNames[name]?.[en()?1:0]||name;}}
  const line=$('#wordMotion39').classList.contains('workflow-tab-hidden')===false;
- const next=name==='table'?'table':line?'line':'scene';
+ const next=pilot?(name==='table'?'table':line?'line':'scene'):name;
  if(mode!==next||!enabled){restoreActions();mode=next;}
- if(enabled){const a=actions.get(next);if(a.status.parentElement!==statusPopup)statusPopup.append(a.status);if(actionBar.firstElementChild!==a.button)actionBar.prepend(a.button);statusSummary.title=a.status.textContent;statusSummary.setAttribute('aria-label',(en()?'Status: ':'وضعیت: ')+a.status.textContent);for(const b of all('[data-page69]',nav))b.setAttribute('aria-current',b.dataset.page69===name?'page':'false');}
+ if(enabled&&pilot){const a=actions.get(next);if(a.status.parentElement!==statusPopup)statusPopup.append(a.status);if(actionBar.firstElementChild!==a.button)actionBar.prepend(a.button);statusSummary.title=a.status.textContent;statusSummary.setAttribute('aria-label',(en()?'Status: ':'وضعیت: ')+a.status.textContent);for(const b of all('[data-page69]',nav))b.setAttribute('aria-current',b.dataset.page69===name?'page':'false');}
  layout();localize();for(const b of all('[data-typo40]')){b.setAttribute('role','tab');b.setAttribute('aria-selected',String(b.classList.contains('active')));b.tabIndex=b.classList.contains('active')?0:-1;}
  }finally{moving=false;}}
 // Deep links keep their original routing, then open the relevant disclosure ancestors.
@@ -92,7 +92,7 @@ function localize(){
  for(const el of all('[data-label-fa69]')){const value=en()?el.dataset.labelEn69:el.dataset.labelFa69;if(el.textContent!==value)el.textContent=value;}
  for(const b of all('[data-page69]',nav)){const text=b.querySelector('.flat-nav-label69').textContent;b.title=text;b.setAttribute('aria-label',text);}more.title=en()?'All pages':'همهٔ بخش‌ها';more.setAttribute('aria-label',more.title);
  if(!active)return;
- $('#currentPageTitle').textContent=w.VarnaUI.current()==='table'?(en()?'Table':'جدول'):(en()?'Typography':'تایپوگرافی');
+ const current=w.VarnaUI.current();$('#currentPageTitle').textContent=pageNames[current]?.[en()?1:0]||current;
  label($('#tableBuild'),'ساخت جدول','Create table');label($('#sceneApply40'),'اعمال','Apply');label($('#applyWord39'),'اعمال حرکت','Apply motion');
  const roots=[...pages,statusPopup];
  for(const root of roots){const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;const nodes=[];while((n=walker.nextNode()))nodes.push(n);
@@ -112,7 +112,7 @@ function localize(){
 }
 const selectMirrors=new Map();
 function selectedText(){if(!active)return;for(const select of all('select', $('.page.active'))){
- if(!select.getClientRects().length||select.closest('details:not([open])'))continue;
+ if(!select.getClientRects().length||select.matches('.sr-only,.tomselected')||select.closest('details:not([open])'))continue;
  let mirror=selectMirrors.get(select);if(!mirror){mirror=element('span','select-value69');mirror.dataset.userContent='true';mirror.dir='auto';mirror.setAttribute('aria-hidden','true');const wrapper=element('div','select-shell69');select.before(wrapper);const focused=document.activeElement===select;wrapper.append(select,mirror);if(focused)select.focus({preventScroll:true});selectMirrors.set(select,mirror);}
  const text=select.selectedOptions?.[0]?.textContent||'',ctx=selectedText.canvas||(selectedText.canvas=document.createElement('canvas').getContext('2d'));ctx.font=getComputedStyle(select).font;
  const clipped=ctx.measureText(text).width>select.clientWidth-34;select.parentElement.toggleAttribute('data-wrapped69',clipped);mirror.hidden=!clipped;if(mirror.textContent!==text)mirror.textContent=text;select.title=text;
@@ -136,7 +136,7 @@ function managePieces69(records){let removedFocus=false;
  scheduleSelect();
 }
 new MutationObserver(managePieces69).observe(pieceRoot,{childList:true});managePieces69([]);
-function statusChanged(){if(!active)return;const a=actions.get(mode),text=a.status.textContent;statusSummary.title=text;statusSummary.setAttribute('aria-label',(en()?'Status: ':'وضعیت: ')+text);statusSummary.dataset.error69=String(/خطا|نیست|نشد|error|failed/i.test(text));}
+function statusChanged(){if(!active)return;const a=actions.get(mode);if(!a)return;const text=a.status.textContent;statusSummary.title=text;statusSummary.setAttribute('aria-label',(en()?'Status: ':'وضعیت: ')+text);statusSummary.dataset.error69=String(/خطا|نیست|نشد|error|failed/i.test(text));}
 for(const a of actions.values())new MutationObserver(statusChanged).observe(a.status,{childList:true,characterData:true,subtree:true});
 statusDetails.addEventListener('toggle',()=>{if(statusDetails.open)statusPopup.style.bottom=(innerHeight-actionBar.getBoundingClientRect().top+4)+'px';});
 document.addEventListener('keydown',e=>{if(active&&statusDetails.open&&e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();statusDetails.open=false;statusSummary.focus();}},true);

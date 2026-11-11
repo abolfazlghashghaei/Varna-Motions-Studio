@@ -1,0 +1,223 @@
+/* UI77 integration: the upload supplies visual direction, not plugin logic.
+   This temporary presentation owner loads before the existing important layers.
+   !important is restricted to collisions with pilot/A68/legacy important rules;
+   removing those layers without rule coverage would break native inspectors.
+   All layout syntax below is supported by Chromium 99 (CEP 12).
+   The panel's ResizeObserver supplies data-size; no container queries/:has/color-mix. */
+html[data-ui77] {
+  --flow-bg-blur77:0px;
+  --flow-rail77:5.4rem;
+  --flow-radius77:1rem;
+}
+@layer varna-flow77 {
+  body[data-flow-shell77] .app-shell {direction:ltr;}
+  html[dir=rtl] body[data-flow-shell77] :is(.workspace,.topbar,.flat-actions69,.flat-chooser69) {direction:rtl;}
+  html[dir=ltr] body[data-flow-shell77] :is(.workspace,.topbar,.flat-actions69,.flat-chooser69) {direction:ltr;}
+  body[data-flow-shell77] .workspace {padding:var(--panel-work-padding71,1rem) !important;}
+  body[data-flow-shell77] .topbar {
+    background:var(--flow-tint77,var(--v48-tint)) !important;border:0 !important;
+    border-bottom:1px solid var(--ui-color-border) !important;gap:.4rem !important;
+  }
+  body[data-flow-shell77] .workspace-heading strong {font-size:var(--ui-font-body) !important;line-height:1.6;}
+  body[data-flow-shell77] #studio30Search {padding:.3rem !important;}
+  body[data-flow-shell77] #studio30Search .flow-icon77 {display:inline-flex !important;}
+  body[data-flow-shell77] #headerOptions>summary {display:flex !important;justify-content:center;align-items:center;padding:.3rem !important;}
+  body[data-flow-shell77] #headerOptions>summary .flow-icon77 {display:inline-flex !important;}
+  body[data-flow-shell77] :is(.flat-actions69,.flat-nav69) {
+    background:var(--flow-tint77,var(--v48-tint)) !important;box-shadow:none !important;
+    backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
+  }
+  body[data-flow-shell77] .flat-nav69>button[hidden] {display:none !important;}
+  body[data-flow-shell77] .flat-nav69>button {
+    border-radius:.8rem !important;padding:.45rem !important;
+  }
+  body[data-flow-shell77] .flat-actions69>button {
+    border-radius:.75rem !important;
+    background:var(--ui-color-action) !important;color:var(--ui-color-on-action) !important;
+    box-shadow:inset 0 1px rgba(255,255,255,.24) !important;
+  }
+  body[data-flow-shell77] [data-flow77] .flat-intro69 {margin:0 0 1rem !important;color:var(--ui-color-muted);}
+  body[data-flow-shell77] [data-flow77] :is(.layout-grid,.split-panel,.form-layout,.stack) {
+    display:grid !important;grid-template-columns:minmax(0,1fr) !important;
+    min-width:0 !important;max-width:100% !important;gap:.8rem !important;
+  }
+  body[data-flow-shell77] [data-flow77] :is(.span-2,.span-3) {grid-column:auto !important;}
+  body[data-flow-shell77] [data-flow77] .workflow-tabs:not([data-navigation-level69]),
+  body[data-flow-shell77] [data-flow77] :is(.studio40-tabs,.section-pager67,.workflow-strip,.section-divider) {display:none !important;}
+  body[data-flow-shell77] [data-flow77] :is(.flat-section69,.flow-hero77,.flow-task77) {
+    border-radius:var(--flow-radius77) !important;
+    border:1px solid var(--v48-edge) !important;
+    background:linear-gradient(145deg,var(--ui-color-soft),transparent 80%),var(--ui-color-surface) !important;
+    box-shadow:inset 0 1px rgba(255,255,255,.06),0 .4rem 1.5rem rgba(0,0,0,.07) !important;
+  }
+  body[data-flow-shell77] [data-flow77] details.flat-section69 {padding:.6rem !important;}
+  body[data-flow-shell77] [data-flow77] .flow-section77>summary {
+    display:flex !important;align-items:center;gap:.65rem;padding:.4rem !important;
+  }
+  .flow-section77>summary::after {content:'+';margin-inline-start:auto;flex:none;color:var(--ui-color-accent);}
+  .flow-section77[open]>summary::after {content:'−';}
+  body[data-flow-shell77] [data-flow77] .flow-section77>[data-flow-card77] {padding:.8rem .3rem .3rem !important;}
+  body[data-flow-shell77] .flow-section77>[data-flow-card77]>.card-title {display:none !important;}
+  body[data-flow-shell77] [data-flow77] :is(.card,.caption-list-card,.bg-style-browser,.bg-style-gallery) {max-height:none !important;}
+  body[data-flow-shell77] [data-flow77] .caption-list {max-height:none !important;overflow:visible !important;}
+  body[data-flow-shell77] [data-flow77] .caption-play {min-width:var(--ui-hit-size) !important;flex:none !important;}
+  /* Gallery-backed legacy selects are state adapters, not a second visible picker.
+     Old important min-heights would expand their clipped one-pixel rectangles. */
+  body[data-flow-shell77] [data-flow77] .sr-only {display:none !important;}
+  body[data-flow-shell77] [data-flow77] .bg-style-gallery {overflow:visible !important;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr)) !important;}
+  body[data-flow-shell77] [data-flow77] .bg-style-card {display:flex !important;flex-direction:column;align-items:stretch !important;}
+  body[data-flow-shell77] [data-flow77] .bg-swatch {display:grid !important;place-items:center;inline-size:100% !important;width:100% !important;height:auto !important;min-height:4rem !important;min-width:0 !important;box-sizing:border-box;}
+  body[data-flow-shell77] [data-flow77] .swatch-glass {display:flex !important;align-items:center;justify-content:center;line-height:1.5 !important;letter-spacing:0 !important;width:auto !important;min-width:3rem !important;height:auto !important;min-height:2rem !important;padding:.15rem .5rem !important;}
+  body[data-flow-shell77] [data-flow77] .liquid-preview-card>span {font-size:var(--ui-font-note) !important;line-height:1.6 !important;overflow-wrap:anywhere;}
+  body[data-flow-shell77] [data-flow77] .flow-section77 .card .card-title {display:flex !important;}
+  /* Grid/flex ancestors in older cards can otherwise retain 300px minimums. */
+  body[data-flow-shell77] [data-flow77] :is(.action-inline,.input-action,.control-row,.toggle-line,.button-row,.scope40,.context40) {flex-wrap:wrap !important;min-width:0 !important;}
+  body[data-flow-shell77] [data-flow77] :is(.input-action,.scope40,.control-row)>* {min-width:0 !important;max-width:100% !important;}
+  body[data-flow-shell77] [data-flow77] :is(.caption-toolbar,.caption-editor-toolbar,.review-toolbar,.brand-components,.memory-actions,.material-actions66,.typing-actions,.motion-builder-actions) {display:flex !important;flex-wrap:wrap !important;gap:.5rem !important;min-width:0 !important;}
+  body[data-flow-shell77] [data-flow77] :is(.caption-row,.caption-list,.review-area,.memory-columns,.ai-column,.director-plan,.studio49-grid,.resource-grid,.brand-grid) {min-width:0 !important;max-width:100% !important;}
+  body[data-flow-shell77] [data-flow77] :is(pre,code) {white-space:pre-wrap !important;overflow-wrap:anywhere;max-width:100%;}
+  body[data-flow-shell77] [data-flow77] .hint {overflow-wrap:anywhere;}
+  body[data-flow-shell77] [data-flow77] :is(.field>span,#bgEngineStatus,#aiModelMirror) {white-space:normal !important;overflow-wrap:anywhere;line-height:1.6 !important;height:auto !important;}
+  body[data-flow-shell77] [data-flow77] label {min-inline-size:var(--ui-hit-size) !important;}
+  body[data-flow-shell77] [data-flow77] .file-field {display:flex !important;flex-direction:column;align-items:stretch;gap:.5rem;flex:1 1 100% !important;height:auto !important;min-height:0 !important;}
+  body[data-flow-shell77] [data-flow77] :is(#sourceLayer,#sourcePath) {display:block !important;white-space:normal !important;overflow-wrap:anywhere;height:auto !important;line-height:1.6 !important;}
+  body[data-flow-shell77] [data-flow77] .caption-row {display:flex !important;flex-direction:column;align-items:stretch !important;gap:.35rem !important;}
+  body[data-flow-shell77] [data-flow77] .caption-row>span {min-width:0 !important;white-space:normal !important;overflow-wrap:anywhere;}
+  body[data-flow-shell77] [data-flow77] .numeric37-value {border:0 !important;box-shadow:none !important;border-radius:.5rem !important;background:var(--ui-color-field) !important;}
+  body[data-flow-shell77] [data-flow77] :is(.property-pair49,.event-chip-grid) {display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:.5rem;min-width:0 !important;}
+  body[data-flow-shell77] [data-flow77] .curve-points49 {display:grid !important;grid-template-columns:minmax(0,1fr) !important;min-width:0 !important;}
+  body[data-flow-shell77] [data-flow77] .edit37-quick {display:flex !important;flex-wrap:wrap;gap:.4rem;min-width:0 !important;}
+  body[data-flow-shell77] [data-flow77] .edit37-quick>button {flex:1 1 6rem !important;}
+  body[data-flow-shell77] #offlineText55 header {flex-wrap:wrap;gap:.5rem;}
+  body[data-flow-shell77] #offlineText55 .text55-toggle {display:flex !important;flex-wrap:wrap;white-space:normal;overflow-wrap:anywhere;max-width:100%;}
+  body[data-flow-shell77] [data-flow77] :is(.audio-heading50,.bg-style-head) {display:flex !important;flex-wrap:wrap;min-width:0 !important;gap:.65rem !important;}
+  body[data-flow-shell77] [data-flow77] :is(.audio-heading50>div,.audio-heading50 h2,.audio-heading50>b,#sfxAnalysisDetail) {min-width:0 !important;max-width:100%;white-space:normal !important;overflow-wrap:anywhere;}
+  body[data-flow-shell77] [data-flow77] .bg-preset-preview {min-width:0 !important;max-width:100% !important;}
+  body[data-flow-shell77] [data-flow77] :is(#bgGradientHandleA,#bgGradientHandleB) {min-width:32px !important;min-height:32px !important;}
+  body[data-flow-shell77] [data-flow77] .paint-stop-track {margin-inline:1.25rem !important;}
+  body[data-flow-shell77] #page-home .flow-hero77 h1 {overflow-wrap:anywhere;}
+  /* Searchable selects keep Tom Select's live combobox. Its backing select and
+     offscreen query input must not be expanded by the generic control floor. */
+  body[data-flow-shell77] [data-flow77] select.tomselected {display:none !important;}
+  body[data-flow-shell77] [data-flow77] .input-hidden .ts-control>input {display:none !important;}
+  body[data-flow-shell77] [data-flow77] .ts-wrapper.focus .ts-control>input {display:block !important;position:static !important;opacity:1 !important;left:auto !important;flex:1 1 4rem !important;min-width:0 !important;width:auto !important;}
+  body[data-flow-shell77] [data-flow77] .ts-control {display:flex !important;flex-wrap:wrap !important;gap:.4rem;min-width:0 !important;}
+  body[data-flow-shell77] [data-flow77] .ts-control>.item {white-space:normal;overflow-wrap:anywhere;max-width:100%;}
+  /* Existing Tweakpane controls use a horizontal 30/70 split, which is too
+     small at high DPI. Stack their original live label/value nodes instead. */
+  body[data-flow-shell77] [data-flow77] .tp-lblv {display:flex !important;flex-direction:column;align-items:stretch;height:auto !important;}
+  body[data-flow-shell77] [data-flow77] :is(.tp-lblv_l,.tp-lblv_v) {width:100% !important;min-width:0 !important;flex:auto !important;height:auto !important;white-space:normal !important;line-height:1.6 !important;padding-inline:0 !important;overflow-wrap:anywhere;}
+  body[data-flow-shell77] [data-flow77] .tp-ckbv_w {display:flex !important;align-items:center;min-height:32px !important;}
+  body[data-flow-shell77] [data-flow77] .tp-sldtxtv {display:flex !important;flex-wrap:wrap;gap:.4rem;min-width:0 !important;}
+  body[data-flow-shell77] [data-flow77] :is(.tp-sldtxtv_s,.tp-sldtxtv_t) {flex:1 1 5rem !important;min-width:0 !important;width:auto !important;}
+  body[data-flow-shell77] [data-flow77] .tp-txtv_k {min-width:2rem !important;width:2rem !important;}
+  /* Keep Tweakpane's drag ornament and slider cap within their own boxes;
+     coordinate/value handlers still use the original slider track. */
+  body[data-flow-shell77] [data-flow77] .tp-sldv_k {min-width:12px !important;}
+  body[data-flow-shell77] #page-motion .motion-card-preview-inner>span {font-size:var(--ui-font-min) !important;line-height:1.6 !important;}
+  body[data-flow-shell77] [data-flow77] :is(.director-timeline-scroll,.director-timeline) {min-width:0 !important;max-width:100% !important;overflow:visible !important;flex-wrap:wrap !important;height:auto !important;}
+  body[data-flow-shell77] [data-flow77] :is(.liquid-preview,.liquid-preview-card) {min-width:0 !important;max-width:100% !important;width:auto !important;}
+  /* The same original V canvas is visible behind the workspace. Default blur is zero. */
+  body[data-flow-shell77] #varnaAtmosphere48 {filter:blur(var(--flow-bg-blur77));background:radial-gradient(ellipse at var(--v48-mouse-x) var(--v48-mouse-y),var(--v48-glow),transparent 65%),linear-gradient(135deg,var(--flow-base77,var(--v48-base)),var(--flow-end77,var(--v48-end)));}
+  body[data-flow-shell77] #varnaGlyphs48 {opacity:1 !important;}
+  /* The old home scaffold stays in the DOM for saved hooks; the task cards replace its visual chrome. */
+  body[data-flow-shell77] #page-home>:is(.launcher-intro,.workflow-picker,.launcher-more,.flat-intro69) {display:none !important;}
+  body[data-flow-shell77] #page-home .launcher-grid {display:grid !important;grid-template-columns:minmax(0,1fr) !important;gap:.65rem !important;padding:0 !important;margin:1rem 0 !important;}
+  body[data-flow-shell77] #page-home .flow-task77 {display:flex !important;align-items:center;gap:.85rem;width:100% !important;min-height:4.75rem !important;height:auto !important;padding:.8rem !important;text-align:start;}
+  body[data-flow-shell77] #page-home .flow-task77>.flow-icon77:first-child {padding:.65rem;background:var(--ui-color-soft);border:1px solid var(--ui-color-border);border-radius:.8rem;}
+  body[data-flow-shell77] #page-home .flow-task77>.flow-icon77:last-child {margin-inline-start:auto;}
+  body[data-flow-shell77] #page-home .flow-task-copy77 {display:flex;flex-direction:column;gap:.2rem;min-width:0;}
+  body[data-flow-shell77] #page-home .flow-task-copy77>strong {color:var(--ui-color-text) !important;font-size:var(--ui-font-body) !important;}
+  body[data-flow-shell77] #page-home .flow-task-copy77>small {color:var(--ui-color-muted) !important;}
+  .flow-hero77 {padding:1.25rem;min-height:9rem;display:flex;flex-direction:column;justify-content:center;gap:.45rem;}
+  body[data-flow-shell77] #page-home .flow-hero77 h1 {display:block !important;font-size:clamp(1.25rem,3vw,1.7rem) !important;line-height:1.7;margin:0;}
+  .flow-hero77 p {margin:0;color:var(--ui-color-muted);overflow-wrap:anywhere;}
+  body[data-flow-shell77] #page-home .flow-signature77 {font-size:var(--ui-font-min) !important;color:var(--ui-color-accent);letter-spacing:.08em;}
+  .flow-icon77 {display:inline-flex;align-items:center;justify-content:center;flex:none;line-height:0;}
+  .flow-icon77 svg {width:1.35rem;height:1.35rem;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+  .flow-button77,.flow-header-button77,.flow-swatch77,.flow-order-row77 button,.flow-pin77 {
+    font:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    color:var(--ui-color-text);background:var(--ui-color-field);border:1px solid var(--ui-color-border);
+    border-radius:.65rem;padding:.5rem .75rem;cursor:pointer;
+  }
+  body[data-flow-shell77] .flow-header-button77 {color:var(--ui-color-muted) !important;}
+  .flow-button77:hover,.flow-swatch77:hover {background:var(--ui-color-soft);}
+  .flow-button-row77 {display:flex;flex-wrap:wrap;gap:.5rem;}
+  body[data-flow-shell77] :is(.flow-header-button77,.flow-language77) {padding:.3rem !important;}
+  body[data-flow-shell77] .topbar>.flow-header-button77>span:not(.flow-icon77) {display:none;}
+  .flow-palette77 {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;margin:.6rem 0;}
+  .flow-swatch77::before {content:'';width:.8rem;height:.8rem;border-radius:50%;background:var(--swatch77);box-shadow:0 0 0 1px var(--ui-color-border);flex:none;}
+  .flow-swatch77[aria-pressed=true],.flow-button77[aria-pressed=true] {outline:2px solid var(--ui-color-focus);outline-offset:1px;}
+  .flow-appearance77 {padding-block-end:.75rem;border-bottom:1px solid var(--ui-color-border);margin-block-end:.75rem;}
+  .flow-appearance77 h3 {margin:0;}
+  .flow-blur77 {margin-block-start:1rem;}
+  .flow-blur-row77 {display:flex;align-items:center;gap:.75rem;min-width:0;}
+  .flow-blur-row77 input {flex:1;min-width:0;}
+  .flow-blur-row77 output {flex:none;direction:ltr;unicode-bidi:isolate;}
+  .flow-quickstart77>.flow-button77 {margin:.4rem;}
+  .flow-catalog-head77 {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem;}
+  .flow-catalog-head77 h2 {margin:0;}
+  .flow-catalog-row77 {display:flex;gap:.4rem;min-width:0;}
+  .flow-catalog-row77[hidden] {display:none;}
+  body[data-flow-shell77] .flow-catalog-row77 .flow-catalog-link77 {display:flex;flex:1;align-items:center;justify-content:flex-start;gap:.6rem;min-width:0 !important;text-align:start;}
+  body[data-flow-shell77] .flow-catalog-row77 .flow-pin77 {flex:none;min-width:32px !important;padding:.4rem !important;}
+  body[data-flow-shell77] .flow-pin77>span:not(.flow-icon77) {display:none;}
+  .flow-pin77[aria-pressed=true] {color:var(--ui-color-accent);background:var(--ui-color-soft);}
+  .flow-pin77[aria-pressed=true] svg {fill:currentColor;}
+  .flow-dock-config77 {margin-block:.75rem;}
+  .flow-dock-config77 summary {padding:.4rem;cursor:pointer;}
+  .flow-dock-order77 {display:flex;flex-direction:column;gap:.5rem;margin-block:.65rem;}
+  .flow-order-row77 {display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;padding:.4rem;border:1px solid var(--ui-color-border);border-radius:.65rem;}
+  .flow-order-row77>span {flex:1 1 6rem;min-width:0;}
+  .flow-logo77 img {display:block;width:2rem;height:2rem;object-fit:contain;}
+  /* Default compact layout keeps the existing small-screen bottom navigation. */
+  body[data-flow-shell77] .app-shell[data-size=compact] .flat-nav69>:is(.flow-logo77,.flow-dock-option77) {display:none !important;}
+  body[data-flow-shell77] .app-shell[data-size=compact] .flat-nav69>button[data-page69]:not([data-page69=home]):not([data-page69=text]):not([data-page69=table]) {display:none !important;}
+  /* A full-height rail for the prototype's desktop panel. Physical side is user-selectable. */
+  body[data-flow-shell77] .app-shell:not([data-size=compact]):not([data-panel-short71=true]) {
+    --panel-columns71:var(--flow-rail77) minmax(0,1fr);--panel-rows71:auto minmax(0,1fr) auto;
+    --panel-areas71:'nav69 top' 'nav69 work' 'nav69 action69';
+  }
+  body[data-flow-shell77] .app-shell:not([data-size=compact]):not([data-panel-short71=true])[data-dock-side77=right] {
+    --panel-columns71:minmax(0,1fr) var(--flow-rail77);
+    --panel-areas71:'top nav69' 'work nav69' 'action69 nav69';
+  }
+  body[data-flow-shell77] .app-shell:not([data-size=compact]):not([data-panel-short71=true]) .flat-nav69 {
+    flex-direction:column;flex-wrap:nowrap !important;align-items:stretch;gap:.4rem;
+    overflow-y:auto;overflow-x:hidden;padding:.6rem .35rem !important;border:0 !important;
+    border-inline-end:1px solid var(--ui-color-border) !important;
+  }
+  body[data-flow-shell77] .app-shell:not([data-size=compact]):not([data-panel-short71=true]) .flat-nav69>button {
+    flex:0 0 auto !important;display:flex;flex-direction:column;gap:.3rem;min-height:3.2rem !important;
+  }
+  body[data-flow-shell77] .app-shell:not([data-size=compact]):not([data-panel-short71=true]) .flat-nav-label69 {display:block;font-size:var(--ui-font-min) !important;max-width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;}
+  body[data-flow-shell77] .app-shell[data-dock-collapsed77=true]:not([data-size=compact]):not([data-panel-short71=true]) .flat-nav-label69 {display:none;}
+  body[data-flow-shell77] .app-shell:not([data-size=compact]):not([data-panel-short71=true]) .flow-logo77 {margin-block-end:.65rem;}
+  body[data-flow-shell77] .flat-nav69>.flow-dock-option77>span:not(.flow-icon77) {display:none;}
+  body[data-flow-shell77] .flat-nav69>[data-more69] {margin-block-start:auto;}
+  body[data-flow-shell77] .app-shell[data-dock-collapsed77=true] {--flow-rail77:3rem;}
+  body[data-flow-shell77] .app-shell[data-size=wide]:not([data-dock-collapsed77=true]) {--flow-rail77:6rem;}
+  body[data-flow-shell77] .app-shell[data-size=wide]:not([data-dock-collapsed77=true]):not([data-panel-short71=true]) .flat-nav-label69 {display:block;font-size:var(--ui-font-min) !important;}
+  body[data-flow-shell77] .app-shell[data-size=wide] #page-home .launcher-grid {grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+  /* Preserve the accepted >=50% content area in short panels. No new header rows. */
+  body[data-flow-shell77] .app-shell[data-panel-short71=true] .flat-nav69>:is(.flow-logo77,.flow-dock-option77) {display:none !important;}
+  body[data-flow-shell77] .app-shell[data-panel-short71=true] .topbar>:is(.flow-header-button77,.flow-language77) {display:none !important;}
+  body[data-flow-shell77] .app-shell[data-panel-short71=true] .flow-hero77 {min-height:0;padding:.65rem;}
+  body[data-flow-shell77] .app-shell[data-panel-short71=true] #page-home .flow-task77 {min-height:32px !important;}
+  body[data-flow-shell77] .app-shell[data-panel-micro69=true] .flow-task77>.flow-icon77 {display:none;}
+  body[data-flow-shell77] .app-shell[data-panel-micro69=true] [data-flow77] :is(.flat-section69,.flow-section77>[data-flow-card77],.bg-style-browser,.bg-preset-preview,.bg-style-head) {padding-inline:.142857rem !important;}
+  body[data-flow-shell77] .app-shell[data-panel-micro69=true] [data-flow77] .bg-style-card {padding:.142857rem !important;}
+  body[data-flow-shell77] .app-shell[data-panel-micro69=true] [data-flow77] .swatch-glass {min-width:0 !important;padding:.142857rem !important;}
+  body[data-flow-shell77] .app-shell[data-panel-micro69=true] .flow-palette77 {grid-template-columns:minmax(0,1fr);}
+  body[data-flow-shell77] .app-shell[data-panel-micro69=true] .flow-catalog-row77 {flex-wrap:wrap;}
+  body[data-flow-shell77] [hidden] {display:none !important;}
+  @media(prefers-reduced-motion:reduce) {.flow-task77,.flow-section77 {transition:none;animation:none;}}
+}
+/* Tweakpane injects an unlayered stylesheet at runtime. These normal, scoped
+   declarations must also be unlayered; no important override is necessary. */
+body[data-flow-shell77] [data-flow77] .tp-sldv_k::after {right:0;}
+body[data-flow-shell77] [data-flow77] .tp-txtv_g {left:0;}
+/* The original V atmosphere and language switch also have unlayered owners.
+   Specific normal rules restore the selected light palette without new important flags. */
+body[data-flow-shell77] #varnaAtmosphere48 {background:radial-gradient(ellipse at var(--v48-mouse-x) var(--v48-mouse-y),var(--v48-glow),transparent 65%),linear-gradient(135deg,var(--flow-base77,var(--v48-base)),var(--flow-end77,var(--v48-end)));}
+body[data-flow-shell77] .flow-language77 {font:inherit;display:inline-flex;align-items:center;justify-content:center;line-height:1.5;background:var(--ui-color-field);color:var(--ui-color-text);border:1px solid var(--ui-color-border);border-radius:.65rem;}

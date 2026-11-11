@@ -14757,9 +14757,14 @@
       "sha256": "9b808d5f1b7dece9a3d66b879c82a6905f217b083a005be51619a227823f50d3"
     },
     {
+      "path": "css/ui/flow77.css",
+      "bytes": 23032,
+      "sha256": "5f0e0ae6e59879f96ac4419b752d64becd8936d6027ccfe813292e3fd40b5268"
+    },
+    {
       "path": "css/ui/pilot-b69.css",
-      "bytes": 19677,
-      "sha256": "05e30e7f826e9875b580579d9543436d957f34c3b93bf0f13e0d291d0bc5e8b7"
+      "bytes": 22044,
+      "sha256": "5e850cbc5dd5112bc6f9a7485999d6d98ecc105fa01ba76e027a1005606c001e"
     },
     {
       "path": "css/ui/stage-a68.css",
@@ -15283,8 +15288,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 196864,
-      "sha256": "57e3fe14dde650a0f09c1b7e20aa51abfcc3c9d0833f87ef844078cd82c88ef1"
+      "bytes": 196964,
+      "sha256": "026855a20faf8ed8299a2027449be05aa984805eeca56fe6ba968285bb07debf"
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
@@ -15462,6 +15467,11 @@
       "sha256": "ff1cd6e0812fe44b30e3736592189a9d9a1b39b7df6c4319f5aee6d09ffc5744"
     },
     {
+      "path": "js/flow77.js",
+      "bytes": 32639,
+      "sha256": "4d871c305c6ef3dc4c57e20f6be6ce89840683ef8092d9190cb6fe9af088a31b"
+    },
+    {
       "path": "js/fonts29.js",
       "bytes": 703,
       "sha256": "a426432fd1c488b5b63d84ae9546a88dec04c439b96cfbb006861ffe94a82d3d"
@@ -15513,8 +15523,8 @@
     },
     {
       "path": "js/liquid48.js",
-      "bytes": 9053,
-      "sha256": "ecb9d70cb90330888e54fa3b8af43d5a4cb9214d510af422dc75183923b4d85d"
+      "bytes": 9069,
+      "sha256": "91ebb914c22c86eb3bff0138ff598a35624f3c38c58becebbd074b0848fc9ac5"
     },
     {
       "path": "js/music-engine.js",
@@ -15543,8 +15553,8 @@
     },
     {
       "path": "js/pilot-b69.js",
-      "bytes": 24673,
-      "sha256": "2211768f88c9676174bfe0b652da85a5bef61a9f8db5f3b2e860731fb8a17177"
+      "bytes": 24776,
+      "sha256": "51b91bfd94a97f621da56f18f1848807c534e2c3a37d8173f3d3645d6f92a9d0"
     },
     {
       "path": "js/plugin53.js",
@@ -15563,13 +15573,13 @@
     },
     {
       "path": "js/production47.js",
-      "bytes": 21106,
-      "sha256": "0fef613336cf7631b5f56962a9fc10d140107819bd4336b430a0c34781f2722f"
+      "bytes": 21151,
+      "sha256": "c13b4aab8337dda72631445a424e1add6bcfc79aca43db3fc3efc28f359f01ac"
     },
     {
       "path": "js/production50.js",
-      "bytes": 14926,
-      "sha256": "f933952334e1dcd0c793c722cfbb2c0a184a88796734cfee659b4cc54a37b499"
+      "bytes": 15171,
+      "sha256": "57f82bde126acd22472379d317ad0b0a9d75272381136aa95f0c19b66081b213"
     },
     {
       "path": "js/production54-core.js",
@@ -15698,8 +15708,8 @@
     },
     {
       "path": "js/studio40.js",
-      "bytes": 11005,
-      "sha256": "3c821dabb3f7ab3d1ac50fceeddb44b245d09ad5656e3279282d34cf0991bd93"
+      "bytes": 11031,
+      "sha256": "bf24caef70703982e68daf43e4f0fb280c3fc54e40f4e8ac9450854d37a15620"
     },
     {
       "path": "js/studio49.js",
@@ -16600,6 +16610,31 @@
       "path": "tests/ui71_screenshots.cjs",
       "bytes": 2600,
       "sha256": "a34aa0f76c358f0de8160f9a93781469f7600ded4a770241fd29e07e60c60f28"
+    },
+    {
+      "path": "tests/ui77_integration_browser.cjs",
+      "bytes": 9115,
+      "sha256": "7984b84ce3e7c8d0224191b3bb0ac208a6c5da8930ae73d05d367dc6f5ba5c72"
+    },
+    {
+      "path": "tests/ui77_layout_browser.cjs",
+      "bytes": 4459,
+      "sha256": "05104726964c1b5d321d8e100886ddde17d1f89d22e527b31b1096b1d57991de"
+    },
+    {
+      "path": "tests/ui77_profile_browser.cjs",
+      "bytes": 1851,
+      "sha256": "189393819d6e0c19e8babd83c1159ba581ee1c666c6336754d1de783bfc768f2"
+    },
+    {
+      "path": "tests/ui77_screenshots.cjs",
+      "bytes": 2210,
+      "sha256": "f3e3b4629b0051e06f8e1c9026af62386bd000b8081087e0881ddb67d71cafa0"
+    },
+    {
+      "path": "tests/ui77_sections_browser.cjs",
+      "bytes": 2935,
+      "sha256": "bbcdf8997f56dda9ad3e45016d28732dff9db09f408bd21903a1f6aae6a2c8f9"
     },
     {
       "path": "tests/vendor/acorn/LICENSE",
