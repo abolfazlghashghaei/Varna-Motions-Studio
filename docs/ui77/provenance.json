@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "0c91a2e418cb89083620a9206c00451aff5f82a0",
+  "input": "Varna_UI77_Iconography_BlurControl.zip",
+  "inputSha256": "06d1de01c8b629db30db935d74e59c90f106c35a11f3ebe7c5bac000b73220ff",
+  "prototypeScriptsIncludedInRuntime": false,
+  "aeEntryOnly": true,
+  "newRuntimeDependencies": [],
+  "existingIconLibrary": "Lucide static 1.57.0; existing ISC notices retained",
+  "modelsBundled": false,
+  "nativeAEOrWindowsTested": false
+}

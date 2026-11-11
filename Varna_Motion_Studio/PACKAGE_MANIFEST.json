@@ -16618,8 +16618,8 @@
     },
     {
       "path": "tests/ui77_layout_browser.cjs",
-      "bytes": 4459,
-      "sha256": "05104726964c1b5d321d8e100886ddde17d1f89d22e527b31b1096b1d57991de"
+      "bytes": 4839,
+      "sha256": "93c14b9b87271d15fac1c2841ccce1dd684331d2e50b376cf2573357f9a53f7a"
     },
     {
       "path": "tests/ui77_profile_browser.cjs",

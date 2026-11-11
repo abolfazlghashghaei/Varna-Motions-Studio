@@ -4,6 +4,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const {launch, prepare, measure, root} = require('./helpers/panel69.cjs');
+for (const file of ['css/ui/flow77.css','css/ui/pilot-b69.css']) {
+  const stats={}; require('./helpers/cep70-profile.cjs').transform(fs.readFileSync(path.join(root,file),'utf8'),stats,file);
+  assert.equal(stats.rules,0,file+': owned layout must not depend on post-99 rules');
+  assert.equal(stats.declarations,0,file+': owned layout must not depend on post-99 declarations');
+}
 const quick = process.env.UI77_QUICK === '1';
 const scales = process.env.UI77_SCALE ? [Number(process.env.UI77_SCALE)] : quick ? [1] : [1, 1.25, 1.5, 2];
 const widths = quick ? [250, 400, 620, 1400] : [250, 320, 400, 620, 900, 1400];

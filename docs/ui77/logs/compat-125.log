@@ -1,0 +1,1 @@
+PASS UI77 chromium99-disabled: 1584 live page cases; 899 IDs, no clipping/overlap/horizontal overflow, 12px text/32px targets, visible primary actions, <=2 navigation levels.

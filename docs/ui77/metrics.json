@@ -1,0 +1,20 @@
+{
+  "baseline": "0c91a2e",
+  "stylesheets": {
+    "before": 35,
+    "after": 36
+  },
+  "before": {
+    "important": 3029,
+    "smallLiteral": 325
+  },
+  "after": {
+    "important": 3228,
+    "smallLiteral": 325
+  },
+  "scope": "Linked CSS declarations only; literal font sizes are overridden, not deleted. Computed UI size is checked in the browser.",
+  "newStylesheets": [
+    "css/ui/flow77.css"
+  ],
+  "nativeHostUnchanged": true
+}

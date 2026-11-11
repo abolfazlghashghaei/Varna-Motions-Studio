@@ -1,0 +1,22 @@
+{
+  "targetChromium": 99,
+  "nativeCEF": false,
+  "files": [
+    {
+      "file": "css/ui/flow77.css",
+      "stats": {
+        "rules": 0,
+        "declarations": 0,
+        "removals": []
+      }
+    },
+    {
+      "file": "css/ui/pilot-b69.css",
+      "stats": {
+        "rules": 0,
+        "declarations": 0,
+        "removals": []
+      }
+    }
+  ]
+}
