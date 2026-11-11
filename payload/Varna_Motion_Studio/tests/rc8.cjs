@@ -1,0 +1,28 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),vm=require('node:vm');
+const root=path.resolve(__dirname,'..'),C=require('../js/corrections.js');
+const bare=C.learn({},[{wrong:'منصوعي',right:'مصنوعی'}]);
+assert.equal(C.applyText('این منصوعي خوبه و آن منصوعي نیست',bare).hits,0);
+const rule=C.learn(bare,[{wrong:'این منصوعي خوبه',right:'این مصنوعی خوبه',mode:'context',canonical:'مصنوعی',autoApply:true}]);
+assert.equal(C.applyText('این منصوعي خوبه، اما آن منصوعي نیست',rule).text,'این مصنوعی خوبه، اما آن منصوعي نیست');
+assert.equal(C.applyText('این، منصوعي خوبه',rule).hits,0);
+const applied=C.applyText('این منصوعي خوبه',rule);assert.equal(applied.edits[0].ruleKey,C.phrase('این منصوعي خوبه'));assert.equal(applied.text.replace(applied.edits[0].to,applied.edits[0].from),'این منصوعي خوبه');
+const app=fs.readFileSync(path.join(root,'js/app.js'),'utf8');
+const begin=app.indexOf('function correctionTokenNorm('),end=app.indexOf('function correctionDb(',begin),ctx={C,Set,Array};vm.createContext(ctx);vm.runInContext(app.slice(begin,end)+';globalThis.learn=correctionPairs',ctx);
+const learned=Array.from(ctx.learn('این منصوعي خوبه','این مصنوعی خوبه'));assert.equal(learned.length,2);assert.equal(learned[0].autoApply,false);assert.equal(learned[1].mode,'context');assert.equal(C.applyText('این منصوعي خوبه',C.learn({},learned)).text,'این مصنوعی خوبه');
+const scratch=fs.mkdtempSync(path.join(os.tmpdir(),'varna-rc8-'));try{
+ const local={},browser={window:{require},process:{env:{APPDATA:scratch},platform:process.platform},Buffer,console,URL,setTimeout,clearTimeout,localStorage:{getItem:k=>local[k]||null,setItem:(k,v)=>local[k]=v},document:{createElement:()=>({getContext:()=>({measureText:()=>({width:24})})})}};
+ vm.createContext(browser);for(const file of ['timing.js','text-layout.js','state.js','node-engine.js'])vm.runInContext(fs.readFileSync(path.join(root,'js',file),'utf8'),browser);
+ const S=browser.window.GHAFState,N=browser.window.GHAFNode;
+ S.importManualCaptions([{text:'اول دوم سوم چهارم',start:0,end:4},{text:'پنجم ششم',start:4,end:6}]);let original=S.groups[0],next=S.groups[1];
+ assert.equal(S.word(original.wordIds[1]).synthetic,true);const chosen=[original.wordIds[3],original.wordIds[2]];S.moveSelectedWords(original.id,chosen,'next');assert.equal(S.text(next),'سوم چهارم پنجم ششم');assert.equal(S.text(original),'اول دوم');
+ next.correctionExclusions=['این منصوعي خوبه'];const split=S.splitGroup(next.id,'half');assert(split.every(g=>g.correctionExclusions.includes('این منصوعي خوبه')));
+ const state={version:2,groups:S.groups,words:S.words,settings:S.settings,correctionMemory:rule};const packet=N.packProjectState(state);assert.deepEqual(JSON.parse(JSON.stringify(N.unpackProjectState(packet))),JSON.parse(JSON.stringify(state)));assert.throws(()=>N.unpackProjectState({...packet,hash:'0'}),/checksum/);
+ const srt=N.exportSrtFile(scratch,S.exportGroups(),'sample');N.exportSubtitleBundle(srt,state);assert.equal(N.importSubtitleBundle(srt).groups.length,S.groups.length);fs.appendFileSync(srt,'changed');assert.throws(()=>N.importSubtitleBundle(srt),/یکسان نیست/);
+}finally{fs.rmSync(scratch,{recursive:true,force:true});}
+class FolderItem{constructor(name,parent){this.name=name;this.comment='';this.children=[];this._parent=null;this.parentFolder=parent||null;}set parentFolder(p){if(this._parent)this._parent.children=this._parent.children.filter(x=>x!==this);this._parent=p;if(p)p.children.push(this);}get parentFolder(){return this._parent;}get numItems(){return this.children.length;}item(i){return this.children[i-1];}remove(){const p=this.parentFolder;if(p)p.children=p.children.filter(x=>x!==this);}}
+const rootFolder=new FolderItem('root'),project={rootFolder,items:{addFolder:name=>new FolderItem(name,rootFolder)}},hostCtx={FolderItem,app:{project},console};Object.defineProperty(hostCtx,'name',{value:'After Effects',writable:false});vm.createContext(hostCtx);const hostSource=fs.readFileSync(path.join(root,'host/ghaf_host.jsx'),'utf8');assert(!/GHAFHost\.saveProjectState\s*=\s*function[\s\S]*?GHAFHost\.saveCurrentProject/.exec(hostSource)?.[0].match(/\b(?:var|,)\s*name\s*=/),'project state must avoid the host read-only name identifier');assert(!hostSource.includes('/^[A-Za-z0-9+/=]*$/'),'base64 validation must not contain an unescaped slash in an ExtendScript regex literal');vm.runInContext(hostSource,hostCtx);const H=hostCtx.GHAFHost,enc=x=>encodeURIComponent(JSON.stringify(x)),ok=x=>{const r=JSON.parse(x);assert.equal(r.ok,true,r.error);return r.data;};
+const packet={version:1,hash:'sha',chunks:['abc','def']};ok(H.saveProjectState(enc({packet})));assert.equal(rootFolder.numItems,1);assert.deepEqual(JSON.parse(JSON.stringify(ok(H.getProjectState()).packet)),packet);
+assert.equal(JSON.parse(H.saveProjectState(enc({packet:{version:1,hash:'bad',chunks:['abc?']}}))).ok,false);assert.equal(rootFolder.numItems,1);
+ok(H.saveProjectState(enc({packet:{version:1,hash:'new',chunks:['ghi']}})));assert.equal(rootFolder.item(1).numItems,1);assert.deepEqual(JSON.parse(JSON.stringify(ok(H.getProjectState()).packet)),{version:1,hash:'new',chunks:['ghi']});
+assert(app.includes('KeyH:4')&&app.includes('KeyG:5'));assert(app.includes('openCorrectionMemoryPanel()'));assert(app.includes('openMergePopup()'));assert(app.includes('openSplitPopup()'));assert(app.includes("host('previewCaption'"));assert(app.includes('memoryAppliedEdits'));assert(app.includes('correctionExclusions'));
+console.log('PASS RC8 strict context, SRT word movement/order, exceptions, state compression/bundle, AE project folder roundtrip, preview/shortcuts');

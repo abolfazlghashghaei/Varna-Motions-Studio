@@ -1,0 +1,22 @@
+{
+  "profile": "native",
+  "browser": "154.0.8037.57",
+  "quick": true,
+  "scales": [
+    1
+  ],
+  "widths": [
+    250,
+    400,
+    620,
+    1400
+  ],
+  "heights": [
+    400
+  ],
+  "cases": 352,
+  "failures": [],
+  "failureCount": 0,
+  "errors": [],
+  "minContentRatio": 0.595
+}

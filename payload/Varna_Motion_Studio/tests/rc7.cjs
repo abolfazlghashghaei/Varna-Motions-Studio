@@ -1,0 +1,12 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.resolve(__dirname,'..');
+const host=fs.readFileSync(path.join(root,'host/ghaf_host.jsx'),'utf8');
+assert(host.includes("var ls=inPoint,le=Math.max(ls+.001,outPoint)"),'text motion must use live layer in/out points');
+assert(host.includes("mt('IN',Math.min(le"),'IN marker must drive entrance timing');
+assert(host.includes("mt('OUT',Math.max"),'OUT marker must drive exit timing');
+assert(host.includes("thisLayer.parent.inPoint")&&host.includes("thisLayer.parent.outPoint"),'background motion must follow live parent timing');
+assert(host.includes("VARNA IN · move marker / trim layer to retime"),'live IN timing selector missing');
+assert(host.includes("VARNA OUT · trim layer / move marker to retime"),'live OUT timing selector missing');
+assert(!host.includes("var ia="+"t0"), 'legacy baked IN expression detected');
+assert(/4\.5\.0-rc\.(?:[6-9]|[1-9]\d+)/.test(host),'host version not bumped');
+console.log('RC7 live marker/layer timing checks passed');

@@ -1,0 +1,1698 @@
+{
+  "browser": "154.0.8037.57",
+  "images": [
+    {
+      "file": "after-home-250-dark.png",
+      "name": "home",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-audio-250-dark.png",
+      "name": "audio",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-text-250-dark.png",
+      "name": "text",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-motion-250-dark.png",
+      "name": "motion",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-kinetic-250-dark.png",
+      "name": "kinetic",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-templates-250-dark.png",
+      "name": "templates",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-bg-250-dark.png",
+      "name": "bg",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-table-250-dark.png",
+      "name": "table",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-sfx-250-dark.png",
+      "name": "sfx",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-music-250-dark.png",
+      "name": "music",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-brand-250-dark.png",
+      "name": "brand",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-safe-250-dark.png",
+      "name": "safe",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-ai-250-dark.png",
+      "name": "ai",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-keywords-250-dark.png",
+      "name": "keywords",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-translate-250-dark.png",
+      "name": "translate",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-easing49-250-dark.png",
+      "name": "easing49",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-director-250-dark.png",
+      "name": "director",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-assistant49-250-dark.png",
+      "name": "assistant49",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-tools-250-dark.png",
+      "name": "tools",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-resources-250-dark.png",
+      "name": "resources",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-output-250-dark.png",
+      "name": "output",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-settings-250-dark.png",
+      "name": "settings",
+      "width": 250,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-home-400-dark.png",
+      "name": "home",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-audio-400-dark.png",
+      "name": "audio",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-text-400-dark.png",
+      "name": "text",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-motion-400-dark.png",
+      "name": "motion",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-kinetic-400-dark.png",
+      "name": "kinetic",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-templates-400-dark.png",
+      "name": "templates",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-bg-400-dark.png",
+      "name": "bg",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-table-400-dark.png",
+      "name": "table",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-sfx-400-dark.png",
+      "name": "sfx",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-music-400-dark.png",
+      "name": "music",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-brand-400-dark.png",
+      "name": "brand",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-safe-400-dark.png",
+      "name": "safe",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-ai-400-dark.png",
+      "name": "ai",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-keywords-400-dark.png",
+      "name": "keywords",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-translate-400-dark.png",
+      "name": "translate",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-easing49-400-dark.png",
+      "name": "easing49",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-director-400-dark.png",
+      "name": "director",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-assistant49-400-dark.png",
+      "name": "assistant49",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-tools-400-dark.png",
+      "name": "tools",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-resources-400-dark.png",
+      "name": "resources",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-output-400-dark.png",
+      "name": "output",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-settings-400-dark.png",
+      "name": "settings",
+      "width": 400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-home-620-dark.png",
+      "name": "home",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-audio-620-dark.png",
+      "name": "audio",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-text-620-dark.png",
+      "name": "text",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-motion-620-dark.png",
+      "name": "motion",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-kinetic-620-dark.png",
+      "name": "kinetic",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-templates-620-dark.png",
+      "name": "templates",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-bg-620-dark.png",
+      "name": "bg",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-table-620-dark.png",
+      "name": "table",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-sfx-620-dark.png",
+      "name": "sfx",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-music-620-dark.png",
+      "name": "music",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-brand-620-dark.png",
+      "name": "brand",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-safe-620-dark.png",
+      "name": "safe",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-ai-620-dark.png",
+      "name": "ai",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-keywords-620-dark.png",
+      "name": "keywords",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-translate-620-dark.png",
+      "name": "translate",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-easing49-620-dark.png",
+      "name": "easing49",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-director-620-dark.png",
+      "name": "director",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-assistant49-620-dark.png",
+      "name": "assistant49",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-tools-620-dark.png",
+      "name": "tools",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-resources-620-dark.png",
+      "name": "resources",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-output-620-dark.png",
+      "name": "output",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-settings-620-dark.png",
+      "name": "settings",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-home-1400-dark.png",
+      "name": "home",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-audio-1400-dark.png",
+      "name": "audio",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-text-1400-dark.png",
+      "name": "text",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-motion-1400-dark.png",
+      "name": "motion",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-kinetic-1400-dark.png",
+      "name": "kinetic",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-templates-1400-dark.png",
+      "name": "templates",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-bg-1400-dark.png",
+      "name": "bg",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-table-1400-dark.png",
+      "name": "table",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-sfx-1400-dark.png",
+      "name": "sfx",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-music-1400-dark.png",
+      "name": "music",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-brand-1400-dark.png",
+      "name": "brand",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-safe-1400-dark.png",
+      "name": "safe",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-ai-1400-dark.png",
+      "name": "ai",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-keywords-1400-dark.png",
+      "name": "keywords",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-translate-1400-dark.png",
+      "name": "translate",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-easing49-1400-dark.png",
+      "name": "easing49",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-director-1400-dark.png",
+      "name": "director",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-assistant49-1400-dark.png",
+      "name": "assistant49",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-tools-1400-dark.png",
+      "name": "tools",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-resources-1400-dark.png",
+      "name": "resources",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-output-1400-dark.png",
+      "name": "output",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-settings-1400-dark.png",
+      "name": "settings",
+      "width": 1400,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-home-250-light.png",
+      "name": "home",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-audio-250-light.png",
+      "name": "audio",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-text-250-light.png",
+      "name": "text",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-motion-250-light.png",
+      "name": "motion",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-kinetic-250-light.png",
+      "name": "kinetic",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-templates-250-light.png",
+      "name": "templates",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-bg-250-light.png",
+      "name": "bg",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-table-250-light.png",
+      "name": "table",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-sfx-250-light.png",
+      "name": "sfx",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-music-250-light.png",
+      "name": "music",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-brand-250-light.png",
+      "name": "brand",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-safe-250-light.png",
+      "name": "safe",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-ai-250-light.png",
+      "name": "ai",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-keywords-250-light.png",
+      "name": "keywords",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-translate-250-light.png",
+      "name": "translate",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-easing49-250-light.png",
+      "name": "easing49",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-director-250-light.png",
+      "name": "director",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-assistant49-250-light.png",
+      "name": "assistant49",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-tools-250-light.png",
+      "name": "tools",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-resources-250-light.png",
+      "name": "resources",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-output-250-light.png",
+      "name": "output",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-settings-250-light.png",
+      "name": "settings",
+      "width": 250,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-home-400-light.png",
+      "name": "home",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-audio-400-light.png",
+      "name": "audio",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-text-400-light.png",
+      "name": "text",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-motion-400-light.png",
+      "name": "motion",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-kinetic-400-light.png",
+      "name": "kinetic",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-templates-400-light.png",
+      "name": "templates",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-bg-400-light.png",
+      "name": "bg",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-table-400-light.png",
+      "name": "table",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-sfx-400-light.png",
+      "name": "sfx",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-music-400-light.png",
+      "name": "music",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-brand-400-light.png",
+      "name": "brand",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-safe-400-light.png",
+      "name": "safe",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-ai-400-light.png",
+      "name": "ai",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-keywords-400-light.png",
+      "name": "keywords",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-translate-400-light.png",
+      "name": "translate",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-easing49-400-light.png",
+      "name": "easing49",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-director-400-light.png",
+      "name": "director",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-assistant49-400-light.png",
+      "name": "assistant49",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-tools-400-light.png",
+      "name": "tools",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-resources-400-light.png",
+      "name": "resources",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-output-400-light.png",
+      "name": "output",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-settings-400-light.png",
+      "name": "settings",
+      "width": 400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-home-620-light.png",
+      "name": "home",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-audio-620-light.png",
+      "name": "audio",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-text-620-light.png",
+      "name": "text",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-motion-620-light.png",
+      "name": "motion",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-kinetic-620-light.png",
+      "name": "kinetic",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-templates-620-light.png",
+      "name": "templates",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-bg-620-light.png",
+      "name": "bg",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-table-620-light.png",
+      "name": "table",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-sfx-620-light.png",
+      "name": "sfx",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-music-620-light.png",
+      "name": "music",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-brand-620-light.png",
+      "name": "brand",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-safe-620-light.png",
+      "name": "safe",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-ai-620-light.png",
+      "name": "ai",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-keywords-620-light.png",
+      "name": "keywords",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-translate-620-light.png",
+      "name": "translate",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-easing49-620-light.png",
+      "name": "easing49",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-director-620-light.png",
+      "name": "director",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-assistant49-620-light.png",
+      "name": "assistant49",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-tools-620-light.png",
+      "name": "tools",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-resources-620-light.png",
+      "name": "resources",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-output-620-light.png",
+      "name": "output",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-settings-620-light.png",
+      "name": "settings",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-home-1400-light.png",
+      "name": "home",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-audio-1400-light.png",
+      "name": "audio",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-text-1400-light.png",
+      "name": "text",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-motion-1400-light.png",
+      "name": "motion",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-kinetic-1400-light.png",
+      "name": "kinetic",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-templates-1400-light.png",
+      "name": "templates",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-bg-1400-light.png",
+      "name": "bg",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-table-1400-light.png",
+      "name": "table",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-sfx-1400-light.png",
+      "name": "sfx",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-music-1400-light.png",
+      "name": "music",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-brand-1400-light.png",
+      "name": "brand",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-safe-1400-light.png",
+      "name": "safe",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-ai-1400-light.png",
+      "name": "ai",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-keywords-1400-light.png",
+      "name": "keywords",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-translate-1400-light.png",
+      "name": "translate",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-easing49-1400-light.png",
+      "name": "easing49",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-director-1400-light.png",
+      "name": "director",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-assistant49-1400-light.png",
+      "name": "assistant49",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-tools-1400-light.png",
+      "name": "tools",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-resources-1400-light.png",
+      "name": "resources",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-output-1400-light.png",
+      "name": "output",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "after-settings-1400-light.png",
+      "name": "settings",
+      "width": 1400,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-original-dark.png",
+      "name": "original",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-ocean-dark.png",
+      "name": "ocean",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-mint-dark.png",
+      "name": "mint",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-ember-dark.png",
+      "name": "ember",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-noir-dark.png",
+      "name": "noir",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-rose-dark.png",
+      "name": "rose",
+      "width": 620,
+      "height": 900,
+      "theme": "dark",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-original-light.png",
+      "name": "original",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-ocean-light.png",
+      "name": "ocean",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-mint-light.png",
+      "name": "mint",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-ember-light.png",
+      "name": "ember",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-noir-light.png",
+      "name": "noir",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    },
+    {
+      "file": "palette-rose-light.png",
+      "name": "rose",
+      "width": 620,
+      "height": 900,
+      "theme": "light",
+      "language": "fa",
+      "profile": "native"
+    }
+  ],
+  "nativeAdobe": false
+}

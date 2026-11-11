@@ -1,0 +1,470 @@
+{
+  "mode": "post99-features-disabled",
+  "nativeCEF": false,
+  "errors": [],
+  "screens": [
+    {
+      "page": "table",
+      "width": 250,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 269
+    },
+    {
+      "page": "kinetic",
+      "width": 250,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 269
+    },
+    {
+      "page": "table",
+      "width": 320,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 269
+    },
+    {
+      "page": "kinetic",
+      "width": 320,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 269
+    },
+    {
+      "page": "table",
+      "width": 400,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 400,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 620,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 620,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 900,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 900,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 1400,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 1400,
+      "height": 400,
+      "theme": "light",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 250,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 269
+    },
+    {
+      "page": "kinetic",
+      "width": 250,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 269
+    },
+    {
+      "page": "table",
+      "width": 320,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 269
+    },
+    {
+      "page": "kinetic",
+      "width": 320,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 269
+    },
+    {
+      "page": "table",
+      "width": 400,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 400,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 620,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 620,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 900,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 900,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 1400,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 1400,
+      "height": 400,
+      "theme": "light",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 250,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 269
+    },
+    {
+      "page": "kinetic",
+      "width": 250,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 269
+    },
+    {
+      "page": "table",
+      "width": 320,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 269
+    },
+    {
+      "page": "kinetic",
+      "width": 320,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 269
+    },
+    {
+      "page": "table",
+      "width": 400,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 400,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 620,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 620,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 900,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 900,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 1400,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 1400,
+      "height": 400,
+      "theme": "dark",
+      "language": "fa",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 250,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 269
+    },
+    {
+      "page": "kinetic",
+      "width": 250,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 269
+    },
+    {
+      "page": "table",
+      "width": 320,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 269
+    },
+    {
+      "page": "kinetic",
+      "width": 320,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 269
+    },
+    {
+      "page": "table",
+      "width": 400,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 400,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 620,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 620,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 900,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 900,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "table",
+      "width": 1400,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 334
+    },
+    {
+      "page": "kinetic",
+      "width": 1400,
+      "height": 400,
+      "theme": "dark",
+      "language": "en",
+      "contentHeight": 334
+    }
+  ],
+  "downloadedOldBrowser": false,
+  "browser": "154.0.8037.57",
+  "features": {
+    "layers": true,
+    "has": false,
+    "colorMix": false,
+    "containerQueries": false,
+    "dynamicViewport": false,
+    "resizeObserver": true,
+    "mutationObserver": true
+  },
+  "legacyCSS": {
+    "rules": 6,
+    "declarations": 4,
+    "stylesheets": 36,
+    "removals": [
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "background",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 8%,var(--r6-surface,#fff))"
+      },
+      {
+        "file": "css/varna-ui.css",
+        "line": 210,
+        "property": "border-color",
+        "value": "color-mix(in srgb,var(--r6-accent,#378fd0) 35%,var(--r6-line,#ccd6dc))"
+      },
+      {
+        "file": "css/liquid-ui.css",
+        "line": 5,
+        "property": "background",
+        "value": "linear-gradient(145deg,color-mix(in srgb,var(--u-panel) 91%,transparent),rgba(255,255,255,.025))"
+      },
+      {
+        "file": "css/project-brain.css",
+        "line": 17,
+        "rule": ".director-item:has(input:checked)"
+      },
+      {
+        "file": "css/workflow-ui.css",
+        "line": 20,
+        "rule": "body .workflow-step>.card>.card-title:has(.card-icon)"
+      },
+      {
+        "file": "css/appearance25.css",
+        "line": 10,
+        "rule": "body #page-text .stack>.card:has(#fontSelect)"
+      },
+      {
+        "file": "css/upgrades27.css",
+        "line": 2,
+        "rule": ".asset-row label:has(input[type=checkbox])"
+      },
+      {
+        "file": "assets/vendor/ui30/tom-select/tom-select.css",
+        "line": 238,
+        "property": "background",
+        "value": "color-mix(#fff, #d0d0d0, 85%)"
+      },
+      {
+        "file": "css/studio37.css",
+        "line": 108,
+        "rule": "body .font-family-control,body .control:has(textarea)"
+      },
+      {
+        "file": "css/fluent-glass47.css",
+        "line": 38,
+        "rule": "body .inline-control:has(>.numeric37)"
+      }
+    ]
+  },
+  "injectedDeclarationsDisabled": 4,
+  "tests": {
+    "panelWidthIndependentOfViewport": true,
+    "layoutStates": 48,
+    "dynamicRelations": true,
+    "capabilityDetection": true
+  }
+}

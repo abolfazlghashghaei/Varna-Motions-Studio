@@ -1,0 +1,843 @@
+{
+  "easing49": [
+    {
+      "tag": "ARTICLE",
+      "id": "",
+      "text": "خروج · X↔خروج · Y↔ورود · X↔ورود · Y↔خطینرمسریعکششیورود نرمخروج نرمشتاب سینماییمکث و ج",
+      "parent": "page studio49-page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "curveApply49",
+      "text": "اعمال به کی‌فریم‌های انتخاب‌شده",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "shapeMotion50",
+      "text": "حرکت ابعاد شیپ",
+      "parent": "page studio49-page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "shapeApply50",
+      "text": "اعمال Size با منحنی بالا",
+      "parent": "card workspace-paged67"
+    }
+  ],
+  "assistant49": [
+    {
+      "tag": "ARTICLE",
+      "id": "",
+      "text": "سرویسOpenAIAnthropicGoogleمدلکلید API · فقط برای این نشستارسال ساختار کامپوزیشن همراه",
+      "parent": "page studio49-page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "assistantGenerate49",
+      "text": "تولید کد",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "assistantRun49",
+      "text": "اجرا در افتر",
+      "parent": "action-inline"
+    }
+  ],
+  "music": [
+    {
+      "tag": "ARTICLE",
+      "id": "audioStudio50",
+      "text": "∿VARNA / AUDIO STUDIOصدا برای هر لحظهLOCAL AIموتور وارنا: بررسی ناموفقروشن‌کردنخاموش‌",
+      "parent": "studio40-content"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "brainMusicEngineStart",
+      "text": "روشن‌کردن",
+      "parent": "music-engine-controls audio-engine51"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "cueAdd50",
+      "text": "ثبت بازه و مارکر",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "cueGenerate50",
+      "text": "ساخت بازه‌ها",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "brainMusicGenerate",
+      "text": "ساخت و افزودن به پروژه",
+      "parent": "action-inline"
+    }
+  ],
+  "templates": [
+    {
+      "tag": "ARTICLE",
+      "id": "templateLibrary38",
+      "text": "قالب‌های پروژه و موگرت ارسالی",
+      "parent": "studio40-content"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "templateApply38",
+      "text": "اعمال قالب کامل با متن من",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "templateBuild45",
+      "text": "اعمال و ساخت خروجی کامل",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "nativeStyles50",
+      "text": "استایل و نمایش روی متن خودت",
+      "parent": "studio40-content"
+    }
+  ],
+  "keywords": [
+    {
+      "tag": "ARTICLE",
+      "id": "captionHighlight37",
+      "text": "کلمه‌های برجسته",
+      "parent": "studio40-content workspace-paged67"
+    }
+  ],
+  "kinetic": [
+    {
+      "tag": "ARTICLE",
+      "id": "kineticStudio40",
+      "text": "صحنهٔ تایپوگرافی",
+      "parent": "studio40-content"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "wordMotion39",
+      "text": "حرکت کلمه‌به‌کلمه روی متن من",
+      "parent": "studio40-content"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "applyWord39",
+      "text": "اعمال حرکت",
+      "parent": "action-inline"
+    }
+  ],
+  "home": [],
+  "tools": [
+    {
+      "tag": "ARTICLE",
+      "id": "glassaryObjectsCard",
+      "text": "شیپ‌های شیشهٔ کادر افزوده",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "smartToolControls",
+      "text": "قالب نوشتار افزوده · قالب و نوشتار",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "smartTemplateApply",
+      "text": "استفاده برای همین کپشن",
+      "parent": "action-inline"
+    }
+  ],
+  "director": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-director-card-0",
+      "text": "۱ · تحلیل و پیشنهاد",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "brainAnalyze",
+      "text": "ساخت برنامهٔ پیشنهادی",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-director-card-1",
+      "text": "۳ · خواندن تغییرات دستی از AE",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-director-card-2",
+      "text": "پیشنهادهای طراحی برای بررسی",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "brainApply",
+      "text": "اعمال موارد انتخابی در پنل",
+      "parent": "action-inline workspace-paged67"
+    }
+  ],
+  "audio": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-audio-card-0",
+      "text": "منبع ویدیو / صوت",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnUseSelected",
+      "text": "خواندن کامپوزیشن فعال",
+      "parent": "file-picker composition-picker29"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-audio-card-1",
+      "text": "تشخیص گفتار",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnTranscribe",
+      "text": "▶ شروع ترنسکریپت",
+      "parent": "action-bar workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-audio-card-2",
+      "text": "وضعیت",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-audio-card-3",
+      "text": "لاگ فنی",
+      "parent": "page active"
+    }
+  ],
+  "text": [
+    {
+      "tag": "BUTTON",
+      "id": "btnManualAfter",
+      "text": "+ متن بعد از انتخاب",
+      "parent": "edit37-quick"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnRegroup",
+      "text": "بازچینی فوری",
+      "parent": "toolbar-wrap"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-text-card-0",
+      "text": "کپشن‌ها",
+      "parent": "split-view"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "",
+      "text": "شنیدن و مرور کپشن",
+      "parent": "stack"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-text-card-1",
+      "text": "ویرایش زنده",
+      "parent": "stack"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-text-card-2",
+      "text": "کلمات همین کپشن",
+      "parent": "stack"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-text-card-3",
+      "text": "بررسی زمان و مرز جمله",
+      "parent": "stack"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnRepairTiming",
+      "text": "اصلاح موارد مطمئن",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "textFontCard",
+      "text": "فونت و موقعیت",
+      "parent": "stack"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "captionLooks37",
+      "text": "ظاهر آماده و پریست کامل",
+      "parent": "stack"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "cosmicTextCard",
+      "text": "متریال حجمی افزوده · استایل حروف",
+      "parent": "stack"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "cosmicTextApply",
+      "text": "اعمال استایل",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "textStyleGlass",
+      "text": "شیشه روی خود حروف",
+      "parent": "stack"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "textAEApply",
+      "text": "به‌روزرسانی شیشهٔ حروف",
+      "parent": ""
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-text-card-7",
+      "text": "چیدمان خطوط و Justify",
+      "parent": "stack"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-text-card-8",
+      "text": "تشخیص بخش‌های زبان دیگر",
+      "parent": "stack"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "captionProtected37",
+      "text": "نام‌ها و عبارت‌های یکپارچه",
+      "parent": "stack"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "applyProtected37",
+      "text": "ذخیره و بازچینی",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "captionStack37",
+      "text": "چیدمان پله‌ای کپشن‌ها",
+      "parent": "stack"
+    }
+  ],
+  "motion": [
+    {
+      "tag": "ARTICLE",
+      "id": "typingStudio",
+      "text": "تایپ حرف‌به‌حرف و کادر شیشه‌ای",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "typingApply",
+      "text": "اعمال تایپ",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "cuttanaStudio",
+      "text": "نوشتار مسیر افزوده · نوشتار مسیر",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "cuttanaApply",
+      "text": "اجرای استایل",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-motion-card-2",
+      "text": "ابزارهای نوشتار نصب‌شده",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-motion-card-3",
+      "text": "اعمال به",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "motionApply",
+      "text": "تأیید و اعمال موشن",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "entrySoundCard66",
+      "text": "صدای ورود متن",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "entry66Apply",
+      "text": "اعمال به محدودهٔ موشن",
+      "parent": "card workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-motion-card-4",
+      "text": "موشن هر متن · پیش‌نمایش روی ویدیو",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "motionRender",
+      "text": "ساخت و پخش پیش‌نمایش",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "motionOutput",
+      "text": "خروجی نهایی لایه‌ها",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "textyleBridge",
+      "text": "کتابخانهٔ موشن · موشن مستقیم کپشن",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "animSimple",
+      "text": "کتابخانه موشن",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "animNative",
+      "text": "تنظیمات پیشرفته — Native Text Animator",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-motion-card-8",
+      "text": "Motion Builder",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnSaveMotionPreset",
+      "text": "ذخیره Motion Preset",
+      "parent": "action-inline workspace-paged67"
+    }
+  ],
+  "table": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-table-card-0",
+      "text": "۱ · ساختار جدول",
+      "parent": "flat-section69"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "tableResize",
+      "text": "اعمال ساختار",
+      "parent": "action-inline table-structure-actions"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-table-card-1",
+      "text": "۲ · محتوا و اندازهٔ خانه‌ها",
+      "parent": "flat-section69"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-table-card-3",
+      "text": "تنظیمات جدول",
+      "parent": "flat-section69"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-table-card-2",
+      "text": "پیش‌نمایش واقعی در After Effects",
+      "parent": "flat-section69 flat-preview69"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "tablePreviewAE",
+      "text": "پیش‌نمایش افتر",
+      "parent": ""
+    }
+  ],
+  "bg": [
+    {
+      "tag": "ARTICLE",
+      "id": "",
+      "text": "تنظیم سریع کادر",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "vendorEffectCard",
+      "text": "استایل بک‌گراند · متریال حجمی افزوده / شیشهٔ کادر افزوده",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "companionApply",
+      "text": "اعمال",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-bg-card-1",
+      "text": "تنظیمات بک‌گراند",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnPreviewBg",
+      "text": "Preview روی ویدیو",
+      "parent": "action-inline workspace-paged67"
+    }
+  ],
+  "safe": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-safe-card-0",
+      "text": "Preset",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-safe-card-1",
+      "text": "Style / Behavior",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnApplySafe",
+      "text": "Add / Update Safe Zone",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "socialGuideCard",
+      "text": "صفحهٔ روی ویدیو",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "safePrecision28",
+      "text": "دقت، منبع و تطبیق رابط",
+      "parent": "layout-grid"
+    }
+  ],
+  "ai": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-ai-card-0",
+      "text": "اصلاح با مدل محلی",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnAiAll",
+      "text": "پیشنهاد برای همه",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-ai-card-1",
+      "text": "حافظه اصلاح کلمات",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnSaveDirectCorrection",
+      "text": "ذخیره و اعمال اصلاح",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnApplyMemoryNow",
+      "text": "بررسی اصلاحات همهٔ کپشن‌ها",
+      "parent": "action-inline correction-memory-toolbar workspace-paged67"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnLearnCurrentCorrections",
+      "text": "ثبت اصلاحات فعلی",
+      "parent": "action-inline correction-memory-toolbar workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-ai-card-2",
+      "text": "واژه‌نامه و Entity Lock پروژه",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "saveEntityLocks",
+      "text": "ذخیره در همین پروژه",
+      "parent": "action-inline workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-ai-card-3",
+      "text": "پیشنهادهای آماده بررسی",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-ai-card-4",
+      "text": "چت با Context تمام کپشن‌ها",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnChat",
+      "text": "ارسال",
+      "parent": "input-action"
+    }
+  ],
+  "translate": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-translate-card-0",
+      "text": "Local Model Translator",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnTranslateAll",
+      "text": "ساخت ترجمه برای همه",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-translate-card-1",
+      "text": "پیشنهادهای ترجمه",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-translate-card-2",
+      "text": "مقایسه و تأیید",
+      "parent": "layout-grid"
+    }
+  ],
+  "sfx": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-sfx-card-1",
+      "text": "کامپوزیشن نهایی",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnUseActiveCompSfx",
+      "text": "استفاده از Comp فعال",
+      "parent": "file-picker"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-sfx-card-2",
+      "text": "کتابخانه SFX",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnAddSfxFolder",
+      "text": "افزودن پوشه شخصی",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-sfx-card-3",
+      "text": "هوشمندی و صدا",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-sfx-card-4",
+      "text": "تراز و استانداردسازی صدا",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnApplyAudioBalance",
+      "text": "تراز خودکار داخل AE",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-sfx-card-5",
+      "text": "پیشنهادهای هوشمند",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnAnalyzeSfx",
+      "text": "تحلیل حرفه‌ای کامپوزیشن",
+      "parent": "action-inline"
+    }
+  ],
+  "resources": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-resources-card-0",
+      "text": "سطح نصب و بسته‌ها",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-resources-card-1",
+      "text": "محدودیت مصرف",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnCheckLocalRoles",
+      "text": "بررسی همه مسیرها",
+      "parent": "action-inline"
+    }
+  ],
+  "brand": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-brand-card-0",
+      "text": "برندهای ذخیره‌شده",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "brandApply",
+      "text": "اعمال برند و به‌روزرسانی خروجی",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-brand-card-1",
+      "text": "اطلاعات و ذخیرهٔ ظاهر",
+      "parent": "page active"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "brandAssetsCard",
+      "text": "لوگو و فایل‌های پایهٔ پروژه",
+      "parent": "page active"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "brandAddLogo",
+      "text": "افزودن لوگو",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "brandSave",
+      "text": "ذخیرهٔ برند از ظاهر فعلی",
+      "parent": "action-inline production-hidden47"
+    }
+  ],
+  "settings": [
+    {
+      "tag": "ARTICLE",
+      "id": "workspaceProfiles",
+      "text": "چیدمان‌های کاری After Effects",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "appearance50",
+      "text": "رنگ و متریال شخصی",
+      "parent": "card workflow-tab-hidden"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "brainAudioModelSettings",
+      "text": "مدل‌های موسیقی و صدا",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-settings-card-2",
+      "text": "اتصال و عیب‌یابی After Effects",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnHostDiagnostics",
+      "text": "تست موقت متن، جدول و صدا",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-settings-card-3",
+      "text": "پروفایل تنظیمات",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnSaveSettingsProfile",
+      "text": "ذخیره تنظیمات فعلی",
+      "parent": "action-inline"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-settings-card-4",
+      "text": "Import / Export",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-settings-card-5",
+      "text": "پیش‌فرض بک‌گراند",
+      "parent": "layout-grid"
+    }
+  ],
+  "output": [
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-output-card-0",
+      "text": "بررسی",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-output-card-1",
+      "text": "ساخت در After Effects",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnBuildOutput",
+      "text": "ساخت خروجی نهایی",
+      "parent": "card workspace-paged67"
+    },
+    {
+      "tag": "ARTICLE",
+      "id": "workflow-page-output-card-2",
+      "text": "SRT — خروجی / ورودی پشتیبان",
+      "parent": "layout-grid"
+    },
+    {
+      "tag": "BUTTON",
+      "id": "btnExportSrt",
+      "text": "خروجی SRT",
+      "parent": "action-inline workspace-paged67"
+    }
+  ]
+}
