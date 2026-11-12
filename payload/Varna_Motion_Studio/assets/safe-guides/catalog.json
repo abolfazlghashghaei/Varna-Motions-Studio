@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "simulatedInterface": true,
+  "definitions": [
+    {
+      "platform": "instagram_reels",
+      "sample": false,
+      "file": "assets/safe-guides/instagram_reels-overlay.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "instagram_reels",
+      "sample": true,
+      "file": "assets/safe-guides/instagram_reels-preview.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "instagram_story",
+      "sample": false,
+      "file": "assets/safe-guides/instagram_story-overlay.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "instagram_story",
+      "sample": true,
+      "file": "assets/safe-guides/instagram_story-preview.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "instagram_feed",
+      "sample": false,
+      "file": "assets/safe-guides/instagram_feed-overlay.png",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "platform": "instagram_feed",
+      "sample": true,
+      "file": "assets/safe-guides/instagram_feed-preview.png",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "platform": "tiktok",
+      "sample": false,
+      "file": "assets/safe-guides/tiktok-overlay.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "tiktok",
+      "sample": true,
+      "file": "assets/safe-guides/tiktok-preview.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "youtube_shorts",
+      "sample": false,
+      "file": "assets/safe-guides/youtube_shorts-overlay.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "youtube_shorts",
+      "sample": true,
+      "file": "assets/safe-guides/youtube_shorts-preview.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "youtube",
+      "sample": false,
+      "file": "assets/safe-guides/youtube-overlay.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "platform": "youtube",
+      "sample": true,
+      "file": "assets/safe-guides/youtube-preview.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "platform": "facebook_reels",
+      "sample": false,
+      "file": "assets/safe-guides/facebook_reels-overlay.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "facebook_reels",
+      "sample": true,
+      "file": "assets/safe-guides/facebook_reels-preview.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "facebook_story",
+      "sample": false,
+      "file": "assets/safe-guides/facebook_story-overlay.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "facebook_story",
+      "sample": true,
+      "file": "assets/safe-guides/facebook_story-preview.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "linkedin",
+      "sample": false,
+      "file": "assets/safe-guides/linkedin-overlay.png",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "platform": "linkedin",
+      "sample": true,
+      "file": "assets/safe-guides/linkedin-preview.png",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "platform": "pinterest",
+      "sample": false,
+      "file": "assets/safe-guides/pinterest-overlay.png",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "platform": "pinterest",
+      "sample": true,
+      "file": "assets/safe-guides/pinterest-preview.png",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "platform": "x",
+      "sample": false,
+      "file": "assets/safe-guides/x-overlay.png",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "platform": "x",
+      "sample": true,
+      "file": "assets/safe-guides/x-preview.png",
+      "width": 1080,
+      "height": 1350
+    },
+    {
+      "platform": "telegram",
+      "sample": false,
+      "file": "assets/safe-guides/telegram-overlay.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "telegram",
+      "sample": true,
+      "file": "assets/safe-guides/telegram-preview.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "snapchat",
+      "sample": false,
+      "file": "assets/safe-guides/snapchat-overlay.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "snapchat",
+      "sample": true,
+      "file": "assets/safe-guides/snapchat-preview.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "platform": "tv",
+      "sample": false,
+      "file": "assets/safe-guides/tv-overlay.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "platform": "tv",
+      "sample": true,
+      "file": "assets/safe-guides/tv-preview.png",
+      "width": 1920,
+      "height": 1080
+    }
+  ]
+}

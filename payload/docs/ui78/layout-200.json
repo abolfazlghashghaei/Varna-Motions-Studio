@@ -1,0 +1,37 @@
+{
+  "profile": "chromium99-disabled",
+  "browser": "154.0.8037.57",
+  "quick": false,
+  "scales": [
+    2
+  ],
+  "widths": [
+    250,
+    320,
+    400,
+    620,
+    900,
+    1400
+  ],
+  "heights": [
+    400,
+    700,
+    1000
+  ],
+  "cases": 1584,
+  "failures": [],
+  "failureCount": 0,
+  "errors": [],
+  "minContentRatio": 0.532,
+  "source": {
+    "index.html": "026855a20faf8ed8299a2027449be05aa984805eeca56fe6ba968285bb07debf",
+    "js/flow77.js": "ffaa7c52a77631e4816f9ebf2cc175ae8d59404b20f4da7f8262ca25ac9f6de5",
+    "css/ui/flow77.css": "2100a974a897758ea7dab7a60ee2a3be4af7e54673e5926bd4273d6fb50ecf97",
+    "js/pilot-b69.js": "2c94aa156292b6fbe031a887890bfc08714792c768aff97a75c84340c946c569",
+    "css/ui/pilot-b69.css": "5e850cbc5dd5112bc6f9a7485999d6d98ecc105fa01ba76e027a1005606c001e",
+    "js/production47.js": "c13b4aab8337dda72631445a424e1add6bcfc79aca43db3fc3efc28f359f01ac",
+    "js/studio40.js": "bf24caef70703982e68daf43e4f0fb280c3fc54e40f4e8ac9450854d37a15620",
+    "js/production50.js": "57f82bde126acd22472379d317ad0b0a9d75272381136aa95f0c19b66081b213",
+    "js/liquid48.js": "80a7d9a1c224f2c200bbaed3a9c42038c6352eb9a67b62b76ddd5b2c6606e009"
+  }
+}

@@ -1,0 +1,69 @@
+body.workbench66 #production47{padding:7px;margin-bottom:7px}
+body.workbench66 #productionSteps47{gap:4px;margin-top:6px}
+body.workbench66 #productionSteps47 button,body.workbench66 .production-actions47 button{padding:5px 7px;font-size:10px;min-height:28px}
+body.workbench66 #productionRoutes47{display:none!important}
+#routeSelect66{max-width:55%;min-width:110px;padding:5px;border:1px solid var(--u-line);border-radius:8px;background:var(--u-input);color:var(--u-text);font:inherit}
+body.workbench66 .studio30-toolbar{padding:0;min-height:0;margin:0}
+body.workbench66 #studio30Search{width:30px;min-width:30px;max-width:30px;padding:5px;flex:none}
+body.workbench66 #studio30Search span,body.workbench66 #studio30Search kbd{display:none}
+.studio30-result-star[aria-pressed=true]{color:#ffe38a!important;filter:drop-shadow(0 0 5px #ffd565)}
+.studio30-result-star[aria-pressed=true] svg{fill:currentColor!important;stroke:currentColor}
+body.workbench66 .control{gap:4px}body.workbench66 .card{padding:10px}
+body.workbench66 .form-grid{gap:7px}
+body.workbench66 #page-table .table-preview-card{position:sticky;top:0;z-index:4;background:var(--u-panel);margin-bottom:8px}
+body.workbench66 .sentence66{margin-top:10px;border:1px solid var(--u-line)}
+.sentence66 output{display:block;font-size:11px;line-height:1.7;margin-top:7px}
+/* Keep the composition in view; only the chosen settings page is displayed. */
+body.workbench66 .workspace{padding:9px!important}
+body.workbench66 .card{padding:10px!important;margin-bottom:8px!important}
+body.workbench66 .form-grid{gap:7px!important}
+body.workbench66 #page-table>.table-dock66{position:relative!important;top:auto;display:grid;grid-template-columns:minmax(90px,1fr) minmax(160px,1fr);gap:7px;align-items:center;margin-top:0!important}
+.table-dock66>.mini-preview-toggle{grid-column:1;grid-row:1/3;margin:0;padding:2px;border:0;min-width:0}
+#tableDockActions66{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;gap:5px;min-width:0}
+#tableDockActions66 .btn{padding:5px!important;min-height:28px!important;width:auto;flex:1 1 40%;font-size:10px!important}
+#tableDockActions66 .switch-row{flex:1 1 100%;font-size:10px}
+#tableDockActions66 output,#tableDockActions66 #tableStatus{flex:1 1 100%;font-size:10px}
+#tablePreviewOptions66{grid-column:2;font-size:10px;position:relative}
+#tablePreviewOptions66[open]{grid-column:1/-1;grid-row:3}
+#tablePages66{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px;min-height:30px}
+#tablePages66 output{font-size:10px;overflow-wrap:anywhere}
+body.workbench66 #page-table .table-editor-wrap{max-height:130px!important;min-height:60px!important}
+body.workbench66 .table-paged-out66{display:none!important}
+body.workbench66 #page-table .table-pro-layout{gap:0!important}
+body.workbench66 #page-table .card-title{margin-bottom:5px}
+#entrySoundCard66 output,#tableMotionSound66 output{display:block;font-size:10px;line-height:1.6}
+body.workbench66 #production47{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px;align-items:center}
+body.workbench66 #production47 .production-heading47{grid-column:1;min-width:0;gap:5px}
+body.workbench66 #production47 .production-actions47{grid-column:2;grid-row:1;margin:0!important;gap:4px}
+body.workbench66 #production47 #productionSteps47{grid-column:1/-1;margin:0}
+body.workbench66 #production47 #productionSelection47{display:none}
+body.workbench66 #page-table .cell-inspector,body.workbench66 #page-table .table-text-motion-box{padding:0!important;border:0!important;margin:0!important;background:transparent!important}
+body.workbench66 #page-table .cell-inspector .inspector-head{display:none!important}
+body.workbench66 .studio30-toolbar{display:none!important}
+body.workbench66 #studio30Density{width:28px;height:28px;flex:none}
+body.workbench66 #page-table .table-pro-layout details{padding:6px!important;margin:4px 0!important}
+body.workbench66 #page-table .table-pro-layout details>summary{padding:3px!important;margin-bottom:5px!important;font-size:10px!important;min-height:0!important}
+body.workbench66 #page-table .table-pro-layout details>.form-grid{padding:0!important;margin:0!important}
+body.workbench66 #page-table .card-title{min-height:22px!important;padding-bottom:4px!important;margin-bottom:4px!important}
+body.workbench66 #page-table .align-panel48{padding:6px!important;margin:4px 0!important;gap:4px}
+body.workbench66 #page-table #tablePreviewStage{min-height:0!important}
+#tablePageJump66{flex:1;min-width:0;max-width:75%;font-size:10px!important;min-height:26px!important;height:28px!important;padding:3px!important}
+#materialStatus66{display:block;font-size:11px;line-height:1.7}
+.material-actions66{margin-bottom:8px}
+body.workbench66 #page-table #tablePages66 button:enabled{color:var(--u-accent)!important;border-color:var(--u-accent)!important}
+body.workbench66 .piece-inspector45>details:not([open]){display:none!important}
+body.workbench66 .piece-inspector45>details[open]>summary{display:none}
+body.workbench66 .sentence66.is-active66{border-color:var(--u-accent)!important;box-shadow:inset 3px 0 0 var(--u-accent)!important}
+body.workbench66 #page-table .table-pro-layout details[open]>summary{display:none}
+@media(max-height:600px){
+ body.workbench66 #production47{padding:5px!important;margin-bottom:4px!important;gap:3px}
+ body.workbench66 #productionSteps47 button,body.workbench66 .production-actions47 button{font-size:9px!important;min-height:23px!important;padding:3px 5px!important}
+ body.workbench66 #page-table>.table-dock66{padding:6px!important;gap:4px}
+ #tableDockActions66 .btn{font-size:9px!important;min-height:24px!important}
+ #tableDockActions66 .switch-row,#tableDockActions66 #tableStatus,#tablePreviewOptions66{font-size:9px!important}
+ body.workbench66 #page-table .table-editor-wrap{max-height:85px!important}
+}
+@media(max-height:600px){
+ body.workbench66 #page-table .table-pro-layout .card{padding:6px!important}
+ body.workbench66 #page-table .table-pro-layout .form-grid{margin-bottom:4px!important}
+}

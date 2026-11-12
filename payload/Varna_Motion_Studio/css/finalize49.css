@@ -1,0 +1,66 @@
+/* Finalization material. The scene stays behind the glass, not behind opaque wrappers. */
+body.liquid48{--v48-tint:rgba(24,37,57,.28);--v48-content:rgba(26,39,58,.24);--v48-highlight:rgba(230,247,255,.1);--v48-glyph-opacity:.46;--v49-height:34px;--v49-gap:12px}
+body.liquid48[data-theme=light],body.liquid48[data-theme=silver]{--v48-tint:rgba(248,252,255,.34);--v48-content:rgba(249,253,255,.3);--v48-highlight:rgba(255,255,255,.42);--v48-glyph-opacity:.43}
+body.liquid48[data-theme=mid]{--v48-tint:rgba(66,81,104,.3);--v48-content:rgba(59,74,94,.26);--v48-glyph-opacity:.48}
+body.liquid48[data-theme=black]{--v48-tint:rgba(12,20,33,.26);--v48-content:rgba(15,24,39,.24);--v48-glyph-opacity:.5}
+body.liquid48 .app-shell{isolation:auto!important}
+body.liquid48 .card,body.liquid48 .launcher-tile{background:linear-gradient(135deg,var(--v48-highlight),transparent 30%),var(--v48-content)!important;box-shadow:inset 0 1px 0 var(--v48-highlight),inset 1px 0 rgba(255,255,255,.05),0 8px 26px rgba(0,0,0,.09)!important}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ body.liquid48 .card,body.liquid48 .launcher-tile{backdrop-filter:blur(3px) saturate(1.45)!important;-webkit-backdrop-filter:blur(3px) saturate(1.45)!important}
+ body.liquid48 .topbar,body.liquid48 .nav-rail,body.liquid48 #production47,body.liquid48 .bottom-dock{backdrop-filter:blur(10px) saturate(1.45)!important;-webkit-backdrop-filter:blur(10px) saturate(1.45)!important}
+}
+body.liquid48 .brand-mark,body.liquid48 .launcher-intro img{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;padding:0!important}
+body.liquid48 .brand-mark img{width:42px;height:42px;filter:drop-shadow(0 3px 8px rgba(78,181,218,.2))}
+body.liquid48 .launcher-intro img{width:64px!important;height:64px!important;filter:drop-shadow(0 4px 12px rgba(78,181,218,.2))}
+#startup49[hidden]{display:none!important}
+#startup49{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#e9f8ff;background:radial-gradient(ellipse at 45% 35%,#20415a 0,transparent 55%),linear-gradient(135deg,#101a29,#080e18);font-family:'Vazirmatn','Segoe UI',sans-serif;overflow:auto;padding:24px;text-align:center}
+#startup49>b{font:600 22px/1.5 'Segoe UI',sans-serif;letter-spacing:.35em;margin-inline-start:.35em}
+#startup49>small{font-size:12px;max-width:100%;overflow-wrap:anywhere}
+.startup-mark49{width:108px;height:108px;position:relative;isolation:isolate}
+.startup-mark49 img{width:100%;height:100%;animation:varna-reveal49 1.3s cubic-bezier(.18,.78,.2,1) both}
+.startup-mark49 span{position:absolute;inset:-30px;background:radial-gradient(ellipse,rgba(92,219,239,.24),transparent 67%);z-index:-1;animation:varna-breathe49 2s ease-in-out infinite alternate}
+.startup-track49{width:min(160px,70vw);height:2px;border-radius:4px;background:rgba(210,246,255,.12);overflow:hidden}
+.startup-track49 i{display:block;width:45%;height:100%;background:linear-gradient(90deg,transparent,#b6f3ff,transparent);animation:varna-progress49 1.4s ease-in-out infinite}
+@keyframes varna-reveal49{from{opacity:0;transform:translateY(18px) scale(.8);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes varna-breathe49{from{opacity:.4;transform:scale(.85)}to{opacity:1;transform:scale(1.15)}}
+@keyframes varna-progress49{from{transform:translateX(-130%)}to{transform:translateX(350%)}}
+.brand-welcome49{max-width:420px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.35)}
+.brand-welcome49>img{width:64px;height:64px;margin-bottom:16px}
+.brand-welcome49 .control{text-align:start;margin-bottom:20px}
+.brand-welcome49 .action-inline{justify-content:center;margin-bottom:12px}
+.brand-welcome49>small{color:var(--u-muted)}
+/* One control height, label baseline, gap and column policy across pages. */
+body.finalize49 .form-grid{align-items:start!important;column-gap:var(--v49-gap)!important;row-gap:var(--v49-gap)!important;grid-auto-flow:row}
+body.finalize49 .control{gap:6px!important;align-self:start;justify-content:flex-start}
+body.finalize49 .control>span:first-child{display:flex;align-items:flex-end;min-height:22px;line-height:1.6!important;margin:0}
+body.finalize49 .form-grid>.control>span:first-child{min-height:2.9em}
+body.finalize49 .control>select,body.finalize49 .control>input:not([type=checkbox]):not([type=radio]):not([type=range]),body.finalize49 .color-editor,body.finalize49 .numeric37{min-height:var(--v49-height)!important;height:var(--v49-height)!important}
+body.finalize49 .control>textarea{min-height:90px!important;height:auto!important}
+body.finalize49 .action-inline>.btn,body.finalize49 .button-row>.btn,body.finalize49 .toolbar-wrap>.btn{min-height:var(--v49-height)!important;align-self:center}
+body.finalize49 .form-grid>.switch-row{align-self:start!important;min-height:var(--v49-height);margin-block-start:calc(2.9em + 6px)!important}
+.property-pair49{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0;align-self:start}
+body.finalize49 .property-pair49>.control>span:first-child{min-height:22px}
+body.finalize49 .form-grid>.property-pair49>.control:first-child>span:first-child{min-height:2.9em}
+body.finalize49 .background-model49{flex:0 1 210px!important;width:210px!important;max-width:100%;min-width:0!important;margin:0!important}
+body.finalize49 #page-bg .page-head #bgModelHead{height:34px!important;min-height:34px!important;max-height:34px!important;min-width:0!important;max-width:100%!important;width:100%!important;flex:none!important;font-size:12px!important;padding-block:4px!important}
+body.finalize49 .bg-style-gallery{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))!important;gap:8px!important;max-height:340px;overflow:auto;align-items:stretch;padding:2px}
+body.finalize49 .bg-style-card{display:grid!important;grid-template-columns:28px minmax(0,1fr)!important;align-items:center!important;gap:8px!important;min-height:50px!important;height:auto!important;padding:8px!important;text-align:start!important}
+body.finalize49 .bg-style-card .bg-swatch{width:28px!important;height:28px!important;min-height:28px!important;grid-row:1 / 3;border-radius:7px!important;margin:0!important}
+body.finalize49 .bg-style-card>b{font-size:11px!important;line-height:1.5!important;overflow-wrap:anywhere}
+body.finalize49 .bg-style-card>small{display:none!important}
+body.finalize49 #brandShortcut{overflow:hidden;text-overflow:ellipsis;white-space:nowrap!important;max-width:150px}
+.studio49-page .card{max-width:860px;margin-inline:auto}
+.curve-editor49{display:block;width:min(100%,300px);height:auto;aspect-ratio:1;overflow:hidden;touch-action:none;direction:ltr;margin:16px auto;color:var(--u-accent)}
+.curve-editor49 .handle49{cursor:grab;fill:var(--u-panel);stroke:currentColor;stroke-width:2}
+.curve-editor49 .handle49:active{cursor:grabbing}
+.curve-points49{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:460px;margin-inline:auto;direction:ltr}
+.curve-points49 .property-pair49{direction:rtl}
+.curve-presets49{display:flex;flex-wrap:wrap;gap:8px;margin-block:14px}
+.studio49-page textarea{width:100%;min-width:0;resize:vertical}
+#assistantCode49{min-height:240px;font:12px/1.7 Consolas,monospace;direction:ltr;text-align:left}
+#assistantHistory49{display:grid;gap:8px;margin-top:16px}
+#assistantHistory49 button{width:100%;text-align:start;justify-content:flex-start}
+.studio49-page [role=status]{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8}
+@media(max-width:430px){body.finalize49 .background-model49{flex-basis:100%!important;width:100%!important}body.finalize49 .form-grid>.control>span:first-child,body.finalize49 .form-grid>.property-pair49>.control:first-child>span:first-child{min-height:22px}body.finalize49 .form-grid>.switch-row{margin-block-start:0!important}.brand-welcome49 .btn{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){#startup49 *{animation:none!important;transition:none!important}.startup-track49 i{width:100%;opacity:.7}}
+@media(prefers-reduced-transparency:reduce){body.liquid48 .card,body.liquid48 .launcher-tile,body.liquid48 .topbar,body.liquid48 .nav-rail,body.liquid48 #production47,body.liquid48 .bottom-dock{background:var(--u-panel)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}

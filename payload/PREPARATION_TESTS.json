@@ -1,0 +1,70 @@
+{
+  "powershell": "7.x on Linux with OS marker set for helper validation",
+  "nativeWindowsInstallerTested": false,
+  "cases": [
+    {
+      "case": "valid complete payload",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "lastOutput": [
+        "Verified Windows payload 3300 / 3350",
+        "All 3350 Windows payload files verified. Starting the selected installer."
+      ]
+    },
+    {
+      "case": "corrupt product file",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "lastOutput": [
+        "Package preparation stopped: Package checksum mismatch: css/ui/flow77.css",
+        "Extract the complete UI78 ZIP into a new folder and retry. No existing plugin files were changed by preparation."
+      ]
+    },
+    {
+      "case": "wrong platform",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "lastOutput": [
+        "Package preparation stopped: Unexpected UI78 Windows manifest.",
+        "Extract the complete UI78 ZIP into a new folder and retry. No existing plugin files were changed by preparation."
+      ]
+    },
+    {
+      "case": "traversal",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "lastOutput": [
+        "Package preparation stopped: Unsafe or duplicate manifest path: ../escape",
+        "Extract the complete UI78 ZIP into a new folder and retry. No existing plugin files were changed by preparation."
+      ]
+    },
+    {
+      "case": "duplicate path",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "lastOutput": [
+        "Package preparation stopped: Unsafe or duplicate manifest path: CSXS/manifest.xml",
+        "Extract the complete UI78 ZIP into a new folder and retry. No existing plugin files were changed by preparation."
+      ]
+    },
+    {
+      "case": "missing product file",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "lastOutput": [
+        "Package preparation stopped: Cannot find path '/tmp/varna-ui78-windows-delivery/payload/Varna_Motion_Studio/css/ui/flow77.css' because it does not exist.",
+        "Extract the complete UI78 ZIP into a new folder and retry. No existing plugin files were changed by preparation."
+      ]
+    },
+    {
+      "case": "restored complete payload",
+      "expectedExit": 0,
+      "actualExit": 0,
+      "lastOutput": [
+        "Verified Windows payload 3300 / 3350",
+        "All 3350 Windows payload files verified. Starting the selected installer."
+      ]
+    }
+  ],
+  "verifiedFiles": 3350
+}
