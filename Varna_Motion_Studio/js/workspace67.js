@@ -1,6 +1,6 @@
 /* Keep task sections stable while font lists and inspectors update. */
 (function(w){'use strict';const $=s=>document.querySelector(s),controllers=new Map();let queued=false,lastTarget=null;
-function active(){const page=$('.page.active');return page&&!['page-home','page-table','page-broll'].includes(page.id)?page:null;}
+function active(){const page=$('.page.active');return page&&!page.hasAttribute('data-flat69')&&!['page-home','page-table','page-broll'].includes(page.id)?page:null;}
 function current(){const page=active();if(!page)return null;if(!controllers.has(page)){const nav=document.createElement('nav');nav.className='workspace-pager67';page.prepend(nav);controllers.set(page,new w.VarnaPager67(page,page,nav));}return controllers.get(page);}
 function refresh(target){current()?.refresh(target);}
 function schedule(target){if(target?.id)lastTarget=target;if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;const el=lastTarget?.isConnected?lastTarget:lastTarget?.id?document.getElementById(lastTarget.id):null;lastTarget=null;refresh(el);});}

@@ -63,7 +63,7 @@ function size(){const current=document.body.dataset.uiSize44;document.documentEl
 // Preserve both live footer nodes; share their grid row when available height is scarce.
 // The threshold follows the user's UI scale, not the monitor or a new CSS feature.
 function shortLayout(){const short=active&&innerHeight<32*parseFloat(getComputedStyle(document.documentElement).fontSize);
- shell.dataset.panelShort71=String(short);
+ if(shell.dataset.panelShort71!==String(short))shell.dataset.panelShort71=String(short);
  const parent=short?$('.topbar'):actionBar;if(statusDetails.parentElement!==parent)parent.append(statusDetails);
 }
 function fitScene(){if(!active||w.VarnaUI.current()!=='kinetic'||!scenePreview.open)return;const stage=$('#sceneStage40'),ratio=stage.style.aspectRatio.split('/').map(Number),aspect=ratio[0]/ratio[1];if(!Number.isFinite(aspect)||aspect<=0)return;const cap=Math.min(innerHeight*.22,parseFloat(getComputedStyle(document.documentElement).fontSize)*13),width=Math.max(1,Math.min(stage.parentElement.clientWidth,cap*aspect));const value=width+'px';if(stage.style.getPropertyValue('--scene-inline69')!==value)stage.style.setProperty('--scene-inline69',value);}
@@ -115,7 +115,7 @@ function selectedText(){if(!active)return;for(const select of all('select', $('.
  if(!select.getClientRects().length||select.matches('.sr-only,.tomselected')||select.closest('details:not([open])'))continue;
  let mirror=selectMirrors.get(select);if(!mirror){mirror=element('span','select-value69');mirror.dataset.userContent='true';mirror.dir='auto';mirror.setAttribute('aria-hidden','true');const wrapper=element('div','select-shell69');select.before(wrapper);const focused=document.activeElement===select;wrapper.append(select,mirror);if(focused)select.focus({preventScroll:true});selectMirrors.set(select,mirror);}
  const text=select.selectedOptions?.[0]?.textContent||'',ctx=selectedText.canvas||(selectedText.canvas=document.createElement('canvas').getContext('2d'));ctx.font=getComputedStyle(select).font;
- const clipped=ctx.measureText(text).width>select.clientWidth-34;select.parentElement.toggleAttribute('data-wrapped69',clipped);mirror.hidden=!clipped;if(mirror.textContent!==text)mirror.textContent=text;select.title=text;
+ const clipped=ctx.measureText(text).width>select.clientWidth-34;if(select.parentElement.hasAttribute('data-wrapped69')!==clipped)select.parentElement.toggleAttribute('data-wrapped69',clipped);if(mirror.hidden!==!clipped)mirror.hidden=!clipped;if(mirror.textContent!==text)mirror.textContent=text;select.title=text;
  }}
 let selectFrame=0;function scheduleSelect(){cancelAnimationFrame(selectFrame);selectFrame=requestAnimationFrame(selectedText);}
 const typoTabs=kinetic.querySelector('.workflow-tabs');typoTabs.setAttribute('role','tablist');typoTabs.dataset.navigationLevel69='2';

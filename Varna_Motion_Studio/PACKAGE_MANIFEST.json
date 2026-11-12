@@ -14758,8 +14758,8 @@
     },
     {
       "path": "css/ui/flow77.css",
-      "bytes": 23032,
-      "sha256": "5f0e0ae6e59879f96ac4419b752d64becd8936d6027ccfe813292e3fd40b5268"
+      "bytes": 29246,
+      "sha256": "2100a974a897758ea7dab7a60ee2a3be4af7e54673e5926bd4273d6fb50ecf97"
     },
     {
       "path": "css/ui/pilot-b69.css",
@@ -15468,8 +15468,8 @@
     },
     {
       "path": "js/flow77.js",
-      "bytes": 32639,
-      "sha256": "4d871c305c6ef3dc4c57e20f6be6ce89840683ef8092d9190cb6fe9af088a31b"
+      "bytes": 41877,
+      "sha256": "ffaa7c52a77631e4816f9ebf2cc175ae8d59404b20f4da7f8262ca25ac9f6de5"
     },
     {
       "path": "js/fonts29.js",
@@ -15523,8 +15523,8 @@
     },
     {
       "path": "js/liquid48.js",
-      "bytes": 9069,
-      "sha256": "91ebb914c22c86eb3bff0138ff598a35624f3c38c58becebbd074b0848fc9ac5"
+      "bytes": 11451,
+      "sha256": "80a7d9a1c224f2c200bbaed3a9c42038c6352eb9a67b62b76ddd5b2c6606e009"
     },
     {
       "path": "js/music-engine.js",
@@ -15553,8 +15553,8 @@
     },
     {
       "path": "js/pilot-b69.js",
-      "bytes": 24776,
-      "sha256": "51b91bfd94a97f621da56f18f1848807c534e2c3a37d8173f3d3645d6f92a9d0"
+      "bytes": 24915,
+      "sha256": "2c94aa156292b6fbe031a887890bfc08714792c768aff97a75c84340c946c569"
     },
     {
       "path": "js/plugin53.js",
@@ -15823,8 +15823,8 @@
     },
     {
       "path": "js/workspace67.js",
-      "bytes": 2025,
-      "sha256": "002f2b477f5e269f6a1383dfb1a8101926da917227d338c70651ed7d8f40a2a1"
+      "bytes": 2060,
+      "sha256": "bebf85beee4b316a75354951c69e7948f0a393148441485f5dbb27e620fdebea"
     },
     {
       "path": "plugin.html",
@@ -16635,6 +16635,16 @@
       "path": "tests/ui77_sections_browser.cjs",
       "bytes": 2935,
       "sha256": "bbcdf8997f56dda9ad3e45016d28732dff9db09f408bd21903a1f6aae6a2c8f9"
+    },
+    {
+      "path": "tests/ui78_reference_browser.cjs",
+      "bytes": 6712,
+      "sha256": "9d08f40ef7e8454634e550b0ada98deb9369d44f7366286410f87b68ea59eb33"
+    },
+    {
+      "path": "tests/ui78_screenshots.cjs",
+      "bytes": 2210,
+      "sha256": "38838f4facc1cc31713ff35bdd3c4c5165bf41900b0ec2209921a811b71077e7"
     },
     {
       "path": "tests/vendor/acorn/LICENSE",

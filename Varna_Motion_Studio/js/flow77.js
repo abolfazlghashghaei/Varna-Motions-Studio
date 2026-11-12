@@ -98,6 +98,80 @@
     }
   }
 
+  // UI78: match the reference's focus panels. Main work stays visible together;
+  // only secondary tools share one disclosure. Original control nodes and card
+  // ancestry are retained, including handlers that resolve their closest card.
+  const essential78 = {
+    audio:['transcriptionSource','language'], text:['captionCount','reviewText','wordList','textFontCard'],
+    motion:['animScope','animSimple'], templates:['templateLibrary38','nativeStyles50'],
+    bg:['bgScope'], table:['tableRows','tableEditor','tableFontPS66'],
+    kinetic:['sceneLines40','scenePieces40','sceneScope40','wordPresets39','wordScope39'],
+    sfx:['sfxCompName','sfxLibraryPath','sfxSuggestionList'], music:['audioStudio50'],
+    brand:['brandList','brandName','brandAssetsCard'], safe:['safePresetSelect','safeOverlayColor'],
+    ai:['aiPreset','pendingList'], keywords:['captionHighlight37'],
+    translate:['translateTarget','translatePendingList','translateOriginal'],
+    easing49:['curveEditor49','shapeMotion50'], director:['brainBrief','brainPlan'],
+    assistant49:['assistantPrompt49'], resources:['resourceProfile'],
+    output:['outputMode'], settings:['appearance50','hostDiagnosticStatus']
+  };
+  const advanced78 = new Map();
+  for (const [name, ids] of Object.entries(essential78)) {
+    const page = $('#page-' + name); if (!page) continue;
+    page.dataset.focus78 = 'true';
+    const sections = all('details.flat-section69', page).filter(d => !d.closest('.flat-preview69') && !d.parentElement.closest('details.flat-section69'));
+    const advanced = element('details', 'flow-advanced78');
+    advanced.append(label(element('summary'), 'تنظیمات پیشرفته و ابزارهای بیشتر', 'Advanced settings & more tools'));
+    advanced78.set(page, advanced);
+    for (const d of sections) {
+      const main = ids.some(id => {const n = document.getElementById(id); return n && d.contains(n);});
+      d.open = true; d.dataset.focusPanel78 = main ? 'main' : 'secondary';
+      // Keep a semantic section heading, without a redundant expand/collapse row.
+      const summary = d.querySelector(':scope>summary');
+      summary.setAttribute('role', 'heading'); summary.setAttribute('aria-level', '2');
+      summary.addEventListener('click', event => event.preventDefault());
+      summary.addEventListener('keydown', event => {if(event.key==='Enter'||event.key===' ')event.preventDefault();});
+      summary.tabIndex = -1;
+      if (!main) advanced.append(d);
+      d.addEventListener('toggle', () => {if(!d.open)d.open=true;});
+    }
+    if (advanced.childElementCount > 1) page.append(advanced);
+  }
+  // Per-cell font and color are core editing controls, not hidden expert options.
+  const cellLook78 = $('#cellFontPS')?.closest('details');
+  if (cellLook78) {cellLook78.open=true;cellLook78.dataset.focusPanel78='main';const s=cellLook78.querySelector('summary');s.setAttribute('role','heading');s.tabIndex=-1;s.addEventListener('click',event=>event.preventDefault());}
+  // Keep technical shader controls separate while preserving their label/grid ancestry.
+  const tableAppearance78 = $('#tableFontPS66')?.closest('article.card');
+  if (tableAppearance78) {
+    const technical = all('details.advanced-panel', tableAppearance78);
+    technical.forEach(d=>d.open=false);
+  }
+
+  // Split the large table inspector into a useful everyday strip and one expert
+  // group, following the reference. Every label keeps its live input children,
+  // and remains inside the same original card for delegated/native handlers.
+  if (tableAppearance78) {
+    const expert=element('details','flow-table-expert78');
+    expert.append(label(element('summary'),'زمان‌بندی دقیق، جای‌گذاری و متریال','Precise timing, placement & material'));
+    const quick=element('div','form-grid two flow-table-quick78');
+    const controls=['tableFontPS66','tableFont','tableFill','tableText','tableStroke','tableRoundness','tableTimingPreset','tableMotion','tableAnimDuration'];
+    const labels=[...new Set(controls.map(id=>document.getElementById(id)?.closest('label.control')).filter(Boolean))];
+    const title=tableAppearance78.querySelector(':scope>.card-title');
+    for(const n of Array.from(tableAppearance78.children))if(n!==title)expert.append(n);
+    for(const n of labels)quick.append(n);
+    tableAppearance78.append(quick,expert);
+  }
+  // Start typography with the authored text and word selection. Layout tuning
+  // follows the content rather than pushing the editor below a long form.
+  const sceneSettings78=$('#sceneLines40')?.closest('.scene-settings40');
+  if(sceneSettings78){const text=$('#sceneLines40').closest('details.flat-section69'),words=$('#scenePieces40').closest('details.flat-section69');sceneSettings78.prepend(text,words);}
+  const timeGuide78=$('#startRange')?.closest('.time-guide');
+  if(timeGuide78){const d=element('details','flow-time-guide78');d.append(label(element('summary'),'تنظیم زمان با کشیدن دستگیره‌ها','Adjust timing with draggable handles'));timeGuide78.before(d);d.append(timeGuide78);}
+  const structureActions78=$('#tableResize')?.parentElement;
+  if(structureActions78){const advanced=element('details','flow-table-rows78');advanced.append(label(element('summary'),'افزودن و حذف ردیف یا ستون','Insert or remove rows & columns'));const buttons=element('div','action-inline');for(const n of Array.from(structureActions78.children))if(n.id!=='tableResize')buttons.append(n);advanced.append(buttons);structureActions78.after(advanced);}
+  const identity78=element('div','flow-identity78');identity78.dir='ltr';
+  identity78.append(element('strong','','VARNA.'),element('span','','MOTION STUDIO / AFTER EFFECTS'));
+  $('.topbar').append(identity78);
+
   // Reuse the existing page navigator and its accessible dialog on every page.
   const navigationButtons = new Map(all('[data-page69]', nav).map(n => [n.dataset.page69, n]));
   for (const [name, info] of Object.entries(pages)) {
@@ -112,8 +186,12 @@
   customize.dataset.customize77 = 'true';
   const collapse = button('جمع‌کردن نوار', 'Collapse rail', 'chevron-left', () => { prefs.collapsed = !prefs.collapsed; save(); renderDock(); }, 'flow-dock-option77');
   collapse.dataset.collapse77 = 'true'; nav.append(customize, collapse);
+  function attr(node, name, value) { value=String(value); if(node.getAttribute(name)!==value)node.setAttribute(name,value); }
+  let dockKey78='';
   function renderDock() {
-    shell.dataset.dockSide77 = prefs.side; shell.dataset.dockCollapsed77 = String(prefs.collapsed);
+    const key=JSON.stringify([prefs.pins,prefs.side,prefs.collapsed,en(),w.VarnaUI.current()]);
+    if(key===dockKey78)return; dockKey78=key;
+    attr(shell,'data-dock-side77',prefs.side); attr(shell,'data-dock-collapsed77',prefs.collapsed);
     collapse.setAttribute('aria-expanded', String(!prefs.collapsed));
     collapse.title = prefs.collapsed ? text('بازکردن نوار ابزار', 'Expand the tool rail') : text('جمع‌کردن نوار ابزار', 'Collapse the tool rail');
     collapse.setAttribute('aria-label', collapse.title);
@@ -243,7 +321,7 @@
   blurRow.append(range, blurValue); blur.append(blurLabel, blurRow, label(element('small'), 'فقط ظاهر پنل تغییر می‌کند؛ خروجی ویدیو دست‌نخورده می‌ماند.', 'Changes the panel only; the video output stays unchanged.')); appearance.append(blur);
   $('#headerOptions .header-options-panel').prepend(appearance);
   function applyBlur() { document.body.style.setProperty('--flow-bg-blur77', prefs.blur + 'px'); blurValue.textContent = prefs.blur + ' px'; }
-  function paletteState() { for (const b of all('[data-palette77]')) b.setAttribute('aria-pressed', String(b.dataset.palette77 === $('#themePreset50').value)); }
+  function paletteState() { for (const b of all('[data-palette77]')) attr(b,'aria-pressed',b.dataset.palette77 === $('#themePreset50').value); }
   function displayPalette() {
     const cfg = w.VarnaProduction50.currentTheme().config;
     const light = ['light', 'silver'].includes(document.body.dataset.theme);
@@ -259,6 +337,20 @@
       w.VarnaUITokens68.refresh();
       document.body.style.setProperty('--v48-glyph', getComputedStyle(document.body).getPropertyValue('--ui-color-accent'));
     }
+    // Reference-derived glass colors follow the selected palette, including custom
+    // themes. They affect interface surfaces only, never project colors/fonts.
+    const base=cfg?.base||'#091827', end=cfg?.end||'#18374d';
+    const rgb=hex=>hex.match(/[0-9a-f]{2}/ig).map(v=>parseInt(v,16));
+    const mix=(a,b,t)=>a.map((v,i)=>Math.round(v*(1-t)+b[i]*t));
+    const alpha=(v,a)=>'rgba('+v.join(',')+','+a+')';
+    const b=rgb(base), e=rgb(end);
+    document.body.style.setProperty('--flow-card78',light?'linear-gradient(140deg,rgba(255,255,255,.96),rgba(232,242,248,.94))':'linear-gradient(140deg,'+alpha(mix(b,e,.62),.94)+','+alpha(b,.90)+')');
+    document.body.style.setProperty('--flow-bar78',light?'rgba(240,247,251,.98)':alpha(mix(b,[0,0,0],.28),.96));
+    document.body.style.setProperty('--flow-field78',light?'#f8fbfd':alpha(mix(b,e,.24),.96));
+    document.body.style.setProperty('--flow-edge78',light?'rgba(38,71,93,.38)':'rgba(160,216,239,.28)');
+    document.body.style.setProperty('--flow-action78',!cfg&&!light?'#8edfeb':'var(--ui-color-action)');
+    document.body.style.setProperty('--flow-on-action78',!cfg&&!light?'#071b29':'var(--ui-color-on-action)');
+    if(!cfg&&!light){document.body.style.setProperty('--flow-base77','#061321');document.body.style.setProperty('--flow-end77','#14364a');document.body.style.setProperty('--v48-glyph','#9ce2ed');}
     w.VarnaLiquid48?.refresh();
     paletteState();
   }
@@ -316,6 +408,7 @@
   w.VarnaUI.reveal = function (node) {
     originalReveal(node);
     if (node?.closest('[data-flow77]')) {
+      const advanced=advanced78.get(node.closest('.page')); if(advanced?.contains(node))advanced.open=true;
       for (let p = node.parentElement; p && p !== workspace; p = p.parentElement) if (p.tagName === 'DETAILS') p.open = true;
       node.scrollIntoView({block: 'nearest'});
     }
@@ -333,16 +426,26 @@
       const brief = {text:['نمایش','Preview'],bg:['نمایش','Preview'],motion:['اعمال','Apply'],brand:['اعمال','Apply'],safe:['اعمال','Apply'],easing49:['اعمال','Apply'],translate:['ترجمه','Send'],resources:['بررسی','Check'],ai:['بررسی','Review'],keywords:['پیشنهاد','Review'],sfx:['پیشنهاد','Review']};
       const value = short ? text(...(brief[name] || ['بساز','Build'])) : text(...(titles[name] || [primary.textContent.trim(), primary.textContent.trim()]));
       if (proxy.textContent !== value) proxy.textContent = value; proxy.title = primary.textContent.trim();
-      proxy.disabled = primary.disabled; proxy.dataset.target77 = primary.id;
+      if(proxy.disabled!==primary.disabled)proxy.disabled=primary.disabled; attr(proxy,'data-target77',primary.id);
     } else {
-      proxy.textContent = shell.dataset.panelShort71 === 'true' ? text('ابزارها', 'Tools') : name === 'home' ? text('همهٔ ابزارها', 'All tools') : name === 'settings' ? text('تنظیم رنگ و ظاهر', 'Adjust appearance') : text('انتخاب ابزار', 'Choose a tool');
-      proxy.disabled = !primaryActions[name]; delete proxy.dataset.target77;
+      const value = shell.dataset.panelShort71 === 'true' ? text('ابزارها', 'Tools') : name === 'home' ? text('همهٔ ابزارها', 'All tools') : name === 'settings' ? text('تنظیم رنگ و ظاهر', 'Adjust appearance') : text('انتخاب ابزار', 'Choose a tool');
+      if(proxy.textContent!==value)proxy.textContent=value;
+      if(proxy.disabled!==!primaryActions[name])proxy.disabled=!primaryActions[name]; if(proxy.hasAttribute('data-target77'))delete proxy.dataset.target77;
     }
     if (!proxy.isConnected) actions.prepend(proxy);
   }
-  let scheduled = 0;
+  let scheduled = 0, syncCount78=0, route78='', language78='';
+  const motion78=w.matchMedia('(prefers-reduced-motion: reduce)');
+  let routeAnimations78=[];
+  function animateRoute78(page) {
+    routeAnimations78.forEach(a=>a.cancel()); routeAnimations78=[];
+    if(motion78.matches||!page?.animate)return;
+    const panels=all('[data-focus-panel78=main],.flow-hero77,.launcher-grid',page).filter(n=>!n.parentElement.closest('[data-focus-panel78]')).slice(0,6);
+    for(const [i,node]of panels.entries()){const a=node.animate([{opacity:.45,transform:'translateY(7px)'},{opacity:1,transform:'translateY(0)'}],{duration:280,delay:i*24,easing:'cubic-bezier(.2,.8,.2,1)'});a.id='flow-route78';routeAnimations78.push(a);}
+  }
+  motion78.addEventListener('change',()=>{if(motion78.matches){routeAnimations78.forEach(a=>a.cancel());routeAnimations78=[];}});
   function sync() {
-    scheduled = 0;
+    scheduled = 0; syncCount78++;
     const current = w.VarnaUI.current(), info = pages[current]; if (!info) return;
     const headerParent = shell.dataset.panelShort71 === 'true' ? $('#headerOptions .header-options-panel') : $('.topbar');
     for (const n of [language, undo]) if (n && n.parentElement !== headerParent) headerParent.append(n);
@@ -351,24 +454,29 @@
     all('.production-hidden47,.workspace-paged67,.table-paged-out66', active).forEach(n => n.classList.remove('production-hidden47', 'workspace-paged67', 'table-paged-out66'));
     if (current !== 'kinetic') all('.workflow-tab-hidden', active).forEach(n => n.classList.remove('workflow-tab-hidden'));
     const heading = $('#currentPageTitle'); if (heading.textContent !== text(info[0], info[1])) heading.textContent = text(info[0], info[1]);
-    for (const n of all('[data-fa77]')) { const value = en() ? n.dataset.en77 : n.dataset.fa77; if (n.textContent !== value) n.textContent = value; }
+    if(language78!==String(en())) {
+      language78=String(en());
+      for (const n of all('[data-fa77]')) { const value = en() ? n.dataset.en77 : n.dataset.fa77; if (n.textContent !== value) n.textContent = value; }
+    }
+    if(route78!==current){route78=current;animateRoute78(active);}
     // These catalog samples are fixed UI artwork, not the user's caption text.
     for (const n of all('#page-motion .motion-card-preview-inner>span')) if (['VARNA MOTION','MOTION','حرکت'].includes(n.textContent)) {
       const value = text('حرکت', 'MOTION'); if (n.textContent !== value) n.textContent = value;
     }
-    catalogSearch.placeholder = text('جست‌وجوی بخش‌ها…', 'Find a section…'); catalogSearch.setAttribute('aria-label', text('جست‌وجوی بخش‌ها', 'Find a section'));
-    range.setAttribute('aria-label', text('محو کردن پس‌زمینهٔ رابط', 'Interface background blur'));
+    attr(catalogSearch,'placeholder',text('جست‌وجوی بخش‌ها…', 'Find a section…')); attr(catalogSearch,'aria-label',text('جست‌وجوی بخش‌ها', 'Find a section'));
+    attr(range,'aria-label',text('محو کردن پس‌زمینهٔ رابط', 'Interface background blur'));
     renderDock(); actionState(); paletteState();
   }
   function schedule() { if (!scheduled) scheduled = requestAnimationFrame(sync); }
   document.addEventListener('varna:page', schedule);
   document.addEventListener('varna:language52', schedule);
-  document.addEventListener('click', schedule);
-  document.addEventListener('change', schedule);
-  new MutationObserver(schedule).observe(workspace, {childList: true, subtree: true, attributes: true, attributeFilter: ['disabled']});
+  // Observe only real primary actions/status. Numeric widgets and animated previews
+  // mutate their own DOM; those updates must not rebuild the rail every frame.
+  for(const info of Object.values(pages))if(info[5]){const n=document.getElementById(info[5]);if(n)new MutationObserver(actionState).observe(n,{attributes:true,attributeFilter:['disabled']});}
+  for(const id of ['modelStatus','sentenceStatus66','motionDraftStatus','templateStatus38','bgEngineStatus','sfxAnalysisDetail','cueStatus50','brandSummary','localAIStatus','translateStatus','brainStatus','resourceSummary','output35Status']){const n=document.getElementById(id);if(n)new MutationObserver(actionState).observe(n,{childList:true,characterData:true,subtree:true});}
   new MutationObserver(schedule).observe(shell, {attributes:true, attributeFilter:['data-panel-short71']});
   // Keep footer progress/disabled labels synchronized without polling or rebuilding fields.
-  document.addEventListener('varna:progress', schedule);
+  document.addEventListener('varna:progress', actionState);
   applyBlur(); displayPalette(); renderOrder(); renderDock(); w.VarnaPilot69.sync(); sync();
-  w.VarnaFlow77 = {sync, openCatalog, version: 77, pages: Object.keys(pages), preferences: () => JSON.parse(JSON.stringify(prefs))};
+  w.VarnaFlow77 = {sync, openCatalog, version: 77, pages: Object.keys(pages), preferences: () => JSON.parse(JSON.stringify(prefs)), performance:()=>({syncs:syncCount78}), focus:essential78};
 })(window);
