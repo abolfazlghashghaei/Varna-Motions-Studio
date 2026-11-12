@@ -1,0 +1,42 @@
+[
+  {
+    "suite": "ui47_controls_browser.cjs",
+    "code": 0,
+    "output": "PASS UI47 Chromium: direct numeric scrubbing + one commit, typing, native slider + numeric mirror, keyboard, Escape, decimals/bounds, direct restores, readonly/fieldset/disabled, dynamic fields, preserved dual handles, and 4 themes × 4 widths × 6 pages without document overflow. Adobe runtime untested.\n"
+  },
+  {
+    "suite": "table47_browser.cjs",
+    "code": 0,
+    "output": "PASS Table RC47 Chromium: composition aspect ratios at 4 viewports, drag/resize to final payload, coalesced sequential live updates, cleanup cancellation, failure stop and unified controls. Native Adobe/optics untested.\n"
+  },
+  {
+    "suite": "ui68_tokens_browser.cjs",
+    "code": 0,
+    "output": "PASS A68: 899 IDs per entry, AE-only scope, 22 pages in both themes with >=12px UI text and >=32px buttons, custom-palette AA token pairs, unchanged caption payload, English/RTL and the original font dialog. Native CEP is not exercised.\n"
+  },
+  {
+    "suite": "ui69_interactions_browser.cjs",
+    "code": 0,
+    "output": "PASS B69 interactions: stable live nodes, repeated enter/exit, sticky action, direct reveal, original font dialog, dense cell editor, real row/column weights, per-word state, keyboard tabs, 22-page chooser/Escape, UI size preferences, scene aspect ratios and the ResizeObserver fallback without container queries. Native AE rendering untested.\n"
+  },
+  {
+    "suite": "ui77_integration_browser.cjs",
+    "code": 0,
+    "output": "PASS UI77 integration: original live controls/899 IDs, 22 real routes, single forwarded/disabled-aware host action, 6 palettes, brightness retention, UI-only blur, pinned shortcuts, search/focus/Escape, real Undo, English/RTL, persisted preferences and original random V with 5-second return. Native Adobe execution untested.\n"
+  },
+  {
+    "suite": "ui77_profile_browser.cjs",
+    "code": 0,
+    "output": "PASS UI77 WithoutEngine: exact installer frontend profile; 21 real pages, no dead music shortcuts, transcription and offline correction retained. Native installer execution untested.\n"
+  },
+  {
+    "suite": "ui78_reference_browser.cjs",
+    "code": 0,
+    "output": "PASS UI78 reference behavior, 22 page groups, real controls, idle work and V physics.\n"
+  },
+  {
+    "suite": "installer_package.cjs",
+    "code": 0,
+    "output": "PASS installer: 3351 source checksums, visible BAT launchers, ownership boundary and rollback\n"
+  }
+]

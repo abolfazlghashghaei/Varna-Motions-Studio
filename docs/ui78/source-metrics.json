@@ -1,0 +1,11 @@
+{
+  "baseline": "d306404de9997e1b96e9c9b3a02cd99f36841bf4",
+  "linkedCSSBefore": 36,
+  "linkedCSSAfter": 36,
+  "importantBefore": 3228,
+  "importantAfter": 3252,
+  "staticIDsEachEntry": 899,
+  "hostJSXChanged": false,
+  "newStylesheetAdded": false,
+  "method": "Linked CSS only; CSS comments removed before counting !important."
+}

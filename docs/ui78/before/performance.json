@@ -1,0 +1,30 @@
+{
+  "idle": {
+    "mutations": 14125,
+    "V": {
+      "particles": 413,
+      "paints": 1,
+      "bursts": 0,
+      "animating": false,
+      "reduced": true,
+      "burstDuration": 5800,
+      "returnDuration": 5000,
+      "burstSignature": "",
+      "displacement": 0
+    }
+  },
+  "pointer": {
+    "mutations": 14633,
+    "V": {
+      "particles": 413,
+      "paints": 1,
+      "bursts": 0,
+      "animating": false,
+      "reduced": true,
+      "burstDuration": 5800,
+      "returnDuration": 5000,
+      "burstSignature": "",
+      "displacement": 0
+    }
+  }
+}
