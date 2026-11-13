@@ -285,6 +285,25 @@ html[data-ui77] {
     body[data-flow-shell77] .flat-nav69>button:hover {transform:translateY(-1px);}
   }
   @keyframes flow-dialog78 {from{opacity:.5;transform:translateY(9px) scale(.99);}to{opacity:1;transform:translateY(0) scale(1);}}
+  /* UI79: measured rail modes override old important navigation rules.
+     Labels are single-line; insufficient width OR height selects icons instead. */
+  body[data-flow-shell77] .app-shell .flat-nav69 .flat-nav-label69 {
+    white-space:nowrap !important;overflow-wrap:normal !important;word-break:normal !important;
+    unicode-bidi:isolate;line-height:1.5;
+  }
+  body[data-flow-shell77] .app-shell[data-rail-mode79=icons] .flat-nav69 .flat-nav-label69 {display:none !important;}
+  body[data-flow-shell77] .app-shell[data-rail-mode79=labels] .flat-nav69 .flat-nav-label69 {display:block !important;}
+  body[data-flow-shell77] .app-shell[data-rail-mode79=icons]:not([data-size=compact]):not([data-panel-short71=true]) .flat-nav69>button {
+    min-height:max(32px,2.5rem) !important;padding:.3rem !important;gap:0;
+  }
+  body[data-flow-shell77] .app-shell[data-rail-mode79=icons]:not([data-size=compact]):not([data-panel-short71=true]) .flat-nav69 {padding-inline:.2rem !important;}
+  body[data-flow-shell77] .app-shell[data-rail-mode79=labels] .flat-nav69>button {min-height:3.6rem !important;}
+  /* Legacy important blur rules would repeatedly sample the moving canvas
+     through every UI card. Glass-like painted surfaces remain; export/preview
+     artwork is untouched. One decorative canvas is the only moving background. */
+  body[data-flow-shell77] :is(.card,.topbar,.flat-nav69,.flat-actions69,.launcher-tile,.table-editor-wrap,.table-cell,.cell-inspector,.context40) {
+    backdrop-filter:none !important;-webkit-backdrop-filter:none !important;
+  }
   @media(prefers-reduced-motion:reduce) {body[data-flow-shell77] :is(.flow-task77,.flow-section77,.flat-nav69>button,.flow-button77,.flow-swatch77,.flow-header-button77,.flat-actions69>button,.flat-chooser69[open]) {transition:none;animation:none;transform:none;}}
 }
 /* Tweakpane injects an unlayered stylesheet at runtime. These normal, scoped

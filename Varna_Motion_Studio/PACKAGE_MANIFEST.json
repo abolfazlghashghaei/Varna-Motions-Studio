@@ -14758,8 +14758,8 @@
     },
     {
       "path": "css/ui/flow77.css",
-      "bytes": 29246,
-      "sha256": "2100a974a897758ea7dab7a60ee2a3be4af7e54673e5926bd4273d6fb50ecf97"
+      "bytes": 30811,
+      "sha256": "866dcc1c4b4c803907b5c5469f7a90b74949fbb1550abedc45a0edbd407d1a69"
     },
     {
       "path": "css/ui/pilot-b69.css",
@@ -15288,8 +15288,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 196964,
-      "sha256": "026855a20faf8ed8299a2027449be05aa984805eeca56fe6ba968285bb07debf"
+      "bytes": 196925,
+      "sha256": "00f492906d1368d08e8834fb750b20c4199aef6a56bbab86dfceca9e17a0429e"
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
@@ -15468,8 +15468,8 @@
     },
     {
       "path": "js/flow77.js",
-      "bytes": 41877,
-      "sha256": "ffaa7c52a77631e4816f9ebf2cc175ae8d59404b20f4da7f8262ca25ac9f6de5"
+      "bytes": 45383,
+      "sha256": "0ecd2a823e2ff4ec752310da5dc215e34c24fb8455ed3b8e87c0b58c75046239"
     },
     {
       "path": "js/fonts29.js",
@@ -15523,8 +15523,8 @@
     },
     {
       "path": "js/liquid48.js",
-      "bytes": 11451,
-      "sha256": "80a7d9a1c224f2c200bbaed3a9c42038c6352eb9a67b62b76ddd5b2c6606e009"
+      "bytes": 14228,
+      "sha256": "e444b8dea5df08c30762ee40fd06db21d2bf0b3d7341021dc13f01829a08e9f3"
     },
     {
       "path": "js/music-engine.js",
@@ -15833,13 +15833,13 @@
     },
     {
       "path": "premiere.html",
-      "bytes": 196026,
-      "sha256": "f28cba7fe642d4f6e3353bc45d2c25cd9c649ac0236227d684807a879e706036"
+      "bytes": 195987,
+      "sha256": "bfdfe3d46fa2cd9e31762ea37244f1ed97f3ba83dea6ea89399f56188c90ec84"
     },
     {
       "path": "resolve.html",
-      "bytes": 196024,
-      "sha256": "273e46725ece5589ab8b718abc10dd7ad3f6e482ec09927c301b955afecd04e6"
+      "bytes": 195985,
+      "sha256": "f8e39d3f9307532baf56458be531e814396bb02f660142a9739d4400fd1bb78e"
     },
     {
       "path": "tests/README.md",
@@ -16645,6 +16645,21 @@
       "path": "tests/ui78_screenshots.cjs",
       "bytes": 2210,
       "sha256": "38838f4facc1cc31713ff35bdd3c4c5165bf41900b0ec2209921a811b71077e7"
+    },
+    {
+      "path": "tests/ui79_motion_software.cjs",
+      "bytes": 4572,
+      "sha256": "1a833608b59de0451c35826581314a3dd729b1ba160d8294398bc068dd3c3e42"
+    },
+    {
+      "path": "tests/ui79_rail_browser.cjs",
+      "bytes": 3655,
+      "sha256": "628d4264a1edcb585c0e4c5aa7fb1fddfa64ff5ecbf8a51dc474c72441f83a86"
+    },
+    {
+      "path": "tests/ui79_screenshots.cjs",
+      "bytes": 2210,
+      "sha256": "cb67f6c819b4fe024137f76f67de6e15912a17f0f3ad9458a6cd824d3a2e8daa"
     },
     {
       "path": "tests/vendor/acorn/LICENSE",

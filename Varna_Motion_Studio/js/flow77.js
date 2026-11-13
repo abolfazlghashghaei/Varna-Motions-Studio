@@ -179,19 +179,55 @@
     const b = button(info[0], info[1], info[2], () => w.VarnaUI.open(name));
     b.dataset.page69 = name; navigationButtons.set(name, b); nav.append(b);
   }
+  const railNames79={
+    home:['خانه','Home'],audio:['زیرنویس','Captions'],text:['متن','Text'],motion:['موشن','Motion'],
+    kinetic:['کلمه‌ها','Words'],templates:['استایل','Styles'],bg:['زمینه','Backdrop'],table:['جدول','Table'],
+    sfx:['افکت صدا','SFX'],music:['صدا','Audio'],brand:['برند','Brand'],safe:['قاب امن','Safe area'],
+    ai:['اصلاح','Correct'],keywords:['کلمات','Keywords'],translate:['ترجمه','Translate'],easing49:['منحنی','Curves'],
+    director:['پروژه','Project'],assistant49:['اسکریپت','Script'],tools:['ابزارها','Tools'],resources:['سیستم','System'],
+    output:['خروجی','Output'],settings:['تنظیمات','Settings']
+  };
   const more = $('[data-more69]', nav), logo = element('button', 'flow-logo77'); logo.type = 'button';
   logo.dataset.flowLogo77 = 'true'; logo.title = 'Varna Motion Studio'; logo.setAttribute('aria-label', 'Varna Motion Studio');
   const logoImage = element('img'); logoImage.src = './assets/varna-logo.svg'; logoImage.alt = ''; logo.append(logoImage); logo.onclick = () => w.VarnaUI.open('home'); nav.prepend(logo);
+  const moreLabel79=$('.flat-nav-label69',more);moreLabel79.removeAttribute('data-label-fa69');moreLabel79.removeAttribute('data-label-en69');label(moreLabel79,'ابزارها','Tools');
   const customize = button('میانبرهای من', 'My shortcuts', 'star', () => openCatalog(true), 'flow-dock-option77');
   customize.dataset.customize77 = 'true';
   const collapse = button('جمع‌کردن نوار', 'Collapse rail', 'chevron-left', () => { prefs.collapsed = !prefs.collapsed; save(); renderDock(); }, 'flow-dock-option77');
   collapse.dataset.collapse77 = 'true'; nav.append(customize, collapse);
   function attr(node, name, value) { value=String(value); if(node.getAttribute(name)!==value)node.setAttribute(name,value); }
-  let dockKey78='';
+  let dockKey78='', railFrame79=0, railKey79='';
+  const railMeasure79=document.createElement('canvas').getContext('2d');
+  function railMode79(mode){
+    attr(shell,'data-rail-mode79',mode);
+    const width=mode==='icons'?'3rem':'5.6rem';
+    if(shell.style.getPropertyValue('--flow-rail77')!==width)shell.style.setProperty('--flow-rail77',width);
+  }
+  function fitRail79(force=false){
+    railFrame79=0;
+    const rect=shell.getBoundingClientRect(), font=parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const key=[rect.width,rect.height,nav.clientHeight,font,en(),prefs.collapsed,prefs.pins.join('|'),shell.dataset.size,shell.dataset.panelShort71].join(':');
+    if(!force&&key===railKey79){if(shell.dataset.railMode79==='labels'&&(nav.scrollHeight>nav.clientHeight+1||all('.flat-nav-label69',nav).some(n=>n.getClientRects().length&&n.scrollWidth>n.clientWidth)))railMode79('icons');return;}railKey79=key;
+    const vertical=shell.dataset.size!=='compact'&&shell.dataset.panelShort71!=='true';
+    const visible=all('button',nav).filter(b=>!b.hidden&&getComputedStyle(b).display!=='none');
+    const labels=visible.map(b=>b.querySelector('.flat-nav-label69')).filter(Boolean);
+    let longest=0;for(const n of labels){railMeasure79.font=getComputedStyle(n).font;longest=Math.max(longest,railMeasure79.measureText(n.textContent).width);}
+    const needed=visible.reduce((height,b)=>height+(b.querySelector('.flat-nav-label69')?3.9:3)*font,0)+font*1.5;
+    const fits=vertical&&!prefs.collapsed&&rect.width>=540&&nav.clientHeight>=needed&&longest<=font*4.4;
+    railMode79(fits?'labels':'icons');
+    // Validate actual CEP boxes too: external panel constraints can be narrower
+    // than the preferred rail width. Latch until the panel/preferences change.
+    if(fits)requestAnimationFrame(()=>{if(shell.dataset.railMode79!=='labels')return;const broken=labels.some(n=>{const r=n.getBoundingClientRect(),b=n.parentElement.getBoundingClientRect();return n.scrollWidth>n.clientWidth||r.width<1||r.left<b.left||r.right>b.right;});if(broken||nav.scrollHeight>nav.clientHeight+1)railMode79('icons');});
+  }
+  function queueRail79(){if(!railFrame79)railFrame79=requestAnimationFrame(()=>fitRail79());}
+  new ResizeObserver(queueRail79).observe(nav);
+  new ResizeObserver(queueRail79).observe(shell);
+  document.fonts?.ready.then(()=>fitRail79(true));
   function renderDock() {
     const key=JSON.stringify([prefs.pins,prefs.side,prefs.collapsed,en(),w.VarnaUI.current()]);
     if(key===dockKey78)return; dockKey78=key;
     attr(shell,'data-dock-side77',prefs.side); attr(shell,'data-dock-collapsed77',prefs.collapsed);
+    attr(customize,'title',text('چیدمان و میانبرهای من','Arrange my shortcuts'));attr(customize,'aria-label',customize.title);
     collapse.setAttribute('aria-expanded', String(!prefs.collapsed));
     collapse.title = prefs.collapsed ? text('بازکردن نوار ابزار', 'Expand the tool rail') : text('جمع‌کردن نوار ابزار', 'Collapse the tool rail');
     collapse.setAttribute('aria-label', collapse.title);
@@ -201,7 +237,7 @@
       b.title = text(info[0], info[1]); b.setAttribute('aria-label', b.title);
       b.setAttribute('aria-current', name === w.VarnaUI.current() ? 'page' : 'false');
       if (!b.dataset.icon77) {
-        b.replaceChildren(icon(info[2]), label(element('span', 'flat-nav-label69'), info[0], info[1])); b.dataset.icon77 = 'true';
+        b.replaceChildren(icon(info[2]), label(element('span', 'flat-nav-label69'), ...railNames79[name])); b.dataset.icon77 = 'true';
       }
     }
     // Reorder only after a preference change. Moving focused buttons on every click
@@ -211,6 +247,7 @@
       for (const name of ['home', ...prefs.pins]) if (navigationButtons.has(name)) nav.append(navigationButtons.get(name));
       nav.append(more, customize, collapse); nav.dataset.order77 = orderKey;
     }
+    queueRail79();
     for (const b of all('[data-pin77]')) {
       const selected = prefs.pins.includes(b.dataset.pin77); b.setAttribute('aria-pressed', String(selected));
       b.title = selected ? text('حذف از میانبرها', 'Unpin shortcut') : text('افزودن به میانبرها', 'Pin shortcut'); b.setAttribute('aria-label', b.title + ': ' + text(...pages[b.dataset.pin77].slice(0, 2)));
@@ -465,7 +502,7 @@
     }
     attr(catalogSearch,'placeholder',text('جست‌وجوی بخش‌ها…', 'Find a section…')); attr(catalogSearch,'aria-label',text('جست‌وجوی بخش‌ها', 'Find a section'));
     attr(range,'aria-label',text('محو کردن پس‌زمینهٔ رابط', 'Interface background blur'));
-    renderDock(); actionState(); paletteState();
+    renderDock(); queueRail79(); actionState(); paletteState();
   }
   function schedule() { if (!scheduled) scheduled = requestAnimationFrame(sync); }
   document.addEventListener('varna:page', schedule);
@@ -478,5 +515,5 @@
   // Keep footer progress/disabled labels synchronized without polling or rebuilding fields.
   document.addEventListener('varna:progress', actionState);
   applyBlur(); displayPalette(); renderOrder(); renderDock(); w.VarnaPilot69.sync(); sync();
-  w.VarnaFlow77 = {sync, openCatalog, version: 77, pages: Object.keys(pages), preferences: () => JSON.parse(JSON.stringify(prefs)), performance:()=>({syncs:syncCount78}), focus:essential78};
+  w.VarnaFlow77 = {sync, openCatalog, version: 77, pages: Object.keys(pages), preferences: () => JSON.parse(JSON.stringify(prefs)), performance:()=>({syncs:syncCount78}), focus:essential78, fitRail:()=>fitRail79(true)};
 })(window);
