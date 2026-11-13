@@ -37,7 +37,7 @@
   {
     "suite": "ui79_rail_browser.cjs",
     "code": 0,
-    "output": "PASS UI79 rail: 30 size/scale/language cases; constrained 40px rail, single-line labels, icon navigation, phone bridge removed from three hosts.\n"
+    "output": "PASS UI79 rail: 90 size/scale/language cases; constrained 40px rail, single-line labels, icon navigation, phone bridge removed from three hosts.\n"
   },
   {
     "suite": "installer_package.cjs",

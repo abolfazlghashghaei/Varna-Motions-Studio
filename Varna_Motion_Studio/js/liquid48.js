@@ -51,8 +51,8 @@ function resize(){const work=document.querySelector('#workspace').getBoundingCli
   const p={index:particles.length,x,y,homeX:x,homeY:y,ox:0,oy:0,glyph:glyphs[(row*7+j*3+(side===1?2:0))%glyphs.length],size:Math.max(10,size*.026),rotation:0,seed:row*1.7+j*.81,row:t,side,progress:1};p.art=sprite(p.glyph,p.size);particles.push(p);
   const bucket=Math.floor(x/cellSize)+':'+Math.floor(y/cellSize);if(!buckets.has(bucket))buckets.set(bucket,[]);buckets.get(bucket).push(p);
  }}
- const left=Math.floor(Math.min(...particles.map(p=>p.homeX-p.art.side/2))),top=Math.floor(Math.min(...particles.map(p=>p.homeY-p.art.side/2)));
- restBounds={left,top,width:Math.ceil(Math.max(...particles.map(p=>p.homeX+p.art.side/2))-left),height:Math.ceil(Math.max(...particles.map(p=>p.homeY+p.art.side/2))-top)};
+ const left=Math.floor(Math.min(...particles.map(p=>p.homeX-p.art.side/2))*pixelRatio)/pixelRatio,top=Math.floor(Math.min(...particles.map(p=>p.homeY-p.art.side/2))*pixelRatio)/pixelRatio;
+ restBounds={left,top,width:Math.ceil((Math.max(...particles.map(p=>p.homeX+p.art.side/2))-left)*pixelRatio)/pixelRatio,height:Math.ceil((Math.max(...particles.map(p=>p.homeY+p.art.side/2))-top)*pixelRatio)/pixelRatio};
  restCanvas.width=Math.ceil(restBounds.width*pixelRatio);restCanvas.height=Math.ceil(restBounds.height*pixelRatio);restContext.setTransform(pixelRatio,0,0,pixelRatio,0,0);restKey=null;last=0;request();}
 function candidates(x,y){const cx=Math.floor(x/cellSize),cy=Math.floor(y/cellSize),n=Math.ceil(radius/cellSize),found=[];for(let ix=cx-n;ix<=cx+n;ix++)for(let iy=cy-n;iy<=cy+n;iy++){const group=buckets.get(ix+':'+iy);if(group)found.push(...group);}return found;}
 function position(p,now){
@@ -70,7 +70,9 @@ function position(p,now){
 }
 function currentPhase(now){if(!burstStart||reduced.matches||now-burstStart>=burstDuration)return 'rest';const t=now-burstStart;return t<scatterDuration?'scatter':t<scatterDuration+anticipationDuration?'anticipation':'gather';}
 function draw(context,p,x,y){const g=p.art;context.drawImage(g.canvas,x-g.side/2,y-g.side/2,g.side,g.side);}
-function restingImage(active){const key=active.map(p=>p.index).join(',');if(key===restKey)return;restKey=key;staticBuilds++;const excluded=new Set(active);restContext.clearRect(0,0,restBounds.width,restBounds.height);for(const p of particles)if(!excluded.has(p))draw(restContext,p,p.homeX-restBounds.left,p.homeY-restBounds.top);}
+// Cache alpha and backing-pixel alignment match live glyph drawing, so joining
+// the cached resting plane does not change brightness or sharpness.
+function restingImage(active){const key=active.map(p=>p.index).join(',');if(key===restKey)return;restKey=key;staticBuilds++;const excluded=new Set(active);restContext.clearRect(0,0,restBounds.width,restBounds.height);restContext.globalAlpha=opacity;for(const p of particles)if(!excluded.has(p))draw(restContext,p,p.homeX-restBounds.left,p.homeY-restBounds.top);}
 function frame(now){raf=0;if(document.hidden)return;const began=performance.now(),dt=Math.min(64,last?now-last:16.667);last=now;const previousPhase=phase;phase=currentPhase(now);if(phase==='rest'&&previousPhase!=='rest'){for(const p of particles){p.x=p.homeX;p.y=p.homeY;p.rotation=0;p.progress=1;}activeParticles=[];restKey=null;}let moving=phase!=='rest';collisionCount=0;drawCalls=0;
  ctx.clearRect(0,0,width,height);ctx.globalAlpha=opacity;
  if(phase==='rest'){
@@ -81,7 +83,7 @@ function frame(now){raf=0;if(document.hidden)return;const began=performance.now(
    p.ox+=(tx-p.ox)*ease;p.oy+=(ty-p.oy)*ease;if(Math.abs(tx-p.ox)+Math.abs(ty-p.oy)>.035)moving=true;else {p.ox=tx;p.oy=ty;}
   }
   if(!moving&&!pointer.active)activeParticles=[];
-  restingImage(activeParticles);ctx.drawImage(restCanvas,restBounds.left,restBounds.top,restBounds.width,restBounds.height);drawCalls++;
+  restingImage(activeParticles);ctx.globalAlpha=1;ctx.drawImage(restCanvas,restBounds.left,restBounds.top,restBounds.width,restBounds.height);ctx.globalAlpha=opacity;drawCalls++;
   for(const p of activeParticles){draw(ctx,p,p.x+p.ox,p.y+p.oy);drawCalls++;}
  } else {restKey=null;for(const p of particles){position(p,now);draw(ctx,p,p.x,p.y);drawCalls++;}}
  paintCount++;const cost=performance.now()-began;frameMs=frameMs?frameMs*.95+cost*.05:cost;framePeakMs=Math.max(framePeakMs,cost);if(moving)request();else last=0;

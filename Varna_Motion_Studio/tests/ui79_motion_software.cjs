@@ -21,5 +21,14 @@ const {chromium}=require('playwright'),{launch,prepare,root}=require('./helpers/
   }else{assert(far.paintDelta>0);assert(far.bodyStyleWrites>0);}
   assert.deepEqual(errors,[]);report.cases.push({baseline,dpr,far,near,styles,errors});await context.close();
  }
+ // Match live and cached alpha at the end of the actual animation. Controlled
+ // browser time samples the final moving frame and the resting frame precisely.
+ report.restingPixels=[];
+ for(const dpr of [1,2]){const p=await browser.newPage({viewport:{width:809,height:580},deviceScaleFactor:dpr});await prepare(p,h.url);await p.waitForTimeout(400);await p.emulateMedia({reducedMotion:'no-preference'});await p.clock.install({time:new Date('2026-11-13T12:00:00Z')});await p.clock.pauseAt(new Date('2026-11-13T12:00:10Z'));await p.evaluate(()=>VarnaLiquid48.shatterAt(400,300));await p.clock.runFor(5800);
+  assert.equal(await p.evaluate(()=>VarnaLiquid48.status().phase),'gather');
+  await p.evaluate(()=>{const c=document.getElementById('varnaGlyphs48');window.beforePixels79=c.getContext('2d').getImageData(0,0,c.width,c.height).data;});await p.clock.runFor(50);
+  const pixels=await p.evaluate(()=>{const c=document.getElementById('varnaGlyphs48'),b=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let difference=0,count=0;for(let i=3;i<b.length;i+=4)if(b[i]||beforePixels79[i]){difference+=Math.abs(b[i]-beforePixels79[i]);count++;}return{meanAlphaDifference:difference/count,nonemptyPixels:count};});
+  assert(pixels.nonemptyPixels>1000);assert(pixels.meanAlphaDifference<1,'no brightness jump from live to cached glyphs');assert.equal(await p.evaluate(()=>VarnaLiquid48.status().phase),'rest');report.restingPixels.push({dpr,...pixels});await p.close();
+ }
  const out=path.resolve(root,'../docs/ui79');fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'software-motion.json'),JSON.stringify(report,null,2)+'\n');console.log('PASS UI79 actual software-rendered old/new pointer work at 100/200% DPR, cached glyphs, zero pointer CSS writes, bounded backing pixels, tip-first upright gather and exact rest.');
 }finally{await browser.close();await h.close();}})().catch(e=>{console.error(e);process.exitCode=1});

@@ -8,23 +8,23 @@
       "dpr": 1,
       "far": {
         "paintDelta": 20,
-        "bodyStyleWrites": 2
+        "bodyStyleWrites": 26
       },
       "near": {
         "particles": 413,
-        "paints": 94,
+        "paints": 69,
         "bursts": 0,
         "animating": true,
         "reduced": false,
         "phase": "rest",
         "collisions": 97,
-        "frameMs": 0.9280548201152652,
-        "framePeakMs": 11.899999976158142,
+        "frameMs": 2.3580639802175964,
+        "framePeakMs": 27.5,
         "burstDuration": 5820,
         "anticipationDuration": 220,
         "returnDuration": 5000,
         "burstSignature": "",
-        "displacement": 30.0581333559819
+        "displacement": 30.016185613957145
       },
       "styles": [
         "blur(3px) saturate(1.45)",
@@ -42,14 +42,14 @@
       },
       "near": {
         "particles": 413,
-        "paints": 83,
+        "paints": 81,
         "bursts": 0,
         "animating": false,
         "reduced": false,
         "phase": "rest",
         "collisions": 94,
-        "frameMs": 0.43677653608953665,
-        "framePeakMs": 3.100000023841858,
+        "frameMs": 1.0755923859946517,
+        "framePeakMs": 13.600000023841858,
         "burstDuration": 5820,
         "anticipationDuration": 220,
         "returnDuration": 5000,
@@ -74,23 +74,23 @@
       "dpr": 2,
       "far": {
         "paintDelta": 20,
-        "bodyStyleWrites": 6
+        "bodyStyleWrites": 24
       },
       "near": {
         "particles": 413,
-        "paints": 91,
+        "paints": 66,
         "bursts": 0,
         "animating": true,
         "reduced": false,
         "phase": "rest",
         "collisions": 97,
-        "frameMs": 0.9432286531997459,
-        "framePeakMs": 15.600000023841858,
+        "frameMs": 2.5357261504017563,
+        "framePeakMs": 22.799999952316284,
         "burstDuration": 5820,
         "anticipationDuration": 220,
         "returnDuration": 5000,
         "burstSignature": "",
-        "displacement": 30.000863330020394
+        "displacement": 29.534014919996057
       },
       "styles": [
         "blur(3px) saturate(1.45)",
@@ -108,14 +108,14 @@
       },
       "near": {
         "particles": 413,
-        "paints": 82,
+        "paints": 86,
         "bursts": 0,
         "animating": false,
         "reduced": false,
         "phase": "rest",
         "collisions": 94,
-        "frameMs": 0.42765211394903585,
-        "framePeakMs": 3.200000047683716,
+        "frameMs": 0.5467948059043269,
+        "framePeakMs": 7.400000095367432,
         "burstDuration": 5820,
         "anticipationDuration": 220,
         "returnDuration": 5000,
@@ -137,8 +137,20 @@
     }
   ],
   "wave": {
-    "tip": 0.20358333698151904,
+    "tip": 0.21363072551006398,
     "top": 0,
     "upright": true
-  }
+  },
+  "restingPixels": [
+    {
+      "dpr": 1,
+      "meanAlphaDifference": 0,
+      "nonemptyPixels": 25528
+    },
+    {
+      "dpr": 2,
+      "meanAlphaDifference": 0,
+      "nonemptyPixels": 35339
+    }
+  ]
 }

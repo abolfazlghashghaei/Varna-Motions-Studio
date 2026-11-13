@@ -12,11 +12,13 @@
     "js/production47.js": "c13b4aab8337dda72631445a424e1add6bcfc79aca43db3fc3efc28f359f01ac",
     "js/studio40.js": "bf24caef70703982e68daf43e4f0fb280c3fc54e40f4e8ac9450854d37a15620",
     "js/production50.js": "57f82bde126acd22472379d317ad0b0a9d75272381136aa95f0c19b66081b213",
-    "js/liquid48.js": "e444b8dea5df08c30762ee40fd06db21d2bf0b3d7341021dc13f01829a08e9f3"
+    "js/liquid48.js": "264463ff7a2bd05721a5f1625e559df4c83f88cb1f0693d27307d4b812833d26"
   },
   "minContentRatio": 0.532,
   "nativeCEP": false,
   "releasePassed": 86,
   "releaseTotal": 100,
-  "retainedWindowsProductFiles": 3353
+  "retainedWindowsProductFiles": 3353,
+  "railCases": 90,
+  "pixelTransitionChecked": true
 }

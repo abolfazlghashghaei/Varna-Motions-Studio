@@ -15523,8 +15523,8 @@
     },
     {
       "path": "js/liquid48.js",
-      "bytes": 14228,
-      "sha256": "e444b8dea5df08c30762ee40fd06db21d2bf0b3d7341021dc13f01829a08e9f3"
+      "bytes": 14543,
+      "sha256": "264463ff7a2bd05721a5f1625e559df4c83f88cb1f0693d27307d4b812833d26"
     },
     {
       "path": "js/music-engine.js",
@@ -16648,13 +16648,13 @@
     },
     {
       "path": "tests/ui79_motion_software.cjs",
-      "bytes": 4572,
-      "sha256": "1a833608b59de0451c35826581314a3dd729b1ba160d8294398bc068dd3c3e42"
+      "bytes": 6046,
+      "sha256": "04177348cb4d2b04561b00af99d000f061c4a86c2ec1e3e87052543b195be8bb"
     },
     {
       "path": "tests/ui79_rail_browser.cjs",
-      "bytes": 3655,
-      "sha256": "628d4264a1edcb585c0e4c5aa7fb1fddfa64ff5ecbf8a51dc474c72441f83a86"
+      "bytes": 4106,
+      "sha256": "1daa4b39d7cebd27cd8f6720a2140ab38dbcd2794dd5d621add8f28e6f5d1b9a"
     },
     {
       "path": "tests/ui79_screenshots.cjs",
