@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionManifest Version="7.0" ExtensionBundleId="com.varnalabs.motionstudio" ExtensionBundleVersion="4.5.0" ExtensionBundleName="Varna Motion Studio">
+  <ExtensionList><Extension Id="com.varnalabs.motionstudio.panel" Version="4.5.0"/></ExtensionList>
+  <ExecutionEnvironment>
+    <HostList><Host Name="AEFT" Version="[24.0,99.9]"/></HostList>
+    <LocaleList><Locale Code="All"/></LocaleList>
+    <RequiredRuntimeList><RequiredRuntime Name="CSXS" Version="12.0"/></RequiredRuntimeList>
+  </ExecutionEnvironment>
+  <DispatchInfoList>
+    <Extension Id="com.varnalabs.motionstudio.panel">
+      <DispatchInfo>
+        <Resources>
+          <MainPath>./index.html</MainPath>
+          <ScriptPath>./host/ghaf_host.jsx</ScriptPath>
+          <CEFCommandLine>
+            <Parameter>--enable-nodejs</Parameter><Parameter>--mixed-context</Parameter><Parameter>--disable-site-isolation-trials</Parameter>
+          </CEFCommandLine>
+        </Resources>
+        <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+        <UI>
+          <Type>Panel</Type><Menu>Varna Motion Studio</Menu>
+          <Geometry><Size><Width>620</Width><Height>640</Height></Size><MinSize><Width>250</Width><Height>250</Height></MinSize><MaxSize><Width>10000</Width><Height>10000</Height></MaxSize></Geometry>
+          <Icons/>
+        </UI>
+      </DispatchInfo>
+    </Extension>
+  </DispatchInfoList>
+</ExtensionManifest>

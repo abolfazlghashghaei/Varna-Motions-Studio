@@ -1,0 +1,16 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.resolve(__dirname,'..');
+const app=fs.readFileSync(path.join(root,'js/app.js'),'utf8');
+const node=fs.readFileSync(path.join(root,'js/node-engine.js'),'utf8');
+const host=fs.readFileSync(path.join(root,'host/ghaf_host.jsx'),'utf8');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const state=fs.readFileSync(path.join(root,'js/state.js'),'utf8');
+assert(html.includes('id="motionScopeModal"')&&app.includes("addEventListener('dblclick'")&&app.includes("commitMotionScope('selected',motionScopeRequest)")&&app.includes("commitMotionScope('all',motionScopeRequest)"));
+assert(app.includes('KeyL:1,KeyK:2,KeyJ:3,KeyH:4,KeyG:5')&&app.includes('Digit1:1')&&app.includes('[71,72,74,75,76]'));
+assert(html.includes('id="textGlowEnabled"')&&html.includes('id="fillMode"')&&host.includes('VARNA Text Glow')&&host.includes('VARNA Text Gradient'));
+assert(html.includes('data-bg-preset="solid-clean"')&&html.includes('data-bg-preset="apple-liquid"')&&html.includes('data-bg-preset="text-glow"'));
+assert(html.includes('id="bgRimGradient"')&&html.includes('id="bgRimBalance"')&&html.includes('id="bgBorderWidth"')&&host.includes("'SOLID_RIM'"));
+assert(html.includes('id="playheadFollowCaptions"')&&app.includes('syncCaptionToPlayhead')&&app.includes('setInterval(syncCaptionToPlayhead,650)'));
+assert(node.includes('releaseAfterJob')&&node.includes("taskkill")&&node.includes('beginLocalAIJob')&&node.includes('endLocalAIJob'));
+assert(state.includes("preset:'apple-liquid'")&&state.includes("releaseAfterJob:true"));
+console.log('PASS RC2: RAM auto-release, motion double-click scope, text glow/gradient, Solid/Text Glow backgrounds, Apple Liquid Glass, Playhead follow, shortcuts, independent gradient rim');

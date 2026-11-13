@@ -1,0 +1,46 @@
+/* RC44 sizes use layout tokens, never CSS zoom: AE coordinates and previews retain their units. */
+body[data-ui-size44]{--ui44-font:11px;--ui44-label:10px;--ui44-hint:10px;--ui44-title:16px;--ui44-control:25px;--ui44-pad:8px;--ui44-gap:7px;--ui44-icon:17px;--c37-height:var(--ui44-control)}
+body[data-ui-size44=compact]{--ui44-font:10px;--ui44-label:10px;--ui44-hint:9px;--ui44-title:15px;--ui44-control:23px;--ui44-pad:7px;--ui44-gap:6px;--ui44-icon:16px}
+body[data-ui-size44=large]{--ui44-font:12px;--ui44-label:11px;--ui44-hint:11px;--ui44-title:18px;--ui44-control:28px;--ui44-pad:10px;--ui44-gap:8px;--ui44-icon:19px}
+body[data-ui-size44=xlarge]{--ui44-font:13px;--ui44-label:12px;--ui44-hint:12px;--ui44-title:20px;--ui44-control:31px;--ui44-pad:12px;--ui44-gap:10px;--ui44-icon:21px}
+body[data-ui-size44][data-density=comfortable]{--ui44-space:1.25}
+body[data-ui-size44][data-density=compact]{--ui44-space:1}
+body[data-ui-size44] .card{padding:calc(var(--ui44-pad) * var(--ui44-space,1))!important}
+body[data-ui-size44] .form-grid{gap:calc(var(--ui44-gap) * var(--ui44-space,1))!important}
+body[data-ui-size44] :is(.control>span,.inline-control,.switch-row,.card-title b,.workflow-tabs button,.studio31-switcher button){font-size:var(--ui44-label)!important}
+body[data-ui-size44] :is(.btn,.btn.tiny,.control input:not([type=checkbox]):not([type=range]):not([type=radio]),.control select,.ts-control,.companion-controls input,.companion-controls select){font-size:var(--ui44-font)!important;min-height:var(--ui44-control)!important}
+body[data-ui-size44] .control input:not([type=checkbox]):not([type=range]):not([type=radio]),body[data-ui-size44] .control select{height:var(--ui44-control)}
+body[data-ui-size44] :is(.hint,.control small,.launcher-tile small){font-size:var(--ui44-hint)!important}
+body[data-ui-size44] :is(.page-head h1,.launcher-intro p){font-size:var(--ui44-title)!important}
+body[data-ui-size44] .launcher-tile strong{font-size:var(--ui44-font)!important;overflow-wrap:anywhere}
+body[data-ui-size44] .launcher-tile{min-height:calc(var(--ui44-control) * 2.5)!important;padding:var(--ui44-pad)!important;grid-template-columns:var(--ui44-icon) minmax(0,1fr);gap:var(--ui44-gap)!important}
+body[data-ui-size44] .launcher-icon{width:var(--ui44-icon);height:var(--ui44-icon)}
+body[data-ui-size44] .launcher-icon svg{width:var(--ui44-icon);height:var(--ui44-icon)}
+body[data-ui-size44] .card-title{min-height:var(--ui44-control)!important}
+body[data-ui-size44] .studio31-switcher{flex-wrap:wrap!important}
+body[data-ui-size44] .studio31-switcher button{flex:1 1 90px!important;white-space:normal!important}
+body[data-ui-size44] .topbar{overflow:visible!important;z-index:3000;isolation:isolate;min-height:calc(var(--ui44-control) + 12px)!important}
+body[data-ui-size44] .header-options-panel{position:fixed!important;max-height:calc(100vh - 70px);overflow:auto!important;overscroll-behavior:contain;box-sizing:border-box;border-radius:10px;gap:10px;padding:12px}
+body[data-ui-size44] .header-options-panel :is(.control>span,.hint,.btn,select){font-size:max(11px,var(--ui44-label))!important}
+.display-settings44{display:grid;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--u-line)}
+.page-icon44{display:inline-flex;vertical-align:middle;margin-inline-end:8px;color:var(--u-accent)}
+.page-icon44 svg{width:1.1em;height:1.1em}
+.feature-master44{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--u-line);margin-bottom:10px}
+.feature-master44 .switch-row{margin:0;min-width:0}
+.feature-status44{font-size:var(--ui44-label);color:var(--u-accent);border:1px solid var(--u-line);border-radius:5px;padding:2px 8px}
+[data-feature-enabled44=false] .feature-status44{color:var(--u-muted)}
+.feature-controls44{border:0;margin:0;padding:0;min-width:0}
+fieldset.dependent44{display:contents;border:0;margin:0;padding:0;min-width:0}
+fieldset.dependent44:disabled>*,.feature-muted44{opacity:.5}
+fieldset.dependent44:disabled *{cursor:not-allowed!important}
+.toggle-state44{font-size:9px!important;color:var(--u-muted);margin-inline-start:5px;white-space:nowrap}
+body[data-ui-size44] .control input:disabled,body[data-ui-size44] .control select:disabled{color:var(--u-muted)!important}
+@media(max-width:560px){body[data-ui-size44] .form-grid{grid-template-columns:minmax(0,1fr)!important}body[data-ui-size44] .feature-master44{align-items:flex-start}body[data-ui-size44] .launcher-grid{gap:8px!important}}
+@media(max-width:350px){body[data-ui-size44] .launcher-grid{grid-template-columns:minmax(0,1fr)!important}body[data-ui-size44] .launcher-tile{min-height:48px!important}body[data-ui-size44] .workspace{padding:7px!important}body[data-ui-size44] .topbar .workspace-heading{flex:1 1 30px!important}body[data-ui-size44] .build31{font-size:8px!important}}
+fieldset.dependent44:disabled>*{pointer-events:none}
+body[data-ui-size44] .header-options-panel :is(select,.btn){font-size:var(--ui44-font)!important}
+body[data-ui-size44] :is(.control textarea,.scene-settings40 textarea){font-size:var(--ui44-font)!important}
+body[data-ui-size44] #reviewText{font-size:max(16px,calc(var(--ui44-font) * 1.4))!important}
+body[data-ui-size44] .topbar :is(.quick-btn,.header-output,.workflow-back){font-size:var(--ui44-label)!important;min-height:var(--ui44-control)!important}
+
+body[data-ui-size44=tiny]{--ui44-font:9px;--ui44-label:9px;--ui44-hint:9px;--ui44-title:14px;--ui44-control:21px;--ui44-pad:5px;--ui44-gap:5px;--ui44-icon:14px}

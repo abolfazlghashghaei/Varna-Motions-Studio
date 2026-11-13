@@ -1,0 +1,156 @@
+{
+  "browser": "154.0.8037.57",
+  "softwareCompositor": true,
+  "nativeCEP": false,
+  "cases": [
+    {
+      "baseline": true,
+      "dpr": 1,
+      "far": {
+        "paintDelta": 20,
+        "bodyStyleWrites": 26
+      },
+      "near": {
+        "particles": 413,
+        "paints": 69,
+        "bursts": 0,
+        "animating": true,
+        "reduced": false,
+        "phase": "rest",
+        "collisions": 97,
+        "frameMs": 2.3580639802175964,
+        "framePeakMs": 27.5,
+        "burstDuration": 5820,
+        "anticipationDuration": 220,
+        "returnDuration": 5000,
+        "burstSignature": "",
+        "displacement": 30.016185613957145
+      },
+      "styles": [
+        "blur(3px) saturate(1.45)",
+        "blur(3px) saturate(1.45)",
+        "blur(3px) saturate(1.45)"
+      ],
+      "errors": []
+    },
+    {
+      "baseline": false,
+      "dpr": 1,
+      "far": {
+        "paintDelta": 0,
+        "bodyStyleWrites": 0
+      },
+      "near": {
+        "particles": 413,
+        "paints": 81,
+        "bursts": 0,
+        "animating": false,
+        "reduced": false,
+        "phase": "rest",
+        "collisions": 94,
+        "frameMs": 1.0755923859946517,
+        "framePeakMs": 13.600000023841858,
+        "burstDuration": 5820,
+        "anticipationDuration": 220,
+        "returnDuration": 5000,
+        "returnStyle": "cascade-fold",
+        "drawCalls": 281,
+        "staticBuilds": 5,
+        "pointerEvents": 55,
+        "pixelRatio": 1,
+        "gradientWrites": 0,
+        "burstSignature": "",
+        "displacement": 21.981442855048407
+      },
+      "styles": [
+        "none",
+        "none",
+        "none"
+      ],
+      "errors": []
+    },
+    {
+      "baseline": true,
+      "dpr": 2,
+      "far": {
+        "paintDelta": 20,
+        "bodyStyleWrites": 24
+      },
+      "near": {
+        "particles": 413,
+        "paints": 66,
+        "bursts": 0,
+        "animating": true,
+        "reduced": false,
+        "phase": "rest",
+        "collisions": 97,
+        "frameMs": 2.5357261504017563,
+        "framePeakMs": 22.799999952316284,
+        "burstDuration": 5820,
+        "anticipationDuration": 220,
+        "returnDuration": 5000,
+        "burstSignature": "",
+        "displacement": 29.534014919996057
+      },
+      "styles": [
+        "blur(3px) saturate(1.45)",
+        "blur(3px) saturate(1.45)",
+        "blur(3px) saturate(1.45)"
+      ],
+      "errors": []
+    },
+    {
+      "baseline": false,
+      "dpr": 2,
+      "far": {
+        "paintDelta": 0,
+        "bodyStyleWrites": 0
+      },
+      "near": {
+        "particles": 413,
+        "paints": 86,
+        "bursts": 0,
+        "animating": false,
+        "reduced": false,
+        "phase": "rest",
+        "collisions": 94,
+        "frameMs": 0.5467948059043269,
+        "framePeakMs": 7.400000095367432,
+        "burstDuration": 5820,
+        "anticipationDuration": 220,
+        "returnDuration": 5000,
+        "returnStyle": "cascade-fold",
+        "drawCalls": 281,
+        "staticBuilds": 5,
+        "pointerEvents": 55,
+        "pixelRatio": 1.25,
+        "gradientWrites": 0,
+        "burstSignature": "",
+        "displacement": 21.981442855048407
+      },
+      "styles": [
+        "none",
+        "none",
+        "none"
+      ],
+      "errors": []
+    }
+  ],
+  "wave": {
+    "tip": 0.21363072551006398,
+    "top": 0,
+    "upright": true
+  },
+  "restingPixels": [
+    {
+      "dpr": 1,
+      "meanAlphaDifference": 0,
+      "nonemptyPixels": 25528
+    },
+    {
+      "dpr": 2,
+      "meanAlphaDifference": 0,
+      "nonemptyPixels": 35339
+    }
+  ]
+}

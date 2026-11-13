@@ -1,0 +1,14 @@
+{
+  "version": "4.4.0-rc.3",
+  "base_version": "4.3.14-rc.1",
+  "base_assets_checked": 1747,
+  "base_assets_changed_or_missing": [],
+  "added_assets": [
+    "assets/fonts/OFL.txt",
+    "assets/fonts/Vazirmatn.woff2"
+  ],
+  "html_duplicate_ids": [],
+  "missing_scripts_or_styles": [],
+  "visible_style_cards": 26,
+  "style_cards_missing_internal_option": []
+}

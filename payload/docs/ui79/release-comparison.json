@@ -1,0 +1,22 @@
+{
+  "passed": 86,
+  "total": 100,
+  "failures": [
+    "ui.cjs",
+    "rc24_ui.cjs",
+    "rc25_ui.cjs",
+    "rc26_app_actions.cjs",
+    "rc35_app.cjs",
+    "rc36_app.cjs",
+    "rc37_captions.cjs",
+    "rc41_app.cjs",
+    "rc45_app.cjs",
+    "rc46_scene.cjs",
+    "rc47_app.cjs",
+    "rc21_companions_shots.cjs",
+    "production50_core.cjs",
+    "studio51_server.cjs"
+  ],
+  "introducedFailures": [],
+  "existingTestsModified": false
+}

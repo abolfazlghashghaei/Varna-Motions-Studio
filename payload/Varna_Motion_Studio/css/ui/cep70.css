@@ -1,0 +1,15 @@
+/* CEP 12 / Chromium 99 adapters for unsupported declarations in legacy sheets.
+   No page redesign: these rules preserve the meaning of the original relational selectors.
+   Flags come from capability detection, never the user agent or monitor size. */
+html[data-ui-a68][data-cep70-has=off] .inline-control[data-cep70-has-numeric]{min-width:0;flex-wrap:wrap;}
+html[data-ui-a68][data-cep70-has=off] .asset-row label[data-cep70-has-checkbox]{flex-direction:row;grid-column:1/-1;}
+html[data-ui-a68][data-cep70-has=off] .director-item[data-cep70-has-checked]{border-color:rgba(146,207,255,.58);box-shadow:inset 0 1px rgba(255,255,255,.2),0 0 0 1px rgba(109,172,225,.12);}
+@layer varna-cep70 {
+  /* The original :has rules in appearance25/studio37/workflow-ui are important. */
+  @media(min-width:1100px){html[data-ui-a68][data-cep70-has=off] #page-text .stack>.card[data-cep70-has-font]{grid-column:1/-1 !important;}}
+  @media(max-width:360px){html[data-ui-a68][data-cep70-has=off] :is(.font-family-control,.control[data-cep70-has-textarea]){grid-column:1/-1 !important;}}
+  html[data-ui-a68][data-cep70-has=off] .workflow-step>.card>.card-title[data-cep70-has-card-icon]{min-height:0 !important;}
+  /* color-mix is unavailable in 99. Reuse the AA palette adapter's solid surface/field roles.
+     The stage A .card rule already supplies the fallback for liquid-ui's mixed background. */
+  html[data-ui-a68][data-cep70-color-mix=off] .btn.warning-soft{background:var(--ui-color-field) !important;border-color:var(--ui-color-border) !important;color:var(--ui-color-warning) !important;}
+}
