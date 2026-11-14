@@ -1,0 +1,10 @@
+{
+  "index.html": "14d56b5a21d9cd66a67ad989886a948d079959428a2dcd74bfab39d52ae83d47",
+  "css/ui/flow77.css": "7649cf62508854ce9470ac4cdc782e8d38fc75e34466b5aa7ff020c0042b17f8",
+  "js/flow77.js": "0ecd2a823e2ff4ec752310da5dc215e34c24fb8455ed3b8e87c0b58c75046239",
+  "js/app.js": "f1548ce843bb7f02688ccd6e254642f0b0db01f4fb618d3ac6d36a491b04ccaa",
+  "js/text-workspace80.js": "87f489e05edab599df6279fded125ddee826bd9021c77a03d17e2e1813ac0d71",
+  "tests/helpers/panel69.cjs": "4f61a72dc3ce29e203bfcd0065ed3f5b3d70bddfe6eb04ce2f862ba2247062e5",
+  "tests/ui80_text_workspace_browser.cjs": "6d37f3a45edd180baa2fd3ec422f3034c05bcf225c91fed07c63ba1551db80c7",
+  "tests/ui80_geometry_oracle_browser.cjs": "df1d2a2424dd975bb8107cb65c3608ca7c7993b7f4a30fc2e714136f4d43f51f"
+}

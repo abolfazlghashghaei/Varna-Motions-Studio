@@ -1,0 +1,16 @@
+GHAFHost._safeLayers=function(c){var out=[];for(var i=1;i<=c.numLayers;i++){var l=c.layer(i),n=String(l.name||'');if(n==='__GHAF_SAFE_ZONE__'||n.indexOf('__GHAF_SAFE_OVERLAY_')===0||n==='__VARNA_SOCIAL_GUIDE__')out.push(l);}return out;};
+GHAFHost.createSafeZone=function(encoded){
+ var p=GHAFHost._parse(encoded),c=GHAFHost._activeComp();if(!c)return GHAFHost._err('NO_COMP');if(!p.preset||!(p.preset.customPaths||[]).length)return GHAFHost._err('PRESET_GEOMETRY_MISSING');
+ var old=GHAFHost._layerSet(c),previous=GHAFHost._safeLayers(c),saved=[],width=c.width,height=c.height,guide=null,item=null,imported=false;
+ app.beginUndoGroup('Varna Social Safe Zone');try{
+  if(p.socialGuidePath){guide=new File(p.socialGuidePath);if(!guide.exists)throw Error('تصویر راهنما پیدا نشد؛ دوباره از پنل اعمال کن.');}
+  if(p.resize){c.width=Math.round(Number(p.preset.width));c.height=Math.round(Number(p.preset.height));}else if(Math.abs((c.width/c.height)/(p.preset.width/p.preset.height)-1)>.05)throw Error('نسبت سیف‌زون با Composition متفاوت است؛ فرمت مناسب را انتخاب کن یا تغییر ابعاد Composition را روشن کن.');
+  for(var i=0;i<previous.length;i++){saved.push({layer:previous[i],name:previous[i].name,locked:previous[i].locked});previous[i].locked=false;previous[i].name='__VARNA_OLD_SAFE_'+String(new Date().getTime())+'_'+i;}
+  var options={};for(var key in p)options[key]=p[key];if(guide){options.showChrome=false;options.overlayOpacity=0;}
+  var zone=GHAFHost._applyPresetSafeZone(c,options);zone.enabled=p.visible!==false;
+  if(guide){item=GHAFHost._findFootageByFile(guide.fsName);if(!item){item=app.project.importFile(new ImportOptions(guide));imported=true;}var layer=c.layers.add(item);layer.name='__VARNA_SOCIAL_GUIDE__';layer.comment='VARNA_SOCIAL_GUIDE:'+p.preset.key;layer.guideLayer=p.guideLayer!==false;layer.inPoint=0;layer.outPoint=c.duration;layer.enabled=p.visible!==false;var tr=layer.property('ADBE Transform Group');tr.property('ADBE Position').setValue([c.width/2,c.height/2]);tr.property('ADBE Scale').setValue([c.width/item.width*100,c.height/item.height*100]);tr.property('ADBE Opacity').setValue(100);layer.moveToBeginning();layer.locked=!!p.lockLayer;}
+  GHAFHost._deleteLayers(previous);c.openInViewer();return GHAFHost._ok({name:p.preset.name,key:p.preset.key,width:c.width,height:c.height,layer:zone.name,socialGuide:!!guide});
+ }catch(e){GHAFHost._deleteLayers(GHAFHost._newLayers(c,old));for(var j=0;j<saved.length;j++)try{saved[j].layer.locked=false;saved[j].layer.name=saved[j].name;saved[j].layer.locked=saved[j].locked;}catch(ignore){}c.width=width;c.height=height;try{if(imported&&item.usedIn.length===0)item.remove();}catch(eCleanup){}return GHAFHost._err(String(e));}finally{app.endUndoGroup();}
+};
+GHAFHost.removeSafeZone=function(){var c=GHAFHost._activeComp();if(!c)return GHAFHost._ok({removed:0});var list=GHAFHost._safeLayers(c);GHAFHost._deleteLayers(list);return GHAFHost._ok({removed:list.length});};
+GHAFHost.setSafeZoneVisible=function(encoded){var p=GHAFHost._parse(encoded),c=GHAFHost._activeComp();if(!c)return GHAFHost._err('NO_COMP');try{var list=GHAFHost._safeLayers(c);for(var i=0;i<list.length;i++){var locked=list[i].locked;list[i].locked=false;list[i].enabled=p.visible!==false;list[i].locked=locked;}return GHAFHost._ok({visible:p.visible!==false});}catch(e){return GHAFHost._err(String(e));}};

@@ -1,0 +1,11 @@
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.resolve(__dirname,'..');
+const host=fs.readFileSync(path.join(root,'host','ghaf_host.jsx'),'utf8');
+const bridge=fs.readFileSync(path.join(root,'js','cep-bridge.js'),'utf8');
+const table=fs.readFileSync(path.join(root,'js','table-designer.js'),'utf8');
+const app=fs.readFileSync(path.join(root,'js','app.js'),'utf8');
+assert(/GHAFHost\.dispatch\s*=\s*function/.test(host),'CEP dispatch missing');
+assert(bridge.includes('GHAFHost.dispatch('),'bridge must call dispatch');
+assert(table.includes('commitPhysicalCols'),'physical RTL/LTR column resizing missing');
+assert(app.includes('Digit1:1')&&app.includes('KeyL:1'),'new shortcut mapping missing');
+console.log('R9 recovery static checks: PASS');

@@ -1,0 +1,89 @@
+body.workbench66 .workspace-paged67{display:none!important}
+.workspace-pager67{display:flex;align-items:center;gap:5px;justify-content:space-between;margin:0 0 7px;position:relative;z-index:6}
+.workspace-pager67 select{flex:1;min-width:0;font-size:11px!important;height:28px!important;min-height:28px!important;padding:3px!important}
+.workspace-pager67 button{padding:3px 7px!important;min-height:28px!important;font-size:10px!important}
+body.workbench66 .page:not(#page-table) .caption-list,body.workbench66 .page:not(#page-table) #logBox{max-height:150px!important;overflow:auto}
+body.workbench66 .page .scene-preview40{position:relative!important;top:auto!important}
+body.workbench66 .page .scene-stage40,body.workbench66 .page #sceneStage40{height:180px!important;min-height:100px!important}
+body.workbench66 .page #wordList,body.workbench66 .page .word-chips48{max-height:100px;overflow:auto}
+body.workbench66 .page:not(#page-table) .form-grid,body.workbench66 .page:not(#page-table) .layout-grid,body.workbench66 .page:not(#page-table) .stack{align-items:start!important}
+body.workbench66 .page:not(#page-table) .card-title{min-height:24px!important;padding-bottom:4px!important;margin-bottom:5px!important}
+body.workbench66 .page:not(#page-table) details[open]>summary{margin-bottom:4px!important}
+.reflow-reference67{max-width:100%;min-width:0}
+#bgReflowCanvas67{display:block;width:100%;max-height:100px;object-fit:contain}
+#materialFrameImage67{display:block;max-width:100%;max-height:170px;object-fit:contain}
+#materialFrameImage67[hidden]{display:none}
+.reflow-panel67 output,.material-frame67 output{font-size:11px;line-height:1.6}
+/* A quiet inspector: task tabs, restrained glass and readable working surfaces. */
+body.designer67{--section-active67:var(--u-accent)}
+body.designer67 #varnaGlyphs48{opacity:.18}
+body.designer67 .page .card{background:var(--surface67)!important;box-shadow:0 5px 18px rgba(0,0,0,.08)!important;border-color:var(--u-line)!important;border-radius:12px!important}
+body.designer67 .page .card .card{background:var(--surface-soft67)!important;box-shadow:none!important}
+body.designer67 #production47{background:transparent!important;border:0!important;box-shadow:none!important;padding:3px 0 8px!important;margin-bottom:5px!important}
+body.designer67 #production47 .production-heading47{justify-content:flex-start;gap:8px;font-size:12px}
+body.designer67 #productionTitle47{font-size:13px}
+body.designer67 #productionPosition47{opacity:.65;font-size:10px}
+body.designer67 #productionSteps47{gap:4px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}
+body.designer67 #productionSteps47 button{flex:1 0 auto;font-size:10px!important;min-height:29px!important;border-color:transparent!important;background:transparent!important;border-radius:7px!important;padding:5px 8px!important}
+body.designer67 #productionSteps47 button[aria-current=step]{background:var(--u-soft)!important;color:var(--u-accent)!important;border-color:var(--u-line)!important}
+body.designer67 .production-actions47 button{width:25px;min-width:25px;min-height:25px!important;padding:0!important;font-size:18px!important}
+body.designer67 #routeSelect66{font-size:11px!important;min-height:27px!important;height:27px;background:var(--surface67)}
+body.designer67 .section-pager67{display:block!important;margin:0 0 8px!important;padding:0!important;border:0}
+.section-tabs67{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.section-tabs67 button{display:flex;align-items:center;gap:5px;padding:5px 9px!important;min-height:29px!important;background:transparent!important;border:1px solid transparent!important;border-radius:7px!important;font:inherit;color:var(--u-muted)!important;font-size:11px!important;white-space:nowrap}
+.section-tabs67 button[aria-selected=true]{color:var(--u-text)!important;background:var(--surface67)!important;border-color:var(--u-line)!important;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.section-tabs67 button>span:first-child{display:flex;align-items:center;opacity:.8}
+.section-tabs67 svg{width:14px;height:14px;flex:none}
+.section-navigation67{display:flex;gap:6px;align-items:center;justify-content:space-between;min-width:0}
+.section-navigation67>select{display:none;flex:1;min-width:0;height:29px!important;min-height:29px!important;font-size:11px!important}
+.section-leaves67{display:flex;align-items:center;gap:7px;margin-inline-start:auto;font-size:10px;color:var(--u-muted)}
+.section-leaves67[hidden]{display:none}
+.section-leaves67 button{min-width:24px;padding:0 4px!important;font-size:16px!important;min-height:22px!important}
+body.designer67 .control>span{font-size:11px!important;line-height:1.5}
+body.designer67 .control{gap:5px!important}
+body.designer67 input:not([type=range]):not([type=checkbox]):not([type=radio]),body.designer67 select{min-height:31px!important;border-radius:7px!important}
+body.designer67 .numeric37{height:31px!important;min-height:31px!important;border-radius:7px!important}
+body.designer67 .numeric37>input.numeric37-value{min-height:27px!important;height:27px!important;font-size:12px!important;flex-basis:56px!important;width:56px!important}
+body.designer67 .numeric37>input.numeric37-slider{height:22px!important;min-height:22px!important}
+body.designer67 .page .form-grid{gap:9px!important;margin-bottom:8px!important}
+body.designer67 .page .font31-native{display:none!important}
+.font-trigger67{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;min-height:32px!important;border:1px solid var(--u-line)!important;border-radius:7px!important;background:var(--u-input)!important;color:var(--u-text)!important;padding:5px 10px!important;text-align:start}
+.font-dialog67{width:min(480px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:14px;border:1px solid var(--u-line);border-radius:16px;background:var(--u-panel);color:var(--u-text);box-shadow:0 25px 90px rgba(0,0,0,.4)}
+.font-dialog67::backdrop{background:rgba(4,10,20,.55);backdrop-filter:blur(5px)}
+.font-dialog67>header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.font-dialog67 .font31-label{display:none}
+body.designer67 .font-dialog67 .font31-browser{margin:0}
+body.designer67 .font-dialog67 .font31-results{max-height:min(260px,40vh);min-height:70px}
+body.designer67 .font-dialog67 .font31-preview{padding:9px;font-size:20px;line-height:1.6}
+body.designer67 .font31-star[aria-pressed=true]{color:#ffe38a!important;text-shadow:0 0 8px rgba(255,212,99,.6)}
+body.designer67 .table-dock66{border-radius:12px!important;background:var(--surface-soft67)!important}
+body.designer67 #tablePageJump66{max-width:none!important}
+@media(min-width:900px){body.designer67 #page-text[data-workflow-tab=appearance] .split-view>.stack{grid-template-columns:minmax(0,1fr)!important}body.designer67 #page-text[data-workflow-tab=appearance] #textFontCard{grid-column:1/-1}}
+@media(max-width:799px){.section-tabs67{display:none}.section-navigation67>select{display:block}.section-leaves67{margin:0}body.designer67 .control>span{font-size:10px!important}}
+
+/* Keep the core font settings on one compact row, even when alignment has its own tab. */
+body.designer67 #page-text #textFontCard>.font-primary-row{grid-template-columns:minmax(0,2fr) minmax(110px,1fr)!important}
+body.designer67 #page-text #textFontCard .font-family-control{grid-column:auto!important}
+body.designer67 #tablePages66 .section-tabs67 button{background:transparent!important;border-color:transparent!important;color:var(--u-muted)!important}
+body.designer67 #tablePages66 .section-tabs67 button[aria-selected=true]{background:var(--surface67)!important;border-color:var(--u-line)!important;color:var(--u-text)!important}
+body.designer67 .section-pager67 button:focus-visible,body.designer67 .font-trigger67:focus-visible{outline:2px solid var(--u-accent);outline-offset:2px}
+@media(max-width:430px){body.designer67 #page-text #textFontCard>.font-primary-row{grid-template-columns:minmax(0,1fr)!important}}
+
+body.designer67 #workspace{overflow-anchor:none}
+
+body.designer67 .form-grid>.control>span:first-child{min-height:22px!important;line-height:1.5!important}
+body.designer67 #page-table .align-panel48{padding:4px!important;gap:3px;margin:2px 0!important}
+
+body.designer67 .page pre{max-height:150px;overflow:auto}
+body.designer67 .page textarea{max-height:140px;min-height:65px!important}
+
+body.designer67 .page .workflow-preview .motion-screen{height:150px!important;min-height:90px!important}
+@media(max-height:600px){
+ body.designer67 #page-table>.table-dock66{gap:3px!important;padding:5px!important}
+ body.designer67 #tableDockActions66 .btn{min-height:23px!important}
+ body.designer67 #tableDockActions66 .switch-row,body.designer67 #tableDockActions66 #tableStatus{line-height:1.4!important;margin:0!important}
+ body.designer67 #tablePreviewOptions66{font-size:9px;line-height:1.4}
+}
+
+/* Each motion card already animates; the redundant enlarged sample delayed the actual choices. */
+body.designer67 #motionShowcase,body.designer67 #animSimple>.section-note{display:none!important}

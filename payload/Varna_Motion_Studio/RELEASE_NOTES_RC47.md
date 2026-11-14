@@ -1,0 +1,7 @@
+# 4.5 RC47
+
+Imported template preview could fail with `_templateProperty38(...).setValue is undefined`: the effect inventory included empty structural groups and compositing parameters, and active-word automation attempted to write every matching effect child. RC47 exposes writable leaves, validates stable property routes, and automates only the primary numeric value. Known unsupported structural entries in old snapshots are skipped. Genuine stale paths remain explicit errors. External same-named composition links resolve only within the owning imported asset. Expression-only private dependencies are retained while any output still uses the graph and cleaned after the last output is removed. Original template graphs, colors and source assets are preserved.
+
+Additional coordinated fixes cover asynchronous malformed CEP envelopes, recovery of committed output receipts, pinned live/frame preview destinations and owned dependency cleanup, ES3-compatible project state completeness validation, disabled typography parity, nonmutating repair of invalid phrase partitions after text edits, matching import undo/reset baselines, idempotent background anchors and typing measurements, dependent motion controls, and music-engine startup/download error handling.
+
+The bridge revision is rc47.1. RC43 atomic loading and serialized individual-caption construction remain intact. See TEST_REPORT_RC47.md for executed verification and the native-runtime boundary.

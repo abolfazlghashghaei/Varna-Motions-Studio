@@ -1,0 +1,11 @@
+/* Tabs cannot leave cards in an unused grid column. Editing controls occupy the available panel width. */
+body #page-text .layout-grid{grid-template-columns:minmax(0,1fr)!important}
+body #page-text .layout-grid>.stack{grid-column:1/-1!important;width:100%!important;min-width:0!important;display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+body #page-text .layout-grid>article.card{grid-column:1/-1!important}
+body #page-text .layout-grid .stack>article.card{grid-column:auto!important;grid-row:auto!important;width:auto!important;min-width:0!important}
+body #page-bg .companion-controls{display:block}
+.companion-controls .effect-control-section{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}
+#textAEControls{margin-top:10px;padding-top:10px;border-top:1px solid var(--u-line)}
+.engine-choice{margin-bottom:12px}.brand-components{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}.brand-components label{display:flex;align-items:center;gap:6px}#page-brand textarea{min-height:72px;resize:vertical}#page-brand .action-inline{flex-wrap:wrap}#page-brand article{max-width:100%;min-width:0}
+@media(min-width:1100px){body #page-text .layout-grid>.stack{grid-template-columns:repeat(2,minmax(0,1fr))}body #page-text .stack>.card:has(#fontSelect){grid-column:1/-1!important}}
+@media(max-width:480px){#page-brand .form-grid,#typingStudio .form-grid,#textAEControls .form-grid{grid-template-columns:minmax(0,1fr)!important}.companion-controls .effect-control-section{grid-template-columns:minmax(0,1fr)}.engine-choice select{width:100%}}

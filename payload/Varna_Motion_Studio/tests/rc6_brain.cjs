@@ -1,0 +1,26 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const root=path.resolve(__dirname,'..');
+const Brain=require('../js/project-brain.js');
+const captions=[{id:1,rawText:'معرفی محصول',start:0,end:2},{id:2,rawText:'فروش ما ۳ برابر شد',start:4,end:6},{id:3,rawText:'طراحی بی‌نظیر',start:7,end:9},{id:4,rawText:'برای سفارش تماس بگیرید',start:12,end:14}];
+const plan=Brain.propose({brief:'Reel لوکس محصول؛ شلوغ نکن',profile:'auto',captions,analysis:{comp:{id:13,duration:20},events:[{time:10,type:'cut',strength:85,meta:{role:'video'}}]}});
+assert.equal(plan.context.profile,'luxury');
+assert(plan.items.some(x=>x.kind==='number'&&x.groupId===2&&x.motion==='none'));
+assert(plan.items.some(x=>x.kind==='cta'&&x.groupId===4&&x.actions.accent));
+assert(plan.items.some(x=>x.kind==='cut'&&x.enabled===false));
+assert(!plan.items.some(x=>x.groupId===3),'ordinary subtitle must be quiet');
+let undo=0;const state={groups:[{id:2},{id:4,styleOverride:{fill:'#111111'}}],pushUndo:()=>undo++,animFor:()=>({preset:'none'}),styleFor:()=>({fill:'#FFFFFF'}),bgFor:()=>({enabled:false,style:'solid'})};
+const enabled=plan.items.filter(x=>x.kind==='number'||x.kind==='cta').map(x=>x.id);
+const result=Brain.apply(plan,enabled,state);assert.equal(result.applied,1);assert.equal(result.skipped,1);assert.equal(undo,1);
+assert.equal(state.groups[0].styleOverride.fill,'#D6B77A');assert.equal(state.groups[0].animOverride,undefined);assert.equal(state.groups[1].styleOverride.fill,'#111111');
+assert.equal(Brain.apply(plan,enabled,state).applied,0);assert.equal(undo,1);
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),app=fs.readFileSync(path.join(root,'js/app.js'),'utf8'),installer=fs.readFileSync(path.join(root,'INSTALL_WINDOWS.ps1'),'utf8');
+assert(html.includes('id="page-director"')&&html.includes('src="./js/project-brain.js"'));
+assert(app.includes('projectBrain:S.projectBrain')&&app.includes('renderBrainPlan()'));
+assert(installer.includes("ValidateSet('Core','Studio','Max')")&&installer.includes("$Level -ne 'Max'"));
+class CompItem{constructor(){this.id=13;this.width=1080;this.height=1920;this.numLayers=2;this.layers=[{name:'GHAF_CAP_NEW_001',comment:'VARNA_CAPTION_ID:7',id:77,inPoint:1,outPoint:3,property:key=>key==='ADBE Text Properties'?{property:()=>({value:{text:'متن دستی',font:'ArialMT',fontSize:64,fillColor:[1,.5,0]}})}:{property:()=>({numKeys:0,expressionEnabled:false,value:[540,1300]})}},{name:'GHAF_CAP_OLD_002',comment:'',property:()=>null}];}layer(i){return this.layers[i-1];}}
+const hostCtx={CompItem,app:{version:'26',project:{activeItem:new CompItem()}}};vm.createContext(hostCtx);vm.runInContext(fs.readFileSync(path.join(root,'host/ghaf_host.jsx'),'utf8'),hostCtx);
+const read=JSON.parse(hostCtx.GHAFHost.getVarnaCaptionLayers());assert.equal(read.ok,true);assert.equal(read.data.items.length,1);assert.equal(read.data.items[0].id,7);assert.equal(read.data.items[0].fill,'#FF8000');
+console.log('PASS RC6 Project Brain plan, quiet captions, human approval, manual overrides, undo, project persistence, install levels');

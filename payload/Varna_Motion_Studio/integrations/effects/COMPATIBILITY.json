@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "policy": "Never copy an AE binary into a Premiere or Resolve plugin folder. Original vendor licenses and supported host builds are required.",
+  "effects": [
+    {"id":"varna-shapes","browser":"native canvas","ae":"native shape size/roundness","premiere":"transparent ProRes graphics or AE-generated MOGRT","resolve":"transparent ProRes video track"},
+    {"id":"varna-word-styles","browser":"per-word canvas","ae":"native text animators","premiere":"transparent graphics or MOGRT","resolve":"TextPlus setting for basic editable text; transparent graphics for full animation"},
+    {"id":"varna-liquid","browser":"backdrop blur, tint, gradient, rim; approximate optical material","ae":"existing native/installed AE effects","premiere":"transparent graphics; optical blur of underlying host footage is not reproduced","resolve":"transparent graphics; native optical material requires a separate Fusion implementation"},
+    {"id":"varna-table","browser":"shared surface, continuous dividers, alignment, animated size","ae":"existing table renderer","premiere":"transparent graphics","resolve":"transparent graphics"},
+    {"id":"AE Glass / Glassary / Orb Reactor / Cosmic / TextBox / Textyle / Animation Composer","ae":"retained existing licensed integrations","browser":"no native binary execution","premiere":"no AE binary compatibility claim","resolve":"no AE binary compatibility claim"}
+  ]
+}

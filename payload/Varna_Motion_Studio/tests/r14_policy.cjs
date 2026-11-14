@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict'),P=require('../js/sfx-policy.js');
+const cut={type:'cut',time:4,strength:85};
+assert.equal(P.eligible({category:'ambience',name:'Room.wav',folder:'',duration:20},'click',cut),false);
+assert.equal(P.eligible({category:'hit',name:'Heavy Boom.wav',folder:'',duration:.5},'hit',cut),false);
+assert.equal(P.eligible({category:'click',name:'Tap.wav',folder:'',duration:.3},'click',cut),true);
+assert.equal(P.eligible({category:'whoosh',name:'Soft.wav',folder:'',duration:3},'whoosh',{type:'motion',strength:45}),false);
+assert.equal(P.allowed({type:'typography',meta:{role:'caption'}},{typography:true,captions:false}),false);
+assert.equal(P.allowed({type:'marker',meta:{role:'caption'}},{markers:true,captions:false}),false);
+assert.equal(P.allowed({type:'typography',meta:{role:'caption'}},{captions:true}),true);
+const beat={compBeats:[4.05],confidence:90};
+assert.equal(P.snap(cut,beat,'off').time,4);
+assert.equal(P.snap({...cut,strength:45},beat,'strong').time,4);
+assert.equal(P.snap(cut,beat,'soft').time,4.05);
+assert.equal(P.snap(cut,{compBeats:[4.1],confidence:90},'soft').time,4);
+assert.equal(P.snap(cut,{compBeats:[4.1],confidence:90},'strong').time,4.1);
+console.log('PASS SFX policy: ambient isolation, cue duration/strength, caption exclusion, off/soft/strong beat thresholds (12 assertions)');

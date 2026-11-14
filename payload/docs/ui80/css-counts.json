@@ -1,0 +1,8 @@
+{
+  "loadedCSSBefore": 36,
+  "loadedCSSAfter": 36,
+  "importantBefore": 3266,
+  "importantAfter": 3352,
+  "newStylesheet": false,
+  "reason": "Scoped overrides in the existing flow77.css replace retained legacy row/grid/span sizing; all original stylesheet files are retained."
+}

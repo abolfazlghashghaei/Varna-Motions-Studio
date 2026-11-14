@@ -1,0 +1,10 @@
+# RC43 validation
+
+Environment: Linux, Node.js v24, headless Chromium. After Effects/Windows is unavailable.
+
+- Release gate: **65/65 suites passed**, including host ES3 syntax, generated CEP initialization, output rollback/ordering, late callback recovery, caption/keyword/template features, composition audio, font queries and installer source checksums.
+- RC43 integration executes the production CEP-generated script, complete host, native text creation and output coordinator together against the existing AE API model. No replacement caption-creation function is injected in the new test. Cases: direct cold start; manifest preload; global/function-scoped file evaluation; initialization error/syntax error/missing error helper; preserved prior adapter; explicit reconnect; empty project; repaired incomplete helper; replaced public aliases; preview and removal before/after 64-cue output; both processing/stack directions; user layer preservation; one adapter load; one caption per request; one physical native call at a time. This exercises native-text construction logic, not Adobe font shaping or image rendering.
+- Existing RC40/RC41 Chromium scenarios: independent pages and phrase layout controls, preserved template colors, explicit overrides, 64 paced requests in ascending order, light payloads without editor-setting mutation, no implicit model analysis, preview paused before output preflight, cancellation/abort, original error retention, unlocked controls and six panel widths (250–1480 px), with no page script errors.
+- ZIP verification: all prior RC42 files retained, all prior asset bytes identical, archive CRC test and SHA-256 checks against the generated installer manifest.
+
+Scope of confidence: these checks verify code paths, scope isolation, serialization and packaging. They do not establish successful Adobe startup, visual preview, export rendering, Windows installation, GPU compatibility or acceptable speed on the user's machine. Those native checks remain unexecuted. The light profile intentionally omits costly styles in the exported copy; it is not a guarantee for every computer or every template.

@@ -1,0 +1,8 @@
+html[lang=en] body,html[lang=en] .app-shell{direction:ltr!important}
+html[lang=en] .nav-item,html[lang=en] .control,html[lang=en] .card,html[lang=en] .production-heading47,html[lang=en] .production-main47,html[lang=en] .production-actions47{text-align:left}
+html[lang=en] .workspace,html[lang=en] .page,html[lang=en] .card,html[lang=en] .form-grid{direction:ltr}
+html[lang=en] [data-user-content],html[lang=en] textarea,html[lang=en] .caption-row,html[lang=en] #tableEditor,html[lang=en] #tablePreview{unicode-bidi:plaintext}
+html[lang=en] .production-main47{direction:ltr!important}
+html[lang=en] .nav-icon{margin-inline:0 7px}
+html[lang=en] .bottom-dock{direction:ltr}
+html[lang=en] .numeric37{direction:ltr!important}
