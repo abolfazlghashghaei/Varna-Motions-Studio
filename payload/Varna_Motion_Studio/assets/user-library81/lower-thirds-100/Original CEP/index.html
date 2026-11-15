@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Lower Thirds — Browser</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo">100</span>
+    <div class="brand-txt"><b>LOWER THIRDS</b><small id="modeLabel">Preview Browser</small></div>
+  </div>
+  <div class="search">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <input id="q" type="search" placeholder="Search number or style…" autocomplete="off">
+  </div>
+  <div class="seg" id="alignSeg">
+    <button data-a="" class="on">All</button><button data-a="Left">Left</button><button data-a="Center">Center</button><button data-a="Right">Right</button>
+  </div>
+  <div class="size">
+    <button id="szDown" title="Smaller">−</button><button id="szUp" title="Bigger">+</button>
+  </div>
+</header>
+<nav class="chips" id="chips"></nav>
+<div class="status"><span id="count"></span><span id="hint"></span></div>
+<main class="grid" id="grid"></main>
+
+<div class="lightbox" id="lb" hidden>
+  <div class="lb-card">
+    <video id="lbVideo" muted loop playsinline></video>
+    <div class="lb-bar">
+      <div><b id="lbTitle"></b><span id="lbMeta"></span></div>
+      <div class="lb-actions">
+        <button id="lbPrev" title="Previous (←)">‹</button>
+        <button id="lbNext" title="Next (→)">›</button>
+        <button id="lbAction" class="primary"></button>
+        <button id="lbClose" title="Close (Esc)">✕</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="js/items.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

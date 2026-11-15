@@ -1,0 +1,718 @@
+/* ============================================================================
+   ATOOLS — тема GRAPHITE (18.09.2026, референс владельца: графит без цвета,
+   левая рейка с подписями, раздел Tools разложен на восемь карточек).
+   Сменила тему VIOLET RAIL: файл violet.css лежит рядом, но не подключён.
+
+   ЭТО ПОСЛЕДНИЙ СЛОЙ ОФОРМЛЕНИЯ. Подключается после style.css, legacy.css и
+   neumorph.css. Убрать одну строку <link> в index.html — вернётся прежний вид
+   (разметка карточек Tools при этом останется, но будет выглядеть как раньше).
+
+   ЧЕГО ЗДЕСЬ НЕЛЬЗЯ — те же правила, что у neumorph.css:
+   1) Ни одного transform и transition:transform у .btn и .freebtn — probe()
+      (main.js ~6760) временно ставит свой transform и возвращает прежний.
+   2) Ни одного display у оверлеев #licenseGate, #updOv, #restoreModal,
+      #expModal, #rxPick — blocked() проверяет их видимость.
+   3) Страницу колеса (.rx-*) отдельными правилами не трогаем — слово
+      владельца «раздел wheel можешь не трогать».
+   Высоту кнопок меняем ТОЛЬКО через min-height: у растянутой вручную кнопки
+   размер стоит в её style (applySize, main.js ~6660) и главнее любого min-height,
+   поэтому сохранённые размеры не едут.
+   ============================================================================ */
+
+:root{
+  /* ---- палитра: нейтральный серый After Effects (владелец 18.09.2026: «цвет
+     не зелёный, а в цвет AE», фото 8 — панели AE #323232). Соотношения тонов —
+     как на референсе: карточка чуть светлее фона, шапка и кнопки ещё светлее. */
+  --g-bg:#323232;          /* фон панели = панели AE */
+  --g-rail:#2a2a2a;        /* рейка */
+  --g-rail-on:#3d3d3d;     /* плашка активного пункта рейки */
+  --g-card:#363636;        /* тело карточки */
+  --g-head:#3e3e3e;        /* шапка карточки */
+  --g-btn:#3f3f3f;         /* кнопки */
+  --g-btn-h:#4a4a4a;       /* наведение */
+  --g-input:#262626;       /* поля ввода */
+  --g-line:#464646;        /* рамка карточки */
+  --g-line-2:#545454;      /* рамка кнопки */
+  --g-sel:#5e5e5e;         /* выбранное */
+  --g-sel-edge:#e0e0e0;    /* рамка выбранного */
+  --g-txt:#f2f2f2;
+  --g-dim:#adadad;
+  --g-knob:#d8d8d8;        /* круглый ползунок */
+  --g-track:#262626;
+  --g-hi:#ececec;          /* светлая полоска активного пункта */
+
+  /* ---- палитра панели → графит ---- */
+  --bg-0:var(--g-bg); --bg-1:var(--g-bg); --bg-2:var(--g-btn);
+  --panel:var(--g-card); --panel-2:var(--g-btn);
+  --line:var(--g-line); --line-2:var(--g-line-2);
+  --txt:var(--g-txt); --txt-dim:var(--g-dim);
+  --accent:#d0d0d0; --accent-2:#eaeaea; --accent-glow:rgba(210,214,218,.28);
+
+  /* рельеф neumorph → тонкая обводка (переменные стоят в box-shadow десятков правил) */
+  --nu-bg:var(--g-btn);
+  --nu-dark:#1e1e1e; --nu-light:#404040;
+  --nu-up-s:inset 0 0 0 1px var(--g-line-2);
+  --nu-up:inset 0 0 0 1px var(--g-line-2);
+  --nu-up-l:inset 0 0 0 1px var(--g-line-2);
+  --nu-card:inset 0 0 0 1px var(--g-line);
+  --nu-in:inset 0 0 0 1px var(--g-line);
+  --nu-in-s:inset 0 0 0 1px var(--g-sel-edge);
+  --nu-track:inset 0 0 0 1px var(--g-line);
+  --nu-tint:var(--g-sel);
+  --nu-on-accent:#1a1a1a;
+
+  --fb-bg:var(--g-btn); --fb-bg-h:var(--g-btn-h);
+  --fb-edge:var(--g-line-2); --fb-edge-h:#727272;
+  --fb-tint:var(--g-sel); --fb-accent-txt:#ffffff;
+  --flat-bg:var(--g-btn); --flat-bg-2:var(--g-btn-h);
+  --flat-border:var(--g-line-2); --flat-border-h:#727272; --flat-hover:var(--g-btn-h);
+
+  --dock-bg:var(--g-btn); --dock-edge:var(--g-line);
+}
+
+/* ------------------------------------------------------------ шрифт и фон
+   На референсе узкий гротеск в духе DIN. На Windows это Bahnschrift, на macOS —
+   DIN Alternate: оба стоят в системе, в плагин ничего не кладём. */
+body, body.theme-light{
+  font-family:"Bahnschrift","DIN Alternate","DIN Next","Segoe UI",-apple-system,Roboto,Arial,sans-serif;
+  background:var(--g-bg); color:var(--g-txt);
+}
+::-webkit-scrollbar-thumb, body.theme-light ::-webkit-scrollbar-thumb{ background:#555555; }
+::-webkit-scrollbar-thumb:hover, body.theme-light ::-webkit-scrollbar-thumb:hover{ background:#707070; }
+
+/* ------------------------------------------------------------------ шапка */
+.logo, body.theme-light .logo,
+.logo b, body.theme-light .logo b{ color:#fff; -webkit-text-fill-color:#fff; font-weight:600; }
+.hicon, body.theme-light .hicon{
+  background:#3a3a3a; border:1px solid #565656; border-radius:8px; box-shadow:none; color:#f2f2f2;
+}
+.hicon:hover, body.theme-light .hicon:hover{ background:var(--g-btn-h); border-color:#7c7c7c; color:#fff; box-shadow:none; }
+.hicon:active, body.theme-light .hicon:active{ background:var(--g-input); box-shadow:none; }
+/* включённый карандаш (режим правки) был синим — style.css:386 */
+.hicon.on, body.theme-light .hicon.on{
+  background:var(--g-sel); border-color:var(--g-sel-edge); color:#fff; box-shadow:none;
+}
+body.theme-light .hicon.on{ color:var(--g-txt); }
+/* Шапка — одной строкой, как на референсе. Рейка сдвигает всё содержимое панели
+   вправо, и в узкой панели (View 1) шапке не хватало места: иконки уезжали на
+   вторую строку (style.css:1473 разрешает перенос «на крайний случай»).
+   Поэтому в View 1 шапка тянется на всю ширину, над рейкой; рейка и так
+   начинается под шапкой (её верх main.js берёт из высоты шапки). В View 2
+   места хватает, и шапка стоит над содержимым, как на референсе. */
+body.vrail-on:not(.am-view2) .header{ margin-left:-62px; }
+body.vrail-on.rx-page-on .header{ margin-left:0; }
+.th-track, body.theme-light .th-track{ background:var(--g-input); border:1px solid #5c5c5c; box-shadow:none; }
+.th-knob, body.theme-light .theme-sw .th-knob{ background:#ececec; box-shadow:none; }
+
+/* ------------------------------------------------------ карточки-разделы */
+.section, body.theme-light .section,
+.tcard{
+  background:var(--g-card);
+  border:1px solid var(--g-line);
+  border-radius:12px;
+  box-shadow:none;
+}
+/* Шапка карточки — полоса во всю ширину с линией снизу, заглавные буквы как в
+   тексте, а не КАПСОМ. Коробку меняем только у заголовка: его не меряет никто. */
+.section-title, body.theme-light .section-title,
+.tcard-t{
+  color:#f5f5f5; font-size:12.5px; font-weight:600; letter-spacing:.2px; text-transform:none;
+  margin:-9px -10px 10px; padding:8px 11px 7px;
+  background:var(--g-head);
+  border-bottom:1px solid var(--g-line);
+  border-radius:12px 12px 0 0;
+}
+.section.compact .section-title{ margin:-7px -8px 9px; padding:7px 10px 6px; }
+.section-title b, body.theme-light .section-title b{ color:#fff; }
+
+/* ----------------------------------------------------------------- кнопки */
+.btn, body.theme-light .btn,
+.shape, body.theme-light .shape,
+.tile, body.theme-light .tile,
+.so-item, body.theme-light .so-item,
+.modebtn, body.theme-light .modebtn{
+  background:var(--g-btn);
+  border:1px solid var(--g-line-2);
+  border-radius:7px;
+  color:var(--g-txt);
+  box-shadow:none;
+  font-weight:500;
+}
+.btn:hover, body.theme-light .btn:hover,
+.shape:hover, body.theme-light .shape:hover,
+.tile:hover, body.theme-light .tile:hover,
+.so-item:hover, body.theme-light .so-item:hover,
+.modebtn:hover, body.theme-light .modebtn:hover{
+  background:var(--g-btn-h); border-color:#727272; color:#fff; box-shadow:none;
+}
+.btn:active, body.theme-light .btn:active,
+.shape:active, body.theme-light .shape:active,
+.modebtn:active, body.theme-light .modebtn:active{ background:var(--g-input); box-shadow:none; }
+/* выбранное — светлая плашка с белой рамкой, как «▤→» и 16:9 на референсе */
+.btn.on, .modebtn.on, .shape.on,
+.flat-sec .modebtn.on,
+body.theme-light .btn.on, body.theme-light .modebtn.on, body.theme-light .shape.on,
+body.theme-light .flat-sec .modebtn.on{
+  background:var(--g-sel); border-color:var(--g-sel-edge); color:#fff; box-shadow:none; font-weight:600;
+}
+/* Главная кнопка раздела — серая объёмная, как «Sequence» на референсе */
+.btn.primary, body.theme-light .btn.primary,
+.ab-btn, body.theme-light .ab-btn,
+.crv-apply, .cust-create, .lic-btn, .updov-go{
+  background:linear-gradient(180deg,#8c8c8c 0%,#686868 100%);
+  border:1px solid #a2a2a2; color:#fff; box-shadow:none; font-weight:600;
+}
+.btn.primary:hover, body.theme-light .btn.primary:hover,
+.ab-btn:hover, body.theme-light .ab-btn:hover,
+.crv-apply:hover, .cust-create:hover, .lic-btn:hover, .updov-go:hover{
+  background:linear-gradient(180deg,#9c9c9c 0%,#767676 100%); border-color:#bcbcbc; box-shadow:none;
+}
+.btn:disabled, .btn[disabled], body.theme-light .btn:disabled{ background:var(--g-input); border-color:var(--g-line); color:#5e666b; }
+/* Save у полосы Animate нёс синий акцент прямо в style.css:896 */
+.ab-save, body.theme-light .ab-save{ background:var(--g-btn); border:1px solid var(--g-line-2); color:var(--g-txt); box-shadow:none; }
+.ab-save:hover, body.theme-light .ab-save:hover{ background:var(--g-btn-h); border-color:#727272; }
+
+/* --------------------------------------------------------- поля и ползунки */
+input.num, .tinput, .stepper, .numstep, .lic-input, .cust-input,
+.so-ren-input, .rd-search, .txt-ed, select.sel, .am-selbox,
+body.theme-light input.num, body.theme-light .tinput, body.theme-light select.sel{
+  background:var(--g-input); border:1px solid #4a4a4a; color:var(--g-txt); box-shadow:none;
+}
+input.num:focus, .tinput:focus, select.sel:focus, .lic-input:focus,
+.cust-input:focus, .rd-search:focus, .txt-ed:focus{ border-color:#a0a0a0; box-shadow:0 0 0 1px #a0a0a0; }
+input[type=range], body.theme-light input[type=range]{ background:var(--g-track); box-shadow:none; }
+input[type=range]::-webkit-slider-thumb, body.theme-light input[type=range]::-webkit-slider-thumb{
+  background:var(--g-knob); border:none; box-shadow:0 1px 3px rgba(0,0,0,.5);
+}
+/* Поле со стрелками — одна рамка у обёртки. Своя рамка у поля внутри и линии
+   между стрелками давали «лишние линии» (фото 4-5 владельца). */
+.numstep input, .stepper input,
+body.theme-light .numstep input, body.theme-light .stepper input{
+  border:0 !important; background:transparent !important; box-shadow:none !important;
+}
+.stepper .steps, .numstep .steps, .stepper .stp, .numstep .stp,
+body.theme-light .stepper .steps, body.theme-light .numstep .steps{
+  border:0 !important; box-shadow:none !important;
+}
+.stepper .stp, .numstep .stp{ color:var(--g-dim); background:transparent; }
+.stepper .stp:hover, .numstep .stp:hover{ color:var(--g-txt); }
+
+/* ------------------------------------------- подвкладки, чипы, категории
+   neumorph.css:750 красит выбранную подвкладку сплошным акцентом с !important —
+   перебиваем тем же способом, иначе вышла бы светло-серая «плита». */
+.subtabs, body.theme-light .subtabs{ background:transparent; box-shadow:none; }
+.subtab, body.theme-light .subtab,
+.grpchip, body.theme-light .grpchip,
+.so-cat, body.theme-light .so-cat{
+  background:var(--g-btn); border:1px solid var(--g-line-2); color:var(--g-dim); box-shadow:none;
+}
+.subtab:hover, .grpchip:hover, .so-cat:hover{ color:#fff; border-color:#727272; background:var(--g-btn-h); }
+.subtab.active, .subtab.active:hover,
+body.theme-light .subtab.active, body.theme-light .subtab.active:hover{
+  background:var(--g-sel) !important; border-color:var(--g-sel-edge) !important; color:#fff !important; box-shadow:none !important;
+}
+.grpchip.active, body.theme-light .grpchip.active,
+.so-cat.active, body.theme-light .so-cat.active{
+  background:var(--g-sel); border-color:var(--g-sel-edge); color:#fff; box-shadow:none;
+}
+
+/* ---------------------------------------- сетка точек, образцы, превью */
+.anchor, body.theme-light .anchor{ background:transparent; box-shadow:none; }
+.cell, body.theme-light .cell{ background:#3a3a3a; border:1px solid var(--g-line-2); box-shadow:none; }
+.cell:hover{ border-color:#727272; }
+.cell.on, body.theme-light .cell.on{ background:#626262; border-color:var(--g-sel-edge); box-shadow:none; }
+.cell::after{ background:#f2f2f2; }
+.cell.on::after{ background:#b4b4b4; }
+.swatch, body.theme-light .swatch{ box-shadow:none; border:1px solid rgba(255,255,255,.08); border-radius:6px; }
+.swatch-add{ background:var(--g-btn); border:1px solid var(--g-line-2); color:var(--g-txt); box-shadow:none; }
+.tile-prev, body.theme-light .tile-prev,
+.pv-stage, body.theme-light .pv-stage{ background:var(--g-input); border:1px solid var(--g-line); box-shadow:none; }
+.animate-bar, body.theme-light .animate-bar{ background:var(--g-card); border:1px solid var(--g-line); box-shadow:none; }
+
+/* Строки свойств карточки Amanow Animation переносятся, а не обрезаются:
+   рейка забирает место у узкой панели. Коробки полей не трогаем. */
+.proprow{ flex-wrap:wrap; }
+
+/* подсказки под каруселями и под Layer Color убраны (слово владельца 18.09) */
+[data-secid="sec_create_carousel"] .hint, [data-secid="sec_3"] .hint{ display:none; }
+
+/* Рейка с подписями забирает у узкой панели 60 px. Две строки упирались не в
+   кнопки, а в минимальную ширину подписи и поля — ужимаем только их:
+   Text Handles («Size» держала 54 px) и строка пресетов Colors (поле имени 56 px). */
+[data-secid="sec_10"] .row > .lbl{ min-width:0; }
+/* у поля имени min-width стоит прямо в разметке (index.html, style="…min-width:56px") */
+body.vrail-on #colName{ min-width:28px !important; }
+
+/* ------------------------------------------------------------ размер блока
+   Ручка в правом нижнем углу раздела в режиме карандаша (модуль «РАЗМЕР БЛОКА»
+   в main.js): тянешь — весь блок крупнее или мельче, двойной клик — 100 %. */
+.blk-rz{ display:none; }
+body.editing .section > .blk-rz{
+  display:block; position:absolute; left:-3px; bottom:-3px; width:18px; height:18px;
+  z-index:9; cursor:nesw-resize; border-radius:0 0 0 10px;
+  background:
+    linear-gradient(45deg,transparent 40%,#bdbdbd 42%,#bdbdbd 55%,transparent 57%),
+    linear-gradient(45deg,transparent 60%,#bdbdbd 62%,#bdbdbd 75%,transparent 77%);
+  transform:scaleX(-1);
+}
+body.theme-light.editing .section > .blk-rz{
+  background:
+    linear-gradient(45deg,transparent 40%,#9c4f35 42%,#9c4f35 55%,transparent 57%),
+    linear-gradient(45deg,transparent 60%,#9c4f35 62%,#9c4f35 75%,transparent 77%);
+}
+body.editing .section.blk-sizing{ outline:1px dashed var(--g-sel-edge); outline-offset:2px; }
+/* в окне функции на колесе блок показывается в своём размере, без масштаба */
+.rxp-body .blk-scaled{ zoom:1 !important; }
+/* уменьшенный блок: рамка вместе с кнопками (ширина k*100 %, без растяжки ячейкой);
+   в окне колеса блок идёт в натуральную величину */
+.blk-shrunk{ width:var(--blk-w,100%) !important; max-width:var(--blk-w,100%); align-self:start; justify-self:start; }
+.rxp-body .blk-shrunk{ width:auto !important; max-width:none; }
+
+/* ------------------------------------------------------------ окно-карта
+   Шапка — отдельная скруглённая плашка (владелец: «низ шапки срезан»; список
+   выбора раздела теперь встаёт под ней, main.js). Полосы подвкладок TEXT и
+   CREATE в карте тоже не показываем — подвкладку выбирает сам раздел. */
+body.am-float .amf-bar{
+  margin:8px 10px 0; padding:8px 12px 7px;
+  border:1px solid var(--g-line); border-radius:10px; background:var(--g-head);
+}
+.amf-title{ color:var(--g-txt); letter-spacing:.5px; }
+body.am-float .tsec-tabs, body.am-float .csec-tabs{ display:none !important; }
+
+/* ------------------------------------------------------------ док, оверлеи */
+.dock-bar, .dock-sub, .dock-handle,
+body.theme-light .dock-bar, body.theme-light .dock-sub, body.theme-light .dock-handle{
+  background:var(--g-btn); border:1px solid var(--g-line); box-shadow:none;
+}
+.dock-ic{ color:var(--g-txt); }
+.dock-ic:hover{ color:#fff; }
+.lic-card, .updov-card, .rc, .cust-pop, .am-selpop{
+  background:var(--g-card); border:1px solid var(--g-line); box-shadow:0 18px 48px -18px rgba(0,0,0,.8);
+}
+
+/* ============================================================================
+   ЛЕВАЯ РЕЙКА РАЗДЕЛОВ. Рисует её js/main.js (модуль «ЛЕВАЯ РЕЙКА РАЗДЕЛОВ»),
+   переключать ничего сама не умеет — кликает по старым вкладкам.
+   ============================================================================ */
+.vrail{
+  position:fixed; left:0; top:var(--vr-top,44px); bottom:0; width:64px;
+  background:var(--g-rail); border-right:1px solid #222222;
+  padding:4px 0 10px; overflow-y:auto; overflow-x:hidden; z-index:150;
+  -webkit-user-select:none; user-select:none;
+}
+.vrail::-webkit-scrollbar{ width:0; }
+.vr-i{
+  position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  margin:2px 4px; padding:9px 1px 8px; border-radius:8px; color:#e2e2e2; cursor:pointer;
+}
+.vr-i svg{ width:24px; height:24px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; display:block; }
+.vr-i:hover{ color:#fff; background:#333333; }
+.vr-i.on{ color:#fff; background:var(--g-rail-on); }
+.vr-i.on::before{
+  content:""; position:absolute; left:-4px; top:6px; bottom:6px; width:3px;
+  border-radius:0 3px 3px 0; background:var(--g-hi);
+}
+.vr-t{ display:block; font-size:10px; letter-spacing:.1px; margin-top:4px; text-align:center; line-height:1.1; white-space:nowrap; }
+.vr-sep{ height:1px; margin:10px 12px; background:#444444; }
+body.vrail-on{ padding-left:72px; }
+body.vrail-on .dock{ left:64px; }
+/* Старые горизонтальные вкладки и полосы подвкладок TEXT/CREATE остаются в
+   разметке (на них живут колесо, окна-карты и сохранённые скрытия), но на экран
+   не выходят НИКОГДА — даже в режиме карандаша (слово владельца 18.09.2026).
+   Прятать разделы теперь можно крестиком прямо на рейке. */
+body.vrail-on .tabs{ display:none !important; }
+body.vrail-on .tsec-tabs, body.vrail-on .csec-tabs{ display:none !important; }
+/* крестик режима правки на пункте рейки (тот же вид, что у крестиков разделов) */
+.vr-i .vr-x{ top:1px; right:1px; left:auto; width:15px; height:15px; font-size:9px; }
+body.editing .vr-i .vr-x{ display:flex; }
+body.rx-page-on .vrail{ display:none; }
+body.vrail-on.rx-page-on{ padding-left:10px; }
+
+/* ============================================================================
+   TOOLS ПО РЕФЕРЕНСУ. Раздел sec_1 остаётся ОДНИМ разделом (на нём живут колесо
+   и окна-карты), но сам становится невидимой обёрткой: его рамку и заголовок
+   прячем, а пять карточек внутри (.tcard) рисуются как отдельные разделы.
+   ============================================================================ */
+.tl-cards, body.theme-light .tl-cards{
+  background:transparent !important; border:0 !important; box-shadow:none !important;
+  padding:0 !important; margin-bottom:0 !important;
+}
+.tl-cards > .section-title{ display:none; }
+.tcard{ position:relative; margin-bottom:10px; padding:9px 10px 10px; }
+/* отступ МЕЖДУ рядами, а не под последним: в конец раздела main.js дописывает
+   крестик и ручку размера, и :last-child у ряда перестал бы срабатывать */
+.tcard .row{ gap:8px; margin:0; }
+.tcard .row + .row{ margin-top:8px; }
+.tcard .btn, .tcard .modebtn{ flex:1 1 0; min-width:0; }
+
+/* Anchor Point: сетка 3x3 слева, Null и Adj. Layer столбиком справа */
+/* Сетка 3x3 — почти половина карточки, как на референсе. main.js:307
+   (amFitAnchor) пишет ей ширину инлайном «в высоту столбика кнопок справа» —
+   это правило старой раскладки (там было четыре ряда кнопок). Перебиваем
+   стилем с !important, но только пока человек сам не задал сетке размер в
+   режиме правки (.moved) и не тянет её сейчас (.sizing). Кнопки Null и
+   Adj. Layer растягиваются по высоте сетки. */
+/* Владелец 18.09: «одни кнопки огромные, другие мелкие» — всё одной высоты.
+   Сетка — три клетки по высоте кнопки, Null и Adj. Layer — обычные кнопки
+   сверху столбика, не растягиваются. */
+.tc-anchor-row{ align-items:flex-start; }
+.tc-anchor-row #anchorGrid:not(.moved):not(.sizing){ width:104px !important; flex:0 0 104px !important; max-width:none; min-width:0; }
+.tc-anchor-btns{ flex:1; display:flex; flex-direction:column; min-width:0; }
+.tc-anchor-btns .btn{ flex:0 0 auto; width:100%; margin-bottom:8px; }
+.tc-anchor-btns .btn:last-child{ margin-bottom:0; }
+
+/* Elastic & Bounce: широкая кнопка движения и узкая Save */
+.tc-motion .tl-pair .btn[data-motion]{ flex:1 1 0; }
+.tc-motion .tl-pair .motion-save{ flex:0 0 34%; max-width:none; min-width:0; }
+
+/* Sequence: «Offset [5] Step [1]» в одну строку, три режима, серая кнопка */
+.tc-seq-fields .field{ flex:1 1 0; flex-direction:row; align-items:center; gap:8px; min-width:0; }
+.tc-seq-fields .field .lbl{ font-size:11px; color:var(--g-txt); letter-spacing:.1px; white-space:nowrap; }
+.tc-seq-fields .field input.num{ width:100%; min-width:0; box-sizing:border-box; }
+/* поле со стрелками — своей ширины, а не на пол-карточки */
+.tc-seq-fields .field > .numstep, .tc-seq-fields .field > .stepper{ flex:0 1 78px; width:auto; min-width:46px; }
+/* в узкой панели поле сжимается, а подпись не наезжает на стрелки */
+.tc-seq-fields .field > .lbl{ flex:0 0 auto; }
+
+/* Elements: цвет Solid стоит внутри кнопки слева, как на референсе */
+/* Solid шириной ровно как Shape: у обёртки нет отступов, у кнопки есть, поэтому
+   при основе 0 Shape стартовал на 15 px шире — даём обоим основу 50% */
+.tc-solid{ position:relative; flex:1 1 50%; min-width:0; display:flex; }
+.tc-elements .tc-solid ~ .btn{ flex:1 1 50%; }
+.tc-solid > .btn{ flex:1 1 auto; }
+/* z-index 7: выше растянутой вручную Solid (.moved — 3) и ручек правки (6),
+   но ниже перетаскиваемой кнопки (1000) */
+.tc-solid > .colorbox{
+  position:absolute; left:7px; top:50%; margin-top:-10px; width:20px; height:20px;
+  padding:0; border:0; border-radius:5px; background:transparent; overflow:hidden;
+  -webkit-appearance:none; z-index:7;
+}
+/* цвет — во весь квадрат, без пустых краёв (владелец) */
+.tc-solid > .colorbox::-webkit-color-swatch-wrapper{ padding:0; }
+.tc-solid > .colorbox::-webkit-color-swatch{ border:0; border-radius:5px; }
+/* Glass 1/2 в разметке помечены primary (главная кнопка) — на референсе это
+   обычные кнопки */
+.tc-elements .btn.primary, body.theme-light .tc-elements .btn.primary{
+  background:var(--g-btn); border:1px solid var(--g-line-2); color:var(--g-txt); font-weight:500;
+}
+.tc-elements .btn.primary:hover{ background:var(--g-btn-h); border-color:#727272; }
+
+/* Разделы TOOLS и CREATE помечены flat-sec: для них в neumorph.css:870 свой блок
+   «плоских кнопок» с более сильными селекторами — главную кнопку он рисует
+   обведённой, а Save — со светлой рамкой (style.css:1311, !important).
+   Перебиваем теми же селекторами, чтобы вышло как на референсе. */
+.flat-sec .btn, .flat-sec .modebtn,
+body.theme-light .flat-sec .btn, body.theme-light .flat-sec .modebtn{ font-weight:400; }
+.flat-sec .btn.primary, body.theme-light .flat-sec .btn.primary{
+  background:linear-gradient(180deg,#8c8c8c 0%,#686868 100%);
+  border-color:#a2a2a2; color:#fff; font-weight:600;
+}
+.flat-sec .btn.primary:hover, body.theme-light .flat-sec .btn.primary:hover{
+  background:linear-gradient(180deg,#9c9c9c 0%,#767676 100%); border-color:#bcbcbc; color:#fff;
+}
+.section.tc-elements .btn.primary, body.theme-light .section.tc-elements .btn.primary{
+  background:var(--g-btn); border-color:var(--g-line-2); color:var(--g-txt); font-weight:400;
+}
+.section.tc-elements .btn.primary:hover, body.theme-light .section.tc-elements .btn.primary:hover{
+  background:var(--g-btn-h); border-color:#727272; color:#fff;
+}
+/* :not(.copied):not(.copyfail) — чтобы зелёная и оранжевая рамки состояний Save
+   (neumorph.css:905-908) по-прежнему пробивались */
+.section.tc-motion .btn.motion-save:not(.copied):not(.copyfail),
+body.theme-light .section.tc-motion .btn.motion-save:not(.copied):not(.copyfail){
+  border-color:var(--g-line-2) !important; color:var(--g-txt); font-weight:400; background:var(--g-btn);
+}
+.section.tc-motion .btn.motion-save:not(.copied):not(.copyfail):hover{
+  border-color:#727272 !important; background:var(--g-btn-h); color:#fff;
+}
+.flat-sec .modebtn.on, body.theme-light .flat-sec .modebtn.on{ font-weight:600; }
+
+/* Comp Resize: сетка 2x2 */
+[data-secid="sec_4"] .ml-row{ margin-bottom:0; }
+[data-secid="sec_4"] .ml-row + .ml-row{ margin-top:8px; }
+
+/* Старый движок (AE 2020-2021, нет flex-gap): те же отступы полями */
+html.no-flexgap .tcard .row > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .tc-seq-fields .field > *:not(:last-child){ margin-right:8px; }
+
+/* ============================================================================
+   VIEW 1 / VIEW 2 (18.09.2026, слово владельца). Кнопки — в полосе карандаша
+   под «Button size». View 1 — рейка разделов слева столбиком (как на
+   референсе). View 2 — та же рейка наверху строкой: пункты в два ряда по пять,
+   активный подчёркнут снизу. Класс body.am-view2 ставит main.js.
+   ============================================================================ */
+#uiScaleWrap{ flex-wrap:wrap; row-gap:6px; }
+.vw-seg{ display:flex; flex:0 0 100%; }
+.vw-b{
+  flex:1 1 0; min-height:24px; padding:3px 8px; font:inherit; font-size:11px; font-weight:600;
+  color:var(--g-dim); background:var(--g-btn); border:1px solid var(--g-line-2); cursor:pointer;
+}
+.vw-b:first-child{ border-radius:7px 0 0 7px; }
+.vw-b:last-child{ border-radius:0 7px 7px 0; border-left:0; }
+.vw-b:hover{ color:#fff; }
+.vw-b.on{ color:#fff; background:var(--g-sel); border-color:var(--g-sel-edge); }
+html.no-flexgap #uiScaleWrap > .vw-seg{ margin-top:6px; }
+
+/* --- View 2: рейка наверху --- */
+body.am-view2.vrail-on{ padding-left:10px; }
+body.am-view2.vrail-on .dock{ left:0; }
+body.am-view2 .vrail{
+  position:static; top:auto; bottom:auto; left:auto; width:auto; z-index:auto;
+  display:flex; flex-wrap:wrap; overflow:visible;
+  margin:0 0 10px; padding:4px;
+  border:1px solid var(--g-line); border-radius:12px;
+}
+body.am-view2 .vr-i{ flex:1 0 18%; min-width:0; margin:2px; padding:7px 1px 6px; }
+body.am-view2 .vr-sep{ display:none; }
+body.am-view2 .vr-i.on::before{ left:10px; right:10px; top:auto; bottom:0; width:auto; height:3px; border-radius:3px 3px 0 0; }
+html.no-flexgap body.am-view2 .vrail > *{ margin:2px; }
+
+/* ============================================================================
+   ДВЕ КОЛОНКИ КАРТОЧЕК — как на референсе, сами, когда содержимому хватает
+   ширины (класс body.am-2col ставит модуль рейки: от 520 локальных px).
+   В обычной пристыкованной панели места на две колонки нет — там одна.
+   ============================================================================ */
+body.am-2col:not(.am-float) .tabpane.active,
+body.am-float.am-2col .amf-host > .tabpane{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-column-gap:10px; column-gap:10px; align-items:stretch; align-content:start;
+}
+/* Окно-карта (Card 1–5 и окно колеса): раздел целиком раскладывается ТАК ЖЕ, как
+   в панели (скрин владельца 18.09: в широкой карте Tools шёл одной колонкой).
+   style.css ставит вкладке в карте display:block !important — перебиваем. */
+body.am-float.am-2col .amf-host > .tabpane{ display:grid !important; }
+body.am-2col:not(.am-float) .tabpane.active > *,
+body.am-float.am-2col .amf-host > .tabpane > *{ grid-column:1 / -1; }
+/* парами, как на референсе: Ease | Anchor, Layer | Elastic, Sequence | Elements,
+   Layer Color | Comp Resize; в CREATE и Modifier — небольшие разделы парами */
+body.am-2col:not(.am-float) .tabpane.active > [data-secid="sec_0"],
+body.am-2col:not(.am-float) .tabpane.active > [data-secid="sec_3"],
+body.am-2col:not(.am-float) .tabpane.active > [data-secid="sec_4"],
+body.am-2col:not(.am-float) .tabpane.active > [data-secid="sec_8"],
+body.am-2col:not(.am-float) .tabpane.active > [data-secid="sec_9"],
+body.am-2col:not(.am-float) .tabpane.active > [data-secid="sec_11"],
+body.am-2col:not(.am-float) .tabpane.active > [data-secid="sec_12"],
+body.am-2col:not(.am-float) .tabpane.active[data-pane^="custom_"] > .section:not(.tl-cards),
+body.am-float.am-2col .amf-host > .tabpane > [data-secid="sec_0"],
+body.am-float.am-2col .amf-host > .tabpane > [data-secid="sec_3"],
+body.am-float.am-2col .amf-host > .tabpane > [data-secid="sec_4"],
+body.am-float.am-2col .amf-host > .tabpane > [data-secid="sec_8"],
+body.am-float.am-2col .amf-host > .tabpane > [data-secid="sec_9"],
+body.am-float.am-2col .amf-host > .tabpane > [data-secid="sec_11"],
+body.am-float.am-2col .amf-host > .tabpane > [data-secid="sec_12"],
+body.am-float.am-2col .amf-host > .tabpane[data-pane^="custom_"] > .section:not(.tl-cards){ grid-column:auto; }
+/* Карточки Tools — в той же сетке. Где браузер умеет display:contents (AE 2022+),
+   обёртка sec_1 исчезает из раскладки и её пять карточек встают в общую сетку
+   ровно как на референсе. На старом движке обёртка остаётся блоком во всю
+   ширину со своей сеткой в две колонки. */
+body.am-2col:not(.am-float) .tabpane.active > .tl-cards,
+body.am-float.am-2col .amf-host > .tabpane > .tl-cards{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-column-gap:10px; column-gap:10px;
+}
+@supports (display:contents){
+  body.am-2col:not(.am-float) .tabpane.active > .tl-cards,
+  body.am-float.am-2col .amf-host > .tabpane > .tl-cards{ display:contents; }
+}
+/* Режим правки выглядит ТАК ЖЕ, как обычный (слово владельца 18.09): карточки
+   Tools — самостоятельные разделы со своими крестиками и ручками, обёртка остаётся
+   прозрачной и в правке. Старый движок (AE 2020, нет display:contents): обёртка —
+   блок во всю ширину со своей сеткой, Ease / Curves во всю ширину, последняя
+   карточка во всю ширину, чтобы не было дыр. */
+@supports not (display:contents){
+  body.am-2col:not(.am-float) .tabpane.active > [data-secid="sec_0"],
+  body.am-float.am-2col .amf-host > .tabpane > [data-secid="sec_0"]{ grid-column:1 / -1; }
+  body.am-2col:not(.am-float) .tabpane.active > .tl-cards > .tcard:last-child,
+  body.am-float.am-2col .amf-host > .tabpane > .tl-cards > .tcard:last-child{ grid-column:1 / -1; }
+}
+/* Одна высота кнопок во всех разделах TOOLS и CREATE, в одну и в две колонки
+   (владелец: «одни кнопки огромные, другие мелкие»). У растянутой вручную
+   кнопки её размер стоит в style и главнее этого min-height. */
+.flat-sec .btn:not(.tiny):not(.small), .flat-sec .modebtn{ min-height:30px; }
+.flat-sec .shape{ min-height:26px; }
+/* кнопки каруселей крупнее (слово владельца) */
+.flat-sec .btn.car-b{ min-height:40px; font-size:12px; }
+
+/* ручки размера в режиме правки были синими (style.css:664) */
+body.editing .freebtn .free-rz{
+  background:
+    linear-gradient(135deg,transparent 40%,#d0d0d0 42%,#d0d0d0 55%,transparent 57%),
+    linear-gradient(135deg,transparent 60%,#d0d0d0 62%,#d0d0d0 75%,transparent 77%);
+}
+body.theme-light.editing .freebtn .free-rz{
+  background:
+    linear-gradient(135deg,transparent 40%,#4a5056 42%,#4a5056 55%,transparent 57%),
+    linear-gradient(135deg,transparent 60%,#4a5056 62%,#4a5056 75%,transparent 77%);
+}
+
+/* ============================================================================
+   СВЕТЛАЯ ТЕМА — тот же графит наоборот
+   ============================================================================ */
+body.theme-light{
+  /* тёплая бумага и терракота — сняты пипеткой с фото 10 владельца */
+  --g-bg:#e5dccd; --g-rail:#ece3d6; --g-rail-on:#e8c0a9; --g-card:#f5ede5; --g-head:#f7f1ea;
+  --g-btn:#efe6db; --g-btn-h:#e8dccd; --g-input:#fbf7f2;
+  --g-line:#dccdbc; --g-line-2:#cfbca7; --g-sel:#e8c0a9; --g-sel-edge:#b8674b;
+  --g-txt:#2a1610; --g-dim:#7d6557; --g-knob:#bd694a; --g-track:#ddd2c6; --g-hi:#b8674b;
+
+  --bg-0:var(--g-bg); --bg-1:var(--g-bg); --bg-2:var(--g-btn);
+  --panel:var(--g-card); --panel-2:var(--g-btn);
+  --line:var(--g-line); --line-2:var(--g-line-2);
+  --txt:var(--g-txt); --txt-dim:var(--g-dim);
+  --accent:#b8674b; --accent-2:#9d5d4e; --accent-glow:rgba(184,103,75,.28);
+  --nu-bg:var(--g-btn); --nu-dark:#d8c9b7; --nu-light:#fffaf4;
+  --nu-up-s:inset 0 0 0 1px var(--g-line-2);
+  --nu-up:inset 0 0 0 1px var(--g-line-2);
+  --nu-up-l:inset 0 0 0 1px var(--g-line-2);
+  --nu-card:inset 0 0 0 1px var(--g-line);
+  --nu-in:inset 0 0 0 1px var(--g-line);
+  --nu-in-s:inset 0 0 0 1px var(--g-sel-edge);
+  --nu-track:inset 0 0 0 1px var(--g-line);
+  --nu-tint:var(--g-sel); --nu-on-accent:#ffffff;
+  --fb-bg:var(--g-btn); --fb-bg-h:var(--g-btn-h);
+  --fb-edge:var(--g-line-2); --fb-edge-h:#b8674b;
+  --fb-tint:var(--g-sel); --fb-accent-txt:#2a1610;
+  --flat-bg:var(--g-btn); --flat-bg-2:var(--g-btn-h);
+  --flat-border:var(--g-line-2); --flat-border-h:#b8674b; --flat-hover:var(--g-btn-h);
+  --dock-bg:var(--g-btn); --dock-edge:var(--g-line);
+}
+body.theme-light .logo, body.theme-light .logo b{ color:var(--g-txt); -webkit-text-fill-color:var(--g-txt); }
+body.theme-light .section-title, body.theme-light .tcard-t{ color:var(--g-txt); }
+body.theme-light .hicon{ background:#f3ebe1; border-color:#d6c5b1; color:var(--g-txt); }
+body.theme-light .btn, body.theme-light .modebtn, body.theme-light .shape{ color:var(--g-txt); }
+body.theme-light .btn.on, body.theme-light .modebtn.on, body.theme-light .shape.on,
+body.theme-light .subtab.active, body.theme-light .grpchip.active, body.theme-light .so-cat.active{ color:var(--g-txt) !important; }
+body.theme-light .cell{ background:#f3ebe1; }
+body.theme-light .cell.on{ background:#e8c0a9; border-color:#b8674b; }
+body.theme-light .cell::after{ background:#3a2a22; }
+body.theme-light .cell.on::after{ background:#9c4f35; }
+body.theme-light .vrail{ border-right-color:#dccdbc; }
+body.theme-light .vr-i{ color:#5a4336; }
+body.theme-light .vr-i:hover{ color:#2a1610; background:#e6d8c7; }
+body.theme-light .vr-i.on{ color:#83452d; }
+/* 20.09.2026: разделитель рейки оставался тёмной чертой на бежевом (находка проверки) */
+body.theme-light .vr-sep{ background:#dccdbc; }
+/* главная кнопка — терракотовая, как «Sequence» на фото 10 */
+body.theme-light .btn.primary, body.theme-light .flat-sec .btn.primary,
+body.theme-light .ab-btn, body.theme-light .crv-apply, body.theme-light .cust-create,
+body.theme-light .lic-btn, body.theme-light .updov-go{
+  background:linear-gradient(180deg,#c47a5c 0%,#9d5d4e 100%); border-color:#9d5d4e; color:#fff;
+}
+body.theme-light .btn.primary:hover, body.theme-light .flat-sec .btn.primary:hover,
+body.theme-light .ab-btn:hover{ background:linear-gradient(180deg,#cf8768 0%,#a8634f 100%); color:#fff; }
+body.theme-light .section.tc-elements .btn.primary{ background:var(--g-btn); border-color:var(--g-line-2); color:var(--g-txt); }
+/* переключатель темы: персиковая дорожка, терракотовый бегунок */
+body.theme-light .th-track{ background:#f4cbb0; border-color:#e0a98a; }
+body.theme-light .logo, body.theme-light .logo b{ color:#2a1610; -webkit-text-fill-color:#2a1610; }
+body.theme-light .vw-b.on{ color:var(--g-txt); }
+/* светлая тема: бегунок переключателя темы и текст кнопок при наведении
+   (в тёмной он белый — на белом фоне пропадал) */
+body.theme-light .theme-sw .th-knob{ background:var(--g-knob); }
+body.theme-light .btn:not(.primary):hover, body.theme-light .modebtn:hover, body.theme-light .shape:hover,
+body.theme-light .tile:hover, body.theme-light .so-item:hover, body.theme-light .hicon:hover,
+body.theme-light .dock-ic:hover, body.theme-light .vw-b:hover, body.theme-light .vr-i:hover,
+body.theme-light .subtab:hover, body.theme-light .grpchip:hover, body.theme-light .so-cat:hover,
+body.theme-light .section.tc-elements .btn.primary:hover{ color:var(--g-txt); }
+body.theme-light .section.tc-motion .btn.motion-save:not(.copied):not(.copyfail):hover{ color:var(--g-txt); }
+body.theme-light .subtab.active:hover{ color:var(--g-txt) !important; }
+
+/* ============================================================================
+   СВЕТЛАЯ ТЕМА: подписи, рассчитанные на тёмный фон (скрин владельца 18.09 —
+   «в светлом режиме текст не виден»; остальные места нашёл замер контраста
+   по всем 10 разделам). Раньше окошко превью в светлой теме оставалось тёмным
+   (style.css), графит сделал его светлым — белые буквы пропали.
+   ============================================================================ */
+body.theme-light .pv-stage .ch{ color:var(--g-txt); }
+body.theme-light .overshoot-chip{ color:#2e7d5b; border-color:rgba(46,125,91,.35); background:rgba(46,125,91,.08); }
+body.theme-light .engtog .engbtn:not(.active){ color:var(--g-dim); }
+body.theme-light .engtog .engbtn:not(.active):hover{ color:var(--g-txt); }
+body.theme-light .crv-pttl{ color:var(--g-dim); }
+/* 21.09.2026, слово владельца: в светлой теме кривые пресетов были белыми на
+   бежевом, а подписи еле различались — «глаза напрягаются». Линия теперь
+   тёмно-коричневая (currentColor плитки), подписи и рамки — в тон темы. */
+body.theme-light .crv-tile{ color:#4a3529; background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.12); }
+body.theme-light .crv-tile:hover{ border-color:#c47a5c; background:rgba(196,122,92,.16); }
+body.theme-light .crv-tile.sel{ border-color:#c47a5c; background:rgba(196,122,92,.26); }
+body.theme-light .crv-tn{ color:#6d5648; }
+body.theme-light .crv-tile.cust .crv-tn{ color:#a0522d; }
+body.theme-light .crv-add{ background:rgba(0,0,0,.05); border-color:rgba(0,0,0,.14); color:var(--g-txt); }
+body.theme-light .crv-add:hover{ border-color:#c47a5c; }
+/* Сам редактор кривой в светлой теме: сцена бежевая, поэтому белая линия,
+   белёсая сетка и голубая нулевая линия в ней тонули. Перекрашиваем только
+   светлую тему — presentation-атрибуты в svg CSS перебивает. */
+body.theme-light .crv-ed{ color:#3b2a20; }
+body.theme-light .crv-ed svg > rect{ fill:rgba(0,0,0,.03); }
+body.theme-light .crv-ed svg line[stroke^="rgba(255"]{ stroke:rgba(0,0,0,.10); }
+body.theme-light .crv-ed svg line[stroke^="rgba(96"]{ stroke:rgba(150,95,60,.55); }
+body.theme-light .crv-ed svg line[stroke="#f0b000"]{ stroke:#b5760f; }
+body.theme-light .crv-ed svg circle[fill="#f0b000"]{ fill:#b5760f; }
+body.theme-light .star{ color:rgba(42,22,16,.45); }
+body.theme-light .star:hover{ color:var(--g-txt); }
+body.theme-light .star.on{ color:#d99a00; text-shadow:none; }
+/* выбранный стиль автосубтитров: был белый текст на почти прозрачном фоне —
+   в светлой теме пропадал, в тёмной выбор был виден только по рамке */
+#asStyles .as-style-btn.sel{ background:var(--g-sel); color:var(--g-txt); border-color:var(--g-sel-edge); }
+
+/* Цветные плашки (Layer Color, Colors, образцы в Create/Text): neumorph.css
+   даёт им внутреннее кольцо var(--nu-up-s), в графите это серая рамка ПОВЕРХ
+   цвета — по краям плашек виден тёмный ободок (скрины владельца 18.09,
+   «казусы»). Цвет — во всю плашку, без кольца; наведение — прежнее увеличение. */
+.col-sw, .col-grad, .gsw, .tb-sw,
+.swatch:not(.swatch-add), .swatches.small .swatch:not(.swatch-add){ box-shadow:none !important; border-color:transparent !important; }
+.col-sw:hover, .col-grad:hover, .gsw:hover, .tb-sw:hover, .swatch:not(.swatch-add):hover{ box-shadow:none !important; }
+/* Colour combinations: серая рамка var(--line-2) обводила каждую пару/тройку
+   цветов тёмным ободком (второй скрин владельца) — без рамки, наведение как
+   у градиентов: лёгкое увеличение */
+.col-combo{ border:0 !important; transition:transform .1s; }
+.col-combo:hover{ transform:scale(1.06); z-index:2; }
+
+/* Library (READY): превью — прозрачная картинка на СВОЁМ фоне. Фон превью был
+   #3f3f3f, а карточка при наведении светлеет до #4a4a4a — вокруг картинки
+   проступал тёмный прямоугольник с полосой снизу и линией сверху (скрины
+   владельца 18.09, «граница видна»). Тёмная тема: у превью своего фона нет —
+   оно всегда цвета карточки. Светлая: тёмная «сцена», как у вьюера, — иначе
+   белые иконки и тексты библиотеки на бежевом не видны. */
+.rd-prev{ background:transparent !important; }
+body.theme-light .rd-prev{ background:#3b302a !important; }
+body.theme-light .rd-prev.rd-noimg{ color:#d9cbbb; }
+
+/* Anchor Point, третья строка: Flip Horizontal | Flip Vertical — две половинки
+   размером с одну кнопку Null (слово владельца 18.09). Подпись в две строки
+   мельче, чтобы «Horizontal» помещалось и в узкой панели. */
+.tc-flip-row{ display:flex; gap:8px; }
+html.no-flexgap .tc-flip-row > .btn + .btn{ margin-left:8px; }
+.tc-flip-row > .btn{ flex:1 1 0; min-width:0; padding:3px 3px !important;
+  font-size:9.5px !important; line-height:1.1; white-space:normal !important; text-align:center; word-break:normal; letter-spacing:0 !important; }
+/* правило колонки Null/Adj. Layer (.tc-anchor-btns .btn: width 100 %, отступ снизу)
+   половинкам не подходит */
+.tc-anchor-btns .tc-flip-row > .btn{ width:auto; margin-bottom:0; }
+
+/* ---- вторая проверка 18.09 ---- */
+/* Светлая тема: белые и почти белые плашки (Stroke у Rect/Rounded, первые Solids)
+   без кольца пропадали на бежевом — тонкая ВНЕШНЯЯ обводка, поверх цвета не ложится */
+body.theme-light .col-sw, body.theme-light .col-grad, body.theme-light .gsw, body.theme-light .tb-sw,
+body.theme-light .swatch:not(.swatch-add), body.theme-light .swatches.small .swatch:not(.swatch-add),
+body.theme-light .col-combo{ box-shadow:0 0 0 1px rgba(42,22,16,.16) !important; }
+/* плашки Fill/Stroke после снятия кольца не отвечали на курсор — лёгкое увеличение, как у .gsw */
+.tb-sw{ transition:transform .12s ease; }
+.tb-sw:hover{ transform:scale(1.12); }
+/* Library → Emoji, светлая тема: при наведении живая анимация встаёт на место картинки
+   в контейнере без класса — у него та же тёмная сцена, иначе прямоугольник мигает */
+body.theme-light .rd-card > div:first-child:not([class]){ background:#3b302a; }
+/* Окна-карты: полоса прокрутки всегда зарезервирована (как у панели) — иначе в широкой
+   карте в две колонки ширина прыгала на её толщину и раскладка мигала раз в полсекунды */
+body.am-float{ overflow-y:scroll; }
+
+/* 19.09, слово владельца: три строки справа от сетки Anchor Point — РОВНО по её
+   высоте, шаг 8 px, как у кнопок Elements (было 30 + 16 + 30 + 16 + 30 = 122 px
+   против сетки 104 px). У сетки тот же шаг 8 px, поэтому строки кнопок стоят
+   вровень с рядами точек. Кнопка, которой размер задан вручную (карандаш),
+   держит свой: её размер записан в самой кнопке и главнее этих правил. */
+.flat-sec.tc-anchor .tc-anchor-row{ align-items:stretch; }
+.flat-sec.tc-anchor .tc-anchor-row #anchorGrid:not(.moved):not(.sizing){ grid-gap:8px; gap:8px; align-self:flex-start; }
+/* столбик — сетка из трёх РАВНЫХ строк: во flex строки делились неровно
+   (у кнопок свои отступы, у строки Flip — нет) */
+.flat-sec.tc-anchor .tc-anchor-btns{ display:grid; grid-template-columns:minmax(0,1fr);
+  grid-template-rows:repeat(3,minmax(0,1fr)); grid-row-gap:8px; row-gap:8px; }
+.flat-sec.tc-anchor .tc-anchor-btns > *{ margin:0 !important; }
+.flat-sec.tc-anchor .tc-anchor-btns > .btn:not(.tiny):not(.small),
+.flat-sec.tc-anchor .tc-anchor-btns .tc-flip-row > .btn:not(.tiny):not(.small){ min-height:0; }

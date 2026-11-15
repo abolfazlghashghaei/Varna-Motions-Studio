@@ -1,0 +1,1 @@
+PASS UI81 host model: static text, zero run endpoints including padding, no intermediate reopening, true geometric resize, full fast-preview context, warm cache, motion restoration and transactional failures. Native AE rendering remains untested.

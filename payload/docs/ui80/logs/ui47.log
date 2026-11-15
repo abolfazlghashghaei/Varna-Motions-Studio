@@ -1,0 +1,1 @@
+PASS UI47 Chromium: direct numeric scrubbing + one commit, typing, native slider + numeric mirror, keyboard, Escape, decimals/bounds, direct restores, readonly/fieldset/disabled, dynamic fields, preserved dual handles, and 4 themes × 4 widths × 6 pages without document overflow. Adobe runtime untested.

@@ -1,0 +1,27 @@
+VARNA MOTION STUDIO 4.5.0-rc.39 — VALIDATION SCOPE
+Date: 2026-10-19
+Environment: Linux, Node.js, headless Chromium 145.0.7632.117.
+
+Release suite: 58 suites (legacy contracts plus RC39 words and RC39 engine).
+Behavioral checks:
+- Rules use project-wide term/document frequency, stopwords, explicit keywords, brand/number signals, protected phrases and preservation of negation. Seeded weighted variation is reproducible.
+- Whole-word selectors use Words + Index units, not Unicode character offsets. Tested third-word index, all-word coverage, removal and source-text preservation.
+- Host simulation evaluates generated opacity, position, scale and color expressions at multiple times and after layer trim/stretch. Seven motion modes, speech/reverse/uniform schedules and native template colors are covered.
+- Existing live preview records are invalidated once at a renderer revision change and retained at a same-version reload.
+- Engine checks use real authenticated localhost HTTP with controlled child processes: a GPU memory failure, one CPU/smaller-context recovery, reuse of the recovered process, architecture mismatch and a generic exit preserving stderr without blind retries.
+- Real Chromium loads the packaged panel, previews current text, changes selections and styles, verifies actual host-call payloads (including selected-caption AE motion preview), uses both native template metadata and original-project mode, and checks six widths from 250 to 1480 pixels.
+- Font search, Alt+L focus, numeric drag/keyboard/cancel, output update/cancel and 10-page responsive regression checks also pass.
+
+Limits:
+No real GGUF model weights, Windows runtime, Adobe After Effects rendering, installed user fonts or user hardware were executed here. The screenshot supplies exit code 1 but not the underlying stderr; its exact machine-specific cause is not known. The default rules/manual/native animation paths require no local text engine. Browser preview approximates the host animation; it is not an Adobe render. Native template style transfer supports documented colors/stroke/glow and Varna word motion, not every original shape; complete original projects remain an explicit alternative.
+
+Browser validation results:
+rc39-browser.log
+PASS RC39 Chromium: automatic engine-free rules, precise third-word export/manual preservation, manual/model/explicit-rule/varied paths, honest model failure fallback, native motion/color/preview and actual refresh payload, all-caption scope, original template colors on editable text without import, optional complete original project mode, six responsive widths with no page errors/overflow
+
+rc31_browser.cjs.log
+PASS RC31: visible permanent font search, Persian matching and actual style change, no-result preservation, favorites, responsive font card, Tweakpane capsule/native sync, selection seek never activates viewer, caption focus retained and immediate Alt+L split
+
+rc37_browser.cjs.log
+PASS RC37 browser: actual native number drag/fine keyboard/manual entry/cancel/single commit, scope-aware looks/full preset save, emphasis export, protected draft, stack options, composition audio/speed, real output button update/cancel, 10 pages at 6 widths including short panel; no page errors/overflow
+

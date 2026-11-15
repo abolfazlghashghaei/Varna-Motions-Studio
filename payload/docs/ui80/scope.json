@@ -1,0 +1,18 @@
+{
+  "sourceCommit": "4b46caa8edd3626c3d890817c853485f924ca33e",
+  "changedProductPaths": [
+    "Varna_Motion_Studio/PACKAGE_MANIFEST.json",
+    "Varna_Motion_Studio/css/ui/flow77.css",
+    "Varna_Motion_Studio/index.html",
+    "Varna_Motion_Studio/js/app.js",
+    "Varna_Motion_Studio/js/text-workspace80.js",
+    "Varna_Motion_Studio/tests/helpers/panel69.cjs",
+    "Varna_Motion_Studio/tests/text55_file_browser.cjs",
+    "Varna_Motion_Studio/tests/text56_browser.cjs",
+    "Varna_Motion_Studio/tests/ui80_geometry_oracle_browser.cjs",
+    "Varna_Motion_Studio/tests/ui80_text_workspace_browser.cjs"
+  ],
+  "changedHostFiles": [],
+  "nativeAdobeTested": false,
+  "publication": "Local review archive; public GitHub publication requires user authorization"
+}

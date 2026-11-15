@@ -1,0 +1,2288 @@
+:root{
+  --bg-0:#14171c; --bg-1:#191d24; --bg-2:#1f242d;
+  --panel:#21262f; --panel-2:#262c37;
+  --line:rgba(255,255,255,.06); --line-2:rgba(255,255,255,.10);
+  --txt:#e7ebf2; --txt-dim:#8b94a3;
+  --accent:#3b82f6; --accent-2:#60a5fa; --accent-glow:rgba(59,130,246,.45);
+  --radius:13px; --radius-sm:10px;
+  --ease-pop:cubic-bezier(.34,1.4,.5,1);
+}
+*{box-sizing:border-box;-webkit-user-select:none;user-select:none;}
+html,body{margin:0;height:100%;}
+body{
+  font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:12px; color:var(--txt);
+  background:radial-gradient(120% 80% at 50% -10%, #1c2230 0%, var(--bg-0) 60%);
+  padding:7px 10px 14px; overflow-y:auto; overflow-x:hidden;
+}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.10);border-radius:8px;}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.18);}
+
+/* ---------- header ---------- */
+.header{display:flex;align-items:center;gap:8px;margin-bottom:7px;padding:0 2px;}
+.logo{font-weight:700;letter-spacing:.5px;font-size:14px;
+  background:linear-gradient(90deg,#fff,#9db4d6);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.logo b{color:var(--accent-2);-webkit-text-fill-color:var(--accent-2);}
+.spacer{flex:1;}
+
+/* ---------- tabs: dark capsule bar, the active tab is a glowing blue pill ---------- */
+.tabs{display:flex;align-items:center;gap:2px;margin-bottom:10px;flex-wrap:wrap;row-gap:3px;
+  padding:4px;border-radius:999px;border:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(180deg,rgba(9,11,15,.94),rgba(17,20,26,.94));
+  box-shadow:inset 0 2px 7px rgba(0,0,0,0.275), inset 0 -1px 0 rgba(255,255,255,0.015), 0 4px 14px -8px rgba(0,0,0,0.425);}
+.tab{flex:1;min-width:0;text-align:center;
+  padding:6px 5px;border-radius:999px;font-weight:700;font-size:9.5px;letter-spacing:1px;white-space:nowrap;
+  color:var(--txt-dim);cursor:pointer;border:1px solid transparent;
+  transition:color .18s ease, background .2s ease, transform .16s var(--ease-pop), box-shadow .25s ease, text-shadow .25s ease;
+}
+.tab:hover{color:#fff;background:rgba(255,255,255,.05);}
+.tab:active{transform:scale(.95);}
+.tab.active{
+  color:#fff;border-color:rgba(140,200,255,.8);
+  background:
+    radial-gradient(130% 170% at 50% -10%, rgba(150,210,255,.6) 0%, rgba(59,130,246,0) 58%),
+    linear-gradient(180deg,#5aa6ff 0%,#2f7bf0 55%,#2160d5 100%);
+  text-shadow:0 0 9px rgba(200,230,255,.95);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.275),
+    inset 0 -1px 0 rgba(0,30,90,0.175),
+    0 0 14px rgba(64,150,255,0.4),
+    0 0 34px -4px rgba(56,140,255,.6),
+    0 6px 18px -6px rgba(30,90,220,.85);
+}
+
+/* ---------- sections ---------- */
+.section{
+  margin-bottom:10px;padding:9px 10px 10px;border:1px solid var(--line-2);border-radius:13px;
+  background:linear-gradient(180deg,rgba(43,46,51,.96),rgba(34,36,40,.96));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.018),0 5px 14px -10px rgba(0,0,0,0.4);
+}
+.section-title{font-size:9px;font-weight:700;letter-spacing:1.1px;color:var(--txt-dim);
+  text-transform:uppercase;margin:0 2px 3px;}
+.row{display:flex;gap:8px;align-items:center;margin-bottom:6px;}
+.row .lbl{font-size:11px;color:var(--txt-dim);min-width:54px;}
+
+/* ---------- premium buttons ---------- */
+.btn{
+  flex:1;min-height:24px;padding:4px 7px;border-radius:8px;
+  font-size:10.5px;font-weight:600;letter-spacing:.2px;color:var(--txt);cursor:pointer;
+  border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#2c323d 0%,#222731 52%,#1d222b 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    inset 0 -1px 0 rgba(0,0,0,0.175),
+    0 4px 12px -6px rgba(0,0,0,0.35);
+  transition:transform .16s var(--ease-pop), box-shadow .2s ease, filter .2s ease, border-color .2s ease;
+  display:flex;align-items:center;justify-content:center;gap:7px;text-align:center;
+  will-change:transform;
+}
+.btn:hover{
+  filter:brightness(1.12);border-color:rgba(255,255,255,.16);transform:translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    inset 0 -1px 0 rgba(0,0,0,0.175),
+    0 8px 20px -8px rgba(0,0,0,0.4);
+}
+.btn:active{
+  transform:scale(.955) translateY(0);
+  filter:brightness(.96);
+  transition:transform .09s ease, filter .09s ease;
+  box-shadow:
+    inset 0 2px 5px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.02),
+    0 2px 6px -4px rgba(0,0,0,0.3);
+}
+/* primary / accent */
+.btn.primary{
+  color:#fff;border-color:rgba(96,165,250,.55);
+  background:linear-gradient(180deg,#4c8dfb 0%,#3b82f6 50%,#2f6fe0 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.125),
+    0 6px 18px -7px var(--accent-glow);
+}
+.btn.primary:hover{filter:brightness(1.08);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.175),0 10px 26px -8px var(--accent-glow);}
+.btn.small{min-height:23px;padding:4px 6px;font-size:10px;border-radius:7px;}
+.btn .ic{font-size:13px;line-height:1;opacity:.85;}
+
+/* ---------- ease rows (like reference) ---------- */
+.ease-row{display:flex;align-items:center;gap:6px;margin-bottom:3px;}
+.ease-ic{width:12px;text-align:center;color:var(--txt-dim);font-size:12px;flex:none;}
+.ease-sl{flex:1;min-width:40px;}
+.stepper{display:flex;align-items:stretch;height:22px;border:1px solid var(--line-2);border-radius:7px;overflow:hidden;
+  background:linear-gradient(180deg,#1b2029,#161a21);flex:none;}
+.stepper .ease-num{width:28px;border:none;background:transparent;color:var(--txt);text-align:center;font-size:10px;
+  border-radius:0;padding:0;outline:none;-webkit-user-select:text;user-select:text;}
+.stepper .ease-num:focus{box-shadow:none;}
+.stepper .steps{display:flex;flex-direction:column;width:14px;border-left:1px solid var(--line);}
+.stepper .stp{flex:1;border:none;background:linear-gradient(180deg,#2a313c,#222831);color:var(--txt-dim);
+  font-size:7px;line-height:1;cursor:pointer;padding:0;transition:background .15s ease,color .15s ease,transform .12s var(--ease-pop);}
+.stepper .stp:hover{color:var(--txt);background:#323a47;}
+.stepper .stp:active{transform:scale(.85);background:#3b4350;}
+.stepper .stp.up{border-bottom:1px solid var(--line);}
+.shape{width:22px;height:22px;flex:none;border-radius:7px;cursor:pointer;color:var(--accent-2);font-size:10px;
+  border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#2c323d,#1d222b);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.035),0 3px 8px -6px rgba(0,0,0,0.35);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .16s var(--ease-pop),filter .2s ease,border-color .2s ease,box-shadow .2s ease;}
+.shape:hover{filter:brightness(1.15);border-color:rgba(96,165,250,.45);transform:translateY(-1px);
+  box-shadow:0 0 14px -4px var(--accent-glow);}
+.shape:active{transform:scale(.88);filter:brightness(.95);transition:transform .09s ease;}
+
+/* ---------- anchor grid ---------- */
+.anchor{display:grid;grid-template-columns:repeat(3,1fr);grid-gap:5px;gap:5px;width:120px;}   /* 05.09.2026: квадрат в высоту 4 рядов кнопок рядом; точную высоту подгоняет main.js */
+.cell{
+  aspect-ratio:1/1;border-radius:10px;cursor:pointer;position:relative;
+  border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#262c37,#1e232c);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.025),0 3px 8px -6px rgba(0,0,0,0.35);
+  transition:transform .16s var(--ease-pop),border-color .2s ease,box-shadow .2s ease;
+}
+.cell::after{content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;border-radius:50%;
+  transform:translate(-50%,-50%);background:var(--txt-dim);transition:all .2s ease;}
+.cell:hover{border-color:rgba(255,255,255,.18);transform:translateY(-1px);}
+.cell:hover::after{background:var(--txt);}
+.cell:active{transform:scale(.9);}
+.cell.on{border-color:rgba(96,165,250,0.3);box-shadow:0 0 0 1px rgba(59,130,246,0.125),0 0 16px -2px var(--accent-glow);}
+.cell.on::after{background:var(--accent-2);width:9px;height:9px;box-shadow:0 0 10px var(--accent-glow);}
+
+/* ---------- inputs ---------- */
+.field{display:flex;flex-direction:column;gap:4px;}
+.field .lbl{font-size:10px;color:var(--txt-dim);letter-spacing:.5px;}
+input.num,select.sel{
+  background:linear-gradient(180deg,#1b2029,#161a21);color:var(--txt);
+  border:1px solid var(--line-2);border-radius:9px;padding:8px 9px;font-size:12px;width:100%;
+  outline:none;transition:border-color .2s ease,box-shadow .2s ease;
+  -webkit-user-select:text;user-select:text;
+}
+input.num:focus,select.sel:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,0.09);}
+input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:6px;
+  background:linear-gradient(90deg,var(--accent) 0%,var(--accent) var(--p,50%),#2a3038 var(--p,50%));outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff,#cdd9ef 40%,var(--accent-2));cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,0.25),0 0 10px -2px var(--accent-glow);transition:transform .12s var(--ease-pop);}
+input[type=range]::-webkit-slider-thumb:active{transform:scale(1.25);}
+
+.hint{font-size:9.5px;color:var(--txt-dim);margin:4px 2px 0;line-height:1.45;}
+.soon{opacity:.5;font-size:11px;color:var(--txt-dim);padding:10px 2px;}
+.grp{display:flex;gap:8px;}
+.grp.col{flex-direction:column;}
+.w-half{flex:1;}
+/* Три кнопки в одном ряду. min-width:0 обязателен: без него flex-элемент
+   отказывается сжиматься уже собственного текста, и третья кнопка выталкивает
+   ряд за пределы узкой панели. */
+.w-third{flex:1;min-width:0;}
+/* sequence mode buttons */
+.modebtn{width:40px;min-height:28px;flex:none;border-radius:8px;cursor:pointer;color:var(--txt-dim);font-size:13px;
+  border:1px solid var(--line-2);background:linear-gradient(180deg,#2a313c,#1d222b);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;
+  transition:transform .16s var(--ease-pop),color .2s ease,border-color .2s ease,box-shadow .2s ease;}
+.modebtn:hover{color:var(--txt);transform:translateY(-1px);}
+.modebtn:active{transform:scale(.9);}
+.modebtn.on{color:#fff;border-color:rgba(96,165,250,.6);
+  background:linear-gradient(180deg,rgba(59,130,246,.28),rgba(59,130,246,.10));
+  box-shadow:0 0 0 1px rgba(59,130,246,0.09),0 0 14px -4px var(--accent-glow);}
+.tabpane{display:none;animation:fade .25s ease;}
+.tabpane.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+.colorbox{width:30px;height:26px;padding:0;border:1px solid var(--line-2);border-radius:8px;background:transparent;cursor:pointer;flex:none;
+  transition:transform .14s var(--ease-pop),border-color .2s ease;}
+.colorbox:hover{border-color:rgba(255,255,255,.2);}
+.colorbox:active{transform:scale(.92);}
+.colorbox::-webkit-color-swatch-wrapper{padding:2px;}
+.colorbox::-webkit-color-swatch{border:none;border-radius:5px;}
+.row.mini{gap:5px;margin-bottom:5px;}
+.row.mini .btn.small{font-size:10.5px;padding:5px 4px;min-height:26px;letter-spacing:0;border-radius:8px;}
+
+/* fix dropdown option visibility */
+select.sel{color:var(--txt);}
+select.sel option{background:#1b2029;color:var(--txt);}
+
+/* compact sections (Counter / Letter Morph) */
+.section.compact{margin-bottom:10px;}
+.section.compact .row{margin-bottom:5px;}
+.section.compact .lbl{font-size:9.5px;}
+.section.compact input.num,.section.compact select.sel{padding:5px 7px;font-size:11px;border-radius:8px;}
+.section.compact .btn{min-height:22px;padding:3px 7px;font-size:10px;}
+.section.compact .field{gap:3px;}
+
+/* generic numeric stepper (auto-built around input.step) */
+.numstep{display:flex;align-items:stretch;height:26px;border:1px solid var(--line-2);border-radius:8px;overflow:hidden;
+  background:linear-gradient(180deg,#1b2029,#161a21);}
+.numstep input{flex:1;min-width:0;width:100%;border:none;background:transparent;color:var(--txt);padding:0 8px;
+  font-size:11px;outline:none;-webkit-user-select:text;user-select:text;text-align:left;border-radius:0;}
+.numstep input:focus{box-shadow:none;}
+.numstep .steps{display:flex;flex-direction:column;width:16px;border-left:1px solid var(--line);flex:none;}
+.numstep .stp{flex:1;border:none;background:linear-gradient(180deg,#2a313c,#222831);color:var(--txt-dim);
+  font-size:7px;line-height:1;cursor:pointer;padding:0;transition:background .15s ease,color .15s ease,transform .12s var(--ease-pop);}
+.numstep .stp:hover{color:var(--txt);background:#323a47;}
+.numstep .stp:active{transform:scale(.85);background:#3b4350;}
+.numstep .stp.up{border-bottom:1px solid var(--line);}
+.section.compact .numstep{height:24px;}
+
+/* ANIM controls */
+input[type=checkbox],input[type=radio]{accent-color:var(--accent);width:14px;height:14px;cursor:pointer;margin:0;vertical-align:middle;}
+.optline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:7px;}
+.optline label{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--txt-dim);cursor:pointer;}
+.proprow{display:flex;align-items:center;gap:5px;margin-bottom:4px;}
+.proprow .pname{font-size:10.5px;color:var(--txt);min-width:78px;}
+.proprow .axl{font-size:9px;color:var(--txt-dim);width:10px;text-align:center;}
+.proprow input.num{width:34px;padding:4px 4px;font-size:10.5px;text-align:center;flex:none;}
+.preset-row{display:flex;align-items:center;gap:5px;margin-bottom:8px;}
+.preset-row .sel{flex:1;min-width:0;padding:5px 7px;font-size:11px;}
+.btn.tiny{min-height:24px;padding:4px 8px;font-size:10.5px;flex:none;width:auto;border-radius:8px;}
+
+/* ============ ANIMATION GALLERY (matches plugin design) ============ */
+.anim-head{margin-bottom:9px;}
+.subtabs{display:flex;gap:4px;}
+/* sub-tabs mirror the main .tab style */
+.subtab{flex:1;text-align:center;padding:6px 8px;border-radius:9px;font-weight:600;font-size:10.5px;letter-spacing:.2px;
+  white-space:nowrap;color:var(--txt-dim);cursor:pointer;border:1px solid transparent;
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+  transition:color .18s ease, background .2s ease, border-color .2s ease, transform .16s var(--ease-pop);}
+/* Подвкладка «Favorites» показывается звездой. Слово НАМЕРЕННО остаётся в
+   разметке и лишь прячется: система настраиваемых кнопок строит ключ из
+   textContent, и если убрать текст, у тех, кто уже двигал эту кнопку,
+   настройка потеряется. Звезда рисуется глифом — ни файла, ни лишнего веса. */
+.subtab[data-sub="fav"]{ font-size:0; line-height:1; }
+.subtab[data-sub="fav"]::before{
+  content:"\2605"; font-size:14px; line-height:1; display:inline-block;
+  transform:translateY(1px);
+}
+.subtab:hover{color:var(--txt);background:rgba(255,255,255,.05);}
+.subtab:active{transform:scale(.94);}
+.subtab.active{color:#fff;border-color:rgba(96,165,250,.55);
+  background:linear-gradient(180deg,rgba(59,130,246,.22),rgba(59,130,246,.08));
+  box-shadow:0 0 0 1px rgba(59,130,246,0.075),0 6px 18px -8px var(--accent-glow);}
+
+.anim-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:10px;} /* wrap: в узком окне-карте хвост строки (Preview и ползунок) отрезался — теперь переезжает на вторую строку, видно всё при любой ширине (27.08.2026) */
+.anim-bar .bar-lbl{font-size:10.5px;color:var(--txt-dim);}
+.anim-bar .spacer{flex:1;}
+.anim-bar .size-ic{color:var(--txt-dim);font-size:13px;}
+.anim-bar input[type=range]{width:78px;flex:none;}
+/* mode buttons mirror the premium .btn / .btn.primary */
+.modebtn-an{padding:6px 12px;border-radius:var(--radius-sm);font-size:11px;font-weight:600;letter-spacing:.3px;
+  color:var(--txt);cursor:pointer;border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#2c323d 0%,#222731 52%,#1d222b 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.04),inset 0 -1px 0 rgba(0,0,0,0.175),0 4px 12px -6px rgba(0,0,0,0.35);
+  transition:transform .16s var(--ease-pop),box-shadow .2s ease,filter .2s ease,border-color .2s ease;will-change:transform;}
+.modebtn-an:hover{filter:brightness(1.12);border-color:rgba(255,255,255,.16);transform:translateY(-1px);}
+.modebtn-an:active{transform:scale(.955);filter:brightness(.96);transition:transform .09s ease,filter .09s ease;}
+.modebtn-an.on{color:#fff;border-color:rgba(96,165,250,.55);
+  background:linear-gradient(180deg,#4c8dfb 0%,#3b82f6 50%,#2f6fe0 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.15),inset 0 -1px 0 rgba(0,0,0,0.125),0 6px 18px -7px var(--accent-glow);}
+
+.gallery{display:grid;grid-template-columns:repeat(var(--cols,4),1fr);grid-gap:6px;gap:6px;}
+.cat-head{grid-column:1/-1;font-size:9px;font-weight:700;letter-spacing:1.1px;color:var(--txt-dim);
+  text-transform:uppercase;margin:6px 2px 2px;}
+/* tiles mirror premium .btn depth + smoothness */
+.tile{position:relative;border-radius:10px;overflow:hidden;cursor:pointer;border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#2c323d 0%,#222731 52%,#1d222b 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.04),inset 0 -1px 0 rgba(0,0,0,0.175),0 4px 12px -6px rgba(0,0,0,0.35);
+  transition:transform .16s var(--ease-pop),box-shadow .2s ease,filter .2s ease,border-color .2s ease;will-change:transform;}
+.tile:hover{filter:brightness(1.08);transform:translateY(-2px);border-color:rgba(96,165,250,.45);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 12px 26px -10px var(--accent-glow);}
+.tile:active{transform:scale(.965);filter:brightness(.97);transition:transform .09s ease,filter .09s ease;}
+.tile-prev{aspect-ratio:16/9;min-height:42px;display:flex;align-items:center;justify-content:center;
+  padding:6px;overflow:hidden;border-bottom:1px solid var(--line);
+  background:radial-gradient(120% 100% at 50% 0%,rgba(30,37,48,.9),rgba(16,18,22,.9));}
+.sample{font-weight:800;font-size:9.5px;line-height:1.06;text-align:center;color:#eef2f8;letter-spacing:.3px;
+  text-transform:uppercase;perspective:300px;}
+.tile-prev .sample.cont{animation-duration:2.4s;animation-iteration-count:infinite;animation-fill-mode:both;animation-name:var(--anim,none);animation-timing-function:var(--ease,cubic-bezier(.2,.85,.25,1));}
+.tile-prev .sample.cont .ch{animation:none;}
+.tile-prev .ch{display:inline-block;animation-duration:2.4s;animation-delay:var(--d,0s);
+  animation-iteration-count:infinite;animation-fill-mode:both;animation-timing-function:cubic-bezier(.2,.85,.25,1);
+  animation-name:var(--anim,none);animation-timing-function:var(--ease,cubic-bezier(.2,.85,.25,1));transform-style:preserve-3d;}
+.shape-dot{width:28px;height:28px;border-radius:50%;background:linear-gradient(160deg,#5aa0ff,#2f6fe0);
+  box-shadow:0 4px 14px -4px var(--accent-glow);animation-duration:2.4s;animation-iteration-count:infinite;
+  animation-fill-mode:both;animation-name:var(--anim,none);animation-timing-function:var(--ease,cubic-bezier(.2,.85,.25,1));}
+.tile-name{font-size:9.5px;font-weight:600;color:var(--txt);opacity:.62;padding:4px 7px 6px;}
+.star{position:absolute;top:4px;right:5px;z-index:3;font-size:11px;line-height:1;color:rgba(255,255,255,.35);
+  cursor:pointer;transition:transform .14s var(--ease-pop),color .2s,text-shadow .2s;text-shadow:0 1px 3px rgba(0,0,0,.6);}
+.star:hover{color:#fff;transform:scale(1.22);}
+.star.on{color:#ffd24a;text-shadow:0 0 10px rgba(255,210,74,.5);}
+.gallery .empty{grid-column:1/-1;color:var(--txt-dim);font-size:11px;text-align:center;padding:24px 0;}
+
+/* preview keyframes (seamless: hidden -> shown -> hidden), match applied transform */
+@keyframes pv-su{0%{opacity:0;transform:translateY(85%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(85%)}}
+@keyframes pv-sd{0%{opacity:0;transform:translateY(-85%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-85%)}}
+@keyframes pv-sl{0%{opacity:0;transform:translateX(85%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateX(85%)}}
+@keyframes pv-sr{0%{opacity:0;transform:translateX(-85%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateX(-85%)}}
+@keyframes pv-sbu{0%{opacity:0;transform:translateY(85%);filter:blur(6px)}26%{opacity:1;transform:none;filter:none}76%{opacity:1;transform:none;filter:none}100%{opacity:0;transform:translateY(85%);filter:blur(6px)}}
+@keyframes pv-sbd{0%{opacity:0;transform:translateY(-85%);filter:blur(6px)}26%{opacity:1;transform:none;filter:none}76%{opacity:1;transform:none;filter:none}100%{opacity:0;transform:translateY(-85%);filter:blur(6px)}}
+@keyframes pv-sbl{0%{opacity:0;transform:translateX(85%);filter:blur(6px)}26%{opacity:1;transform:none;filter:none}76%{opacity:1;transform:none;filter:none}100%{opacity:0;transform:translateX(85%);filter:blur(6px)}}
+@keyframes pv-sbr{0%{opacity:0;transform:translateX(-85%);filter:blur(6px)}26%{opacity:1;transform:none;filter:none}76%{opacity:1;transform:none;filter:none}100%{opacity:0;transform:translateX(-85%);filter:blur(6px)}}
+@keyframes pv-fade{0%{opacity:0}26%{opacity:1}76%{opacity:1}100%{opacity:0}}
+@keyframes pv-blur{0%{opacity:0;filter:blur(8px)}26%{opacity:1;filter:none}76%{opacity:1;filter:none}100%{opacity:0;filter:blur(8px)}}
+@keyframes pv-defocus{0%{opacity:0;filter:blur(15px)}26%{opacity:1;filter:none}76%{opacity:1;filter:none}100%{opacity:0;filter:blur(15px)}}
+@keyframes pv-scale{0%{opacity:0;transform:scale(.18)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:scale(.18)}}
+@keyframes pv-scaledn{0%{opacity:0;transform:scale(1.9)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:scale(1.9)}}
+@keyframes pv-pop{0%{opacity:0;transform:scale(0) translateY(30%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:scale(0) translateY(30%)}}
+@keyframes pv-punch{0%{opacity:0;transform:scale(0);filter:blur(6px)}26%{opacity:1;transform:none;filter:none}76%{opacity:1;transform:none;filter:none}100%{opacity:0;transform:scale(0);filter:blur(6px)}}
+@keyframes pv-zoomblur{0%{opacity:0;transform:scale(.35);filter:blur(7px)}26%{opacity:1;transform:none;filter:none}76%{opacity:1;transform:none;filter:none}100%{opacity:0;transform:scale(.35);filter:blur(7px)}}
+@keyframes pv-risescale{0%{opacity:0;transform:scale(.4) translateY(60%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:scale(.4) translateY(60%)}}
+@keyframes pv-rot{0%{opacity:0;transform:rotate(-50deg) scale(.7)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotate(-50deg) scale(.7)}}
+@keyframes pv-rotl{0%{opacity:0;transform:rotate(55deg) scale(.7)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotate(55deg) scale(.7)}}
+@keyframes pv-rotr{0%{opacity:0;transform:rotate(-55deg) scale(.7)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotate(-55deg) scale(.7)}}
+@keyframes pv-spingrow{0%{opacity:0;transform:rotate(-100deg) scale(.3)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotate(-100deg) scale(.3)}}
+@keyframes pv-flipx{0%{opacity:0;transform:rotateX(90deg)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotateX(-90deg)}}
+@keyframes pv-flipy{0%{opacity:0;transform:rotateY(90deg)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotateY(-90deg)}}
+@keyframes pv-tumbleup{0%{opacity:0;transform:rotateX(80deg) translateY(45%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotateX(80deg) translateY(45%)}}
+@keyframes pv-skew{0%{opacity:0;transform:skewX(28deg)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:skewX(28deg)}}
+@keyframes pv-skewl{0%{opacity:0;transform:skewX(-24deg) translateX(22%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:skewX(-24deg) translateX(22%)}}
+@keyframes pv-skewr{0%{opacity:0;transform:skewX(24deg) translateX(-22%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:skewX(24deg) translateX(-22%)}}
+@keyframes pv-type{0%{opacity:0}7%{opacity:0}11%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@keyframes pv-bounceu{0%{opacity:0;transform:translateY(95%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(95%)}}
+@keyframes pv-bounced{0%{opacity:0;transform:translateY(-95%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-95%)}}
+@keyframes pv-elasticu{0%{opacity:0;transform:translateY(90%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(90%)}}
+@keyframes pv-elasticscale{0%{opacity:0;transform:scale(.2)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:scale(.2)}}
+@keyframes pv-trackexp{0%{opacity:0;letter-spacing:-0.16em}26%{opacity:1;letter-spacing:.3px}76%{opacity:1;letter-spacing:.3px}100%{opacity:0;letter-spacing:-0.16em}}
+@keyframes pv-trackcon{0%{opacity:0;letter-spacing:.55em}26%{opacity:1;letter-spacing:.3px}76%{opacity:1;letter-spacing:.3px}100%{opacity:0;letter-spacing:.55em}}
+@keyframes pv-trackup{0%{opacity:0;letter-spacing:.35em}26%{opacity:1;letter-spacing:.3px}76%{opacity:1;letter-spacing:.3px}100%{opacity:0;letter-spacing:.35em}}
+@keyframes pv-spin{0%{opacity:0;transform:rotate(-220deg) scale(.4)}34%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotate(140deg) scale(.4)}}
+@keyframes pv-up{0%{opacity:0;transform:translateY(85%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(85%)}}
+@keyframes pv-down{0%{opacity:0;transform:translateY(-85%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-85%)}}
+@keyframes pv-left{0%{opacity:0;transform:translateX(85%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateX(85%)}}
+@keyframes pv-right{0%{opacity:0;transform:translateX(-85%)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:translateX(-85%)}}
+@keyframes pv-bounce{0%{opacity:0;transform:translateY(-130%)}24%{opacity:1;transform:translateY(8%)}34%{transform:translateY(0)}44%{transform:translateY(-7%)}54%{transform:translateY(0)}76%{transform:translateY(0);opacity:1}100%{opacity:0;transform:translateY(-130%)}}
+
+/* granularity + selection + animate bar */
+.sample.lines{display:flex;flex-direction:column;gap:1px;}
+.sample .w,.sample .ln{display:inline-block;}
+.sample .ln{display:block;}
+.tile.sel{border-color:rgba(96,165,250,0.425);box-shadow:0 0 0 1px rgba(96,165,250,0.25),0 10px 24px -10px var(--accent-glow);}
+.animate-bar{position:sticky;bottom:6px;z-index:20;display:none;flex-wrap:wrap;align-items:center;gap:7px;margin-top:10px; /* wrap: см. .anim-bar — In/Out/Both пропадали за краем узкой карты */
+  padding:8px 10px;border-radius:12px;border:1px solid var(--line-2);
+  background:linear-gradient(180deg,rgba(28,33,42,.96),rgba(20,24,31,.96));backdrop-filter:blur(8px);
+  box-shadow:0 -2px 18px -6px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.03);}
+.animate-bar.show{display:flex;animation:abIn .22s var(--ease-pop);}
+@keyframes abIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.animate-bar .ab-name{font-size:11px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:56px;}
+.animate-bar .ab-lbl{font-size:10.5px;color:var(--txt-dim);}
+.ab-btn{padding:6px 13px;border-radius:var(--radius-sm);font-size:11px;font-weight:600;letter-spacing:.3px;color:#fff;cursor:pointer;
+  border:1px solid rgba(96,165,250,.55);background:linear-gradient(180deg,#4c8dfb,#2f6fe0);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.14),0 5px 14px -7px var(--accent-glow);
+  transition:transform .14s var(--ease-pop),filter .18s ease;}
+.ab-btn:hover{filter:brightness(1.1);transform:translateY(-1px);}
+.ab-btn:active{transform:scale(.94);}
+.ab-close{color:var(--txt-dim);cursor:pointer;font-size:15px;padding:0 4px;line-height:1;}
+.ab-close:hover{color:var(--txt);}
+
+/* ============ HEADER ICONS / EDIT MODE / RESTORE ============ */
+.hicons{display:flex;align-items:center;gap:5px;}
+.hicon{width:23px;height:23px;display:flex;align-items:center;justify-content:center;border-radius:7px;
+  color:var(--txt-dim);cursor:pointer;border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#2a313c,#1d222b);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.03);
+  transition:transform .14s var(--ease-pop),color .18s ease,border-color .2s ease,box-shadow .2s ease;}
+.hicon:hover{color:#fff;border-color:rgba(96,165,250,0.25);transform:translateY(-1px);box-shadow:0 5px 14px -7px var(--accent-glow);}
+.hicon:active{transform:scale(.9);}
+.hicon svg{width:14px;height:14px;display:block;}
+#icoTg:hover{color:#29a9eb;}
+#icoIg:hover{color:#e1306c;}
+.hicon.on{color:#fff;border-color:rgba(96,165,250,.6);
+  background:linear-gradient(180deg,#4c8dfb,#2f6fe0);box-shadow:0 5px 14px -7px var(--accent-glow);}
+
+/* delete (×) overlays — only visible in edit mode */
+.del-x{position:absolute;z-index:8;width:18px;height:18px;display:none;align-items:center;justify-content:center;
+  border-radius:50%;background:#e0466e;color:#fff;font-size:11px;line-height:1;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,0.45);box-shadow:0 2px 8px rgba(0,0,0,0.25);
+  transition:transform .12s var(--ease-pop),filter .15s ease;}
+.del-x:hover{transform:scale(1.18);filter:brightness(1.1);}
+.tile .del-x{top:4px;left:5px;}
+.section .del-x{top:-7px;right:-6px;}
+body.editing .tile .del-x,body.editing .section .del-x{display:flex;}
+body.editing .section{position:relative;outline:1px dashed rgba(96,165,250,.45);outline-offset:2px;border-radius:12px;}
+body.editing .tile{outline:1px dashed rgba(96,165,250,.35);}
+.edit-hint{display:none;margin:0 2px 8px;font-size:10px;color:var(--accent-2);}
+body.editing .edit-hint{display:block;}
+.sec-hidden{display:none !important;}
+
+/* restore modal */
+.restore-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:300;display:none;align-items:center;justify-content:center;
+  background:rgba(8,10,14,.62);backdrop-filter:blur(3px);}
+.restore-modal.show{display:flex;animation:abIn .2s var(--ease-pop);}
+.restore-card{width:86%;max-width:340px;max-height:74vh;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,#222732,#191d24);border:1px solid var(--line-2);border-radius:14px;
+  box-shadow:0 18px 50px -12px rgba(0,0,0,0.4);overflow:hidden;}
+.restore-head{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;
+  border-bottom:1px solid var(--line);font-weight:700;font-size:12px;color:var(--txt);}
+.restore-x{cursor:pointer;color:var(--txt-dim);font-size:15px;}
+.restore-x:hover{color:#fff;}
+.restore-list{overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:5px;}
+.restore-row{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:9px;
+  background:rgba(255,255,255,.03);border:1px solid var(--line);}
+.restore-row .rr-name{flex:1;font-size:11px;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.restore-row .rr-cat{font-size:8.5px;color:var(--txt-dim);}
+.rr-add{padding:4px 10px;border-radius:7px;font-size:10.5px;font-weight:600;color:#fff;cursor:pointer;
+  border:1px solid rgba(96,165,250,.55);background:linear-gradient(180deg,#4c8dfb,#2f6fe0);
+  transition:transform .12s var(--ease-pop),filter .15s ease;}
+.rr-add:hover{filter:brightness(1.1);}
+.rr-add:active{transform:scale(.93);}
+.restore-empty{color:var(--txt-dim);font-size:11px;text-align:center;padding:22px 0;}
+
+/* ===== Layer color swatches ===== */
+.swatches{display:grid;grid-template-columns:repeat(8,1fr);grid-gap:6px;gap:6px;}
+.swatch{aspect-ratio:1/1;border-radius:8px;border:1px solid var(--line-2);cursor:pointer;padding:0;
+  background:var(--c,#000);box-shadow:inset 0 1px 2px rgba(255,255,255,0.09),0 1px 3px rgba(0,0,0,0.175);
+  transition:transform .14s var(--ease-pop),box-shadow .18s ease,border-color .18s ease;}
+.swatch:hover{transform:translateY(-2px) scale(1.06);border-color:rgba(255,255,255,.35);
+  box-shadow:inset 0 1px 2px rgba(255,255,255,0.125),0 4px 10px -3px rgba(0,0,0,0.25);}
+.swatch:active{transform:scale(.9);}
+
+/* ===== Animation group chips (Letters/Words/Lines, Position/Rotate/Scale) ===== */
+.animgroups{display:flex;gap:4px;margin:6px 0 2px;}
+.grpchip{flex:1;text-align:center;padding:5px 6px;border-radius:8px;font-weight:600;font-size:10px;letter-spacing:.2px;
+  color:var(--txt-dim);border:1px solid var(--line-2);cursor:pointer;
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+  transition:color .18s ease,background .2s ease,border-color .2s ease,transform .16s var(--ease-pop);}
+.grpchip:hover{color:var(--txt);background:rgba(255,255,255,.05);}
+.grpchip:active{transform:scale(.94);}
+.grpchip.active{color:#fff;border-color:rgba(96,165,250,.55);
+  background:linear-gradient(180deg,rgba(59,130,246,.22),rgba(59,130,246,.08));
+  box-shadow:0 0 0 1px rgba(59,130,246,0.09),0 4px 14px -8px var(--accent-glow);}
+
+/* ===== smaller layer-color swatches ===== */
+.swatches.small{display:flex;flex-wrap:wrap;gap:5px;}
+.swatches.small .swatch{width:22px;height:22px;border-radius:6px;flex:0 0 auto;aspect-ratio:auto;}
+
+/* ===== new preview keyframes (match real animations) ===== */
+@keyframes pv-scalex{0%{opacity:0;transform:scaleX(.12)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:scaleX(.12)}}
+@keyframes pv-scaley{0%{opacity:0;transform:scaleY(.12)}26%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:scaleY(.12)}}
+@keyframes pv-fadedim{0%{opacity:.32;filter:brightness(.35)}26%{opacity:1;filter:brightness(1)}76%{opacity:1;filter:brightness(1)}100%{opacity:.32;filter:brightness(.35)}}
+@keyframes pv-flipxy{0%{opacity:0;transform:rotateX(70deg) rotateY(70deg)}30%{opacity:1;transform:none}76%{opacity:1;transform:none}100%{opacity:0;transform:rotateX(-70deg) rotateY(-70deg)}}
+
+/* ===== edit mode: hide whole tabs ===== */
+.tab{position:relative;}
+.tab .del-x{top:-6px;right:-5px;left:auto;}
+body.editing .tab .del-x{display:flex;}
+body.editing .tabs{outline:1px dashed rgba(96,165,250,.28);outline-offset:3px;border-radius:10px;}
+.tab-hidden{display:none !important;}
+
+/* ===== edit mode: UI size slider ===== */
+#uiScaleWrap{display:none;align-items:center;gap:7px;padding:6px 10px;}
+body.editing #uiScaleWrap{display:flex;}
+#uiScaleWrap .lbl{font-size:10px;color:var(--txt-dim);letter-spacing:.4px;}
+#uiScaleWrap input[type=range]{flex:1;}
+
+/* ===== license gate ===== */
+.lic-gate{position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;display:none;align-items:center;justify-content:center;
+  background:rgba(10,11,14,.97);backdrop-filter:blur(3px);padding:22px;}
+.lic-gate.show{display:flex;}
+.lic-card{position:relative;width:100%;max-width:360px;background:var(--panel,#21262f);border:1px solid var(--line-2,#333a47);
+  border-radius:14px;padding:22px 20px;box-shadow:0 20px 60px -20px rgba(0,0,0,0.35);}
+/* close button — the overlay is cosmetic, the real lock is host-side */
+.lic-x{position:absolute;top:8px;right:9px;width:26px;height:26px;line-height:1;padding:0;
+  background:transparent;border:1px solid transparent;border-radius:8px;cursor:pointer;
+  color:var(--txt-dim,#8b94a3);font-size:19px;}
+.lic-x:hover{background:var(--line-2,#333a47);color:var(--txt,#e7ebf2);}
+/* padlock that brings the activation window back after it was closed */
+.am-lock-pill{position:fixed;right:12px;bottom:12px;z-index:9998;display:none;cursor:pointer;
+  padding:7px 12px;border-radius:20px;font-size:11.5px;font-weight:600;
+  background:var(--panel,#21262f);border:1px solid var(--line-2,#333a47);color:var(--txt-dim,#8b94a3);
+  box-shadow:0 8px 24px -10px rgba(0,0,0,0.35);}
+.am-lock-pill.show{display:block;}
+.am-lock-pill:hover{color:var(--txt,#e7ebf2);border-color:var(--accent,#3b82f6);}
+.lic-card h2{margin:0 0 3px;font-size:16px;color:var(--txt,#e7ebf2);letter-spacing:.3px;}
+.lic-card h2 b{color:var(--accent,#3b82f6);}
+/* white-space:pre-line — без него переводы строк в сообщениях гейта
+   схлопывались в пробелы, и пошаговая инструкция превращалась в сплошной
+   абзац. Обычные однострочные подписи от этого не меняются. */
+.lic-sub{margin:0 0 16px;font-size:11.5px;color:var(--txt-dim,#8b94a3);line-height:1.5;white-space:pre-line;}
+/* Отказ по разрешению — это инструкция к действию, а не примечание мелким
+   серым. Крупнее и янтарным, чтобы её прочитали. */
+.lic-sub.lic-warn{font-size:12.5px;color:#ffcc45;line-height:1.65;}
+body.theme-light .lic-sub.lic-warn{color:#7a4e00;}
+.lic-lbl{display:block;font-size:9.5px;letter-spacing:.7px;text-transform:uppercase;color:var(--txt-dim,#8b94a3);margin:12px 0 5px;}
+.lic-dev{display:flex;gap:6px;align-items:center;}
+.lic-dev code{flex:1;background:var(--panel-2,#262c37);border:1px solid var(--line-2,#333a47);border-radius:9px;
+  padding:9px 11px;font-family:ui-monospace,Consolas,monospace;font-size:13px;color:var(--accent-2,#60a5fa);
+  letter-spacing:1px;word-break:break-all;user-select:all;}
+.lic-mini{padding:8px 10px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;color:#fff;
+  border:1px solid var(--line-2,#333a47);background:var(--panel-2,#262c37);white-space:nowrap;}
+.lic-mini:hover{filter:brightness(1.15);}
+.lic-input{width:100%;background:var(--panel-2,#262c37);border:1px solid var(--line-2,#333a47);color:var(--txt,#e7ebf2);
+  border-radius:9px;padding:11px 12px;font-family:ui-monospace,Consolas,monospace;font-size:14px;letter-spacing:1px;}
+.lic-input:focus{outline:none;border-color:var(--accent,#3b82f6);}
+.lic-btn{margin-top:14px;width:100%;background:linear-gradient(180deg,#4c8dfb,#2f6fe0);color:#fff;border:0;
+  border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;}
+.lic-btn:hover{filter:brightness(1.08);}
+.lic-msg{margin-top:10px;font-size:11.5px;min-height:16px;}
+.lic-msg.err{color:#f0736b;}
+.lic-msg.ok{color:#5fcf8a;}
+
+/* ===== static concept icons (replace animated previews) ===== */
+/* icon tiles: scale with width, keep aspect (never distort), keep margin (never touch edge) */
+.tile-icon{aspect-ratio:auto;min-height:0;display:block;padding:11% 13%;}
+.tile-icon svg{display:block;width:100%;height:auto;}
+
+/* ===== word labels: dim by default, full on hover ===== */
+.tile-name{opacity:.55;transition:opacity .15s ease;}
+.tile:hover .tile-name{opacity:1;}
+
+/* ===== bottom pinned dock ===== */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;pointer-events:none;padding-bottom:8px;}
+.dock-hidden{display:none !important;}
+.dock-bar{position:relative;pointer-events:auto;display:flex;align-items:center;gap:6px;
+  background:rgba(22,26,33,.94);border:1px solid var(--line-2,#333a47);border-radius:14px;padding:6px 8px;
+  box-shadow:0 10px 30px -12px rgba(0,0,0,0.35);}
+.dock-tools{display:flex;align-items:center;gap:6px;}
+.dock-ic{position:relative;width:34px;height:30px;display:flex;align-items:center;justify-content:center;
+  border-radius:9px;color:var(--txt,#e7ebf2);cursor:pointer;border:1px solid transparent;}
+.dock-ic:hover{background:var(--panel-2,#262c37);border-color:var(--line-2,#333a47);}
+.dock-ic svg{width:18px;height:18px;}
+.dock-add{width:34px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:9px;
+  cursor:pointer;color:var(--txt-dim,#8b94a3);border:1px dashed var(--line-2,#3a4250);}
+.dock-add:hover{color:var(--accent,#3b82f6);border-color:var(--accent,#3b82f6);}
+.dock-add svg{width:16px;height:16px;}
+.dock-sub{display:none;pointer-events:auto;margin-bottom:7px;gap:5px;align-items:center;
+  background:rgba(22,26,33,.94);border:1px solid var(--line-2,#333a47);border-radius:12px;padding:5px 7px;
+  box-shadow:0 8px 26px -12px rgba(0,0,0,0.325);}
+.dock-sub.show{display:flex;}
+.dock-sub .dock-ic{width:30px;height:28px;color:var(--txt-dim,#9aa6b6);}
+.dock-sub .dock-ic:hover{color:var(--accent,#3b82f6);background:var(--panel-2,#262c37);border-color:var(--line-2,#333a47);}
+.dock-sub .dock-ic svg{width:16px;height:16px;}
+.dock-menu{display:none;pointer-events:auto;position:absolute;bottom:54px;left:50%;transform:translateX(-50%);
+  flex-direction:column;min-width:124px;background:var(--panel,#21262f);border:1px solid var(--line-2,#333a47);
+  border-radius:10px;padding:5px;box-shadow:0 12px 32px -8px rgba(0,0,0,0.35);}
+.dock-menu.show{display:flex;}
+.dock-mi{padding:8px 11px;border-radius:7px;font-size:12px;color:var(--txt,#e7ebf2);cursor:pointer;}
+.dock-mi:hover{background:var(--panel-2,#262c37);}
+.dock-del{top:-7px;right:-7px;left:auto;}
+.dock-icx{top:-7px;right:-6px;left:auto;width:16px;height:16px;}
+body.editing .dock-del{display:flex;}
+body.editing .dock-ic .dock-icx{display:flex;}
+body.editing .dock-bar{outline:1px dashed rgba(96,165,250,.4);outline-offset:3px;}
+/* keep content clear of the pinned dock */
+body{padding-bottom:60px;}
+
+
+/* ===== dock collapse / restore ===== */
+.dock-collapse{width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:9px;
+  cursor:pointer;color:var(--txt-dim,#8b94a3);border:1px solid transparent;}
+.dock-collapse:hover{background:var(--panel-2,#262c37);color:var(--txt,#e7ebf2);border-color:var(--line-2,#333a47);}
+.dock-collapse svg{width:16px;height:16px;}
+.dock.collapsed .dock-bar,.dock.collapsed .dock-menu,.dock.collapsed .dock-sub{display:none !important;}
+.dock-handle{display:none;pointer-events:auto;position:fixed;right:10px;bottom:10px;width:34px;height:30px;
+  align-items:center;justify-content:center;border-radius:10px;cursor:pointer;color:var(--txt,#e7ebf2);
+  background:rgba(22,26,33,0.47);border:1px solid var(--line-2,#333a47);box-shadow:0 8px 24px -10px rgba(0,0,0,0.3);}
+.dock.collapsed .dock-handle{display:flex;}
+.dock-handle:hover{border-color:var(--accent,#3b82f6);color:var(--accent,#3b82f6);}
+.dock-handle svg{width:18px;height:18px;}
+
+
+/* ===== Task 3: Animation Reset button (subtle reddish, ~50% opacity) ===== */
+.anim-reset{padding:4px 12px;border-radius:8px;font-size:10.5px;font-weight:600;color:#fff;cursor:pointer;
+  border:1px solid rgba(239,68,68,.55);background:rgba(239,68,68,.5);opacity:.5;
+  transition:opacity .16s ease, transform .14s var(--ease-pop);}
+.anim-reset:hover{opacity:1;}
+.anim-reset:active{transform:scale(.93);}
+
+/* ===== Task 4: add-color swatch ===== */
+.swatches.small .swatch-add{display:flex;align-items:center;justify-content:center;
+  background:transparent;border:1px dashed var(--line-2,#3a4250);color:var(--txt-dim);
+  font-size:15px;font-weight:600;line-height:1;}
+.swatches.small .swatch-add:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px) scale(1.06);}
+
+/* ===== Task 5: dock handle holds both arrows, always visible ===== */
+.dock-handle{display:flex;}
+.dock-handle .dh-expand{display:none;}
+.dock.collapsed .dock-handle .dh-collapse{display:none;}
+.dock.collapsed .dock-handle .dh-expand{display:flex;}
+
+/* ===== Task 6: custom-sections modal ===== */
+.cust-segs{display:flex;gap:4px;}
+.cust-seg{padding:5px 12px;border-radius:8px;font-size:11px;font-weight:600;color:var(--txt-dim);cursor:pointer;
+  border:1px solid transparent;transition:color .15s ease,background .18s ease,border-color .18s ease;}
+.cust-seg:hover{color:var(--txt);background:rgba(255,255,255,.05);}
+.cust-seg.active{color:#fff;background:linear-gradient(180deg,var(--accent-2),var(--accent));border-color:var(--accent);
+  box-shadow:0 4px 14px -4px var(--accent-glow);}
+.cust-view{display:block;margin-top:10px;overflow-y:auto;min-height:0;}
+.cust-new{display:flex;gap:6px;margin-bottom:10px;}
+.cust-input{flex:1;min-width:0;background:var(--panel-2,#262c37);border:1px solid var(--line-2,#333a47);
+  color:var(--txt);border-radius:8px;padding:7px 9px;font-size:11px;outline:none;
+  -webkit-user-select:text;user-select:text;}
+.cust-input:focus{border-color:var(--accent);}
+.cust-create{padding:7px 14px;border-radius:8px;font-size:11px;font-weight:600;color:#fff;cursor:pointer;
+  border:1px solid var(--accent);background:linear-gradient(180deg,var(--accent-2),var(--accent));
+  box-shadow:0 4px 14px -4px var(--accent-glow);transition:transform .14s var(--ease-pop),filter .15s ease;}
+.cust-create:hover{filter:brightness(1.08);}
+.cust-create:active{transform:scale(.94);}
+.cust-list{display:flex;flex-direction:column;gap:8px;}
+.cust-empty,.cust-mem-empty{font-size:10.5px;color:var(--txt-dim);padding:6px 2px;line-height:1.5;}
+.cust-item{border:1px solid var(--line-2,#333a47);border-radius:11px;padding:9px;background:var(--panel,#21262f);}
+.cust-item-head{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+.cust-item-name{flex:1;font-size:12px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cust-del{width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:6px;
+  font-size:11px;color:#fff;cursor:pointer;background:rgba(239,68,68,.5);border:1px solid rgba(239,68,68,.55);
+  transition:filter .15s ease,transform .12s ease;}
+.cust-del:hover{filter:brightness(1.12);}
+.cust-del:active{transform:scale(.9);}
+.cust-mem{display:flex;flex-direction:column;gap:5px;margin-bottom:8px;}
+.cust-mem-row{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:8px;
+  background:var(--panel-2,#262c37);border:1px solid var(--line);}
+.cust-mem-name{flex:1;font-size:10.5px;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cust-mem-x{width:18px;height:18px;display:flex;align-items:center;justify-content:center;border-radius:5px;
+  font-size:10px;color:var(--txt-dim);cursor:pointer;transition:color .15s ease,background .15s ease;}
+.cust-mem-x:hover{color:#fff;background:rgba(239,68,68,.55);}
+.cust-add-sel{width:100%;background:var(--panel-2,#262c37);border:1px dashed var(--line-2,#3a4250);
+  color:var(--txt-dim);border-radius:8px;padding:6px 8px;font-size:10.5px;outline:none;cursor:pointer;}
+.cust-add-sel:hover{border-color:var(--accent);color:var(--txt);}
+
+
+/* ===== Free edit mode: move ANY button anywhere + resize each individually ===== */
+body.editing .tabpane, body.editing .section, body.editing .row, body.editing .grp{overflow:visible;}
+body.editing .freebtn{position:relative;z-index:6;cursor:grab;transition:none;}
+.freebtn.moved{position:relative;z-index:3;}
+body.editing .freebtn.dragging,body.editing .freebtn.sizing{z-index:1000;cursor:grabbing;opacity:.96;
+  box-shadow:0 14px 32px -8px rgba(0,0,0,0.36),0 0 0 1px rgba(96,165,250,0.35) inset;}
+/* move grip (top-left dots) */
+body.editing .freebtn::before{
+  content:"";position:absolute;top:4px;left:5px;width:11px;height:11px;opacity:.7;pointer-events:none;z-index:2;
+  color:rgba(150,170,200,.95);
+  background-image:radial-gradient(currentColor 1.1px,transparent 1.3px);background-size:4px 4px;
+}
+/* resize handle (bottom-right corner) */
+body.editing .freebtn::after{
+  content:"";position:absolute;right:0;bottom:0;width:17px;height:17px;cursor:nwse-resize;z-index:2;
+  background:
+    linear-gradient(135deg,transparent 44%,rgba(96,165,250,.9) 45%,rgba(96,165,250,.9) 58%,transparent 59%),
+    linear-gradient(135deg,transparent 64%,rgba(96,165,250,.9) 65%,rgba(96,165,250,.9) 78%,transparent 79%);
+  border-radius:0 0 8px 0;
+}
+
+/* ===== Free edit: explicit, easy-to-grab resize handle (real width/height) ===== */
+.freebtn .free-rz{ display:none; }
+body.editing .freebtn::after{ display:none; }      /* drop the geometric corner; use the real handle */
+body.editing .freebtn .free-rz{
+  display:block; position:absolute; right:-3px; bottom:-3px;
+  width:18px; height:18px; z-index:9; cursor:nwse-resize; pointer-events:auto;
+  background:
+    linear-gradient(135deg,transparent 40%,#60a5fa 42%,#60a5fa 55%,transparent 57%),
+    linear-gradient(135deg,transparent 60%,#60a5fa 62%,#60a5fa 75%,transparent 77%);
+  border-radius:0 0 9px 0;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.5));
+  transition:transform .12s cubic-bezier(.34,1.56,.64,1);
+}
+body.editing .freebtn .free-rz:hover{ transform:scale(1.18); }
+body.editing .freebtn.sizing .free-rz{ transform:scale(1.18); }
+
+/* ===== Text tab: EXPR / KFRM engine toggle ===== */
+.engine-line{ display:flex; align-items:center; gap:8px; }
+.engine-line .eng-lbl{ font-size:11px; color:var(--muted,#8b93a7); min-width:46px; }
+.engtog{ display:inline-flex; border:1px solid rgba(255,255,255,.14); border-radius:8px; overflow:hidden; }
+.engtog .engbtn{
+  appearance:none; -webkit-appearance:none; border:0; cursor:pointer;
+  background:transparent; color:var(--muted,#9aa3b8);
+  font:600 11px/1 inherit; letter-spacing:.4px; padding:6px 14px;
+  transition:background .14s, color .14s;
+}
+.engtog .engbtn + .engbtn{ border-left:1px solid rgba(255,255,255,.12); }
+.engtog .engbtn:hover{ color:#dfe5f3; }
+.engtog .engbtn.active{ background:linear-gradient(180deg,#3b82f6,#2563eb); color:#fff; }
+
+/* ===== AmanowText layout: compact, card-based, no sliders ===== */
+.anim-values{display:grid !important;grid-template-columns:repeat(5,minmax(0,1fr));grid-gap:5px !important;gap:5px !important;align-items:end;}
+.anim-values .field{min-width:0;gap:3px;}
+.anim-values .field .lbl{min-width:0;font-size:9px;letter-spacing:.15px;white-space:nowrap;}
+.anim-values .numstep{height:24px;min-width:0;}
+.anim-values .numstep input{padding:0 5px;font-size:10.5px;}
+.anim-values .numstep .steps{width:14px;}
+.bounce-field .lbl{display:flex;align-items:center;gap:3px;color:var(--txt);}
+.bounce-field .lbl input{width:12px;height:12px;}
+.mode-seg{display:flex;gap:3px !important;padding:3px;margin-bottom:8px !important;border-radius:9px;background:#191b1f;border:1px solid var(--line);}
+.mode-seg label{flex:1;display:block !important;text-align:center;cursor:pointer;}
+.mode-seg input{position:absolute;opacity:0;pointer-events:none;}
+.mode-seg span{display:block;padding:5px 4px;border-radius:6px;color:var(--txt-dim);font-size:10px;font-weight:700;transition:.16s ease;}
+.mode-seg input:checked + span{color:#fff;background:linear-gradient(180deg,#60a5fa,#2563eb);box-shadow:0 2px 7px rgba(37,99,235,0.21);}
+.animation-mini-line{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px !important;}
+.overshoot-chip{padding:3px 7px;border-radius:12px;border:1px solid rgba(52,211,153,.32);background:rgba(52,211,153,.09);color:#34d399;font-size:9px;font-weight:700;}
+.engtog{border-radius:6px;}
+.engtog .engbtn{font-size:9px;padding:3px 7px;min-height:20px;letter-spacing:.25px;}
+.amanow-text-card .preset-row{gap:4px;margin-bottom:8px;}
+.amanow-text-card .btn.tiny{min-height:22px;padding:3px 7px;font-size:9.5px;}
+.amanow-text-card .proprow{margin-bottom:5px;}
+.amanow-text-card .proprow .pname{font-size:10px;}
+.amanow-text-card .proprow input.num{padding:3px;font-size:10px;}
+.amanow-text-card .proprow .numstep{flex:none;}
+.amanow-text-card .proprow .numstep input{flex:1;min-width:0;width:100%;padding:0 4px;text-align:center;}
+.amanow-text-card .opacity-row .pname{min-width:58px;}
+.opacity-recommended{
+  flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:#ef5350;font-size:9.5px;font-weight:600;letter-spacing:.05px;
+}
+.amanow-animation-card>.row:not(.anim-values){margin-bottom:6px;}
+
+/* Reset button in the edit-mode bar */
+#uiScaleWrap #freeReset{ margin-left:8px; white-space:nowrap; }
+
+/* Copy/Paste Curves success flash */
+.btn.ok-flash{ border-color:#34d399 !important; color:#34d399 !important; background:rgba(52,211,153,.12) !important; }
+
+/* Free-trial pill (top center; sits under the license gate which is z-index 9999) */
+#amTrialPill{ position:fixed; top:7px; left:50%; transform:translateX(-50%); z-index:60; display:none;
+  padding:3px 11px; border-radius:999px; font-size:10.5px; font-weight:700; letter-spacing:.3px;
+  color:#fde68a; background:rgba(245,158,11,.14); border:1px solid rgba(245,158,11,.5);
+  cursor:pointer; user-select:none; white-space:nowrap; box-shadow:0 2px 8px rgba(0,0,0,0.175); }
+#amTrialPill.show{ display:block; }
+#amTrialPill:hover{ filter:brightness(1.12); }
+
+/* License gate: trial-code row */
+.lic-row2{ display:flex; gap:8px; align-items:stretch; }
+.lic-row2 .lic-input{ flex:1 1 auto; min-width:0; width:auto; margin:0; }
+.lic-row2 .lic-btn.alt{ flex:0 0 auto; width:auto; margin-top:0; display:flex; align-items:center; justify-content:center; }
+.lic-btn.alt{ background:transparent; border:1px solid var(--accent,#3b82f6); color:var(--accent,#3b82f6); white-space:nowrap; padding:0 16px; }
+.lic-btn.alt:hover{ background:rgba(59,130,246,.12); }
+.lic-or{ color:var(--muted,#8b93a7); text-align:center; font-size:11px; margin:12px 0 2px; letter-spacing:.6px; }
+
+/* ===== Animation live-preview stage (shows the selected animation on the words) ===== */
+.pv-stage{ position:relative; min-height:96px; margin:0 0 10px; padding:12px;
+  border:1px solid var(--line); border-radius:11px; overflow:hidden;
+  background:radial-gradient(130% 130% at 50% 0%, rgba(30,37,48,.92), rgba(13,15,19,.96));
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  perspective:560px; }
+.pv-stage .pv-idle{ color:var(--txt-dim); font-size:11px; letter-spacing:.4px; }
+.pv-stage .pv-row{ display:flex; justify-content:center; align-items:center; white-space:nowrap; }
+.pv-stage .ch{ display:inline-block; font-weight:800; font-size:16px; letter-spacing:.6px; color:#eef2f8;
+  text-transform:uppercase; transform-style:preserve-3d; will-change:transform,opacity,filter;
+  animation-duration:2.6s; animation-delay:var(--d,0s); animation-iteration-count:infinite;
+  animation-fill-mode:both; animation-name:var(--anim,none);
+  animation-timing-function:var(--ease,cubic-bezier(.2,.85,.25,1)); }
+.pv-stage .pv-sp{ animation:none; }
+.pv-stage .pv-shape{ width:48px; height:34px; border-radius:8px;
+  background:linear-gradient(160deg,#5aa0ff,#2f6fe0); box-shadow:0 6px 18px -6px var(--accent-glow);
+  transform-style:preserve-3d; will-change:transform,opacity,filter;
+  animation-duration:2.6s; animation-iteration-count:infinite; animation-fill-mode:both;
+  animation-name:var(--anim,none); animation-timing-function:var(--ease,cubic-bezier(.2,.85,.25,1)); }
+
+/* ===== Bounce on/off toggle (Animation bar, left of Reset) ===== */
+.bounce-toggle{ display:inline-flex; align-items:center; gap:6px; cursor:pointer; user-select:none; margin:0 8px 0 0; flex:0 0 auto; }
+.bounce-toggle input{ position:absolute; opacity:0; width:0; height:0; }
+.bounce-toggle .bt-box{ position:relative; width:32px; height:17px; border-radius:999px; background:#3a4150; transition:background .16s; flex:0 0 auto; }
+.bounce-toggle .bt-box::after{ content:""; position:absolute; top:2px; left:2px; width:13px; height:13px; border-radius:50%; background:#e8ecf3; transition:transform .16s; }
+.bounce-toggle input:checked + .bt-box{ background:var(--accent,#3b82f6); }
+.bounce-toggle input:checked + .bt-box::after{ transform:translateX(15px); }
+.bounce-toggle .bt-txt{ font-size:11px; font-weight:600; color:var(--txt,#e7ebf2); letter-spacing:.2px; }
+
+/* ===== Gate: "Later" (dismiss) button ===== */
+.lic-later{ display:block; width:100%; margin-top:10px; background:transparent; border:0; color:var(--txt-dim,#8b93a7);
+  font-size:12px; cursor:pointer; padding:6px; letter-spacing:.3px; }
+.lic-later:hover{ color:var(--txt,#e7ebf2); text-decoration:underline; }
+
+/* ===== Edit mode: whole-section reordering ===== */
+body.editing .section-title{ cursor:grab; user-select:none; }
+body.editing .section-title:active{ cursor:grabbing; }
+.section.sec-drag{ outline:2px dashed var(--accent,#3b82f6); outline-offset:2px; opacity:.93; position:relative; z-index:5; }
+/* 21.09.2026: блок, сдвинутый со своего места, рисуется поверх соседей, а у
+   родного места подсвечивается — это магнит, такой же, как у размеров кнопок */
+/* z-index выше кнопок режима правки (у них 6): иначе кнопка соседнего блока
+   накрывала заголовок сдвинутого и тот переставал ловить мышь */
+.section.blk-moved{ position:relative; z-index:30; }
+.section.sec-drag{ z-index:40; }
+.section.sec-drag.am-snap{ outline:2px solid var(--accent,#4c8dff); }
+
+/* ===== Text Exploder chooser ===== */
+.exp-modal{ position:fixed; top:0;right:0;bottom:0;left:0; z-index:9000; display:none; align-items:center; justify-content:center;
+  background:rgba(8,10,13,.82); backdrop-filter:blur(2px); padding:20px; }
+.exp-modal.show{ display:flex; }
+.exp-card{ position:relative; width:100%; max-width:340px; background:#17181c;
+  border:1px solid #3b82f6; border-radius:14px; padding:20px 18px 18px;
+  box-shadow:0 0 0 1px rgba(59,130,246,0.125), 0 18px 50px -18px rgba(0,0,0,0.4), 0 0 26px -6px rgba(59,130,246,0.175); }
+.exp-title{ text-align:center; color:#3b82f6; font-weight:800; font-size:15px; letter-spacing:2.5px; margin:2px 0 16px; }
+.exp-close{ position:absolute; top:-10px; right:-10px; width:26px; height:26px; border-radius:50%;
+  background:#ef4444; color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center;
+  cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.225); transition:transform .12s; }
+.exp-close:hover{ transform:scale(1.12); }
+.exp-grid{ display:grid; grid-template-columns:1fr 1fr; grid-gap:10px;gap:10px; }
+.exp-opt{ background:#232529; border:1px solid #3a3d44; border-radius:9px; padding:13px 6px;
+  text-align:center; color:#e8ecf3; font-weight:700; font-size:11.5px; letter-spacing:1.2px;
+  cursor:pointer; user-select:none; transition:border-color .14s, background .14s, transform .12s; }
+.exp-opt:hover{ border-color:#3b82f6; background:#232a38; }
+.exp-opt:active{ transform:scale(.97); }
+
+/* ===== Motion Lab ===== */
+.ml-lbl{ font-size:10.5px; letter-spacing:.7px; color:var(--txt-dim,#8b93a7); text-transform:uppercase; margin:10px 0 6px; font-weight:700; }
+.ml-row{ gap:6px; align-items:center; }
+.ml-f{ font-size:11px; color:var(--txt-dim,#8b93a7); white-space:nowrap; }
+.ml-row .num{ width:52px; }
+.ml-shapes .ml-shape{ flex:1; font-size:15px; padding:7px 0; text-align:center; line-height:1; }
+.ml-chk{ display:flex; align-items:center; gap:5px; font-size:11px; color:var(--txt,#e7ebf2); user-select:none; white-space:nowrap; }
+.ml-swatches{ display:flex; gap:5px; flex-wrap:wrap; flex:1; min-height:20px; }
+.ml-sw{ width:20px; height:20px; border-radius:6px; cursor:pointer; border:1px solid rgba(255,255,255,.18); transition:transform .12s; }
+.ml-sw:hover{ transform:scale(1.15); }
+.ml-hint{ font-size:10px; color:var(--txt-dim,#8b93a7); margin:4px 0 2px; }
+.ml-mode.active{ border-color:var(--accent,#3b82f6); color:var(--accent,#3b82f6); }
+
+/* ===== Colors tab ===== */
+.tinput{ background:#0f1216; border:1px solid var(--line,#2a2e36); color:var(--txt,#e7ebf2);
+  border-radius:7px; padding:6px 8px; font-size:12px; outline:none; }
+.tinput:focus{ border-color:var(--accent,#3b82f6); }
+.col-sep{ width:1px; height:18px; background:var(--line,#2a2e36); margin:0 3px; }
+.col-pre{ padding:4px 6px; min-width:74px; max-width:120px; font-size:11px; }
+.col-hidden{ position:absolute; width:0; height:0; opacity:0; pointer-events:none; }
+.col-lbl{ font-size:10px; letter-spacing:.8px; color:var(--txt-dim,#8b93a7); text-transform:uppercase; margin:12px 0 7px; font-weight:700; }
+.col-gradhead{ display:flex; align-items:center; gap:7px; }
+.col-mini{ width:22px; height:20px; padding:0; border:1px solid rgba(255,255,255,.2); border-radius:5px; background:none; cursor:pointer; }
+.col-title{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.col-title input[type=range]{ width:96px; flex:0 0 auto; }
+.col-solids{ display:flex; flex-wrap:wrap; gap:6px; }
+.col-sw{ width:var(--sw,24px); height:var(--sw,24px); border-radius:6px; cursor:pointer; border:1px solid rgba(255,255,255,.14); transition:transform .1s; }
+.col-sw:hover{ transform:scale(1.16); z-index:2; }
+.col-grads{ display:flex; flex-wrap:wrap; gap:6px; }
+.col-grad{ width:46px; height:26px; border-radius:7px; cursor:pointer; border:1px solid rgba(255,255,255,.14); transition:transform .1s; }
+.col-grad:hover{ transform:scale(1.08); z-index:2; }
+
+/* delete-preset X button */
+.col-x{ flex:0 0 auto; color:#f87171; font-weight:700; }
+.col-x:hover{ background:#7f1d1d; color:#fff; }
+
+/* separator inside the align dock, between align and distribute */
+.dock-sep2{ width:1px; align-self:stretch; background:rgba(255,255,255,.14); margin:4px 3px; }
+
+/* ===== Auto-update: header badge + full-panel overlay ===== */
+.hicon{ position:relative; }
+.upd-badge{ display:none; position:absolute; top:-4px; right:-5px; min-width:14px; height:14px;
+  padding:0 3px; border-radius:8px; background:#ef4444; color:#fff;
+  font-size:9px; font-weight:800; line-height:14px; text-align:center;
+  box-shadow:0 0 0 2px #101216; pointer-events:none; }
+.upd-badge.show{ display:block; }
+#icoUpd.spin svg{ animation:updspin 0.9s linear infinite; }
+@keyframes updspin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+
+.updov{ display:none; position:fixed; top:0;right:0;bottom:0;left:0; z-index:9500;
+  background:rgba(8,10,14,.82); backdrop-filter:blur(3px);
+  align-items:center; justify-content:center; padding:18px; }
+.updov.show{ display:flex; }
+.updov-card{ position:relative; width:100%; max-width:300px;
+  background:linear-gradient(180deg,#181c25 0%,#12151c 100%);
+  border:1px solid rgba(59,130,246,.5); border-radius:16px;
+  box-shadow:0 0 0 1px rgba(59,130,246,0.06), 0 24px 60px -18px rgba(0,0,0,0.45), 0 0 44px -12px var(--accent-glow);
+  padding:22px 18px 18px; text-align:center; }
+.updov-x{ position:absolute; top:8px; right:10px; border:0; background:transparent;
+  color:#64748b; font-size:19px; line-height:1; cursor:pointer; padding:2px 5px; }
+.updov-x:hover{ color:#e2e8f0; }
+.updov-ico{ width:46px; height:46px; margin:2px auto 10px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg,#4c8dfb 0%,#3b82f6 60%,#2f6fe0 100%);
+  color:#fff; box-shadow:0 10px 26px -10px var(--accent-glow); }
+.updov-ico svg{ width:22px; height:22px; }
+.updov.busy .updov-ico svg{ animation:updspin 0.9s linear infinite; }
+.updov.done .updov-ico{ background:linear-gradient(180deg,#22c55e 0%,#16a34a 100%); }
+.updov.err  .updov-ico{ background:linear-gradient(180deg,#ef4444 0%,#dc2626 100%); }
+.updov-t{ font-size:14.5px; font-weight:800; color:#eef3ff; letter-spacing:.3px; }
+.updov-v{ font-size:11px; color:var(--accent-2); font-weight:700; margin-top:3px; }
+.updov-n{ font-size:11px; color:#9aa8c2; margin:8px 2px 14px; line-height:1.45;
+  /* заметки приходят с сервера с переводами строк — каждый пункт с новой
+     строки (просьба владельца 27.08.2026), textContent их не съедает */
+  white-space:pre-line; text-align:left;
+  max-height:118px; overflow:auto; }
+.updov-go{ display:block; width:100%; border:0; cursor:pointer; padding:10px 12px; border-radius:10px;
+  font-size:12.5px; font-weight:800; color:#fff;
+  background:linear-gradient(180deg,#4c8dfb 0%,#3b82f6 50%,#2f6fe0 100%);
+  box-shadow:0 8px 22px -8px var(--accent-glow); }
+.updov-go:hover{ filter:brightness(1.08); }
+.updov-go:disabled{ opacity:.55; cursor:default; filter:none; }
+.updov-link{ display:block; width:100%; margin-top:8px; border:1px solid #2c3442; cursor:pointer;
+  padding:8px 12px; border-radius:10px; font-size:11.5px; font-weight:700;
+  color:#c7d2e8; background:#161a22; }
+.updov-link:hover{ border-color:var(--accent); color:#fff; }
+.updov-msg{ font-size:10.5px; color:#8fa0bd; margin-top:10px; min-height:13px; }
+.updov.err .updov-msg{ color:#fca5a5; }
+.updov.done .updov-msg{ color:#86efac; }
+.updov-link.solo{ margin-top:0; border:0; padding:10px 12px; font-size:12.5px; font-weight:800; color:#fff;
+  background:linear-gradient(180deg,#4c8dfb 0%,#3b82f6 50%,#2f6fe0 100%);
+  box-shadow:0 8px 22px -8px var(--accent-glow); }
+.updov-link.solo:hover{ filter:brightness(1.08); }
+
+/* Save-default button in the Animate bar */
+.ab-save{ display:inline-flex; align-items:center; justify-content:center; height:24px; padding:0 12px; margin-right:8px;
+  border-radius:7px; font-size:11px; font-weight:700; cursor:pointer; color:#e8eefc;
+  background:linear-gradient(180deg,#2a3550 0%,#212a40 100%); border:1px solid rgba(59,130,246,.45); }
+.ab-save:hover{ border-color:var(--accent); background:linear-gradient(180deg,#33436a 0%,#26314b 100%); }
+.ab-save.saved{ background:linear-gradient(180deg,#16a34a 0%,#128a3f 100%); border-color:#16a34a; color:#fff; }
+.ab-save.err{ background:linear-gradient(180deg,#dc2626 0%,#b91c1c 100%); border-color:#dc2626; color:#fff; }
+
+/* Reset In/Out choice dialog */
+.rc{ display:none; position:fixed; top:0;right:0;bottom:0;left:0; z-index:9600; background:rgba(8,10,14,.8); backdrop-filter:blur(3px); align-items:center; justify-content:center; }
+.rc.show{ display:flex; }
+.rc-card{ background:linear-gradient(180deg,#181c25,#12151c); border:1px solid rgba(59,130,246,0.25); border-radius:14px; padding:20px 18px; text-align:center; min-width:240px; box-shadow:0 20px 50px -15px rgba(0,0,0,0.45); }
+.rc-t{ font-size:13.5px; font-weight:800; color:#eef3ff; margin-bottom:14px; }
+.rc-btns{ display:flex; gap:8px; justify-content:center; margin-bottom:10px; }
+.rc-b{ border:0; cursor:pointer; padding:9px 16px; border-radius:9px; font-size:12px; font-weight:700; color:#fff; background:linear-gradient(180deg,#4c8dfb,#2f6fe0); box-shadow:0 6px 16px -7px var(--accent-glow); }
+.rc-b:hover{ filter:brightness(1.1); }
+.rc-both{ background:linear-gradient(180deg,#64748b,#475569); }
+.rc-x{ border:0; background:transparent; color:#8fa0bd; cursor:pointer; font-size:11px; padding:4px; margin-top:2px; }
+.rc-x:hover{ color:#e2e8f0; }
+
+/* Text Box Fill/Stroke swatches */
+.tb-row{ align-items:center; gap:8px; }
+.tb-sw{ width:22px; height:22px; flex:0 0 22px; border-radius:6px; cursor:pointer; border:2px solid rgba(255,255,255,0.125); box-shadow:0 1px 4px rgba(0,0,0,0.2); }
+.tb-sw:hover{ border-color:var(--accent); }
+.tb-btn{ flex:1; }
+
+/* Device-code copy feedback + selectable code */
+#licDevice{ -webkit-user-select:text; user-select:text; cursor:text; }
+.copied{ background:linear-gradient(180deg,#16a34a,#128a3f)!important; border-color:#16a34a!important; color:#fff!important; }
+.copyfail{ background:linear-gradient(180deg,#b45309,#92400e)!important; border-color:#b45309!important; color:#fff!important; }
+/* Motion Save button (next to Elastic / Bounce) */
+/* По аудиту монтажёра кнопки Save заметно шире, чем нужно: они лишь
+   запоминают текущие значения, а тянули на себя треть строки. Ширина
+   фиксирована — Elastic и Bounce забирают освободившееся место.
+   Здесь ЗАДАЁТСЯ ТОЛЬКО ШИРИНА. Размер шрифта и отступы по вертикали
+   намеренно не трогаем: ниже по файлу есть правило .motion-save с
+   !important на padding, оно идёт позже и всё равно победит — дубли
+   тут только создавали бы третий источник правды. */
+.motion-save{ font-weight:700; flex:0 0 auto; min-width:52px; max-width:64px; }
+
+/* ===================== SAVE OBJECTS ===================== */
+.so-wrap{display:flex;gap:8px;align-items:flex-start;}
+.so-rail{display:flex;flex-direction:column;gap:4px;flex:0 0 82px;min-width:0;}
+.so-cat{text-align:center;padding:7px 4px;border-radius:9px;font-weight:600;font-size:9.5px;letter-spacing:.2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--txt-dim);cursor:pointer;border:1px solid var(--line-2);
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));
+  transition:color .18s ease,background .2s ease,border-color .2s ease,transform .16s var(--ease-pop);}
+.so-cat:hover{color:var(--txt);background:rgba(255,255,255,.05);}
+.so-cat:active{transform:scale(.94);}
+.so-cat.active{color:#fff;border-color:rgba(96,165,250,.55);
+  background:linear-gradient(180deg,rgba(59,130,246,.22),rgba(59,130,246,.08));
+  box-shadow:0 0 0 1px rgba(59,130,246,0.075),0 6px 18px -8px var(--accent-glow);}
+.so-main{flex:1;min-width:0;display:flex;flex-direction:column;}
+.so-top{display:flex;gap:6px;margin-bottom:7px;}
+.so-top .btn{min-height:26px;}
+.so-top .btn.busy{opacity:.6;pointer-events:none;}
+.so-list{display:flex;flex-direction:column;gap:5px;min-height:44px;}
+.so-empty{font-size:10.5px;color:var(--txt-dim);text-align:center;padding:14px 4px;line-height:1.5;}
+.so-item{position:relative;display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:9px;cursor:pointer;
+  border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#2c323d 0%,#222731 52%,#1d222b 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.035),0 4px 10px -7px rgba(0,0,0,0.35);
+  transition:transform .16s var(--ease-pop),border-color .2s ease,box-shadow .2s ease,filter .2s ease;}
+.so-item:hover{filter:brightness(1.08);border-color:rgba(96,165,250,.4);transform:translateY(-1px);}
+.so-item.sel{border-color:rgba(96,165,250,.85);
+  box-shadow:0 0 0 1px rgba(96,165,250,0.225),0 8px 20px -10px var(--accent-glow);}
+.so-nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+.so-name{font-size:11px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.so-info{font-size:8.5px;color:var(--txt-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.so-act{width:20px;height:20px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:6px;
+  font-size:11px;line-height:1;color:var(--txt-dim);cursor:pointer;border:1px solid transparent;
+  transition:color .15s ease,background .15s ease,transform .12s var(--ease-pop);}
+.so-act:hover{color:#fff;background:var(--panel-2,#262c37);border-color:var(--line-2);}
+.so-act:active{transform:scale(.88);}
+.so-act.so-go:hover{color:var(--accent-2);}
+.so-act.so-del:hover{color:#fff;background:rgba(239,68,68,.55);}
+.so-ren-input{flex:1;min-width:0;background:var(--panel-2,#262c37);border:1px solid var(--accent);color:var(--txt);
+  border-radius:6px;padding:3px 6px;font-size:11px;font-weight:600;outline:none;
+  -webkit-user-select:text;user-select:text;}
+.so-status{min-height:15px;margin-top:7px;font-size:10px;line-height:1.45;color:var(--txt-dim);}
+.so-status.ok{color:#5fcf8a;}
+.so-status.err{color:#f0736b;}
+
+/* ===== SAVE OBJECTS: TEXT notebook ===== */
+#soHint{white-space:pre-line;}
+.txt-wrap{display:flex;gap:7px;align-items:stretch;min-height:150px;flex-wrap:wrap;}
+.txt-pages{display:flex;flex-direction:column;gap:4px;flex:0 0 78px;min-width:0;max-height:280px;overflow-y:auto;}
+.txt-empty{font-size:9.5px;color:var(--txt-dim);line-height:1.5;padding:4px 2px;}
+.txt-page{position:relative;display:flex;align-items:center;gap:3px;padding:5px 6px;border-radius:8px;cursor:pointer;
+  border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#2c323d 0%,#222731 52%,#1d222b 100%);
+  transition:transform .16s var(--ease-pop),border-color .2s ease,filter .2s ease;}
+.txt-page:hover{filter:brightness(1.08);border-color:rgba(96,165,250,.4);}
+.txt-page.sel{border-color:rgba(96,165,250,.85);
+  box-shadow:0 0 0 1px rgba(96,165,250,0.2),0 6px 16px -10px var(--accent-glow);}
+.txt-page-nm{flex:1;min-width:0;font-size:10px;font-weight:600;color:var(--txt);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.txt-page-act{width:15px;height:15px;flex:none;display:none;align-items:center;justify-content:center;border-radius:4px;
+  font-size:9px;line-height:1;color:var(--txt-dim);cursor:pointer;}
+.txt-page:hover .txt-page-act{display:flex;}
+.txt-page-act:hover{color:#fff;background:var(--panel-2,#262c37);}
+.txt-page-del:hover{background:rgba(239,68,68,.55);}
+.txt-side{flex:1;min-width:108px;display:flex;flex-direction:column;gap:5px;}
+.txt-bar{display:flex;gap:3px;}
+.txt-b{width:26px;height:22px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:6px;
+  font-size:10.5px;line-height:1;color:var(--txt);cursor:pointer;border:1px solid var(--line-2);
+  background:linear-gradient(180deg,#2c323d,#1d222b);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.035);
+  transition:transform .14s var(--ease-pop),filter .18s ease,border-color .2s ease;}
+.txt-b:hover{filter:brightness(1.15);border-color:rgba(96,165,250,.45);}
+.txt-b:active{transform:scale(.88);}
+.txt-b b,.txt-b i,.txt-b u,.txt-b s{pointer-events:none;}
+.txt-ed{flex:1;min-height:130px;max-height:320px;overflow-y:auto;border-radius:9px;padding:8px 9px;
+  border:1px solid var(--line-2);background:linear-gradient(180deg,#1b2029,#161a21);
+  font-size:11.5px;line-height:1.55;color:var(--txt);outline:none;cursor:text;
+  -webkit-user-select:text;user-select:text;}
+.txt-ed:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,0.07);}
+.txt-ed[contenteditable="false"]{opacity:.45;cursor:default;}
+.txt-ed ul{margin:4px 0;padding-left:18px;}
+.txt-ed b,.txt-ed strong{color:#fff;}
+
+/* ===== Layout 2.0: a custom-sized button never spills its label over neighbours ===== */
+.freebtn.moved{overflow:hidden;white-space:nowrap;}
+
+/* ===== Colors tab: gradient palette + composer ===== */
+.gmix-row{align-items:center;gap:5px;margin-top:7px;flex-wrap:wrap;}
+.gcount{min-width:24px;flex:0 0 auto;}
+.gcount.on{color:#fff;border-color:rgba(96,165,250,.6);
+  background:linear-gradient(180deg,rgba(59,130,246,.28),rgba(59,130,246,.10));
+  box-shadow:0 0 0 1px rgba(59,130,246,0.09),0 0 12px -5px var(--accent-glow);}
+.gsw{width:20px;height:20px;flex:0 0 20px;border-radius:6px;cursor:pointer;
+  border:2px solid rgba(255,255,255,0.125);box-shadow:0 1px 4px rgba(0,0,0,0.2);
+  transition:transform .12s var(--ease-pop),border-color .15s ease;}
+.gsw:hover{border-color:var(--accent);transform:scale(1.12);}
+.gprev{flex:1;min-width:40px;height:20px;border-radius:6px;border:1px solid rgba(255,255,255,.16);}
+
+/* ===== Amanow Animation: the animation + text cards read as ONE card =====
+   They stay two separate .section blocks (so hide/restore and the saved
+   section ids keep working), but the seam between them is erased: flat shared
+   background, no inner border/radius/shadow, and the second title is hidden
+   (its element stays for the Sections list in the customize modal). */
+.section.compact.amanow-animation-card{
+  margin-bottom:0;
+  padding-bottom:6px;
+  border-bottom:0;
+  border-bottom-left-radius:0;border-bottom-right-radius:0;
+  background:rgba(39,42,47,.96);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.018);
+}
+.section.compact.amanow-text-card{
+  padding-top:8px;
+  border-top:0;
+  border-top-left-radius:0;border-top-right-radius:0;
+  background:rgba(39,42,47,.96);
+  box-shadow:0 5px 14px -10px rgba(0,0,0,0.4);
+}
+.amanow-text-card>.section-title{display:none;}
+.amanow-animation-card>.section-title b{color:var(--accent-2);font-weight:800;}
+
+/* ===== TEXT tab: Section 1/2/3 sub-chips + Auto Subtitles ===== */
+.tsec-tabs{margin-bottom:9px;}
+#asKey{-webkit-user-select:text;user-select:text;font-size:11px;}
+#asStatus{margin-top:2px;}
+
+/* ===== Section titles: white with a faint glow, always readable ===== */
+.section-title, .col-lbl{
+  color:#fff;
+  text-shadow:0 0 7px rgba(150,195,255,.38), 0 0 1px rgba(255,255,255,.5);
+}
+
+/* ===== Narrow-panel fix: a tab's label may never bleed over its neighbours ===== */
+.tab{overflow:hidden;}
+
+/* ===== Anchor Point grid: keeps its look at ANY size (radius/dot scale with the cell) ===== */
+.cell{border-radius:24%;}
+.cell::after{width:14%;height:14%;min-width:3px;min-height:3px;}
+.cell.on::after{width:26%;height:26%;min-width:5px;min-height:5px;}
+
+/* ===== Language dropdown: bigger, airy, separated options ===== */
+#asLang{font-size:13px;padding:9px 10px;}
+#asLang option{
+  font-size:13px;
+  padding:8px 10px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+  background:#1b2029;color:#e7ebf2;
+}
+
+/* ============================================================
+   1.25.0 — FLAT REDESIGN
+   The raised "3D" buttons are replaced with a calm flat look
+   (solid fill, hairline border, no bevel). The top capsule tab
+   bar intentionally keeps its original design.
+   ============================================================ */
+:root{
+  --flat-bg:#262b34; --flat-bg-2:#2b313b; --flat-hover:#303743;
+  --flat-border:rgba(255,255,255,.07); --flat-border-h:rgba(255,255,255,.16);
+}
+.btn,.modebtn,.modebtn-an,.shape,.hicon,.txt-b,.tile,.so-item,.txt-page{
+  background:var(--flat-bg);
+  box-shadow:none;
+  border:1px solid var(--flat-border);
+}
+.btn:hover,.modebtn:hover,.modebtn-an:hover,.shape:hover,.hicon:hover,.txt-b:hover{
+  background:var(--flat-hover);
+  border-color:var(--flat-border-h);
+  box-shadow:none; filter:none; transform:none;
+}
+.btn:active,.modebtn-an:active{ transform:scale(.97); box-shadow:none; filter:brightness(.95); }
+.tile:hover,.so-item:hover,.txt-page:hover{ background:var(--flat-bg-2); filter:none; transform:none; box-shadow:none; border-color:var(--flat-border-h); }
+.tile.sel,.so-item.sel,.txt-page.sel{ border-color:rgba(96,165,250,0.4); box-shadow:0 0 0 1px rgba(96,165,250,0.175); }
+.btn.primary{
+  background:var(--accent); border-color:transparent; color:#fff;
+  box-shadow:0 4px 14px -6px var(--accent-glow);
+}
+.btn.primary:hover{ background:var(--accent-2); filter:none; box-shadow:0 6px 18px -7px var(--accent-glow); }
+.stepper,.numstep{ background:var(--flat-bg); box-shadow:none; }
+.stepper .stp,.numstep .stp{ background:transparent; }
+.stepper .stp:hover,.numstep .stp:hover{ background:var(--flat-hover); }
+input.num,select.sel,.tinput{ background:var(--flat-bg); box-shadow:none; }
+.ab-btn{ background:var(--accent); border-color:transparent; box-shadow:none; }
+.ab-btn:hover{ background:var(--accent-2); transform:none; filter:none; }
+.ab-save{ background:var(--flat-bg); box-shadow:none; }
+.modebtn.on{ background:rgba(59,130,246,0.09); box-shadow:none; }
+.cell{ background:var(--flat-bg); box-shadow:none; border:1px solid var(--flat-border); }
+.cell:hover{ transform:none; }
+.tile-prev{ background:rgba(0,0,0,.22); }
+.anim-bar .anim-reset{ box-shadow:none; }
+.so-cat,.grpchip,.subtab{ background:transparent; }
+.dock-bar,.dock-sub{ box-shadow:0 6px 20px -12px rgba(0,0,0,0.3); }
+
+/* ===== ANIMATION sub-tab labels ===== */
+/* Свечение убрано: из-за него Shape/Favorites выглядели размытыми, не как
+   остальные подвкладки. Правка в источнике (не только в neumorph), чтобы
+   чётко было и в плагине, и в демо-панели сайта, которая грузит именно style.css. */
+.tabpane[data-pane="anim"] .subtabs .subtab{
+  color:#fff;
+  text-shadow:none;
+}
+.tabpane[data-pane="anim"] .subtabs .subtab.active{
+  color:#fff;
+  text-shadow:none;
+}
+
+/* ===== Theme switch (header, right of the logo) ===== */
+.theme-sw{ display:flex; align-items:center; gap:5px; margin-left:10px; cursor:pointer; user-select:none; }
+.theme-sw .th-ic{ width:13px; height:13px; color:var(--txt-dim); transition:color .2s ease; }
+.theme-sw .th-track{ position:relative; width:30px; height:16px; border-radius:999px;
+  background:var(--flat-bg); border:1px solid var(--flat-border-h); transition:background .2s ease; }
+/* 21.09.2026, слово владельца: было наоборот — солнце давало серую панель.
+     Кружок стоит у солнца в светлой теме и у месяца в тёмной. */
+.theme-sw .th-knob{ position:absolute; top:1.5px; left:2px; width:11px; height:11px; border-radius:50%; transform:translateX(13px);
+  background:#cfd6e2; transition:transform .22s var(--ease-pop), background .2s ease; }
+body.theme-light .theme-sw .th-knob{ transform:none; background:#e8cba0; }
+body.theme-light .theme-sw .th-sun{ color:#e8cba0; }
+body:not(.theme-light) .theme-sw .th-moon{ color:#9db4d6; }
+
+/* ============================================================
+   LIGHT THEME — warm cocoa / cream (not white)
+   ============================================================ */
+body.theme-light{
+  --bg-0:#332c27; --bg-1:#3a322c; --bg-2:#443b34;
+  --panel:#3f3731; --panel-2:#4a4139;
+  --line:rgba(255,235,200,.07); --line-2:rgba(255,235,200,.13);
+  --txt:#f0e7d8; --txt-dim:#b6a893;
+  --accent:#d9a662; --accent-2:#e8c088; --accent-glow:rgba(217,166,98,.4);
+  --flat-bg:#453c35; --flat-bg-2:#4d443c; --flat-hover:#544a41;
+  --flat-border:rgba(255,235,200,.09); --flat-border-h:rgba(255,235,200,.2);
+  background:radial-gradient(120% 80% at 50% -10%, #423931 0%, #332c27 60%);
+  color:var(--txt);
+}
+body.theme-light .section{
+  background:var(--panel);
+  border-color:var(--line-2);
+  box-shadow:inset 0 1px 0 rgba(255,240,210,0.015),0 5px 14px -10px rgba(0,0,0,0.275);
+}
+body.theme-light .logo{ background:linear-gradient(90deg,#fff6e6,#d8c4a4); -webkit-background-clip:text; background-clip:text; }
+body.theme-light .logo b{ color:var(--accent-2); -webkit-text-fill-color:var(--accent-2); }
+body.theme-light input.num, body.theme-light select.sel, body.theme-light .tinput,
+body.theme-light .stepper, body.theme-light .numstep{ background:#3a322b; color:var(--txt); border-color:var(--line-2); }
+body.theme-light select.sel option{ background:#3a322b; color:var(--txt); }
+body.theme-light input.num:focus, body.theme-light select.sel:focus{ border-color:var(--accent); box-shadow:0 0 0 3px rgba(217,166,98,0.08); }
+body.theme-light input[type=range]{ background:linear-gradient(90deg,var(--accent) 0%,var(--accent) var(--p,50%),#57493c var(--p,50%)); }
+body.theme-light input[type=range]::-webkit-slider-thumb{ background:radial-gradient(circle at 35% 30%,#fff8ea,#efd9b4 40%,var(--accent-2)); }
+body.theme-light .section-title, body.theme-light .col-lbl{
+  color:#fff6e6; text-shadow:0 0 7px rgba(232,192,136,.4), 0 0 1px rgba(255,246,230,.5);
+}
+body.theme-light .subtab.active, body.theme-light .grpchip.active, body.theme-light .so-cat.active{
+  color:#241d17; border-color:rgba(232,192,136,.7);
+  background:linear-gradient(180deg,rgba(232,192,136,.9),rgba(217,166,98,.9));
+  box-shadow:0 0 0 1px rgba(232,192,136,0.125),0 6px 18px -8px var(--accent-glow);
+  text-shadow:none;
+}
+body.theme-light .btn.primary,body.theme-light .ab-btn{ background:var(--accent); color:#241d17; }
+body.theme-light .btn.primary:hover,body.theme-light .ab-btn:hover{ background:var(--accent-2); }
+body.theme-light .tab.active{
+  border-color:rgba(232,192,136,.8);
+  background:
+    radial-gradient(130% 170% at 50% -10%, rgba(255,226,176,.55) 0%, rgba(217,166,98,0) 58%),
+    linear-gradient(180deg,#e8c088 0%,#d9a662 55%,#c08c4b 100%);
+  color:#241d17; text-shadow:0 0 9px rgba(255,240,214,.8);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(80,50,10,0.175),
+    0 0 14px rgba(232,192,136,0.35), 0 0 34px -4px rgba(217,166,98,0.275),
+    0 6px 18px -6px rgba(150,100,40,0.4);
+}
+body.theme-light .tabpane[data-pane="anim"] .subtabs .subtab{
+  color:#fff6e6; text-shadow:none;
+}
+body.theme-light .cell.on{ border-color:rgba(232,192,136,0.375); box-shadow:0 0 0 1px rgba(217,166,98,0.15),0 0 16px -2px var(--accent-glow); }
+body.theme-light .cell.on::after{ background:var(--accent-2); box-shadow:0 0 10px var(--accent-glow); }
+body.theme-light ::-webkit-scrollbar-thumb{ background:rgba(255,235,200,.14); }
+body.theme-light .txt-ed{ background:#3a322b; border-color:var(--line-2); }
+body.theme-light .mode-seg{ background:#362f29; border-color:var(--line); }
+body.theme-light .mode-seg input:checked + span{ color:#241d17; background:linear-gradient(180deg,var(--accent-2),var(--accent)); box-shadow:0 2px 7px rgba(217,166,98,0.2); }
+body.theme-light .engtog .engbtn.active{ background:linear-gradient(180deg,var(--accent-2),var(--accent)); color:#241d17; }
+body.theme-light .animate-bar{ background:linear-gradient(180deg,rgba(63,55,49,.97),rgba(51,44,39,.97)); border-color:var(--line-2); }
+body.theme-light .pv-stage{ background:radial-gradient(130% 130% at 50% 0%, rgba(66,57,49,.95), rgba(40,34,29,.97)); }
+body.theme-light .tile-prev{ background:rgba(0,0,0,.18); }
+body.theme-light .dock-bar,body.theme-light .dock-sub,body.theme-light .dock-handle{ background:rgba(58,50,44,.96); border-color:var(--line-2); }
+body.theme-light .dock-menu{ background:var(--panel); border-color:var(--line-2); }
+body.theme-light .restore-card,body.theme-light .rc-card{ background:linear-gradient(180deg,#453c35,#3a322c); border-color:var(--line-2); }
+
+/* ===== Auto Subtitles — settings UI ===== */
+.as-lbl{ font-size:10px; font-weight:600; letter-spacing:.4px; color:var(--txt); margin:8px 2px 4px; }
+.as-slrow{ gap:7px; align-items:center; }
+.as-slrow input[type=range]{ flex:1; }
+.as-num{ width:44px !important; flex:none !important; text-align:center; padding:4px 4px !important; font-size:10.5px !important; }
+.as-unit{ font-size:9.5px; color:var(--txt-dim); min-width:52px; }
+.as-layout label span{ font-size:10.5px; }
+.as-styles{ display:grid; grid-template-columns:repeat(2,1fr); grid-gap:6px;gap:6px; margin-bottom:2px; }
+.as-style{ position:relative; border-radius:9px; overflow:hidden; cursor:pointer;
+  border:1px solid var(--flat-border); background:var(--flat-bg);
+  transition:border-color .18s ease, background .18s ease; }
+.as-style:hover{ background:var(--flat-hover); border-color:var(--flat-border-h); }
+.as-style.sel{ border-color:rgba(96,165,250,0.425); box-shadow:0 0 0 1px rgba(96,165,250,0.2); }
+body.theme-light .as-style.sel{ border-color:rgba(232,192,136,0.425); box-shadow:0 0 0 1px rgba(232,192,136,0.2); }
+.as-style .asp{ display:block; width:100%; aspect-ratio:16/7; object-fit:cover; background:#000; }
+.as-style .asn{ font-size:9px; font-weight:600; color:var(--txt); opacity:.75; padding:3px 6px 5px; text-align:center; }
+
+/* ===== SAVE: READY library ===== */
+.rd-search{ flex:1; text-align:left; font-size:11px; }
+.rd-grid{ display:grid; grid-template-columns:repeat(2,1fr); grid-gap:7px;gap:7px; }
+.rd-card{ position:relative; border-radius:10px; overflow:hidden; border:1px solid var(--flat-border);
+  background:var(--flat-bg); transition:border-color .18s ease, background .18s ease; }
+.rd-card:hover{ background:var(--flat-bg-2); border-color:var(--flat-border-h); }
+.rd-prev{ display:block; width:100%; aspect-ratio:16/10; object-fit:contain; background:
+  repeating-conic-gradient(rgba(255,255,255,.045) 0% 25%, rgba(0,0,0,.12) 0% 50%) 50%/14px 14px; }
+.rd-prev.rd-noimg{ display:flex; align-items:center; justify-content:center; color:var(--txt-dim); font-size:16px; }
+/* transitions: превью нет намеренно — плитка низкая, не тратим место (30.08.2026) */
+.rd-card.rd-sm .rd-prev{ aspect-ratio:auto; height:34px; }
+.rd-card.rd-sm .rd-prev.rd-noimg{ font-size:13px; }
+.rd-name{ font-size:9.8px; font-weight:600; color:var(--txt); padding:4px 6px 2px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rd-acts{ display:flex; gap:4px; padding:3px 5px 6px; }
+.rd-b{ flex:1; display:flex; align-items:center; justify-content:center; gap:4px; min-height:20px;
+  border-radius:6px; font-size:9.5px; font-weight:700; color:var(--txt); cursor:pointer;
+  border:1px solid var(--flat-border); background:rgba(255,255,255,.03);
+  transition:background .15s ease, color .15s ease, border-color .15s ease; }
+.rd-b:hover{ background:var(--accent); color:#fff; border-color:transparent; }
+body.theme-light .rd-b:hover{ color:#241d17; }
+.rd-b:active{ transform:scale(.96); }
+.rd-empty{ grid-column:1/-1; color:var(--txt-dim); font-size:10.5px; text-align:center; padding:18px 4px; line-height:1.5; }
+.rd-badge{ position:absolute; top:4px; right:4px; z-index:2; font-size:8px; font-weight:800; letter-spacing:.4px;
+  color:#fff; background:rgba(59,130,246,.85); border-radius:5px; padding:1.5px 5px; pointer-events:none; }
+body.theme-light .rd-badge{ color:#241d17; background:rgba(232,192,136,.9); }
+
+/* per-item Open / Share buttons in the user library rows */
+.so-act.so-open{ width:auto; padding:0 7px; font-size:9px; font-weight:700; letter-spacing:.3px; }
+.so-act.so-open:hover{ color:var(--accent-2); }
+.so-act.so-share:hover{ color:var(--accent-2); }
+.so-act svg{ width:11px; height:11px; display:block; }
+
+/* tab drag (edit mode) */
+.tab.tab-drag{ outline:2px dashed var(--accent); outline-offset:1px; opacity:.9; z-index:30; }
+
+/* ===== Auto-subtitles live preview ===== */
+.as-pv{ position:relative; width:100%; aspect-ratio:16/9; background:#0d1220;
+  border:1px solid rgba(255,255,255,.07); border-radius:10px; overflow:hidden; margin:2px 0 10px; }
+.as-pv .pvs-safe{ position:absolute; left:0; right:0; border-top:1px dashed rgba(255,255,255,.14); pointer-events:none; }
+.as-pv .pvs-cap{ position:absolute; font-weight:800; color:#fff; line-height:1.25;
+  letter-spacing:.2px; text-shadow:0 1px 3px rgba(0,0,0,.55); }
+.as-pv .pvs-cap span{ display:inline-block; }
+body.theme-light .as-pv{ border-color:rgba(0,0,0,.22); }
+
+/* ===== READY: unified preview cards, style chips, search badge ===== */
+.rd-prev{ background:#0d1428 !important; }
+body.theme-light .rd-prev{ background:#e9b83f !important; }
+.rd-card{ position:relative; }
+.rd-cbadge{ position:absolute; top:6px; right:6px; font-size:9px; font-weight:700;
+  padding:2px 7px; border-radius:8px; background:rgba(13,20,40,.82); color:#cfe0ff;
+  border:1px solid rgba(255,255,255,.14); pointer-events:none; }
+body.theme-light .rd-cbadge{ background:rgba(60,44,20,.82); color:#ffe9b0; border-color:rgba(0,0,0,.2); }
+.rd-subs{ display:flex; flex-wrap:wrap; gap:5px; margin:0 0 8px; }
+.rd-sub{ font-size:10px; font-weight:700; padding:4px 10px; border-radius:10px; cursor:pointer;
+  background:var(--flat-bg, rgba(255,255,255,.06)); border:1px solid rgba(255,255,255,.1); user-select:none; }
+.rd-sub:hover{ border-color:var(--accent, #4c8dff); }
+.rd-sub.active{ background:var(--accent, #4c8dff); color:#fff; border-color:transparent; }
+body.theme-light .rd-sub{ border-color:rgba(0,0,0,.18); }
+
+/* ===== 1.26.0 round 2 ===== */
+/* Auto-subtitles: style tiles are plain buttons now (no video previews) */
+.as-style-btn{ display:flex; align-items:center; justify-content:center;
+  padding:10px 8px; border-radius:9px; font-size:12px; font-weight:700;
+  cursor:pointer; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+  user-select:none; text-align:center; }
+.as-style-btn:hover{ border-color:var(--accent,#4c8dff); }
+.as-style-btn.sel{ background:var(--accent,#4c8dff); color:#fff; border-color:transparent; }
+body.theme-light .as-style-btn{ border-color:rgba(0,0,0,.18); background:rgba(0,0,0,.05); }
+/* bigger labels across the Auto-subtitles section (the language select stays as is) */
+.tsec-3 .section-title{ font-size:14px; }
+.tsec-3 .as-lbl{ font-size:12.5px; }
+.tsec-3 .as-layout label span{ font-size:12.5px; }
+.tsec-3 .as-unit{ font-size:11.5px; }
+.tsec-3 .as-num{ font-size:12.5px; }
+.tsec-3 .optline label span{ font-size:12.5px; }
+.tsec-3 .lbl{ font-size:12.5px; }
+.tsec-3 #asGo{ font-size:13px; }
+.tsec-3 .so-status{ font-size:11.5px; }
+/* Elastic / Bounce Save buttons: blue edge, a touch smaller */
+.motion-save{ border:1px solid var(--accent,#4c8dff) !important; font-size:0.92em;
+  padding-top:4px !important; padding-bottom:4px !important; }
+
+/* ===== round 3: white pill sub-tabs (photo-1 look) ===== */
+.subtab{ background:#ffffff !important; color:#14181f !important; font-weight:800;
+  border:1px solid rgba(0,0,0,.08) !important; border-radius:12px; }
+.subtab:hover{ background:#eef2f8 !important; color:#0d1a33 !important; }
+.subtab.active{ background:#ffffff !important; color:#0d1a33 !important;
+  border:2px solid var(--accent,#4c8dff) !important;
+  box-shadow:0 0 0 2px rgba(76,141,255,0.11); }
+body.theme-light .subtab{ border-color:rgba(0,0,0,.16) !important; }
+
+/* ===== Word Boxes =====
+   Same markup and the same behaviour as before - only the skin changed: a dark
+   navy card, a "TOOLS" rule with the colour dot on the left, and five outlined
+   tiles carrying a white serif glyph plus the mark in the picked colour. The
+   mark colour still rides on --wbc, so the dot / colour picker is untouched. */
+.wb-win{ --wbc:#2563eb; border-radius:14px; overflow:hidden;
+  border:1px solid rgba(255,255,255,.07); background:#0b0f18; padding:10px; }
+.wb-titlebar{ position:relative; display:flex; align-items:center; gap:10px;
+  padding:9px 12px; margin-bottom:11px; border-radius:11px;
+  border:1px solid rgba(255,255,255,.06); background:rgba(255,255,255,.018); }
+.wb-dot{ flex:0 0 auto; width:14px; height:14px; border-radius:50%; background:var(--wbc);
+  cursor:pointer; border:none; transition:transform .12s; }
+.wb-dot:hover{ transform:scale(1.2); }
+.wb-rule{ flex:1; height:1px; background:rgba(255,255,255,.10); }
+.wb-title{ flex:0 0 auto; font-size:11px; font-weight:500; color:#c7cdd8; letter-spacing:4px; }
+.wb-tiles{ display:flex; gap:9px; padding:0; background:transparent; }
+.wb-tile{ position:relative; flex:1; aspect-ratio:1.03; border:1px solid rgba(255,255,255,.09);
+  border-radius:9px; background:transparent; cursor:pointer; display:flex; align-items:center;
+  justify-content:center; overflow:hidden; transition:border-color .14s, background .14s; }
+.wb-tile:hover{ border-color:var(--wbc); background:rgba(255,255,255,.03); }
+.wb-tile.sel{ border-color:var(--wbc); background:rgba(37,99,235,.10);
+  box-shadow:inset 0 0 0 1px var(--wbc); }
+.wb-ch{ font-family:'Didot','Bodoni MT',Georgia,'Times New Roman',serif; font-weight:400;
+  font-size:30px; color:#ffffff; line-height:1; z-index:1; }
+.wb-ch.wb-red{ color:#ffffff; }
+.wb-scr{ position:absolute; left:8%; right:8%; bottom:10%; width:84%; height:auto; z-index:2; }
+.wb-scr path{ stroke:var(--wbc); stroke-width:2.2; }
+.wb-strike{ position:absolute; left:8%; right:8%; top:50%; height:2.5px; margin-top:-1px;
+  background:var(--wbc); z-index:2; }
+.wb-hl .wb-ch{ position:relative; }
+/* the two filled plates read as a deeper shade of the marker colour; opacity
+   does that without color-mix(), which the CEF build cannot be relied on for */
+.wb-hl::before{ content:""; position:absolute; left:12%; right:12%; top:20%; bottom:20%;
+  background:var(--wbc); opacity:.52; border-radius:5px; }
+.wb-half{ position:absolute; left:12%; right:12%; top:56%; bottom:24%;
+  background:var(--wbc); opacity:.52; border-radius:3px; z-index:0; }
+.wb-und{ position:absolute; left:12%; right:12%; bottom:18%; height:2.5px;
+  background:var(--wbc); border-radius:2px; }
+body.theme-light .wb-win{ background:#efe6d6; border-color:rgba(0,0,0,.12); }
+body.theme-light .wb-titlebar{ background:rgba(0,0,0,.03); border-color:rgba(0,0,0,.09); }
+body.theme-light .wb-rule{ background:rgba(0,0,0,.14); }
+body.theme-light .wb-title{ color:#4a4030; }
+body.theme-light .wb-tile{ border-color:rgba(0,0,0,.14); }
+body.theme-light .wb-ch, body.theme-light .wb-ch.wb-red{ color:#1b1409; }
+
+/* ===== CRVS: curve panel ===== */
+/* масштаб панели в правом верхнем углу CRVS. Секция становится relative,
+   контрол ложится поверх свободного места справа от заголовка Curves и не
+   мешает перетаскиванию секции за заголовок (drag слушает .section-title). */
+/* Раздел НИКОГДА не шире панели: ползунок размера меняет ширину редактора в
+   процентах (--crv-w) и число колонок пресетов (--crv-cols), а не зумит блок от
+   левого угла, как было раньше. Поэтому горизонтальная прокрутка больше не
+   нужна — она и появлялась только из-за уехавшего за край зума. */
+.crv-section{ position:relative; overflow-x:hidden; }
+/* редактор: график, числа, кнопки режимов и APPLY — одной шириной, по центру */
+.crv-section .crv-ed,
+.crv-section .crv-nums,
+.crv-section .crv-modes{ width:var(--crv-w,100%); margin-left:auto; margin-right:auto; }
+/* 29.09.2026: ниже 62 % ужимается только график, цифры и кнопки держат ширину */
+.crv-section .crv-nums,
+.crv-section .crv-modes{ width:var(--crv-wb,var(--crv-w,100%)); }
+/* приподнят к самому заголовку CURVES и выровнен по его середине: раньше стоял
+   ниже базовой линии подписи и читался как съехавший */
+.crv-zoom{ position:absolute; top:9px; right:16px; display:flex; align-items:center; gap:7px; z-index:2; line-height:1; }
+.crv-zoom-ic{ width:13px; height:13px; color:var(--txt-dim); flex:0 0 auto; display:block; }
+.crv-zoom input[type=range]{ width:78px; display:block; margin:0; vertical-align:middle; }
+.crv-ed{ background:#23262e; border-radius:10px; padding:4px; border:1px solid rgba(255,255,255,.07);
+  /* кривая внутри рисуется currentColor — здесь её цвет для тёмной темы */
+  color:#fff; }
+.crv-svg{ width:100%; display:block; cursor:crosshair; }
+.crv-nums{ text-align:center; font-size:12px; color:#cfd6e4; letter-spacing:1px; margin:6px 0; font-weight:600; }
+.crv-modes{ display:flex; gap:6px; align-items:stretch; margin:2px 0 6px; }
+.crv-mode{ min-width:34px; padding:0 8px; display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:800; letter-spacing:.6px;
+  border-radius:8px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); cursor:pointer; user-select:none; }
+.crv-mode:hover{ border-color:var(--accent,#4c8dff); }
+.crv-mode.active{ background:var(--accent,#4c8dff); color:#fff; border-color:transparent; }
+.crv-apply{ flex:1; display:flex; align-items:center; justify-content:center; padding:9px 0; border-radius:8px;
+  background:var(--accent,#4c8dff); color:#fff; font-weight:800; letter-spacing:1.5px; font-size:12px; cursor:pointer; user-select:none; }
+.crv-apply:hover{ filter:brightness(1.1); }
+.crv-apply:active{ transform:scale(.98); }
+.crv-phead{ display:flex; align-items:center; justify-content:space-between; margin:8px 0 4px; }
+.crv-pttl{ font-size:11px; font-weight:700; color:#aab3c5; letter-spacing:.6px; }
+.crv-add{ width:24px; height:24px; display:flex; align-items:center; justify-content:center; border-radius:7px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); cursor:pointer; font-weight:800; font-size:15px; }
+.crv-add:hover{ border-color:var(--accent,#4c8dff); }
+.crv-namerow{ display:flex; gap:6px; margin:4px 0; }
+.crv-namerow .num{ flex:1; text-align:left; }
+.crv-nok{ max-width:70px; }
+/* число колонок задаёт ползунок размера (--crv-cols): 6 — мелкие плитки,
+   3 — крупные. repeat(5,...) остаётся значением по умолчанию для старых
+   сохранений и для движков, где переменная почему-то не подхватилась. */
+.crv-grid{ display:grid; grid-template-columns:repeat(5,1fr);
+  grid-template-columns:repeat(var(--crv-cols,5),1fr); grid-gap:5px;gap:5px; }
+.crv-tile{ display:flex; flex-direction:column; align-items:center; gap:1px; padding:4px 2px 3px; border-radius:8px;
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); cursor:pointer;
+  /* кривая внутри плитки рисуется currentColor — здесь её цвет для тёмной темы */
+  color:#fff; }
+.crv-tile:hover{ border-color:var(--accent,#4c8dff); background:rgba(76,141,255,.16); }
+.crv-tile.sel{ border-color:var(--accent,#4c8dff); background:rgba(76,141,255,.28); }
+.crv-tile svg{ width:100%; height:auto; display:block; }
+.crv-tn{ font-size:8.5px; color:#9aa3b5; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.crv-tile.cust .crv-tn{ color:#cfe0ff; font-weight:700; }
+body.theme-light .crv-ed{ background:#2a2620; }
+
+/* ===== 1.26.0 round 4 ===== */
+/* Auto-subtitles: "Language" label bigger, the AUTO SUBTITLES title a bit smaller */
+.tsec-3 .section-title{ font-size:12px; }
+.tsec-3 .lbl, .section.compact.tsec-3 .lbl{ font-size:14.5px; color:var(--txt); }
+/* clear air between the animation gallery and the Squash & Stretch section */
+#sqSection{ margin-top:14px; }
+/* sub-tab capsule bars keep a clean gap from the section frame below (CREATE / SAVE / TEXT) */
+.csec-tabs, .ssec-tabs, .tsec-tabs{ margin:2px 1px 10px; }
+/* the active sub-tab pill is yellow, not white */
+.subtab.active{ background:#e9b83f !important; color:#231a06 !important;
+  border:2px solid #d9a52e !important; box-shadow:0 0 0 2px rgba(233,184,63,0.14); }
+.subtab.active:hover{ background:#f2c24a !important; color:#231a06 !important; }
+body.theme-light .subtab.active{ background:#e9b83f !important; color:#231a06 !important;
+  border-color:#c8951f !important; }
+
+/* ===== 1.26.0 round 5 ===== */
+/* off-screen READY cards skip layout/paint/decode - large grids stop stuttering */
+.rd-card{ content-visibility:auto; contain-intrinsic-size:150px 140px; }
+/* per-letter preview wrapper: keeps word layout, letters animate individually */
+.pv-wrap{ display:inline-block; white-space:nowrap; }
+.sample .pv-wrap .ch{ display:inline-block; }
+
+/* ===== 1.26.0 round 7 - panel smoothness =====
+   Every .btn and every gallery .tile used to declare will-change:transform, so
+   the compositor kept ~110 permanent GPU layers alive. Opening a heavy pane
+   (ANIMATION) had to re-composite all of them inside a fading parent - that was
+   the stutter. Chrome promotes an element for the duration of a transform
+   transition on its own, so the hint buys nothing and costs a lot. */
+.btn, .tile, .modebtn-an{ will-change:auto; }
+
+/* The pane cross-fade is opacity-only now. The old keyframe also slid the pane
+   4px, which re-rasterised every glyph of a 500-node subtree mid-animation. */
+@keyframes fade{ from{opacity:0} to{opacity:1} }
+.tabpane{ animation:fade .13s linear; }
+
+/* The tab pill no longer animates its glow: box-shadow and text-shadow repaint
+   the whole capsule bar on every frame of the transition. */
+.tab{ transition:color .18s ease, background .2s ease, transform .16s var(--ease-pop); }
+
+/* The animate bar sits on a 96%-opaque background - the blur behind it was
+   invisible and forced a backdrop snapshot on every scroll frame. */
+.animate-bar{ backdrop-filter:none; -webkit-backdrop-filter:none; }
+
+/* Reserve the scrollbar gutter: panes differ in height, so the bar used to
+   appear/disappear on every tab switch and shove the layout sideways. */
+html{ scrollbar-gutter:stable; }
+body{ overflow-y:scroll; }
+
+/* The header row is a single nowrap flex line: at the manifest's own default
+   width (330) and at MinSize (270) it ran past the right edge and body's
+   overflow-x:hidden simply ate the last icons. Tighten it, and let it wrap as a
+   last resort so an icon is never lost. */
+.header{ flex-wrap:wrap; row-gap:5px; }
+.hicons{ margin-left:auto; }
+@media (max-width:400px){
+  .header{ gap:5px; padding:0; }
+  .logo{ gap:3px; }
+  /* .hicons already right-aligns itself with margin-left:auto, so the spacer is
+     pure dead width (plus one flex gap) once things get tight */
+  .header .spacer{ display:none; }
+  .logo{ font-size:12px; letter-spacing:.2px; }
+  .logo .logo-cv{ width:10px; height:10px; }
+  .theme-sw{ gap:4px; margin-left:4px; }
+  .theme-sw .th-ic{ width:11px; height:11px; }
+  .theme-sw .th-track{ width:26px; height:14px; }
+  .theme-sw .th-knob{ width:9px; height:9px; top:1.5px; transform:translateX(11px); }
+  body.theme-light .theme-sw .th-knob{ transform:none; }
+  .hicons{ gap:2px; }
+  .hicon{ width:20px; height:20px; border-radius:6px; }
+  .hicon svg{ width:12px; height:12px; }
+}
+@media (max-width:320px){
+  .logo{ font-size:11px; }
+  .logo .logo-cv{ width:9px; height:9px; }
+  .theme-sw .th-track{ width:22px; }
+  .theme-sw .th-knob{ transform:translateX(8px); }
+  body.theme-light .theme-sw .th-knob{ transform:none; }
+  .hicon{ width:18px; height:18px; }
+  .hicon svg{ width:11px; height:11px; }
+}
+
+
+
+/* ============================================================
+   ATOOLS RADIAL
+
+   The wheel is drawn to the proportions measured off the plugin in the
+   reference clip (fractions of the disc radius R):
+     disc          1.00 R, translucent dark, subtle radial dividers
+     hub           0.313 R, thin ring in the active segment's colour
+     labels        0.680 R, 0.095 R type, light grey, sentence case
+     tool arc      1.16 R .. 1.55 R, one tile per tool, 36 deg pitch
+   The hovered segment is filled with ITS OWN colour (that is what the
+   settings screen's "recolor" changes), not a fixed blue.
+   ============================================================ */
+.logo{ cursor:pointer; display:inline-flex; align-items:center; gap:5px;
+  transition:filter .18s ease, transform .16s var(--ease-pop); }
+.logo:hover{ filter:brightness(1.15); }
+.logo:active{ transform:scale(.96); }
+.logo .logo-cv{ width:12px; height:12px; flex:0 0 auto; color:var(--accent-2);
+  -webkit-text-fill-color:currentColor; opacity:.75; transition:transform .2s var(--ease-pop), opacity .2s ease; }
+.logo:hover .logo-cv{ opacity:1; transform:translateX(2px); }
+body.rx-page-on .logo .logo-cv{ transform:rotate(180deg); }
+
+/* the READY grid builds a page at a time now; this asks for the next one */
+.rd-more{ grid-column:1/-1; margin:6px 0 2px; padding:9px 0; text-align:center; cursor:pointer;
+  border-radius:10px; font-size:10.5px; font-weight:600; letter-spacing:.3px; color:#c3c9d3;
+  border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); }
+.rd-more:hover{ color:#fff; background:rgba(59,143,220,.20); border-color:rgba(59,143,220,.45); }
+
+/* ============================================================
+   FLOATING CARD WINDOW
+   The same page running as the Modeless extension: no tabs, no dock,
+   no header - one card and a title strip, in a window After Effects
+   lets the user park anywhere on screen.
+   ============================================================ */
+body.am-float{ overflow-y:auto; overflow-x:auto; }  /* ручное увеличение уводит контент вправо — даём прокрутку, а не обрезку */
+body.am-float .header,
+body.am-float .tabs,
+body.am-float .tabpane,
+body.am-float .dock,
+body.am-float .lic-gate,
+body.am-float .updov,
+body.am-float #uiScaleWrap,
+body.am-float .rx-page,
+body.am-float .rx-ov{ display:none !important; }
+
+.amf-bar{ display:flex; align-items:center; gap:8px; padding:9px 12px 7px;
+  border-bottom:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.03); }
+.amf-title{ font-size:11px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:#c3c9d3; }
+.amf-host{ padding:10px; margin:0 auto; }  /* при ручном уменьшении контент по центру */
+/* the card arrives with whatever the tab switcher had set on it, and it may be
+   flagged hidden in the panel - in here it is the only thing there is */
+.amf-host > .section{ display:block !important; margin:0; }
+.amf-host > .section.sec-hidden{ display:block !important; }
+.amf-host > .section > .del-x{ display:none !important; }
+
+/* вкладка ЦЕЛИКОМ, перенесённая в окно-карту (пункт Section в раскладках
+   ATOOLS): общий запрет tabpane в float-окне выше для неё снимается —
+   специфичность этого правила выше, оба с !important */
+body.am-float .amf-host > .tabpane{ display:block !important; margin:0; }
+
+/* ---------- wheel overlay ---------- */
+.rx-ov{ position:fixed; top:0;right:0;bottom:0;left:0; z-index:9800; display:none;
+  background:rgba(6,7,9,.52); -webkit-user-select:none; user-select:none; }
+.rx-ov.show{ display:block; }
+
+/* The stage gets its own compositing layer. Without it every highlight change
+   makes CEF re-raster the translucent overlay sitting behind the wheel across
+   the whole panel, which is most of what made the gesture feel heavy. The layer
+   only exists while the overlay is shown, so it costs nothing the rest of the
+   time. */
+.rx-stage{ position:absolute; left:0; top:0; will-change:transform; transform:translateZ(0); contain:paint; }
+/* No entrance animation on purpose: a radial menu has to be correct on the
+   frame it appears, and a CSS animation freezes at its FIRST keyframe whenever
+   the host stops compositing - which CEF does routinely. */
+.rx-svg{ display:block; width:100%; height:100%; overflow:visible; }
+
+.rxw-disc{ fill:rgba(31,34,41,.95); }
+.rxw-div{ stroke:rgba(255,255,255,.07); fill:none; }
+.rxw-wedge{ fill:transparent; }
+.rxw-wedge.hot{ fill:var(--rxc,#3b8fdc); }
+.rxw-lbl{ fill:#c3c9d3; font-weight:500; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
+.rxw-lbl.hot{ fill:#ffffff; font-weight:600; }
+.rxw-hub{ fill:#13161c; }
+.rxw-hubring{ fill:none; stroke:var(--rxc,#3b8fdc); }
+.rxw-hubt{ font-weight:600; text-anchor:middle; dominant-baseline:middle; pointer-events:none; fill:#c3c9d3; }
+.rxw-hubt.act{ fill:var(--rxc,#3b8fdc); }
+.rxw-tile{ fill:rgba(42,46,55,.95); stroke:rgba(255,255,255,.05); stroke-width:1; }
+.rxw-tile.hot{ fill:var(--rxc,#3b8fdc); stroke:transparent; }
+.rxw-tlbl{ fill:#c3c9d3; font-weight:500; text-anchor:middle; dominant-baseline:middle; pointer-events:none; }
+.rxw-tlbl.hot{ fill:#ffffff; font-weight:600; }
+
+/* The Anchor section is one nine-cell grid, drawn like the Anchor Point control
+   in the panel itself: a place you point at, not the letters BR / ML / TC. */
+.rxw-agc{ fill:rgba(255,255,255,.05); stroke:rgba(255,255,255,.11); stroke-width:1.4; }
+.rxw-agd{ fill:rgba(255,255,255,.42); }
+.rxw-agc.on{ fill:rgba(255,255,255,.14); stroke:var(--rxc,#3b8fdc); stroke-width:3; }
+.rxw-agd.on{ fill:#ffffff; }
+
+/* ---------- HUD under the wheel ---------- */
+.rx-hud{ position:absolute; left:0; right:0; bottom:0; padding:8px 10px 10px;
+  background:linear-gradient(180deg, rgba(6,7,9,0), rgba(6,7,9,.9) 42%); }
+.rx-cap{ min-height:32px; text-align:center; }
+.rx-cap b{ display:block; font-size:12px; font-weight:800; letter-spacing:.5px; color:#f2f5f9; }
+.rx-cap span{ display:block; font-size:10.5px; color:#98a0ac; margin-top:2px; line-height:1.35; }
+.rx-status{ text-align:center; font-size:10.5px; min-height:14px; color:#98a0ac; }
+.rx-status.ok{ color:#7ee0a8; }
+.rx-status.err{ color:#ff8f8f; }
+.rx-foot{ display:flex; align-items:center; justify-content:center; gap:6px; margin-top:6px; }
+.rx-hint{ font-size:9.5px; letter-spacing:.4px; color:#6b727c; }
+
+/* the wheel usually closes the instant a tool fires, so the result is reported
+   by a toast rather than a line nobody is still looking at */
+.rx-toast{ position:fixed; left:50%; bottom:14px; transform:translate(-50%,10px); z-index:9900;
+  max-width:88%; padding:7px 13px; border-radius:999px; pointer-events:none;
+  font-size:10.5px; font-weight:600; letter-spacing:.2px; color:#eef2f7; text-align:center;
+  background:rgba(20,24,31,.96); border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 8px 22px -10px rgba(0,0,0,0.45);
+  /* no transition on purpose: this is the ONLY report the user gets that a tool
+     ran, and CEF freezes a transition on its first frame whenever it stops
+     compositing - which would have left the toast permanently invisible */
+  opacity:0; }
+.rx-toast.show{ opacity:1; transform:translate(-50%,0); }
+.rx-toast.ok{ border-color:rgba(126,224,168,.45); color:#c9f5dc; }
+.rx-toast.err{ border-color:rgba(255,143,143,.45); color:#ffd4d4; }
+
+/* ---------- effect browser ---------- */
+.rx-fx{ display:none; margin:6px 0 0; }
+.rx-fx.show{ display:block; }
+.rx-fxsearch{ width:100%; padding:7px 10px; border-radius:9px; font-size:11px; color:#eef2f7;
+  border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); outline:none;
+  -webkit-user-select:text; user-select:text; }
+.rx-fxsearch:focus{ border-color:#3b8fdc; }
+.rx-fxlist{ max-height:190px; overflow-y:auto; margin-top:6px; border-radius:9px;
+  border:1px solid rgba(255,255,255,.10); background:rgba(0,0,0,.35); }
+.rx-fxrow{ display:flex; align-items:center; gap:7px; padding:6px 9px; cursor:pointer;
+  border-bottom:1px solid rgba(255,255,255,.05); }
+.rx-fxrow:last-child{ border-bottom:none; }
+.rx-fxrow:hover{ background:rgba(59,143,220,.18); }
+.rx-fxn{ flex:1; font-size:11px; color:#eef2f7; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rx-fxc{ font-size:9px; color:#8b9099; white-space:nowrap; }
+.rx-fxempty{ padding:14px 10px; text-align:center; font-size:10.5px; color:#8b9099; }
+
+/* ============================================================
+   SETTINGS PAGE (the AmanowTools logo opens this)
+   ============================================================ */
+.rx-page{ display:none; }
+/* no entrance animation: a whole page that CEF might freeze on its first
+   keyframe (opacity 0) is a page nobody can see */
+body.rx-page-on .rx-page{ display:block; }
+body.rx-page-on .tabs,
+body.rx-page-on .tabpane,
+body.rx-page-on #uiScaleWrap,
+body.rx-page-on .dock{ display:none !important; }
+
+.rx-phead{ display:flex; align-items:center; gap:6px; margin:2px 1px 12px; }
+.rx-back{ display:inline-flex; align-items:center; gap:5px; padding:5px 11px; border-radius:999px;
+  font-size:10px; font-weight:700; letter-spacing:.7px; color:var(--txt-dim); cursor:pointer;
+  border:1px solid var(--line-2); background:rgba(255,255,255,.03); }
+.rx-back:hover{ color:var(--txt); border-color:rgba(96,165,250,.5); background:rgba(96,165,250,.10); }
+.rx-back:active{ transform:scale(.96); }
+.rx-pbtn{ padding:5px 12px; border-radius:8px; font-size:10.5px; font-weight:700; cursor:pointer;
+  color:var(--txt-dim); border:1px solid var(--line-2); background:rgba(255,255,255,.03); }
+.rx-pbtn:hover{ color:var(--txt); }
+.rx-pbtn.primary{ color:#fff; background:var(--accent); border-color:transparent; }
+.rx-pbtn.primary:hover{ filter:brightness(1.1); }
+.rx-pbtn:active{ transform:scale(.96); }
+.rx-pbtn.off{ opacity:.45; pointer-events:none; }
+
+.rx-sec{ font-size:9px; font-weight:800; letter-spacing:1.6px; color:var(--txt-dim);
+  text-transform:uppercase; margin:14px 2px 7px; display:flex; align-items:center; gap:7px; }
+.rx-dirty{ font-size:8px; letter-spacing:1px; color:#e0a83a; border:1px solid rgba(224,168,58,.4);
+  border-radius:5px; padding:1px 5px; display:none; }
+.rx-dirty.show{ display:inline-block; }
+
+.rx-presetrow{ display:flex; align-items:center; gap:5px; margin:0 1px 8px; }
+.rx-preset{ flex:1; min-width:0; padding:6px 8px; border-radius:8px; font-size:11px; color:var(--txt);
+  border:1px solid var(--line-2); background:var(--bg-2); outline:none; }
+.rx-preset.narrow{ flex:0 0 auto; width:88px; }
+.rx-mini{ flex:0 0 auto; min-width:26px; height:27px; padding:0 8px; display:flex; align-items:center;
+  justify-content:center; border-radius:8px; font-size:10.5px; font-weight:700; color:var(--txt-dim);
+  cursor:pointer; border:1px solid var(--line-2); background:rgba(255,255,255,.03); }
+.rx-mini:hover{ color:var(--txt); border-color:rgba(96,165,250,.45); }
+.rx-mini:active{ transform:scale(.95); }
+.rx-mini.wide{ min-width:auto; }
+
+.rx-seglist{ display:flex; flex-direction:column; gap:5px; margin:0 1px; }
+.rx-segrow{ border-radius:9px; border:1px solid var(--line-2); background:rgba(255,255,255,.025); }
+.rx-segrow.drag{ opacity:.55; outline:1px dashed var(--accent); }
+.rx-seghead{ display:flex; align-items:center; gap:8px; padding:8px 9px; cursor:pointer; }
+.rx-grip{ flex:0 0 auto; width:9px; height:14px; cursor:grab; opacity:.45;
+  background-image:radial-gradient(currentColor 1px, transparent 1px);
+  background-size:4px 4px; color:var(--txt-dim); }
+.rx-dot{ flex:0 0 auto; width:11px; height:11px; border-radius:50%; cursor:pointer;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.175) inset; }
+.rx-segname{ flex:1; min-width:0; font-size:12px; font-weight:600; color:var(--txt);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rx-segcount{ flex:0 0 auto; font-size:9.5px; color:var(--txt-dim); letter-spacing:.4px; }
+.rx-segcount.locked{ color:#e0a83a; }
+.rx-chev{ flex:0 0 auto; width:12px; color:var(--txt-dim); font-size:11px; text-align:center;
+  transition:transform .16s ease; }
+.rx-segrow.open .rx-chev{ transform:rotate(90deg); }
+.rx-segbody{ display:none; padding:0 9px 9px; }
+.rx-segrow.open .rx-segbody{ display:block; }
+.rx-toolrow{ display:flex; align-items:center; gap:7px; padding:5px 7px; margin-bottom:4px;
+  border-radius:7px; background:rgba(0,0,0,.22); border:1px solid rgba(255,255,255,.05); }
+.rx-toolrow.drag{ opacity:.5; }
+.rx-tooln{ flex:1; min-width:0; font-size:11px; color:var(--txt); white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; }
+.rx-toold{ font-size:9px; color:var(--txt-dim); white-space:nowrap; overflow:hidden;
+  text-overflow:ellipsis; max-width:40%; }
+.rx-toolx{ flex:0 0 auto; width:16px; height:16px; display:flex; align-items:center; justify-content:center;
+  border-radius:5px; font-size:10px; color:var(--txt-dim); cursor:pointer; }
+.rx-toolx:hover{ color:#ff8f8f; background:rgba(255,143,143,.14); }
+.rx-addtool{ display:flex; align-items:center; justify-content:center; gap:5px; padding:6px;
+  border-radius:7px; font-size:10.5px; font-weight:700; color:var(--txt-dim); cursor:pointer;
+  border:1px dashed var(--line-2); }
+.rx-addtool:hover{ color:var(--txt); border-color:rgba(96,165,250,.5); }
+.rx-addtool.off{ opacity:.4; pointer-events:none; }
+.rx-segnote{ font-size:9.5px; color:var(--txt-dim); padding:4px 2px 0; line-height:1.4; }
+.rx-colorrow{ display:flex; align-items:center; gap:5px; padding:4px 0 7px; flex-wrap:wrap; }
+.rx-cc{ width:15px; height:15px; border-radius:50%; cursor:pointer; border:1px solid rgba(0,0,0,.4); }
+.rx-cc.on{ box-shadow:0 0 0 2px var(--accent); }
+.rx-renameseg{ flex:1; min-width:70px; padding:4px 7px; border-radius:6px; font-size:10.5px;
+  color:var(--txt); border:1px solid var(--line-2); background:var(--bg-2); outline:none;
+  -webkit-user-select:text; user-select:text; }
+
+.rx-pref{ display:flex; align-items:center; gap:8px; margin:0 1px 7px; }
+.rx-plbl{ flex:1; font-size:11.5px; color:var(--txt); }
+.rx-size{ display:flex; gap:4px; }
+.rx-sz{ padding:4px 9px; border-radius:7px; font-size:9.5px; font-weight:700; letter-spacing:.3px;
+  color:var(--txt-dim); cursor:pointer; border:1px solid var(--line-2); background:rgba(255,255,255,.03); }
+.rx-sz:hover{ color:var(--txt); }
+.rx-sz.on{ color:#fff; background:var(--accent); border-color:transparent; }
+.rx-phint{ font-size:9.5px; color:var(--txt-dim); margin:2px 2px 0; line-height:1.45; }
+
+.rx-prevbox{ border-radius:11px; border:1px solid var(--line); padding:8px; margin:0 1px;
+  background:radial-gradient(120% 120% at 50% 0%, rgba(30,37,48,.9), rgba(13,15,19,.96)); }
+.rx-prev{ width:100%; max-width:250px; margin:0 auto; }
+.rx-defrow{ display:flex; justify-content:center; margin:12px 1px 4px; }
+
+/* ---------- tool picker ---------- */
+.rx-modal{ display:none; position:fixed; top:0;right:0;bottom:0;left:0; z-index:9850; align-items:center; justify-content:center;
+  background:rgba(6,7,9,.72); padding:16px; }
+.rx-modal.show{ display:flex; }
+.rx-mcard{ width:100%; max-width:330px; max-height:82vh; display:flex; flex-direction:column;
+  border-radius:12px; border:1px solid var(--line-2); background:var(--panel);
+  box-shadow:0 18px 40px -18px rgba(0,0,0,0.45); overflow:hidden; }
+.rx-mtitle{ padding:11px 13px; font-size:12px; font-weight:700; color:var(--txt);
+  border-bottom:1px solid var(--line); }
+.rx-mlist{ flex:1; overflow-y:auto; }
+.rx-mrow{ padding:7px 13px; cursor:pointer; border-bottom:1px solid rgba(255,255,255,.04); }
+.rx-mrow:hover{ background:rgba(59,143,220,.18); }
+.rx-mrow.off{ opacity:.4; pointer-events:none; }
+.rx-mn{ font-size:11.5px; color:var(--txt); }
+.rx-md{ font-size:9.5px; color:var(--txt-dim); margin-top:1px; }
+.rx-mcat{ padding:6px 13px 3px; font-size:8.5px; font-weight:800; letter-spacing:1.3px;
+  color:var(--txt-dim); text-transform:uppercase; background:rgba(0,0,0,.25); }
+.rx-mfoot{ padding:9px 13px; border-top:1px solid var(--line); display:flex; justify-content:center; gap:8px; }
+/* legacy.css turns the gap off for engines without flex-gap, so the buttons
+   also carry their own margin - two of them side by side would otherwise touch */
+html.no-flexgap .rx-mfoot > *+*{ margin-left:8px; }
+
+/* ---------- picker, second mode: the machine's own effect library ----------
+   The row that opens it reads as an action, not as one more catalogue entry.
+   Everything below lives INSIDE .rx-modal on purpose: the same class names are
+   used by the wheel's own browser, which is always dark, while the modal
+   follows the panel theme - so the colours here are variables, not the hexes
+   the overlay uses. */
+.rx-mplus{ background:rgba(59,143,220,.10); border-bottom:1px solid rgba(255,255,255,.04); }
+.rx-mplus:hover{ background:rgba(59,143,220,.24); }
+.rx-mplus .rx-mn{ font-weight:700; color:#8dc3f5; }
+.rx-msearch{ display:block; width:auto; margin:9px 13px 2px; padding:7px 10px; border-radius:9px;
+  font-size:11px; color:var(--txt); background:rgba(0,0,0,.30);
+  border:1px solid var(--line-2); outline:none; font-family:inherit; }
+.rx-msearch:focus{ border-color:#3b8fdc; }
+.rx-modal .rx-fxrow{ border-bottom:1px solid rgba(255,255,255,.04); }
+.rx-modal .rx-fxrow:hover{ background:rgba(59,143,220,.18); }
+.rx-modal .rx-fxn{ color:var(--txt); }
+.rx-modal .rx-fxc{ color:var(--txt-dim); }
+.rx-modal .rx-fxempty{ color:var(--txt-dim); }
+/* an effect already on the section: dim the NAME only, so the remove cross
+   beside it stays bright and clickable */
+.rx-mfx.added{ cursor:default; }
+.rx-mfx.added:hover{ background:transparent; }
+.rx-mfx.added .rx-fxn{ opacity:.5; }
+.rx-mretry{ margin:9px auto 0; }
+
+/* ===== 1.26.0 round 10 ===== */
+/* The two animation cards are one .section now, so the seam CSS that used to
+   fake the join has to be undone: it is a normal single card again, its title
+   is visible, and "Text Properties" became an inner sub-heading. */
+.section.compact.amanow-animation-card.amanow-text-card{
+  margin-bottom:10px; padding-top:10px; padding-bottom:10px;
+  border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:0 5px 14px -10px rgba(0,0,0,0.4);
+}
+.amanow-animation-card.amanow-text-card>.section-title{ display:block; }
+.sub-title{ font-size:9px; font-weight:800; letter-spacing:1.4px; text-transform:uppercase;
+  color:var(--txt-dim); margin:11px 2px 6px; padding-top:9px;
+  border-top:1px solid rgba(255,255,255,.06); }
+body.theme-light .sub-title{ border-top-color:rgba(0,0,0,.10); }
+/* sub-tabs get the same pencil-mode hide button the tabs have */
+.subtab{ position:relative; }
+.subtab .del-x{ top:-6px; right:-5px; left:auto; }
+body.editing .subtab .del-x{ display:flex; }
+body.editing .subtabs{ outline:1px dashed rgba(96,165,250,.28); outline-offset:3px; border-radius:12px; }
+
+/* ---------- radial: delete a section, add a section ---------- */
+.rx-segx{ flex:0 0 auto; width:16px; height:16px; display:flex; align-items:center; justify-content:center;
+  border-radius:5px; font-size:9px; color:var(--txt-dim); cursor:pointer; }
+.rx-segx:hover{ color:#ff8f8f; background:rgba(255,143,143,.14); }
+.rx-addseg{ display:flex; align-items:center; justify-content:center; padding:7px; margin-top:2px;
+  border-radius:9px; font-size:10.5px; font-weight:700; color:var(--txt-dim); cursor:pointer;
+  border:1px dashed var(--line-2); }
+.rx-addseg:hover{ color:var(--txt); border-color:rgba(96,165,250,.5); }
+.rx-addseg.off{ opacity:.4; pointer-events:none; }
+
+/* ---------- a plugin feature lifted into its own floating window ---------- */
+.rxp-win{ position:fixed; z-index:9700; width:340px;max-width:94vw;width:min(94vw, 340px);
+  border-radius:13px; border:1px solid var(--line-2); background:var(--bg-1);
+  box-shadow:0 20px 44px -20px rgba(0,0,0,0.475); overflow:hidden; }
+.rxp-head{ display:flex; align-items:center; gap:8px; padding:8px 10px; cursor:grab;
+  border-bottom:1px solid var(--line); background:rgba(255,255,255,.03); }
+.rxp-head:active{ cursor:grabbing; }
+.rxp-title{ flex:1; min-width:0; font-size:10px; font-weight:800; letter-spacing:1.4px;
+  text-transform:uppercase; color:var(--txt-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rxp-x{ flex:0 0 auto; width:20px; height:20px; display:flex; align-items:center; justify-content:center;
+  border-radius:6px; font-size:11px; color:var(--txt-dim); cursor:pointer;
+  border:1px solid var(--line-2); background:rgba(255,255,255,.03); }
+.rxp-x:hover{ color:#fff; background:#e5544b; border-color:transparent; }
+.rxp-body{ padding:9px; max-height:620px;max-height:min(74vh, 620px); overflow-y:auto; }
+/* beat both the sub-tab switcher's inline display and .sec-hidden */
+.rxp-body > .section{ display:block !important; margin-bottom:0 !important; }
+.rxp-body > .section > .del-x{ display:none !important; }
+.rx-mini.off{ opacity:.35; pointer-events:none; }
+.rx-chk{ display:flex; align-items:center; gap:7px; cursor:pointer; font-size:11.5px; color:var(--txt); }
+.rx-chk input{ width:13px; height:13px; }
+.rx-phint.ok{ color:#7ee0a8; }
+.rx-phint.warn{ color:#e0a83a; }
+.rx-phint.err{ color:#ff8f8f; }
+
+/* ============================================================
+   macOS: видимость пунктов выпадающих списков
+   ============================================================
+   Выпадающий список на macOS рисует сама система, своим меню.
+   Наш тёмный background у <option> она игнорирует, а color —
+   применяет. В тёмной теме color это --txt (#e7ebf2), почти
+   белый, и пункты становились белыми по белому: список
+   открывался, но выбрать в нём что-то можно было только
+   вслепую, наугад. Так вели себя ВСЕ списки панели — и выбор
+   языка субтитров, и "+ Add a block..." в разделах.
+
+   Поэтому на macOS задаём пунктам тёмный текст на светлом фоне:
+   он читается и в системном меню, и если движок вдруг решит
+   нарисовать список сам. Windows не затрагиваем — там наша
+   тёмная раскраска работает как задумано.                     */
+html.is-mac option,
+html.is-mac select.sel option,
+html.is-mac #asLang option,
+html.is-mac body.theme-light select.sel option{
+  color:#111 !important;
+  background:#fff !important;
+  background-color:#fff !important;
+}
+/* сам закрытый список остаётся в теме панели — меняем только раскрытые пункты */
+
+/* ============================================================
+   macOS: два списка, которые вели себя иначе остальных
+   ============================================================
+   Наблюдение с живой машины: "Format" открывался нормально, а
+   "Language" то показывал пункты, то нет, и "+ Add a block..."
+   не открывался вовсе. Оба — обычные <select>, значит дело в их
+   личных стилях.
+
+   1) У #asLang пунктам заданы собственные padding и border-bottom.
+      Выпадающий список на macOS рисует система, и своя геометрия
+      пунктов ей мешает: высота считается неверно, и пункты
+      схлопываются. На Windows это украшение работает, поэтому
+      снимаем его ТОЛЬКО на маке.
+
+   2) У .cust-add-sel пункты не имели цвета вовсе и наследовали
+      --txt-dim, приглушённо-серый. На светлом системном меню это
+      почти невидимо. Задаём явно.                                */
+html.is-mac #asLang option{
+  padding:0 !important;
+  border-bottom:0 !important;
+  font-size:inherit !important;
+}
+html.is-mac .cust-add-sel option{
+  color:#111 !important;
+  background:#fff !important;
+}
+/* На Windows пункты этого списка тоже стоит покрасить явно:
+   раньше они наследовали приглушённый цвет самого списка. */
+.cust-add-sel option{ background:#1b2029; color:var(--txt); }
+
+/* ============================================================
+   macOS: размытие фона у окон ломает выпадающие списки внутри
+   ============================================================
+   Симптом с живой машины: список "+ Add a block..." в окне
+   разделов не открывался НИ РАЗУ — не мелькал, не появлялся
+   сбоку, вообще ничего. При этом "Format" в обычной части
+   панели работал нормально.
+
+   Разница ровно одна: окно разделов лежит внутри .restore-modal,
+   а у него backdrop-filter. Это свойство поднимает содержимое в
+   отдельный слой композитинга. Выпадающий список на macOS — это
+   ОКНО СИСТЕМЫ, которое ставится по экранным координатам
+   элемента; для содержимого такого слоя координаты считаются
+   иначе, и окно списка не показывается вовсе.
+
+   Поэтому на macOS размытие снимаем. Потеря невелика: подложки у
+   всех этих окон и так почти непрозрачные (от .62 до .97), фон
+   за ними и без блюра не мешает. Windows не трогаем — там
+   размытие работает и списки открываются.                      */
+html.is-mac .header,
+html.is-mac .restore-modal,
+html.is-mac .lic-gate,
+html.is-mac .exp-modal,
+html.is-mac .updov,
+html.is-mac .rc,
+html.is-mac .rx-ov,
+html.is-mac .rx-modal,
+html.is-mac .rxp-win{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* ============================================================
+   «+ Add a block…» — свой список вместо нативного <select>
+   ============================================================
+   Adobe CEP на macOS рисует панель офскрин, и нативное меню
+   <select>, которому не хватает места внутри панели, не
+   отрисовывается вообще (баг Adobe CEP-2870, сроков починки
+   нет). Окно разделов — position:fixed с центрированием,
+   прокруткой его не подвинуть, поэтому именно этот список не
+   открывался ни разу, а короткий Format в обычном потоке
+   страницы работал всегда.
+
+   Закрытый вид не меняется: класс .cust-add-sel тот же, к нему
+   лишь добавлена раскладка под стрелку.                        */
+.cust-add-sel{display:flex;align-items:center;justify-content:space-between;gap:6px;}
+.cust-add-sel .cas-car{font-size:9px;opacity:.65;}
+.cust-pop{position:absolute;z-index:120;overflow-y:auto;
+  background:#1b2029;border:1px solid var(--line-2,#3a4250);border-radius:9px;padding:4px;
+  box-shadow:0 14px 34px -10px rgba(0,0,0,0.425);}
+.cust-pop-row{padding:6px 9px;border-radius:6px;font-size:10.5px;color:var(--txt);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.cust-pop-row:hover{background:var(--accent,#2f6fe0);color:#fff;}
+.cust-pop-empty{padding:8px 9px;font-size:10px;color:var(--txt-dim);line-height:1.45;}
+body.theme-light .cust-pop{background:#3a322b;}
+
+/* ============================================================
+   Свой список вместо длинного нативного <select>
+   ============================================================
+   Та же причина, что у «+ Add a block…»: Adobe CEP на macOS
+   рисует панель офскрин, и системное меню, которому не хватает
+   высоты внутри панели, не отрисовывается вовсе. У выбора языка
+   31 пункт — самое высокое меню в панели, поэтому оно и
+   работало через раз.
+
+   Закрытая кнопка повторяет вид обычного поля один в один:
+   те же градиент, рамка, скругление, отступы и размер шрифта,
+   что у input.num / select.sel выше.                          */
+.am-selbox{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:linear-gradient(180deg,#1b2029,#161a21);color:var(--txt);
+  border:1px solid var(--line-2);border-radius:9px;padding:8px 9px;font-size:12px;width:100%;
+  outline:none;cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease;
+}
+.am-selbox:hover{border-color:var(--accent);}
+.am-selbox-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.am-selbox-c{font-size:9px;opacity:.65;flex:0 0 auto;}
+.am-selpop{
+  position:fixed;z-index:9990;overflow-y:auto;
+  background:#1b2029;border:1px solid var(--line-2,#3a4250);border-radius:9px;padding:4px;
+  box-shadow:0 16px 38px -10px rgba(0,0,0,0.425);
+}
+.am-selpop-row{
+  padding:7px 9px;border-radius:6px;font-size:12px;color:var(--txt);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;
+}
+.am-selpop-row:hover{background:var(--accent,#2f6fe0);color:#fff;}
+.am-selpop-row.on{background:rgba(96,165,250,.18);font-weight:600;}
+body.theme-light .am-selbox{background:#3a322b;}
+body.theme-light .am-selpop{background:#3a322b;}
+
+/* ===== ПОДСКАЗКИ ПРИ НАВЕДЕНИИ =========================================
+   Полоса внизу панели, над доком: навёл на кнопку, подержал полторы секунды —
+   выехало пояснение. Образец поведения — панель Motion Tools Pro, где подсказка
+   появляется снизу, а не всплывает у курсора.
+
+   Всё на переменных темы, поэтому светлая тема и neumorph.css перекрашивают
+   полосу сами. Геометрия в локальных пикселях: панель зумится целиком, полоса
+   масштабируется вместе с кнопками, пересчёт в скрипте не нужен.
+
+   pointer-events:none обязателен — полоса лежит поверх низа содержимого и без
+   этого съедала бы клики по нему.
+
+   flex и gap здесь НЕ используются сознательно: файл фолбэков для старых
+   движков css/legacy.css собирается скриптом, которого на диске уже нет, и
+   парную строку пришлось бы дописывать руками. Обычный строчный поток. */
+.am-tip{
+  position:fixed; left:8px; right:8px; bottom:52px; z-index:210;
+  pointer-events:none;
+  padding:6px 10px; border-radius:11px;
+  border:1px solid var(--line-2); background:var(--panel);
+  /* Крупнее и ЖЁЛТЫМ по просьбе владельца: на 4K-мониторе прежние 10.5px
+     читались с трудом, а серый сливался с панелью. */
+  color:#ffcc45; font-size:14.5px; line-height:1.4;
+  box-shadow:0 8px 22px -10px rgba(0,0,0,0.375);
+  opacity:0; visibility:hidden;
+  transform:translateY(6px);
+  transition:opacity .13s ease, transform .13s ease, visibility 0s linear .13s;
+}
+.am-tip.show{ opacity:1; visibility:visible; transform:translateY(0); transition-delay:0s; }
+.am-tip-lead{ color:#ffcc45; font-weight:700; }
+.am-tip-lead:not(:empty){ margin-right:6px; }
+/* 05.09.2026: пункты подсказки идут с новой строки — если строка ещё и не
+   влезла по ширине, её продолжение сдвигается, чтобы список читался списком */
+.am-tip-txt{ display:inline; }
+.am-tip{ text-indent:0; }
+/* док свёрнут — полоса опускается на его место */
+.dock.dock-hidden ~ .am-tip{ bottom:10px; }
+
+/* ---- галочки заливки и обводки у Rect / Rounded ----
+   Кнопка стала короче: по аудиту она занимала почти всю строку, хотя рядом
+   стоят четыре органа управления. Флажок намеренно обычный <input>, а не
+   кнопка панели — иначе он попал бы в нумерацию настраиваемых кнопок и сбил
+   бы сохранённые размеры соседей. */
+.tb-on{ flex:0 0 auto; width:13px; height:13px; margin:0; cursor:pointer; accent-color:var(--accent,#4c8dff); }
+.tb-row .tb-btn{ flex:1 1 auto; min-width:0; }
+
+/* ===== КРУЖОК «i» И ПРЕВЬЮ =============================================
+   Наведи на кружок в углу раздела, подержи две секунды — рядом появится
+   картинка того, что делает кнопка. Всё рисуется разметкой и анимацией
+   прямо в панели: ни одного файла картинки, ни одного обращения в сеть.
+   Пакет и так почти 300 МБ, а интернета у панели может не быть. */
+.section-title{ position:relative; padding-right:16px; }
+.am-i{
+  position:absolute; right:0; top:50%; margin-top:-7px;
+  width:14px; height:14px; border-radius:50%;
+  border:1px solid var(--line-2); color:var(--txt-dim);
+  font-size:9px; font-weight:700; font-style:italic; letter-spacing:0;
+  line-height:12px; text-align:center; text-transform:none;
+  cursor:help; opacity:.55; transition:opacity .12s ease, color .12s ease;
+}
+.am-i:hover{ opacity:1; color:var(--accent,#4c8dff); border-color:var(--accent,#4c8dff); }
+
+.am-prev{
+  position:fixed; z-index:9600; pointer-events:none;
+  /* ширина ФИКСИРОВАНА по сцене превью: иначе длинная подпись растягивала
+     карточку шире панели, и она вылезала за правый край */
+  width:186px; box-sizing:content-box;
+  padding:10px; border-radius:12px;
+  border:1px solid var(--line-2); background:var(--panel);
+  box-shadow:0 14px 34px -12px rgba(0,0,0,0.425);
+  opacity:0; visibility:hidden; transform:translateY(5px);
+  transition:opacity .14s ease, transform .14s ease, visibility 0s linear .14s;
+}
+.am-prev.show{ opacity:1; visibility:visible; transform:translateY(0); transition-delay:0s; }
+.am-prev-cap{ font-size:9.5px; color:var(--txt-dim); margin-top:7px; text-align:center; line-height:1.35; }
+/* сцена превью: фиксированный размер, чтобы карточка не прыгала */
+.apv{ position:relative; width:186px; height:96px; border-radius:9px; overflow:hidden;
+      background:rgba(0,0,0,.24); }
+body.theme-light .apv{ background:rgba(0,0,0,.07); }
+.apv-w{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+        font-size:17px; font-weight:800; letter-spacing:1.6px; color:var(--txt); white-space:nowrap; }
+/* бокс, облегающий слово */
+.apv-box{ position:absolute; left:50%; top:50%; width:112px; height:34px; margin:-17px 0 0 -56px;
+          box-sizing:border-box; }
+.apv-box.fill{ background:#7A73FF; border:1.5px solid #fff; }
+.apv-box.round{ border-radius:9px; }
+.apv-box.dot{ background:transparent; border:1.5px dashed #fff; }
+/* угловые маркеры */
+.apv-h{ position:absolute; width:7px; height:7px; background:#f31e2e; border-radius:1px; }
+/* карточки карусели */
+.apv-c{ position:absolute; top:50%; width:26px; height:34px; margin-top:-17px; border-radius:5px; }
+@keyframes apvPop{ 0%{transform:scale(.6);opacity:0} 55%{transform:scale(1.06);opacity:1} 100%{transform:scale(1);opacity:1} }
+@keyframes apvSq{ 0%,100%{transform:translate(-50%,-50%) scale(1,1)} 45%{transform:translate(-50%,-50%) scale(1.28,.72)} 70%{transform:translate(-50%,-50%) scale(.9,1.12)} }
+@keyframes apvSpin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
+.apv-anim{ animation:apvPop 1.5s ease-in-out infinite alternate; }
+.apv-sq{ animation:apvSq 1.6s ease-in-out infinite; }
+.apv-ring{ position:absolute; left:50%; top:50%; width:96px; height:96px; margin:-48px 0 0 -48px;
+           animation:apvSpin 6s linear infinite; }
+
+/* ---- сочетания цветов ---- */
+.col-combos{ display:flex; flex-wrap:wrap; gap:6px; margin:0 2px 8px; }
+.col-combo{ display:flex; border-radius:7px; overflow:hidden; cursor:pointer;
+  border:1px solid var(--line-2); height:22px; }
+.col-combo .cbsw{ width:26px; height:100%; display:block; }
+.col-combo:hover{ border-color:var(--accent,#4c8dff); }
+
+/* кнопки 2 / 3 / 4 у сочетаний выделяются так же, как у градиентов:
+   без этого не было видно, сколько цветов будет в наборе */
+.ccount{min-width:24px;flex:0 0 auto;}
+.ccount.on{color:#fff;border-color:rgba(96,165,250,.6);background:rgba(96,165,250,.22);}
+body.theme-light .ccount.on{color:var(--txt);}
+
+/* ---- превью на семь стилей карусели ----
+   Карточка шире обычной: семь мини-сцен в узкую не влезают читаемо. */
+.am-prev.wide{ width:266px; }
+.apv-grid{ display:flex; flex-wrap:wrap; }
+.apv-cell{ width:50%; box-sizing:border-box; padding:2px; }
+.apv-cell:last-child{ width:100%; }
+.apv-mini{ position:relative; height:42px; border-radius:6px; overflow:hidden; background:rgba(0,0,0,.24); }
+body.theme-light .apv-mini{ background:rgba(0,0,0,.07); }
+.apv-nm{ font-size:8.5px; color:var(--txt-dim); text-align:center; margin-top:2px; letter-spacing:.2px; }
+
+/* Жёлтый читается только на тёмном: на светлой панели его контраст падает до
+   1,25 при норме 4,5 — текст буквально исчезает. В светлой теме тот же цвет,
+   но затемнённый до янтарного: узнаётся как «жёлтая подсказка» и читается. */
+body.theme-light .am-tip{ color:#7a4e00; }
+body.theme-light .am-tip-lead{ color:#5c3a00; }
+
+/* ===== 05.09.2026: TOOLS — новая раскладка (слово владельца, фото 2–4) ===== */
+/* Кнопки в четырёх рядах у якоря — в одну строку: перенос «Un Pre-compose» на
+   две строки делал ряд выше, а якорь тянулся за колонкой. Боковые отступы уже. */
+#anchorGrid + .grp.col .btn{ white-space:nowrap; padding-left:4px; padding-right:4px; }
+/* Якорь держит ровно заданную ширину (иначе flex ужимал его, когда колонка
+   упиралась в свой минимум), колонка забирает остаток. */
+#anchorGrid{ flex:0 0 auto; }
+#anchorGrid + .grp.col{ min-width:0; }
+/* Пара «кнопка + Save» в левой колонке: Save короче, а имя кнопки не переносится
+   и не давит соседей на узкой панели. */
+.tl-pair .btn{ min-width:0; padding-left:3px; padding-right:3px; white-space:nowrap; }
+.tl-pair .motion-save{ min-width:34px; max-width:48px; }
+/* В режиме правки кнопка не сжимается при нажатии (.btn:active → scale .97):
+   этот масштаб попадал в замер размера, и магнит промахивался мимо заводского. */
+body.editing .freebtn:active, body.editing .freebtn.sizing{ transform:none; }
+/* Sequence, ужатый в левую половину: три кнопки режима делят ширину поровну,
+   поля Off/Step не распирают колонку своей врождённой шириной. */
+.seq-col .modebtn{ width:auto; flex:1 1 0; min-width:0; }
+.seq-col .field{ min-width:0; }
+.seq-col .field input.num{ width:100%; min-width:0; box-sizing:border-box; }
+/* правая половина: первый ряд вровень с Off/Step, последний — с кнопкой Sequence */
+.tl-right{ justify-content:space-between; }
+.tl-right .btn{ min-width:0; }
+/* «магнит» размера кнопки (режим правки): в момент, когда размер прилип к
+   заводскому, кнопка коротко обводится акцентом — как отдача на iPhone */
+.freebtn.sizing.am-snap{ outline:2px solid var(--accent,#4c8dff); outline-offset:1px; }
+
+/* ===== AE 2020/2021 (Chromium 61/80): flex-gap нет, отступы новых рядов TOOLS руками.
+   html.no-flexgap ставит детектор в index.html; на новых движках правила спят.
+   Специфичность выше сгенерированных в legacy.css (.grp > * даёт колонке
+   margin-right — снимаем и даём margin-bottom). ===== */
+/* !important: у рядов в колонке инлайн margin-bottom:0 (гасит штатные 6px .row) */
+html.no-flexgap .grp.col > *:not(:last-child){ margin-right:0; margin-bottom:8px !important; }
+html.no-flexgap .row.tl-pair > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .row.tl-split > *:not(:last-child){ margin-right:10px; }
+html.no-flexgap #anchorGrid + .grp.col .row > *:not(:last-child),
+html.no-flexgap .seq-col .row > *:not(:last-child),
+html.no-flexgap .tl-right .row > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .section .row > #anchorGrid{ margin-right:10px; }
+
+/* ===== TEXT -> Amanow Animation: окно Instruction (17.09.2026) =====
+   Оверлей тот же .rc, что у «Reset which animation?»: он уже умеет обе темы,
+   macOS без backdrop-filter и работает в окне-карте. Здесь только размеры
+   карточки и текст. Цвета через --txt, чтобы читалось и в светлой теме. */
+.an-ins-card{ max-width:300px; width:calc(100% - 28px); text-align:left; padding:16px 16px 12px; }
+.an-ins-card .rc-t{ text-align:center; color:var(--txt); margin-bottom:10px; }
+.an-ins-t{ font-size:11.5px; line-height:1.5; color:var(--txt); white-space:pre-line; max-height:62vh; overflow:auto; margin:0 0 6px; }
+.an-ins-t b{ color:var(--accent); font-weight:800; }
+.an-ins-card .rc-x{ display:block; margin:2px auto 0; }
+/* живое превью карточки: те же размеры и шрифт, что у превью галереи ANIM;
+   своей CSS-анимации у букв нет - кадры считает main.js */
+.an-pv .ch{ animation:none; transform-origin:50% 80%; }
+/* строки передают перспективу сцены буквам: поворот X/Y виден с одной точкой
+   схода в центре, как у камеры композиции AE */
+.an-pv .pv-row{ transform-style:preserve-3d; }
+
+/* ===== Auto-subtitles: компактнее (17.09.2026, просьба владельца, вторая правка) =====
+   Превью - во всю ширину, но ниже прежнего кадра 16:9: фиксированная высота
+   160 px (кегль и зона безопасности считаются от высоты). Кадр 240x135 по центру
+   владелец счёл слишком маленьким. Для старых движков без aspect-ratio высота
+   задана явно и перебивает запасное правило из legacy.css (там height:0 +
+   padding-bottom). Настройки под превью (Layout, ползунки, галочки, кнопка) -
+   на полшага мельче. */
+.as-pv{ width:100%; height:160px; aspect-ratio:auto; margin:2px 0 10px; }
+html.no-ratio body .as-pv{ height:160px; padding-bottom:0; }
+.as-style-btn{ padding:7px 6px; font-size:11px; }
+.tsec-3 .as-style-btn{ font-size:11.5px; }
+.tsec-3 .as-lbl{ font-size:11.5px; margin:6px 2px 3px; }
+.tsec-3 .as-layout label span{ font-size:11.5px; }
+.tsec-3 .optline label span{ font-size:11.5px; }
+.tsec-3 .as-unit{ font-size:10.5px; min-width:46px; }
+.tsec-3 #asGo{ font-size:12px; }
+.as-styles .as-style-wide{ grid-column:1 / -1; }
+/* Auto Subtitles · Cascade 3D (a4) — строки-ступеньки в превью, 25.09.2026 */
+.as-pv .pvs-cas-wrap{ position:absolute; left:0; top:0; right:0; bottom:0; pointer-events:none; }
+.as-pv .pvs-cas{ position:absolute; left:0; top:0; white-space:nowrap; font-weight:700; color:#fff;
+  line-height:1.2; letter-spacing:.1px; transform-origin:0 50%; will-change:transform,opacity,filter;
+  text-shadow:0 0 8px rgba(0,0,0,.35); }
+/* Cascade 3D: направление лесенки — две кнопки под стилями */
+.as-casdir{ display:grid; grid-template-columns:1fr 1fr; grid-gap:6px; gap:6px; margin:6px 0 2px; }
+
+/* Layer & Composition: Text Exploder и Split Mask делят место бывшей одной кнопки (27.09.2026) */
+.row.tl-exp3 > #centerBtn{ flex:2 1 0; min-width:0; }
+.row.tl-exp3{ align-items:stretch; }
+.row.tl-exp3 > #expBtn, .row.tl-exp3 > #splitMaskBtn{ flex:1 1 0; min-width:0; padding-left:3px; padding-right:3px; line-height:1.15; text-align:center; }
+html.no-flexgap .row.tl-exp3 > *:not(:last-child){ margin-right:6px; }
+
+/* Round Corners + Layer Fit (29.09.2026, образец — RoundPro) */
+.rc-sec .rc-btns > .btn{ flex:1 1 0; min-width:0; }
+.rc-rad{ display:flex; align-items:center; gap:7px; margin:8px 0 6px; }
+.rc-rad .lbl{ font-size:11px; color:var(--txt-dim); min-width:0; flex:none; }
+.rc-rad .rc-sl{ flex:1; min-width:40px; }
+.rc-link{ width:24px; height:24px; flex:none; display:flex; align-items:center; justify-content:center; border-radius:7px;
+  cursor:pointer; color:var(--txt-dim); background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); user-select:none; }
+.rc-link svg{ width:14px; height:14px; display:block; }
+.rc-link.on{ color:var(--accent,#4c8dff); border-color:var(--accent,#4c8dff); }
+.rc-link:hover{ border-color:var(--accent,#4c8dff); }
+/* четыре угла — рамкой 2×2, как углы прямоугольника */
+.rc-corners{ display:grid; grid-template-columns:1fr 1fr; grid-gap:6px 10px; gap:6px 10px; margin:2px auto 6px; max-width:190px;
+  padding:6px 8px; border-radius:9px; border:1px dashed rgba(255,255,255,.16); }
+.rc-corners .numstep{ width:auto !important; }
+.rc-chk{ display:flex; align-items:center; gap:7px; font-size:11px; color:var(--txt); margin:4px 0 2px; cursor:pointer; user-select:none; }
+.rc-chk input{ margin:0; }
+.rc-subttl{ font-size:10px; font-weight:700; letter-spacing:.6px; color:var(--txt-dim); margin:10px 0 4px; text-transform:uppercase; }
+.rc-status{ margin-top:4px; }
+html.no-flexgap .rc-rad > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .rc-chk > input{ margin-right:7px; }
+body.theme-light .rc-link{ background:rgba(0,0,0,.05); border-color:rgba(0,0,0,.14); }
+body.theme-light .rc-link.on{ color:#c47a5c; border-color:#c47a5c; }
+body.theme-light .rc-corners{ border-color:rgba(0,0,0,.18); }
+
+/* Curves: два вида (29.09.2026). Вид 1 — колонки .crv-l/.crv-r идут друг под
+   другом, картинка как раньше. Вид 2 — рядом: слева график и кнопки, справа
+   пресеты; кнопки компактнее, APPLY уходит отдельной строкой под OUT/EASE/IN. */
+.crv-view{ width:20px; height:20px; display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  border-radius:6px; cursor:pointer; color:var(--txt-dim); border:1px solid transparent; user-select:none; }
+.crv-view:hover{ color:var(--txt); border-color:rgba(255,255,255,.14); }
+.crv-vic{ width:14px; height:14px; display:block; }
+.crv-view .crv-vic2, .crv-view[data-v="2"] .crv-vic1{ display:none; }
+.crv-view[data-v="2"] .crv-vic2{ display:block; }
+.crv-section.crv-v2 #crvHost{ display:flex; align-items:flex-start; gap:10px; }
+html.no-flexgap .crv-section.crv-v2 .crv-l{ margin-right:10px; }
+.crv-section.crv-v2 .crv-l{ flex:0 0 58%; min-width:0; }
+.crv-section.crv-v2 .crv-r{ flex:1 1 0; min-width:0; }
+.crv-section.crv-v2 .crv-phead{ margin-top:0; }
+.crv-section.crv-v2 .crv-grid{ grid-template-columns:repeat(auto-fill,minmax(48px,1fr)); grid-template-columns:repeat(auto-fill,minmax(var(--crv-tile2,48px),1fr)); grid-gap:4px; gap:4px; }
+.crv-section.crv-v2 .crv-tile{ padding:3px 1px 2px; border-radius:6px; }
+.crv-section.crv-v2 .crv-tn{ font-size:7.5px; }
+.crv-section.crv-v2 .crv-add{ width:20px; height:20px; font-size:13px; border-radius:6px; }
+.crv-section.crv-v2 .crv-nums{ font-size:10px; letter-spacing:.4px; margin:4px 0; }
+.crv-section.crv-v2 .crv-modes{ flex-wrap:wrap; gap:4px; margin:2px auto 4px; }
+.crv-section.crv-v2 .crv-mode{ flex:1 1 0; min-width:0; padding:4px 2px; font-size:8.5px; letter-spacing:.3px; border-radius:6px; }
+.crv-section.crv-v2 .crv-apply{ flex:1 0 100%; padding:6px 0; font-size:10px; letter-spacing:1px; border-radius:6px; }
+.crv-section.crv-v2 .crv-l > .row{ margin-top:4px !important; }
+.crv-section.crv-v2 .crv-l > .row > .btn{ font-size:9px; padding:5px 2px; min-width:0; white-space:nowrap; letter-spacing:0; }
+.crv-section.crv-v2 .crv-l > .so-status{ font-size:9px; margin-top:4px; }
+.crv-phead > .so-status{ flex:1 1 auto; min-width:0; min-height:0; margin:0 8px; text-align:center;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:10px; line-height:1.2; }
+.crv-section.crv-v2 .crv-phead > .so-status{ font-size:9px; margin:0 6px; }
+.crv-section .crv-l > .row{ margin-bottom:0; }
+/* 29.09.2026 (2), слово владельца: Copy/Paste Curves выпирали шире OUT/EASE/IN/APPLY и
+   раздували колонку — лишнее место слева и между графиком и пресетами. Теперь ряд той же
+   ширины, что кнопки режимов (оба вида); в виде 2 ширину колонки задаёт ползунок размера,
+   а график, цифры и кнопки занимают её целиком. */
+.crv-section .crv-l > .row{ width:var(--crv-wb,var(--crv-w,100%)); margin-left:auto; margin-right:auto; box-sizing:border-box; }
+.crv-section.crv-v2 .crv-l{ flex:0 0 calc(var(--crv-wb,100%) * .58); max-width:calc(var(--crv-wb,100%) * .58); }
+.crv-section.crv-v2 .crv-l > .crv-nums,
+.crv-section.crv-v2 .crv-l > .crv-modes,
+.crv-section.crv-v2 .crv-l > .row{ width:100%; }
+.crv-section.crv-v2 .crv-l > .crv-ed{ width:var(--crv-g2,100%); box-sizing:border-box; }
+html.no-flexgap .crv-section.crv-v2 .crv-modes > *{ margin:0 4px 4px 0; }
+html.no-flexgap .crv-section.crv-v2 .crv-modes > .crv-apply{ margin-right:0; }
+/* узкие размеры: надпись APPLY и режимы плотнее, чтобы не вылезали из кнопки */
+.crv-section.crv-tight .crv-apply{ letter-spacing:.4px; font-size:11px; }
+.crv-section.crv-tight .crv-mode{ padding:0 5px; letter-spacing:.2px; }

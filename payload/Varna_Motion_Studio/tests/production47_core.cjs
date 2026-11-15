@@ -1,0 +1,11 @@
+const C=require('../js/corrections'),assert=require('node:assert/strict');
+const memory=C.learn({},[{wrong:'این منصوعي خوبه',right:'این مصنوعی خوبه',mode:'context',autoApply:true},{wrong:'منصوعي',right:'مصنوعی',autoApply:false},{wrong:'منصوعیی',right:'مصنوعی',autoApply:false}]);
+const original='این منصوعي خوبه؛ آن منصوعي بده و منصوعیی است.';
+const snapshot=JSON.stringify(memory),out=C.reviewMatches(original,memory);assert.equal(out.length,3);assert.equal(out[0].candidates[0].reason,'context');assert.equal(out[1].candidates[0].reason,'word');assert.equal(JSON.stringify(memory),snapshot,'review never rewrites memory');assert.equal(original,'این منصوعي خوبه؛ آن منصوعي بده و منصوعیی است.');
+const protectedRows=C.reviewMatches(original,memory,{protectedPhrases:['آن منصوعي بده']});assert.equal(protectedRows.length,2);
+assert.equal(C.reviewMatches('منصوعي',memory,{excluded:['منصوعی','این منصوعی خوبه','منصوعیی']}).length,0);
+const pair={wrong:'بوش',right:'Bosch Pro 5'};const near=C.reviewMatches('بوش پوش بوش،',{items:[]},{pair});assert.equal(near.length,3);assert.equal(near[1].candidates[0].reason,'similar');assert.equal(near[2].candidates[0].right,'Bosch Pro 5،','punctuation remains outside replacement');
+assert.equal(C.reviewMatches('۱۲۳ 124 و یا',{items:[]},{pair:{wrong:'۱۲۳',right:'۱۲۴'}}).length,1,'numbers never receive fuzzy matches');
+const ambiguous=C.learn(memory,[{wrong:'منصوعي',right:'نام دیگر',autoApply:false}]);assert(C.reviewMatches('منصوعي',ambiguous)[0].candidates.length>1,'conflicting meanings require an explicit choice');
+const cross=C.reviewMatches('گفتم بوش کار؛ سپس بوش رسید',{}, {pair,protectedPhrases:['بوش رسید']});assert.equal(cross.length,1);
+console.log('PASS Production47 review: two-neighbour context, standalone word, near spellings, explicit conflicting choices, exclusions, punctuation, multiword replacements, protected names and nonmutating proposals.');

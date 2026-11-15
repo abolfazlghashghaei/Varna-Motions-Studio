@@ -1,0 +1,9 @@
+Fonts used in Hook Texts Pack (both free, Google Fonts):
+
+Inter (Black, ExtraBold)
+https://fonts.google.com/specimen/Inter
+
+Instrument Serif (Italic)
+https://fonts.google.com/specimen/Instrument+Serif
+
+Install the fonts, then restart After Effects / Premiere Pro.

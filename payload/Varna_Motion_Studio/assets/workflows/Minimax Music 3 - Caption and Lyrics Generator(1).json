@@ -1,0 +1,316 @@
+{
+  "id": "41428afd-3060-4c6c-b85c-d8047dbedfa8",
+  "revision": 0,
+  "last_node_id": 8,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "PixaromaNote",
+      "pos": [
+        298.35227224119296,
+        -310.950492525116
+      ],
+      "size": [
+        564.3470562739067,
+        417.93898647413846
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "1227d9898f9d5137533df750611ca97e8c738f3d",
+        "Node name for S&R": "PixaromaNote"
+      },
+      "widgets_values": [
+        "{\"version\":1,\"content\":\"<h1>NODES AND MODELS USED IN THIS WORKFLOW</h1><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><hr class=\\\"pix-note-hr-solid\\\" style=\\\"color: #b8b8b8\\\"><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><h2><span data-ic=\\\"CLIP\\\" class=\\\"pix-note-ic\\\" contenteditable=\\\"false\\\" style=\\\"color: #f66744\\\"></span>&nbsp;Load CLIP in the Settings of the node</h2><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n<span class=\\\"pix-note-btnblock\\\">\\n  <a class=\\\"pix-note-dl\\\" style=\\\"background-color: #f66744\\\" href=\\\"https://huggingface.co/Winnougan/Qwen-3.5-INT8-Convrot-Comfy/resolve/main/qwen3.5_4b_int8_convrot.safetensors\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">Download qwen3.5_4b_int8_convrot.safetensors<span class=\\\"pix-note-btnsize\\\">~5.2 GB</span></a>\\n</span>&nbsp;\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><div class=\\\"pix-note-folderhint\\\" style=\\\"color: #f66744\\\">Place in: ComfyUI/models/text_encoders</div><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n<span class=\\\"pix-note-btnblock\\\">\\n  <a class=\\\"pix-note-vp\\\" style=\\\"background-color: #f66744\\\" href=\\\"https://huggingface.co/Winnougan/Qwen-3.5-INT8-Convrot-Comfy/tree/main\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">View Qwen 3.5 INT8 Convrot Repository</a>\\n</span>&nbsp;\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><hr class=\\\"pix-note-hr-solid\\\" style=\\\"color: #b8b8b8\\\"><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p><span data-ic=\\\"warning-v1\\\" class=\\\"pix-note-ic\\\" contenteditable=\\\"false\\\" style=\\\"color: #f66744\\\"></span>&nbsp;After placing the file, restart ComfyUI or refresh the model lists using the <b>R</b> shortcut.</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><hr class=\\\"pix-note-hr-solid\\\" style=\\\"color: #b8b8b8\\\"><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><h2><span data-ic=\\\"nodes-installed\\\" class=\\\"pix-note-ic\\\" contenteditable=\\\"false\\\" style=\\\"color: #f66744\\\"></span>&nbsp;Nodes Installed from Manager</h2><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><ul>\\n  <li>Pixaroma</li>\\n</ul><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><hr class=\\\"pix-note-hr-solid\\\" style=\\\"color: #b8b8b8\\\"><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><h2><span data-ic=\\\"pixaroma\\\" class=\\\"pix-note-ic\\\" contenteditable=\\\"false\\\" style=\\\"color: #f66744\\\"></span>&nbsp;Resources</h2><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n  <a class=\\\"pix-note-discord\\\" href=\\\"https://discord.com/invite/gggpkVgBf3\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">Join Discord</a>&nbsp;\\n  <a class=\\\"pix-note-yt\\\" href=\\\"https://www.youtube.com/@pixaroma\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">Pixaroma YouTube Channel</a>&nbsp;\\n</p>\",\"buttonColor\":\"#f66744\",\"lineColor\":\"#f66744\",\"width\":564.3470562739067,\"height\":417.93898647413846,\"backgroundColor\":\"#2a2a2a\"}",
+        ""
+      ],
+      "widgets_values_named": {
+        "note_json": "{\"version\":1,\"content\":\"<h1>NODES AND MODELS USED IN THIS WORKFLOW</h1><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><hr class=\\\"pix-note-hr-solid\\\" style=\\\"color: #b8b8b8\\\"><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><h2><span data-ic=\\\"CLIP\\\" class=\\\"pix-note-ic\\\" contenteditable=\\\"false\\\" style=\\\"color: #f66744\\\"></span>&nbsp;Load CLIP in the Settings of the node</h2><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n<span class=\\\"pix-note-btnblock\\\">\\n  <a class=\\\"pix-note-dl\\\" style=\\\"background-color: #f66744\\\" href=\\\"https://huggingface.co/Winnougan/Qwen-3.5-INT8-Convrot-Comfy/resolve/main/qwen3.5_4b_int8_convrot.safetensors\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">Download qwen3.5_4b_int8_convrot.safetensors<span class=\\\"pix-note-btnsize\\\">~5.2 GB</span></a>\\n</span>&nbsp;\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><div class=\\\"pix-note-folderhint\\\" style=\\\"color: #f66744\\\">Place in: ComfyUI/models/text_encoders</div><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n<span class=\\\"pix-note-btnblock\\\">\\n  <a class=\\\"pix-note-vp\\\" style=\\\"background-color: #f66744\\\" href=\\\"https://huggingface.co/Winnougan/Qwen-3.5-INT8-Convrot-Comfy/tree/main\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">View Qwen 3.5 INT8 Convrot Repository</a>\\n</span>&nbsp;\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><hr class=\\\"pix-note-hr-solid\\\" style=\\\"color: #b8b8b8\\\"><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p><span data-ic=\\\"warning-v1\\\" class=\\\"pix-note-ic\\\" contenteditable=\\\"false\\\" style=\\\"color: #f66744\\\"></span>&nbsp;After placing the file, restart ComfyUI or refresh the model lists using the <b>R</b> shortcut.</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><hr class=\\\"pix-note-hr-solid\\\" style=\\\"color: #b8b8b8\\\"><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><h2><span data-ic=\\\"nodes-installed\\\" class=\\\"pix-note-ic\\\" contenteditable=\\\"false\\\" style=\\\"color: #f66744\\\"></span>&nbsp;Nodes Installed from Manager</h2><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><ul>\\n  <li>Pixaroma</li>\\n</ul><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><hr class=\\\"pix-note-hr-solid\\\" style=\\\"color: #b8b8b8\\\"><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><h2><span data-ic=\\\"pixaroma\\\" class=\\\"pix-note-ic\\\" contenteditable=\\\"false\\\" style=\\\"color: #f66744\\\"></span>&nbsp;Resources</h2><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n\\n</p><p>\\n  <a class=\\\"pix-note-discord\\\" href=\\\"https://discord.com/invite/gggpkVgBf3\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">Join Discord</a>&nbsp;\\n  <a class=\\\"pix-note-yt\\\" href=\\\"https://www.youtube.com/@pixaroma\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\">Pixaroma YouTube Channel</a>&nbsp;\\n</p>\",\"buttonColor\":\"#f66744\",\"lineColor\":\"#f66744\",\"width\":564.3470562739067,\"height\":417.93898647413846,\"backgroundColor\":\"#2a2a2a\"}",
+        "note_dom": ""
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 6,
+      "type": "PixaromaShowText",
+      "pos": [
+        1280.9751417379084,
+        -310.950492525116
+      ],
+      "size": [
+        405.151589133523,
+        641.8207682160853
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Caption",
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "07055200cec54d9445ac5190d3d368a01143e9ea",
+        "Node name for S&R": "PixaromaShowText"
+      },
+      "widgets_values": [
+        "Global Metadata: genre is 80s hip hop, subgenre is boom bap, BPM is 92, key is C minor with a pentatonic scale, feeling shifts from playful and bouncy to melancholic and reflective, it fits for late night drives or urban study sessions, recording should sound warm and slightly lo-fi with tape saturation.\nVocal Details: voice is male, sounds gritty and conversational like an old-school MC, performed with a laid-back flow and slight ad-libs, there are no harmonies but a soft backing vocal layer adds texture in the chorus.\nArrangement: instruments that carry the song include a crisp snare and a melodic bassline, supported by a muted electric guitar and a dusty drum machine, the beat switches from a steady four-on-the-floor feel to a syncopated break in the bridge, groove is relaxed and syncopated, bass plays a walking line while drums maintain a tight pocket, recording has plenty of headroom with subtle reverb on the vocals."
+      ],
+      "widgets_values_named": {
+        "text": "Global Metadata: genre is 80s hip hop, subgenre is boom bap, BPM is 92, key is C minor with a pentatonic scale, feeling shifts from playful and bouncy to melancholic and reflective, it fits for late night drives or urban study sessions, recording should sound warm and slightly lo-fi with tape saturation.\nVocal Details: voice is male, sounds gritty and conversational like an old-school MC, performed with a laid-back flow and slight ad-libs, there are no harmonies but a soft backing vocal layer adds texture in the chorus.\nArrangement: instruments that carry the song include a crisp snare and a melodic bassline, supported by a muted electric guitar and a dusty drum machine, the beat switches from a steady four-on-the-floor feel to a syncopated break in the bridge, groove is relaxed and syncopated, bass plays a walking line while drums maintain a tight pocket, recording has plenty of headroom with subtle reverb on the vocals."
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 7,
+      "type": "PixaromaShowText",
+      "pos": [
+        1710.6597029707982,
+        -310.95049252511603
+      ],
+      "size": [
+        405.151589133523,
+        641.8207682160853
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "source",
+          "type": "*",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "title": "Lyrics",
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "07055200cec54d9445ac5190d3d368a01143e9ea",
+        "Node name for S&R": "PixaromaShowText"
+      },
+      "widgets_values": [
+        "[Verse]\nGot a carrot in my pocket, munching on the beat\nBunny hops across the street, yeah I'm moving to the feet\n[Chorus]\nLittle ears listening close, to the rhythm in the air\nDancing with the moonlight, through the city's open door\n[Verse]\nGot a carrot in my pocket, munching on the beat\nBunny hops across the street, yeah I'm moving to the feet\n[Chorus]\nLittle ears listening close, to the rhythm in the air\nDancing with the moonlight, through the city's open door"
+      ],
+      "widgets_values_named": {
+        "text": "[Verse]\nGot a carrot in my pocket, munching on the beat\nBunny hops across the street, yeah I'm moving to the feet\n[Chorus]\nLittle ears listening close, to the rhythm in the air\nDancing with the moonlight, through the city's open door\n[Verse]\nGot a carrot in my pocket, munching on the beat\nBunny hops across the street, yeah I'm moving to the feet\n[Chorus]\nLittle ears listening close, to the rhythm in the air\nDancing with the moonlight, through the city's open door"
+      },
+      "color": "#1d1d1d",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 8,
+      "type": "PixaromaLabel",
+      "pos": [
+        898.424246488361,
+        359.61372595129035
+      ],
+      "size": [
+        352,
+        50
+      ],
+      "flags": {
+        "no_title": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "80b307e8d1882fd933959cb0ea94a26d143557b5",
+        "Node name for S&R": "PixaromaLabel",
+        "aux_id": "pixaroma/ComfyUI-Pixaroma"
+      },
+      "widgets_values": [
+        "{\"text\":\"It runs the model twice: first to generate a caption,\\nthen to generate lyrics from that caption.\",\"fontSize\":15,\"fontFamily\":\"Arial\",\"fontColor\":\"#ffffff\",\"textAlign\":\"center\",\"backgroundColor\":\"#f66744\",\"padding\":10,\"borderRadius\":0,\"opacity\":1,\"fontWeight\":\"normal\",\"lineHeight\":1}"
+      ],
+      "widgets_values_named": {
+        "label_json": "{\"text\":\"It runs the model twice: first to generate a caption,\\nthen to generate lyrics from that caption.\",\"fontSize\":15,\"fontFamily\":\"Arial\",\"fontColor\":\"#ffffff\",\"textAlign\":\"center\",\"backgroundColor\":\"#f66744\",\"padding\":10,\"borderRadius\":0,\"opacity\":1,\"fontWeight\":\"normal\",\"lineHeight\":1}"
+      },
+      "color": "rgba(0,0,0,0)",
+      "bgcolor": "rgba(0,0,0,0)"
+    },
+    {
+      "id": 4,
+      "type": "PixaromaMusicPrompt",
+      "pos": [
+        886.3884001879993,
+        -310.950492525116
+      ],
+      "size": [
+        364.03584630036164,
+        641.8207682160853
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "shape": 7,
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "text",
+          "shape": 7,
+          "type": "STRING",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "caption",
+          "type": "STRING",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "lyrics",
+          "type": "STRING",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "duration",
+          "type": "FLOAT",
+          "links": null
+        }
+      ],
+      "title": "Add your Idea and Pick Length",
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "07055200cec54d9445ac5190d3d368a01143e9ea",
+        "Node name for S&R": "PixaromaMusicPrompt",
+        "musicPromptState": {
+          "idea": "a song about a bunny, 80s hip hop",
+          "model": "qwen3.5_4b_int8_convrot.safetensors",
+          "clip_type": "minimax",
+          "seed": 0,
+          "seconds": 60,
+          "verses": 0,
+          "bridge": false,
+          "instrumental": false,
+          "no_vocals": false,
+          "release_model": false,
+          "caption_formula": "",
+          "lyrics_formula": "",
+          "caption_temperature": 0.3,
+          "caption_max_length": 500,
+          "lyrics_temperature": 0.8,
+          "lyrics_max_length": 900,
+          "seed_mode": "fixed",
+          "idea_share": 0.34,
+          "view": "caption"
+        },
+        "musicPromptLast": {
+          "caption": "Global Metadata: genre is 80s hip hop, subgenre is boom bap, BPM is 92, key is C minor with a pentatonic scale, feeling shifts from playful and bouncy to melancholic and reflective, it fits for late night drives or urban study sessions, recording should sound warm and slightly lo-fi with tape saturation.\nVocal Details: voice is male, sounds gritty and conversational like an old-school MC, performed with a laid-back flow and slight ad-libs, there are no harmonies but a soft backing vocal layer adds texture in the chorus.\nArrangement: instruments that carry the song include a crisp snare and a melodic bassline, supported by a muted electric guitar and a dusty drum machine, the beat switches from a steady four-on-the-floor feel to a syncopated break in the bridge, groove is relaxed and syncopated, bass plays a walking line while drums maintain a tight pocket, recording has plenty of headroom with subtle reverb on the vocals.",
+          "lyrics": "[Verse]\nGot a carrot in my pocket, munching on the beat\nBunny hops across the street, yeah I'm moving to the feet\n[Chorus]\nLittle ears listening close, to the rhythm in the air\nDancing with the moonlight, through the city's open door\n[Verse]\nGot a carrot in my pocket, munching on the beat\nBunny hops across the street, yeah I'm moving to the feet\n[Chorus]\nLittle ears listening close, to the rhythm in the air\nDancing with the moonlight, through the city's open door",
+          "meta": "239 words · 39.8s",
+          "error": false,
+          "muted": false,
+          "seed": 0
+        }
+      },
+      "widgets_values": [],
+      "widgets_values_named": {},
+      "color": "#f66744",
+      "bgcolor": "#2a2a2a"
+    },
+    {
+      "id": 2,
+      "type": "PixaromaLabel",
+      "pos": [
+        298.35227224119296,
+        -421.1437758242777
+      ],
+      "size": [
+        683,
+        51
+      ],
+      "flags": {
+        "no_title": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "ComfyUI-Pixaroma",
+        "ver": "80b307e8d1882fd933959cb0ea94a26d143557b5",
+        "Node name for S&R": "PixaromaLabel",
+        "aux_id": "pixaroma/ComfyUI-Pixaroma"
+      },
+      "widgets_values": [
+        "{\"text\":\"Minimax Music 3 - Caption and Lyrics Generator\",\"fontSize\":31,\"fontFamily\":\"Arial\",\"fontColor\":\"#ffffff\",\"textAlign\":\"left\",\"backgroundColor\":\"#f66744\",\"padding\":10,\"borderRadius\":0,\"opacity\":1,\"fontWeight\":\"normal\",\"lineHeight\":1}"
+      ],
+      "widgets_values_named": {
+        "label_json": "{\"text\":\"Minimax Music 3 - Caption and Lyrics Generator\",\"fontSize\":31,\"fontFamily\":\"Arial\",\"fontColor\":\"#ffffff\",\"textAlign\":\"left\",\"backgroundColor\":\"#f66744\",\"padding\":10,\"borderRadius\":0,\"opacity\":1,\"fontWeight\":\"normal\",\"lineHeight\":1}"
+      },
+      "color": "rgba(0,0,0,0)",
+      "bgcolor": "rgba(0,0,0,0)"
+    }
+  ],
+  "links": [
+    [
+      2,
+      4,
+      0,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      4,
+      1,
+      7,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.1,
+      "offset": [
+        -182.72590946937834,
+        533.7103073192391
+      ]
+    },
+    "frontendVersion": "1.49.6",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

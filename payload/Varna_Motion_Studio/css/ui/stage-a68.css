@@ -1,0 +1,200 @@
+/*
+ * Temporary AE-only bridge, not the phase D stylesheet consolidation.
+ * IMPORTANT declarations below are necessary because the 31 legacy sheets contain
+ * unlayered !important rules. An isolated important layer outranks those rules
+ * without duplicating their ID specificity. Stage D must transfer ownership and
+ * remove this bridge only with coverage evidence. CEP 12 requires Chromium 99,
+ * which supports cascade layers; see docs/ui-a68/STAGE_A_FA.md for Adobe's source.
+ */
+@layer varna-stage-a68 {
+  /* Legacy body fonts/colors are important. Preserve the existing font family. */
+  html[data-ui-a68] body {
+    font-size: var(--ui-font-body) !important;
+    line-height: var(--ui-line-body) !important;
+    color: var(--ui-color-text) !important;
+  }
+
+  /* Legacy descendants set 8–11px explicitly. Project graphics are excluded,
+     including sample type, actual table cells, SVG artwork and user-styled words. */
+  html[data-ui-a68] body *:not(:where(
+    script, style, svg, svg *, canvas, iframe,
+    #tablePreview, #tablePreview *, #tableEditor, #tableEditor *,
+    #sceneStage40, #sceneStage40 *, .scene-piece40, .scene-piece40 *,
+    .preview-text50, .preview-text50 *, .motion-card-preview, .motion-card-preview *,
+    .caption-preview37, .caption-preview37 *, .preview-caption, .preview-caption *,
+    .font31-preview, .font31-preview *, .look37 > span,
+    .liquid-preview, .liquid-preview *, [data-user-content], [data-user-content] *
+  )) {
+    font-size: var(--ui-font-body) !important;
+  }
+
+  /* Fixed label sizes in workspace44/workspace67 otherwise defeat the token floor. */
+  html[data-ui-a68] :is(button, input, select, textarea, label, .control > span, .switch-row, .inline-control):not(:where(
+    .scene-piece40, #tablePreview *, #tableEditor *, .preview-text50 *, [data-user-content]
+  )) {
+    font-size: var(--ui-font-label) !important;
+  }
+  html[data-ui-a68] :is(small, .hint, .mini-badge, .status-pill, .toggle-state44, kbd, .section-leaves67 output) {
+    font-size: var(--ui-font-note) !important;
+    line-height: var(--ui-line-body) !important;
+  }
+  html[data-ui-a68] :is(.card-title b, .font-dialog67 > header b, h2) {
+    font-size: var(--ui-font-section) !important;
+  }
+  html[data-ui-a68] :is(h1, #currentPageTitle) {
+    font-size: var(--ui-font-title) !important;
+  }
+  html[data-ui-a68] :is(.nav-label48, .production-main47 > button, #routeSelect66, .section-tabs67 button, .section-navigation67 select) {
+    font-size: var(--ui-font-label) !important;
+  }
+
+  /* Fixed legacy colors in scene labels, hints and statuses fail on light surfaces. */
+  html[data-ui-a68] :is(.card, .control, .inline-control, .switch-row, .card-title b, .font-dialog67, .context40, #motionDraftStatus) {
+    color: var(--ui-color-text) !important;
+  }
+  html[data-ui-a68] :is(.hint, small, .control > span, .inline-control, .switch-row, .mini-badge, .section-leaves67, .scene-settings40 .control) {
+    color: var(--ui-color-muted) !important;
+  }
+  html[data-ui-a68] :is(.card, .font-dialog67) {
+    background: var(--ui-color-surface) !important;
+    border-color: var(--ui-color-border) !important;
+    border-radius: var(--ui-radius-card) !important;
+    padding: var(--ui-card-space) !important;
+  }
+  html[data-ui-a68] :is(.featured-control, .motion-phase-summary, .context40, .mini-badge, .status-pill, label.inline-control) {
+    background: var(--ui-color-field) !important;
+    border-color: var(--ui-color-border) !important;
+  }
+
+  /* Legacy .field status text is hard-coded light even when its surface is light. */
+  html[data-ui-a68] :is(.field, .field > span) {
+    background: var(--ui-color-field) !important;
+    color: var(--ui-color-text) !important;
+    border-color: var(--ui-color-border) !important;
+  }
+  /* The old phase pills use u-accent on an alpha background and miss AA by rounding. */
+  html[data-ui-a68] .motion-phase-summary > span {
+    background: var(--ui-color-soft) !important;
+    color: var(--ui-color-accent) !important;
+  }
+  /* This is a UI handle inside the protected preview, not rendered table artwork. */
+  html[data-ui-a68] #tablePreview .table-stage-resize {
+    min-height: var(--ui-hit-size) !important;
+    min-width: var(--ui-hit-size) !important;
+  }
+
+  /* Legacy control rules fix heights down to 21px. No IDs, values or handlers change. */
+  html[data-ui-a68] :is(button, select, input:not([type=checkbox]):not([type=radio]):not([type=hidden]), textarea):not(:where(
+    .scene-piece40, #tablePreview *, #tableEditor *, .preview-text50 *, [data-user-content]
+  )) {
+    min-height: var(--ui-control-min) !important;
+    box-sizing: border-box !important;
+    color: var(--ui-color-text) !important;
+    border-color: var(--ui-color-border) !important;
+  }
+  html[data-ui-a68] :is(select, textarea, input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=hidden])):not(:where(
+    #tablePreview *, #tableEditor *, [data-user-content]
+  )) {
+    background: var(--ui-color-field) !important;
+    border-radius: var(--ui-radius-control) !important;
+  }
+  html[data-ui-a68] :is(.btn, .quick-btn, .header-output, .font-trigger67, .section-pager67 button, .production-actions47 button, .header-options summary) {
+    min-height: var(--ui-control-min) !important;
+    background: var(--ui-color-field) !important;
+    color: var(--ui-color-text) !important;
+    border-color: var(--ui-color-border) !important;
+    border-radius: var(--ui-radius-control) !important;
+  }
+  html[data-ui-a68] :is(.btn.primary, .header-output, #tableDockActions66 .btn.primary) {
+    background: var(--ui-color-action) !important;
+    color: var(--ui-color-on-action) !important;
+    border-color: var(--ui-color-action) !important;
+  }
+  html[data-ui-a68] :is(.btn.secondary, .font31-star, .font31-choose, .section-tabs67 button, .production-main47 > button) {
+    color: var(--ui-color-accent) !important;
+  }
+  html[data-ui-a68] :is(.btn.danger-soft, .error, .error-text) {
+    color: var(--ui-color-danger) !important;
+  }
+  html[data-ui-a68] :is(.corrected-token, .success, .success-text) {
+    color: var(--ui-color-success) !important;
+  }
+  html[data-ui-a68] :is(.warning, .warning-text, .engine-error-details summary) {
+    color: var(--ui-color-warning) !important;
+  }
+
+  html[data-ui-a68] .switch-row {
+    min-height: var(--ui-control-min);
+  }
+  html[data-ui-a68] :is(input[type=checkbox], input[type=radio]) {
+    accent-color: var(--ui-color-action);
+  }
+  /* fluent-glass47 fixes the checked track/thumb with important declarations.
+     Keep checked/unchecked behavior, but use readable track/thumb pairs. */
+  html[data-ui-a68] .switch-row > .switch {
+    background: var(--ui-color-field) !important;
+    border-color: var(--ui-color-border) !important;
+  }
+  html[data-ui-a68] .switch-row > .switch::after {
+    background: var(--ui-color-muted) !important;
+  }
+  html[data-ui-a68] .switch-row > input:checked + .switch {
+    background: var(--ui-color-action) !important;
+    border-color: var(--ui-color-action) !important;
+  }
+  html[data-ui-a68] .switch-row > input:checked + .switch::after {
+    background: var(--ui-color-on-action) !important;
+  }
+  html[data-ui-a68] .switch-row:focus-within > .switch {
+    outline: 2px solid var(--ui-color-focus);
+    outline-offset: 2px;
+  }
+
+  /* Legacy numeric37 uses a 31px wrapper, 27px number and a narrow 15px handle.
+     The widget's JavaScript and native range track/thumb rules are retained. */
+  html[data-ui-a68] .numeric37 {
+    height: var(--ui-control-height) !important;
+    min-height: var(--ui-control-height) !important;
+    background: var(--ui-color-field) !important;
+    border-color: var(--ui-color-border) !important;
+    border-radius: var(--ui-radius-control) !important;
+    gap: var(--ui-space-1) !important;
+  }
+  html[data-ui-a68] .numeric37 > :is(input.numeric37-value, input.numeric37-slider, .numeric37-handle) {
+    height: var(--ui-control-min) !important;
+    min-height: var(--ui-control-min) !important;
+    color: var(--ui-color-text) !important;
+    background: transparent !important;
+  }
+  html[data-ui-a68] .numeric37 > .numeric37-handle {
+    width: var(--ui-hit-size) !important;
+    min-width: var(--ui-hit-size) !important;
+    flex-basis: var(--ui-hit-size) !important;
+    color: var(--ui-color-muted) !important;
+  }
+  html[data-ui-a68] :is(.form-grid, .action-inline, .button-row) {
+    gap: var(--ui-space-2) !important;
+  }
+  html[data-ui-a68] .control {
+    gap: var(--ui-space-1) !important;
+  }
+  html[data-ui-a68] :is(.section-tabs67 button[aria-selected=true], .production-main47 > button.active, #productionSteps47 button[aria-current=step]) {
+    background: var(--ui-color-soft) !important;
+    color: var(--ui-color-accent) !important;
+    border-color: var(--ui-color-border) !important;
+  }
+  /* The header uses explicit u-text and a .65 counter opacity in legacy sheets;
+     semantic foregrounds must stay readable after a custom palette change. */
+  html[data-ui-a68] :is(#currentPageTitle, #production47, .workspace-heading) {
+    color: var(--ui-color-text) !important;
+  }
+  html[data-ui-a68] #productionPosition47 {
+    color: var(--ui-color-muted) !important;
+    opacity: 1 !important;
+  }
+  /* Fixed legacy focus colors need a visible token in both theme families. */
+  html[data-ui-a68] :is(button, input, select, textarea, summary, a):focus-visible {
+    outline: 2px solid var(--ui-color-focus) !important;
+    outline-offset: 2px !important;
+  }
+}

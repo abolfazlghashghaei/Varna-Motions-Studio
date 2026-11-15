@@ -1,0 +1,72 @@
+{
+  "packs": [
+    {
+      "id": "hook-titles-25",
+      "fa": "۲۵ عنوان هوک",
+      "en": "25 Hook Titles",
+      "kind": "titles",
+      "entry": "hook-titles-25/Hook Texts Pack.aep",
+      "count": 25
+    },
+    {
+      "id": "highlighter-2",
+      "fa": "هایلایتر اصلی",
+      "en": "Highlighter 2",
+      "kind": "script",
+      "entry": "highlighter-2/Highlighter.jsxbin",
+      "count": 1
+    },
+    {
+      "id": "lower-thirds-100",
+      "fa": "۱۰۰ عنوان معرفی",
+      "en": "100 Lower Thirds",
+      "kind": "lower",
+      "entry": "",
+      "count": 100
+    },
+    {
+      "id": "saas-gradients-20",
+      "fa": "۲۰ پس‌زمینهٔ تکنولوژی",
+      "en": "20 SaaS Gradients",
+      "kind": "backgrounds",
+      "entry": "saas-gradients-20/After Effects/SaaS Gradients.aep",
+      "count": 20
+    },
+    {
+      "id": "instagram-ui-100",
+      "fa": "۱۰۰ عنصر اجتماعی",
+      "en": "100 Social Elements",
+      "kind": "social",
+      "entry": "instagram-ui-100/Instagram Elements UI Pack.aep",
+      "count": 100
+    },
+    {
+      "id": "social-hooks-100",
+      "fa": "۱۰۰ متن هوک",
+      "en": "100 Social Hooks",
+      "kind": "titles",
+      "entry": "social-hooks-100/100 Hooks.aep",
+      "count": 100
+    },
+    {
+      "id": "atools-2.106",
+      "fa": "ابزارهای Amanow / ATools",
+      "en": "Amanow / ATools 2.106",
+      "kind": "cep",
+      "entry": "atools-2.106/index.html",
+      "count": 1
+    }
+  ],
+  "files": 407,
+  "bytes": 126416567,
+  "originalScriptsExecuted": false,
+  "publicRedistributionVerified": false,
+  "unavailableUploads": [
+    "Neon Style - DJ Subtitle.rar",
+    "Light Leaks Transitions.rar",
+    "Paper Burn Transitions.rar",
+    "Holographic Foil v1.0 (Win).rar",
+    "AmanowTools_2.106.zxp"
+  ],
+  "unavailableReason": "Uploaded files exceed the 32 MiB executor transfer limit."
+}

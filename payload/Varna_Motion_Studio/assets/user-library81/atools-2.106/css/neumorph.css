@@ -1,0 +1,966 @@
+/* ============================================================================
+   ATOOLS — тема NEUMORPH SOFT. Светлый и тёмный режим.
+
+   ЭТО СЛОЙ ПОВЕРХ style.css. Подключается ПОСЛЕ него и после legacy.css.
+   Здесь только оформление: цвет, тень, скругление, градиент.
+
+   ЧЕГО ЗДЕСЬ НЕТ И БЫТЬ НЕ ДОЛЖНО — и почему:
+
+   1) Ни одного padding, height, font-size, line-height, gap, margin.
+      js/main.js:4080 один раз меряет «заводской» размер каждой кнопки и кладёт
+      его в localStorage. Изменишь коробку — у того, кто уже растягивал кнопки,
+      кегль пересчитается по старым числам и уедет. Высота #asPreview задаёт
+      весь масштаб предпросмотра субтитров (main.js:1052). Строки настроек
+      колеса обязаны идти вплотную, иначе перестановка залипает (main.js:6312).
+
+   2) Ни одного transform и transition:transform на .btn и .freebtn.
+      probe() (main.js:4122) временно ставит свой transform и возвращает
+      прежнее значение — чужой затрёт, а переход собьёт замер масштаба.
+
+   3) Ни одной анимации появления у .rx-ov, .rx-stage, .rx-svg.
+      measure() (main.js:5501) снимает геометрию колеса ОДИН раз. Анимация —
+      и зоны попадания разъедутся с картинкой. Ошибка плавающая, ловится тяжело.
+
+   4) Ни одного изменения display у оверлеев #licenseGate, #updOv,
+      #restoreModal, #expModal, #rxPick. blocked() (main.js:6062) проверяет
+      именно computed display:none. Спрячешь иначе — колесо не откроется никогда.
+
+   5) Контейнеры кнопок не переводить с flex на grid: moveStep() (main.js:4169)
+      читает flexDirection, у grid он всегда 'row'.
+
+   ЧИТАЕМОСТЬ. Чистый неоморфизм её не держит: на светлой базе тень дотягивает
+   до контраста 3:1 только став примерно на 40% темнее фона — то есть перестав быть
+   рельефом. Поэтому здесь рельеф — ДЕКОР, а опознаётся элемент по подписи и
+   заливке. Текст держим выше 4.5:1, активные состояния красим цветом, а не
+   только вдавленностью, фокус — сплошной контур. Источник требований:
+   WCAG 2.2 SC 1.4.3 и 1.4.11.
+
+   ГЕОМЕТРИЯ ТЕНЕЙ. Свет один на всю панель — сверху-слева. Тёмная тень идёт
+   по свету (+x +y), светлая против (-x -y). Смещение ≈ 10% от размера
+   элемента с потолком 8px, размытие = 2 x смещение, растяжение всегда 0.
+   Больше 3x размытия — та самая «мутность», от которой устают глаза.
+   ============================================================================ */
+
+/* ------------------------------------------------------------------ ТЁМНАЯ */
+/* Тени выводим сложением, а не умножением: на тёмной базе умножение на 0.85
+   даёт контраст 1.10:1 — рельефа не видно вообще. */
+:root{
+  /* 05.09.2026, слово владельца: база панели — серый After Effects с его скриншота
+     (rgb 50,50,50), а не синеватый #262b33. Все оттенки ниже выведены от неё. */
+  --bg-0:#2e2e2e; --bg-1:#323232; --bg-2:#373737;
+  --panel:#333333; --panel-2:#3b3b3b;
+  --line:rgba(255,255,255,.05); --line-2:rgba(255,255,255,.09);
+  --txt:#e8ecf4; --txt-dim:#9aa3b4;
+  --accent:#7b8bd8; --accent-2:#98a6e6; --accent-glow:rgba(123,139,216,.34);
+
+  /* рельеф */
+  --nu-bg:#323232;        /* = серый AE (было #262b33) */
+  /* 05.09.2026, слово владельца («тени ещё на 50 % снизь», фото 5 и 6): рельеф
+     ослаблен вдвое — база ∓ 8 вместо ∓ 15. Это одна пара переменных на все
+     выпуклости и вдавленности: кнопки, подвкладки, карточки-разделы. */
+  --nu-dark:#2a2a2a;      /* база − 8 по каналам */
+  --nu-light:#3a3a3a;     /* база + 8 */
+  /* ТЕНИ СНИЖЕНЫ по аудиту монтажёра (13.08.2026) — но ТОЛЬКО крупные.
+     --nu-up-s НЕ ТРОГАТЬ: 2px/4px это уже выправленный минимум (см. пояснение
+     ниже по файлу), и на нём висит почти вся мелочь — подвкладки, чипы,
+     переключатели, ползунки, образцы цвета. Минус четверть превратил бы её
+     в 1.5px/3px и разом уплостил бы всю панель.
+     --nu-in-s тоже не трогать: это не «нажатие», а признак ВЫБРАННОГО
+     состояния у подвкладок, чипов и категорий. */
+  --nu-up-s:2px 2px 4px var(--nu-dark), -2px -2px 4px var(--nu-light);
+  --nu-up:2.5px 2.5px 5px var(--nu-dark), -2.5px -2.5px 5px var(--nu-light);
+  --nu-up-l:4px 4px 8px var(--nu-dark), -4px -4px 8px var(--nu-light);
+  --nu-card:5px 5px 11px var(--nu-dark), -5px -5px 11px var(--nu-light);
+  --nu-in:inset 3px 3px 6px var(--nu-dark), inset -3px -3px 6px var(--nu-light);
+  --nu-in-s:inset 2px 2px 4px var(--nu-dark), inset -2px -2px 4px var(--nu-light);
+  --nu-track:inset 2px 2px 5px var(--nu-dark), inset -1px -1px 3px var(--nu-light);
+  /* подпись на акцентной заливке */
+  --nu-on-accent:#1a1f2c;
+}
+
+/* Токены светлой темы задаются одним блоком ниже, в разделе WARM PAPER. */
+
+/* --------------------------------------------------------- фон и прокрутка */
+body{
+  background:var(--nu-bg);
+  color:var(--txt);
+}
+body.theme-light{
+  background:var(--nu-bg);
+}
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--nu-dark); border-radius:999px; }
+::-webkit-scrollbar-thumb:hover{ background:var(--accent); }
+body.theme-light ::-webkit-scrollbar-thumb{ background:#c8cedb; }
+body.theme-light ::-webkit-scrollbar-thumb:hover{ background:var(--accent); }
+
+/* ------------------------------------------------------------ шапка, логотип */
+.logo{
+  background:none; -webkit-background-clip:initial; background-clip:initial;
+  color:var(--txt); -webkit-text-fill-color:var(--txt);
+}
+.logo b{ color:var(--accent); -webkit-text-fill-color:var(--accent); }
+body.theme-light .logo{
+  background:none; -webkit-background-clip:initial; background-clip:initial;
+  color:var(--txt); -webkit-text-fill-color:var(--txt);
+}
+body.theme-light .logo b{ color:var(--accent); -webkit-text-fill-color:var(--accent); }
+
+/* круглые кнопки шапки — выпуклые «таблетки» */
+.hicon,
+body.theme-light .hicon{
+  background:var(--nu-bg);
+  border-color:transparent;
+  border-radius:50%;
+  box-shadow:var(--nu-up-s);
+  color:var(--txt-dim);
+}
+.hicon:hover,
+body.theme-light .hicon:hover{
+  box-shadow:var(--nu-up);
+  color:var(--accent);
+}
+.hicon:active,
+body.theme-light .hicon:active{ box-shadow:var(--nu-in-s); }
+
+/* тумблер темы */
+.th-track,
+body.theme-light .th-track{
+  background:var(--nu-bg);
+  border-color:transparent;
+  box-shadow:var(--nu-track);
+}
+.th-knob{ background:var(--accent-2); box-shadow:0 1px 2px rgba(0,0,0,.35); }
+body.theme-light .theme-sw .th-knob{ background:var(--accent); box-shadow:0 1px 2px rgba(40,50,80,.28); }
+body.theme-light .theme-sw .th-sun{ color:var(--accent); }
+
+/* ------------------------------------------------------------------ вкладки */
+/* Вся полоса — одно вдавленное ложе, активная вкладка приподнята над ним.
+   Так соседние выпуклые элементы не складывают тени в грязную полосу. */
+.tabs,
+body.theme-light .tabs{
+  background:var(--nu-bg);
+  border-color:transparent;
+  box-shadow:var(--nu-track);
+  border-radius:999px;
+}
+.tab,
+body.theme-light .tab{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+  color:var(--txt-dim);
+}
+.tab:hover,
+body.theme-light .tab:hover{ color:var(--txt); background:transparent; }
+
+/* Активная вкладка: рельеф + ЦВЕТ подписи. Одной «выпуклости» мало —
+   низкий контраст читается как «выключено», а не «выбрано». */
+.tab.active,
+body.theme-light .tab.active{
+  background:var(--nu-bg);
+  border-color:transparent;
+  box-shadow:var(--nu-up);
+  color:var(--txt);
+  font-weight:700;
+  text-shadow:none;
+}
+.tab.active::after,
+body.theme-light .tab.active::after{ display:none; }
+
+/* подвкладки — тот же приём */
+.subtabs,
+body.theme-light .subtabs{ background:transparent; border-color:transparent; box-shadow:none; }
+.subtab,
+body.theme-light .subtab{
+  background:var(--nu-bg);
+  border-color:transparent;
+  box-shadow:var(--nu-up-s);
+  color:var(--txt-dim);
+}
+.subtab:hover,
+body.theme-light .subtab:hover{ box-shadow:var(--nu-up); color:var(--txt); }
+.subtab.active,
+body.theme-light .subtab.active{
+  background:var(--nu-bg);
+  box-shadow:none;            /* 05.09.2026, слово владельца: у выделенной (фиолетовой) подвкладки тени нет */
+  color:var(--accent);
+  font-weight:700;
+  border-color:transparent;
+}
+
+/* чипы групп */
+.grpchip,
+body.theme-light .grpchip{
+  background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-up-s); color:var(--txt-dim);
+}
+.grpchip:hover,
+body.theme-light .grpchip:hover{ box-shadow:var(--nu-up); color:var(--txt); }
+.grpchip.active,
+body.theme-light .grpchip.active{
+  background:var(--nu-bg); box-shadow:var(--nu-in-s); color:var(--accent); font-weight:700; border-color:transparent;
+}
+
+/* --------------------------------------------------------- секции-карточки */
+.section,
+body.theme-light .section{
+  background:var(--nu-bg);
+  border-color:transparent;
+  box-shadow:var(--nu-card);
+  border-radius:18px;
+}
+.section.compact{ box-shadow:var(--nu-up-l); }
+
+/* Заголовок секции: в старой теме он белый со свечением. Свечение убираем —
+   именно такие «сияющие» подписи и делают панель шумной. */
+.section-title,
+body.theme-light .section-title,
+.col-lbl,
+body.theme-light .col-lbl{
+  color:var(--txt-dim);
+  text-shadow:none;
+  background:none;
+  -webkit-text-fill-color:currentColor;
+}
+.section-title b{ color:var(--accent); -webkit-text-fill-color:var(--accent); }
+.amanow-animation-card .section-title b{ color:var(--accent); -webkit-text-fill-color:var(--accent); }
+
+/* ------------------------------------------------------------------ кнопки */
+.btn,
+body.theme-light .btn,
+.shape,
+body.theme-light .shape,
+.tile,
+body.theme-light .tile,
+.so-item,
+body.theme-light .so-item,
+.txt-page,
+body.theme-light .txt-page{
+  background:var(--nu-bg);
+  border-color:transparent;
+  box-shadow:var(--nu-up);
+  color:var(--txt);
+}
+.btn:hover,
+body.theme-light .btn:hover,
+.shape:hover,
+body.theme-light .shape:hover,
+.tile:hover,
+body.theme-light .tile:hover,
+.so-item:hover,
+body.theme-light .so-item:hover,
+.txt-page:hover,
+body.theme-light .txt-page:hover{
+  box-shadow:var(--nu-up-l);
+  color:var(--txt);
+}
+/* Нажатие показываем ТОЛЬКО тенью — transform здесь запрещён (см. шапку файла) */
+.btn:active,
+body.theme-light .btn:active,
+.shape:active,
+body.theme-light .shape:active,
+.tile:active,
+body.theme-light .tile:active{ box-shadow:var(--nu-in-s); }
+
+.btn:disabled,
+.btn[disabled],
+body.theme-light .btn:disabled,
+body.theme-light .btn[disabled]{
+  box-shadow:none;
+  background:var(--nu-bg);
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+/* Мелкие кнопки (Save / X / Load / Refresh и т.п.) — тень пропорционально
+   меньше. На кнопке ~28px высотой смещение 3px из --nu-up читается как
+   оторвавшийся ореол; для мелочи правильный масштаб — 2px/4px. Действует в
+   обеих темах, но заметно только в светлой, где светлая сторона тени яркая. */
+/* Сдвоенная карточка Animation + Text. В style.css:1009 и :1017 у неё зашит
+   тёмный фон rgba(39,42,47,.96) литералом — переменные его не трогают, поэтому
+   в светлой теме секция оставалась ТЁМНОЙ, а кнопки на ней светлели. Отсюда и
+   «жёсткие тени»: светлая кнопка на тёмной подложке. Возвращаем карточку в
+   тему. Две части склеены (у верхней нет низа, у нижней нет верха), поэтому
+   рельеф даём общий: верхней — тень без низа, нижней — без верха. */
+.section.compact.amanow-animation-card,
+body.theme-light .section.compact.amanow-animation-card{
+  background:var(--nu-card-bg, var(--nu-bg));
+  box-shadow:var(--nu-card);
+  border-color:transparent;
+}
+.section.compact.amanow-text-card,
+body.theme-light .section.compact.amanow-text-card{
+  background:var(--nu-card-bg, var(--nu-bg));
+  box-shadow:var(--nu-card);
+  border-color:transparent;
+}
+/* когда обе части — один блок, вторая карточка не должна рисовать свою тень
+   поверх первой: получилась бы полоса на стыке */
+.section.compact.amanow-animation-card + .section.compact.amanow-text-card,
+body.theme-light .section.compact.amanow-animation-card + .section.compact.amanow-text-card{
+  box-shadow:none;
+}
+
+.btn.tiny,
+.btn.small,
+body.theme-light .btn.tiny,
+body.theme-light .btn.small{ box-shadow:var(--nu-up-s); }
+.btn.tiny:hover,
+.btn.small:hover,
+body.theme-light .btn.tiny:hover,
+body.theme-light .btn.small:hover{ box-shadow:var(--nu-up); }
+.btn.tiny:active,
+.btn.small:active,
+body.theme-light .btn.tiny:active,
+body.theme-light .btn.small:active{ box-shadow:var(--nu-in-s); }
+
+/* акцентные кнопки — сплошная заливка, подпись контрастная */
+.btn.primary,
+body.theme-light .btn.primary,
+.ab-btn,
+body.theme-light .ab-btn,
+.crv-apply,
+.rx-pbtn.primary,
+.cust-create,
+.motion-save{
+  background:var(--accent);
+  color:var(--nu-on-accent);
+  border-color:transparent;
+  box-shadow:var(--nu-up);
+  text-shadow:none;
+}
+.btn.primary:hover,
+body.theme-light .btn.primary:hover,
+.ab-btn:hover,
+body.theme-light .ab-btn:hover{
+  background:var(--accent-2);
+  color:var(--nu-on-accent);
+  box-shadow:var(--nu-up-l);
+}
+.btn.primary:active,
+.ab-btn:active{ box-shadow:var(--nu-in-s); }
+
+/* кнопки режима */
+.modebtn,
+body.theme-light .modebtn{
+  background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-up-s); color:var(--txt-dim);
+}
+.modebtn.on,
+body.theme-light .modebtn.on{
+  background:var(--nu-bg); box-shadow:var(--nu-in-s); color:var(--accent); font-weight:700;
+}
+
+/* сегмент-контролы: общее вдавленное ложе, выбранный сегмент приподнят */
+.mode-seg,
+body.theme-light .mode-seg,
+.engtog,
+body.theme-light .engtog{
+  background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-track); border-radius:999px;
+}
+.mode-seg input:checked + span,
+body.theme-light .mode-seg input:checked + span,
+.engtog .engbtn.active,
+body.theme-light .engtog .engbtn.active{
+  background:var(--nu-bg);
+  color:var(--accent);
+  font-weight:700;
+  box-shadow:var(--nu-up-s);
+  text-shadow:none;
+}
+
+/* ---------------------------------------------------- поля ввода и списки */
+input.num,
+select.sel,
+.tinput,
+.stepper,
+.numstep,
+.lic-input,
+.cust-input,
+.so-ren-input,
+.rd-search,
+.txt-ed,
+.rx-preset,
+.rx-renameseg,
+.rx-msearch,
+body.theme-light input.num,
+body.theme-light select.sel,
+body.theme-light .tinput,
+body.theme-light .stepper,
+body.theme-light .numstep,
+body.theme-light .txt-ed{
+  background:var(--nu-bg);
+  border-color:transparent;
+  box-shadow:var(--nu-in-s);
+  color:var(--txt);
+}
+input.num::placeholder,
+.tinput::placeholder,
+.rd-search::placeholder,
+.cust-input::placeholder{ color:var(--txt-dim); }
+
+select.sel option,
+body.theme-light select.sel option{ background:var(--nu-bg); color:var(--txt); }
+
+/* Фокус — сплошной контур поверх любого рельефа. «Тень поглубже» как признак
+   фокуса проваливает и 1.4.11, и 2.4.13: нужен видимый ободок с контрастом. */
+input.num:focus,
+select.sel:focus,
+.tinput:focus,
+.lic-input:focus,
+.cust-input:focus,
+.so-ren-input:focus,
+.rd-search:focus,
+.txt-ed:focus,
+body.theme-light input.num:focus,
+body.theme-light select.sel:focus{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+  box-shadow:var(--nu-in-s);
+  border-color:transparent;
+}
+.btn:focus-visible,
+.tab:focus-visible,
+.subtab:focus-visible,
+.hicon:focus-visible,
+.swatch:focus-visible,
+.cell:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+
+/* стрелки степперов */
+.stepper .steps,
+.numstep .steps,
+.stepper .stp.up,
+.numstep .stp.up{ border-color:var(--line); }
+.stepper .stp,
+.numstep .stp{ color:var(--txt-dim); background:transparent; }
+.stepper .stp:hover,
+.numstep .stp:hover{ color:var(--accent); background:transparent; }
+
+/* свои выпадающие списки (замена нативных на macOS) */
+.am-selbox,
+.cust-add-sel,
+body.theme-light .am-selbox{
+  background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-in-s); color:var(--txt);
+}
+.am-selbox:hover{ box-shadow:var(--nu-in-s); color:var(--accent); }
+.am-selpop,
+.cust-pop,
+body.theme-light .am-selpop,
+body.theme-light .cust-pop{
+  background:var(--panel); border-color:transparent; box-shadow:var(--nu-card); color:var(--txt);
+}
+.am-selpop-row:hover,
+.cust-pop-row:hover{ background:var(--accent); color:var(--nu-on-accent); }
+
+/* ---------------------------------------------------------------- ползунки */
+input[type=range],
+body.theme-light input[type=range]{
+  background:linear-gradient(90deg,var(--accent) 0%,var(--accent) var(--p,50%),var(--nu-dark) var(--p,50%));
+  border-radius:999px;
+  box-shadow:var(--nu-track);
+}
+input[type=range]::-webkit-slider-thumb,
+body.theme-light input[type=range]::-webkit-slider-thumb{
+  background:var(--nu-bg);
+  border-color:transparent;
+  box-shadow:var(--nu-up-s);
+}
+input[type=range]::-webkit-slider-thumb:hover{ box-shadow:var(--nu-up); }
+
+/* чекбоксы и радио */
+input[type=checkbox],
+input[type=radio]{ accent-color:var(--accent); }
+
+/* ----------------------------------------------------------- якорная точка */
+.anchor,
+body.theme-light .anchor{
+  background:var(--nu-bg); box-shadow:var(--nu-in); border-radius:14px; border-color:transparent;
+}
+.cell,
+body.theme-light .cell{ background:transparent; border-color:transparent; box-shadow:none; }
+.cell:hover{ background:transparent; }
+.cell::after{ background:var(--txt-dim); box-shadow:none; }
+.cell.on,
+body.theme-light .cell.on{
+  background:var(--nu-bg); box-shadow:var(--nu-up-s); border-color:transparent;
+}
+.cell.on::after,
+body.theme-light .cell.on::after{ background:var(--accent); box-shadow:none; }
+
+/* ------------------------------------------------------------ цвета, свотчи */
+.swatch,
+body.theme-light .swatch{ border-color:transparent; box-shadow:var(--nu-up-s); }
+.swatch:hover{ box-shadow:var(--nu-up); }
+.swatch-add,
+.swatches.small .swatch-add{
+  background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-up-s); color:var(--txt-dim);
+}
+.swatch-add:hover{ color:var(--accent); box-shadow:var(--nu-up); }
+.col-sw,
+.col-grad,
+.gsw,
+.tb-sw{ border-color:transparent; box-shadow:var(--nu-up-s); }
+.col-sep{ border-color:var(--line); }
+
+/* --------------------------------------------------- галерея и превью анимаций */
+.tile-prev,
+body.theme-light .tile-prev{ background:var(--nu-dark); border-color:var(--line); }
+.pv-stage,
+body.theme-light .pv-stage{
+  background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-in); border-radius:14px;
+}
+.animate-bar,
+body.theme-light .animate-bar{
+  background:var(--nu-bg); border-color:transparent; box-shadow:0 -6px 16px rgba(0,0,0,.22);
+}
+body.theme-light .animate-bar{ box-shadow:0 -6px 16px rgba(40,50,80,.10); }
+
+/* ------------------------------------------------------------- READY, Notes */
+.so-cat,
+body.theme-light .so-cat{ background:transparent; border-color:transparent; box-shadow:none; color:var(--txt-dim); }
+.so-cat.active,
+body.theme-light .so-cat.active{
+  background:var(--nu-bg); box-shadow:var(--nu-in-s); color:var(--accent); font-weight:700; border-color:transparent;
+}
+.so-act,
+.txt-page-act{ background:transparent; color:var(--txt-dim); }
+.so-act:hover,
+.txt-page-act:hover{ background:var(--panel-2); color:var(--accent); }
+.rd-badge{ background:var(--accent); color:var(--nu-on-accent); }
+
+/* --------------------------------------------------------------- CRVS */
+.crv-ed,
+body.theme-light .crv-ed{
+  background:var(--nu-bg); box-shadow:var(--nu-in); border-radius:14px; border-color:transparent;
+}
+.crv-nums{ color:var(--txt-dim); }
+
+/* ------------------------------------------------- модалки, док, оверлеи */
+/* display НЕ трогаем: blocked() (main.js:6062) читает именно его */
+.restore-card,
+.rc-card,
+.exp-card,
+.updov-card,
+.lic-card,
+.rx-mcard,
+.rxp-win,
+body.theme-light .restore-card,
+body.theme-light .rc-card{
+  background:var(--panel);
+  border-color:transparent;
+  box-shadow:var(--nu-card), 0 18px 40px rgba(0,0,0,.35);
+}
+body.theme-light .restore-card,
+body.theme-light .rc-card,
+body.theme-light .exp-card,
+body.theme-light .updov-card,
+body.theme-light .lic-card{
+  box-shadow:var(--nu-card), 0 18px 40px rgba(40,50,80,.16);
+}
+.restore-head,
+.rx-mtitle,
+.rxp-head{ border-color:var(--line); }
+.dock-bar,
+.dock-sub,
+.dock-handle,
+body.theme-light .dock-bar{
+  background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-up-l);
+}
+.dock-menu,
+body.theme-light .dock-menu{ background:var(--panel); border-color:transparent; box-shadow:var(--nu-card); }
+.dock-ic:hover,
+.dock-mi:hover,
+.dock-collapse:hover{ background:var(--panel-2); }
+.cust-seg.active{ background:var(--accent); color:var(--nu-on-accent); }
+.exp-opt{ background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-up-s); }
+.exp-opt:hover{ box-shadow:var(--nu-up); }
+
+/* ---------------------------------------------------------- радиальное колесо */
+/* Здесь только цвета. Никакой анимации и никакого transform: measure()
+   (main.js:5501) снимает геометрию один раз, и всё попадание считается из неё. */
+.rxw-disc{ fill:var(--nu-bg); }
+.rxw-div{ stroke:var(--line-2); }
+.rxw-tile{ fill:var(--panel-2); stroke:var(--line); }
+.rxw-lbl,
+.rxw-tlbl{ fill:var(--txt-dim); }
+.rx-hud,
+.rx-cap{ color:var(--txt); }
+.rx-toast{ background:var(--panel); color:var(--txt); box-shadow:var(--nu-card); border-color:transparent; }
+.rx-back,
+.rx-pbtn,
+.rx-mini,
+.rx-sz,
+.rx-segrow,
+.rx-mrow{
+  background:var(--nu-bg); border-color:transparent; box-shadow:var(--nu-up-s); color:var(--txt);
+}
+.rx-sz.on,
+.rx-cc.on{ box-shadow:var(--nu-in-s); color:var(--accent); }
+/* the row that opens the effect search is an action, not one more catalogue
+   entry - it has to be re-stated here because this file loads last and the
+   .rx-mrow rule above would otherwise flatten its accent away */
+.rx-mplus{ background:rgba(59,143,220,.14); }
+.rx-mplus:hover{ background:rgba(59,143,220,.26); }
+.rx-mplus .rx-mn{ color:var(--accent); font-weight:700; }
+.rx-modal .rx-fxrow{ background:transparent; box-shadow:none; }
+.rx-prevbox{ border-color:var(--line); }
+
+/* ------------------------------------------------------------ подписи, прочее */
+.hint,
+.lbl,
+.soon,
+.cat-head,
+.as-lbl,
+.rx-phint,
+.rx-segnote{ color:var(--txt-dim); }
+
+/* Режим правки: пунктир должен быть виден на обеих базах */
+body.editing .section,
+body.editing .tile,
+body.editing .tabs,
+body.editing .subtabs,
+body.editing .dock-bar{ outline-color:var(--accent); }
+
+/* ============================================================================
+   СВЕТЛЫЙ РЕЖИМ — WARM PAPER.
+
+   Правится ТОЛЬКО палитра. Ни одного правила оформления здесь нет намеренно:
+   весь рельеф уже описан выше через переменные --nu-*, и он один на обе темы.
+   Значит светлый режим получает ровно тот же объём, что и тёмный, —
+   меняются только цвета.
+
+   Первая попытка была другой: там светлый режим поднимал элементы не тенью,
+   а светлотой, и кнопки вышли плоскими пилюлями. Отказался.
+
+   Почему сначала тени в светлом были жёсткими: цвет тени брался холодный
+   серый и слишком далёкий от базы. Здесь тень тёплая и близкая к бумаге —
+   контраст базы к тени 1.28:1. Это декор, а не признак элемента: опознаётся
+   кнопка подписью и заливкой, за них и отвечает контраст текста.
+
+   База #ebe5d9 выбрана не наугад. Взять бумагу светлее (#f2f0ea и выше) —
+   и светлой тени некуда расти, до белого остаётся меньше 1.15:1: рельеф
+   становится односторонним, остаётся только тёмный кант. Ровно это и
+   портило первый вариант.
+   ============================================================================ */
+body.theme-light{
+  --bg-0:#ebe5d9; --bg-1:#efeae0; --bg-2:#f3efe7;
+  --panel:#efeae0; --panel-2:#e2dbcb;
+  --line:rgba(90,72,45,.06); --line-2:rgba(90,72,45,.10);
+  --txt:#3a342b; --txt-dim:#6a6255;
+  --accent:#a85f30; --accent-2:#c47a45; --accent-glow:rgba(168,95,48,.22);
+
+  /* рельеф: тёплая бумага, тень выведена из базы умножением на 0.90 */
+  --nu-bg:#ebe5d9;
+  --nu-dark:#dfd9cb;       /* 05.09.2026: рельеф вдвое слабее (было #d3ccbd) */
+  /* светлая сторона тени. Была #fffdf7 — почти чистый белый: на больших
+     элементах красиво, но на мелких кнопках (Save/X/Load/Refresh, степперы)
+     3-пиксельное смещение + белый = жёсткий ореол, тот самый «harsh». Делаем
+     светлую сторону тёплой и чуть менее белой — рельеф остаётся, ореол уходит. */
+  --nu-light:#f2ede2;      /* 05.09.2026: рельеф вдвое слабее (было #f9f4ea) */
+  --nu-tint:#f7e5d4;        /* подложка выбранного */
+  --nu-on-accent:#ffffff;
+
+  /* ВСЕ составные тени обязаны быть пересобраны здесь, а не только --nu-card.
+     Ловушка CSS: значение вида "3px 3px 6px var(--nu-dark)" объявлено в :root,
+     и внутренний var() подставляется ТАМ ЖЕ, в контексте :root. Вниз по дереву
+     уходит уже готовая строка с ТЁМНЫМИ цветами — переопределение --nu-dark в
+     светлой теме на неё никак не влияет. Именно из-за этого светлый режим
+     сначала получил тени тёмного. */
+  /* В СВЕТЛОЙ ТЕМЕ РЕЖЕМ МЕНЬШЕ, И ВОТ ПОЧЕМУ.
+     Здесь у кнопки нет ни заливки, ни рамки: фон страницы, карточки и кнопки —
+     ОДИН цвет, и границу рисует исключительно тень. Её светлая сторона уже
+     около предела различимости (контраст к фону порядка 1,15:1). Срезать
+     --nu-up значило бы урезать на треть именно ту сторону, что и так слабее,
+     и получить односторонний рельеф — этот провал уже проходили, см. ниже.
+     Поэтому --nu-up остаётся как был, снижены только по-настоящему крупные:
+     --nu-up-l (это наведение, потеря там не критична) и --nu-card. */
+  --nu-up-s:2px 2px 4px var(--nu-dark), -2px -2px 4px var(--nu-light);
+  --nu-up:3px 3px 6px var(--nu-dark), -3px -3px 6px var(--nu-light);
+  --nu-up-l:3px 3px 7px var(--nu-dark), -3px -3px 7px var(--nu-light);
+  --nu-card:4px 4px 10px var(--nu-dark), -4px -4px 10px var(--nu-light);
+  --nu-in:inset 3px 3px 6px var(--nu-dark), inset -3px -3px 6px var(--nu-light);
+  --nu-in-s:inset 2px 2px 4px var(--nu-dark), inset -2px -2px 4px var(--nu-light);
+  --nu-track:inset 2px 2px 5px var(--nu-dark), inset -1px -1px 3px var(--nu-light);
+}
+
+/* ВЫБРАННОЕ должно быть видно. Одного рельефа мало — низкий контраст глаз
+   читает как «выключено». Добавляем подложку и акцент в тексте. */
+body.theme-light .subtab.active,
+body.theme-light .grpchip.active,
+body.theme-light .modebtn.on,
+body.theme-light .so-cat.active,
+body.theme-light .rx-sz.on,
+body.theme-light .rx-cc.on{
+  background:var(--nu-tint);
+  color:var(--accent);
+  font-weight:700;
+}
+
+/* ГЛАВНЫЕ КНОПКИ. .motion-save перечислен явно: у кнопок Save класс
+   .btn.motion-save, и правило body.theme-light .btn (вес 0,2,1) перебивало
+   заливку, заданную одиночным .motion-save (вес 0,1,0). В тёмной теме такого
+   правила нет — потому там заливка была, а в светлой пропадала. */
+body.theme-light .btn.motion-save,
+body.theme-light .motion-save,
+body.theme-light .crv-apply,
+body.theme-light .cust-create,
+body.theme-light .rx-pbtn.primary{
+  background:var(--accent);
+  color:var(--nu-on-accent);
+  box-shadow:var(--nu-up);
+}
+body.theme-light .btn.motion-save:hover,
+body.theme-light .crv-apply:hover,
+body.theme-light .cust-create:hover{
+  background:var(--accent-2); color:var(--nu-on-accent); box-shadow:var(--nu-up-l);
+}
+.btn.motion-save{ background:var(--accent); color:var(--nu-on-accent); }
+
+/* ============================================================================
+   ПЕРЕБИВАЕМ !important ИЗ style.css.
+
+   В старом стиле 50 правил с !important. Обычным весом селектора их не взять —
+   поэтому здесь единственное место во всём файле, где стоит !important, и
+   только для тех компонентов, которые иначе выпадают из темы.
+
+   НЕ ТРОГАЕМ намеренно:
+     .ok-flash / .copied / .copyfail — зелёная и красная отдача о результате
+       действия. Это смысл, а не оформление: перекрасить их в тему значит
+       отнять у человека ответ «получилось / не вышло».
+     html.is-mac option — починка выпадающих списков на macOS. Тронуть их
+       значит вернуть баг, который правили отдельно.
+   ============================================================================ */
+
+/* Подвкладки. Старый стиль жёстко задавал белые пилюли и золотую активную —
+   в тёплой бумаге золото спорит с терракотой, в тёмной выбивается из палитры.
+   Приводим к акценту темы: один язык выделения на всю панель. */
+.subtab,
+body.theme-light .subtab{
+  background:var(--nu-btn, var(--nu-bg)) !important;
+  color:var(--txt-dim) !important;
+  border-color:var(--nu-edge, var(--line-2)) !important;
+}
+.subtab:hover,
+body.theme-light .subtab:hover{
+  background:var(--nu-btn, var(--nu-bg)) !important;
+  color:var(--txt) !important;
+}
+.subtab.active,
+.subtab.active:hover,
+body.theme-light .subtab.active,
+body.theme-light .subtab.active:hover{
+  background:var(--accent) !important;
+  color:var(--nu-on-accent) !important;
+  border-color:var(--accent) !important;
+  box-shadow:none !important;   /* 05.09.2026: фиолетовая подвкладка — без тени (и при наведении) */
+}
+
+/* Подвкладки ANIMATION (Shape, Favorites и соседние). В style.css у их подписей
+   осталось свечение — светлый ореол по буквам, из-за которого текст выглядит
+   размытым и не в фокусе, в отличие от подвкладок в других разделах. Гасим
+   ореол у всех и в обеих темах, иначе он вернётся при выборе вкладки. */
+.tabpane[data-pane="anim"] .subtabs .subtab,
+.tabpane[data-pane="anim"] .subtabs .subtab.active,
+body.theme-light .tabpane[data-pane="anim"] .subtabs .subtab,
+body.theme-light .tabpane[data-pane="anim"] .subtabs .subtab.active{
+  text-shadow:none;
+}
+
+/* Кант главной кнопки был прибит к старому синему */
+.motion-save,
+body.theme-light .motion-save{ border-color:var(--accent) !important; }
+
+/* Превью READY: тёмно-синий в тёмной теме и золотой в светлой — оба мимо */
+.rd-prev{ background:var(--panel-2) !important; }
+body.theme-light .rd-prev{ background:var(--nu-sunk) !important; }
+
+/* ============================================================================
+   Режим повышенной контрастности Windows. В нём box-shadow принудительно
+   гасится системой — интерфейс, который держится на тенях, превратился бы в
+   пустые прямоугольники без границ. Возвращаем настоящие рамки.
+   ============================================================================ */
+@media (forced-colors: active){
+  .section, .btn, .tab, .subtab, .grpchip, .modebtn, .tile, .so-item,
+  .txt-page, .hicon, .shape, .anchor, .cell.on, .exp-opt,
+  .restore-card, .rc-card, .exp-card, .updov-card, .lic-card, .rx-mcard,
+  input.num, select.sel, .tinput, .stepper, .numstep, .am-selbox{
+    border:1px solid ButtonBorder;
+    box-shadow:none;
+  }
+  .tab.active, .subtab.active, .grpchip.active, .modebtn.on, .so-cat.active{
+    border:2px solid Highlight;
+  }
+}
+
+/* ============================================================================
+   05.09.2026, ПРОБА ВЛАДЕЛЬЦА: плоские обведённые кнопки в разделах вкладок
+   TOOLS и CREATE (класс flat-sec на разделах в index.html). Образец — кнопка
+   Solid с его скриншота: заливка #30363e (база + 10), рамка 1 px #50596e,
+   текст #e8ecf4, тени нет. Не трогаем: вкладки (.tab), подвкладки (.subtab),
+   поля, степперы, свотчи, якорь и все остальные разделы панели.
+   Главные кнопки (Sequence, Glass, Save, Create) — тот же плоский тип, но
+   рамка акцентом и подпись читаемым акцентом (--fb-accent-txt: контраст к
+   заливке ≥ 4.5:1 в обеих темах). Откат — удалить этот блок и класс flat-sec.
+   ============================================================================ */
+:root{
+  --fb-bg:#3c3c3c;                    /* заливка: база + 10 (на синей базе была #30363e) */
+  --fb-bg-h:#444444;                  /* наведение */
+  --fb-edge:#5c5c5c;                  /* рамка: нейтральная, как рамки самого AE */
+  --fb-edge-h:#7a7a7a;                /* рамка при наведении */
+  --fb-tint:rgba(123,139,216,.16);    /* подложка главной кнопки при наведении и выбранного режима */
+  --fb-accent-txt:#98a6e6;            /* акцентная подпись: 4.6:1 на новой --fb-bg #3c3c3c (сам --accent даёт лишь 3.5:1) */
+}
+body.theme-light{
+  --fb-bg:#f4efe6; --fb-bg-h:#faf7f0; --fb-edge:#bdb29c; --fb-edge-h:#a99c84;
+  --fb-tint:rgba(168,95,48,.12);
+  --fb-accent-txt:#7f4420;            /* 6.7:1 на бумаге; --accent-2 при наведении давал 2.3:1 */
+}
+.flat-sec .btn,
+.flat-sec .modebtn,
+.flat-sec .shape,
+body.theme-light .flat-sec .btn,
+body.theme-light .flat-sec .modebtn,
+body.theme-light .flat-sec .shape{
+  background:var(--fb-bg);
+  border:1px solid var(--fb-edge);
+  box-shadow:none;
+  color:var(--txt);
+  text-shadow:none;
+  filter:none;
+}
+/* глифы формы ключа (ромб, квадрат, круг) — иконки, остаются акцентными;
+   в светлой теме светлый акцент не дотягивал до 3:1 — берём основной */
+.flat-sec .shape{ color:var(--accent-2); }
+body.theme-light .flat-sec .shape{ color:var(--accent); }
+.flat-sec .btn:hover,
+.flat-sec .modebtn:hover,
+.flat-sec .shape:hover,
+body.theme-light .flat-sec .btn:hover,
+body.theme-light .flat-sec .modebtn:hover,
+body.theme-light .flat-sec .shape:hover{
+  background:var(--fb-bg-h);
+  border-color:var(--fb-edge-h);
+  box-shadow:none;
+  filter:none;
+}
+/* нажатие: заливка проваливается до базы, рамка вспыхивает акцентом */
+.flat-sec .btn:active,
+.flat-sec .modebtn:active,
+.flat-sec .shape:active,
+body.theme-light .flat-sec .btn:active,
+body.theme-light .flat-sec .modebtn:active,
+body.theme-light .flat-sec .shape:active{
+  background:var(--nu-bg);
+  border-color:var(--accent);
+  box-shadow:none;
+  filter:none;
+}
+/* выключенная кнопка на наведение не отвечает */
+.flat-sec .btn[disabled]:hover,
+.flat-sec .btn:disabled:hover,
+body.theme-light .flat-sec .btn[disabled]:hover,
+body.theme-light .flat-sec .btn:disabled:hover{
+  background:var(--fb-bg);
+  border-color:var(--fb-edge);
+}
+/* главные кнопки: тот же плоский тип, рамка и подпись акцентом */
+.flat-sec .btn.primary,
+.flat-sec .btn.motion-save,
+body.theme-light .flat-sec .btn.primary,
+body.theme-light .flat-sec .btn.motion-save{
+  background:var(--fb-bg);
+  border-color:var(--accent);
+  color:var(--fb-accent-txt);
+  font-weight:700;
+  box-shadow:none;
+}
+.flat-sec .btn.primary:hover,
+.flat-sec .btn.motion-save:hover,
+body.theme-light .flat-sec .btn.primary:hover,
+body.theme-light .flat-sec .btn.motion-save:hover{
+  background:var(--fb-tint);
+  border-color:var(--accent-2);
+  color:var(--fb-accent-txt);
+  box-shadow:none;
+}
+/* у Save рамка задана с !important (style.css и выше в этом файле) — наведение
+   пробиваем тем же способом, иначе рамка не меняется */
+.flat-sec .btn.motion-save:hover,
+body.theme-light .flat-sec .btn.motion-save:hover{ border-color:var(--accent-2) !important; }
+/* нажатие Save: акцентная рамка должна пробить !important наведения */
+.flat-sec .btn.motion-save:active,
+body.theme-light .flat-sec .btn.motion-save:active{ border-color:var(--accent) !important; }
+.flat-sec .btn.primary:active,
+.flat-sec .btn.motion-save:active,
+body.theme-light .flat-sec .btn.primary:active,
+body.theme-light .flat-sec .btn.motion-save:active{
+  background:var(--nu-bg);
+  border-color:var(--accent);
+  color:var(--fb-accent-txt);
+}
+/* зелёная/оранжевая отдача Save («сохранено» / «не вышло») пробивает акцентную рамку */
+/* … и видна под курсором и в светлой теме (там наведение весит больше) */
+.flat-sec .btn.motion-save.copied, .flat-sec .btn.motion-save.copied:hover,
+body.theme-light .flat-sec .btn.motion-save.copied, body.theme-light .flat-sec .btn.motion-save.copied:hover{ border-color:#16a34a !important; }
+.flat-sec .btn.motion-save.copyfail, .flat-sec .btn.motion-save.copyfail:hover,
+body.theme-light .flat-sec .btn.motion-save.copyfail, body.theme-light .flat-sec .btn.motion-save.copyfail:hover{ border-color:#b45309 !important; }
+/* выбранный режим Sequence: акцентная рамка и подпись на лёгкой подложке;
+   на наведение и нажатие отвечает, как остальные */
+.flat-sec .modebtn.on,
+body.theme-light .flat-sec .modebtn.on{
+  background:var(--fb-tint);
+  border-color:var(--accent);
+  color:var(--fb-accent-txt);
+  box-shadow:none;
+  font-weight:700;
+}
+.flat-sec .modebtn.on:hover,
+body.theme-light .flat-sec .modebtn.on:hover{ border-color:var(--accent-2); }
+.flat-sec .modebtn.on:active,
+body.theme-light .flat-sec .modebtn.on:active{ background:var(--nu-bg); }
+/* режим правки: подсветка перетаскивания и растягивания (style.css:641) должна
+   быть видна и на плоских кнопках — наведение/нажатие здесь её глушили */
+body.editing .flat-sec .btn.dragging,
+body.editing .flat-sec .btn.sizing,
+body.editing .flat-sec .modebtn.dragging,
+body.editing .flat-sec .modebtn.sizing,
+body.editing .flat-sec .shape.dragging,
+body.editing .flat-sec .shape.sizing{
+  box-shadow:0 14px 32px -8px rgba(0,0,0,.36), inset 0 0 0 1px var(--accent-glow);
+}
+/* «магнит» размера: кольцо тенью, а не outline — outline до Chromium 94 (AE ≤ 2022)
+   рисуется прямоугольным поверх скруглений; правило стоит после подсветки правки */
+body.editing .freebtn.sizing.am-snap{
+  outline:none;
+  box-shadow:0 0 0 2px var(--accent,#4c8dff), 0 14px 32px -8px rgba(0,0,0,.36);
+}
+/* повышенная контрастность Windows: у выбранного режима кольцо Highlight, как у остальных */
+@media (forced-colors: active){
+  .flat-sec .btn, .flat-sec .modebtn, .flat-sec .shape{ border:1px solid ButtonBorder; box-shadow:none; }
+  .flat-sec .modebtn.on, body.theme-light .flat-sec .modebtn.on{ border:2px solid Highlight; }
+}
+
+/* ============================================================================
+   05.09.2026, слово владельца: у НИЖНЕГО ЗАКРЕПЛЁННОГО ДОКА теней нет.
+   Рельеф всей остальной панели остаётся как был — снимаем тень только у самой
+   полосы дока, у её второй строки (выравнивание) и у ручки. Выпадающее меню
+   дока тень сохраняет: оно всплывает поверх содержимого, и без тени его край
+   теряется. Правило стоит последним в файле, поэтому перебивает и рельеф
+   отсюда, и тень из style.css (там .dock-bar,.dock-sub).
+   ============================================================================ */
+:root{
+  --dock-bg:#3b3b3b;                    /* на ступень светлее панели (#323232) */
+  --dock-edge:rgba(255,255,255,.10);
+}
+body.theme-light{
+  --dock-bg:#e3ddd0;                    /* та же бумага, на тон плотнее — без коричневого */
+  --dock-edge:rgba(90,72,45,.22);
+}
+.dock-bar, .dock-sub, .dock-handle,
+body.theme-light .dock-bar, body.theme-light .dock-sub, body.theme-light .dock-handle{
+  box-shadow:none;
+  background:var(--dock-bg);
+  border:1px solid var(--dock-edge);
+}

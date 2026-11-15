@@ -1,0 +1,326 @@
+/* ============================================================================
+   ATOOLS — тема VIOLET RAIL (18.09.2026, концепт владельца TOOLS-VIOLET.png).
+
+   ЭТО ПОСЛЕДНИЙ СЛОЙ ОФОРМЛЕНИЯ. Подключается после style.css, legacy.css и
+   neumorph.css. Убрать одну строку <link> в index.html — панель вернётся к
+   прежнему серому виду целиком, без единой правки в остальных файлах.
+
+   ЧТО ЗДЕСЬ МОЖНО И ЧЕГО НЕЛЬЗЯ — те же правила, что у neumorph.css, и по тем
+   же причинам:
+
+   1) НИ ОДНОГО padding / height / font-size / gap / margin у КНОПОК и полей.
+      js/main.js:4080 один раз меряет «заводской» размер каждой кнопки и кладёт
+      его в localStorage. Изменишь коробку — у того, кто уже растягивал кнопки,
+      кегль пересчитается по старым числам и уедет.
+      Исключение сделано ровно одно и осознанно: .section-title (заголовок
+      карточки). Его никто не меряет и ни одна сохранённая настройка от него не
+      зависит, а по концепту он обязан стать белой шапкой карточки.
+
+   2) НИ ОДНОГО transform и transition:transform у .btn и .freebtn.
+      probe() (main.js:4122) временно ставит свой transform и возвращает
+      прежнее значение — чужой затрёт, а переход собьёт замер масштаба.
+
+   3) НИ ОДНОГО display у оверлеев #licenseGate, #updOv, #restoreModal,
+      #expModal, #rxPick — blocked() (main.js:6062) проверяет их видимость.
+
+   4) СТРАНИЦУ КОЛЕСА (.rx-*) не трогаем отдельными правилами — слово владельца
+      18.09.2026 «раздел wheel можешь не трогать». Общая палитра на неё всё же
+      действует: иначе одна страница осталась бы серой посреди тёмной панели.
+
+   Как устроено: neumorph.css рисует почти всю панель через свои переменные
+   (--nu-*, --fb-*, --flat-*, --accent*). Мы их переопределяем: цвета — на
+   графитово-фиолетовые, «рельеф» — на тонкую обводку в 1 px. Так плоский вид
+   получают СРАЗУ все элементы, а не только перечисленные ниже.
+   ============================================================================ */
+
+:root{
+  /* ---- палитра снята пипеткой с концепта владельца ---- */
+  --v-bg:#10171c;          /* фон панели */
+  --v-bg-2:#0c1217;        /* рейка, вдавленные ложа */
+  --v-card:#131c22;        /* тело карточки-раздела */
+  --v-head:#18212a;        /* шапка карточки и кнопки */
+  --v-surf:#18212a;        /* кнопки, чипы, поля-таблетки */
+  --v-surf-h:#1f2a34;      /* наведение */
+  --v-input:#0f161b;       /* поля ввода */
+  --v-line:#26313a;        /* тонкая линия */
+  --v-line-2:#36434e;      /* рамка кнопки */
+  --v-txt:#eef3f7;
+  --v-dim:#8e9aa4;
+  --v-acc:#7b4efc;         /* фиолетовый с концепта (#7B4EFC) */
+  --v-acc-2:#9c66fe;
+  --v-acc-txt:#cbb8ff;
+  --v-tint:rgba(123,78,252,.16);
+
+  /* ---- переводим палитру панели на новые цвета ---- */
+  --bg-0:var(--v-bg); --bg-1:var(--v-bg); --bg-2:var(--v-surf);
+  --panel:var(--v-card); --panel-2:var(--v-surf);
+  --line:var(--v-line); --line-2:var(--v-line-2);
+  --txt:var(--v-txt); --txt-dim:var(--v-dim);
+  --accent:var(--v-acc); --accent-2:var(--v-acc-2); --accent-glow:rgba(123,78,252,.38);
+
+  /* ---- рельеф neumorph → плоская обводка ----
+     Переменные подставляются в box-shadow десятков правил. Заменив их на
+     внутреннее кольцо в 1 px, мы разом уплощаем всю панель и не трогаем
+     ни одной коробки. */
+  --nu-bg:var(--v-surf);
+  --nu-dark:#0a1014; --nu-light:#1d2831;
+  --nu-up-s:inset 0 0 0 1px var(--v-line-2);
+  --nu-up:inset 0 0 0 1px var(--v-line-2);
+  --nu-up-l:inset 0 0 0 1px var(--v-line-2);
+  --nu-card:inset 0 0 0 1px var(--v-line);
+  --nu-in:inset 0 0 0 1px var(--v-line);
+  --nu-in-s:inset 0 0 0 1px var(--v-acc);
+  --nu-track:inset 0 0 0 1px var(--v-line);
+  --nu-tint:var(--v-tint);
+  --nu-on-accent:#ffffff;
+
+  /* ---- плоские кнопки (flat-sec и FLAT REDESIGN) ---- */
+  --fb-bg:var(--v-surf); --fb-bg-h:var(--v-surf-h);
+  --fb-edge:var(--v-line-2); --fb-edge-h:var(--v-acc);
+  --fb-tint:var(--v-tint); --fb-accent-txt:var(--v-acc-txt);
+  --flat-bg:var(--v-surf); --flat-bg-2:var(--v-surf-h);
+  --flat-border:var(--v-line-2); --flat-border-h:var(--v-acc); --flat-hover:var(--v-surf-h);
+
+  /* ---- нижний док ---- */
+  --dock-bg:var(--v-surf); --dock-edge:var(--v-line);
+}
+
+/* ---------------------------------------------------------------- основа */
+body, body.theme-light{ background:var(--v-bg); color:var(--v-txt); }
+::-webkit-scrollbar-thumb, body.theme-light ::-webkit-scrollbar-thumb{ background:#222d36; }
+::-webkit-scrollbar-thumb:hover, body.theme-light ::-webkit-scrollbar-thumb:hover{ background:var(--v-acc); }
+
+/* шапка: имя белое, вторая половина фиолетовая (как на концепте) */
+.logo, body.theme-light .logo{ color:#fff; -webkit-text-fill-color:#fff; }
+.logo b, body.theme-light .logo b{ color:var(--v-acc-2); -webkit-text-fill-color:var(--v-acc-2); }
+.hicon, body.theme-light .hicon{
+  background:var(--v-surf); border:1px solid var(--v-line-2); border-radius:9px;
+  box-shadow:none; color:var(--v-txt);
+}
+.hicon:hover, body.theme-light .hicon:hover{ background:var(--v-surf-h); border-color:var(--v-acc); color:#fff; box-shadow:none; }
+.hicon:active, body.theme-light .hicon:active{ background:var(--v-bg-2); box-shadow:none; }
+.th-track, body.theme-light .th-track{ background:var(--v-input); border:1px solid var(--v-line-2); box-shadow:none; }
+.th-knob, body.theme-light .theme-sw .th-knob{ background:#e9eef3; box-shadow:none; }
+.theme-sw.on .th-knob{ background:var(--v-acc-2); }
+
+/* ------------------------------------------------------- карточки-разделы */
+.section, body.theme-light .section{
+  background:var(--v-card);
+  border:1px solid var(--v-line);
+  box-shadow:none;
+}
+/* Заголовок карточки — единственное место, где меняется коробка (см. шапку
+   файла): по концепту это белая шапка во всю ширину карточки с линией снизу. */
+.section-title, body.theme-light .section-title{
+  color:#fff; font-size:11.5px; font-weight:700; letter-spacing:.1px; text-transform:none;
+  margin:-9px -10px 9px; padding:8px 11px 7px;
+  background:var(--v-head);
+  border-bottom:1px solid var(--v-line);
+  border-radius:12px 12px 0 0;
+}
+.section.compact .section-title{ margin:-7px -8px 8px; padding:7px 10px 6px; }
+.section-title b, body.theme-light .section-title b{ color:var(--v-acc-2); }
+
+/* ----------------------------------------------------------------- кнопки */
+.btn, body.theme-light .btn,
+.shape, body.theme-light .shape,
+.tile, body.theme-light .tile,
+.so-item, body.theme-light .so-item,
+.modebtn, body.theme-light .modebtn{
+  background:var(--v-surf);
+  border:1px solid var(--v-line-2);
+  color:var(--v-txt);
+  box-shadow:none;
+}
+.btn:hover, body.theme-light .btn:hover,
+.shape:hover, body.theme-light .shape:hover,
+.tile:hover, body.theme-light .tile:hover,
+.so-item:hover, body.theme-light .so-item:hover,
+.modebtn:hover, body.theme-light .modebtn:hover{
+  background:var(--v-surf-h); border-color:var(--v-acc); color:#fff; box-shadow:none;
+}
+.btn:active, body.theme-light .btn:active,
+.shape:active, body.theme-light .shape:active,
+.modebtn:active, body.theme-light .modebtn:active{ background:var(--v-bg-2); box-shadow:none; }
+.btn.on, .modebtn.on, .shape.on,
+body.theme-light .btn.on, body.theme-light .modebtn.on, body.theme-light .shape.on{
+  background:var(--v-tint); border-color:var(--v-acc); color:#fff; box-shadow:none;
+}
+/* главная кнопка раздела — сплошная фиолетовая, как «Create Sequence» */
+.btn.primary, body.theme-light .btn.primary,
+.ab-btn, body.theme-light .ab-btn,
+.crv-apply, .cust-create, .lic-btn, .updov-go{
+  background:var(--v-acc); border:1px solid var(--v-acc); color:#fff; box-shadow:none;
+}
+.btn.primary:hover, body.theme-light .btn.primary:hover,
+.ab-btn:hover, body.theme-light .ab-btn:hover,
+.crv-apply:hover, .cust-create:hover, .lic-btn:hover, .updov-go:hover{
+  background:var(--v-acc-2); border-color:var(--v-acc-2); box-shadow:none;
+}
+.btn:disabled, .btn[disabled], body.theme-light .btn:disabled{
+  background:var(--v-bg-2); border-color:var(--v-line); color:#5e6a74;
+}
+
+/* --------------------------------------------------------- поля и ползунки */
+input.num, .tinput, .stepper, .numstep, .lic-input, .cust-input,
+.so-ren-input, .rd-search, .txt-ed, select.sel, .am-selbox,
+body.theme-light input.num, body.theme-light .tinput, body.theme-light select.sel{
+  background:var(--v-input); border:1px solid var(--v-line-2); color:var(--v-txt); box-shadow:none;
+}
+input.num:focus, .tinput:focus, select.sel:focus, .lic-input:focus,
+.cust-input:focus, .rd-search:focus, .txt-ed:focus{
+  border-color:var(--v-acc); box-shadow:0 0 0 1px var(--v-acc);
+}
+input[type=range], body.theme-light input[type=range]{ background:var(--v-input); box-shadow:none; }
+input[type=range]::-webkit-slider-thumb, body.theme-light input[type=range]::-webkit-slider-thumb{
+  background:var(--v-acc-2); border:none; box-shadow:none;
+}
+.stepper .stp, .numstep .stp{ color:var(--v-dim); background:transparent; }
+.stepper .stp:hover, .numstep .stp:hover{ color:var(--v-acc-2); }
+
+/* ------------------------------------------- подвкладки, чипы, категории */
+.subtabs, body.theme-light .subtabs{ background:transparent; box-shadow:none; }
+.subtab, body.theme-light .subtab,
+.grpchip, body.theme-light .grpchip,
+.so-cat, body.theme-light .so-cat{
+  background:var(--v-surf); border:1px solid var(--v-line-2); color:var(--v-dim); box-shadow:none;
+}
+.subtab:hover, .grpchip:hover, .so-cat:hover{ color:#fff; border-color:var(--v-acc); background:var(--v-surf-h); }
+.subtab.active, body.theme-light .subtab.active,
+.grpchip.active, body.theme-light .grpchip.active,
+.so-cat.active, body.theme-light .so-cat.active{
+  background:var(--v-tint); border-color:var(--v-acc); color:#fff; box-shadow:none;
+}
+
+/* ---------------------------------------- сетка точек, образцы, превью */
+.anchor, body.theme-light .anchor{ background:transparent; box-shadow:none; }
+.cell, body.theme-light .cell{ background:var(--v-surf); border:1px solid var(--v-line-2); box-shadow:none; }
+.cell.on, body.theme-light .cell.on{ background:var(--v-tint); border-color:var(--v-acc); box-shadow:none; }
+.swatch, body.theme-light .swatch{ box-shadow:none; border:1px solid var(--v-line-2); }
+.swatch-add{ background:var(--v-surf); border:1px solid var(--v-line-2); color:var(--v-txt); box-shadow:none; }
+.tile-prev, body.theme-light .tile-prev,
+.pv-stage, body.theme-light .pv-stage{ background:var(--v-input); border:1px solid var(--v-line); box-shadow:none; }
+.animate-bar, body.theme-light .animate-bar{ background:var(--v-card); border:1px solid var(--v-line); box-shadow:none; }
+
+/* Карточка Amanow Animation — самая широкая в панели. Рейка забирает 44 px, и
+   её строки свойств (Position x/y, Scale x/y, Rotation x/y/z) переставали
+   помещаться: поля уезжали за правый край и молча обрезались. Разрешаем строке
+   переноситься — на широкой панели вид прежний, на узкой второе поле уходит
+   на следующую строку. Коробки самих полей не трогаем: их размеры меряет
+   main.js:4080 и хранит в localStorage. */
+.proprow{ flex-wrap:wrap; }
+
+/* Кнопка Save в полосе Animate несла старый синий акцент прямо в style.css:896
+   (градиент + синяя рамка). Зелёное «сохранено» и красную ошибку не трогаем —
+   это состояния, а не тема. */
+.ab-save, body.theme-light .ab-save{
+  background:var(--v-surf); border:1px solid var(--v-line-2); color:var(--v-txt); box-shadow:none;
+}
+.ab-save:hover, body.theme-light .ab-save:hover{ background:var(--v-surf-h); border-color:var(--v-acc); }
+
+/* --------------------------------------------------------- нижний док */
+.dock-bar, .dock-sub, .dock-handle,
+body.theme-light .dock-bar, body.theme-light .dock-sub, body.theme-light .dock-handle{
+  background:var(--v-surf); border:1px solid var(--v-line); box-shadow:none;
+}
+.dock-ic{ color:var(--v-txt); }
+.dock-ic:hover{ color:var(--v-acc-2); }
+
+/* ------------------------------------------------------------- оверлеи */
+.lic-card, .updov-card, .rc, .cust-pop, .am-selpop{
+  background:var(--v-card); border:1px solid var(--v-line); box-shadow:0 18px 48px -18px rgba(0,0,0,.8);
+}
+
+/* ============================================================================
+   ЛЕВАЯ РЕЙКА РАЗДЕЛОВ
+   Новая разметка, поэтому здесь можно задавать коробку: сохранённых размеров у
+   неё нет. Рейку рисует js/main.js (модуль «ЛЕВАЯ РЕЙКА РАЗДЕЛОВ»), и она
+   ничего не переключает сама — кликает по существующим вкладкам.
+   ============================================================================ */
+.vrail{
+  position:fixed; left:0; top:var(--vr-top,44px); bottom:0; width:44px;
+  background:var(--v-bg-2); border-right:1px solid var(--v-line);
+  padding:6px 0 10px; overflow-y:auto; overflow-x:hidden; z-index:150;
+  -webkit-user-select:none; user-select:none;
+}
+.vrail::-webkit-scrollbar{ width:0; }
+.vr-i{
+  position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:8px 2px; color:var(--v-dim); cursor:pointer;
+}
+.vr-i svg{ width:21px; height:21px; stroke:currentColor; fill:none; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; display:block; }
+.vr-i:hover{ color:#fff; }
+.vr-i.on{ color:var(--v-acc-2); }
+.vr-i.on::before{
+  content:""; position:absolute; left:0; top:5px; bottom:5px; width:3px;
+  border-radius:0 3px 3px 0; background:var(--v-acc);
+}
+.vr-t{ display:none; font-size:9px; letter-spacing:.2px; margin-top:4px; text-align:center; line-height:1.1; }
+.vr-sep{ height:1px; margin:9px 11px; background:var(--v-line); }
+body.vrail-on{ padding-left:54px; }
+body.vrail-on .dock{ left:44px; }
+/* верхние вкладки живут в разметке дальше (на них завязаны колесо, окна-карты
+   и режим правки), но в новом виде их место занимает рейка. В режиме правки
+   возвращаем: там их прячут и переставляют карандашом. */
+body.vrail-on .tabs{ display:none; }
+body.vrail-on.editing .tabs{ display:flex; }
+/* подвкладки TEXT и CREATE дублируют пункты рейки — прячем их, кроме правки */
+body.vrail-on .tsec-tabs, body.vrail-on .csec-tabs{ display:none; }
+body.vrail-on.editing .tsec-tabs, body.vrail-on.editing .csec-tabs{ display:flex; }
+/* страница колеса занимает панель целиком — рейка там не нужна */
+body.rx-page-on .vrail{ display:none; }
+body.vrail-on.rx-page-on{ padding-left:10px; }
+
+/* Панель шире 630 px по-настоящему (то есть локально шире ~420): рейка
+   раскрывается и показывает подписи, как на концепте владельца. */
+@media (min-width:630px){
+  .vrail{ width:72px; }
+  .vr-t{ display:block; }
+  body.vrail-on{ padding-left:82px; }
+  body.vrail-on .dock{ left:72px; }
+}
+
+/* ============================================================================
+   СВЕТЛАЯ ТЕМА. Тот же графит наоборот: белая бумага, фиолетовый акцент.
+   ============================================================================ */
+body.theme-light{
+  --v-bg:#eef1f5; --v-bg-2:#e4e8ee; --v-card:#ffffff; --v-head:#f4f6fa;
+  --v-surf:#ffffff; --v-surf-h:#f2f4f9; --v-input:#f6f8fb;
+  --v-line:#dfe4ec; --v-line-2:#cdd5e0;
+  --v-txt:#1c2330; --v-dim:#5f6b7a;
+  --v-acc:#6d3cf5; --v-acc-2:#8358fb; --v-acc-txt:#4b25c0;
+  --v-tint:rgba(109,60,245,.12);
+
+  /* Те же сопоставления, что и в :root, повторены здесь намеренно: neumorph.css
+     задаёт свою «тёплую бумагу» внутри body.theme-light, и без повтора светлая
+     тема осталась бы кремовой, а тёмная — фиолетовой. */
+  --bg-0:var(--v-bg); --bg-1:var(--v-bg); --bg-2:var(--v-surf);
+  --panel:var(--v-card); --panel-2:var(--v-surf);
+  --line:var(--v-line); --line-2:var(--v-line-2);
+  --txt:var(--v-txt); --txt-dim:var(--v-dim);
+  --accent:var(--v-acc); --accent-2:var(--v-acc-2); --accent-glow:rgba(109,60,245,.30);
+  --nu-bg:var(--v-surf); --nu-dark:#d7dde6; --nu-light:#ffffff;
+  --nu-up-s:inset 0 0 0 1px var(--v-line-2);
+  --nu-up:inset 0 0 0 1px var(--v-line-2);
+  --nu-up-l:inset 0 0 0 1px var(--v-line-2);
+  --nu-card:inset 0 0 0 1px var(--v-line);
+  --nu-in:inset 0 0 0 1px var(--v-line);
+  --nu-in-s:inset 0 0 0 1px var(--v-acc);
+  --nu-track:inset 0 0 0 1px var(--v-line);
+  --nu-tint:var(--v-tint);
+  --nu-on-accent:#ffffff;
+  --fb-bg:var(--v-surf); --fb-bg-h:var(--v-surf-h);
+  --fb-edge:var(--v-line-2); --fb-edge-h:var(--v-acc);
+  --fb-tint:var(--v-tint); --fb-accent-txt:var(--v-acc-txt);
+  --flat-bg:var(--v-surf); --flat-bg-2:var(--v-surf-h);
+  --flat-border:var(--v-line-2); --flat-border-h:var(--v-acc); --flat-hover:var(--v-surf-h);
+  --dock-bg:var(--v-surf); --dock-edge:var(--v-line);
+}
+body.theme-light .section-title{ color:var(--v-txt); }
+body.theme-light .logo{ color:var(--v-txt); -webkit-text-fill-color:var(--v-txt); }
+body.theme-light .hicon{ color:var(--v-txt); }
+body.theme-light .vrail{ background:var(--v-bg-2); }
+body.theme-light .vr-i{ color:var(--v-dim); }
+body.theme-light .vr-i:hover{ color:var(--v-txt); }
+body.theme-light .vr-i.on{ color:var(--v-acc); }
+body.theme-light .btn.primary, body.theme-light .ab-btn{ color:#fff; }

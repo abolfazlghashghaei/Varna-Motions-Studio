@@ -1,0 +1,126 @@
+/* AmanowTools 2.0 — фолбэки для старых движков CEP (AE 2020-2021, CEF 61/74).
+   Файл сгенерирован скриптом css_backport.js. Руками не править — правь style.css и пересобери.
+
+   html.no-flexgap  ставится, когда движок не умеет gap во flexbox (до Chromium 84)
+   html.no-ratio    ставится, когда движок не умеет aspect-ratio (до Chromium 88)
+
+   На современном CEP ни один из этих классов не появляется и файл ни на что не влияет. */
+
+/* ---------- gap во flexbox -> отступы у детей ---------- */
+html.no-flexgap .header > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .tabs > *:not(:last-child){ margin-right:2px; }
+html.no-flexgap .tabs > *:not(:last-child){ margin-bottom:2px; }
+html.no-flexgap .tabs > *:not(:last-child){ margin-bottom:3px; }
+html.no-flexgap .row > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .btn > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .ease-row > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .field > *:not(:last-child){ margin-bottom:4px; }
+html.no-flexgap .grp > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .row.mini > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .section.compact .field > *:not(:last-child){ margin-bottom:3px; }
+html.no-flexgap .optline > *:not(:last-child){ margin-right:10px; }
+html.no-flexgap .optline > *:not(:last-child){ margin-bottom:10px; }
+html.no-flexgap .optline label > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .proprow > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .preset-row > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .subtabs > *:not(:last-child){ margin-right:4px; }
+html.no-flexgap .anim-bar > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .sample.lines > *:not(:last-child){ margin-bottom:1px; }
+html.no-flexgap .animate-bar > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .hicons > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .restore-list > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .restore-row > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .animgroups > *:not(:last-child){ margin-right:4px; }
+html.no-flexgap .swatches.small > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .swatches.small > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap #uiScaleWrap > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .lic-dev > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .dock-bar > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .dock-tools > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .dock-sub > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .cust-segs > *:not(:last-child){ margin-right:4px; }
+html.no-flexgap .cust-new > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .cust-list > *:not(:last-child){ margin-bottom:8px; }
+html.no-flexgap .cust-item-head > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .cust-mem > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .cust-mem-row > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .engine-line > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .anim-values .field > *:not(:last-child){ margin-bottom:3px; }
+html.no-flexgap .bounce-field .lbl > *:not(:last-child){ margin-right:3px; }
+html.no-flexgap .mode-seg > *:not(:last-child){ margin-right:3px !important; }
+html.no-flexgap .amanow-text-card .preset-row > *:not(:last-child){ margin-right:4px; }
+html.no-flexgap .lic-row2 > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .pv-stage > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .bounce-toggle > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .ml-row > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .ml-chk > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .ml-swatches > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .ml-swatches > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .col-gradhead > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .col-title > *:not(:last-child){ margin-right:10px; }
+html.no-flexgap .col-solids > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .col-solids > *:not(:last-child){ margin-bottom:6px; }
+html.no-flexgap .col-grads > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .col-grads > *:not(:last-child){ margin-bottom:6px; }
+html.no-flexgap .rc-btns > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .tb-row > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .so-wrap > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .so-rail > *:not(:last-child){ margin-bottom:4px; }
+html.no-flexgap .so-top > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .so-list > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .so-item > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .so-nm > *:not(:last-child){ margin-bottom:1px; }
+html.no-flexgap .txt-wrap > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .txt-wrap > *:not(:last-child){ margin-bottom:7px; }
+html.no-flexgap .txt-pages > *:not(:last-child){ margin-bottom:4px; }
+html.no-flexgap .txt-page > *:not(:last-child){ margin-right:3px; }
+html.no-flexgap .txt-side > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .txt-bar > *:not(:last-child){ margin-right:3px; }
+html.no-flexgap .gmix-row > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .gmix-row > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .theme-sw > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .as-slrow > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .rd-acts > *:not(:last-child){ margin-right:4px; }
+html.no-flexgap .rd-b > *:not(:last-child){ margin-right:4px; }
+html.no-flexgap .rd-subs > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .rd-subs > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .wb-titlebar > *:not(:last-child){ margin-right:10px; }
+html.no-flexgap .wb-tiles > *:not(:last-child){ margin-right:9px; }
+html.no-flexgap .crv-modes > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .crv-namerow > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .crv-tile > *:not(:last-child){ margin-bottom:1px; }
+html.no-flexgap .header > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .logo > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .amf-bar > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .rx-foot > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .rx-fxrow > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .rx-phead > *:not(:last-child){ margin-right:6px; }
+html.no-flexgap .rx-back > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .rx-sec > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .rx-presetrow > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .rx-seglist > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .rx-seghead > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .rx-toolrow > *:not(:last-child){ margin-right:7px; }
+html.no-flexgap .rx-addtool > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .rx-colorrow > *:not(:last-child){ margin-right:5px; }
+html.no-flexgap .rx-colorrow > *:not(:last-child){ margin-bottom:5px; }
+html.no-flexgap .rx-pref > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .rx-size > *:not(:last-child){ margin-right:4px; }
+html.no-flexgap .rxp-head > *:not(:last-child){ margin-right:8px; }
+html.no-flexgap .rx-chk > *:not(:last-child){ margin-right:7px; }
+
+@media (max-width:400px){
+  html.no-flexgap .header > *:not(:last-child){ margin-right:5px; }
+  html.no-flexgap .logo > *:not(:last-child){ margin-right:3px; }
+  html.no-flexgap .theme-sw > *:not(:last-child){ margin-right:4px; }
+  html.no-flexgap .hicons > *:not(:last-child){ margin-right:2px; }
+}
+
+/* ---------- aspect-ratio -> padding-трюк ---------- */
+html.no-ratio .cell{ height:0;padding-bottom:100%; }
+html.no-ratio .swatch{ height:0;padding-bottom:100%; }
+html.no-ratio .as-pv{ height:0;padding-bottom:56.25%; }
+html.no-ratio .tile-prev{ height:0;padding-bottom:56.25%; }
+html.no-ratio .wb-tile::before{ content:""; display:block; width:0; padding-bottom:97.09%; }
+html.no-ratio .swatches.small .swatch,
+html.no-ratio .tile-icon{ height:auto; padding-bottom:0; }

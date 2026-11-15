@@ -1,0 +1,1079 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+<!-- Фолбэки для старых движков CEP (After Effects 2020-2021 несут CEF 61/74,
+     где нет flex-gap и aspect-ratio). Включаются классами на <html>, которые
+     ставит детектор сразу после <body>. На современном AE файл не действует. -->
+<link rel="stylesheet" href="css/legacy.css">
+<!-- Тема NEUMORPH SOFT. Идёт ПОСЛЕДНЕЙ намеренно: это слой чистого оформления
+     поверх style.css, он ничего не двигает и переопределяет только цвет, тень
+     и скругление. Убрать эту строку — панель вернётся к прежнему виду целиком,
+     без единой правки в других файлах. -->
+<link rel="stylesheet" href="css/neumorph.css">
+<!-- Тема GRAPHITE (18.09.2026, референс владельца). Стоит ПОСЛЕДНЕЙ намеренно:
+     слой оформления поверх neumorph.css. Сменила тему VIOLET RAIL (файл
+     css/violet.css лежит рядом, но не подключён). -->
+<link rel="stylesheet" href="css/graphite.css">
+<title>AmanowTools</title>
+<script>
+/* Ловушка необработанных ошибок. Без неё падение скрипта на чужой машине
+   выглядит как пустая панель без единого следа, и причину приходится искать
+   удалённо через отладочную консоль CEP. Теперь текст ошибки виден прямо в
+   панели, и его можно сфотографировать и прислать. */
+(function(){
+  var pending=null, shown=0;
+  /* Движок Chromium регулярно шлёт в window.onerror сообщения, которые ошибками
+     НЕ являются: ResizeObserver рапортует о лишнем проходе раскладки, а на
+     кросс-доменные скрипты приходит обезличенное "Script error." без строки.
+     Первая версия этой ловушки закрашивала ими всю панель, и рабочий плагин
+     выглядел сломанным. Такие сообщения игнорируем полностью. */
+  var IGNORE=[/ResizeObserver loop/i, /^Script error\.?$/i, /^$/];
+  function benign(m){
+    m=String(m||"");
+    for(var i=0;i<IGNORE.length;i++) if(IGNORE[i].test(m)) return true;
+    return false;
+  }
+  function paint(t){
+    try{
+      if(!document.body){ pending=t; return; }
+      var d=document.getElementById("amErrBox");
+      if(!d){
+        /* Полоса снизу, а не полноэкранная заливка: настоящую ошибку видно и
+           можно сфотографировать, но панель под ней остаётся рабочей. */
+        d=document.createElement("div"); d.id="amErrBox";
+        d.style.cssText="position:fixed;left:0;right:0;bottom:0;z-index:99999;max-height:42%;"+
+          "background:#2a0d0d;color:#ffd7d7;font:11px/1.45 Menlo,Consolas,monospace;"+
+          "padding:8px 26px 8px 10px;margin:0;white-space:pre-wrap;overflow:auto;"+
+          "border-top:1px solid #7a2a2a;box-shadow:0 -6px 18px -8px rgba(0,0,0,.8);";
+        var x=document.createElement("div");
+        x.textContent="×"; x.title="Закрыть";
+        x.style.cssText="position:absolute;top:4px;right:7px;cursor:pointer;font-size:15px;"+
+          "line-height:1;color:#ffb4b4;padding:2px 4px;";
+        x.onclick=function(){ try{ d.parentNode.removeChild(d); }catch(e){} };
+        d.appendChild(x);
+        document.body.appendChild(d);
+      }
+      var line=document.createElement("div");
+      line.textContent=t;
+      d.appendChild(line);
+    }catch(e){}
+  }
+  window.onerror=function(msg,src,line,col){
+    if(benign(msg)) return false;
+    if(++shown>5) return false;              /* один сбой в цикле не должен залить экран */
+    paint("AmanowTools — ошибка: "+msg+"  ("+String(src||"").split("/").pop()+":"+line+":"+col+")");
+    return false;
+  };
+  document.addEventListener("DOMContentLoaded",function(){ if(pending){ var t=pending; pending=null; paint(t); } });
+})();
+</script>
+<!-- Постоянное хранилище настроек (05.10.2026): дублирует localStorage панели
+     в %APPDATA%/AmanowTools/panel_settings.json и возвращает потерянное после
+     обновления After Effects. Должен идти ДО любых других скриптов панели. -->
+<script src="js/am_persist.js"></script>
+</head>
+<body>
+<script>
+/* Определение возможностей движка CEP. After Effects 2020 несёт CEP 9 (Chromium 61),
+   2021 — CEP 10 (Chromium 74), и только 18.4+ даёт CEP 11 (Chromium 88).
+   flex-gap появился в 84, aspect-ratio в 88. Проверяем и включаем фолбэки. */
+(function(){
+  var h=document.documentElement;
+  function add(c){ if((" "+h.className+" ").indexOf(" "+c+" ")<0) h.className=(h.className?h.className+" ":"")+c; }
+
+  /* macOS рисует выпадающие списки СВОИМ меню: наш тёмный фон у пунктов он
+     игнорирует, а цвет текста применяет. Светлый текст на светлом системном
+     меню = пункты не видно вообще, выбирать приходится вслепую. Помечаем
+     систему и подменяем цвет пунктов в css/style.css. */
+  try{ if(navigator.platform.indexOf("Mac")>=0) add("is-mac"); }catch(eM){}
+
+  var ratio=false;
+  try{ ratio=!!(window.CSS && CSS.supports && CSS.supports("aspect-ratio","1 / 1")); }catch(e){}
+  if(!ratio) add("no-ratio");
+
+  /* CSS.supports("gap") врёт: в старом Chromium gap валиден для grid,
+     поэтому меряем реальную раскладку двух пустых детей во flex-колонке. */
+  var gap=false;
+  try{
+    var d=document.createElement("div");
+    d.style.cssText="display:flex;flex-direction:column;gap:11px;position:absolute;left:-9999px;top:0;visibility:hidden;";
+    d.appendChild(document.createElement("i"));
+    d.appendChild(document.createElement("i"));
+    document.body.appendChild(d);
+    gap=(d.scrollHeight>=11);
+    d.parentNode.removeChild(d);
+  }catch(e2){ gap=false; }
+  if(!gap) add("no-flexgap");
+})();
+</script>
+
+  <div class="lic-gate" id="licenseGate">
+    <div class="lic-card">
+      <button class="lic-x" id="licClose" title="Close">&times;</button>
+      <h2>AMANOW<b>TOOLS</b> &mdash; Activation</h2>
+      <p class="lic-sub" id="licSub">Paste the key you received in the Telegram bot and press Activate — it binds to this computer automatically. No key yet? Get one at t.me/AmanowPluginsBot</p>
+      <span class="lic-lbl">Your device code</span>
+      <div class="lic-dev">
+        <code id="licDevice">&mdash; &mdash; &mdash; &mdash;</code>
+        <button class="lic-mini" id="licCopy">Copy</button>
+      </div>
+      <span class="lic-lbl">Enter your key</span>
+      <input class="lic-input" id="licKey" placeholder="AT2-XXXXX-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
+      <button class="lic-btn" id="licActivate">Activate</button>
+      <div class="lic-msg" id="licMsg"></div>
+    </div>
+  </div>
+
+  <div class="updov" id="updOv">
+    <div class="updov-card">
+      <button class="updov-x" id="updOvX" title="Later">&times;</button>
+      <div class="updov-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+      </div>
+      <div class="updov-t" id="updOvTitle">Update available</div>
+      <div class="updov-v" id="updOvVer"></div>
+      <div class="updov-n" id="updOvNotes"></div>
+      <button class="updov-go" id="updOvGo">Update now</button>
+      <button class="updov-link" id="updOvLink">Open Telegram channel</button>
+      <div class="updov-msg" id="updOvMsg"></div>
+    </div>
+  </div>
+
+  <div class="header">
+    <div class="logo" id="logoBtn" title="Open the ATOOLS radial wheel">Amanow<b>Tools</b><svg class="logo-cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    <div class="theme-sw" id="themeSw" title="Dark / Light theme">
+      <svg class="th-ic th-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <span class="th-track"><span class="th-knob"></span></span>
+      <svg class="th-ic th-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/><path d="M17 4l.4 1.2L18.6 5.6l-1.2.4L17 7.2l-.4-1.2L15.4 5.6l1.2-.4z" fill="currentColor" stroke="none"/></svg>
+    </div>
+    <div class="spacer"></div>
+    <div class="hicons">
+      <div class="hicon" id="icoUpd" title="Check for updates">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+        <span class="upd-badge" id="updBadge">1</span>
+      </div>
+      <div class="hicon" id="icoKey" title="Enter license key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4.2"/><path d="M11 12L20 3"/><path d="M17.5 5.5l2 2"/><path d="M15 8l2 2"/></svg></div>
+      <div class="hicon" id="icoTg" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.8 15.6 9.6 19c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.8c.7.4 1.2.2 1.4-.7l2.6-12.1c.3-1.1-.4-1.6-1.1-1.3L3.4 9.9c-1.1.4-1.1 1-.2 1.3l4 1.2L16.6 7c.4-.3.8-.1.5.2L9.8 15.6z"/></svg></div>
+      <div class="hicon" id="icoIg" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></div>
+      <div class="hicon" id="icoEdit" title="Edit: hide items"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M14 6l4 4"/></svg></div>
+      <div class="hicon" id="icoAdd" title="Restore hidden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+    </div>
+  </div>
+
+  <div id="uiScaleWrap">
+    <span class="lbl">Button size</span>
+    <input type="range" id="uiScale" min="70" max="115" step="5" value="100">
+    <button class="btn small" id="freeReset" title="Reset all button size and position changes">Reset</button>
+    <!-- 18.09.2026, владелец: View 1 — рейка разделов слева столбиком, View 2 —
+         та же рейка наверху строкой. Выбор хранит main.js (amanow_view). -->
+    <div class="vw-seg" id="viewSeg">
+      <button class="vw-b" data-view="1">View 1</button>
+      <button class="vw-b" data-view="2">View 2</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="tools">TOOLS</div>
+    <div class="tab" data-tab="create">CREATE</div>
+    <div class="tab" data-tab="text">TEXT</div>
+    <div class="tab" data-tab="anim">ANIM</div>
+    <div class="tab" data-tab="fx">CRVS</div>
+    <div class="tab" data-tab="save">SAVE</div>
+    <div class="tab" data-tab="colors">COLORS</div>
+  </div>
+
+  <!-- ============ TOOLS ============ -->
+  <!-- flat-sec (05.09.2026, проба владельца): разделы, чьи кнопки рисуются плоскими
+       обведёнными (блок в конце css/neumorph.css). Класс стоит на РАЗДЕЛЕ, а не на
+       вкладке, поэтому раздел, унесённый в окно-карту или свою вкладку, выглядит так же. -->
+  <div class="tabpane active" data-pane="tools">
+
+    <div data-secid="sec_0" class="section flat-sec">
+      <div class="section-title">Ease / Curves</div>
+      <!-- Стрелки намеренно остаются на своих местах, а действия у них
+           поменяны местами: верхняя «‹» теперь делает то, что делала нижняя
+           «›», и наоборот. Меняется только data-mode, разметка не двигается. -->
+      <div class="ease-row" data-mode="out">
+        <span class="ease-ic">&#8249;</span>
+        <input type="range" class="ease-sl" min="0" max="100" value="0">
+        <div class="stepper">
+          <input class="ease-num" value="0">
+          <div class="steps"><button class="stp up">&#9650;</button><button class="stp dn">&#9660;</button></div>
+        </div>
+        <button class="shape" data-shape="diamond">&#9670;</button>
+      </div>
+      <div class="ease-row" data-mode="in">
+        <span class="ease-ic">&#8250;</span>
+        <input type="range" class="ease-sl" min="0" max="100" value="0">
+        <div class="stepper">
+          <input class="ease-num" value="0">
+          <div class="steps"><button class="stp up">&#9650;</button><button class="stp dn">&#9660;</button></div>
+        </div>
+        <button class="shape" data-shape="square">&#9632;</button>
+      </div>
+      <div class="ease-row" data-mode="both">
+        <span class="ease-ic">&#10540;</span>
+        <input type="range" class="ease-sl" min="0" max="100" value="0">
+        <div class="stepper">
+          <input class="ease-num" value="0">
+          <div class="steps"><button class="stp up">&#9650;</button><button class="stp dn">&#9660;</button></div>
+        </div>
+        <button class="shape" data-shape="circle">&#9679;</button>
+      </div>
+      <!-- Копирование кривых переехало сюда из блока Anchor Point: по аудиту
+           монтажёра это работа с кривыми, и место ей рядом с кривыми. -->
+      <div class="row" style="gap:6px;margin-bottom:0;">
+        <div class="btn" id="copyCurves" data-fk="tools#copyCurves#0" title="Copy the speed/ease curves of the selected keyframes">Copy Curves</div>
+        <div class="btn" id="pasteCurves" data-fk="tools#pasteCurves#1" title="Paste those curves onto the selected keyframes">Paste Curves</div>
+      </div>
+    </div>
+
+    <!-- 18.09.2026, референс владельца: раздел Tools разложен на пять карточек —
+         Anchor Point, Layer & Composition, Elastic & Bounce, Sequence, Elements.
+         Раздел sec_1 остаётся (на нём живут колесо ATOOLS и окна-карты «Tools») —
+         это обёртка-группа (data-secgroup), а пять карточек внутри — самостоятельные
+         разделы со своими data-secid (sec_tl_*): у каждой свой крестик, перетаскивание
+         и размер в режиме карандаша. Обёртка своего крестика не имеет.
+         КЛЮЧИ: у каждой кнопки явный data-fk, равный её прежнему позиционному
+         ключу, — сохранённые размеры кнопок не сдвинулись. Ключи перестановок
+         data-ckey "n:N" сквозные по всему документу, а раздел можно унести в
+         свою вкладку, поэтому число контейнеров кнопок без id держим прежним
+         ПО КАЖДОМУ РАЗДЕЛУ: в Tools их 10, как было (обёртка Solid без id входит
+         в счёт), в Comp Resize 1 (второй ряд имеет id). Иначе у всех следующих
+         вкладок съехали бы сохранённые перестановки.
+         Перестановки внутри самого Tools сбрасываются один раз (main.js, ключ
+         amanow_tools_ref1): они относились к старой раскладке. -->
+    <div data-secid="sec_1" class="section flat-sec tl-cards" data-secgroup="1">
+      <div class="section-title">Tools</div>
+
+      <div class="section flat-sec tcard tc-anchor" data-secid="sec_tl_anchor">
+        <div class="section-title tcard-t">Anchor Point</div>
+        <div class="row tc-anchor-row">
+          <div class="anchor" id="anchorGrid"></div>
+          <!-- Null и Adj. Layer: обычный клик — «под длительность слоя»; Ctrl
+               (на Mac Command) и Ctrl+Shift — как раньше, см. подсказки -->
+          <div class="grp col tc-anchor-btns">
+            <div class="btn" id="nullBtn" data-fk="tools#nullBtn#2"
+                 title="Null | Takes the selected layer's duration &#183; Ctrl+click: the same null, but 3D &#183; Ctrl+Shift+click: a null across the whole composition">Null</div>
+            <div class="btn" id="adjLayerBtn" data-fk="tools#adjLayerBtn#3"
+                 title="Adj. Layer | Takes the selected layer's duration &#183; Ctrl+click: across the whole composition">Adj. Layer</div>
+            <!-- 18.09.2026, слово владельца: третья строка, чтобы место под
+                 Adj. Layer не пустовало — две половинки размером с одну кнопку
+                 (сначала была Camera, владелец заменил). У строки есть id: лишний
+                 контейнер без id сдвинул бы ключи перестановок data-ckey "n:N"
+                 всех следующих вкладок. Явные data-fk — позиционные ключи
+                 размеров остальных кнопок не сдвигаются. -->
+            <div class="tc-flip-row" id="flipRow">
+              <div class="btn" id="flipHBtn" data-fk="tools#flipHBtn#u"
+                   title="Flip Horizontal | Mirrors the selected layers left to right">Flip<br>Horizontal</div>
+              <div class="btn" id="flipVBtn" data-fk="tools#flipVBtn#u"
+                   title="Flip Vertical | Mirrors the selected layers top to bottom">Flip<br>Vertical</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section flat-sec tcard tc-layer" data-secid="sec_tl_layer">
+        <div class="section-title tcard-t">Layer &amp; Composition</div>
+        <div class="row tl-exp3">
+          <div class="btn" id="centerBtn" data-fk="tools#centerBtn#4" title="Center | Centres the selected layers on the BOTTOM one · Ctrl+click: on the TOP one · needs 2+ layers">Center</div>
+          <div class="btn" id="expBtn" data-fk="tools#expBtn#5" title="Text Exploder | Splits a text layer into separate layers">Text<br>Exploder</div>
+          <div class="btn" id="splitMaskBtn" data-fk="tools#splitMaskBtn#u" title="Split Mask | Every mask of the selected layer becomes its own layer">Split<br>Mask</div>
+        </div>
+        <div class="row">
+          <div data-fk="create#precompBtn#8" class="btn w-half" id="precompBtn" title="Pre-compose | Puts the selected layers into a new composition">Pre-compose</div>
+          <div data-fk="create#unprecompBtn#7" class="btn w-half" id="unprecompBtn" title="Un Pre-compose | Pulls the layers of the selected pre-comp back into this composition">Un Pre-compose</div>
+        </div>
+      </div>
+
+      <div class="section flat-sec tcard tc-motion" data-secid="sec_tl_motion">
+        <div class="section-title tcard-t">Elastic &amp; Bounce</div>
+        <div class="row tl-pair">
+          <div class="btn" data-motion="Elastic" data-fk="tools#elastic#6" title="Elastic | Springy overshoot on the selected keyframes — Save keeps your values as the default">Elastic</div>
+          <div class="btn motion-save" id="motionSaveElastic" data-savekind="Elastic" data-fk="tools#motionSaveElastic#7" title="Save current Amplitude / Frequency / Decay as default for Elastic">Save</div>
+        </div>
+        <div class="row tl-pair">
+          <div class="btn" data-motion="Bounce" data-fk="tools#bounce#8" title="Bounce | Bouncing settle on the selected keyframes — Save keeps your values as the default">Bounce</div>
+          <div class="btn motion-save" id="motionSaveBounce" data-savekind="Bounce" data-fk="tools#motionSaveBounce#9" title="Save current Amplitude / Frequency / Decay as default for Bounce">Save</div>
+        </div>
+      </div>
+
+      <div class="section flat-sec tcard tc-seq" data-secid="sec_tl_seq">
+        <div class="section-title tcard-t">Sequence</div>
+        <div class="row tc-seq-fields">
+          <div class="field w-half"><span class="lbl">Offset</span><input class="num step" data-step="1" id="seqOff" value="5"></div>
+          <div class="field w-half"><span class="lbl">Step</span><input class="num step" data-step="1" data-min="0" id="seqStep" value="1"></div>
+        </div>
+        <div class="row">
+          <button class="modebtn" data-seqmode="left" title="Left">&#9636;&#8592;</button>
+          <button class="modebtn" data-seqmode="center" title="From center">&#9636;&#8596;</button>
+          <button class="modebtn on" data-seqmode="right" title="Right">&#9636;&#8594;</button>
+        </div>
+        <div class="row">
+          <div class="btn primary" id="seqBtn" data-fk="tools#seqBtn#10" title="Sequence | Lays the selected layers out in time, one after another">Sequence</div>
+        </div>
+      </div>
+
+      <div class="section flat-sec tcard tc-elements" data-secid="sec_tl_elements">
+        <div class="section-title tcard-t">Elements</div>
+        <div class="row">
+          <div data-fk="create#glassBtn#4" class="btn primary w-half" id="glassBtn" title="Glass 1 | Liquid-glass rig on the selected layer">Glass 1</div>
+          <div class="btn primary w-half" id="glassBtn2" data-fk="create#glassBtn2#x1" title="Glass 2 | Second liquid-glass look">Glass 2</div>
+        </div>
+        <div class="row">
+          <!-- образец цвета стоит внутри кнопки Solid, как на референсе; он по-прежнему
+               сам по себе — клик по нему выбирает цвет, клик по кнопке делает солид -->
+          <div class="tc-solid">
+            <div data-fk="create#solid#2" class="btn" data-create="Solid" id="solidBtn"
+                 title="Solid | The size of the composition, in the colour beside the button &#183; Ctrl+click: pick a new colour">Solid</div>
+            <input type="color" id="solidColor" value="#f31e2e" class="colorbox" title="Solid colour">
+          </div>
+          <div data-fk="create#shape#3" class="btn" data-create="Shape" title="Shape | Turns the selected layers into shapes: text and vector art (AI/EPS/PDF) natively, solids as a rectangle of the same size and colour, images and precomps as a rectangle of their bounds &#183; nothing selected: a new empty shape layer">Shape</div>
+        </div>
+        <div class="row">
+          <div class="btn" id="clipPasteBtn" title="Paste Copy | Imports the image from the clipboard and puts it into the open composition" data-fk="create#clipPasteBtn#n0">Paste Copy</div>
+          <div class="btn" id="organizeBtn" data-fk="tools#organizeBtn#n0" title="Organize | Sorts everything in the Project panel into folders by type: PNG, JPG, MP4, MP3 …, COMPOSITION (top-level), PRECOMPOSITION (nested), SOLIDS; empty folders are removed">Organize</div>
+        </div>
+      </div>
+    </div>
+
+    <div data-secid="sec_3" class="section flat-sec">
+      <div class="section-title">Layer Color</div>
+      <div class="swatches small" id="swatchRow"></div>
+      <input type="color" id="swatchColor" value="#5a84e4" style="position:absolute;width:1px;height:1px;opacity:0;border:0;padding:0;pointer-events:none;">
+      <div class="hint">Select a layer, then click a color. <b>+</b> adds your own; right-click a color to remove it.</div>
+    </div>
+
+    <div data-secid="sec_4" class="section flat-sec">
+      <div class="section-title">Comp Resize</div>
+      <!-- 18.09.2026: сетка 2x2 по референсу; ключи размеров прежние (явные data-fk).
+           У второго ряда id: без него в разделе стало бы два контейнера без id
+           вместо одного, и ключи перестановок у следующих вкладок съехали бы. -->
+      <div class="row ml-row">
+        <div class="btn" data-resize="1920x1080" data-fk="tools#16-9#11" style="flex:1;">16:9</div>
+        <div class="btn" data-resize="1080x1920" data-fk="tools#9-16#12" style="flex:1;">9:16</div>
+      </div>
+      <div class="row ml-row" id="resizeRow2">
+        <div class="btn" data-resize="1080x1080" data-fk="tools#1-1#13" style="flex:1;">1:1</div>
+        <div class="btn" data-resize="1080x1350" data-fk="tools#4-5#14" style="flex:1;">4:5</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ placeholders ============ -->
+  <div class="tabpane" data-pane="create">
+
+    <!-- 05.09.2026: подвкладки General больше нет — Solid/Shape, Glass 1/2,
+         Pre-compose/Un Pre-compose и Paste Copy переехали во вкладку TOOLS
+         (слово владельца). У Carousel ключ размера задан явно, чтобы после
+         ухода General он не сдвинулся. -->
+    <div class="subtabs csec-tabs">
+      <div class="subtab active" data-csec="3" data-fk="create@sub#textshape#n0">TEXT SHAPE</div>
+      <div class="subtab" data-csec="2" data-fk="create@sub#carousel#1">Carousel</div>
+    </div>
+
+    <!-- Word Boxes стоит первым по аудиту монтажёра. Номер раздела
+         (data-secid) НЕ менялся: по нему адресуются колесо и сохранённые
+         раскладки, смена номера сломала бы их у пользователей. -->
+    <div class="section csec-3 flat-sec" data-secid="sec_word_boxes">
+      <div class="section-title">Word Boxes</div>
+      <div class="wb-win" id="wbWin">
+        <div class="wb-titlebar"><span class="wb-dot" id="wbDot" title="Marker color — click to change"></span><span class="wb-rule"></span><span class="wb-title">TOOLS</span><span class="wb-rule"></span></div>
+        <input type="color" id="wbColorPick" value="#3B82F6" style="position:absolute;width:1px;height:1px;opacity:0;border:0;padding:0;pointer-events:none;">
+        <div class="wb-tiles">
+          <div class="wb-tile" data-mark="scribble" title="Scribble — marker underline with a zig-zag tail">
+            <span class="wb-ch wb-red">T</span>
+            <svg class="wb-scr" viewBox="0 0 44 14"><path d="M3 3 L41 3 L14 8 L36 12" fill="none" stroke="#EA2C33" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="wb-tile" data-mark="strike" title="Strike — a line straight through the words">
+            <span class="wb-ch">O</span><span class="wb-strike"></span>
+          </div>
+          <div class="wb-tile wb-hl" data-mark="highlight" title="Highlight — a red plate behind the whole text">
+            <span class="wb-ch">O</span>
+          </div>
+          <div class="wb-tile" data-mark="halfbox" title="HalfBox — a plate behind the lower half of the text">
+            <span class="wb-ch">L</span><span class="wb-half"></span>
+          </div>
+          <div class="wb-tile" data-mark="underline" title="Underline — a clean marker underline">
+            <span class="wb-ch">S</span><span class="wb-und"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-secid="sec_8" class="section csec-3 flat-sec">
+      <div class="section-title">Text Shape Box<span class="am-i" data-prev="rect">i</span></div>
+      <!-- По аудиту монтажёра: слева всегда ЗАЛИВКА, справа всегда ОБВОДКА
+           (раньше у Rounded они стояли зеркально), у каждой — галочка, кнопка
+           стала короче. Галочки НЕ носят класс .btn намеренно: иначе сдвинулись
+           бы позиционные ключи раскладки и у соседних кнопок пропали бы
+           сохранённые размеры. -->
+      <div class="row tb-row">
+        <input type="checkbox" class="tb-on" id="rectFillOn" checked title="Fill on / off">
+        <span class="tb-sw" id="rectFill" title="Fill colour"></span>
+        <div data-fk="create#rect#9" class="btn tb-btn" data-box="0" data-fill="rectFill" data-strk="rectStrk"
+             title="Box that hugs the selected text">Rect</div>
+        <span class="tb-sw" id="rectStrk" title="Stroke colour"></span>
+        <input type="checkbox" class="tb-on" id="rectStrkOn" checked title="Stroke on / off">
+      </div>
+      <div class="row tb-row">
+        <input type="checkbox" class="tb-on" id="rndFillOn" checked title="Fill on / off">
+        <span class="tb-sw" id="rndFill" title="Fill colour"></span>
+        <div data-fk="create#rounded#10" class="btn tb-btn" data-box="22" data-fill="rndFill" data-strk="rndStrk"
+             title="Rounded box that hugs the selected text">Rounded</div>
+        <span class="tb-sw" id="rndStrk" title="Stroke colour"></span>
+        <input type="checkbox" class="tb-on" id="rndStrkOn" checked title="Stroke on / off">
+      </div>
+    </div>
+    <input type="color" id="tbColorPick" style="position:absolute;width:0;height:0;opacity:0;pointer-events:none;">
+
+
+    <div data-secid="sec_9" class="section csec-3 flat-sec">
+      <div class="section-title">Dotted Line Shape<span class="am-i" data-prev="dotted">i</span></div>
+      <div class="row"><div data-fk="create#dottedBtn#11" class="btn" id="dottedBtn" title="Dotted Box | Dashed frame around the selected text · padding, dash and gap live in Effect Controls">Dotted Box</div></div>
+      <div class="hint">Padding / Dash / Gap / Trim — in Effect Controls.</div>
+    </div>
+
+    <div data-secid="sec_10" class="section csec-3 flat-sec">
+      <div class="section-title">Text Handles<span class="am-i" data-prev="handles">i</span></div>
+      <!-- По аудиту монтажёра: Create поднялся в одну строку с размером и
+           цветом и больше не занимает отдельную строку; кнопка Off убрана —
+           она лишь прятала слой; On теперь ЗАМЕНЯЕТ уже созданные маркеры на
+           новые с текущими размером и цветом, а не создаёт вторые поверх. -->
+      <div class="row">
+        <span class="lbl">Size</span>
+        <input class="num step" data-step="1" data-min="1" data-w="58" id="hndSize" value="12">
+        <input type="color" id="hndColor" value="#f31e2e" class="colorbox" title="Handle colour">
+        <div data-fk="create#hndCreate#12" class="btn primary" id="hndCreate" style="flex:1;"
+             title="Create handles around the selected text">Create</div>
+        <div data-fk="create#hndOn#13" class="btn small" id="hndOn" style="max-width:54px;"
+             title="Replace the handles already on this layer with the size and colour above">On</div>
+      </div>
+    </div>
+
+    <!-- 29.09.2026, видео владельца (RoundPro): скругление углов любого слоя.
+         Все строки с кнопками несут свой id, у кнопок явный data-fk — иначе
+         сдвинулись бы сквозные ключи контейнеров (n:N) и сохранённые размеры
+         кнопок в Carousel и на следующих вкладках. -->
+    <div class="section csec-3 flat-sec rc-sec" data-secid="sec_round">
+      <div class="section-title">Round Corners</div>
+      <div class="row rc-btns" id="rcRowBtns">
+        <div class="btn primary" id="rcApply" data-fk="create#rcApply#r0" title="Round | Rounds the corners of the selected layers — images, video, solids, precomps, shapes, text. Values live in Effect Controls &#183; Alt+click: remove">Round</div>
+        <div class="btn" id="rcCircle" data-fk="create#rcCircle#r1" title="Circle | Maximum roundness: a square becomes a circle, a rectangle a pill &#183; Alt+click: remove">Circle</div>
+        <div class="btn" id="rcReset" data-fk="create#rcReset#r2" title="Remove | Takes the rounding (mask and controls) off the selected layers">Remove</div>
+      </div>
+      <div class="rc-rad" id="rcRowRad">
+        <span class="lbl">Radius</span>
+        <input type="range" class="rc-sl" id="rcSlider" min="0" max="400" step="1" value="40" aria-label="Corner radius">
+        <input class="num step" data-step="1" data-min="0" data-w="52" id="rcRadius" value="40">
+        <span class="rc-link on" id="rcLink" title="Linked: one radius for all four corners &#183; click to set each corner separately"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.6 9.4l2.8-2.8M7.2 4.6l1.1-1.1a2.6 2.6 0 0 1 3.7 3.7l-1.1 1.1M8.8 11.4l-1.1 1.1a2.6 2.6 0 0 1-3.7-3.7l1.1-1.1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="rc-corners" id="rcCorners" style="display:none;">
+        <input class="num step rc-c" data-step="1" data-min="0" id="rcTL" value="40" title="Top left">
+        <input class="num step rc-c" data-step="1" data-min="0" id="rcTR" value="40" title="Top right">
+        <input class="num step rc-c" data-step="1" data-min="0" id="rcBL" value="40" title="Bottom left">
+        <input class="num step rc-c" data-step="1" data-min="0" id="rcBR" value="40" title="Bottom right">
+      </div>
+      <label class="rc-chk" title="On: the radius is in composition pixels — every layer gets the same visible roundness whatever its size or scale. Off: the radius is in the layer's own pixels"><input type="checkbox" id="rcConsistent" checked> Consistent Roundness</label>
+      <div class="so-status rc-status" id="rcStatus"></div>
+    </div>
+
+    <div class="section csec-2 flat-sec" data-secid="sec_create_carousel">
+      <div class="section-title">Carousel<span class="am-i" data-prev="carousel">i</span></div>
+      <div class="row">
+        <div class="btn car-b" data-carousel="v1" data-fk="create#car_v1#n5">Vertical Style 1</div>
+        <div class="btn car-b" data-carousel="v2" data-fk="create#car_v2#n6">Vertical Style 2</div>
+      </div>
+      <div class="row">
+        <div class="btn car-b" data-carousel="h1" data-fk="create#car_h1#n3">Horizontal Style 1</div>
+        <div class="btn car-b" data-carousel="h2" data-fk="create#car_h2#n4">Horizontal Style 2</div>
+      </div>
+      <div class="row">
+        <div class="btn car-b" data-carousel="c1" data-fk="create#car_c1#n0">Circle Style 1</div>
+        <div class="btn car-b" data-carousel="c2" data-fk="create#car_c2#n1">Circle Style 2</div>
+      </div>
+      <div class="row">
+        <div class="btn car-b" data-carousel="c3" data-fk="create#car_c3#n2">Circle Style 3</div>
+      </div>
+      <div class="hint">Select 2+ layers (shapes, images, text) and click a style — the layers snap into the carousel and a control null appears. Keyframe its <b>Spin</b> slider to turn the carousel: Spin is in <b>degrees</b>, 360 = one full cycle. The centre card grows, side cards shrink/blur automatically.</div>
+    </div>
+
+
+  </div>
+  <div class="tabpane" data-pane="text">
+
+    <div class="subtabs tsec-tabs">
+      <div class="subtab" data-tsec="3" data-fk="text@sub#section-3#2">Auto-subtitles</div>
+      <div class="subtab" data-tsec="2" data-fk="text@sub#section-2#1">Animation</div>
+      <div class="subtab active" data-tsec="1" data-fk="text@sub#section-1#0">Modifier</div>
+    </div>
+
+    <div data-secid="sec_11" class="section compact tsec-1">
+      <div class="section-title">Counter</div>
+      <div class="row">
+        <div class="field w-half"><span class="lbl">Start</span><input class="num step" data-step="1" id="ctS" value="0"></div>
+        <div class="field w-half"><span class="lbl">End</span><input class="num step" data-step="1" id="ctE" value="100"></div>
+      </div>
+      <div class="row">
+        <div class="field w-half"><span class="lbl">Pre</span><input class="num" id="ctPre" value="" style="text-align:left;"></div>
+        <div class="field w-half"><span class="lbl">Suf</span><input class="num" id="ctSuf" value="" style="text-align:left;"></div>
+      </div>
+      <div class="row">
+        <div class="field w-half"><span class="lbl">Blur</span><input class="num step" data-step="1" data-min="0" id="ctBlur" value="0"></div>
+        <div class="field w-half"><span class="lbl">Ease</span><input class="num step" data-step="0.1" data-dec="1" data-min="0.1" id="ctEase" value="2"></div>
+      </div>
+      <div class="row"><div class="btn primary" id="ctApply">Apply Counter</div></div>
+    </div>
+
+    <div data-secid="sec_12" class="section compact tsec-1">
+      <div class="section-title">Letter Morph</div>
+      <div class="row"><span class="lbl">Start</span><input class="num" id="lmStart" value="" style="text-align:left;"></div>
+      <div class="row"><span class="lbl">End</span><input class="num" id="lmEnd" value="" style="text-align:left;"></div>
+      <div class="row">
+        <div class="field"><span class="lbl">Dur</span><input class="num step" data-step="0.1" data-dec="1" data-min="0.1" id="lmDur" value="0.4"></div>
+        <div class="field"><span class="lbl">Blur</span><input class="num step" data-step="1" data-min="0" id="lmBlur" value="3"></div>
+        <div class="field"><span class="lbl">Dir</span>
+          <select class="sel" id="lmDir">
+            <option value="0">L&#8594;R</option>
+            <option value="1">R&#8594;L</option>
+            <option value="2" selected>C&#8594;E</option>
+            <option value="3">Random</option>
+          </select>
+        </div>
+      </div>
+      <div class="row"><div class="btn primary" id="lmApply">Apply Morph</div></div>
+    </div>
+
+    <!-- 12.10.2026: Morph It. Select A, then B, click: A flies into B. All controls live in
+         Effect Controls of layer A. Explicit data-fk keeps the positional button keys of this
+         pane unchanged (old saved button sizes survive). -->
+    <div data-secid="sec_mt_morph" class="section compact tsec-1">
+      <div class="section-title">Morph It</div>
+      <div class="row" id="mtMorphRow"><div class="btn primary" id="mtMorphIt" data-fk="text#mtMorphIt#u" title="Select layer A, then layer B, and click: A flies into B and turns into it at the playhead. Ctrl+click (Cmd on Mac): the other way round, B into A. Tune it in Effect Controls of the layer that starts">Morph It</div></div>
+    </div>
+
+
+
+    <!-- Amanow Animation and its Text Properties are one feature: the top half
+         sets the sequencing, the bottom half sets what actually animates, and
+         neither does anything on its own. They used to be two .section cards
+         with two separate hide buttons - now one card. It keeps sec_13, so no
+         saved layout shifts. -->
+    <div data-secid="sec_13" class="section compact tsec-2 amanow-animation-card amanow-text-card">
+      <div class="section-title"><b>Amanow</b> Animation</div>
+      <div class="pv-stage an-pv" id="anPreview"></div>
+      <div class="row"><span class="lbl" style="min-width:64px;">Based on</span>
+        <select class="sel" id="an_based" style="flex:1;">
+          <option value="0">Characters</option>
+          <option value="1">Characters Excl. Spaces</option>
+          <option value="2" selected>Words</option>
+          <option value="3">Lines</option>
+        </select>
+      </div>
+      <div class="row"><span class="lbl" style="min-width:64px;">Direction</span>
+        <select class="sel" id="an_dir" style="flex:1;">
+          <option value="0" selected>Left to Right</option>
+          <option value="1">Right to Left</option>
+          <option value="2">Center Outwards</option>
+          <option value="3">Center Inwards</option>
+          <option value="4">Random</option>
+        </select>
+      </div>
+      <div class="row anim-values">
+        <div class="field"><span class="lbl">Frequency</span><input class="num step" data-step="0.1" data-dec="1" data-min="0" id="an_freq" value="2.5"></div>
+        <div class="field"><span class="lbl">Decay</span><input class="num step" data-step="0.1" data-dec="1" data-min="0" id="an_decay" value="4"></div>
+        <div class="field"><span class="lbl">Duration</span><input class="num step" data-step="0.1" data-dec="1" data-min="0.1" id="an_dur" value="1"></div>
+        <div class="field"><span class="lbl">Delay</span><input class="num step" data-step="0.1" data-dec="1" data-min="0" id="an_delay" value="7"></div>
+        <div class="field bounce-field"><span class="lbl"><input type="checkbox" id="an_bounce_cb"> Bounce</span><input class="num step" data-step="1" data-min="0" data-max="100" id="an_bounce" value="60"></div>
+      </div>
+
+      <div class="sub-title">Text Properties</div>
+      <div class="optline mode-seg">
+        <label><input type="radio" name="an_io" value="0" checked><span>In</span></label>
+        <label><input type="radio" name="an_io" value="1"><span>In / Out</span></label>
+        <label><input type="radio" name="an_io" value="2"><span>Out</span></label>
+      </div>
+      <div class="optline animation-mini-line">
+        <span class="overshoot-chip">&#10003; Overshoot</span>
+        <div class="engtog">
+          <button class="engbtn active" id="an_eng_expr" data-eng="expr" title="Expression based">EXPR</button>
+          <button class="engbtn" id="an_eng_kfrm" data-eng="kfrm" title="Keyframe based">KFRM</button>
+        </div>
+      </div>
+      <div class="preset-row">
+        <div class="btn tiny" id="an_save">Save</div>
+        <div class="btn tiny" id="an_dl" data-fk="text#an_dl#n0" title="Download | Saves YOUR presets to a file on the disk &#183; A system window asks where to put it &#183; Take the file to another computer or send it to a friend">&#8595;</div>
+        <div class="btn tiny" id="an_ul" data-fk="text#an_ul#n0" title="Upload | Loads presets from a file you pick on the disk &#183; Nothing is overwritten and nothing is duplicated: a preset you already have with the same values is skipped, and one whose name is taken but whose values differ comes in under a new number">&#8593;</div>
+        <select class="sel" id="an_preset"></select>
+        <div class="btn tiny" id="an_del">X</div>
+        <div class="btn tiny" id="an_load">Load</div>
+        <div class="btn tiny" id="an_refresh" title="Remove Amanow animation from selected layers">Refresh</div>
+      </div>
+
+      <div class="proprow"><input type="checkbox" id="an_pos_cb" checked><span class="pname">Position</span>
+        <span class="axl">x</span><input class="num step" data-step="1" data-w="52" id="an_pos_x" value="0"><span class="axl">y</span><input class="num step" data-step="1" data-w="52" id="an_pos_y" value="60"></div>
+      <div class="proprow"><input type="checkbox" id="an_scl_cb"><span class="pname">Scale</span>
+        <span class="axl">x</span><input class="num step" data-step="1" data-w="52" id="an_scl_x" value="60"><span class="axl">y</span><input class="num step" data-step="1" data-w="52" id="an_scl_y" value="60"></div>
+      <!-- Rotation: хост это давно умеет (p.rot), и панель уже читала an_rot_*,
+           не хватало только самих полей. z — обычный поворот в плоскости кадра,
+           x/y работают, когда включён 3D. -->
+      <div class="proprow"><input type="checkbox" id="an_rot_cb"><span class="pname">Rotation</span>
+        <span class="axl">x</span><input class="num step" data-step="1" data-w="52" id="an_rot_x" value="0"><span class="axl">y</span><input class="num step" data-step="1" data-w="52" id="an_rot_y" value="0"><span class="axl">z</span><input class="num step" data-step="1" data-w="52" id="an_rot_z" value="0"></div>
+      <div class="proprow"><input type="checkbox" id="an_blur_cb"><span class="pname">Blur</span>
+        <input class="num step" data-step="1" data-min="0" data-w="52" id="an_blur_v" value="0"><span class="axl">Dur</span><input class="num step" data-step="0.1" data-dec="1" data-min="0.1" data-w="52" id="an_blur_dur" value="0.5"></div>
+      <div class="proprow opacity-row"><input type="checkbox" id="an_opac_cb" checked><span class="pname">Opacity</span><span class="opacity-recommended">Recommended Opacity 0</span>
+        <input class="num step" data-step="1" data-min="0" data-max="100" data-w="52" id="an_opac_v" value="0"><span class="axl">Dur</span><input class="num step" data-step="0.1" data-dec="1" data-min="0.1" data-w="52" id="an_opac_dur" value="0.2"></div>
+
+      <div class="row" style="margin-top:6px;"><div class="btn primary" id="an_apply" style="flex:1;">Animate</div><div class="btn" id="an_help" style="margin-left:6px;">Instruction</div></div>
+    </div>
+
+    <div class="section compact tsec-3" data-secid="sec_auto_subs">
+      <div class="section-title">Auto Subtitles</div>
+      <div class="row"><span class="lbl" style="min-width:64px;">Language</span>
+        <select class="sel" id="asLang" style="flex:1;"></select>
+      </div>
+      <div class="row" id="asKeyRow" style="display:none;">
+        <input class="num" type="password" id="asKey" placeholder="Groq API key (free: console.groq.com/keys)" style="text-align:left;" autocomplete="off" spellcheck="false">
+      </div>
+
+      <div class="as-lbl">Format</div>
+      <div class="row"><select class="sel" id="asFormat" style="flex:1;">
+        <option value="def" selected>Default</option>
+        <option value="at">ATOOLS</option>
+      </select></div>
+
+      <div class="as-lbl">Style</div>
+      <div class="as-styles" id="asStyles"></div>
+      <div class="as-casdir" id="asCasDir" style="display:none;">
+        <div class="as-style-btn" data-casdir="rl">Right &rarr; Left</div>
+        <div class="as-style-btn" data-casdir="lr">Left &rarr; Right</div>
+      </div>
+
+      <div class="as-lbl">Preview</div>
+      <div class="as-pv" id="asPreview"></div>
+
+      <div class="as-lbl">Layout</div>
+      <div class="optline as-layout" id="asLayout">
+        <label><input type="radio" name="as_layout" value="single"><span>Single Line</span></label>
+        <label><input type="radio" name="as_layout" value="double" checked><span>Double Line</span></label>
+        <label><input type="radio" name="as_layout" value="word"><span>Single Word</span></label>
+      </div>
+
+      <div class="as-lbl">Maximum length in characters</div>
+      <div class="row as-slrow">
+        <input type="range" id="asMaxLen" min="8" max="80" step="1" value="42">
+        <input class="num as-num" id="asMaxLenN" value="42"><span class="as-unit">characters</span>
+      </div>
+
+      <div class="as-lbl">Minimum duration in seconds</div>
+      <div class="row as-slrow">
+        <input type="range" id="asMinDur" min="0" max="10" step="0.1" value="3.0">
+        <input class="num as-num" id="asMinDurN" value="3.0"><span class="as-unit">seconds</span>
+      </div>
+
+      <div class="as-lbl">Gap between captions (frames)</div>
+      <div class="row as-slrow">
+        <input type="range" id="asGap" min="0" max="30" step="1" value="0">
+        <input class="num as-num" id="asGapN" value="0"><span class="as-unit">frames</span>
+      </div>
+
+      <div class="as-lbl">Safe Zone</div>
+      <div class="row as-slrow">
+        <input type="range" id="asSafe" min="0" max="45" step="1" value="15">
+        <input class="num as-num" id="asSafeN" value="15"><span class="as-unit">%</span>
+      </div>
+
+      <div class="optline" style="margin:2px 0 8px;">
+        <label><input type="checkbox" id="asPunct"><span>Remove Punctuation</span></label>
+        <label><input type="checkbox" id="asCaps"><span>Capitalize Sentences</span></label>
+      </div>
+
+      <div class="row"><div class="btn primary" id="asGo">Create Subtitles</div></div>
+      <div class="so-status" id="asStatus"></div>
+    </div>
+
+
+  </div>
+  <div class="tabpane" data-pane="anim">
+    <!-- animLib: невидимая обёртка БЕЗ класса .section — визуально ничего не
+         меняет, но регистрируется в SECMAP вручную (main.js), чтобы библиотеку
+         анимаций можно было запускать с колеса и держать в окнах-картах -->
+    <div id="animLib">
+    <div class="anim-head">
+      <div class="subtabs">
+        <div class="subtab active" data-sub="text">Text</div>
+        <div class="subtab" data-sub="shape">Shape</div>
+        <div class="subtab" data-sub="fav" title="Favorites">Favorites</div>
+      </div>
+    </div>
+    <div class="animgroups" id="textGroups">
+      <div class="grpchip active" data-tg="all">All</div>
+      <div class="grpchip" data-tg="3">Words</div>
+      <div class="grpchip" data-tg="4">Lines</div>
+      <div class="grpchip" data-tg="2">Character</div>
+    </div>
+    <div class="animgroups" id="shapeGroups" style="display:none;">
+      <div class="grpchip active" data-sg="all">All</div>
+    </div>
+    <div class="anim-bar">
+      <label class="bounce-toggle" title="Enhance gallery animations with stronger bounce"><input type="checkbox" id="amBounce" checked><span class="bt-box"></span><span class="bt-txt">Bounce</span></label>
+      <label class="bounce-toggle" title="Add a 0.2s blur to gallery animations (presets with their own blur are not affected)"><input type="checkbox" id="amBlurT"><span class="bt-box"></span><span class="bt-txt">Blur</span></label>
+      <label class="bounce-toggle" title="Trending glow: letters light up as they appear and cool down"><input type="checkbox" id="amGlowT"><span class="bt-box"></span><span class="bt-txt">Glow</span></label>
+      <label class="bounce-toggle" title="Glow 2: each letter flashes with a soft white bloom as it appears, then the bloom fades fast"><input type="checkbox" id="amGlow2T"><span class="bt-box"></span><span class="bt-txt">Glow 2</span></label>
+      <button class="anim-reset" id="animReset" title="Reset animation on selected layers">Reset</button>
+      <span class="bar-lbl">Preview:</span>
+      <span class="spacer"></span>
+      <span class="size-ic" title="Preview size">&#9635;</span>
+      <input type="range" id="tileSize" min="2" max="6" value="4" step="1">
+    </div>
+    <div class="pv-stage" id="animPreview"><div class="pv-idle">Select an animation to preview</div></div>
+    <div class="gallery" id="gallery"></div>
+    <div class="animate-bar" id="animateBar">
+      <span class="ab-name" id="abName"></span>
+      <div class="ab-save ab-reset" id="abResetDef" title="Reset | Forgets the values you saved for THIS animation and brings back the factory ones &#183; Only the cell for the current toggles is cleared: reset with Bounce on does not touch what you tuned with it off, and the same goes for Blur and Glow">Reset</div>
+      <div class="ab-save" id="abSave" title="Save current Effect Controls values as default for this animation">Save</div>
+      <span class="ab-lbl">Animate:</span>
+      <div class="ab-btn" data-anmode="in">In</div>
+      <div class="ab-btn" data-anmode="out">Out</div>
+      <div class="ab-btn" data-anmode="both">Both</div>
+      <span class="ab-close" id="abClose">&#10005;</span>
+    </div>
+    </div><!-- /animLib -->
+
+    <div data-secid="sec_15" class="section" id="sqSection" style="display:none;">
+      <div class="section-title">Squash &amp; Stretch<span class="am-i" data-prev="squash">i</span></div>
+      <div class="row ml-row">
+        <span class="ml-f">Scale</span>
+        <span class="axl">x</span><input class="num step" data-step="1" data-min="1" data-w="52" id="mlSqX" value="120">
+        <span class="axl">y</span><input class="num step" data-step="1" data-min="1" data-w="52" id="mlSqY" value="80">
+        <span class="ml-f">Dur s</span><input class="num step" data-step="0.1" data-dec="1" data-min="0.1" data-w="52" id="mlSqDur" value="0.6">
+      </div>
+      <div class="row ml-row" style="gap:6px;"><div class="btn primary" id="mlSquash" style="flex:1;">Squash &amp; Stretch</div><div class="btn" id="mlSqReset" title="Remove the squash animation from selected layers">Reset</div></div>
+      <div class="ml-hint">Set the peak scale on X and Y. The layer springs to it, then settles back. Works even without movement.</div>
+    </div>
+  </div>
+
+  <div class="restore-modal" id="restoreModal">
+    <div class="restore-card">
+      <div class="restore-head">
+        <div class="cust-segs">
+          <div class="cust-seg active" data-seg="custom">Sections</div>
+          <div class="cust-seg" data-seg="restore">Restore</div>
+        </div>
+        <span class="restore-x" id="restoreClose">&#10005;</span>
+      </div>
+      <div class="cust-view" id="custView">
+        <div class="cust-new">
+          <input type="text" id="custName" class="cust-input" placeholder="New section name" maxlength="24">
+          <button class="cust-create" id="custCreate">Create</button>
+        </div>
+        <div class="cust-list" id="custList"></div>
+      </div>
+      <div class="restore-list" id="restoreList" style="display:none;"></div>
+    </div>
+  </div>
+  <div class="dock" id="dock">
+    <div class="dock-sub" id="alignSub">
+      <div class="dock-ic" data-align="left" title="Align Left"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="1.6" height="14" rx=".6"/><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="9" width="9" height="3" rx="1"/></svg></div>
+      <div class="dock-ic" data-align="cx" title="Align Center"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="7.2" y="1" width="1.6" height="14" rx=".6"/><rect x="5" y="4" width="6" height="3" rx="1"/><rect x="3.5" y="9" width="9" height="3" rx="1"/></svg></div>
+      <div class="dock-ic" data-align="right" title="Align Right"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="13.4" y="1" width="1.6" height="14" rx=".6"/><rect x="6" y="4" width="6" height="3" rx="1"/><rect x="3" y="9" width="9" height="3" rx="1"/></svg></div>
+      <div class="dock-ic" data-align="top" title="Align Top"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="14" height="1.6" rx=".6"/><rect x="4" y="4" width="3" height="6" rx="1"/><rect x="9" y="4" width="3" height="9" rx="1"/></svg></div>
+      <div class="dock-ic" data-align="cy" title="Align Middle"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="7.2" width="14" height="1.6" rx=".6"/><rect x="4" y="5" width="3" height="6" rx="1"/><rect x="9" y="3.5" width="3" height="9" rx="1"/></svg></div>
+      <div class="dock-ic" data-align="bottom" title="Align Bottom"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="13.4" width="14" height="1.6" rx=".6"/><rect x="4" y="6" width="3" height="6" rx="1"/><rect x="9" y="3" width="3" height="9" rx="1"/></svg></div>
+      <div class="dock-sep2"></div>
+      <div class="dock-ic" data-align="dh" title="Distribute Horizontally (equal gaps)"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1.6" y="3" width="2.3" height="10" rx=".8"/><rect x="6.85" y="3" width="2.3" height="10" rx=".8"/><rect x="12.1" y="3" width="2.3" height="10" rx=".8"/></svg></div>
+      <div class="dock-ic" data-align="dv" title="Distribute Vertically (equal gaps)"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="3" y="1.6" width="10" height="2.3" rx=".8"/><rect x="3" y="6.85" width="10" height="2.3" rx=".8"/><rect x="3" y="12.1" width="10" height="2.3" rx=".8"/></svg></div>
+    </div>
+    <div class="dock-bar" id="dockBar">
+      <div class="dock-tools" id="dockTools"></div>
+      <div class="dock-add" id="dockAdd" title="Add tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="del-x dock-del" id="dockDel" title="Hide dock">&#10005;</div>
+    </div>
+    <div class="dock-menu" id="dockMenu">
+      <div class="dock-mi" data-add="align">Align</div>
+      <div class="dock-mi" data-add="dub">Duplicate</div>
+      <div class="dock-mi" data-add="import">Import</div>
+      <div class="dock-mi" data-add="export">Export</div>
+      <div class="dock-mi" data-add="cache">Clear Cache</div>
+    </div>
+    <div class="dock-handle" id="dockHandle" title="Hide panel"><svg class="dh-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><svg class="dh-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></div>
+  </div>
+
+  <!-- ПОДСКАЗКИ ПРИ НАВЕДЕНИИ (по аудиту монтажёра, образец — Motion Tools Pro).
+       Полоса живёт ВНЕ .tabpane и не носит классов .section или .btn, поэтому
+       её не видят ни нумерация разделов, ни ключи раскладки, ни режим правки.
+       Стоит сразу после дока намеренно: соседские правила CSS подстраивают её
+       под свёрнутый док без единой строки скрипта. -->
+  <div class="am-tip" id="amTipBar"><span class="am-tip-lead" id="amTipLead"></span><span class="am-tip-txt" id="amTipTxt"></span></div>
+
+  <div class="tabpane" data-pane="fx">
+    <div class="section crv-section" data-secid="sec_curves">
+      <div class="section-title">Curves</div>
+      <!-- масштаб ТОЛЬКО этого раздела, правый верхний угол. Зум вешается на
+           #crvHost (main.js), панель целиком не трогает — для неё есть свой
+           слайдер "Button size" в режиме правки. Свой ключ amanow_crvscale. -->
+      <div class="crv-zoom" title="Curves size">
+        <!-- 29.09.2026: вид 1 — пресеты снизу, вид 2 — пресеты справа -->
+        <span class="crv-view" id="crvView" data-v="1" title="View 1: presets below · click for presets on the right"><svg class="crv-vic crv-vic1" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2" width="11" height="6.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M3 11.5h2.4M6.8 11.5h2.4M10.6 11.5h2.4M3 14h2.4M6.8 14h2.4M10.6 14h2.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><svg class="crv-vic crv-vic2" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="3" width="7.5" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M11 4.5h3.2M11 7.2h3.2M11 9.9h3.2M11 12.6h3.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+        <svg class="crv-zoom-ic" viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="2.5" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 5.4v5.2M5.4 8h5.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="range" id="crvScale" min="40" max="150" step="5" value="100" aria-label="Curves size">
+      </div>
+      <div id="crvHost"></div>
+    </div>
+  </div>
+
+  <div class="tabpane" data-pane="save">
+
+    <div class="subtabs ssec-tabs">
+      <div class="subtab active" data-ssec="ready">READY</div>
+      <div class="subtab" data-ssec="create">CREATE</div>
+    </div>
+
+    <div class="section ssec-ready" data-secid="sec_save_ready">
+      <div class="section-title">Ready Library</div>
+      <div class="so-wrap">
+        <div class="so-rail" id="rdRail">
+          <div class="so-cat active" data-rdcat="text">Text</div>
+          <div class="so-cat" data-rdcat="animation">Animation</div>
+          <div class="so-cat" data-rdcat="transitions">Transitions</div>
+        </div>
+        <div class="so-main">
+          <div class="so-top">
+            <input class="num rd-search" id="rdSearch" placeholder="Search…" spellcheck="false">
+          </div>
+          <div class="rd-grid" id="rdGrid"></div>
+          <div class="so-status" id="rdStatus"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section ssec-create" data-secid="sec_save_objects" style="display:none;">
+      <div class="section-title">Save Objects</div>
+      <div class="so-wrap">
+        <div class="so-rail">
+          <div class="so-cat active" data-socat="precomp" data-fk="save@socat#precomp#0">Precomp</div>
+          <div class="so-cat" data-socat="widget" data-fk="save@socat#widget#n0">Widget</div>
+          <div class="so-cat" data-socat="icon" data-fk="save@socat#icon#n1">Icon</div>
+          <div class="so-cat" data-socat="emoji" data-fk="save@socat#emoji#n2">Emoji</div>
+          <div class="so-cat" data-socat="gradient" data-fk="save@socat#gradient#n3">Gradient</div>
+          <div class="so-cat" data-socat="textobj" data-fk="save@socat#textobj#n4">Text</div>
+          <div class="so-cat" data-socat="anim" data-fk="save@socat#anim#n5">Animation</div>
+          <div class="so-cat" data-socat="fx" data-fk="save@socat#fx#1">Effects</div>
+          <div class="so-cat" data-socat="text" data-fk="save@socat#text#2">Notes</div>
+          <!-- Свои категории. Кнопка НЕ носит data-socat: иначе она попала бы
+               в общий обработчик выбора категории и сама стала бы категорией. -->
+          <div class="so-cat so-addcat" id="soAddCat" data-fk="save@socat#addcat#z0"
+               title="Add your own category | Right-click a custom category to remove it">+ Add</div>
+        </div>
+        <div class="so-main">
+          <div class="so-top">
+            <!-- 05.09.2026, слово владельца: COPY сохраняет ВСЁ — слои 1:1 и все фото,
+                 видео, звук и секвенции, которые они используют (как Collect Files). -->
+            <div class="btn primary" id="soCopy" title="COPY | Saves the selected layers 1:1 and packs every photo, video and audio file they use into the item's folder — like Collect Files, so the item opens on any computer">COPY</div>
+            <div class="btn primary" id="soNewPage" style="display:none;">+ Page</div>
+          </div>
+          <div class="so-list" id="soList"></div>
+          <div class="txt-wrap" id="soTxtWrap" style="display:none;">
+            <div class="txt-pages" id="txtPages"></div>
+            <div class="txt-side">
+              <div class="txt-bar" id="txtBar">
+                <input class="num step" data-step="1" data-min="8" data-max="72" data-w="46" id="txtFontSize" value="12" title="Font size (px)">
+                <button class="txt-b" data-cmd="bold" title="Bold"><b>B</b></button>
+                <button class="txt-b" data-cmd="italic" title="Italic"><i>I</i></button>
+                <button class="txt-b" data-cmd="underline" title="Underline"><u>U</u></button>
+                <button class="txt-b" data-cmd="strikeThrough" title="Strikethrough"><s>S</s></button>
+                <button class="txt-b" data-cmd="insertUnorderedList" title="Bulleted list">&#8226;&#9472;</button>
+              </div>
+              <div class="txt-ed" id="txtEd" contenteditable="true" spellcheck="false"></div>
+            </div>
+          </div>
+          <div class="so-status" id="soStatus"></div>
+          <div class="hint" id="soHint"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabpane" data-pane="colors">
+    <div data-secid="sec_16" class="section">
+      <div class="section-title col-title">Colors<input type="range" id="colSize" min="16" max="36" value="24" title="Color swatch size"></div>
+      <div class="row ml-row" style="align-items:center;gap:5px;">
+        <div class="btn tiny ml-mode active" id="colFill">Fill</div>
+        <div class="btn tiny ml-mode" id="colStroke">Stroke</div>
+        <span class="col-sep"></span>
+        <input class="tinput" id="colName" placeholder="Preset name" style="flex:1;min-width:56px;">
+        <div class="btn tiny" id="colSave" title="Save the current colors under this name">Save</div>
+        <div class="btn tiny" id="colDl" data-fk="colors#colDl#n0" title="Download | Saves YOUR presets to a file on the disk &#183; A system window asks where to put it &#183; Take the file to another computer or send it to a friend">&#8595;</div>
+        <div class="btn tiny" id="colUl" data-fk="colors#colUl#n0" title="Upload | Loads presets from a file you pick on the disk &#183; Nothing is overwritten and nothing is duplicated: a preset you already have with the same values is skipped, and one whose name is taken but whose values differ comes in under a new number">&#8593;</div>
+      </div>
+      <div class="row ml-row" style="align-items:center;gap:5px;">
+        <select id="colPresets" class="tinput" style="flex:1;min-width:80px;"></select>
+        <div class="btn tiny col-x" id="colDel" title="Delete the selected preset">&#10005;</div>
+        <div class="btn tiny" id="colLoad" title="Load the selected preset">Load</div>
+        <div class="btn tiny" id="colReset" title="Clear added colors (back to defaults)">Reset</div>
+      </div>
+      <div class="row ml-row" style="align-items:center;gap:5px;">
+        <input class="tinput" id="colHex" placeholder="#FF5500" style="flex:1;min-width:70px;">
+        <div class="btn tiny" id="colPick" title="Pick a color from a palette">+</div>
+        <div class="btn tiny" id="colAdd" title="Add this hex color">ADD</div>
+        <input type="color" id="colPicker" value="#3b82f6" class="col-hidden">
+      </div>
+      <div class="col-lbl">Solids</div>
+      <div class="col-solids" id="colSolids"></div>
+      <div class="col-lbl">Gradients</div>
+      <div class="col-grads" id="colGrads"></div>
+      <div class="row ml-row gmix-row">
+        <div class="btn tiny gcount on" data-gc="2" title="2-color gradient">2</div>
+        <div class="btn tiny gcount" data-gc="3" title="3-color gradient">3</div>
+        <div class="btn tiny gcount" data-gc="4" title="4-color gradient">4</div>
+        <span class="col-sep"></span>
+        <span class="gsw" id="gsw0" data-def="#3b82f6"></span>
+        <span class="gsw" id="gsw1" data-def="#d946ef"></span>
+        <span class="gsw" id="gsw2" data-def="#f59e0b" style="display:none;"></span>
+        <span class="gsw" id="gsw3" data-def="#22c55e" style="display:none;"></span>
+        <span class="gprev" id="gPrev"></span>
+        <div class="btn tiny" id="gAdd" title="Add this gradient to the palette">ADD</div>
+        <input type="color" id="gPick" class="col-hidden">
+      </div>
+      <div class="col-lbl">Colour combinations</div>
+      <div class="col-combos" id="colCombos"></div>
+      <div class="row ml-row gmix-row">
+        <div class="btn tiny ccount on" data-cc="2" title="2 colours in a set">2</div>
+        <div class="btn tiny ccount" data-cc="3" title="3 colours in a set">3</div>
+        <div class="btn tiny ccount" data-cc="4" title="4 colours in a set">4</div>
+        <span class="col-sep"></span>
+        <span class="ml-hint" style="flex:1;margin:0;">Choose a base colour, then press Add.</span>
+        <span class="gsw" id="cbSw" title="Base colour for the set"></span>
+        <div class="btn tiny" id="cbAdd" title="Build a matching set from the base colour">Add</div>
+        <input type="color" id="cbPick" class="col-hidden" value="#3b82f6">
+      </div>
+      <!-- 18.09.2026, слово владельца: подсказка под цветами убрана -->
+    </div>
+  </div>
+
+<div class="exp-modal" id="expModal">
+  <div class="exp-card">
+    <div class="exp-close" id="expClose" title="Close">&#10005;</div>
+    <div class="exp-title">TEXT EXPLODER</div>
+    <div class="exp-grid">
+      <div class="exp-opt" data-exp="chars">CHARACTERS</div>
+      <div class="exp-opt" data-exp="words">WORDS</div>
+      <div class="exp-opt" data-exp="lines">LINES</div>
+      <div class="exp-opt" data-exp="paras">PARAGRAPHS</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ATOOLS RADIAL ============
+     Two surfaces: the wheel overlay (held right mouse button) and the settings
+     page (the AmanowTools logo). Both live outside every .tabpane and use no
+     .section / .btn classes, so the positional sec_N and data-fk key systems
+     never see them. -->
+<div class="rx-ov" id="rxOv">
+  <div class="rx-stage" id="rxStage"></div>
+  <div class="rx-hud" id="rxHud">
+    <div class="rx-cap"><b id="rxCapT">&nbsp;</b><span id="rxCapD"></span></div>
+    <div class="rx-status" id="rxStatus"></div>
+    <div class="rx-fx" id="rxFx">
+      <input class="rx-fxsearch" id="rxFxSearch" placeholder="Search effects and animation presets&hellip;" spellcheck="false" autocomplete="off">
+      <div class="rx-fxlist" id="rxFxList"></div>
+    </div>
+    <div class="rx-foot">
+      <span class="rx-hint" id="rxHint">Hold right mouse button &middot; flick &middot; release</span>
+    </div>
+  </div>
+</div>
+
+<div class="rx-page" id="rxPage">
+  <div class="rx-phead">
+    <div class="rx-back" id="rxBack"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>PANEL</div>
+    <span class="spacer"></span>
+    <div class="rx-pbtn" id="rxDiscard">Discard</div>
+    <div class="rx-pbtn primary" id="rxSave">Save</div>
+  </div>
+
+  <div class="rx-sec">WHEEL LAYOUT</div>
+  <div class="rx-presetrow">
+    <select class="rx-preset" id="rxPreset"></select>
+    <div class="rx-mini" id="rxRename" title="Rename this layout">&#9998;</div>
+    <div class="rx-mini wide" id="rxNew" title="New layout">+ New</div>
+    <div class="rx-mini" id="rxDelPreset" title="Delete this layout">&#10005;</div>
+  </div>
+  <div class="rx-seglist" id="rxSegList"></div>
+
+  <div class="rx-sec">PREFERENCES</div>
+  <div class="rx-pref">
+    <span class="rx-plbl">Wheel size</span>
+    <div class="rx-size">
+      <div class="rx-sz" data-rxsz="s">Small</div>
+      <div class="rx-sz on" data-rxsz="m">Medium</div>
+      <div class="rx-sz" data-rxsz="l">Large</div>
+    </div>
+  </div>
+  <div class="rx-pref">
+    <span class="rx-plbl">Right-click hold delay</span>
+    <select class="rx-preset narrow" id="rxHold">
+      <option value="120">120 ms</option>
+      <option value="160">160 ms</option>
+      <option value="200" selected>200 ms</option>
+      <option value="260">260 ms</option>
+      <option value="350">350 ms</option>
+    </select>
+  </div>
+  <div class="rx-pref">
+    <label class="rx-chk"><input type="checkbox" id="rxFloat" checked><span>Open a fired panel in its own floating window</span></label>
+  </div>
+  <div class="rx-pref">
+    <label class="rx-chk"><input type="checkbox" id="rxGlobal"><span>Open the wheel anywhere in After Effects</span></label>
+  </div>
+  <div class="rx-pref">
+    <span class="rx-plbl">Hold time in After Effects</span>
+    <select class="rx-preset narrow" id="rxGhold">
+      <option value="200">200 ms</option>
+      <option value="250" selected>250 ms</option>
+      <option value="300">300 ms</option>
+      <option value="400">400 ms</option>
+      <option value="500">500 ms</option>
+    </select>
+  </div>
+  <div class="rx-phint" id="rxGstat" style="display:none"></div>
+  <div class="rx-defrow" id="rxAccessRow" style="display:none"><div class="rx-mini wide" id="rxAskAccess">Enable the right-button gesture</div><div class="rx-mini wide" id="rxRevealHelper">Show the helper in Finder</div></div>
+
+  <div class="rx-sec">PREVIEW <span class="rx-dirty" id="rxDirty">UNSAVED</span></div>
+  <div class="rx-prevbox"><div class="rx-prev" id="rxPrev"></div></div>
+  <div class="rx-defrow"><div class="rx-mini wide" id="rxDefaults">Use Defaults</div></div>
+</div>
+
+<div class="rx-modal" id="rxPick">
+  <div class="rx-mcard">
+    <div class="rx-mtitle" id="rxPickTitle">Pick a tool to add</div>
+    <input class="rx-msearch" id="rxPickSearch" style="display:none"
+           placeholder="Search effects and animation presets&hellip;" spellcheck="false" autocomplete="off">
+    <div class="rx-mlist" id="rxPickList"></div>
+    <div class="rx-mfoot">
+      <div class="rx-mini wide" id="rxPickBack" style="display:none">&#8249; Back</div>
+      <div class="rx-mini wide" id="rxPickCancel">Cancel</div>
+    </div>
+  </div>
+</div>
+
+  <script src="js/CSInterface.js"></script>
+  <script src="js/ready_syn.js"></script>
+  <!-- ===================================================================== -->
+  <!--  НАСТРОЙКА СЕРВЕРА: адрес лицензионного Worker'а.                      -->
+  <!--  serverAlt — тот же самый Worker на его workers.dev-адресе. Если       -->
+  <!--  основной домен вдруг недоступен (DNS, сертификат, блокировка у        -->
+  <!--  провайдера), панель на этот сеанс переключается на запасной, и        -->
+  <!--  активация И субтитры продолжают работать вместе с доменом, а не       -->
+  <!--  умирают вместе с ним.                                                 -->
+  <!-- ===================================================================== -->
+  <script>window.AM_CFG = { server: "https://api.amanowplugins.com", serverAlt: "https://amanowtools-v2.aamanow1509.workers.dev" };</script>
+  <script src="js/pako_inflate.min.js"></script>
+  <script src="js/lottie_light_canvas.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

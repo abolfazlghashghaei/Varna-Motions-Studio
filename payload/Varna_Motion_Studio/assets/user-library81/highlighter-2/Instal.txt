@@ -1,0 +1,14 @@
+﻿[Script Installation]
+
+1. Copy the `Highlighter.jsxbin` file to the After Effects scripts directory:
+
+Win: ...Adobe After Effects CC\Support Files\Scripts\ScriptUI Panels\
+Mac: Applications/Adobe After Effects CC/Scripts/ScriptUI Panels/
+
+
+2. Open the After Effects preferences and enable the option "Allow Scripts to Write Files and Access Network":
+Win: Edit > Preferences > General
+Mac: After Effects CC > Preferences > General
+
+
+3. You will find the `Highlighter.jsxbin` script listed under the "Window" menu at the top of the application.

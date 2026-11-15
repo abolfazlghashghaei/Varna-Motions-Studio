@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Orb Reactor</title>
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+    /* Trial locks (licensing) */
+    .preset-card.lic-locked { position: relative; opacity: .55; }
+    .preset-card.lic-locked::after { content: "\1F512"; position: absolute; top: 6px; right: 6px; font-size: 13px; }
+    .lock-banner { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px;
+      padding: 8px 10px; border-radius: 6px; background: var(--bg-raised); border: 1px solid var(--accent); font-size: 11px; }
+    .lock-banner.hidden { display: none; }
+    #tab-voice.lic-section-locked > *:not(.lock-banner) { opacity: .45; }
+    .lic-toast { position: fixed; left: 10px; right: 10px; bottom: 10px; z-index: 9999; display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; border-radius: 6px; background: var(--bg-raised); border: 1px solid var(--accent); color: var(--text); font-size: 12px; }
+    .lic-toast span { flex: 1; }
+    .lic-toast button { cursor: pointer; }
+    .lic-toast-x { background: none; border: 0; color: var(--text-dim); font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div id="orbLoading" class="orb-loading" aria-live="polite">
+    <div class="orb-loading-brand">Orb Reactor</div>
+    <div class="orb-skeleton orb-skeleton-preview"></div>
+    <div class="orb-skeleton orb-skeleton-tabs"></div>
+    <div class="orb-skeleton orb-skeleton-row"></div>
+    <div class="orb-skeleton orb-skeleton-row short"></div>
+    <div class="orb-loading-status">Loading preview…</div>
+  </div>
+  <svg style="display:none">
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="5" y="4" width="5" height="16" fill="currentColor"/><rect x="14" y="4" width="5" height="16" fill="currentColor"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.2"/><rect x="14" y="3" width="7" height="7" rx="1.2"/><rect x="3" y="14" width="7" height="7" rx="1.2"/><rect x="14" y="14" width="7" height="7" rx="1.2"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2.2" fill="currentColor" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2.2" fill="currentColor" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="11" cy="18" r="2.2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2s-.6-1.4-1-2c-.5-.6 0-1.6 1-1.6h2a4 4 0 0 0 4-4A8 8 0 0 0 12 3z"/><circle cx="7.5" cy="10.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="11" cy="7" r="1.1" fill="currentColor" stroke="none"/><circle cx="15.5" cy="8" r="1.1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="9" y1="21" x2="15" y2="21"/></symbol>
+    <symbol id="i-export" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="M7 9l5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6z"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="1.5"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><polyline points="20 5 20 11 14 11"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.03-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></symbol>
+    <symbol id="i-orbit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="12" rx="9" ry="4"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></symbol>
+  </svg>
+
+  <div id="app">
+
+    <header class="topbar">
+      <div class="brand">Orb Reactor</div>
+      <div class="topbar-actions"><div id="connStatus" class="conn-status">connecting to After Effects…</div><button id="btnAbout" class="icon-btn" title="Settings" aria-label="Settings"><svg class="icon"><use href="#i-gear"/></svg></button></div>
+    </header>
+
+    <section class="preview-wrap">
+      <div id="ribbonRotator" class="rotator hidden" title="Drag to orbit the 3D ribbon preview. Double-click to reset.">
+        <svg class="icon rotator-icon"><use href="#i-orbit"/></svg>
+        <div class="rotator-dot"></div>
+      </div>
+      <canvas id="previewCanvas" width="360" height="360"></canvas>
+      <div id="previewResizeHandle" class="preview-resize-handle" title="Drag to resize preview"></div>
+      <div class="preview-controls">
+        <button id="btnPlayPause" class="pill" title="Pause / resume the preview"><svg class="icon"><use href="#i-pause"/></svg></button>
+        <button id="btnToggleTalk" class="pill" title="Preview the idle (resting) look">Idle preview</button>
+        <span id="stateLabel" class="state-label"></span>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="presets" title="Presets"><svg class="icon"><use href="#i-grid"/></svg><span>Presets</span></button>
+      <button class="tab" data-tab="params" title="Style &amp; Look"><svg class="icon"><use href="#i-sliders"/></svg><span>Style</span></button>
+      <button class="tab" data-tab="colors" title="Colors"><svg class="icon"><use href="#i-palette"/></svg><span>Colors</span></button>
+      <button class="tab" data-tab="voice" title="Voice Reactivity"><svg class="icon"><use href="#i-mic"/></svg><span>Voice</span></button>
+      <button class="tab" data-tab="export" title="Export"><svg class="icon"><use href="#i-export"/></svg><span>Export</span></button>
+    </nav>
+
+    <main>
+      <section id="tab-presets" class="tabpanel active">
+        <div id="presetGrid" class="preset-grid"></div>
+      </section>
+
+      <section id="tab-params" class="tabpanel">
+        <div id="groupMotion" class="group"></div>
+        <div id="groupShape" class="group"></div>
+        <div id="groupLook" class="group"></div>
+        <div id="groupMetal" class="group hidden"></div>
+        <div id="groupRibbon" class="group hidden"></div>
+      </section>
+
+      <section id="tab-colors" class="tabpanel">
+        <div id="groupColors" class="group"></div>
+      </section>
+
+      <section id="tab-voice" class="tabpanel">
+        <div id="voiceLockBanner" class="lock-banner hidden">
+          <span>Voice Reactivity is locked in trial mode.</span>
+          <button type="button" id="btnVoiceUnlock" class="btn">Activate license&hellip;</button>
+        </div>
+        <label class="row" title="The orb eases toward a near-still, dim look at silence and eases into your designed look while there's speech - continuously, matching how loud it is, not just on/off.">
+          <span>Enable voice reactivity</span>
+          <button type="button" class="toggle-btn" id="reactiveEnabled" aria-pressed="false">OFF</button>
+        </label>
+
+        <div class="audio-source">
+          <button id="btnUseTimelineAudio" class="btn" title="Use the selected timeline layer's audio, respecting its in/out points">
+            <svg class="icon"><use href="#i-film"/></svg><span>Timeline layer</span></button>
+          <button id="btnBrowseAudio" class="btn" title="Browse for an audio or video file">
+            <svg class="icon"><use href="#i-folder"/></svg><span>Browse file</span></button>
+          <input type="file" id="audioFileInput" accept="audio/*,video/*" style="display:none" />
+        </div>
+        <div class="audio-status-row">
+          <div id="audioStatus" class="hint">No audio loaded yet.</div>
+          <button type="button" id="btnClearAudio" class="icon-btn hidden" title="Remove loaded audio" aria-label="Remove audio">
+            <svg class="icon icon-sm"><use href="#i-close"/></svg>
+          </button>
+        </div>
+        <label class="row" id="placeAudioRow" style="display:none">
+          <span>Also place this audio on the timeline</span>
+          <button type="button" class="toggle-btn" id="placeAudioOnTimeline" aria-pressed="true"
+            title="Adds the audio file as its own layer at the CTI, aligned with the rendered orb.">ON</button>
+        </label>
+
+        <div class="group" id="groupVoiceTuning">
+          <div class="field">
+            <label title="How loud the audio needs to get before the orb treats it as talking.">Sensitivity</label>
+            <input type="range" id="voiceThreshold" min="0.02" max="0.6" step="0.01" value="0.14" />
+          </div>
+          <div class="field">
+            <label title="How long audio has to be quiet before the orb settles back to idle.">Hangover (sec)</label>
+            <input type="range" id="voiceHangover" min="0.05" max="1.2" step="0.05" value="0.35" />
+          </div>
+          <div class="field">
+            <label title="How quickly the orb reacts when speech starts.">Wake-up speed (sec)</label>
+            <input type="range" id="activationDuration" min="0.05" max="1.0" step="0.01" value="0.22" />
+          </div>
+          <div class="field">
+            <label title="How quickly the orb settles back down after speech stops.">Settle-down speed (sec)</label>
+            <input type="range" id="transitionDuration" min="0.1" max="2.0" step="0.01" value="0.65" />
+          </div>
+          <label class="row" style="display:none" title="Scales exposure up slightly with instantaneous loudness, on top of the idle/talking blend.">
+            <span>Also brighten with loudness</span>
+            <button type="button" class="toggle-btn" id="reactiveExposure" aria-pressed="true">ON</button>
+          </label>
+        </div>
+      </section>
+
+      <section id="tab-export" class="tabpanel">
+        <div class="field">
+          <label>Active composition</label>
+          <div id="compInfo" class="hint">not connected yet</div>
+        </div>
+
+        <div class="field">
+          <label>Output format</label>
+          <div class="segmented" id="exportFormatSeg">
+            <button class="seg-btn active" data-format="sequence"
+              title="Alpha-transparent PNG frames. Most compatible, slower to write.">PNG sequence</button>
+            <button class="seg-btn" data-format="mp4"
+              title="Set ffmpeg path in Settings to enable H.264 MP4 export.">H.264 MP4</button>
+          </div>
+          <div id="mp4DisabledHint" class="hint hidden" style="margin-top:6px">Set ffmpeg path in Settings to enable H.264.</div>
+        </div>
+
+        <div class="field hidden" id="mp4BgRow">
+          <label title="H.264 has no alpha channel, so transparent areas are filled with this color.">Background color</label>
+          <input type="color" id="mp4BgColor" value="#000000" />
+        </div>
+
+        <div class="field">
+          <label>Duration</label>
+          <select id="durationSource">
+            <option value="audio">Match loaded audio length</option>
+            <option value="workarea">Match comp work area</option>
+            <option value="custom">Custom (seconds)</option>
+          </select>
+          <input type="number" id="customDuration" min="0.1" step="0.1" value="3" class="hidden" />
+        </div>
+
+        <div class="field">
+          <label>Resolution</label>
+          <select id="resolutionSource">
+            <option value="comp">Match active comp</option>
+            <option value="custom">Custom</option>
+          </select>
+          <div id="customResolutionRow" class="hidden">
+            <input type="number" id="customWidth" value="1024" min="16" />
+            ×
+            <input type="number" id="customHeight" value="1024" min="16" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Frame rate</label>
+          <select id="frameRateSource">
+            <option value="comp">Match active comp</option>
+            <option value="custom">Custom</option>
+          </select>
+          <input type="number" id="customFrameRate" value="30" min="1" class="hidden" />
+        </div>
+
+        <div class="field">
+          <label>Output folder</label>
+          <div class="row">
+            <input type="text" id="outputFolder" placeholder="Downloads (default)" readonly />
+            <button id="btnChooseFolder" class="btn" title="Select the folder where exports will be saved"><svg class="icon"><use href="#i-folder"/></svg></button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Layer name</label>
+          <input type="text" id="layerName" value="Liquid Orb" />
+        </div>
+
+        <button id="btnExport" class="btn primary"
+          title="Renders frame-by-frame to exactly match your comp, then places the result on the timeline at the CTI.">
+          <svg class="icon"><use href="#i-export"/></svg><span>Export</span></button>
+        <button id="btnCancelExport" class="btn cancel hidden">
+          <svg class="icon"><use href="#i-close"/></svg><span>Cancel</span></button>
+
+        <div id="exportProgressWrap" class="hidden">
+          <div class="progress"><div id="exportProgressBar" class="progress-bar"></div></div>
+          <div id="exportStatus" class="hint"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="aboutOverlay" class="about-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
+    <div class="about-card">
+      <div class="about-head"><div id="aboutTitle" class="about-title">Settings</div><button id="btnCloseAbout" class="icon-btn" title="Close" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button></div>
+      <div class="about-body">
+        <div class="about-logo"></div>
+        <div class="about-version">Orb Reactor · v1.0</div>
+        <div class="about-description">Create customizable animated orbs in After Effects and Premiere Pro (Windows &amp; macOS), with particle styles, color controls, voice reactivity, and frame-accurate export.</div>
+        <div class="settings-section">
+          <div class="settings-section-title">License</div>
+          <div id="licenseStatus" class="hint" style="margin-bottom:8px">Checking license&hellip;</div>
+          <button type="button" id="btnLicense" class="btn" style="width:100%"><span>License &amp; Support&hellip;</span></button>
+        </div>
+        <div class="settings-section">
+          <div class="settings-section-title">ffmpeg</div>
+          <div class="hint" style="margin-bottom:8px">Optional. Needed for H.264 MP4 export and for decoding some audio formats. Download ffmpeg yourself and paste the path to the executable below.</div>
+          <div class="field">
+            <label>ffmpeg path</label>
+            <div class="row">
+              <input type="text" id="ffmpegPathInput" placeholder="Paste path to ffmpeg…" />
+              <button type="button" id="btnFfmpegHelp" class="btn" title="How to download ffmpeg">?</button>
+            </div>
+          </div>
+          <div class="row" style="margin-top:6px;gap:6px">
+            <button type="button" id="btnClearFfmpeg" class="btn" style="flex:1">Clear</button>
+          </div>
+          <div id="ffmpegStatus" class="hint" style="margin-top:6px"></div>
+          <div id="ffmpegHelpPanel" class="hidden" style="margin-top:10px;padding:10px;border:1px solid var(--border, #333);border-radius:8px;font-size:12px;line-height:1.45">
+            <strong>Windows</strong>
+            <ol style="margin:6px 0 10px 18px;padding:0">
+              <li>Download a free FFmpeg build for Windows (essentials package is enough).</li>
+              <li>Unzip it to a fixed folder, e.g. <code>C:\ffmpeg</code>.</li>
+              <li>Paste the full path to <code>ffmpeg.exe</code> above (usually inside a <code>bin</code> folder).</li>
+            </ol>
+            <strong>macOS</strong>
+            <ol style="margin:6px 0 10px 18px;padding:0">
+              <li>Install FFmpeg with Homebrew: <code>brew install ffmpeg</code>.</li>
+              <li>Paste <code>/opt/homebrew/bin/ffmpeg</code> (Apple Silicon) or <code>/usr/local/bin/ffmpeg</code> (Intel).</li>
+            </ol>
+            <div class="hint">You only need the ffmpeg executable path — nothing else from the package.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="lib/CSInterface.js"></script>
+  <script defer src="js/presets.js"></script>
+  <script defer src="js/motion.js"></script>
+  <script defer src="js/renderer.js"></script>
+  <script defer src="js/audio.js"></script>
+  <script defer src="js/reactive.js"></script>
+  <script defer src="js/export.js"></script>
+  <script defer src="js/license.js"></script>
+  <script defer src="js/app.js"></script>
+</body>
+</html>

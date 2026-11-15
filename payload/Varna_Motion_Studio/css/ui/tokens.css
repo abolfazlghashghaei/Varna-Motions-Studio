@@ -1,0 +1,93 @@
+/* Shared design vocabulary. This file is loaded only by the AE entry in stage A. */
+html[data-ui-a68] {
+  --ui-ink-dark: #0f172a;
+  --ui-ink-light: #f8fafc;
+  --ui-seed-success-light: #166534;
+  --ui-seed-success-dark: #86efac;
+  --ui-seed-warning-light: #92400e;
+  --ui-seed-warning-dark: #fcd34d;
+  --ui-seed-danger-light: #be123c;
+  --ui-seed-danger-dark: #fda4af;
+  --ui-font-min: 12px;
+  --ui-font-note: 12px;
+  --ui-font-label: 13px;
+  --ui-font-body: 14px;
+  --ui-font-section: 16px;
+  --ui-font-title: 18px;
+  --ui-line-body: 1.6;
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-6: 24px;
+  --ui-radius-small: 4px;
+  --ui-radius-control: 8px;
+  --ui-radius-card: 12px;
+  --ui-control-min: 32px;
+  --ui-control-height: 36px;
+  --ui-hit-size: 32px;
+  --ui-card-space: var(--ui-space-3);
+  --ui-color-surface: #1e293b;
+  --ui-color-field: #111c2e;
+  --ui-color-text: #f8fafc;
+  --ui-color-muted: #cbd5e1;
+  --ui-color-accent: #93c5fd;
+  --ui-color-action: #93c5fd;
+  --ui-color-on-action: #0f172a;
+  --ui-color-soft: #253d58;
+  --ui-color-border: #64748b;
+  --ui-color-success: var(--ui-seed-success-dark);
+  --ui-color-warning: var(--ui-seed-warning-dark);
+  --ui-color-danger: var(--ui-seed-danger-dark);
+  --ui-color-focus: #93c5fd;
+}
+html[data-ui-a68] body {
+  /* Existing size controls keep their values; compactness now changes space, not legibility. */
+  --ui44-font: var(--ui-font-label);
+  --ui44-label: var(--ui-font-label);
+  --ui44-hint: var(--ui-font-note);
+  --ui44-title: var(--ui-font-title);
+  --ui44-control: var(--ui-control-height);
+  --ui44-pad: var(--ui-space-3);
+  --ui44-gap: var(--ui-space-2);
+  --ui44-icon: 20px;
+  --c37-height: var(--ui-control-height);
+}
+html[data-ui-a68] body[data-density=compact],
+html[data-ui-a68] body[data-ui-size44=tiny],
+html[data-ui-a68] body[data-ui-size44=compact] {
+  --ui-control-height: var(--ui-control-min);
+  --ui-card-space: var(--ui-space-2);
+}
+html[data-ui-a68] body[data-theme=light],
+html[data-ui-a68] body[data-theme=silver] {
+  --ui-color-surface: #ffffff;
+  --ui-color-field: #f1f5f9;
+  --ui-color-text: #0f172a;
+  --ui-color-muted: #475569;
+  --ui-color-accent: #1d4ed8;
+  --ui-color-action: #1d4ed8;
+  --ui-color-on-action: #ffffff;
+  --ui-color-soft: #dbeafe;
+  --ui-color-border: #64748b;
+  --ui-color-success: var(--ui-seed-success-light);
+  --ui-color-warning: var(--ui-seed-warning-light);
+  --ui-color-danger: var(--ui-seed-danger-light);
+  --ui-color-focus: #1d4ed8;
+}
+html[data-ui-a68] .ai-sound50 {
+  /* The existing audio studio is an intentionally dark surface, including in light mode. */
+  --ui-color-surface: #152b3c;
+  --ui-color-field: #112431;
+  --ui-color-text: #edf9ff;
+  --ui-color-muted: #cbd5e1;
+  --ui-color-accent: #93e6d3;
+  --ui-color-action: #93e6d3;
+  --ui-color-on-action: #0f172a;
+  --ui-color-soft: #264356;
+  --ui-color-border: #64748b;
+  --ui-color-success: var(--ui-seed-success-dark);
+  --ui-color-warning: var(--ui-seed-warning-dark);
+  --ui-color-danger: var(--ui-seed-danger-dark);
+  --ui-color-focus: #93e6d3;
+}

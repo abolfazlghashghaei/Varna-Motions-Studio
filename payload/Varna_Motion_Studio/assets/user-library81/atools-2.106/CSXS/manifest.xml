@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionManifest Version="7.0" ExtensionBundleId="com.amanow.tools" ExtensionBundleVersion="2.106"
+    ExtensionBundleName="AmanowTools" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <ExtensionList>
+        <Extension Id="com.amanow.tools.panel" Version="2.106"/>
+        <!-- the floating card window: the same page, opened as a Modeless
+             extension so a card fired from the wheel can sit anywhere on
+             screen instead of inside the docked panel -->
+        <Extension Id="com.amanow.tools.float" Version="2.106"/>
+        <!-- the numbered card windows (AmanowTools Card 1..5): each keeps ONE
+             section of the user's choosing and remembers it, so five sections
+             can stay docked side by side with no switching. Opened from the
+             wheel's Cards segment (ATOOLS 1..5) or from Window > Extensions. -->
+        <Extension Id="com.amanow.tools.card1" Version="2.106"/>
+        <Extension Id="com.amanow.tools.card2" Version="2.106"/>
+        <Extension Id="com.amanow.tools.card3" Version="2.106"/>
+        <Extension Id="com.amanow.tools.card4" Version="2.106"/>
+        <Extension Id="com.amanow.tools.card5" Version="2.106"/>
+    </ExtensionList>
+    <ExecutionEnvironment>
+        <HostList>
+            <!-- Обещание должно быть выполнимым. AE 15.x (CC 2018) несёт CEP 8 и
+                 не удовлетворяет RequiredRuntime CSXS 9.0 ниже — там панель просто
+                 молча не появляется, сколько бы мы ни писали 15.0. Нижняя реально
+                 достижимая планка — AE 17.0 (2020), это CEP 9; фолбэки вёрстки для
+                 его движка лежат в css/legacy.css и включаются детектором в
+                 index.html. -->
+            <Host Name="AEFT" Version="[17.0,99.9]"/>
+        </HostList>
+        <LocaleList><Locale Code="All"/></LocaleList>
+        <RequiredRuntimeList>
+            <RequiredRuntime Name="CSXS" Version="9.0"/>
+        </RequiredRuntimeList>
+    </ExecutionEnvironment>
+    <DispatchInfoList>
+        <Extension Id="com.amanow.tools.panel">
+            <DispatchInfo>
+                <Resources>
+                    <MainPath>./index.html</MainPath>
+                    <ScriptPath>./jsx/host.jsxbin</ScriptPath>
+                    <!-- Ключи GPU убраны намеренно, возвращать нельзя. Они ставились
+                         против сбоя видеокарты на одной Windows-машине с 4K-экраном
+                         ("GPU state invalid after WaitForGetOffsetInRange"), в
+                         поддерживаемый Adobe список CEFCommandLine не входят, а на
+                         macOS ломали отрисовку полностью: расширение регистрировалось,
+                         вкладка появлялась, а содержимое не рисовалось никогда —
+                         тот самый чёрный экран. Проверено на живом маке. -->
+                </Resources>
+                <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>AmanowTools</Menu>
+                    <Geometry>
+                        <Size><Height>620</Height><Width>330</Width></Size>
+                        <MinSize><Height>160</Height><Width>270</Width></MinSize>
+                        <MaxSize><Height>2200</Height><Width>700</Width></MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+        <Extension Id="com.amanow.tools.float">
+            <DispatchInfo>
+                <Resources>
+                    <MainPath>./index.html</MainPath>
+                    <!-- deliberately NOT host.jsx: a ScriptPath is evaluated into
+                         After Effects' single shared ExtendScript scope, so pointing
+                         this one at host.jsx made every open re-parse 262 KB on AE's
+                         script thread and reset state the panel was relying on. The
+                         panel has already put host.jsx there. -->
+                    <ScriptPath>./jsx/float.jsx</ScriptPath>
+                    <!-- Ключей GPU здесь тоже нет, и по той же причине, что у панели
+                         выше: на macOS они гасят содержимое окна насмерть. -->
+                </Resources>
+                <!-- AutoVisible=true (28.08.2026): с false панель, оставшаяся в workspace,
+                     после перезапуска AE оставалась ПУСТОЙ - страница не грузилась, и
+                     карта не восстанавливала свой раздел. true само окно НЕ открывает,
+                     оно лишь грузит содержимое, когда окно уже есть в workspace. -->
+                <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+                <UI>
+                    <!-- A Panel, NOT Modeless. Measured, from the two logs side
+                         by side: as a Modeless window this thing received the
+                         card in 60 ms and then vanished a second or two later,
+                         because After Effects tears a Modeless extension down
+                         the moment focus returns to it - which is exactly what
+                         the next right-press does. So every gesture had to
+                         rebuild the window, and the rebuild is what the user saw
+                         as "nothing happened; do it again".
+                         A Panel simply stays. It can be floated and parked
+                         anywhere, it survives focus changes, and the card then
+                         switches inside it in those same 60 ms. -->
+                    <Type>Panel</Type>
+                    <Menu>AmanowTools Card</Menu>
+                    <Geometry>
+                        <Size><Height>360</Height><Width>380</Width></Size>
+                        <MinSize><Height>140</Height><Width>280</Width></MinSize>
+                        <MaxSize><Height>1400</Height><Width>900</Width></MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+        <!-- the numbered card windows: same page, same empty ScriptPath (see the
+             note on .float above), Panel type so they dock and survive focus
+             changes. AutoVisible true - see the note on .float above. -->
+        <Extension Id="com.amanow.tools.card1">
+            <DispatchInfo>
+                <Resources><MainPath>./index.html</MainPath><ScriptPath>./jsx/float.jsx</ScriptPath></Resources>
+                <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>AmanowTools Card 1</Menu>
+                    <Geometry>
+                        <Size><Height>360</Height><Width>380</Width></Size>
+                        <MinSize><Height>140</Height><Width>280</Width></MinSize>
+                        <MaxSize><Height>1400</Height><Width>900</Width></MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+        <Extension Id="com.amanow.tools.card2">
+            <DispatchInfo>
+                <Resources><MainPath>./index.html</MainPath><ScriptPath>./jsx/float.jsx</ScriptPath></Resources>
+                <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>AmanowTools Card 2</Menu>
+                    <Geometry>
+                        <Size><Height>360</Height><Width>380</Width></Size>
+                        <MinSize><Height>140</Height><Width>280</Width></MinSize>
+                        <MaxSize><Height>1400</Height><Width>900</Width></MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+        <Extension Id="com.amanow.tools.card3">
+            <DispatchInfo>
+                <Resources><MainPath>./index.html</MainPath><ScriptPath>./jsx/float.jsx</ScriptPath></Resources>
+                <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>AmanowTools Card 3</Menu>
+                    <Geometry>
+                        <Size><Height>360</Height><Width>380</Width></Size>
+                        <MinSize><Height>140</Height><Width>280</Width></MinSize>
+                        <MaxSize><Height>1400</Height><Width>900</Width></MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+        <Extension Id="com.amanow.tools.card4">
+            <DispatchInfo>
+                <Resources><MainPath>./index.html</MainPath><ScriptPath>./jsx/float.jsx</ScriptPath></Resources>
+                <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>AmanowTools Card 4</Menu>
+                    <Geometry>
+                        <Size><Height>360</Height><Width>380</Width></Size>
+                        <MinSize><Height>140</Height><Width>280</Width></MinSize>
+                        <MaxSize><Height>1400</Height><Width>900</Width></MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+        <Extension Id="com.amanow.tools.card5">
+            <DispatchInfo>
+                <Resources><MainPath>./index.html</MainPath><ScriptPath>./jsx/float.jsx</ScriptPath></Resources>
+                <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
+                <UI>
+                    <Type>Panel</Type>
+                    <Menu>AmanowTools Card 5</Menu>
+                    <Geometry>
+                        <Size><Height>360</Height><Width>380</Width></Size>
+                        <MinSize><Height>140</Height><Width>280</Width></MinSize>
+                        <MaxSize><Height>1400</Height><Width>900</Width></MaxSize>
+                    </Geometry>
+                </UI>
+            </DispatchInfo>
+        </Extension>
+    </DispatchInfoList>
+</ExtensionManifest>

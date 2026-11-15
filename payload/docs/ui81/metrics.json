@@ -1,0 +1,17 @@
+{
+  "baseline": "720fa2246118e4ae8038e62e7bf27a2d52aa2c27",
+  "importantFlow77Before": 321,
+  "importantFlow77After": 321,
+  "newStylesheets": 0,
+  "motionPresets": 144,
+  "nativeTitleRecipes": 18,
+  "nativeGradientPalettes": 20,
+  "privatePacksInspected": 7,
+  "privateFiles": 407,
+  "atoolsOriginalCopy": {
+    "files": 74,
+    "bytes": 8323632,
+    "scriptsExecuted": false,
+    "windowsRegistrationTested": false
+  }
+}
