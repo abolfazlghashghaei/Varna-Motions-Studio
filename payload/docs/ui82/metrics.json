@@ -1,0 +1,16 @@
+{
+  "ids": {
+    "index": 899,
+    "premiere": 899,
+    "resolve": 899
+  },
+  "newStylesheets": 0,
+  "flow77ImportantBefore": 321,
+  "flow77ImportantAfter": 324,
+  "newImportantReason": "Three scoped display/width/height declarations override the legacy hidden 1px switch input; all new layout rules otherwise use normal ownership.",
+  "privateLibraryFiles": 4429,
+  "packDestinations": 11,
+  "amanowFiles": 3948,
+  "nativeAdobeExecuted": false,
+  "nativeWindowsInstallerExecuted": false
+}

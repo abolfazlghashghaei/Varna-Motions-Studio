@@ -136,6 +136,12 @@ function Get-VendorInstallPlan([string]$panelRoot) {
         }
     }
     [void]$plan.Add(@{Source=(Join-Path $root 'Cosmic\Win\Cosmic.aex');Target=(Join-Path $env:ProgramFiles 'Adobe\Common\Plug-ins\7.0\MediaCore\Cosmic\Cosmic.aex')})
+    # UI82: the supplied native foil binary uses the same verified/rollback copy
+    # path as other effects. Its presence is optional in source-only packages.
+    $foil82 = Join-Path $panelRoot 'assets\user-library81\holographic-foil\HolographicFoil.aex'
+    if (Test-Path -LiteralPath $foil82 -PathType Leaf) {
+        [void]$plan.Add(@{Source=$foil82;Target=(Join-Path $env:ProgramFiles 'Adobe\Common\Plug-ins\7.0\MediaCore\HolographicFoil.aex');Component='HolographicFoil82'})
+    }
     $aeRoots = @(Get-AERoots)
     if (!$aeRoots.Count) { throw 'After Effects installation was not found for the supplied tools.' }
     foreach ($ae in $aeRoots) {
@@ -392,8 +398,11 @@ try {
         # Decide per component before writing anything: never mix two vendor versions.
         $groups = @{}
         foreach ($entry in $vendorPlan) {
-            $relative = $entry.Source.Substring((Join-Path $src 'assets\vendor').Length).TrimStart('\')
-            $component = $relative.Split('\')[0]
+            if ($entry.Component) { $component = [string]$entry.Component }
+            else {
+                $relative = $entry.Source.Substring((Join-Path $src 'assets\vendor').Length).TrimStart('\')
+                $component = $relative.Split('\')[0]
+            }
             if (!$groups.ContainsKey($component)) { $groups[$component] = @() }
             $groups[$component] += $entry
         }

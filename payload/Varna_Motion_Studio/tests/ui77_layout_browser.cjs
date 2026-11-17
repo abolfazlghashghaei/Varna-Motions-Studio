@@ -48,7 +48,7 @@ const source = () => Object.fromEntries(['index.html','js/flow77.js','css/ui/flo
               });
               report.minContentRatio = Math.min(report.minContentRatio, ratio);
               const flags = ['small', 'clipped', 'overflow', 'touch', 'overlap'];
-              const bad = metrics.documentOverflow || metrics.workspaceOverflow || !metrics.mainVisible || metrics.navigation.length > 2 || metrics.workspaceHeight <= 0 || flags.some(k => metrics[k].length);
+              const bad = metrics.documentOverflow || metrics.workspaceOverflow || !metrics.mainVisible || metrics.navigation.length > 2 || metrics.workspaceHeight <= 0 || ratio < .5 || flags.some(k => metrics[k].length);
               if (bad) {
                 report.failureCount++;
                 if (report.failures.length < 250) report.failures.push({name,width,height,scale,theme,lang,metrics});

@@ -28,7 +28,7 @@ let limit=12,tab='look',updating=false,pending=null;
 const timing=group('ورود و خروج','Entrance & exit'),timingGrid=node('div','form-grid two');timing.append(timingGrid);
 for(const id of ['bgMotionDur','bgMotionDelay','bgOutMotion','bgOutDuration']){const n=field(id);if(n)timingGrid.append(n);}
 const custom=node('div','form-grid two'),strength=node('input'),loop=node('input');strength.type='number';strength.min='.1';strength.max='3';strength.step='.05';strength.value='1';strength.setAttribute('aria-label','Motion strength');loop.type='checkbox';
-const strengthLabel=node('label','control');strengthLabel.append(label(node('span'),'شدت حرکت','Motion strength'),strength);const loopLabel=node('label','switch-row');loopLabel.append(loop,label(node('span'),'حرکت آرام هنگام نمایش','Ambient movement while visible'));custom.append(strengthLabel,loopLabel);timing.append(custom);
+const strengthLabel=node('label','control');strengthLabel.append(label(node('span'),'شدت حرکت','Motion strength'),strength);const loopLabel=node('label','switch-row');loopLabel.append(loop,node('span','switch'),label(node('span'),'حرکت آرام هنگام نمایش','Ambient movement while visible'));custom.append(strengthLabel,loopLabel);timing.append(custom);
 const continuous=group('تغییر اندازه بین متن‌ها','Resize between captions'),reflow=$('.reflow-panel67');
 if(reflow){
  // Gather actual control nodes, including units regrouped by older adapters.

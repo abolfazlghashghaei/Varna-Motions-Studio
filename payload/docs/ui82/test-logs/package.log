@@ -1,0 +1,24 @@
+{
+  "ui": 80,
+  "version": "4.5.0-rc.47",
+  "platform": "Windows",
+  "sourceCommit": "5e27aa2",
+  "evidenceCommit": "5e27aa2d47657049c85e7dd399ee0634ce7429eb",
+  "manifestFiles": 3375,
+  "sourceManifestFiles": 3376,
+  "excludedMacOnlyFile": "assets/vendor/Railcut/Railcut/bin/mac/ffmpeg",
+  "allRetainedProductHashesUnchanged": true,
+  "nativeWindowsInstallerTested": false,
+  "nativeCEPTested": false,
+  "modelsBundled": false,
+  "releaseGatePassed": 86,
+  "releaseGateTotal": 100
+}
+{
+  "ui": 81,
+  "verifiedFiles": 7805,
+  "privateFiles": 4429,
+  "privateOnly": true,
+  "zipNotPublished": true
+}
+{"ui": 82, "verifiedFiles": 7805, "libraryFiles": 4429, "libraryPacks": 11, "windowsInstallerTested": false}

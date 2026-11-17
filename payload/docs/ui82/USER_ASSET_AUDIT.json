@@ -1,0 +1,30 @@
+{
+  "packs": 11,
+  "files": 4429,
+  "bytes": 556607739,
+  "amanowFiles": 3948,
+  "omittedTutorialVideos": [
+    {
+      "path": "neon-dj-subtitle/Help/Usage Instruction.mp4",
+      "bytes": 72431135,
+      "sha256": "7af2b78f0ab814be54029a2310fabb430576da94ab77e5d6d08d06ffffd6fccf",
+      "reason": "Instruction video only; not a runtime asset. Original remains in private extraction."
+    },
+    {
+      "path": "paper-burn/Help/Transitions After Effects.mp4",
+      "bytes": 13554998,
+      "sha256": "b0cf1b89a7e4c2ccec8bb7b9859b4df698dd415ecd5516db533c13a1733c09a7",
+      "reason": "Instruction video only; not a runtime asset. Original remains in private extraction."
+    },
+    {
+      "path": "holographic-foil/Tutorial.mp4",
+      "bytes": 107914871,
+      "sha256": "9e7e63d2776b230f31c1295254f5b498a7f5f804a5e101ddf7c75cdb4cc9c963",
+      "reason": "Instruction video only; not a runtime asset. Original remains in private extraction."
+    }
+  ],
+  "unavailableUploads": [],
+  "executedVendorContent": false,
+  "publicPublicationAuthorizedForNewUploads": true,
+  "publicDeliveryApproval": "User explicitly confirmed public publication of ALL original UI82 pack files on GitHub: انتشار عمومی تمام فایل‌های اصلی پکیج‌های UI82 روی GitHub را تأیید می‌کنم"
+}

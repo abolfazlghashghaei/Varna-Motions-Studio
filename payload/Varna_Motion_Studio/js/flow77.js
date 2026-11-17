@@ -431,6 +431,21 @@
   // Sticky action forwards to the original button; ancestry-dependent handlers stay intact.
   const proxy = element('button', 'btn primary flow-primary77'); proxy.type = 'button'; proxy.dataset.primary69 = 'true';
   proxy.dataset.proxy77 = 'true'; let primary = null;
+  // Keep the actual input and its existing host handlers; no mirrored state/button.
+  const previewInput82 = $('#livePreviewGlobal'), previewToggle82 = previewInput82.closest('label');
+  previewToggle82.classList.remove('top-preview'); previewToggle82.classList.add('preview-toggle82');
+  const previewPower82 = previewToggle82.querySelector('.switch'), previewText82 = previewToggle82.querySelector('span:last-child');
+  previewPower82.className = 'preview-power82'; previewPower82.setAttribute('aria-hidden','true');
+  previewPower82.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v8m-5.7-5a8 8 0 1 0 11.4 0"/></svg>';
+  previewText82.className = 'preview-label82'; previewText82.setAttribute('aria-hidden','true');
+  actions.append(previewToggle82);
+  function previewState82() {
+    const enabled=previewInput82.checked, title=text('پیش‌نمایش زندهٔ افتر؛ '+(enabled?'روشن است، برای خاموش‌کردن بزن':'خاموش است، برای روشن‌کردن بزن'),'Live AE preview; '+(enabled?'on, click to turn off':'off, click to turn on'));
+    attr(previewToggle82,'title',title); attr(previewInput82,'aria-label',text('پیش‌نمایش زندهٔ افتر','Live AE preview'));
+    const value=text(enabled?'پیش‌نمایش روشن':'پیش‌نمایش خاموش',enabled?'Preview on':'Preview off');
+    if(previewText82.textContent!==value)previewText82.textContent=value;
+  }
+  previewInput82.addEventListener('change',previewState82);
   const pageStatus = element('p', 'hint'); pageStatus.dataset.flowStatus77 = 'true'; pageStatus.setAttribute('role', 'status');
   $('.flat-status-popup69').append(pageStatus);
   const primaryActions = {
@@ -451,6 +466,7 @@
     }
   };
   function actionState() {
+    previewState82();
     if (['table', 'kinetic'].includes(w.VarnaUI.current())) { if (proxy.isConnected) proxy.remove(); pageStatus.hidden = true; return; }
     const name = w.VarnaUI.current(), id = pages[name]?.[5]; primary = id ? document.getElementById(id) : null;
     pageStatus.hidden = false;
@@ -459,13 +475,13 @@
     if (pageStatus.textContent !== status) pageStatus.textContent = status;
     if (primary) {
       const titles = {audio:['ساخت زیرنویس','Transcribe'],text:['پیش‌نمایش در افتر','Preview in After Effects'],motion:['اعمال موشن','Apply motion'],templates:['اعمال و ساخت استایل','Apply & build style'],bg:['پیش‌نمایش در افتر','Preview in After Effects'],sfx:['پیشنهاد صداها','Suggest sounds'],music:['ساخت بازه‌های صدا','Generate audio cues'],brand:['اعمال برند','Apply brand'],safe:['اعمال محدودهٔ امن','Apply safe area'],ai:['پیشنهاد اصلاح‌ها','Suggest corrections'],keywords:['پیشنهاد کلمات مهم','Suggest keywords'],translate:['ساخت ترجمه','Translate'],easing49:['اعمال منحنی','Apply curve'],director:['ساخت پیشنهاد','Create plan'],assistant49:['تولید کد','Generate code'],resources:['بررسی مسیرها','Check paths'],output:['ساخت در افتر','Build in After Effects']};
-      const short = shell.dataset.panelShort71 === 'true';
+      const short = shell.dataset.panelShort71 === 'true'||shell.dataset.size==='compact';
       const brief = {text:['نمایش','Preview'],bg:['نمایش','Preview'],motion:['اعمال','Apply'],brand:['اعمال','Apply'],safe:['اعمال','Apply'],easing49:['اعمال','Apply'],translate:['ترجمه','Send'],resources:['بررسی','Check'],ai:['بررسی','Review'],keywords:['پیشنهاد','Review'],sfx:['پیشنهاد','Review']};
       const value = short ? text(...(brief[name] || ['بساز','Build'])) : text(...(titles[name] || [primary.textContent.trim(), primary.textContent.trim()]));
       if (proxy.textContent !== value) proxy.textContent = value; proxy.title = primary.textContent.trim();
       if(proxy.disabled!==primary.disabled)proxy.disabled=primary.disabled; attr(proxy,'data-target77',primary.id);
     } else {
-      const value = shell.dataset.panelShort71 === 'true' ? text('ابزارها', 'Tools') : name === 'home' ? text('همهٔ ابزارها', 'All tools') : name === 'settings' ? text('تنظیم رنگ و ظاهر', 'Adjust appearance') : text('انتخاب ابزار', 'Choose a tool');
+      const value = (shell.dataset.panelShort71 === 'true'||shell.dataset.size==='compact') ? text('ابزارها', 'Tools') : name === 'home' ? text('همهٔ ابزارها', 'All tools') : name === 'settings' ? text('تنظیم رنگ و ظاهر', 'Adjust appearance') : text('انتخاب ابزار', 'Choose a tool');
       if(proxy.textContent!==value)proxy.textContent=value;
       if(proxy.disabled!==!primaryActions[name])proxy.disabled=!primaryActions[name]; if(proxy.hasAttribute('data-target77'))delete proxy.dataset.target77;
     }

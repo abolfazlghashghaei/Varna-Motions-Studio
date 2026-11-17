@@ -57,12 +57,14 @@ more.onclick=()=>chooser.showModal();const closeChooser=()=>{chooser.close();mor
 // Move duplicate global actions into the existing display popover while a pilot page is active.
 const tools=accordion('ابزارهای افتر و متن فعال','After Effects & active text',false);$('#headerOptions .header-options-panel').append(tools);
 const liveLabel=$('#livePreviewGlobal').closest('label').querySelector('span:last-child'),liveLabelOriginal=liveLabel.textContent;
-const globalControls=[$('#btnRefreshPreview'),$('#btnGoOutput'),$('#livePreviewGlobal').closest('label'),$('.bottom-dock .active-caption-mini'),$('.bottom-dock .dock-actions')].map(node=>{const slot=element('span','flat-return69');node.before(slot);return {node,slot};});
+// UI82 keeps the original live-preview switch in the non-scrolling action bar.
+// Older entry points retain their existing popover behavior.
+const globalControls=[$('#btnRefreshPreview'),$('#btnGoOutput'),$('#livePreviewGlobal').closest('label'),$('.bottom-dock .active-caption-mini'),$('.bottom-dock .dock-actions')].filter(node=>!document.documentElement.hasAttribute('data-ui77')||node!==$('#livePreviewGlobal').closest('label')).map(node=>{const slot=element('span','flat-return69');node.before(slot);return {node,slot};});
 let active=false,mode='',lastBand='',moving=false;
 function size(){const current=document.body.dataset.uiSize44;document.documentElement.style.setProperty('--panel-root69',({tiny:12,compact:13,standard:14,large:16,xlarge:18}[current]||14)+'px');}
 // Preserve both live footer nodes; share their grid row when available height is scarce.
 // The threshold follows the user's UI scale, not the monitor or a new CSS feature.
-function shortLayout(){const short=active&&innerHeight<32*parseFloat(getComputedStyle(document.documentElement).fontSize);
+function shortLayout(){const short=active&&innerHeight<(shell.dataset.panelBand69==='compact'?48:32)*parseFloat(getComputedStyle(document.documentElement).fontSize);
  if(shell.dataset.panelShort71!==String(short))shell.dataset.panelShort71=String(short);
  const parent=short?$('.topbar'):actionBar;if(statusDetails.parentElement!==parent)parent.append(statusDetails);
 }
@@ -93,7 +95,7 @@ function localize(){
  for(const b of all('[data-page69]',nav)){const text=b.querySelector('.flat-nav-label69').textContent;b.title=text;b.setAttribute('aria-label',text);}more.title=en()?'All pages':'همهٔ بخش‌ها';more.setAttribute('aria-label',more.title);
  if(!active)return;
  const current=w.VarnaUI.current();$('#currentPageTitle').textContent=pageNames[current]?.[en()?1:0]||current;
- label($('#tableBuild'),'ساخت جدول','Create table');label($('#sceneApply40'),'اعمال','Apply');label($('#applyWord39'),'اعمال حرکت','Apply motion');
+ const compactAction82=shell.dataset.panelShort71==='true'||shell.dataset.panelBand69==='compact';label($('#tableBuild'),compactAction82?'بساز':'ساخت جدول',compactAction82?'Build':'Create table');label($('#sceneApply40'),'اعمال','Apply');label($('#applyWord39'),compactAction82?'اعمال':'اعمال حرکت',compactAction82?'Apply':'Apply motion');$('#tableBuild').title=en()?'Create table':'ساخت جدول';$('#applyWord39').title=en()?'Apply motion':'اعمال حرکت';
  const roots=[...pages,statusPopup];
  for(const root of roots){const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;const nodes=[];while((n=walker.nextNode()))nodes.push(n);
   for(const node of nodes){const parent=node.parentElement;if(!parent||parent.closest('script,style,[data-label-fa69],[data-user-content],#tableEditor,#tablePreview,#sceneStage40,#scenePieces40 input,#scenePieceSelect45,#captionPicker40-kinetic,input,textarea,#brandShortcut,svg,bdi,.word-chips48,select[id*="font" i],#tableFontPS66,#cellFontPS'))continue;let text=node.nodeValue;if(!en())for(const [token,fa]of replacements)text=text.replace(new RegExp('\\b'+token+'\\b','g'),fa);if(text!==node.nodeValue)node.nodeValue=text;
@@ -104,7 +106,7 @@ function localize(){
   }
  }
  $('#currentPageEyebrow').title=en()?'Panel version':'نسخهٔ پنل';
- const badge=$('#livePreviewGlobal').closest('label').querySelector('span:last-child');label(badge,'پیش‌نمایش زندهٔ افتر','Live AE preview');
+ if(!document.documentElement.hasAttribute('data-ui77')){const badge=$('#livePreviewGlobal').closest('label').querySelector('span:last-child');label(badge,'پیش‌نمایش زندهٔ افتر','Live AE preview');}
  // Bidi isolation uses direction on controls and CSS isolate on UI values; project text is untouched.
  all('input[type=number],.numeric37-value,.numeric37-slider',document).forEach(e=>e.dir='ltr');
  if(active&&w.VarnaUI.current()==='table')syncEditor();

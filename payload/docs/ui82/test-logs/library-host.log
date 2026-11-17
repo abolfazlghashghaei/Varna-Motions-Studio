@@ -1,0 +1,1 @@
+PASS UI81 user-library host model: fixed catalog paths, lazy import, nested isolated copies/expression relinking, unchanged originals, draft preview cleanup, native title/gradient layers, transcript ownership isolation and original UI handler proxy. Actual AEP decoding/vendor binaries remain untested.

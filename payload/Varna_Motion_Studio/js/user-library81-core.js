@@ -7,7 +7,11 @@
   {id:'instagram-ui-100',fa:'۱۰۰ عنصر اجتماعی',en:'100 Social Elements',kind:'project',entry:'instagram-ui-100/Instagram Elements UI Pack.aep',count:100},
   {id:'saas-gradients-20',fa:'۲۰ پس‌زمینهٔ تکنولوژی',en:'20 SaaS Gradients',kind:'project',entry:'saas-gradients-20/After Effects/SaaS Gradients.aep',count:20},
   {id:'highlighter-2',fa:'هایلایتر اصلی',en:'Highlighter 2',kind:'script',entry:'highlighter-2/Highlighter.jsxbin',count:1},
-  {id:'atools-2.106',fa:'Amanow / ATools ۲٫۱۰۶',en:'Amanow / ATools 2.106',kind:'cep',entry:'atools-2.106/index.html',host:'atools-2.106/jsx/host.jsxbin',extensionId:'com.amanow.tools.panel',count:1}
+  {id:'atools-2.106',fa:'Amanow / ATools کامل ۲٫۱۰۶',en:'Amanow / ATools full 2.106',kind:'cep',entry:'atools-2.106/index.html',host:'atools-2.106/jsx/host.jsxbin',extensionId:'com.amanow.tools.panel',count:1},
+  {id:'neon-dj-subtitle',fa:'زیرنویس نئون و DJ Subtitle',en:'Neon & DJ Subtitle',kind:'project',entry:'neon-dj-subtitle/After Effects/Neon.aep',script:'neon-dj-subtitle/Script/DJ Subtitle.jsx',count:1},
+  {id:'light-leaks',fa:'ترنزیشن‌های نشت نور',en:'Light Leaks Transitions',kind:'project',entry:'light-leaks/Light Leaks Transitions/Light Leaks Transitions 25.x.aep',role:'transition',centerCut:true,collapse:true,footage:'light-leaks/Light Leaks Transitions/(Footage)',count:20},
+  {id:'paper-burn',fa:'ترنزیشن‌های سوختن کاغذ',en:'Paper Burn Transitions',kind:'project',entry:'paper-burn/Paper Burn Transitions/Paper Burn Transitions.aep',role:'transition',centerCut:false,footage:'paper-burn/Paper Burn Transitions/(Footage)',count:0},
+  {id:'holographic-foil',fa:'افکت فویل هولوگرافیک',en:'Holographic Foil',kind:'effect',entry:'holographic-foil/HolographicFoil.aex',effect:'foil82',count:1}
  ];
  var gradients=[
   ['azure','آبی تکنولوژی','Azure',['#07182E','#235BE8','#72DAFF']],['mint','نعنا','Mint',['#07332C','#25B58A','#B2FFE2']],

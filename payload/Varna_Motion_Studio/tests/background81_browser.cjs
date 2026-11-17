@@ -29,7 +29,7 @@ const {launch,measure,root}=require('./helpers/panel69.cjs');
  const queued=await p.evaluate(()=>({requests:queueRequests81,ids:queueIds81}));assert.equal(queued.requests.length,3,'rapid requested edits cannot be silently discarded');assert.deepEqual(queued.requests.map(r=>r.payload.groups[0].id),queued.ids);assert(queued.requests.every(r=>r.payload.allGroups67.length===12));assert.equal(await p.evaluate(()=>max81),1);
  // Native recipes remain usable without installing opaque vendor files.
  await p.evaluate(()=>VarnaUI.open('tools'));await p.waitForFunction(()=>document.querySelector('.library-status81').textContent.includes('نصب نیست'));
- assert.equal(await p.locator('.library-packs81 button:disabled').count(),7);assert.equal(await p.locator('.library-native81 select').first().locator('option').count(),3);
+ assert.equal(await p.locator('.library-packs81 button:disabled').count(),12);assert.equal(await p.locator('.library-native81 select').first().locator('option').count(),3);
  // Every mode of both workspaces uses the same strict geometry oracle.
  for(const width of [250,320,400,620,900,1400])for(const height of [400,700])for(const theme of ['dark','light'])for(const lang of ['fa','en']){
   await p.setViewportSize({width,height});await p.evaluate(({theme,lang})=>{const t=document.getElementById('uiTheme');t.value=theme;t.dispatchEvent(new Event('change',{bubbles:true}));VarnaI18n52.set(lang);},{theme,lang});

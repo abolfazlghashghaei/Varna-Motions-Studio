@@ -1,0 +1,1 @@
+PASS A68: 899 IDs per entry, AE-only scope, 22 pages in both themes with >=12px UI text and >=32px buttons, custom-palette AA token pairs, unchanged caption payload, English/RTL and the original font dialog. Native CEP is not exercised.

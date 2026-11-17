@@ -19,7 +19,21 @@ function create(req,options={}){
   const xml=entries.find(e=>e.path==='atools-2.106/CSXS/manifest.xml');if(!xml)throw Error('Missing CEP manifest');
   const sourceManifest=await checked(root,xml),sourceText=await fs.promises.readFile(sourceManifest,'utf8');
   if(!/ExtensionBundleId="com\.amanow\.tools"/.test(sourceText)||!/ExtensionBundleVersion="2\.106"/.test(sourceText))throw Error('Unexpected AmanowTools bundle identity');
-  try{const exists=await fs.promises.lstat(destination);if(exists.isSymbolicLink()||!exists.isDirectory())throw Error('Existing tool path is not a regular folder');const current=await fs.promises.readFile(path.join(destination,'CSXS','manifest.xml'),'utf8');if(!/ExtensionBundleId="com\.amanow\.tools"/.test(current))throw Error('Another extension owns this folder');return {installed:false,existing:true,destination,version:(current.match(/ExtensionBundleVersion="([^"]+)"/)||[])[1]||'unknown'};}catch(error){if(error.code!=='ENOENT')throw error;}
+  let previous=null;
+  async function managedUnchanged(marker){
+   if(marker.owner!=='VarnaLibrary81'||marker.bundle!=='com.amanow.tools'||!Array.isArray(marker.files)||!marker.files.length)return false;
+   const names=new Set(['.varna-library81-install.json']);
+   try{for(const entry of marker.files){if(!entry.path.startsWith('atools-2.106/'))return false;const local=relative(entry.path.slice('atools-2.106/'.length));names.add(local);await checked(destination,{...entry,path:local});}
+    let count=0;async function visit(folder,prefix=''){for(const item of await fs.promises.readdir(folder,{withFileTypes:true})){const local=prefix+item.name;if(item.isSymbolicLink())throw Error('Unmanaged link');if(item.isDirectory())await visit(path.join(folder,item.name),local+'/');else{if(!names.has(local))throw Error('Unmanaged file');count++;}}}await visit(destination);return count===names.size;
+   }catch(_){return false;}
+  }
+  try{const exists=await fs.promises.lstat(destination);if(exists.isSymbolicLink()||!exists.isDirectory())throw Error('Existing tool path is not a regular folder');const current=await fs.promises.readFile(path.join(destination,'CSXS','manifest.xml'),'utf8');if(!/ExtensionBundleId="com\.amanow\.tools"/.test(current))throw Error('Another extension owns this folder');
+   const retained={installed:false,existing:true,destination,version:(current.match(/ExtensionBundleVersion="([^"]+)"/)||[])[1]||'unknown'};
+   let marker;try{marker=JSON.parse(await fs.promises.readFile(path.join(destination,'.varna-library81-install.json'),'utf8'));}catch(_){return {...retained,repairBlocked:true};}
+   if(!await managedUnchanged(marker))return {...retained,repairBlocked:true};
+   const old=new Map(marker.files.map(e=>[e.path,e.sha256]));if(marker.files.length===entries.length&&entries.every(e=>old.get(e.path)===e.sha256))return retained;
+   previous=marker;
+  }catch(error){if(error.code!=='ENOENT')throw error;}
   const parent=path.dirname(destination);await fs.promises.mkdir(parent,{recursive:true});const stage=await fs.promises.mkdtemp(path.join(parent,'.varna-atools81-'));let published=false,bytes=0;
   const total=entries.reduce((n,e)=>n+e.bytes,0),started=Date.now();
   try{
@@ -28,8 +42,11 @@ function create(req,options={}){
     if(await digest(target)!==e.sha256)throw Error('Copied tool checksum mismatch');bytes+=e.bytes;progress({files:i+1,totalFiles:entries.length,bytes,totalBytes:total,bytesPerSecond:bytes/Math.max(.001,(Date.now()-started)/1000)});
    }
    await fs.promises.writeFile(path.join(stage,'.varna-library81-install.json'),JSON.stringify({owner:'VarnaLibrary81',bundle:'com.amanow.tools',version:'2.106',files:entries},null,2));
-   try{await fs.promises.lstat(destination);throw Error('Tool destination appeared during installation; nothing was replaced');}catch(error){if(error.code!=='ENOENT')throw error;}
-   await fs.promises.rename(stage,destination);published=true;return {installed:true,destination,files:entries.length,bytes,restartAdobe:true};
+   let backup=null;
+   if(previous){if(!await managedUnchanged(previous))throw Error('Installed tool changed during preparation; existing files retained');backup=stage+'.previous';await fs.promises.rename(destination,backup);}
+   else try{await fs.promises.lstat(destination);throw Error('Tool destination appeared during installation; nothing was replaced');}catch(error){if(error.code!=='ENOENT')throw error;}
+   try{await fs.promises.rename(stage,destination);published=true;}catch(error){if(backup)await fs.promises.rename(backup,destination);throw error;}
+   return {installed:true,updated:!!previous,backup,destination,files:entries.length,bytes,restartAdobe:true};
   }finally{if(!published){if(fs.promises.rm)await fs.promises.rm(stage,{recursive:true,force:true});else await fs.promises.rmdir(stage,{recursive:true});}}
  }
  return {installAtools,registry};

@@ -2689,7 +2689,11 @@ var VarnaUserLibrary81=/* Private-library routing and original native recipes. V
   {id:'instagram-ui-100',fa:'۱۰۰ عنصر اجتماعی',en:'100 Social Elements',kind:'project',entry:'instagram-ui-100/Instagram Elements UI Pack.aep',count:100},
   {id:'saas-gradients-20',fa:'۲۰ پس‌زمینهٔ تکنولوژی',en:'20 SaaS Gradients',kind:'project',entry:'saas-gradients-20/After Effects/SaaS Gradients.aep',count:20},
   {id:'highlighter-2',fa:'هایلایتر اصلی',en:'Highlighter 2',kind:'script',entry:'highlighter-2/Highlighter.jsxbin',count:1},
-  {id:'atools-2.106',fa:'Amanow / ATools ۲٫۱۰۶',en:'Amanow / ATools 2.106',kind:'cep',entry:'atools-2.106/index.html',host:'atools-2.106/jsx/host.jsxbin',extensionId:'com.amanow.tools.panel',count:1}
+  {id:'atools-2.106',fa:'Amanow / ATools کامل ۲٫۱۰۶',en:'Amanow / ATools full 2.106',kind:'cep',entry:'atools-2.106/index.html',host:'atools-2.106/jsx/host.jsxbin',extensionId:'com.amanow.tools.panel',count:1},
+  {id:'neon-dj-subtitle',fa:'زیرنویس نئون و DJ Subtitle',en:'Neon & DJ Subtitle',kind:'project',entry:'neon-dj-subtitle/After Effects/Neon.aep',script:'neon-dj-subtitle/Script/DJ Subtitle.jsx',count:1},
+  {id:'light-leaks',fa:'ترنزیشن‌های نشت نور',en:'Light Leaks Transitions',kind:'project',entry:'light-leaks/Light Leaks Transitions/Light Leaks Transitions 25.x.aep',role:'transition',centerCut:true,collapse:true,footage:'light-leaks/Light Leaks Transitions/(Footage)',count:20},
+  {id:'paper-burn',fa:'ترنزیشن‌های سوختن کاغذ',en:'Paper Burn Transitions',kind:'project',entry:'paper-burn/Paper Burn Transitions/Paper Burn Transitions.aep',role:'transition',centerCut:false,footage:'paper-burn/Paper Burn Transitions/(Footage)',count:0},
+  {id:'holographic-foil',fa:'افکت فویل هولوگرافیک',en:'Holographic Foil',kind:'effect',entry:'holographic-foil/HolographicFoil.aex',effect:'foil82',count:1}
  ];
  var gradients=[
   ['azure','آبی تکنولوژی','Azure',['#07182E','#235BE8','#72DAFF']],['mint','نعنا','Mint',['#07332C','#25B58A','#B2FFE2']],
@@ -2801,7 +2805,8 @@ GHAFHost._backgroundMotion81=function(shape,bg){
 /* USER_LIBRARY81_HOST_BEGIN */
 /* User assets stay private. All paths come from the fixed catalog, never code
    supplied by the UI. Originals are imported once; placed graphs are isolated. */
-GHAFHost._libraryRevision81=1;
+GHAFHost._libraryRevision81=2;
+GHAFHost._vendorEffectNames.foil82='Holographic Foil';
 GHAFHost._libraryRoot81=function(){
  var bundled=new Folder(File(GHAFHost._filePath).parent.parent.fsName+'/assets/user-library81');
  if(new File(bundled.fsName+'/USER_LIBRARY81.json').exists)return bundled;
@@ -2815,8 +2820,18 @@ GHAFHost._libraryFile81=function(spec){
 GHAFHost.library81Status=function(){try{
  var root=GHAFHost._libraryRoot81(),packs=VarnaUserLibrary81.packs(),out=[];
  for(var i=0;i<packs.length;i++){var p=packs[i],entry=p.kind==='lower'?VarnaUserLibrary81.asset('lower-001').entry:p.entry;out.push({id:p.id,available:new File(root.fsName+'/'+entry).exists});}
- return GHAFHost._ok({root:root.fsName,privateLibrary:new File(root.fsName+'/USER_LIBRARY81.json').exists,packs:out});
+ var foil=false;try{for(var j=0;j<(app.effects||[]).length;j++)if(String(app.effects[j].displayName)==='Holographic Foil')foil=true;}catch(ignore){}
+ return GHAFHost._ok({root:root.fsName,privateLibrary:new File(root.fsName+'/USER_LIBRARY81.json').exists,packs:out,installedEffects:{foil82:foil}});
 }catch(e){return GHAFHost._err(String(e));}};
+// Relink only missing imported footage, using unique filenames inside the fixed
+// pack's own Footage directory. Never search a disk or change existing items.
+GHAFHost._libraryRelink82=function(spec,items){
+ if(!spec.footage)return;var base=new Folder(GHAFHost._libraryRoot81().fsName+'/'+spec.footage),byName={},visited=0,missing=[];
+ function scan(folder,depth){if(depth>12||folder.alias)return;var files=folder.getFiles();for(var i=0;i<files.length;i++){if(++visited>1200)throw Error('تعداد فایل‌های رسانهٔ قالب بیش از حد است.');var f=files[i];if(f.alias)continue;if(f instanceof Folder)scan(f,depth+1);else{var key=String(f.name).toLowerCase();if(!byName[key])byName[key]=[];byName[key].push(f);}}}
+ if(base.exists)scan(base,0);
+ for(var i=0;i<items.length;i++){var item=items[i];if(!(item instanceof FootageItem)||!item.file||!(item.footageMissing===true||!item.file.exists))continue;var list=byName[String(item.file.name).toLowerCase()]||[];if(list.length===1&&typeof item.replace==='function')item.replace(list[0]);else missing.push(String(item.file.name));}
+ if(missing.length)throw Error('رسانهٔ قالب پیدا نشد یا نام تکراری دارد: '+missing.slice(0,5).join(', ')+'؛ پوشهٔ اصلی Footage را کامل نصب کن.');
+};
 GHAFHost._libraryTag81=function(id){return 'VARNA_TEMPLATE38_ASSET:user81:'+id;};
 GHAFHost._libraryComp81=function(id,compId){
  var tag=GHAFHost._libraryTag81(id);for(var i=1;i<=app.project.numItems;i++){var item=app.project.item(i);if(item instanceof CompItem&&Number(item.id)===Number(compId)&&String(item.comment||'').split('\n')[0]===tag)return item;}
@@ -2831,18 +2846,20 @@ GHAFHost.library81Import=function(encoded){
  app.beginUndoGroup('Varna Import User Library');try{
   if(!existing.length){var file=GHAFHost._libraryFile81(spec);app.project.importFile(new ImportOptions(file));
    for(i=1;i<=app.project.numItems;i++){item=app.project.item(i);if(before['I'+item.id])continue;created.push(item);item.comment=tag+'\nVARNA_USER_LIBRARY81:'+spec.id;if(item instanceof CompItem)existing.push(item);}
+   GHAFHost._libraryRelink82(spec,created);
    if(!existing.length)throw Error('کامپوزیشن قابل استفاده‌ای در این فایل پیدا نشد.');
   }
   var list=[];for(i=0;i<existing.length;i++){item=existing[i];list.push({id:item.id,name:item.name,width:item.width,height:item.height,duration:item.duration});}
   list.sort(function(a,b){var am=/^(hook|lower third|gradient|instagram|social)/i.test(a.name)?0:1,bm=/^(hook|lower third|gradient|instagram|social)/i.test(b.name)?0:1;return am-bm||a.name.localeCompare(b.name);});
   return GHAFHost._ok({asset:spec.id,comps:list,destinationId:GHAFHost._libraryDestination81?GHAFHost._libraryDestination81.id:null});
- }catch(e){for(var pass=0;pass<3;pass++)for(i=created.length-1;i>=0;i--)try{if(created[i]&&(!(created[i] instanceof CompItem)||created[i].usedIn.length===0)){created[i].remove();created[i]=null;}}catch(ignore){}return GHAFHost._err(String(e));}finally{app.endUndoGroup();}
+ }catch(e){created=[];for(i=1;i<=app.project.numItems;i++){item=app.project.item(i);if(!before['I'+item.id])created.push(item);}for(var pass=0;pass<3;pass++)for(i=created.length-1;i>=0;i--)try{if(created[i]&&(!(created[i] instanceof CompItem)||created[i].usedIn.length===0)){created[i].remove();created[i]=null;}}catch(ignore){}return GHAFHost._err(String(e));}finally{app.endUndoGroup();}
 };
 GHAFHost.library81Describe=function(encoded){try{var p=GHAFHost._parse(encoded),comp=GHAFHost._libraryComp81(String(p.id),p.compId),info=GHAFHost._templateInventory38(comp);return GHAFHost._ok({compId:comp.id,name:comp.name,width:comp.width,height:comp.height,duration:comp.duration,slots:info.slots,controls:info.controls});}catch(e){return GHAFHost._err(String(e));}};
 GHAFHost._libraryTarget81=function(){var c=GHAFHost._activeComp();if(c&&String(c.comment||'').indexOf('VARNA_TEMPLATE38_ASSET:')!==0&&String(c.comment||'').indexOf('VARNA_LIBRARY81_INSTANCE:')!==0)return c;return GHAFHost._libraryDestination81||null;};
 GHAFHost.library81Place=function(encoded){
  var p=GHAFHost._parse(encoded),created=[],layer=null,c=GHAFHost._libraryTarget81();if(!c&&!p.previewOnly)return GHAFHost._err('ابتدا کامپوزیشن مقصد را در افتر فعال کن.');
  app.beginUndoGroup('Varna Place User Design');try{
+  var spec=VarnaUserLibrary81.asset(String(p.id));if(!spec||spec.kind!=='project')throw Error('یک قالب پروژهٔ معتبر انتخاب کن.');
   var source=GHAFHost._libraryComp81(String(p.id),p.compId),copy=GHAFHost._cloneTemplate38(source,'user81',created),slots=p.slots||[],settings=p.controls||[];
   if(slots.length>240||settings.length>400)throw Error('تعداد تغییرات قالب بیش از حد است.');
   for(var i=0;i<slots.length;i++){
@@ -2854,9 +2871,13 @@ GHAFHost.library81Place=function(encoded){
   GHAFHost._validateTemplate38(copy,source.name);
   for(i=0;i<created.length;i++)created[i].comment='VARNA_LIBRARY81_INSTANCE:'+String(copy.id);
   if(p.previewOnly){var preview=GHAFJSON.parse(GHAFHost.renderTableFrame50(encodeURIComponent(GHAFJSON.stringify({compId:copy.id,time:Math.max(0,Math.min(copy.duration-copy.frameDuration,Number(p.time)||copy.duration*.4)),folder:p.folder,mode:'full'}))));if(!preview.ok)throw Error(preview.error);GHAFHost._cleanTemplateCopies38(created);return GHAFHost._ok(preview.data);}
-  var start=Math.max(0,Number(c.time)||0),duration=Number(p.duration)||copy.duration;if(!isFinite(duration)||duration<=0||start>=c.duration)throw Error('زمان طرح خارج از کامپوزیشن مقصد است.');duration=Math.min(duration,c.duration-start);
+  var start=Math.max(0,Number(c.time)||0),duration=Number(p.duration)||copy.duration;
+  if(spec.role==='transition'){duration=copy.duration;if(p.centerCut===true)start-=duration/2;if(start<0||start+duration>c.duration)throw Error('برای ترنزیشن کامل، نشانگر زمان را دورتر از ابتدا یا پایان کامپوزیشن قرار بده.');}
+  if(!isFinite(duration)||duration<=0||start>=c.duration)throw Error('زمان طرح خارج از کامپوزیشن مقصد است.');duration=Math.min(duration,c.duration-start);
   layer=c.layers.add(copy);layer.name='VARNA DESIGN · '+source.name;layer.comment='VARNA_LIBRARY81_LAYER:'+String(p.id);layer.startTime=start;layer.stretch=duration/copy.duration*100;layer.inPoint=start;layer.outPoint=start+duration;
-  var tr=layer.property('ADBE Transform Group'),scale=Math.min(c.width/copy.width,c.height/copy.height)*100;tr.property('ADBE Scale').setValue([scale,scale]);tr.property('ADBE Position').setValue([c.width/2,c.height/2]);
+  var tr=layer.property('ADBE Transform Group'),scale=Math.min(c.width/copy.width,c.height/copy.height)*100;
+  if(spec.role==='transition'){if(Math.abs(c.width-copy.width)>.5||Math.abs(c.height-copy.height)>.5)throw Error('فرمت ترنزیشن را مطابق اندازهٔ کامپوزیشن انتخاب کن؛ تغییر خودکار اندازهٔ قالب انجام نمی‌شود.');scale=100;if(spec.collapse)layer.collapseTransformation=true;if(p.muteTransition===true)layer.audioEnabled=false;}
+  tr.property('ADBE Scale').setValue([scale,scale]);tr.property('ADBE Position').setValue([c.width/2,c.height/2]);
   return GHAFHost._ok({layer:layer.name,compId:c.id,editableCompId:copy.id,duration:duration,isolated:true});
  }catch(e){if(layer)try{layer.remove();}catch(ignore){}GHAFHost._cleanTemplateCopies38(created);return GHAFHost._err(String(e));}finally{app.endUndoGroup();}
 };
@@ -2909,12 +2930,12 @@ GHAFHost.library81Highlight=function(encoded){
 (function(){
  var load=GHAFHost.loadEmbeddedHost,init=GHAFHost.initScriptTool;
  GHAFHost.loadEmbeddedHost=function(encoded){var p=GHAFHost._parse(encoded);if(p.tool!=='atools81')return load(encoded);try{GHAFHost._embeddedLoaded=GHAFHost._embeddedLoaded||{};if(!GHAFHost._embeddedLoaded.atools81){var spec=VarnaUserLibrary81.pack('atools-2.106');$.evalFile(GHAFHost._libraryFile81({entry:spec.host}));GHAFHost._embeddedLoaded.atools81=true;}return GHAFHost._ok({loaded:true});}catch(e){return GHAFHost._err(String(e));}};
- GHAFHost.initScriptTool=function(encoded){var p=GHAFHost._parse(encoded);if(p.tool!=='highlighter81')return init(encoded);try{
-  var root=GHAFHost._scriptUIs.highlighter81;if(!root){var result=$.evalFile(GHAFHost._libraryFile81(VarnaUserLibrary81.pack('highlighter-2')));if(result&&result.children)root=result;
-   var names=['Highlighter','Highlighter v2.0','Highlighter 2.0','Highlighter - v2.0'];for(var i=0;i<names.length&&!root;i++)root=Window.find('palette',names[i]);
-   if(!root||!root.children)return GHAFHost._ok({tool:'highlighter81',controls:[],external:true,note:'پنجرهٔ اصلی Highlighter اجرا شد؛ کنترل قابل اتصال پیدا نشد. پنجرهٔ ابزار را در افتر بررسی کن.'});
-   root.hide();GHAFHost._scriptUIs.highlighter81=root;
-  }return GHAFHost._ok(GHAFHost._scriptUITree('highlighter81',root));
+ GHAFHost.initScriptTool=function(encoded){var p=GHAFHost._parse(encoded);if(p.tool!=='highlighter81'&&p.tool!=='dj82')return init(encoded);try{
+  var root=GHAFHost._scriptUIs[p.tool];if(!root){var spec=p.tool==='dj82'?{entry:VarnaUserLibrary81.pack('neon-dj-subtitle').script}:VarnaUserLibrary81.pack('highlighter-2'),result=$.evalFile(GHAFHost._libraryFile81(spec));if(result&&result.children)root=result;
+   var names=p.tool==='dj82'?['DJ Subtitle','DJ Subtitle 1.0','DJ Subtitle v1.0']:['Highlighter','Highlighter v2.0','Highlighter 2.0','Highlighter - v2.0'];for(var i=0;i<names.length&&!root;i++)root=Window.find('palette',names[i]);
+   if(!root||!root.children)return GHAFHost._ok({tool:p.tool,controls:[],external:true,note:'پنجرهٔ اصلی ابزار اجرا شد؛ کنترل قابل اتصال پیدا نشد. پنجرهٔ ابزار را در افتر بررسی کن.'});
+   root.hide();GHAFHost._scriptUIs[p.tool]=root;
+  }return GHAFHost._ok(GHAFHost._scriptUITree(p.tool,root));
  }catch(e){return GHAFHost._err(String(e));}};
 })();
 /* USER_LIBRARY81_HOST_END */

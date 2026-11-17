@@ -1,0 +1,2 @@
+PASS supplied original Amanow: verified 74-file to 3948-file managed upgrade without executing vendor code.
+PASS UI82 managed Amanow repair: stage/check/backup upgrade adds media, retains recoverable old bundle, repeated install reuses it, and user-modified files block replacement.
