@@ -33,6 +33,13 @@ function inspect(){
    const metrics=await p.evaluate(inspect);report.cases++;if(metrics.bad.length)report.failures.push({width,height,scale,theme,lang,...metrics});
    assert(await p.evaluate(()=>controls80.every(n=>n===document.getElementById(n.id))),'original controls must retain identity');
   }
+  // UI83: a narrow, normally tall panel must offer a usable editor, not a tiny strip.
+  await p.setViewportSize({width:250,height:700});await p.evaluate(()=>VarnaTextWorkspace80.layout());
+  const normal83=await p.locator('#reviewText').boundingBox();assert(normal83.height>=112,'narrow editor reserves useful height');
+  assert.equal(await p.locator('#reviewText').evaluate(n=>getComputedStyle(n).overflowY),'auto');
+  assert(await p.locator('#text55-enabled').isVisible(),'offline correction stays beside the editor when there is room');
+  await p.locator('[data-text-grow83]').click();const larger83=await p.locator('#reviewText').boundingBox();assert(larger83.height>normal83.height,'expand control really enlarges the editor');
+  await p.locator('[data-text-grow83]').click();
   await p.setViewportSize({width:890,height:580});await p.evaluate(()=>VarnaI18n52.set('fa'));await p.locator('.caption-row').nth(44).click();
   const before=await p.locator('#captionList').evaluate(n=>n.scrollTop);
   await p.locator('#reviewText').fill('helo world');await p.locator('#reviewText').press('End');await p.locator('#reviewText').press('!');
@@ -55,4 +62,4 @@ function inspect(){
   await context.close();
  }
  assert.deepEqual(report.failures,[]);assert.deepEqual(report.errors,[]);console.log('PASS UI80: '+report.cases+' long-transcript layouts, persistent editor, stable scrolling/caret, real offline worker/apply/off, original control identity, settings focus and word extraction.');
-}finally{fs.mkdirSync(path.resolve(root,'../docs/ui80'),{recursive:true});fs.writeFileSync(path.resolve(root,'../docs/ui80/text-workspace.json'),JSON.stringify(report,null,2)+'\n');await h.close();}})().catch(e=>{console.error(e);process.exitCode=1});
+}finally{fs.mkdirSync(path.resolve(root,'../docs/ui80'),{recursive:true});fs.writeFileSync(path.resolve(root,'../docs/ui83/text-workspace.json'),JSON.stringify(report,null,2)+'\n');await h.close();}})().catch(e=>{console.error(e);process.exitCode=1});

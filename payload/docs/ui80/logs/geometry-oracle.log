@@ -1,1 +1,0 @@
-PASS UI80 geometry oracle: scroll-clipped false overlap excluded; actual overlap, text clipping, small fonts and small targets still rejected.

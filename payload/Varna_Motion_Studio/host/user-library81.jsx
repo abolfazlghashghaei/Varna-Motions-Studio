@@ -1,6 +1,6 @@
 /* User assets stay private. All paths come from the fixed catalog, never code
    supplied by the UI. Originals are imported once; placed graphs are isolated. */
-GHAFHost._libraryRevision81=2;
+GHAFHost._libraryRevision81=3;
 GHAFHost._vendorEffectNames.foil82='Holographic Foil';
 GHAFHost._libraryRoot81=function(){
  var bundled=new Folder(File(GHAFHost._filePath).parent.parent.fsName+'/assets/user-library81');
@@ -16,7 +16,11 @@ GHAFHost.library81Status=function(){try{
  var root=GHAFHost._libraryRoot81(),packs=VarnaUserLibrary81.packs(),out=[];
  for(var i=0;i<packs.length;i++){var p=packs[i],entry=p.kind==='lower'?VarnaUserLibrary81.asset('lower-001').entry:p.entry;out.push({id:p.id,available:new File(root.fsName+'/'+entry).exists});}
  var foil=false;try{for(var j=0;j<(app.effects||[]).length;j++)if(String(app.effects[j].displayName)==='Holographic Foil')foil=true;}catch(ignore){}
- return GHAFHost._ok({root:root.fsName,privateLibrary:new File(root.fsName+'/USER_LIBRARY81.json').exists,packs:out,installedEffects:{foil82:foil}});
+ var vendor='',tools=[],definitions=[['orb','Orb Reactor/com.anas.orbreactor/client/index.html','Orb Reactor/com.anas.orbreactor/host/index.jsx'],['writetyper','WriteTyper/WriteTyper.jsxbin',''],['glassary','Glassary/Glassary-ScriptUI/Glassary.jsxbin',''],['cuttana','CuttanaNir3/CuttanaNir.jsxbin',''],['smart','Smart Captions Engine/01. Smart Captions Engine/Smart Captions Engine.aep','']];
+ try{vendor=File(GHAFHost._filePath).parent.parent.fsName+'/assets/vendor/';}catch(ignorePath){}
+ for(j=0;j<definitions.length;j++){var tool=definitions[j],present=!!vendor&&new File(vendor+tool[1]).exists&&(!tool[2]||new File(vendor+tool[2]).exists);tools.push({id:tool[0],available:present});}
+ var capabilities={},methods=['library81Import','library81Describe','library81Place','library81Preview','library81NativeTitle','library81Gradient','library81Highlight','vendorEffectSchema','applyVendorValues','refreshCaptionStyles','initScriptTool','loadEmbeddedHost','prepareSmartTemplates'];for(j=0;j<methods.length;j++)capabilities[methods[j]]=typeof GHAFHost[methods[j]]==='function';
+ return GHAFHost._ok({root:root.fsName,privateLibrary:new File(root.fsName+'/USER_LIBRARY81.json').exists,packs:out,installedEffects:{foil82:foil},tools83:tools,capabilities83:capabilities});
 }catch(e){return GHAFHost._err(String(e));}};
 // Relink only missing imported footage, using unique filenames inside the fixed
 // pack's own Footage directory. Never search a disk or change existing items.

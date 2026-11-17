@@ -1,0 +1,14 @@
+{
+  "before": {
+    "cssFiles": 36,
+    "importantInLoadedCss": 3355,
+    "staticIDs": 899,
+    "newStyleSheets": 0
+  },
+  "after": {
+    "cssFiles": 36,
+    "importantInLoadedCss": 3354,
+    "staticIDs": 899,
+    "newStyleSheets": 0
+  }
+}

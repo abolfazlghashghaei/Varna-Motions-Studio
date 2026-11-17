@@ -438,18 +438,27 @@
   previewPower82.className = 'preview-power82'; previewPower82.setAttribute('aria-hidden','true');
   previewPower82.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v8m-5.7-5a8 8 0 1 0 11.4 0"/></svg>';
   previewText82.className = 'preview-label82'; previewText82.setAttribute('aria-hidden','true');
-  actions.append(previewToggle82);
+  // UI83: preview power, refresh and settings share the non-scrolling header.
+  const previewHeader83=element('div','preview-header83'),previewRefresh83=$('#btnRefreshPreview'),previewMode83=$('#livePreviewMode').closest('label');
+  previewHeader83.setAttribute('role','group');previewHeader83.setAttribute('aria-label',text('پیش‌نمایش و تنظیمات','Preview & settings'));
+  previewRefresh83.classList.remove('quick-btn');previewRefresh83.classList.add('preview-refresh83');
+  previewRefresh83.replaceChildren(icon('rotate-ccw'));previewRefresh83.title=text('به‌روزرسانی پیش‌نمایش','Refresh preview');previewRefresh83.setAttribute('aria-label',previewRefresh83.title);
+  const previewSettings83=element('section','preview-settings83');previewSettings83.append(label(element('b'),'تنظیم پیش‌نمایش','Preview settings'),previewMode83);
+  $('#headerOptions .header-options-panel').prepend(previewSettings83);
+  $('#headerOptions').before(previewHeader83);previewHeader83.append(previewToggle82,previewRefresh83,$('#headerOptions'));
   function previewState82() {
     const enabled=previewInput82.checked, title=text('پیش‌نمایش زندهٔ افتر؛ '+(enabled?'روشن است، برای خاموش‌کردن بزن':'خاموش است، برای روشن‌کردن بزن'),'Live AE preview; '+(enabled?'on, click to turn off':'off, click to turn on'));
     attr(previewToggle82,'title',title); attr(previewInput82,'aria-label',text('پیش‌نمایش زندهٔ افتر','Live AE preview'));
     const value=text(enabled?'پیش‌نمایش روشن':'پیش‌نمایش خاموش',enabled?'Preview on':'Preview off');
     if(previewText82.textContent!==value)previewText82.textContent=value;
+    const busy=!!w.GHAFBridge.outputBusy;if(previewInput82.disabled!==busy)previewInput82.disabled=busy;if(previewRefresh83.disabled!==busy)previewRefresh83.disabled=busy;
+    previewRefresh83.title=text('به‌روزرسانی پیش‌نمایش','Refresh preview');previewRefresh83.setAttribute('aria-label',previewRefresh83.title);
   }
   previewInput82.addEventListener('change',previewState82);
   const pageStatus = element('p', 'hint'); pageStatus.dataset.flowStatus77 = 'true'; pageStatus.setAttribute('role', 'status');
   $('.flat-status-popup69').append(pageStatus);
   const primaryActions = {
-    home: () => openCatalog(), tools: () => { toolLibrary.scrollIntoView({block: 'nearest'}); $('button', toolLibrary).focus(); },
+    home: () => openCatalog(), tools: () => { if(w.VarnaFeatureHub83)return w.VarnaFeatureHub83.primary();toolLibrary.scrollIntoView({block: 'nearest'}); $('button', toolLibrary).focus(); },
     settings: () => { w.VarnaUI.reveal($('#themePreset50')); $('#themePreset50').focus(); }
   };
   proxy.onclick = () => {
@@ -468,7 +477,7 @@
   function actionState() {
     previewState82();
     if (['table', 'kinetic'].includes(w.VarnaUI.current())) { if (proxy.isConnected) proxy.remove(); pageStatus.hidden = true; return; }
-    const name = w.VarnaUI.current(), id = pages[name]?.[5]; primary = id ? document.getElementById(id) : null;
+    const name = w.VarnaUI.current(), feature=name==='tools'&&w.VarnaFeatureHub83?.action(), id = pages[name]?.[5]; primary = feature?.button || (id ? document.getElementById(id) : null);
     pageStatus.hidden = false;
     const statusIds = {audio:'modelStatus',text:'sentenceStatus66',motion:'motionDraftStatus',templates:'templateStatus38',bg:'bgEngineStatus',sfx:'sfxAnalysisDetail',music:'cueStatus50',brand:'brandSummary',ai:'localAIStatus',translate:'translateStatus',director:'brainStatus',resources:'resourceSummary',output:'output35Status'};
     const status = document.getElementById(statusIds[name])?.textContent.trim() || text(pages[name][3], pages[name][4]);
@@ -477,11 +486,11 @@
       const titles = {audio:['ساخت زیرنویس','Transcribe'],text:['پیش‌نمایش در افتر','Preview in After Effects'],motion:['اعمال موشن','Apply motion'],templates:['اعمال و ساخت استایل','Apply & build style'],bg:['پیش‌نمایش در افتر','Preview in After Effects'],sfx:['پیشنهاد صداها','Suggest sounds'],music:['ساخت بازه‌های صدا','Generate audio cues'],brand:['اعمال برند','Apply brand'],safe:['اعمال محدودهٔ امن','Apply safe area'],ai:['پیشنهاد اصلاح‌ها','Suggest corrections'],keywords:['پیشنهاد کلمات مهم','Suggest keywords'],translate:['ساخت ترجمه','Translate'],easing49:['اعمال منحنی','Apply curve'],director:['ساخت پیشنهاد','Create plan'],assistant49:['تولید کد','Generate code'],resources:['بررسی مسیرها','Check paths'],output:['ساخت در افتر','Build in After Effects']};
       const short = shell.dataset.panelShort71 === 'true'||shell.dataset.size==='compact';
       const brief = {text:['نمایش','Preview'],bg:['نمایش','Preview'],motion:['اعمال','Apply'],brand:['اعمال','Apply'],safe:['اعمال','Apply'],easing49:['اعمال','Apply'],translate:['ترجمه','Send'],resources:['بررسی','Check'],ai:['بررسی','Review'],keywords:['پیشنهاد','Review'],sfx:['پیشنهاد','Review']};
-      const value = short ? text(...(brief[name] || ['بساز','Build'])) : text(...(titles[name] || [primary.textContent.trim(), primary.textContent.trim()]));
-      if (proxy.textContent !== value) proxy.textContent = value; proxy.title = primary.textContent.trim();
-      if(proxy.disabled!==primary.disabled)proxy.disabled=primary.disabled; attr(proxy,'data-target77',primary.id);
+      const value = feature?feature.label:short ? text(...(brief[name] || ['بساز','Build'])) : text(...(titles[name] || [primary.textContent.trim(), primary.textContent.trim()]));
+      if (proxy.textContent !== value) proxy.textContent = value; proxy.title = primary.getAttribute('aria-label')||primary.title||primary.textContent.trim();
+      const disabled=primary.disabled||!!feature?.disabled;if(proxy.disabled!==disabled)proxy.disabled=disabled; attr(proxy,'data-target77',primary.id);
     } else {
-      const value = (shell.dataset.panelShort71 === 'true'||shell.dataset.size==='compact') ? text('ابزارها', 'Tools') : name === 'home' ? text('همهٔ ابزارها', 'All tools') : name === 'settings' ? text('تنظیم رنگ و ظاهر', 'Adjust appearance') : text('انتخاب ابزار', 'Choose a tool');
+      const value = (shell.dataset.panelShort71 === 'true'||shell.dataset.size==='compact') ? text('ابزارها', 'Tools') : name === 'home' ? text('همهٔ ابزارها', 'All tools') : name === 'settings' ? text('تنظیم رنگ و ظاهر', 'Adjust appearance') : text('جست‌وجوی ابزارها', 'Find tools');
       if(proxy.textContent!==value)proxy.textContent=value;
       if(proxy.disabled!==!primaryActions[name])proxy.disabled=!primaryActions[name]; if(proxy.hasAttribute('data-target77'))delete proxy.dataset.target77;
     }
@@ -500,13 +509,16 @@
   function sync() {
     scheduled = 0; syncCount78++;
     const current = w.VarnaUI.current(), info = pages[current]; if (!info) return;
-    const headerParent = shell.dataset.panelShort71 === 'true' ? $('#headerOptions .header-options-panel') : $('.topbar');
+    const compactHeader83=shell.dataset.panelShort71==='true'||shell.dataset.size==='compact';
+    const headerParent = compactHeader83 ? $('#headerOptions .header-options-panel') : $('.topbar');
     for (const n of [language, undo]) if (n && n.parentElement !== headerParent) headerParent.append(n);
+    const refreshParent83=shell.dataset.panelMicro69==='true'?previewSettings83:previewHeader83;
+    if(previewRefresh83.parentElement!==refreshParent83)refreshParent83.insertBefore(previewRefresh83,refreshParent83===previewHeader83?$('#headerOptions'):null);
     // Only stale navigation classes are cleared; conditionally hidden controls remain hidden.
     const active = $('#page-' + current);
     all('.production-hidden47,.workspace-paged67,.table-paged-out66', active).forEach(n => n.classList.remove('production-hidden47', 'workspace-paged67', 'table-paged-out66'));
     if (current !== 'kinetic') all('.workflow-tab-hidden', active).forEach(n => n.classList.remove('workflow-tab-hidden'));
-    const heading = $('#currentPageTitle'); if (heading.textContent !== text(info[0], info[1])) heading.textContent = text(info[0], info[1]);
+    const heading = $('#currentPageTitle'),headingValue=current==='tools'&&w.VarnaFeatureHub83?.title()||text(info[0],info[1]);if(heading.textContent!==headingValue)heading.textContent=headingValue;
     if(language78!==String(en())) {
       language78=String(en());
       for (const n of all('[data-fa77]')) { const value = en() ? n.dataset.en77 : n.dataset.fa77; if (n.textContent !== value) n.textContent = value; }
@@ -523,6 +535,7 @@
   function schedule() { if (!scheduled) scheduled = requestAnimationFrame(sync); }
   document.addEventListener('varna:page', schedule);
   document.addEventListener('varna:language52', schedule);
+  document.addEventListener('varna:feature83', actionState);
   // Observe only real primary actions/status. Numeric widgets and animated previews
   // mutate their own DOM; those updates must not rebuild the rail every frame.
   for(const info of Object.values(pages))if(info[5]){const n=document.getElementById(info[5]);if(n)new MutationObserver(actionState).observe(n,{attributes:true,attributeFilter:['disabled']});}

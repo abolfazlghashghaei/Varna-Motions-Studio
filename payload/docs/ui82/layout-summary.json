@@ -1,8 +1,0 @@
-{
-  "cases": 6336,
-  "failures": 0,
-  "minContentRatio": 0.6514286000000001,
-  "nativeCEP": false,
-  "browser": "154.0.8037.57",
-  "profile": "chromium99-disabled"
-}

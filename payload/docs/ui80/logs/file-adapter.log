@@ -1,1 +1,0 @@
-PASS file-based asset adapter: real Blob worker, simulated CEP fs transport, Persian auto-normalization/caret/timing, independent suggestions/Finglish switches, disabled normalization and no HTTP traffic. Native Adobe/file navigation is not executed; a file base URL exercises the fs loader.

@@ -1,1 +1,0 @@
-PASS UI82 extraction: safe Unicode files, inert scripts, rejected traversal/absolute/case-collision/symlink entries and bounded unpack size.

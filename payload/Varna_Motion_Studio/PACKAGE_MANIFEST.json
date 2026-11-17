@@ -14693,8 +14693,8 @@
     },
     {
       "path": "css/standardization-ui.css",
-      "bytes": 19899,
-      "sha256": "7dbec5e5598f6593e497de37e36351f640afdddaa14eb4fe7a1d9f235a263789"
+      "bytes": 19947,
+      "sha256": "7bbc1c5478e187499364d3b80fa85e3df1b5914e447544e08e1aeacef6bd7554"
     },
     {
       "path": "css/studio28.css",
@@ -14753,13 +14753,13 @@
     },
     {
       "path": "css/ui/flow77.css",
-      "bytes": 46354,
-      "sha256": "2a1b00c5847e65e730b11481037b1525a5f2a313ef1a9f2ea0d9bc70440c64fa"
+      "bytes": 51691,
+      "sha256": "c3403bb94a711cd046a764a8015fa9df4852c3eb420652d2586f269e0ca4a70a"
     },
     {
       "path": "css/ui/pilot-b69.css",
-      "bytes": 22044,
-      "sha256": "5e850cbc5dd5112bc6f9a7485999d6d98ecc105fa01ba76e027a1005606c001e"
+      "bytes": 22279,
+      "sha256": "9118c6fd7b93e0418bb56fc04513dab5a3169978011496501da92c0b44f21f19"
     },
     {
       "path": "css/ui/stage-a68.css",
@@ -14788,8 +14788,8 @@
     },
     {
       "path": "css/workflow-ui.css",
-      "bytes": 13205,
-      "sha256": "c9f3a3c0ed69489086e41828ba0113ef854f10ef8dc930fc5270a9ace60c2d1b"
+      "bytes": 13253,
+      "sha256": "30b836f8f40e765841bbee5522236e882e9470da2c643479ae5e166c11672b32"
     },
     {
       "path": "css/workflow24.css",
@@ -15203,8 +15203,8 @@
     },
     {
       "path": "host/ghaf_host.jsx",
-      "bytes": 420477,
-      "sha256": "ed84ce0e3663cfbb3f1bee3a481d28a0fa29b687f99727c0c1b1cc5d64570ca7"
+      "bytes": 421598,
+      "sha256": "b9f08e4faf9695349ef4a466556c0690df28faf7e6272bf0b301a19d04da8476"
     },
     {
       "path": "host/graphics52.jsx",
@@ -15278,8 +15278,8 @@
     },
     {
       "path": "host/user-library81.jsx",
-      "bytes": 17780,
-      "sha256": "c418d21906aaa53b6441f14ee5172d41ab33bb35f996c85489f76630d820356b"
+      "bytes": 18901,
+      "sha256": "e8b6296b200e2a07c0d5ddf5cb7cb27d68acd2f2261ade2746dde9855e0854fe"
     },
     {
       "path": "host/words39.jsx",
@@ -15293,8 +15293,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 197305,
-      "sha256": "6327d68cb3f5548d10d2aa05dcfc0296a388b0d47ccedfd205f05a9749ba7b32"
+      "bytes": 197358,
+      "sha256": "104695e099d40f6908f3c38ec13c442934fcc65b2873fde43df604f0753ae5ec"
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
@@ -15419,7 +15419,7 @@
     {
       "path": "js/cep-bridge.js",
       "bytes": 9765,
-      "sha256": "cf8ce88271ed9ba7ac96176fd2d5efb1d199bd93fa7045b061b1341ac09fedc6"
+      "sha256": "598e01a523bb9e27dc0778d8c2e00a38013b377de09016af65da9790e30c6d7f"
     },
     {
       "path": "js/cep70.js",
@@ -15472,6 +15472,11 @@
       "sha256": "68d984de3e580c229eca62fb4bad31eca629349201d6212e4538632a4caac229"
     },
     {
+      "path": "js/feature-workspaces83.js",
+      "bytes": 26400,
+      "sha256": "787f3ba1f7aba3e32da92078108be3659223175964503be272cf66f740bb3c22"
+    },
+    {
       "path": "js/finalize49.js",
       "bytes": 4290,
       "sha256": "0f3c688071d1bf52a0025b60aaa1742ab2c04796e83c98eca7ebada5b745c490"
@@ -15483,8 +15488,8 @@
     },
     {
       "path": "js/flow77.js",
-      "bytes": 47027,
-      "sha256": "b4c95824fd485ab270ce7fca7baa94bd73e9e0161858e9c5608e56c33164ef8b"
+      "bytes": 49115,
+      "sha256": "e5ac542ed736a64ce35d3397772166ea6f43c7c76e23b1a63001657f4272670d"
     },
     {
       "path": "js/fonts29.js",
@@ -15568,8 +15573,8 @@
     },
     {
       "path": "js/pilot-b69.js",
-      "bytes": 25602,
-      "sha256": "6c23963a2707329b374bb3c335deb4e7d4ae0fc3ebbfda3904347c0e595f1595"
+      "bytes": 25729,
+      "sha256": "14744ee8591153677ee8c0ddd5413a3b8801cf4897944071a42cb75175b6b60f"
     },
     {
       "path": "js/plugin53.js",
@@ -15763,8 +15768,8 @@
     },
     {
       "path": "js/text-workspace80.js",
-      "bytes": 7831,
-      "sha256": "87f489e05edab599df6279fded125ddee826bd9021c77a03d17e2e1813ac0d71"
+      "bytes": 9231,
+      "sha256": "a99e4fd4d4d41b93de79d5d097fbc7656895706ec70838979f9acfabe8b4bb61"
     },
     {
       "path": "js/text55-core.js",
@@ -15828,13 +15833,13 @@
     },
     {
       "path": "js/user-library81-ui.js",
-      "bytes": 21143,
-      "sha256": "2dd1b199806bda9307bb5e71b7cdba1e20ffe195b8529944a68e01dbfdebf3b8"
+      "bytes": 22725,
+      "sha256": "9f52736f84724b4da57509c1aa87ca858d56aa3756e8f1db6198eb922513d35a"
     },
     {
       "path": "js/vendor-tools.js",
-      "bytes": 19323,
-      "sha256": "c51f4ab8c16c9b81df56265f872162de001bc13fbfb8e30cbf2901038b105114"
+      "bytes": 20121,
+      "sha256": "31c23f9904a0751c59467f17bee2c6116923102b3042ecbd61854d7147e07240"
     },
     {
       "path": "js/word-motion39.js",
@@ -15953,13 +15958,13 @@
     },
     {
       "path": "tests/library82_browser.cjs",
-      "bytes": 3800,
-      "sha256": "faba87f094e80b5a273be7c450edb6434644655d39ffb3812378b19db2785c98"
+      "bytes": 3923,
+      "sha256": "f1efa76a14a732051cc943c381ff20ce87524b097b9efae185a2f33bb9787c1f"
     },
     {
       "path": "tests/library82_host.cjs",
-      "bytes": 3411,
-      "sha256": "9fc5d9ba446e3c2ab720ed75ce5f2796d2defc5a1da2a92bf36a1d4664825efa"
+      "bytes": 3823,
+      "sha256": "494c6d43b4cc1ce80d6cc922edd6a3f2ea16a53cf583d9cfc86b6e083c8fbf29"
     },
     {
       "path": "tests/library82_install.cjs",
@@ -15988,8 +15993,8 @@
     },
     {
       "path": "tests/preview82_browser.cjs",
-      "bytes": 3702,
-      "sha256": "88dae2139ca00ef9fecae437a6d2dc62257764173b2a4e8706b58c806b85ba91"
+      "bytes": 4787,
+      "sha256": "94f181afff3a90e4c06e2652915d273115538b61091e3da33cb01bf15e9deee0"
     },
     {
       "path": "tests/production47_browser.cjs",
@@ -16743,13 +16748,18 @@
     },
     {
       "path": "tests/ui80_text_workspace_browser.cjs",
-      "bytes": 6590,
-      "sha256": "6d37f3a45edd180baa2fd3ec422f3034c05bcf225c91fed07c63ba1551db80c7"
+      "bytes": 7373,
+      "sha256": "8ed1f7c828d00d330ace0176d20ecd2f78c91357fcb4638ef668bde4b9fecf25"
+    },
+    {
+      "path": "tests/ui83_features_browser.cjs",
+      "bytes": 7800,
+      "sha256": "f0c8fda93d7be3845252dccb6d29a08f8d29ecdf26dc9844ad48c51d1d30e85a"
     },
     {
       "path": "tests/user_library81_browser.cjs",
-      "bytes": 4597,
-      "sha256": "6311c881175cc196f85e563863dcbeb370e317708abfdde43647d63b68d143aa"
+      "bytes": 4622,
+      "sha256": "a8194dbb3f63f3ce5c1318764dd280fa8c38bfce98ee2696db471002561904cc"
     },
     {
       "path": "tests/user_library81_host.cjs",
@@ -39028,7 +39038,7 @@
     }
   ],
   "platform": "Windows",
-  "sourceCommit": "2ad909d5dd52097fb93c0a508a8a2670c4548bf1",
-  "ui": 82,
+  "sourceCommit": "b88f45143dac3c1f31330b68dc381d480e5ee528",
+  "ui": 83,
   "privateOriginalsBundled": true
 }

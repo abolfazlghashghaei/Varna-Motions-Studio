@@ -37,7 +37,7 @@ html[data-ui77] {
     background:var(--flow-action78,var(--ui-color-action)) !important;color:var(--flow-on-action78,var(--ui-color-on-action)) !important;
     box-shadow:inset 0 1px rgba(255,255,255,.24) !important;
   }
-  body[data-flow-shell77] [data-flow77] .flat-intro69 {margin:0 0 1rem !important;color:var(--ui-color-muted);}
+  body[data-flow-shell77] [data-flow77] .flat-intro69 {margin:0 0 .5rem !important;color:var(--ui-color-muted);}
   body[data-flow-shell77] [data-flow77] :is(.layout-grid,.split-panel,.form-layout,.stack) {
     display:grid !important;grid-template-columns:minmax(0,1fr) !important;
     min-width:0 !important;max-width:100% !important;gap:.8rem !important;
@@ -216,7 +216,7 @@ html[data-ui77] {
   .flow-identity78 strong {letter-spacing:.15em;}
   .flow-identity78 span {font-size:var(--ui-font-min);color:var(--ui-color-muted);overflow-wrap:anywhere;}
   body[data-flow-shell77] .app-shell[data-size=wide]:not([data-panel-short71=true]) .flow-identity78 {display:flex;}
-  body[data-flow-shell77] .app-shell:not([data-panel-short71=true]) .topbar {padding-block:.65rem !important;}
+  body[data-flow-shell77] .app-shell:not([data-panel-short71=true]) .topbar {padding-block:.3rem !important;}
   body[data-flow-shell77] [data-flow77] :is(.flow-table-expert78,.flow-table-rows78,.flow-time-guide78) {min-width:0;border:0;background:transparent;padding-block:.5rem;}
   body[data-flow-shell77] [data-flow77] :is(.flow-table-expert78,.flow-table-rows78,.flow-time-guide78)>summary {padding:.5rem;min-height:var(--ui-hit-size);cursor:pointer;color:var(--ui-color-muted);}
   /* Preserve the 32px hit floor against legacy category-chip flex sizing. */
@@ -310,7 +310,7 @@ html[data-ui77] {
   body[data-text-edit80] #workspace {overflow:hidden !important;}
   body[data-flow-shell77] #page-text[data-text-workspace80] {height:100% !important;min-height:0 !important;display:none !important;}
   body[data-flow-shell77] #page-text[data-text-workspace80].active {display:block !important;}
-  .text-workbench80 {display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.45fr);height:100%;min-height:0;min-width:0;gap:.75rem;direction:ltr;}
+  .text-workbench80 {display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.45fr);height:100%;min-height:0;min-width:0;gap:.5rem;direction:ltr;}
   .text-library80,.text-editor80 {min-width:0;min-height:0;}
   .text-editor80 {display:grid;grid-template-rows:auto minmax(0,1fr);gap:.6rem;}
   html[dir=rtl] :is(.text-library80,.text-editor-head80,.text-inspector80) {direction:rtl;}
@@ -324,9 +324,9 @@ html[data-ui77] {
   .text-editor-head80 {min-width:0;padding:.6rem;border:1px solid var(--flow-edge78,var(--ui-color-border));border-radius:var(--flow-radius77);background:var(--flow-card78,var(--ui-color-surface));display:grid;gap:.4rem;}
   .text-editor-bar80 {display:flex;align-items:center;gap:.4rem;min-width:0;}
   .text-counter80 {margin-inline-end:auto;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;min-width:0;}
-  body[data-flow-shell77] .text80-action {display:inline-flex !important;align-items:center;justify-content:center;flex:none;padding:.3rem !important;min-width:32px !important;min-height:32px !important;}
+  body[data-flow-shell77] .text80-action:not([hidden]) {display:inline-flex !important;align-items:center;justify-content:center;flex:none;padding:.3rem !important;min-width:32px !important;min-height:32px !important;}
   .text80-action svg {width:1.25rem;height:1.25rem;display:block;stroke:currentColor;}
-  body[data-flow-shell77] .text-editor-head80 #reviewText {width:100% !important;min-width:0 !important;min-height:5rem !important;height:6rem !important;max-height:8rem !important;resize:none !important;padding:.65rem !important;line-height:1.8 !important;font-size:var(--ui-font-body) !important;text-align:start;unicode-bidi:plaintext;}
+  body[data-flow-shell77] .text-editor-head80 #reviewText {width:100% !important;min-width:0 !important;min-height:var(--text-editor-min83,5rem) !important;height:var(--text-editor-height83,8rem) !important;max-height:var(--text-editor-max83,20rem) !important;resize:none !important;overflow:auto !important;padding:.65rem !important;line-height:1.8 !important;font-size:var(--ui-font-body) !important;text-align:start;unicode-bidi:plaintext;}
   body[data-flow-shell77] .text-editor-head80 #offlineText55 {display:flex !important;flex-wrap:wrap;gap:.4rem;align-items:center;padding:.4rem !important;margin:0 !important;min-width:0;border-radius:.6rem;}
   body[data-flow-shell77] .text-editor-head80 #offlineText55>header {display:contents !important;}
   body[data-flow-shell77] .text80-spell-title {display:none !important;}
@@ -347,9 +347,9 @@ html[data-ui77] {
   body[data-flow-shell77] #page-text:not([data-text-mode80=wide]) .text-editor-head80 {grid-row:1;}
   body[data-flow-shell77] #page-text:not([data-text-mode80=wide]) .text-library80 {grid-row:2;}
   body[data-flow-shell77] #page-text[data-text-mode80=micro] .text-editor-head80 {padding:.25rem;gap:.25rem;}
-  body[data-flow-shell77] #page-text[data-text-mode80=micro] .text-editor-head80 #reviewText {min-height:32px !important;height:clamp(32px,16vh,4rem) !important;padding:.2rem !important;}
+  body[data-flow-shell77] #page-text[data-text-mode80=micro] .text-editor-head80 #reviewText {padding:.35rem !important;}
   body[data-flow-shell77] #page-text[data-text-mode80=micro] :is(.text80-step,.caption-list-card>.card-title,.caption-search) {display:none !important;}
-  body[data-flow-shell77] #page-text[data-text-mode80=micro] .text-editor-head80 #offlineText55 {display:none !important;}
+  body[data-flow-shell77] #page-text[data-text-tight83=true] .text-editor-head80 #offlineText55 {display:none !important;}
   /* Caption words are inline text, never mini layout boxes. Time and number
      have their own tracks, independent of Persian/English paragraph direction. */
   body[data-flow-shell77] #page-text .caption-entry {display:flex;flex:none;align-items:stretch;gap:.35rem;min-width:0;direction:ltr;}
@@ -418,7 +418,7 @@ body[data-flow-shell77] [data-flow77] .tp-txtv_g {left:0;}
    Specific normal rules restore the selected light palette without new important flags. */
 body[data-flow-shell77] #varnaAtmosphere48 {background:radial-gradient(ellipse at var(--v48-mouse-x) var(--v48-mouse-y),var(--v48-glow),transparent 65%),linear-gradient(135deg,var(--flow-base77,var(--v48-base)),var(--flow-end77,var(--v48-end)));}
 body[data-flow-shell77] .flow-language77 {font:inherit;display:inline-flex;align-items:center;justify-content:center;line-height:1.5;background:var(--ui-color-field);color:var(--ui-color-text);border:1px solid var(--ui-color-border);border-radius:.65rem;}
-/* UI82: the original preview input is reachable in the fixed action bar.
+/* UI83: the original preview input is reachable in the fixed header.
      display/width/height need important to override the legacy hidden 1px input;
      all other new rules use ordinary ownership and the existing size tokens. */
   .preview-toggle82 {position:relative;flex:none;gap:.4rem;padding:0;cursor:pointer;min-inline-size:var(--ui-hit-size);min-block-size:var(--ui-hit-size);}
@@ -434,3 +434,59 @@ body[data-flow-shell77] .flow-language77 {font:inherit;display:inline-flex;align
    preserves the >=32px targets and half-height content area beside Preview. */
 body[data-flow-shell77] .app-shell[data-size=compact]:not([data-panel-short71=true]) {--panel-action-padding71:.285714rem;--panel-action-button-padding71:.285714rem;}
 body[data-flow-shell77] .app-shell[data-size=compact] .flat-actions69 {gap:.285714rem;}
+
+/* UI83: compact header controls reuse the original inputs and handlers. */
+.preview-header83 {display:flex;align-items:center;gap:.3rem;flex:none;min-width:0;}
+body[data-flow-shell77] .preview-refresh83 {display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:var(--ui-hit-size);min-height:var(--ui-hit-size);padding:.3rem;border:1px solid var(--ui-color-border);border-radius:.65rem;background:var(--ui-color-field);color:var(--ui-color-text);font:inherit;cursor:pointer;}
+.preview-refresh83 .flow-icon77 {display:inline-flex;}
+.preview-settings83 {display:grid;grid-template-columns:minmax(0,1fr);gap:.4rem;padding-block-end:.5rem;border-block-end:1px solid var(--ui-color-border);}
+.preview-settings83>b {font-size:var(--ui-font-body);}
+.preview-settings83 .control {min-width:0;}
+/* These variables replace the existing important padding owners without adding
+   another override. Click targets and text floors remain unchanged. */
+body[data-flow-shell77] .app-shell {--panel-work-padding71:.5rem;}
+body[data-flow-shell77] .app-shell[data-panel-short71=true] {--panel-work-padding71:.142857rem;}
+body[data-flow-shell77] .app-shell:not([data-panel-short71=true]) .topbar {--panel-header-padding71:.3rem .4rem;}
+body[data-flow-shell77] [data-flow77] .flat-intro69 {line-height:1.6;}
+#page-text[data-text-tight83=true] .text-editor-bar80 {gap:.25rem;}
+#page-text[data-text-tight83=true] .text-counter80 {font-size:var(--ui-font-min);}
+/* UI83 feature components have a single owner. Retired navigation stays in the
+   DOM for existing handlers; hidden never means an unimplemented fake control. */
+body[data-flow-shell77] #page-tools[data-feature-workspaces83]>.library-tabs81,
+body[data-flow-shell77] #page-tools[data-feature-workspaces83]>.library-view81 {display:none;}
+.feature-shell83,.feature-hub83,.feature-stage83,.feature-body83 {min-width:0;max-width:100%;}
+.feature-hub83 {display:grid;gap:.6rem;}
+.feature-search83 {box-sizing:border-box;inline-size:100%;min-width:0;min-height:var(--ui-hit-size);font:inherit;}
+.feature-filters83 {display:flex;flex-wrap:wrap;gap:.3rem;}
+.feature-filters83>button {flex:1 1 6rem;min-width:0;font:inherit;white-space:normal;}
+.feature-filters83>button[aria-selected=true] {background:var(--ui-color-soft);color:var(--ui-color-accent);border-color:var(--ui-color-accent);}
+.feature-deck83 {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:.5rem;min-width:0;}
+body[data-flow-shell77] .feature-card83 {display:flex;align-items:center;gap:.6rem;min-width:0;min-height:var(--ui-hit-size);padding:.6rem;box-sizing:border-box;border:1px solid var(--ui-color-border);border-radius:.7rem;background:var(--ui-color-field);color:var(--ui-color-text);font:inherit;text-align:start;cursor:pointer;}
+.feature-card-copy83 {display:grid;grid-template-columns:minmax(0,1fr);gap:.2rem;min-width:0;}
+.feature-card-copy83>b {font-size:var(--ui-font-body);line-height:1.5;}
+.feature-card-copy83>span {font-size:var(--ui-font-min);line-height:1.6;color:var(--ui-color-muted);overflow-wrap:anywhere;}
+.feature-icon83 {display:inline-flex;align-items:center;justify-content:center;flex:none;inline-size:1.7rem;block-size:1.7rem;color:var(--ui-color-accent);pointer-events:none;}
+.feature-icon83 svg {inline-size:100%;block-size:100%;}
+.feature-head83 {display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;min-width:0;}
+.feature-head83 h2 {font-size:var(--ui-font-body);line-height:1.5;flex:1;min-width:0;margin:0;overflow-wrap:anywhere;}
+.feature-head83 button {display:inline-flex;align-items:center;justify-content:center;gap:.25rem;max-width:100%;font:inherit;}
+.feature-head83 button>.feature-icon83 {inline-size:1rem;block-size:1rem;}
+html[dir=rtl] .feature-head83 button>.feature-icon83 {transform:rotate(180deg);}
+.feature-description83 {margin:.4rem 0;line-height:1.7;color:var(--ui-color-muted);overflow-wrap:anywhere;}
+.feature-body83 {display:grid;grid-template-columns:minmax(0,1fr);gap:.6rem;padding:.5rem;}
+.feature-body83 .library-native81 {padding:0;border:0;}
+.feature-body83 .library-lower81 {max-height:18rem;overflow:auto;}
+.feature-body83 .library-status81:empty {display:none;}
+.feature-body83 .library-status81 {padding:.4rem;border-radius:.4rem;background:var(--ui-color-field);}
+.feature-body83 .embedded-tool-toolbar {display:flex;flex-wrap:wrap;gap:.3rem;align-items:center;}
+.feature-body83 .library-inspector81 {padding:0;border:0;}
+.feature-body83 .feature-foil83,.feature-controls83 {display:grid;grid-template-columns:minmax(0,1fr);gap:.5rem;min-width:0;}
+.feature-setup83 summary,.feature-extra83 summary {font-size:var(--ui-font-min);line-height:1.6;min-height:var(--ui-hit-size);cursor:pointer;}
+.feature-setup83>summary {color:var(--ui-color-muted);}
+.feature-setup83[open]>.feature-deck83 {margin-block-start:.4rem;}
+.feature-progress83 {line-height:1.7;overflow-wrap:anywhere;}
+
+/* At the smallest zoomed viewport, a long caption may exceed the whole list.
+   Keep the full text scrollable inside its real button so its click target
+   stays in the list instead of projecting beneath the persistent editor. */
+body[data-flow-shell77] #page-text[data-text-row-scroll83=true] .caption-row {--panel-control-max83:var(--caption-row-max83);overflow:auto;}

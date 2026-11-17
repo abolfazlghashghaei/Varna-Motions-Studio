@@ -1,1 +1,0 @@
-PASS UI81 private installer: checksums, progress, atomic publish, existing-owner preservation, bad paths/duplicate case/tampering/symlink rejection, no vendor execution and successful retry. Native Windows CEP registration remains untested.

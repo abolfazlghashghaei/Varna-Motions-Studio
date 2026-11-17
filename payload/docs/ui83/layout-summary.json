@@ -1,0 +1,37 @@
+{
+  "cases": 6336,
+  "failures": 0,
+  "scales": [
+    1,
+    1.25,
+    1.5,
+    2
+  ],
+  "widths": [
+    250,
+    320,
+    400,
+    620,
+    900,
+    1400
+  ],
+  "heights": [
+    400,
+    700,
+    1000
+  ],
+  "themes": [
+    "dark",
+    "light"
+  ],
+  "languages": [
+    "fa",
+    "en"
+  ],
+  "pages": 22,
+  "minContentRatio": 0.6514286000000001,
+  "browser": "154.0.8037.57",
+  "profile": "chromium99-disabled",
+  "nativeCEP": false,
+  "matchingRuntimeSources": true
+}

@@ -59,14 +59,14 @@ const tools=accordion('ابزارهای افتر و متن فعال','After Effe
 const liveLabel=$('#livePreviewGlobal').closest('label').querySelector('span:last-child'),liveLabelOriginal=liveLabel.textContent;
 // UI82 keeps the original live-preview switch in the non-scrolling action bar.
 // Older entry points retain their existing popover behavior.
-const globalControls=[$('#btnRefreshPreview'),$('#btnGoOutput'),$('#livePreviewGlobal').closest('label'),$('.bottom-dock .active-caption-mini'),$('.bottom-dock .dock-actions')].filter(node=>!document.documentElement.hasAttribute('data-ui77')||node!==$('#livePreviewGlobal').closest('label')).map(node=>{const slot=element('span','flat-return69');node.before(slot);return {node,slot};});
+const globalControls=[$('#btnRefreshPreview'),$('#btnGoOutput'),$('#livePreviewGlobal').closest('label'),$('.bottom-dock .active-caption-mini'),$('.bottom-dock .dock-actions')].filter(node=>!document.documentElement.hasAttribute('data-ui77')||node!==$('#livePreviewGlobal').closest('label')&&node!==$('#btnRefreshPreview')).map(node=>{const slot=element('span','flat-return69');node.before(slot);return {node,slot};});
 let active=false,mode='',lastBand='',moving=false;
 function size(){const current=document.body.dataset.uiSize44;document.documentElement.style.setProperty('--panel-root69',({tiny:12,compact:13,standard:14,large:16,xlarge:18}[current]||14)+'px');}
 // Preserve both live footer nodes; share their grid row when available height is scarce.
 // The threshold follows the user's UI scale, not the monitor or a new CSS feature.
 function shortLayout(){const short=active&&innerHeight<(shell.dataset.panelBand69==='compact'?48:32)*parseFloat(getComputedStyle(document.documentElement).fontSize);
  if(shell.dataset.panelShort71!==String(short))shell.dataset.panelShort71=String(short);
- const parent=short?$('.topbar'):actionBar;if(statusDetails.parentElement!==parent)parent.append(statusDetails);
+ const parent=short?(document.documentElement.hasAttribute('data-ui77')?$('#headerOptions .header-options-panel'):$('.topbar')):actionBar;if(statusDetails.parentElement!==parent)parent.append(statusDetails);
 }
 function fitScene(){if(!active||w.VarnaUI.current()!=='kinetic'||!scenePreview.open)return;const stage=$('#sceneStage40'),ratio=stage.style.aspectRatio.split('/').map(Number),aspect=ratio[0]/ratio[1];if(!Number.isFinite(aspect)||aspect<=0)return;const cap=Math.min(innerHeight*.22,parseFloat(getComputedStyle(document.documentElement).fontSize)*13),width=Math.max(1,Math.min(stage.parentElement.clientWidth,cap*aspect));const value=width+'px';if(stage.style.getPropertyValue('--scene-inline69')!==value)stage.style.setProperty('--scene-inline69',value);}
 function layout(){const width=shell.getBoundingClientRect().width,band=width<340?'compact':width<=640?'regular':'wide';shell.dataset.panelBand69=band;shell.dataset.size=band==='regular'?'normal':band;shell.dataset.panelMicro69=String(width<180);

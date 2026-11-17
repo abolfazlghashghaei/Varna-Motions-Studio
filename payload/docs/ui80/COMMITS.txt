@@ -1,3 +1,0 @@
-dc2380f45cf39802ac478e1581d914ee6f6a7ce4 Keep selected caption editor visible and isolate transcript scrolling
-f5ffc934747a286cda6f425a3c9a7d8fa76d148b Measure actual painted overlap in scrolling panes and prevent RTL hanging whitespace
-4b46caa8edd3626c3d890817c853485f924ca33e Wrap complete caption timecodes at extreme panel widths
