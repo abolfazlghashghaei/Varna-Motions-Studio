@@ -91,3 +91,32 @@ html[data-ui-a68] .ai-sound50 {
   --ui-color-danger: var(--ui-seed-danger-dark);
   --ui-color-focus: #93e6d3;
 }
+
+/* UI85 desktop density. Fluent uses 2/4/6px spacing and regular labels;
+   Spectrum separates groups with dividers. Preserve 12px text and 32px hit floors. */
+html[data-ui85] body[data-flow-shell77] {
+  --ui-font-min:max(.857143rem,12px);
+  --ui-font-note:max(.857143rem,12px);
+  --ui-font-label:max(.857143rem,12px);
+  --ui-font-body:max(.857143rem,12px);
+  --ui-font-section:max(.928571rem,12px);
+  --ui-font-title:max(1rem,12px);
+  --ui-line-body:1.5;
+  --ui-control-min:max(2rem,32px);
+  --ui-control-height:max(2rem,32px);
+  --ui-hit-size:max(2rem,32px);
+  --ui-space-1:.142857rem;
+  --ui-space-2:.285714rem;
+  --ui-space-3:.428571rem;
+  --ui-space-4:.571429rem;
+  --ui-space-6:.857143rem;
+  --ui-card-space:.285714rem;
+  --ui-radius-small:.142857rem;
+  --ui-radius-control:.214286rem;
+  --ui-radius-card:0px;
+  --ui-weight-body:400;
+  --ui-weight-control:500;
+  --ui-weight-section:500;
+  --ui-pane-gap:.142857rem;
+  --ui-pane-pad:.285714rem;
+}

@@ -40,13 +40,24 @@
   }
   html[data-ui-a68] :is(.card-title b, .font-dialog67 > header b, h2) {
     font-size: var(--ui-font-section) !important;
+    font-weight: var(--ui-weight-section,700) !important;
   }
   html[data-ui-a68] :is(h1, #currentPageTitle) {
     font-size: var(--ui-font-title) !important;
+    font-weight: var(--ui-weight-section,700) !important;
   }
   html[data-ui-a68] :is(.nav-label48, .production-main47 > button, #routeSelect66, .section-tabs67 button, .section-navigation67 select) {
     font-size: var(--ui-font-label) !important;
   }
+
+  /* UI85: these important owners replace legacy 600/800-weight labels and
+     fixed 22px label boxes; authored text/preview typography is excluded. */
+  html[data-ui85] :is(.control>span,.inline-control,.switch-row,.hint,small):not(:where(
+    #tablePreview *,#tableEditor *,#sceneStage40 *,[data-user-content],[data-user-content] *
+  )) {font-weight:var(--ui-weight-body) !important;line-height:var(--ui-line-body) !important;min-height:0 !important;}
+  html[data-ui85] :is(button,select,input,textarea,summary):not(:where(
+    .scene-piece40,#tablePreview *,#tableEditor *,[data-user-content],[data-user-content] *
+  )) {font-weight:var(--ui-weight-control) !important;padding-block:var(--ui-space-1) !important;padding-inline:var(--ui-space-2) !important;}
 
   /* Fixed legacy colors in scene labels, hints and statuses fail on light surfaces. */
   html[data-ui-a68] :is(.card, .control, .inline-control, .switch-row, .card-title b, .font-dialog67, .context40, #motionDraftStatus) {

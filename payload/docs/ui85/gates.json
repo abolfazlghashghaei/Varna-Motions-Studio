@@ -1,0 +1,88 @@
+[
+  {
+    "name": "ui47_controls_browser.cjs",
+    "exitCode": 0,
+    "seconds": 30.69
+  },
+  {
+    "name": "ui68_tokens_browser.cjs",
+    "exitCode": 0,
+    "seconds": 13.29
+  },
+  {
+    "name": "ui69_pilot_browser.cjs",
+    "exitCode": 0,
+    "cases": 576,
+    "expandedStates": 864
+  },
+  {
+    "name": "ui85_density_browser.cjs",
+    "exitCode": 0,
+    "cases": 80
+  },
+  {
+    "name": "ui69_interactions_browser.cjs",
+    "exitCode": 0,
+    "seconds": 19.47
+  },
+  {
+    "name": "ui84_table_browser.cjs",
+    "exitCode": 0,
+    "seconds": 41.57
+  },
+  {
+    "name": "ui84_preview_first_browser.cjs",
+    "exitCode": 0,
+    "seconds": 11.91
+  },
+  {
+    "name": "ui83_features_browser.cjs",
+    "exitCode": 0,
+    "seconds": 12.5
+  },
+  {
+    "name": "background81_browser.cjs",
+    "exitCode": 0,
+    "seconds": 65.32
+  },
+  {
+    "name": "preview82_browser.cjs",
+    "exitCode": 0,
+    "seconds": 126.26
+  },
+  {
+    "name": "library84_frames_browser.cjs",
+    "exitCode": 0,
+    "seconds": 9.09
+  },
+  {
+    "name": "table47_browser.cjs",
+    "exitCode": 0,
+    "seconds": 22.34,
+    "finalBoundedInspector": true
+  },
+  {
+    "name": "ui84_panes_browser.cjs",
+    "exitCode": 0,
+    "seconds": 29.26,
+    "finalBoundedInspector": true
+  },
+  {
+    "name": "ui78_reference_browser.cjs",
+    "exitCode": 0,
+    "seconds": 31.57,
+    "finalBoundedInspector": true
+  },
+  {
+    "name": "ui84_background_browser.cjs",
+    "exitCode": 0,
+    "seconds": 41.79,
+    "finalBoundedInspector": true
+  },
+  {
+    "name": "ui80_text_workspace_browser.cjs",
+    "exitCode": 0,
+    "cases": 144,
+    "report": "text-workspace.json"
+  }
+]

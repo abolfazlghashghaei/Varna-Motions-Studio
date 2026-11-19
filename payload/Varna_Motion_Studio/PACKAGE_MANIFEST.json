@@ -15058,23 +15058,23 @@
     },
     {
       "path": "css/ui/flow77.css",
-      "bytes": 58147,
-      "sha256": "1b526cc83d3a90352cf0530ccedeb892d08ad852f5486e4ba1e67c5f48c3b1c8"
+      "bytes": 59883,
+      "sha256": "bba26e9791c519a4a91f77f273dbf4fe888de42a1a6dddf653cc29bbf57f35c0"
     },
     {
       "path": "css/ui/pilot-b69.css",
-      "bytes": 22279,
-      "sha256": "9118c6fd7b93e0418bb56fc04513dab5a3169978011496501da92c0b44f21f19"
+      "bytes": 22419,
+      "sha256": "f5774d1cf02c65a286a7ca0fcba3e7e21ed3911992b835c0ab4df4dd1dbf9e5d"
     },
     {
       "path": "css/ui/stage-a68.css",
-      "bytes": 9478,
-      "sha256": "bffa03ae302ba2fd21057c15ae95229d5284a13cc8429524d9bc43525a962397"
+      "bytes": 10357,
+      "sha256": "94fc6abad5709e37c93a048351e166859af40ae5d2a49c51dc5f9482086e72ba"
     },
     {
       "path": "css/ui/tokens.css",
-      "bytes": 3080,
-      "sha256": "a1b7f24c9fba4b07f4d94673088482c2d74938310b6e5a3692ca490297bff475"
+      "bytes": 4033,
+      "sha256": "33516ef783152a5f5d71d2a92c1d68af03766c2ba5f0bf4dcf3c760675021f1d"
     },
     {
       "path": "css/upgrades27.css",
@@ -15598,8 +15598,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 197612,
-      "sha256": "3537105573477e97d860d30575429d5eaf90e11acc6ff213a9e0a55aa9a3401f"
+      "bytes": 197622,
+      "sha256": "23a85a40fe70fba8e668f70f2f161bbc8f1eb8ca21b33baeec8a38e5a5b1ea32"
     },
     {
       "path": "integrations/INSTALL_CROSS_HOST_WINDOWS.ps1",
@@ -16183,8 +16183,8 @@
     },
     {
       "path": "js/workspace-panes84.js",
-      "bytes": 16903,
-      "sha256": "2b32b2ef03c2cdfc0b2d953ab03631d1431fdbdd2c5547888961bf34c10e46cb"
+      "bytes": 18786,
+      "sha256": "a1f5e000a57ba1222194c3429f29ba7fb5e915ade876b26c429720948b440ff1"
     },
     {
       "path": "js/workspace44.js",
@@ -17118,8 +17118,8 @@
     },
     {
       "path": "tests/ui84_panes_browser.cjs",
-      "bytes": 3326,
-      "sha256": "f6d61695f88b093a6cfacbd75518689e0e949278e7b430167b9dbf4490018a0b"
+      "bytes": 3587,
+      "sha256": "4ee3a6c9d61ca166fda45021adf5278e0df70d6ebc7d3317a4965a991de8045f"
     },
     {
       "path": "tests/ui84_preview_first_browser.cjs",
@@ -17130,6 +17130,16 @@
       "path": "tests/ui84_table_browser.cjs",
       "bytes": 2732,
       "sha256": "382f3b240ae56b08e8a6877bb1d044425c23529ecfd9b11194c78828d69d2a1c"
+    },
+    {
+      "path": "tests/ui85_density_browser.cjs",
+      "bytes": 4853,
+      "sha256": "f5022f4ae9d01009ac183441485996d0c0e2a3d3b3558e946fd3f3b094a64c11"
+    },
+    {
+      "path": "tests/ui85_layout_browser.cjs",
+      "bytes": 5294,
+      "sha256": "e9bbd9e1fd5e7d5108adfe21918627c9ba515b88ca51c6ff99cf925eeb357d79"
     },
     {
       "path": "tests/user_library81_browser.cjs",
@@ -39413,7 +39423,7 @@
     }
   ],
   "platform": "Windows",
-  "sourceCommit": "f171c17",
-  "ui": 84,
+  "sourceCommit": "d82aaec",
+  "ui": 85,
   "privateOriginalsBundled": true
 }

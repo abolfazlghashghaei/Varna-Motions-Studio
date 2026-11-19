@@ -1,1 +1,0 @@
-PASS UI84 preview worker: real cache, unchanged sources, argument-safe isolated CLI, serialized processes, cache reuse, cancel, traversal rejection and duplicate-name guard. Adobe render untested.

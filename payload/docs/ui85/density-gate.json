@@ -1,0 +1,145 @@
+{
+  "cases": 80,
+  "density": {
+    "label": 32,
+    "field": 32,
+    "heading": {
+      "font": 12.0714,
+      "weight": 500,
+      "height": 0,
+      "padding": 0,
+      "border": 0,
+      "radius": 0
+    },
+    "head": {
+      "font": 12,
+      "weight": 400,
+      "height": 0,
+      "padding": 0,
+      "border": 0,
+      "radius": 0
+    },
+    "body": {
+      "font": 12,
+      "weight": 400,
+      "height": 0,
+      "padding": 3.71428,
+      "border": 0,
+      "radius": 0
+    },
+    "card": {
+      "font": 12,
+      "weight": 400,
+      "height": 0,
+      "padding": 0,
+      "border": 0,
+      "radius": 0
+    },
+    "gap": 1.85714,
+    "labelWeight": 400,
+    "rightScrollers": 0
+  },
+  "baseline": {
+    "rightScrollers": 4,
+    "body": {
+      "font": 13,
+      "weight": "400",
+      "line": 20.8,
+      "height": 620,
+      "padding": "0px",
+      "gap": "normal",
+      "border": "0px",
+      "radius": "0px",
+      "shadow": "none"
+    },
+    "title": {
+      "font": 13,
+      "weight": "700",
+      "line": 20.8,
+      "height": 20.796875,
+      "padding": "0px",
+      "gap": "normal",
+      "border": "0px",
+      "radius": "0px",
+      "shadow": "none"
+    },
+    "head": {
+      "font": 13,
+      "weight": "400",
+      "line": 20.8,
+      "height": 40.78125,
+      "padding": "3.9px 5.2px",
+      "gap": "3.9px",
+      "border": "0px 0px 1px",
+      "radius": "0px",
+      "shadow": "none"
+    },
+    "section": {
+      "font": 14.8571,
+      "weight": "700",
+      "line": 23.7714,
+      "height": 23.765625,
+      "padding": "0px",
+      "gap": "normal",
+      "border": "0px",
+      "radius": "0px",
+      "shadow": "none"
+    },
+    "field": {
+      "font": 12.0714,
+      "weight": "400",
+      "line": 19.3143,
+      "height": 59.703125,
+      "padding": "0px",
+      "gap": "3.71428px",
+      "border": "0px",
+      "radius": "0px",
+      "shadow": "none"
+    },
+    "fieldLabel": {
+      "font": 12.0714,
+      "weight": "600",
+      "line": 19.3143,
+      "height": 22,
+      "padding": "0px",
+      "gap": "normal",
+      "border": "0px",
+      "radius": "0px",
+      "shadow": "none"
+    },
+    "paneBody": {
+      "font": 13,
+      "weight": "400",
+      "line": 20.8,
+      "height": 197.21875,
+      "padding": "5.2px",
+      "gap": "normal",
+      "border": "0px",
+      "radius": "0px",
+      "shadow": "none"
+    },
+    "card": {
+      "font": 13,
+      "weight": "400",
+      "line": 20.8,
+      "height": 271.375,
+      "padding": "7.42858px",
+      "gap": "normal",
+      "border": "0px",
+      "radius": "11.1429px",
+      "shadow": "none"
+    },
+    "workspace": {
+      "font": 13,
+      "weight": "400",
+      "line": 20.8,
+      "height": 516.890625,
+      "padding": "6.5px",
+      "gap": "normal",
+      "border": "0px",
+      "radius": "0px",
+      "shadow": "none"
+    }
+  },
+  "nativeAdobe": false
+}
