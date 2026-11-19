@@ -63,5 +63,6 @@
       "minContentRatio": 0.6514286000000001,
       "report": "layout-2.json"
     }
-  ]
+  ],
+  "minContentRatio": 0.6514286000000001
 }
