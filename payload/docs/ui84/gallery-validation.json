@@ -1,0 +1,18 @@
+{
+  "screenshots": 408,
+  "before": 176,
+  "after": 232,
+  "widths": [
+    250,
+    400,
+    620,
+    1400
+  ],
+  "height": 700,
+  "themes": [
+    "dark",
+    "light"
+  ],
+  "modeledInventory": true,
+  "nativeAdobe": false
+}

@@ -1,0 +1,6 @@
+const assert=require('node:assert/strict'),vm=require('node:vm'),M=require('../js/background-motion81-core');
+assert.equal(M.catalog().length,144,'keep the existing preset catalog');
+let bg=M.applyPreset({enabled:true},'none'),cfg=M.resolve(bg);let s=M.sample(cfg,0,0,4,200,60,false);assert.equal(s.opacity,100);assert.equal(s.scaleX,100);assert.equal(s.scaleY,100);assert.equal(s.x,0);
+bg=M.applyPreset(bg,'expand-y:soft');bg.motion81.outPreset='slide-right:quick';bg.outDur=.4;cfg=M.resolve(bg);const entry=M.sample(cfg,.1,0,4,200,60,false),settled=M.sample(cfg,2,0,4,200,60,false),exit=M.sample(cfg,3.9,0,4,200,60,false);assert(entry.scaleY<100&&entry.x===0);assert.equal(settled.scaleX,100);assert.equal(settled.x,0);assert(exit.x>0&&exit.opacity<100,'OUT has its own direction and curve');
+for(const time of [0,.1,2,3.8,4]){const actual=M.sample(cfg,time,0,4,200,60,true),expression=M.expression(cfg,'t,0,4,200,60,true',JSON.stringify),other=vm.runInNewContext(expression,{t:time});for(const k of Object.keys(actual))assert(Math.abs(actual[k]-other[k])<1e-8);if(time===0||time===4)assert.equal(actual.scaleX,0);}
+console.log('PASS UI84 background math: unchanged 144 presets, true static mode, independent IN/OUT, ES3 browser/expression parity and forced zero run boundaries.');

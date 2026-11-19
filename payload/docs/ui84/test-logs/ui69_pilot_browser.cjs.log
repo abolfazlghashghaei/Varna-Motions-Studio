@@ -1,0 +1,5 @@
+Matrix zoom 1: 144 page cases, 0 failures
+Matrix zoom 1.25: 288 page cases, 0 failures
+Matrix zoom 1.5: 432 page cases, 0 failures
+Matrix zoom 2: 576 page cases, 0 failures
+PASS B69: 576 page cases / 864 expanded states; 899 IDs; no horizontal overflow, clipped UI text, intersecting controls or undersized text/targets; main actions visible; at most two navigation levels. Two-page pilot only.

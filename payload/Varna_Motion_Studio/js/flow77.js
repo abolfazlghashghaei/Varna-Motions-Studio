@@ -30,7 +30,7 @@
     easing49: ['منحنی حرکت', 'Motion curves', 'sliders-horizontal', 'شتاب حرکت را تنظیم و به کلیدهای انتخاب‌شده اعمال کن.', 'Adjust easing and apply it to the selected keyframes.', 'curveApply49'],
     director: ['دستیار پروژه', 'Project assistant', 'layers', 'شرح پروژه را بده و پیشنهادهای طراحی را پیش از اعمال ببین.', 'Describe the project and review design suggestions before applying.', 'brainAnalyze'],
     assistant49: ['دستیار اسکریپت', 'Script assistant', 'code', 'کد پیشنهادی را بررسی کن؛ اجرای آن مرحله‌ای جداست.', 'Review generated code; running it is a separate action.', 'assistantGenerate49'],
-    tools: ['ابزارهای افزوده', 'Additional tools', 'layout-template', 'ابزار نصب‌شده را انتخاب کن تا کنترل‌های واقعی آن باز شود.', 'Choose an installed tool to open its actual controls.', null],
+    tools: ['قالب‌ها و افکت‌ها', 'Templates & effects', 'layout-template', 'ابزار نصب‌شده را انتخاب کن تا کنترل‌های واقعی آن باز شود.', 'Choose an installed tool to open its actual controls.', null],
     resources: ['منابع سیستم', 'System resources', 'sliders-horizontal', 'مسیر موتور و مدل‌ها و مصرف منابع را بررسی کن.', 'Check engine and model paths and resource use.', 'btnCheckLocalRoles'],
     output: ['خروجی', 'Output', 'upload', 'لایه‌های متن را در افتر بساز یا فایل زیرنویس ذخیره کن.', 'Build text layers in After Effects or save a subtitle file.', 'btnBuildOutput'],
     settings: ['تنظیمات', 'Settings', 'sliders-horizontal', 'ظاهر رابط، اتصال میزبان و پروفایل‌های تنظیمات را مدیریت کن.', 'Manage interface appearance, host connection and settings profiles.', null]
@@ -190,7 +190,7 @@
   const more = $('[data-more69]', nav), logo = element('button', 'flow-logo77'); logo.type = 'button';
   logo.dataset.flowLogo77 = 'true'; logo.title = 'Varna Motion Studio'; logo.setAttribute('aria-label', 'Varna Motion Studio');
   const logoImage = element('img'); logoImage.src = './assets/varna-logo.svg'; logoImage.alt = ''; logo.append(logoImage); logo.onclick = () => w.VarnaUI.open('home'); nav.prepend(logo);
-  const moreLabel79=$('.flat-nav-label69',more);moreLabel79.removeAttribute('data-label-fa69');moreLabel79.removeAttribute('data-label-en69');label(moreLabel79,'ابزارها','Tools');
+  const moreLabel79=$('.flat-nav-label69',more);moreLabel79.removeAttribute('data-label-fa69');moreLabel79.removeAttribute('data-label-en69');label(moreLabel79,'بخش‌ها','Sections');
   const customize = button('میانبرهای من', 'My shortcuts', 'star', () => openCatalog(true), 'flow-dock-option77');
   customize.dataset.customize77 = 'true';
   const collapse = button('جمع‌کردن نوار', 'Collapse rail', 'chevron-left', () => { prefs.collapsed = !prefs.collapsed; save(); renderDock(); }, 'flow-dock-option77');
@@ -217,14 +217,14 @@
     railMode79(fits?'labels':'icons');
     // Validate actual CEP boxes too: external panel constraints can be narrower
     // than the preferred rail width. Latch until the panel/preferences change.
-    if(fits)requestAnimationFrame(()=>{if(shell.dataset.railMode79!=='labels')return;const broken=labels.some(n=>{const r=n.getBoundingClientRect(),b=n.parentElement.getBoundingClientRect();return n.scrollWidth>n.clientWidth||r.width<1||r.left<b.left||r.right>b.right;});if(broken||nav.scrollHeight>nav.clientHeight+1)railMode79('icons');});
+    if(fits){const broken=labels.some(n=>{const r=n.getBoundingClientRect(),b=n.parentElement.getBoundingClientRect();return n.scrollWidth>n.clientWidth||r.width<1||r.left<b.left||r.right>b.right;});if(broken||nav.scrollHeight>nav.clientHeight+1)railMode79('icons');}
   }
   function queueRail79(){if(!railFrame79)railFrame79=requestAnimationFrame(()=>fitRail79());}
   new ResizeObserver(queueRail79).observe(nav);
   new ResizeObserver(queueRail79).observe(shell);
   document.fonts?.ready.then(()=>fitRail79(true));
   function renderDock() {
-    const key=JSON.stringify([prefs.pins,prefs.side,prefs.collapsed,en(),w.VarnaUI.current()]);
+    const key=JSON.stringify([prefs.pins,prefs.side,prefs.collapsed,en(),w.VarnaDestinations84?.route()||w.VarnaUI.current()]);
     if(key===dockKey78)return; dockKey78=key;
     attr(shell,'data-dock-side77',prefs.side); attr(shell,'data-dock-collapsed77',prefs.collapsed);
     attr(customize,'title',text('چیدمان و میانبرهای من','Arrange my shortcuts'));attr(customize,'aria-label',customize.title);
@@ -235,7 +235,7 @@
       const info = pages[name], pinned = name === 'home' || prefs.pins.includes(name);
       b.hidden = !pinned; b.dataset.pinned77 = String(pinned);
       b.title = text(info[0], info[1]); b.setAttribute('aria-label', b.title);
-      b.setAttribute('aria-current', name === w.VarnaUI.current() ? 'page' : 'false');
+      b.setAttribute('aria-current', name === (w.VarnaDestinations84?.route()||w.VarnaUI.current()) ? 'page' : 'false');
       if (!b.dataset.icon77) {
         b.replaceChildren(icon(info[2]), label(element('span', 'flat-nav-label69'), ...railNames79[name])); b.dataset.icon77 = 'true';
       }
@@ -544,5 +544,12 @@
   // Keep footer progress/disabled labels synchronized without polling or rebuilding fields.
   document.addEventListener('varna:progress', actionState);
   applyBlur(); displayPalette(); renderOrder(); renderDock(); w.VarnaPilot69.sync(); sync();
-  w.VarnaFlow77 = {sync, openCatalog, version: 77, pages: Object.keys(pages), preferences: () => JSON.parse(JSON.stringify(prefs)), performance:()=>({syncs:syncCount78}), focus:essential78, fitRail:()=>fitRail79(true)};
+  function registerDestination84(name, info) {
+    if(pages[name])return;pages[name]=info;railNames79[name]=info.slice(0,2);
+    const b=button(info[0],info[1],info[2],()=>w.VarnaUI.open(name));b.dataset.page69=name;navigationButtons.set(name,b);nav.append(b);
+    const row=element('div','flow-catalog-row77'),link=button(info[0],info[1],info[2],()=>{chooser.close();w.VarnaUI.open(name);},'flow-catalog-link77');link.dataset.destination69=name;
+    const pin=button('میانبر','Pin','star',()=>togglePin(name),'flow-pin77');pin.dataset.pin77=name;row.append(link,pin);(catalogRows[0]?.row.parentElement||chooser).append(row);catalogRows.push({row,name});
+    Object.assign(prefs,read());dockKey78='';renderDock();renderOrder();
+  }
+  w.VarnaFlow77 = {sync, openCatalog, registerDestination84, version: 77, pages: Object.keys(pages), preferences: () => JSON.parse(JSON.stringify(prefs)), performance:()=>({syncs:syncCount78}), focus:essential78, fitRail:()=>fitRail79(true)};
 })(window);

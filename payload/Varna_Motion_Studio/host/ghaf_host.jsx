@@ -2566,7 +2566,7 @@ var VarnaBackgroundMotion81=/* Original ES3 motion math shared by the browser re
       var span=end-start,delay=number(cfg.delay,0,0,Math.max(0,span*.2)),a=start+delay;
       var di=Math.max(.001,Math.min(number(cfg.inDur,.36,.001,10),span*.44));
       var dout=Math.max(.001,Math.min(number(cfg.outDur,.3,.001,10),span*.44));
-      var pin=ease((time-a)/di,cfg.curve),pout=cfg.exit==='none'&&!forceZero?0:ease((time-(end-dout))/dout,'smooth');
+      var pin=cfg.family==='none'&&!forceZero?1:ease((time-a)/di,cfg.curve),pout=cfg.exitMotion?0:cfg.exit==='none'&&!forceZero?0:ease((time-(end-dout))/dout,'smooth');
       var strength=number(cfg.strength,1,.1,3),distance=Math.min(180,Math.max(12,width*.12))*strength;
       var dy=Math.min(100,Math.max(12,height*.6))*strength,remaining=1-pin;
       var sx=100,sy=100,x=0,y=0,rotation=0,f=cfg.family||'expand-x';
@@ -2622,6 +2622,7 @@ var VarnaBackgroundMotion81=/* Original ES3 motion math shared by the browser re
       if(exit==='slideRightOut')x+=distance*pout;
       if(exit==='slideDown')y+=dy*pout;
       sx=Math.max(0,sx)*outX;sy=Math.max(0,sy)*outY;
+      if(cfg.exitMotion){var om=cfg.exitMotion,reverse=sample({family:om.family,curve:om.curve,strength:om.strength,inDur:dout,outDur:.001,exit:'none',loop:false},Math.max(0,end-time),0,span+20,width,height,forceZero);sx*=reverse.scaleX/100;sy*=reverse.scaleY/100;x+=reverse.x;y+=reverse.y;rotation+=reverse.rotation;edge*=reverse.opacity/100;}
       if(!visible||time<=a){sx=forceZero?0:sx;sy=forceZero?0:sy;}
       if(!visible&&time>=end){sx=0;sy=0;}
       return {x:x===0?0:x,y:y===0?0:y,scaleX:sx,scaleY:sy,rotation:rotation===0?0:rotation,opacity:visible?100*edge:0};
@@ -2654,10 +2655,10 @@ var VarnaBackgroundMotion81=/* Original ES3 motion math shared by the browser re
     var f=families[i],p=profiles[j];out.push({id:f[0]+':'+p[0],family:f[0],category:f[3],fa:f[1]+' · '+p[1],en:f[2]+' · '+p[2],inDur:p[3],outDur:p[4],strength:p[5],curve:p[6],loop:f[3]==='ambient'});
   }return out;}
   var presets=catalog();
-  function find(id){for(var i=0;i<presets.length;i++)if(presets[i].id===id)return clone(presets[i]);return null;}
+  function find(id){if(id==='none')return {id:'none',family:'none',category:'normal',fa:'معمولی · بدون حرکت',en:'Normal · no motion',inDur:.03,outDur:.03,strength:1,curve:'linear',loop:false};for(var i=0;i<presets.length;i++)if(presets[i].id===id)return clone(presets[i]);return null;}
   function resolve(bg){
-    bg=bg||{};var source=bg.motion81||{},p=find(source.preset)||find('expand-x:soft');
-    return {family:p.family,curve:/^(smooth|linear|spring|quart|sine|back)$/.test(source.curve)?source.curve:p.curve,inDur:number(bg.motionDur,p.inDur,.03,10),outDur:number(bg.outDur,p.outDur,.03,10),delay:number(bg.motionDelay,0,0,10),strength:number(source.strength,p.strength,.1,3),loop:source.loop==null?p.loop:source.loop===true,exit:/^(none|fade|nativeMirror81|scaleOut|splitClose|slideDown|slideLeftOut|slideRightOut)$/.test(bg.outPreset)?bg.outPreset:'nativeMirror81'};
+    bg=bg||{};var source=bg.motion81||{},p=find(source.preset)||find('expand-x:soft'),out=find(source.outPreset);
+    return {exitMotion:out?{family:out.family,curve:out.curve,strength:out.strength}:null,family:p.family,curve:/^(smooth|linear|spring|quart|sine|back)$/.test(source.curve)?source.curve:p.curve,inDur:number(bg.motionDur,p.inDur,.03,10),outDur:number(bg.outDur,p.outDur,.03,10),delay:number(bg.motionDelay,0,0,10),strength:number(source.strength,p.strength,.1,3),loop:source.loop==null?p.loop:source.loop===true,exit:/^(none|fade|nativeMirror81|scaleOut|splitClose|slideDown|slideLeftOut|slideRightOut)$/.test(bg.outPreset)?bg.outPreset:'nativeMirror81'};
   }
   function applyPreset(bg,id){var p=find(id);if(!p)throw Error('UNKNOWN_BACKGROUND_PRESET');var out=clone(bg||{});out.enabled=true;out.independentMotion=true;out.motion81={preset:p.id,strength:p.strength,loop:p.loop};out.motionDur=p.inDur;out.outDur=p.outDur;out.outPreset='nativeMirror81';out.motionDelay=0;return out;}
   function staticText(group){
@@ -2805,7 +2806,7 @@ GHAFHost._backgroundMotion81=function(shape,bg){
 /* USER_LIBRARY81_HOST_BEGIN */
 /* User assets stay private. All paths come from the fixed catalog, never code
    supplied by the UI. Originals are imported once; placed graphs are isolated. */
-GHAFHost._libraryRevision81=3;
+GHAFHost._libraryRevision81=4;
 GHAFHost._vendorEffectNames.foil82='Holographic Foil';
 GHAFHost._libraryRoot81=function(){
  var bundled=new Folder(File(GHAFHost._filePath).parent.parent.fsName+'/assets/user-library81');
@@ -2817,6 +2818,8 @@ GHAFHost._libraryFile81=function(spec){
  var root=GHAFHost._libraryRoot81(),file=new File(root.fsName+'/'+spec.entry);
  if(!file.exists)throw Error('این فایل کتابخانه نصب نشده؛ بستهٔ شخصی را نصب یا مسیر آن را بررسی کن.');return file;
 };
+// Read-only renderer discovery; never opens/imports a project or evaluates a vendor.
+GHAFHost.library84PreviewInfo=function(){try{var root=File(GHAFHost._filePath).parent.parent,bin=new File(app.path.fsName+'/aerender.exe');if(!bin.exists)bin=new File(app.path.fsName+'/aerender');return GHAFHost._ok({libraryRoot:GHAFHost._libraryRoot81().fsName,aerender:bin.exists?bin.fsName:'',ffmpeg:new File(root.fsName+'/assets/vendor/Railcut/Railcut/bin/win/ffmpeg.exe').fsName,platform:$.os,isolated:true});}catch(e){return GHAFHost._err(String(e));}};
 GHAFHost.library81Status=function(){try{
  var root=GHAFHost._libraryRoot81(),packs=VarnaUserLibrary81.packs(),out=[];
  for(var i=0;i<packs.length;i++){var p=packs[i],entry=p.kind==='lower'?VarnaUserLibrary81.asset('lower-001').entry:p.entry;out.push({id:p.id,available:new File(root.fsName+'/'+entry).exists});}

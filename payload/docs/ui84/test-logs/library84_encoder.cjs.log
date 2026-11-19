@@ -1,0 +1,1 @@
+PASS UI84: real FFmpeg JPEG-sequence encode using production worker args; valid bounded frames with source pixel verification and bundled Windows capability flags, untouched source and cleaned temporary files. aerender/Windows modeled, not executed.

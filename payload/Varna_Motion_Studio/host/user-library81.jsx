@@ -1,6 +1,6 @@
 /* User assets stay private. All paths come from the fixed catalog, never code
    supplied by the UI. Originals are imported once; placed graphs are isolated. */
-GHAFHost._libraryRevision81=3;
+GHAFHost._libraryRevision81=4;
 GHAFHost._vendorEffectNames.foil82='Holographic Foil';
 GHAFHost._libraryRoot81=function(){
  var bundled=new Folder(File(GHAFHost._filePath).parent.parent.fsName+'/assets/user-library81');
@@ -12,6 +12,8 @@ GHAFHost._libraryFile81=function(spec){
  var root=GHAFHost._libraryRoot81(),file=new File(root.fsName+'/'+spec.entry);
  if(!file.exists)throw Error('این فایل کتابخانه نصب نشده؛ بستهٔ شخصی را نصب یا مسیر آن را بررسی کن.');return file;
 };
+// Read-only renderer discovery; never opens/imports a project or evaluates a vendor.
+GHAFHost.library84PreviewInfo=function(){try{var root=File(GHAFHost._filePath).parent.parent,bin=new File(app.path.fsName+'/aerender.exe');if(!bin.exists)bin=new File(app.path.fsName+'/aerender');return GHAFHost._ok({libraryRoot:GHAFHost._libraryRoot81().fsName,aerender:bin.exists?bin.fsName:'',ffmpeg:new File(root.fsName+'/assets/vendor/Railcut/Railcut/bin/win/ffmpeg.exe').fsName,platform:$.os,isolated:true});}catch(e){return GHAFHost._err(String(e));}};
 GHAFHost.library81Status=function(){try{
  var root=GHAFHost._libraryRoot81(),packs=VarnaUserLibrary81.packs(),out=[];
  for(var i=0;i<packs.length;i++){var p=packs[i],entry=p.kind==='lower'?VarnaUserLibrary81.asset('lower-001').entry:p.entry;out.push({id:p.id,available:new File(root.fsName+'/'+entry).exists});}

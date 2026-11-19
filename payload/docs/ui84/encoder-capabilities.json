@@ -1,0 +1,16 @@
+{
+  "file": "Varna_Motion_Studio/assets/vendor/Railcut/Railcut/bin/win/ffmpeg.exe",
+  "bytes": 7223296,
+  "sha256": "527b3b438a9844314d26ab827c3b38a6a097a391dfa2123b687de4136f13036d",
+  "requiredEnabledFlags": [
+    "--enable-demuxer=avi",
+    "--enable-decoder=rawvideo",
+    "--enable-encoder=mjpeg",
+    "--enable-muxer=image2",
+    "--enable-filter=scale"
+  ],
+  "windowsBinaryExecuted": false,
+  "linuxProductionArgsExecuted": true,
+  "jpegPixelsDecoded": true,
+  "nativeAerenderExecuted": false
+}

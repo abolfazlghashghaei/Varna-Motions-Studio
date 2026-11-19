@@ -62,4 +62,4 @@ function inspect(){
   await context.close();
  }
  assert.deepEqual(report.failures,[]);assert.deepEqual(report.errors,[]);console.log('PASS UI80: '+report.cases+' long-transcript layouts, persistent editor, stable scrolling/caret, real offline worker/apply/off, original control identity, settings focus and word extraction.');
-}finally{fs.mkdirSync(path.resolve(root,'../docs/ui80'),{recursive:true});fs.writeFileSync(path.resolve(root,'../docs/ui83/text-workspace.json'),JSON.stringify(report,null,2)+'\n');await h.close();}})().catch(e=>{console.error(e);process.exitCode=1});
+}finally{fs.mkdirSync(path.resolve(root,'../docs/ui80'),{recursive:true});fs.writeFileSync(process.env.VARNA_TEXT_REPORT||path.resolve(root,'../docs/ui83/text-workspace.json'),JSON.stringify(report,null,2)+'\n');await h.close();}})().catch(e=>{console.error(e);process.exitCode=1});

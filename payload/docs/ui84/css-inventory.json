@@ -1,0 +1,14 @@
+{
+  "before": {
+    "stylesheets": 36,
+    "important": 3354,
+    "staticFontSizeUnder12Declarations": 325,
+    "staticIds": 899
+  },
+  "after": {
+    "stylesheets": 36,
+    "important": 3354,
+    "staticFontSizeUnder12Declarations": 325,
+    "staticIds": 899
+  }
+}

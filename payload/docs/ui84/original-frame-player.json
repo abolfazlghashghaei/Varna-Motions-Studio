@@ -1,0 +1,10 @@
+{
+  "jpegDecode": true,
+  "pixels": true,
+  "animated": true,
+  "reducedMotion": true,
+  "thumbnailSingleImage": true,
+  "layouts": 8,
+  "noImport": true,
+  "nativeAdobe": false
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "name": "ui47_controls_browser.cjs",
+    "exitCode": 0,
+    "seconds": 55.39
+  },
+  {
+    "name": "table47_browser.cjs",
+    "exitCode": 0,
+    "seconds": 31.18
+  },
+  {
+    "name": "ui68_tokens_browser.cjs",
+    "exitCode": 0,
+    "seconds": 31.28
+  },
+  {
+    "name": "ui69_pilot_browser.cjs",
+    "exitCode": 0,
+    "seconds": 542.55
+  },
+  {
+    "name": "ui69_interactions_browser.cjs",
+    "exitCode": 0,
+    "rerunReason": "29 exact destinations and actual workspace columns; all functional assertions retained"
+  },
+  {
+    "name": "ui78_reference_browser.cjs",
+    "exitCode": 0,
+    "seconds": 28.26
+  },
+  {
+    "name": "ui80_text_workspace_browser.cjs",
+    "exitCode": 0,
+    "seconds": 357.74
+  },
+  {
+    "name": "ui84_table_browser.cjs",
+    "exitCode": 0,
+    "seconds": 38.86
+  },
+  {
+    "name": "ui84_panes_browser.cjs",
+    "exitCode": 0,
+    "seconds": 14.09
+  },
+  {
+    "name": "ui84_background_browser.cjs",
+    "exitCode": 0,
+    "seconds": 18.9
+  },
+  {
+    "name": "ui84_preview_first_browser.cjs",
+    "exitCode": 0,
+    "seconds": 10.81
+  },
+  {
+    "name": "background81_browser.cjs",
+    "exitCode": 0,
+    "seconds": 54.37
+  },
+  {
+    "name": "preview82_browser.cjs",
+    "exitCode": 0,
+    "seconds": 185.96
+  },
+  {
+    "name": "background81_core.cjs",
+    "exitCode": 0,
+    "seconds": 2.95
+  },
+  {
+    "name": "background84_core.cjs",
+    "exitCode": 0,
+    "seconds": 0.12
+  },
+  {
+    "name": "background81_host.cjs",
+    "exitCode": 0,
+    "seconds": 0.22
+  },
+  {
+    "name": "library82_host.cjs",
+    "exitCode": 0,
+    "seconds": 0.18
+  },
+  {
+    "name": "library84_preview_worker.cjs",
+    "exitCode": 0,
+    "seconds": 0.2
+  },
+  {
+    "name": "library84_encoder.cjs",
+    "exitCode": 0,
+    "seconds": 1.0
+  },
+  {
+    "name": "library84_frames_browser.cjs",
+    "exitCode": 0,
+    "checks": "Real JPEG decoding/pixels, animated original-frame canvas, reduced motion, single-frame thumbnail and 8 strict layouts; modeled Adobe only"
+  }
+]
