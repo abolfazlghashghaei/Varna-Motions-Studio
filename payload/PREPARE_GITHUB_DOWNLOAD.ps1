@@ -3,7 +3,7 @@ try {
     if ($env:OS -ne 'Windows_NT') { throw 'This review package is for Windows.' }
     $root = Join-Path $PSScriptRoot 'Varna_Motion_Studio'
     $manifest = Get-Content -LiteralPath (Join-Path $root 'PACKAGE_MANIFEST.json') -Raw -Encoding UTF8 | ConvertFrom-Json
-    if ($manifest.ui -ne 91 -or $manifest.version -cne '4.5.0-rc.47' -or $manifest.platform -cne 'Windows' -or @($manifest.files).Count -ne 7909) { throw 'Unexpected UI91 Windows manifest.' }
+    if ($manifest.ui -ne 91 -or $manifest.version -cne '4.5.0-rc.47' -or $manifest.platform -cne 'Windows' -or @($manifest.files).Count -ne 7910) { throw 'Unexpected UI91 Windows manifest.' }
     $separator = [IO.Path]::DirectorySeparatorChar
     $prefix = [IO.Path]::GetFullPath($root).TrimEnd($separator) + $separator
     $seen = @{}
@@ -20,9 +20,9 @@ try {
         if ($item.PSIsContainer -or ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) { throw ('Unexpected file type: ' + $relative) }
         if ($item.Length -ne [long]$entry.bytes -or (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -ne [string]$entry.sha256) { throw ('Package checksum mismatch: ' + $relative) }
         $count++
-        if ($count % 100 -eq 0) { Write-Host ('Verified Windows payload ' + $count + ' / 7909') }
+        if ($count % 100 -eq 0) { Write-Host ('Verified Windows payload ' + $count + ' / 7910') }
     }
-    Write-Host 'All 7909 Windows payload files verified. Starting the selected installer.'
+    Write-Host 'All 7910 Windows payload files verified. Starting the selected installer.'
     exit 0
 } catch {
     Write-Host ('Package preparation stopped: ' + $_.Exception.Message)

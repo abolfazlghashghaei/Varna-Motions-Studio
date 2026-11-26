@@ -323,11 +323,25 @@
   for(const node of all('#page-table .numeric37'))node.dataset.numericCompact91='';
 
   document.addEventListener('varna:language52',()=>labels.forEach(update=>update()));
+  // UI92: a value already supports typing, dragging and keyboard edits. Hide
+  // redundant arrow grips/range mirrors, retaining real geometry/time/gradient
+  // handles. Original input nodes, IDs and listeners are never removed.
+  function compactNumbers92(root){
+    if(root.matches?.('.numeric37'))root.dataset.numericCompact91='';
+    for(const group of all('.numeric37',root))group.dataset.numericCompact91='';
+  }
+  compactNumbers92(document);
+  new MutationObserver(records=>{
+    for(const record of records)for(const node of record.addedNodes){
+      if(node.nodeType===1)compactNumbers92(node);
+    }
+  }).observe(document.getElementById('workspace'),{childList:true,subtree:true});
+
   // Deep links to a native range must reveal a real, keyboard-focusable slider.
   // Normal navigation keeps the supplied compact numeric presentation.
   const reveal91=w.VarnaUI.reveal,expandedRanges91=new Set();
   w.VarnaUI.reveal=function(target){
-    if(target?.matches('input[type=range]')){
+    if(target?.matches('input[type=range],.numeric37-handle')){
       const group=target.closest('[data-numeric-compact91]');
       if(group){group.removeAttribute('data-numeric-compact91');expandedRanges91.add(group);}
     }

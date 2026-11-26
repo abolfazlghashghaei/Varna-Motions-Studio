@@ -349,6 +349,8 @@
       v.hud.hidden=hide;
       compareButton.disabled=full;
       if(!hide&&path){
+        const accent=getComputedStyle(v.view).getPropertyValue('--vp-accent').trim();
+        path.stroke(accent);dotted.stroke(accent);
         path.points(corners);
         dotted.points([M.point(s,0,-s.height/2),M.point(s,0,-s.height/2-24/g.fit/(s.scale/100))].map(p=>project(p,g)).flat());
         for(const child of Array.from(pen.getChildren()).slice(2))child.destroy();
@@ -377,6 +379,8 @@
       for(const [key,input]of inputs)if(document.activeElement!==input)input.value=s[key];
     }
     function queue(){if(!pending)pending=requestAnimationFrame(draw);}
+    document.addEventListener('varna:palette50',queue);
+    new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:['data-theme']});
     function begin(event,kind,edgeX,edgeY){
       if(event.button!==0||v.panning()||stage.dataset.frameMode50==='full'||hiddenOverlay)return;
       event.preventDefault();event.stopImmediatePropagation();

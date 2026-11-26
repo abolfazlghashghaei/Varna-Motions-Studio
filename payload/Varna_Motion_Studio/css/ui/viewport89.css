@@ -49,6 +49,25 @@ html[data-ui89] body:is([data-theme=light],[data-theme=silver]) {
   --vp-grid-light: #d3deeb;
   color-scheme: light;
 }
+/* UI92: use the existing persisted palette and its AA-adjusted tokens instead
+   of a fixed purple skin. Brightness/custom palettes keep their existing owner. */
+html[data-ui89] body[data-flow-shell77] {
+  --vp-bg: var(--ui-color-surface);
+  --vp-surface: var(--ui-color-surface);
+  --vp-field: var(--ui-color-field);
+  --vp-text: var(--ui-color-text);
+  --vp-muted: var(--ui-color-muted);
+  --vp-edge: var(--ui-color-border);
+  --vp-line: var(--u-line, var(--ui-color-border));
+  --vp-glass: var(--ui-color-surface);
+  --vp-accent: var(--ui-color-accent);
+  --vp-secondary: var(--ui-color-accent);
+  --vp-on: var(--ui-color-on-accent);
+  --vp-grid-dark: var(--ui-color-field);
+  --vp-grid-light: var(--ui-color-soft);
+  --vp-gap: 4px;
+  --vp-radius-panel: 6px;
+}
 @layer varna-viewport89 {
   html[data-ui89] body[data-flow-shell77] {
     font-family: Varna Inter, Tahoma, system-ui,sans-serif !important;
@@ -310,7 +329,7 @@ html[data-ui89] .vp-handle89:is([data-handle89=rotate],[data-handle89=anchor])::
 html[data-ui89] .vp-handle89[data-handle89=anchor]::after{
   background:linear-gradient(#170f28,#170f28) center/1px 100% no-repeat,linear-gradient(#170f28,#170f28) center/100% 1px no-repeat,#55c7df;
 }
-html[data-ui89] .vp-handle89:is(:hover,:active,:focus-visible)::after {transform:scale(1.16);background-color:#b3a3ff}
+html[data-ui89] .vp-handle89:is(:hover,:active,:focus-visible)::after {transform:scale(1.16);background-color:var(--vp-accent)}
 html[data-ui89] :is(.vp-button89,.vp-scrub89,.vp-select89) {
   min-block-size:32px;
   padding:3px 7px;

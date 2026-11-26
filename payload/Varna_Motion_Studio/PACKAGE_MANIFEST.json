@@ -18,8 +18,8 @@
     },
     {
       "path": "INSTALL_WINDOWS.ps1",
-      "bytes": 34871,
-      "sha256": "84fbd467b190711ec545bf9226c3fdb37beb180904833927adc56ebb21bf041b"
+      "bytes": 35253,
+      "sha256": "21a13867cebe84402069b3991eed69d17080bd3375ebf03ca88740f6dfbb367b"
     },
     {
       "path": "LAUNCH_EDITOR_WINDOWS.bat",
@@ -37208,8 +37208,8 @@
     },
     {
       "path": "css/ui/compact91.css",
-      "bytes": 9992,
-      "sha256": "1f5f19723a0dcd566d297b5b2eb503e41329cfcaa4b942cfc154af175702baeb"
+      "bytes": 10806,
+      "sha256": "7bbfbb5896a7190c4ace83900138dbdb0bcf750c450d2c0a966b7a81fffec152"
     },
     {
       "path": "css/ui/context90.css",
@@ -37233,8 +37233,8 @@
     },
     {
       "path": "css/ui/studio88.css",
-      "bytes": 49635,
-      "sha256": "d20de688ed6c25caa5fb46e4cc1328fac0243ecdb6c8d04b01a7e6a95259fbdb"
+      "bytes": 50464,
+      "sha256": "55f55129be42582965576cc705daee92e62e4f90526295d6e2d05622e0674b92"
     },
     {
       "path": "css/ui/tokens.css",
@@ -37298,8 +37298,8 @@
     },
     {
       "path": "css/ui/viewport89.css",
-      "bytes": 20861,
-      "sha256": "32824ceb357591492f41b5730b5b93016e66dac538b1d6ce1ddfc2ce1e8ee718"
+      "bytes": 21635,
+      "sha256": "f45b3c3bc388cd77b11395249ed30a04b804dff50259902696a05d0a5a450d17"
     },
     {
       "path": "css/upgrades27.css",
@@ -37963,8 +37963,8 @@
     },
     {
       "path": "js/compact91.js",
-      "bytes": 20671,
-      "sha256": "e9bde0a65a36b42a5ef5522ab08248e1a003c46c0f7a00325cf2e64d1b20baf2"
+      "bytes": 21384,
+      "sha256": "e18681351ae28c1d18fc4fc2212bc2f6a26b264e75daec2acd981a1bdab9692e"
     },
     {
       "path": "js/context90.js",
@@ -38098,8 +38098,8 @@
     },
     {
       "path": "js/liquid48.js",
-      "bytes": 15819,
-      "sha256": "cf642ffcfb1e919591bd5d1e3ef4a6636c2cb20d95972b5383acf3ab9d2ae8fc"
+      "bytes": 15568,
+      "sha256": "17d0da4ed3fa0bd95182ea70a95ac4939dc6d6df634a80e56795e249b529ae48"
     },
     {
       "path": "js/music-engine.js",
@@ -38383,8 +38383,8 @@
     },
     {
       "path": "js/ui-tokens68.js",
-      "bytes": 4490,
-      "sha256": "15439dbc2af3fb15e1a5227e16ab683f4bcd35b3cd622105d8810d2da757f577"
+      "bytes": 4539,
+      "sha256": "eb1f9da5e6a64cd9b2a30892ef7ac24f84a098362ff894418c7f56c7ea06e6a5"
     },
     {
       "path": "js/upgrades27.js",
@@ -38423,8 +38423,8 @@
     },
     {
       "path": "js/viewport89.js",
-      "bytes": 47525,
-      "sha256": "ccbb12eb0bdc824f083b015993e16baf2916d0c43358a79f24e35d1b5c9ff88c"
+      "bytes": 47823,
+      "sha256": "950204e7505afb9cdabf72356acd0fded3fe454f18b2dc051e7857ea4aaa9533"
     },
     {
       "path": "js/word-motion39.js",
@@ -39263,8 +39263,8 @@
     },
     {
       "path": "tests/ui47_controls_browser.cjs",
-      "bytes": 8149,
-      "sha256": "943a207baf871e34bb4994c4242d2d47498e371c1ea368d94030cc2041894933"
+      "bytes": 8378,
+      "sha256": "952588666b81409166c838660305f4e118c54c6e3fc871302140f4a6e0343e7b"
     },
     {
       "path": "tests/ui67_review.cjs",
@@ -39415,6 +39415,11 @@
       "path": "tests/ui91_transform_core.cjs",
       "bytes": 1915,
       "sha256": "ef4f7ea13174f48fe68fa9973fe514534133c6ed4fb15ef2eb8ecd7915f697da"
+    },
+    {
+      "path": "tests/ui92_refinements_browser.cjs",
+      "bytes": 8126,
+      "sha256": "1ea977c7f9a922679b4a5f399ef9cda61bd9a125c8d51f21abfb747ee1d759a0"
     },
     {
       "path": "tests/user_library81_browser.cjs",

@@ -1,0 +1,6 @@
+PASS60 parser, physically omitted engine modules, shared-module preservation, fixed-location discovery, no recursive/outside scans, invalid-pointer rejection, version reuse, missing/incomplete engines and junction rejection. Real Windows install/removal not executed.
+Disconnected link; target preserved: /tmp/unlink602-8cef320202ae43d28e4fb0af06c9b846/GHAF/Core/ComfyUI/models/SEEDVR2
+Disconnected link; target preserved: /tmp/unlink602-8cef320202ae43d28e4fb0af06c9b846/GHAF/Core/ComfyUI/models/file-model
+Disconnected link; target preserved: /tmp/unlink602-8cef320202ae43d28e4fb0af06c9b846/broken
+PASS603 real filesystem: read-only Git pack removed; engine removed; external model bytes preserved; root link refused. Link type: SymbolicLink
+Disconnected link; target preserved: /tmp/unlink602-8cef320202ae43d28e4fb0af06c9b846/root-link

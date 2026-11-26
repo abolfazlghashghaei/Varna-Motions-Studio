@@ -1,7 +1,7 @@
 @layer varna-compact91 {
   html[data-ui91] body [data-hidden91] { display:none !important; }
   html[data-ui91] body[data-flow-shell77] {
-    --compact-gap91:6px;
+    --compact-gap91:4px;
     --compact-field91:32px;
   }
   html[data-ui91] body[data-flow-shell77] [data-numeric-compact91].numeric37 {
@@ -19,13 +19,13 @@
   }
   html[data-ui91] body[data-flow-shell77] .line-panel91,
   html[data-ui91] body[data-flow-shell77] #page-table details.flat-section69:not(.flat-preview69):not([data-table-editor91]) {
-    margin:4px 0 !important; padding:0 !important;
+    margin:2px 0 !important; padding:0 !important;
     border:0 !important; border-radius:0 !important; border-block-start:1px solid var(--vp-line) !important;
     background:transparent !important; box-shadow:none !important;
   }
   html[data-ui91] body[data-flow-shell77] .line-panel91 > summary,
   html[data-ui91] body[data-flow-shell77] #page-table details.flat-section69:not(.flat-preview69):not([data-table-editor91]) > summary {
-    cursor:pointer; min-height:32px !important; padding:6px 8px !important;
+    cursor:pointer; min-height:32px !important; padding:2px 4px !important;
     font-size:max(12px, 12px) !important; color:var(--vp-text) !important;
   }
   html[data-ui91] body[data-flow-shell77] :is(.curve-row91,.curve-points49,.shape-fields91,.shape-options91,.motion-mode91,.bg-common-fields91,.bg-animation-switches91) {
@@ -151,5 +151,28 @@ html[data-ui91] .studio-brand-art87 #varnaGlyphs48 { display:block; width:100%; 
      contextual group shrink and wrap instead of overflowing a 300px panel. */
   html[data-ui91] body[data-flow-shell77] .vp-toolbar89 > .context-tools90 {
     flex:1 1 auto !important; min-inline-size:0; max-inline-size:100%;
+  }
+}
+
+@layer varna-compact91 {
+  /* UI92: legacy card/layout layers use !important; matching priority is needed
+     to reclaim their padding. Retain the 12px font and 32px control floors. */
+  html[data-ui91] body[data-flow-shell77] .page > .flat-section69 {
+    margin-block:2px !important; padding:4px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .page .card {
+    margin-block:2px !important; padding:4px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .page .form-grid {
+    gap:4px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .page .control {
+    gap:2px !important; margin-block:0 !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .vp-inspector89 {
+    padding:4px;
+  }
+  html[data-ui91] body[data-flow-shell77] .vp-inspector89 > summary {
+    padding:2px 4px;
   }
 }

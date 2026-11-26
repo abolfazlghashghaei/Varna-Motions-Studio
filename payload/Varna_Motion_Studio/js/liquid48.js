@@ -39,7 +39,7 @@ const missing=glyphFingerprint('\u{10FFFF}'),glyphs=['V','v','Ⅴ','ν','В','в
 // neighborhood. Pointer events never change CSS or query layout/style.
 let particles=[],width=0,height=0,raf=0,last=0,paintCount=0,burstCount=0,color='',opacity=.4,burstStart=0,burstSignature='',layoutKey='';
 const sprites=new Map(),buckets=new Map(),restCanvas=document.createElement('canvas'),restContext=restCanvas.getContext('2d');
-const scatterDuration=600,anticipationDuration=220,returnDuration=5000,burstDuration=scatterDuration+anticipationDuration+returnDuration,cellSize=80;
+const scatterDuration=600,anticipationDuration=0,returnDuration=5000,burstDuration=scatterDuration+anticipationDuration+returnDuration,cellSize=80;
 let pointer={x:-1000,y:-1000,active:false},collisionCount=0,phase='rest',frameMs=0,framePeakMs=0,pixelRatio=1,radius=80;
 let activeParticles=[],restKey=null,restBounds={left:0,top:0,width:1,height:1},staticBuilds=0,drawCalls=0,pointerEvents=0;
 function request(){if(!raf&&!document.hidden&&(!sculptureHost91||document.body.dataset.page==='home'))raf=requestAnimationFrame(frame);}
@@ -63,7 +63,6 @@ function position(p,now){
  if(!burstStart||reduced.matches||now-burstStart>=burstDuration){p.x=p.homeX;p.y=p.homeY;p.rotation=0;p.progress=1;return;}
  const elapsed=Math.max(0,now-burstStart);p.rotation=0;
  if(elapsed<scatterDuration){const u=1-Math.pow(1-elapsed/scatterDuration,3);p.x=p.sx+(p.peakX-p.sx)*u;p.y=p.sy+(p.peakY-p.sy)*u;p.progress=0;}
- else if(elapsed<scatterDuration+anticipationDuration){const u=(elapsed-scatterDuration)/anticipationDuration,a=Math.pow(Math.sin(u*Math.PI),2)*1.6;p.x=p.peakX+Math.sin(u*Math.PI*4+p.seed)*a;p.y=p.peakY+Math.cos(u*Math.PI*4+p.seed)*a;p.progress=0;}
  else {
   // Fold back along two arms in a wave from the tip upwards. Each glyph follows
   // a non-looping cubic curve, decelerates into place, and keeps its orientation.

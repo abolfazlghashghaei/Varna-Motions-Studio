@@ -1,0 +1,18 @@
+{
+  "deliveryKind": "complete-plugin",
+  "ui": 91,
+  "browserCases": 54,
+  "browserErrors": [],
+  "actualPluginControllers": true,
+  "standaloneUIIncluded": false,
+  "originalInteractiveV": true,
+  "tableBuildPayloadVerified": true,
+  "fixedEngineAddressesVerified": true,
+  "paletteActionVerified": true,
+  "redundantNumericGripsHidden": true,
+  "vAnticipationShakeRemoved": true,
+  "productFiles": 7910,
+  "originalLibraryFiles": 4429,
+  "nativeAdobeExecuted": false,
+  "nativeWindowsInstallerExecuted": false
+}

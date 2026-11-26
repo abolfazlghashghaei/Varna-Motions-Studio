@@ -1,20 +1,49 @@
-﻿param([ValidateSet('Install','Repair','Uninstall')][string]$Action='Install',[ValidateSet('AE','Premiere','Resolve')][string]$HostApp='AE',[ValidateSet('WithEngine','WithoutEngine')][string]$Mode='WithoutEngine',[string]$ScanRoot=$env:SystemDrive)
+﻿param([ValidateSet('Install','Repair','Uninstall')][string]$Action='Install',[ValidateSet('AE','Premiere','Resolve')][string]$HostApp='AE',[ValidateSet('WithEngine','WithoutEngine')][string]$Mode='WithoutEngine')
 $ErrorActionPreference='Stop'
 $package=Split-Path $PSScriptRoot -Parent
 $payload=Join-Path $package 'Varna_Motion_Studio'
 $report=Join-Path $env:TEMP ('Varna-preflight-'+(Get-Date -Format yyyyMMdd-HHmmss)+'.json')
-function Find-Engines60([string]$Root){
- $queue=New-Object 'System.Collections.Generic.Queue[string]';$queue.Enqueue([IO.Path]::GetFullPath($Root+[IO.Path]::DirectorySeparatorChar));$seen=@{};$scanned=0
- while($queue.Count){$dir=$queue.Dequeue();$scanned++;if($scanned%100 -eq 0){Write-Progress -Activity 'Inventory C drive' -Status ($scanned.ToString()+' folders checked: '+$dir)};foreach($child in @(Get-ChildItem -LiteralPath $dir -Directory -Force -ErrorAction SilentlyContinue)){
-  if($child.Attributes -band [IO.FileAttributes]::ReparsePoint){continue}
-  if($child.Name -in @('Windows','$Recycle.Bin','System Volume Information','.git','node_modules')){continue}
-  $path=$child.FullName
-  $branded=$path -match '(?i)(varna|ghaf|qaf|قاف|وارنا)'
-  $engine=(Test-Path -LiteralPath (Join-Path $path 'ComfyUI\main.py')) -and (Test-Path -LiteralPath (Join-Path $path 'python_embeded\python.exe'))
-  $source=Test-Path -LiteralPath (Join-Path $path 'main.py')
-  if($branded -and ($engine -or ($source -and (Test-Path -LiteralPath (Join-Path $path 'comfy'))))){if(!$seen[$path]){$seen[$path]=$true;[pscustomobject]@{Path=$path;Portable=$engine;Models=(Test-Path (Join-Path $path 'ComfyUI\models'))}};continue}
-  $queue.Enqueue($path)
- }}
+function Get-VarnaEngineCandidates {
+    param([string]$LocalAppData=$env:LOCALAPPDATA)
+    if ([string]::IsNullOrWhiteSpace($LocalAppData)) { throw 'LOCALAPPDATA is unavailable; engine locations cannot be checked.' }
+    # Exactly two installation addresses. Only immediate version directories
+    # inside Varna's own address are inspected; never traverse a drive/profile.
+    $locations = @((Join-Path $LocalAppData 'VarnaMotionStudio\Engines59'),(Join-Path $LocalAppData 'GHAF\Core'))
+    $saved = ''
+    $candidates = New-Object System.Collections.ArrayList
+    foreach ($location in $locations) {
+        $parent = Get-Item -LiteralPath (Split-Path $location -Parent) -Force -ErrorAction SilentlyContinue
+        $item = Get-Item -LiteralPath $location -Force -ErrorAction SilentlyContinue
+        if (!$parent -or !$item -or !$item.PSIsContainer) { continue }
+        if (($parent.Attributes -band [IO.FileAttributes]::ReparsePoint) -or ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) { continue }
+        [void]$candidates.Add($item.FullName)
+        if ($location -eq $locations[0]) {
+            foreach ($version in @(Get-ChildItem -LiteralPath $location -Directory -Force -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending)) {
+                if (!($version.Attributes -band [IO.FileAttributes]::ReparsePoint)) { [void]$candidates.Add($version.FullName) }
+            }
+        }
+    }
+    # A saved pointer may prioritize a known version, never add a third address.
+    $pointer = Join-Path $LocalAppData 'VarnaMotionStudio\engine-root.txt'
+    if (Test-Path -LiteralPath $pointer -PathType Leaf) {
+        $saved = ([string](Get-Content -LiteralPath $pointer -Raw -ErrorAction SilentlyContinue)).Trim()
+        if ($candidates.Contains($saved)) { $saved }
+    }
+    foreach ($candidate in $candidates) { if ($candidate -ne $saved) { $candidate } }
+}
+function Find-Engines60([string]$LocalAppData=$env:LOCALAPPDATA){
+ foreach($path in @(Get-VarnaEngineCandidates -LocalAppData $LocalAppData)){
+  $main=Join-Path $path 'ComfyUI\main.py';$python=Join-Path $path 'python_embeded\python.exe'
+  # Refuse linked runtime directories rather than following their targets.
+  $linked=$false
+  foreach($part in @('ComfyUI','python_embeded')){
+   $item=Get-Item -LiteralPath (Join-Path $path $part) -Force -ErrorAction SilentlyContinue
+   if($item -and ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)){$linked=$true}
+  }
+  if(!$linked -and (Test-Path -LiteralPath $main -PathType Leaf) -and (Test-Path -LiteralPath $python -PathType Leaf)){
+   [pscustomobject]@{Path=$path;Portable=$true;Models=(Test-Path -LiteralPath (Join-Path $path 'ComfyUI\models'))}
+  }
+ }
 }
 # Never use recursive deletion on a tree that may contain model junctions.
 function Remove-EngineTree602 {
@@ -44,13 +73,15 @@ function Remove-EngineTree602 {
 }
 Write-Host '1. Preflight: close Adobe applications; inventory only, no files changed.'
 if(Get-Process AfterFX,'Adobe Premiere Pro',Resolve -ErrorAction SilentlyContinue){throw 'Close After Effects, Premiere and Resolve first.'}
-Write-Host 'Scanning branded engine installations; inaccessible folders are skipped and junctions are never followed...'
-$engines=@(Find-Engines60 $ScanRoot)
+Write-Host 'Checking the two fixed engine locations only (no drive scan):'
+$locations=@((Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio\Engines59'),(Join-Path $env:LOCALAPPDATA 'GHAF\Core'))
+$locations|ForEach-Object {Write-Host ('  '+$_)}
+$engines=@(Find-Engines60)
 if($Action -eq 'Uninstall'){
  $cache=Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio\Downloads59'
  if(Test-Path -LiteralPath $cache -PathType Container){$engines+= [pscustomobject]@{Path=$cache;Portable=$false;Models=$false;Cache=$true}}
 }
-$state=[ordered]@{action=$Action;host=$HostApp;mode=$Mode;engines=$engines;packageManifest=(Test-Path (Join-Path $payload 'PACKAGE_MANIFEST.json'));nvidia=@(Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue|Where-Object Name -match NVIDIA).Count -gt 0}
+$state=[ordered]@{action=$Action;host=$HostApp;mode=$Mode;engineLocations=$locations;engines=$engines;packageManifest=(Test-Path (Join-Path $payload 'PACKAGE_MANIFEST.json'));nvidia=@(Get-CimInstance Win32_VideoController -ErrorAction SilentlyContinue|Where-Object Name -match NVIDIA).Count -gt 0}
 $state|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $report -Encoding UTF8
 $state['existingAEPanel']=Test-Path (Join-Path $env:APPDATA 'Adobe\CEP\extensions\VarnaMotionStudio')
 $state['existingPremierePanel']=Test-Path (Join-Path $env:APPDATA 'Adobe\CEP\extensions\com.varnalabs.editstudio.premiere')

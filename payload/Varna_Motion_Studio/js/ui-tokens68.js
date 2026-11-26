@@ -64,6 +64,7 @@
       '--ui-color-action': action,
       '--ui-color-on-action': onAction,
       '--ui-color-accent': accent,
+      '--ui-color-on-accent': bestInk([accent]),
       '--ui-color-soft': soft,
       '--ui-color-border': readable(border, [surface, field], 3),
       '--ui-color-focus': readable(action, [surface, field], 3),

@@ -199,28 +199,32 @@ function Test-VarnaEngine([string]$base) {
     finally {if($healthy59){Remove-Item -LiteralPath $stdout,$stderr -Force -ErrorAction SilentlyContinue};Remove-Item -LiteralPath $script -Force -ErrorAction SilentlyContinue}
 }
 function Get-VarnaEngineCandidates {
-    $roots = New-Object System.Collections.ArrayList
-    $pointer = Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio\engine-root.txt'
+    param([string]$LocalAppData=$env:LOCALAPPDATA)
+    if ([string]::IsNullOrWhiteSpace($LocalAppData)) { throw 'LOCALAPPDATA is unavailable; engine locations cannot be checked.' }
+    # Exactly two installation addresses. Only immediate version directories
+    # inside Varna's own address are inspected; never traverse a drive/profile.
+    $locations = @((Join-Path $LocalAppData 'VarnaMotionStudio\Engines59'),(Join-Path $LocalAppData 'GHAF\Core'))
+    $saved = ''
+    $candidates = New-Object System.Collections.ArrayList
+    foreach ($location in $locations) {
+        $parent = Get-Item -LiteralPath (Split-Path $location -Parent) -Force -ErrorAction SilentlyContinue
+        $item = Get-Item -LiteralPath $location -Force -ErrorAction SilentlyContinue
+        if (!$parent -or !$item -or !$item.PSIsContainer) { continue }
+        if (($parent.Attributes -band [IO.FileAttributes]::ReparsePoint) -or ($item.Attributes -band [IO.FileAttributes]::ReparsePoint)) { continue }
+        [void]$candidates.Add($item.FullName)
+        if ($location -eq $locations[0]) {
+            foreach ($version in @(Get-ChildItem -LiteralPath $location -Directory -Force -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending)) {
+                if (!($version.Attributes -band [IO.FileAttributes]::ReparsePoint)) { [void]$candidates.Add($version.FullName) }
+            }
+        }
+    }
+    # A saved pointer may prioritize a known version, never add a third address.
+    $pointer = Join-Path $LocalAppData 'VarnaMotionStudio\engine-root.txt'
     if (Test-Path -LiteralPath $pointer -PathType Leaf) {
-        $saved = (Get-Content -LiteralPath $pointer -Raw -ErrorAction SilentlyContinue).Trim()
-        if ($saved) { [void]$roots.Add($saved) }
+        $saved = ([string](Get-Content -LiteralPath $pointer -Raw -ErrorAction SilentlyContinue)).Trim()
+        if ($candidates.Contains($saved)) { $saved }
     }
-    if ($env:VARNA_ENGINE_ROOT) { [void]$roots.Add($env:VARNA_ENGINE_ROOT) }
-    foreach ($base in @((Join-Path $env:LOCALAPPDATA 'GHAF\Core'),(Join-Path $env:LOCALAPPDATA 'GHAF'),(Join-Path $env:APPDATA 'GHAF\Core'),(Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio\ComfyUI_windows_portable'),(Join-Path $env:USERPROFILE 'ComfyUI_windows_portable'),(Join-Path $env:SystemDrive 'ComfyUI_windows_portable'))) { [void]$roots.Add($base) }
-    $shared = Join-Path $env:LOCALAPPDATA 'GHAF'
-    if (Test-Path -LiteralPath $shared -PathType Container) {
-        foreach ($child in (Get-ChildItem -LiteralPath $shared -Directory -ErrorAction SilentlyContinue)) {
-            if (($child.Attributes -band [IO.FileAttributes]::ReparsePoint) -eq 0) { [void]$roots.Add($child.FullName) }
-        }
-    }
-    $seen = @{}
-    foreach ($item in $roots) {
-        foreach ($variant in @([string]$item,(Join-Path ([string]$item) 'ComfyUI_windows_portable'))) {
-            if (!$variant) { continue }
-            $key = $variant.TrimEnd('\').ToLowerInvariant()
-            if (!$seen.ContainsKey($key)) { $seen[$key] = $true; $variant }
-        }
-    }
+    foreach ($candidate in $candidates) { if ($candidate -ne $saved) { $candidate } }
 }
 function Save-VarnaEngineLocation([string]$root) {
     $dir = Join-Path $env:LOCALAPPDATA 'VarnaMotionStudio'
