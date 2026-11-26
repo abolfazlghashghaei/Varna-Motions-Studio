@@ -20,4 +20,12 @@ r=call('buildVarnaTable',{...p,unified:false});assert(r.ok,r.error);assert(c._la
 // Cleanup uses the pinned destination, even when the active item is a folder.
 ctx.app.project.activeItem=null;r=call('removeVarnaTablePreview',{compId:c.id});assert(r.ok,r.error);assert.equal(c.numLayers,0);ctx.app.project.activeItem=c;
 r=call('buildVarnaTable',{...p,stagger:'rows',delay:8,cellSettings:{'0:0':{textStart:-4,textEnd:90}}});assert(r.ok,r.error);const text=c._layers.filter(l=>l.type==='text');assert.equal(text.length,1);assert(text.every(l=>l.inPoint>=1&&l.outPoint<=5));
-console.log('PASS Table RC47 host: shared surface, continuous merge-aware RTL/LTR dividers, opacity/color/width, placement, four entries, independent mode, serialized replacement rollback, pinned cleanup and bounded timing, global/cell fonts, curve validation and keyed exits (AE model).');
+// UI91 transforms the unified surface controller or independent members as a group.
+for(const unified91 of [true,false]){
+ r=call('buildVarnaTable',{...p,unified:unified91,transform89:{rotation:25,scale:150,opacity:65,ax:12,ay:-8}});assert(r.ok,r.error);
+ const group91=c._layers.find(l=>l.name.endsWith('_transform'));assert(group91);
+ const props91=group91.property('ADBE Transform Group');assert.equal(props91.property('ADBE Rotate Z').value,25);assert.deepEqual(plain(props91.property('ADBE Scale').value),[150,150]);assert.equal(props91.property('ADBE Opacity').value,65);assert.deepEqual(plain(props91.property('ADBE Position').value),[312,192]);
+ const roots91=c._layers.filter(l=>l!==group91&&l.parent===group91);assert.equal(roots91.length,unified91?1:c._layers.length-1);assert(roots91.every(l=>l.property('ADBE Transform Group').property('ADBE Opacity').expression.includes('parent.transform.opacity')));
+}
+assert.equal(typeof H.library84PreviewInfo,'function','keep the existing isolated preview-discovery hook');assert.equal(H._libraryRevision81,4);
+console.log('PASS Table RC47/UI91 host: shared surface, continuous merge-aware RTL/LTR dividers, opacity/color/width, placement, four entries, independent mode, serialized replacement rollback, pinned cleanup, timing, global/cell fonts, keyed exits and grouped UI91 transforms (AE model).');

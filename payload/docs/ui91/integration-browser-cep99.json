@@ -1,0 +1,15 @@
+{
+  "nativeAdobe": false,
+  "actualChromium99": false,
+  "profile": "post-99-features-disabled",
+  "errors": [],
+  "cases": 864,
+  "layoutFailures": [],
+  "checks": [
+    "20 original destinations, both assistants excluded; all seven UI84 collections retained; background normal/IN/OUT model preserved",
+    "original 413-glyph V occupies the incoming V slot; static V removed; pointer repulsion, click scatter, cascade-fold return, rest caching, off-page pause and reduced motion verified"
+  ],
+  "originalIDs": 899,
+  "browser": "154.0.8037.57",
+  "integrationCommit": "a2ad4a89a99933f56245e760f2d3f41847e662c3"
+}

@@ -19,7 +19,7 @@
         <Lifecycle><AutoVisible>true</AutoVisible></Lifecycle>
         <UI>
           <Type>Panel</Type><Menu>Varna Motion Studio</Menu>
-          <Geometry><Size><Width>620</Width><Height>640</Height></Size><MinSize><Width>250</Width><Height>250</Height></MinSize><MaxSize><Width>10000</Width><Height>10000</Height></MaxSize></Geometry>
+          <Geometry><Size><Width>420</Width><Height>760</Height></Size><MinSize><Width>300</Width><Height>250</Height></MinSize><MaxSize><Width>10000</Width><Height>10000</Height></MaxSize></Geometry>
           <Icons/>
         </UI>
       </DispatchInfo>

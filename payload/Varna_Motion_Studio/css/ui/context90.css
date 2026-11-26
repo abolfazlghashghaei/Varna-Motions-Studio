@@ -1,0 +1,120 @@
+/* UI90 contextual layout. First in the cascade so prior priority layers can
+   continue to govern legacy controls without duplicating the theme system. */
+@layer varna-context90 {
+  html[data-ui90] body[data-flow-shell77] .studio-sections87[data-context-groups91] {
+    padding: 0 !important;
+    margin-block: 2px !important;
+    min-height: 0 !important;
+  }
+  html[data-ui90] .context-groups90 {
+    display:flex; gap:4px; align-items:center; overflow-x:auto; min-width:0;
+    max-width:100%; scrollbar-width:thin; padding:2px;
+  }
+  html[data-ui90] body[data-flow-shell77] .context-group90 {
+    flex:0 0 auto; min-height:32px !important; padding:4px 9px !important;
+    border-radius:6px !important; white-space:nowrap; font-size:max(12px, 11px) !important;
+    border:1px solid transparent !important; background:transparent !important;
+    color:var(--vp-muted) !important;
+  }
+  html[data-ui90] body[data-flow-shell77] .context-group90[aria-pressed="true"] {
+    border-color:var(--vp-accent) !important; color:var(--vp-text) !important;
+    background:var(--vp-glass) !important;
+  }
+  html[data-ui90] .context-tools90 {
+    display:flex; flex-wrap:wrap; gap:4px; align-items:center; min-width:0;
+    flex:1 1 auto;
+  }
+  html[data-ui90] body[data-flow-shell77] .context-tools90 > .vp-select89 {
+    flex:0 1 84px !important; width:84px !important; min-width:68px !important; max-width:84px !important;
+  }
+  html[data-ui90] .context-tools90+.context-tools90 {
+    border-inline-start:1px solid var(--vp-line); padding-inline-start:5px;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableViewport89 .context-align90 {
+    border-top:1px solid var(--vp-line); padding:4px;
+  }
+  html[data-ui90] body[data-flow-shell77] #page-table :is(#tableAlignment48,#cellAlignment48) {
+    border:0 !important; border-radius:0 !important; padding:6px !important;
+    margin:0 !important; background:transparent !important;
+    display:flex !important; flex-wrap:wrap !important; align-items:center; gap:4px !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableAlignment48 > strong {
+    flex-basis:100%; color:var(--vp-muted); font-size:max(12px, 11px);
+  }
+  html[data-ui90] body[data-flow-shell77] #tableAlignment48 .align-group48 {
+    display:flex !important; align-items:center; flex:0 1 auto !important; gap:2px !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableAlignment48 .context-margin90 {
+    flex:1 1 90px !important; min-width:65px !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableViewport89 .table-timeline {
+    margin:0 !important; padding:6px !important;
+    border:0 !important; border-radius:0 !important;
+    border-top:1px solid var(--vp-line) !important; background:transparent !important;
+    min-width:0;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableViewport89 #tablePreviewTime {
+    width:100% !important; max-width:none !important; min-width:0 !important; display:block !important;
+    margin:4px 0 !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableViewport89 .table-timeline .action-inline {
+    display:flex !important; flex-wrap:wrap !important; gap:5px !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableAlignment48 .numeric37 { grid-template-columns:minmax(0,1fr) 30px !important; }
+  html[data-ui90] body[data-flow-shell77] #tableAlignment48 .numeric37-slider {
+    display:none !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableAlignment48 .context-margin90 {
+    flex:0 1 132px !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableFrameStatus50:empty {display:none !important;}
+  html[data-ui90] body[data-flow-shell77] #tableFrameStatus50 {
+    display:block; padding:4px 8px; font-size:max(12px, 11px) !important; color:var(--vp-muted);
+  }
+  html[data-ui90] body[data-flow-shell77] #tableViewport89 .vp-surface89 {
+    min-height:120px !important; height:clamp(140px,30vh,300px) !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #cellAlignment48 {
+    border-bottom:1px solid var(--vp-line) !important;
+    padding-block:8px !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #tableEditor .table-cell > input {
+    width:100% !important; max-width:none !important; min-width:0 !important;
+    height:100% !important; margin:0 !important; box-sizing:border-box !important;
+  }
+  html[data-ui90] body[data-flow-shell77] #cellAlignment48 > label.control {
+    flex:0 1 156px !important; min-width:90px !important;
+  }
+  html[data-ui90] #cellAlignment48 .context-selection90 {
+    flex:1 1 100%; color:var(--vp-accent); font-size:max(12px, 11px);
+  }
+  html[data-ui90] .context-motion90 {
+    display:flex; flex-direction:column; min-width:0; align-items:stretch;
+    gap:4px; padding-block:6px; border-block-end:1px solid var(--vp-line);
+  }
+  html[data-ui90] .context-motion90 #motionScrub { width:100%; }
+  html[data-ui90] body[data-flow-shell77] .context-button90 {
+    min-height:32px !important; padding:3px 8px !important; font-size:max(12px, 11px) !important;
+    border:1px solid var(--vp-line) !important; border-radius:6px !important;
+    background:var(--vp-field) !important; color:var(--vp-text) !important;
+  }
+  html[data-ui90] body[data-flow-shell77] .context-button90[data-keywords-active90] {
+    color:var(--vp-accent) !important; border-color:var(--vp-accent) !important;
+  }
+  html[data-ui90] .app-shell[data-quick87] [data-context-full90] { display:none !important; }
+  html[data-ui90] :is(.context-button90,.context-group90):focus-visible {
+    outline:2px solid var(--vp-accent) !important; outline-offset:-2px;
+  }
+  html[data-ui90] .app-shell[data-viewport-band89=expanded] #tableViewport89 .vp-surface89 {
+    height:clamp(210px,37vh,340px) !important;
+  }
+  html[data-ui90] .vp-monitor89 .vp-surface89[data-orientation90=landscape] {
+    height:clamp(145px,28vh,300px) !important;
+  }
+  html[data-ui90] .app-shell[data-viewport-band89=compact] #tableViewport89 .vp-surface89 {
+    height:clamp(144px,26vh,220px) !important;
+  }
+  html[data-ui90] .app-shell[data-viewport-short89="true"] #tableViewport89 .vp-surface89 {
+    height:clamp(108px,30vh,165px) !important;
+  }
+}

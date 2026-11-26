@@ -493,13 +493,263 @@ Seed · منفی یعنی تصادفی|Seed · negative for random
 فایل پروژه شامل چیدمان و استایل‌هاست؛ رسانه در حافظهٔ همین مرورگر می‌ماند. برای انتقال به دستگاه دیگر فایل‌های اصلی را هم همراه ببر.|Project files contain edits and styles. Media is cached in this browser; include source files when moving to another device.
 `.trim().split('\n').map(line=>line.split('|')));
 const labels53={"Source": "منبع", "Program": "پیش‌نمایش نهایی", "Selection": "انتخاب", "Razor": "تیغ برش", "Ripple trim": "تریم ریپل", "Rolling edit": "برش رول", "Slip": "لغزش منبع", "Slide": "جابه‌جایی بین دو کلیپ", "Track select": "انتخاب ادامهٔ ترک", "Hand / pan": "جابجایی نما", "Fit sequence": "نمایش کل پروژه", "Mark In · I": "شروع منبع · I", "Mark Out · O": "پایان منبع · O", "Insert · ,": "درج · ,", "Append": "افزودن به انتها", "In · I": "شروع بازه · I", "Out · O": "پایان بازه · O", "Clear In/Out": "پاک‌کردن بازه", "Add marker": "افزودن مارکر", "Import OTIO": "ورود OTIO", "Track height": "ارتفاع ترک", "Sequence preset": "اندازهٔ پروژه", "Close gap": "بستن فاصله", "Text & transcription": "متن و تشخیص گفتار", "Review & translate": "اصلاح و ترجمه", "Typography & words": "تایپوگرافی و واژه‌ها", "Background & glass": "زمینه و شیشه", "Motion": "موشن", "Sound generation": "ساخت صدا", "Build graphics": "ساخت گرافیک", "Models & settings": "مدل‌ها و تنظیمات", "Info & licenses": "اطلاعات و مجوزها", "Save project": "ذخیرهٔ پروژه", "Open project": "بازکردن پروژه", "Preview time": "زمان پیش‌نمایش", "Title": "متن", "Choose a title": "انتخاب متن", "Add title": "افزودن متن", "Transcribe source": "تشخیص گفتار منبع", "Delete title": "حذف متن", "Choose style": "انتخاب استایل", "Size": "اندازه", "Color": "رنگ", "Fill": "رنگ زمینه", "Opacity": "شفافیت", "Corners": "گردی", "Padding": "فاصلهٔ داخلی", "Remove background": "حذف زمینه", "Glass surface": "سطح شیشه‌ای", "Entrance": "انیمیشن ورود", "Translation target": "زبان ترجمه", "Propose spelling corrections": "پیشنهاد اصلاح", "Propose translation": "پیشنهاد ترجمه", "Approve": "تأیید", "Create table": "ساخت جدول", "Width": "عرض", "Height": "ارتفاع", "Divider width": "ضخامت جداکننده", "Divider color": "رنگ جداکننده", "Divider opacity": "شفافیت جداکننده", "Text color": "رنگ متن", "Role": "کاربرد", "Model": "مدل", "Duration": "مدت", "Start engine": "روشن‌کردن موتور", "Music style": "سبک موسیقی", "Instruments": "سازها", "Exclude instruments": "حذف سازها", "Job history": "تاریخچهٔ عملیات", "Cancel this job": "لغو همین عملیات", "Generate": "ساخت", "Brand name": "نام برند", "Save current style": "ذخیرهٔ استایل", "Export brands": "خروجی برندها", "Transparent graphic MOV": "گرافیک شفاف MOV", "Editable Resolve Text+": "متن قابل‌ویرایش داوینچی", "Compatibility": "سازگاری", "Local AI": "هوش مصنوعی محلی", "Task": "کاربرد", "Audio model": "مدل صدا", "Start audio engine": "روشن‌کردن موتور صدا", "Generate / propose": "ساخت / پیشنهاد", "Job history / reconnect": "تاریخچه و اتصال مجدد", "Approve this caption": "تأیید این متن", "Approve identical captions": "اعمال به متن‌های مشابه", "Horizontal alignment": "تراز افقی", "Vertical alignment": "تراز عمودی", "Font": "فونت", "Style": "استایل"};
+// Keep technical units and standard initials neutral while translating control labels.
+const tablePairs91=Object.fromEntries(`
+پیش‌نمایش جدول|Table preview
+ساختار جدول|Table structure
+متن خانه‌ها و تنظیمات انتخاب|Cell text & selection
+ظاهر و حرکت جدول|Table appearance & motion
+ویژگی‌های جدول|Properties
+تنظیمات خانه|Cell settings
+تراز متن خانه‌ها|Cell text alignment
+ویرایش ساختار جدول|Edit table structure
+خانهٔ فعلی|Current cell
+حدود انتخاب|Selection
+ردیف|Row
+ستون|Column
+عرض کلی|Table width
+ارتفاع کلی|Table height
+جهت جدول|Table direction
+RTL — ستون ۱ سمت راست|RTL — column 1 on the right
+LTR — ستون ۱ سمت چپ|LTR — column 1 on the left
+خودکار بر اساس متن|Auto based on text
+Auto بر اساس متن|Auto based on text
+شیشهٔ افزوده — سطح مشترک یا خانه‌های مستقل|AE Glass — shared surface or separate cells
+اعمال ساختار|Apply structure
+افزودن و حذف ردیف یا ستون|Insert or delete rows and columns
+ردیف اول یکپارچه|Merge first row
+ادغام انتخاب|Merge selection
+جداکردن|Unmerge
+تنظیمات خانهٔ انتخاب‌شده|Selected cell settings
+زمان‌بندی خانه|Cell timing
+طبق ریتم جدول|Use table timing
+شروع از نشانگر زمان|Start at playhead
+زمان دقیق|Custom time
+موشن خانه|Cell motion
+از جدول|Inherit from table
+از خانه|Inherit from cell
+بدون موشن|No motion
+محو|Fade
+بالا آمدن|Rise
+تغییر اندازه|Resize
+از چپ|Slide left
+از راست|Slide right
+از بالا|Slide down
+جهش|Pop
+نرمی ورود|Ease
+سریع|Fast
+متعادل|Balanced
+خیلی نرم|Very smooth
+دقیق|Custom
+رنگ و قلم همین خانه|Cell color & font
+رنگ خانه|Cell fill
+رنگ خط|Line color
+رنگ متن|Text color
+ضخامت خط|Line width
+قلم|Font
+بازگشت به سبک جدول|Reset to table style
+متن همین خانه|Cell text
+شروع متن|Text start
+همراه خانه|With cell
+نشانگر زمان فعلی|Current playhead
+از نشانهٔ زمانی|From marker
+زمان دستی|Manual time
+نشانهٔ زمانی|Marker
+نشانهٔ زمانی انتخاب نشده|No marker selected
+موشن متن|Text motion
+کلمه · بالا|Word · rise
+کلمه · آبشاری|Word · cascade
+حرف · بالا|Character · rise
+خط · بالا|Line · rise
+خط · محو|Line · fade
+از زمان|From
+تا زمان|To
+مدت موشن|Motion duration
+تراز|Alignment
+وسط|Center
+راست|Right
+چپ|Left
+بالا|Top
+پایین|Bottom
+بالا چپ|Top left
+بالا راست|Top right
+پایین چپ|Bottom left
+پایین راست|Bottom right
+محور|Anchor
+سایز متن|Text size
+زمان دقیق شکل این خانه|Custom cell shape timing
+شروع|Start
+پایان|End
+مدت حضور|Hold duration
+مدت ورود|In duration
+مدت خروج|Out duration
+پیش‌نمایش افتر|AE preview
+پیش‌نمایش زنده|Live preview
+تازه‌سازی زمان‌بندی|Refresh timing
+پاک کردن پیش‌نمایش|Clear preview
+ردیف اول عنوان|Header row
+ردیف راه‌راه|Alternating rows
+شروع جدول|Table start
+پایان جدول|Table end
+زمینه|Fill
+خط|Line
+متن|Text
+سطح مشترک یکپارچه — یک شیشه برای کل جدول|One surface for the whole table
+ورود سطح یکپارچه|Surface entrance
+نرم|Smooth
+فنری|Spring
+شناور|Float
+کششی|Stretch
+بدون ورود|No entrance
+بدون خروج|No exit
+فقط ۴ گوشه بیرونی جدول|Outer corners only
+همه خانه‌ها گرد|All cells rounded
+کاملاً صاف|Square
+گردی|Corner radius
+گوشه‌های جدول|Table corners
+شفافیت خطوط جداکننده|Divider opacity
+مرکز افقی|Horizontal center
+مرکز عمودی|Vertical center
+وسط کامپوزیشن|Center in composition
+فونت کل جدول|Table font
+همه باهم|Together
+ردیفی نرم|Soft row stagger
+ستونی نرم|Soft column stagger
+سینمایی|Cinematic
+محو نرم|Soft fade
+بالا آمدن نرم|Soft rise
+تغییر اندازه نرم|Soft scale
+همزمان|Simultaneous
+ورود متن‌ها / خانه‌ها|Text and cell entrance
+ترتیب ورود|Entrance order
+ریتم ورود|Entrance rhythm
+شفافیت خانه‌های مستقل|Cell opacity
+شفافیت سطح مشترک|Surface opacity
+تنظیمات دقیق ظاهر و ریتم|Appearance & timing
+زمان‌بندی دقیق، جای‌گذاری و متریال|Timing, placement & material
+اندازهٔ ستون و ردیف انتخاب‌شده|Selected row and column size
+عرض نسبی ستون|Column weight
+ارتفاع نسبی ردیف|Row weight
+ارسال متن خانه‌ها به افتر|Send cell text to AE
+پس از خروج از کادر متن|On blur
+پس از مکث در نوشتن|After a typing pause
+قاب پیش‌نمایش، دست و کلیدهای جهت برای جابه‌جایی|Preview viewport, Pan and arrow keys to move
+جای جدول؛ کلیدهای جهت برای جابه‌جایی|Table position. Arrow keys move it
+تراز افقی جدول|Horizontal table alignment
+تراز عمودی جدول|Vertical table alignment
+تراز جدول به چپ قاب|Align table to left edge
+مرکز افقی جدول|Center table horizontally
+تراز جدول به راست قاب|Align table to right edge
+تراز جدول به بالای قاب|Align table to top edge
+مرکز عمودی جدول|Center table vertically
+تراز جدول به پایین قاب|Align table to bottom edge
+متن چپ‌چین|Align text left
+متن وسط‌چین|Center text
+متن راست‌چین|Align text right
+متن بالای خانه|Align text top
+متن وسط عمودی خانه|Center text vertically
+متن پایین خانه|Align text bottom
+فاصله از لبه|Edge margin
+متریال شیشهٔ مایع|Liquid glass material
+موتور شیشهٔ جدول|Table glass engine
+شیشهٔ وارنا|Varna Glass
+شیشهٔ اپتیکی|Optical glass
+لبهٔ شیشه|Glass rim
+ماتی|Frost
+انحراف نور|Splay
+بزرگ‌نمایی اپتیکی|Magnify
+مقیاس افکت|Effect scale
+مقیاس لبه|Rim scale
+رنگ A|Tint A
+رنگ B|Tint B
+جهت ترکیب رنگ|Tint angle
+عمق لبه|Edge depth
+لبهٔ روشن|Bright rim
+لبهٔ رنگی|Tinted rim
+شکست نرم|Lens
+مرکز ترکیب|Tint balance
+موج ظریف لبه|Edge wave
+عرض تنظیمات|Inspector width
+بکش · Shift سریع‌تر · Alt دقیق‌تر|Scrub · Shift faster · Alt for precision
+مدت انیمیشن ورود (ثانیه)|Entrance duration (s)
+فاصلهٔ ورود (ثانیه)|Entrance spacing (s)
+تنظیمات AE Glass جدول|Table AE Glass settings
+متریال Liquid Glass جدول|Table liquid glass material
+AE Glass — سطح مشترک یا خانه‌های مستقل|AE Glass — shared surface or separate cells
+همه Cellها Round|All cells rounded
+شروع = Playhead|Start at playhead
+پایان = Playhead|End at playhead
+شروع = نشانگر زمان|Start at playhead
+پایان = نشانگر زمان|End at playhead
+آهنربای مرکز و لبه‌ها · Alt برای حرکت آزاد|Snap to center and edges · Alt for free movement
+از سبک جدول|Use table style
+کد رنگ زمینه|Fill color code
+کد رنگ متن|Text color code
+کد رنگ خط|Line color code
+خواندن فریم واقعی افتر|Read AE frame
+شات پشت جدول|Frame behind the table
+طراحی تعاملی|Interactive design
+فاصلهٔ متن از لبه|Text padding
+فاصلهٔ حروف|Tracking
+تمیز|Clean
+شیشه‌ای|Glass
+تیرهٔ حرفه‌ای|Dark Pro
+تحریریه‌ای|Editorial
+لوکس|Luxury
+فناوری|Tech
+پخش تلویزیونی|Broadcast
+دورخط|Outline
+شیشهٔ مایع AE|AE Liquid Glass
+شیشهٔ مایع آیفون|iPhone Liquid
+شیشهٔ مایع تیره|Dark Liquid
+مینیمال|Minimal
+آبی داده|Data Blue
+کارت نرم|Soft Cards
+خودکار|Auto
+پیش‌فرض|Default
+پایان خانه|Cell end
+جای‌گذاری در کامپوزیشن — بکش برای جابه‌جایی؛ گوشه را بکش برای اندازه|Drag to position in the composition. Drag a corner to resize
+`.trim().split('\n').map(line=>line.split('|')));
+const tableReverse91=Object.fromEntries(Object.entries(tablePairs91).map(([fa,english])=>[english,fa]));
+const tableTokens91={Merge:'ادغام',Unmerge:'جداکردن',Cell:'خانه',Shape:'شیپ',Preview:'پیش‌نمایش',Timeline:'زمان‌بندی',Playhead:'نشانگر زمان',Marker:'نشانهٔ زمانی',Fade:'محو',Rise:'بالا آمدن',Scale:'تغییر اندازه','Slide Left':'از چپ','Slide Right':'از راست',Drop:'از بالا',Pop:'جهش',Header:'عنوان',Zebra:'ردیف راه‌راه',Round:'گرد',Draft:'سبک',Full:'کامل'};
+function abbreviate91(text){
+ return text.replace(/پیکسل|\bpixels?\b/gi,'px')
+  .replace(/میلی[‌ ]?ثانیه|\bmilliseconds?\b/gi,'ms')
+  .replace(/(·\s*|\(\s*|[\d۰-۹]\s*)ثانیه/g,'$1s')
+  .replace(/(·\s*|\(\s*|\d\s*)seconds?\b/gi,'$1s')
+  .replace(/فریم[‌ ]*بر ثانیه|frames per second/gi,'fps')
+  .replace(/\bdegrees?\b(?=\s*$)/gi,'°').replace(/درصد|\bpercent\b/gi,'%');
+}
+function tableEnglish91(text){
+ if(!/[\u0600-\u06ff]/.test(text))return text;
+ const translated=tablePairs91[text]||dictionary[text]||tablePairs91[tablePersian91(text)];
+ if(translated)return translated;
+ const coordinates=text.match(/^ردیف (\d+) ستون (\d+)$/);
+ if(coordinates)return 'Row '+coordinates[1]+', column '+coordinates[2];
+ const row=text.match(/^(ردیف|ستون) (\d+(?:\s*\/\s*\d+)?)$/);
+ if(row)return (row[1]==='ردیف'?'Row ':'Column ')+row[2];
+ if(text.includes(' · '))return text.split(' · ').map(tableEnglish91).join(' · ');
+ return english(text);
+}
+function tablePersian91(text){
+ if(text==='Auto based on text'||text==='Auto بر اساس متن')return 'خودکار بر اساس متن';
+ let value=tableReverse91[text]||persian53(text);
+ if(value===text||/[A-Za-z]/.test(value)){
+  for(const [english,fa] of Object.entries(tableTokens91))value=value.replace(new RegExp('\\b'+english+'\\b','g'),fa);
+ }
+ return value;
+}
 const persian53=text=>labels53[text]||simplify(text);
 const originals=new WeakMap(),attributes=new WeakMap();let lang=localStorage.getItem('VARNA_LANGUAGE52')==='en'?'en':'fa',pending=new Set(),queued=false;
 const protectedSelector='#offlineText55,#text55Dialog,script,style,pre,code,textarea,input,canvas,#varnaInfo47,#wordList,#reviewText,#correctionTextPreview,.caption-row,.scene-piece40,.scene-preview40,.preview-text50,#tableEditor,#tablePreview,#brandList,#brandAssetsList,#brandShortcut,#startupBrandSelect49,#brollFiles,.edit51-bin,.edit51-caption-list,.edit51-word,.edit51-clip,#fontSelect,#cellFontPS,#modelSelect,[data-user-content]';
 function simplify(text){return text.replace(/\s+وارنا(?=\s|$)/g,'').replace(/^وارنا\s+(?=استودیو)/,'').trim();}
 function english(text){const simple=simplify(text);if(dictionary[text]||dictionary[simple])return dictionary[text]||dictionary[simple];if(text.includes(' · '))return text.split(' · ').map(english).join(' · ');return simple.replace(/(\d+)\s*ثانیه/g,'$1 s').replace(/(\d+)\s*مورد/g,'$1 items').replace(/(\d+)\s*کپشن/g,'$1 captions');}
-function translate(root=document.body){if(!root||root.closest?.(protectedSelector))return;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while((node=walker.nextNode())){if(node.parentElement?.closest(protectedSelector))continue;const current=node.nodeValue,record=originals.get(node);let raw=record&&current===record.last?record.raw:current;if(!raw.trim())continue;const space=raw.match(/^\s*/)[0],trail=raw.match(/\s*$/)[0],label=raw.trim(),value=space+(lang==='en'?english(label):persian53(label))+trail;originals.set(node,{raw,last:value});if(value!==current)node.nodeValue=value;}
-for(const el of root.querySelectorAll?.('[title],[placeholder],[aria-label]')||[]){if(el.closest('script,style,#varnaInfo47,[data-user-content]'))continue;const records=attributes.get(el)||{};for(const attr of ['title','placeholder','aria-label']){const current=el.getAttribute(attr);if(current==null)continue;const record=records[attr],raw=record&&current===record.last?record.raw:current,value=lang==='en'?english(raw):persian53(raw);records[attr]={raw,last:value};if(value!==current)el.setAttribute(attr,value);}attributes.set(el,records);}}
+function localizeLabel91(label,element){
+ const table=element?.closest('#page-table');
+ return abbreviate91(lang==='en'?(table?tableEnglish91(label):english(label)):(table?tablePersian91(label):persian53(label)));
+}
+function translate(root=document.body){if(!root||root.closest?.(protectedSelector))return;const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let node;while((node=walker.nextNode())){if(node.parentElement?.closest(protectedSelector))continue;const current=node.nodeValue,record=originals.get(node);let raw=record&&current===record.last?record.raw:current;if(!raw.trim())continue;const space=raw.match(/^\s*/)[0],trail=raw.match(/\s*$/)[0],label=raw.trim(),value=space+localizeLabel91(label,node.parentElement)+trail;originals.set(node,{raw,last:value});if(value!==current)node.nodeValue=value;}
+for(const el of root.querySelectorAll?.('[title],[placeholder],[aria-label]')||[]){if(el.closest('script,style,#varnaInfo47,[data-user-content]'))continue;const records=attributes.get(el)||{};for(const attr of ['title','placeholder','aria-label']){const current=el.getAttribute(attr);if(current==null)continue;const record=records[attr],raw=record&&current===record.last?record.raw:current,value=localizeLabel91(raw,el);records[attr]={raw,last:value};if(value!==current)el.setAttribute(attr,value);}attributes.set(el,records);}}
 function set(value){lang=value==='en'?'en':'fa';localStorage.setItem('VARNA_LANGUAGE52',lang);document.documentElement.lang=lang;document.documentElement.dir=lang==='en'?'ltr':'rtl';document.body.dataset.language52=lang;translate();document.querySelectorAll('button[data-language52]').forEach(b=>b.textContent=lang==='en'?'فارسی':'English');document.dispatchEvent(new CustomEvent('varna:language52',{detail:{language:lang}}));}
 function addSwitch(root){if(root.querySelector('[data-language52]'))return;const b=document.createElement('button');b.type='button';b.dataset.language52='true';b.className='language52';b.textContent=lang==='en'?'فارسی':'English';b.onclick=()=>set(lang==='en'?'fa':'en');root.append(b);}
 new MutationObserver(records=>{for(const r of records){const el=r.target.nodeType===1?r.target:r.target.parentElement;if(el&&!el.closest(protectedSelector))pending.add(el);}if(!queued){queued=true;setTimeout(()=>{queued=false;const roots=[...pending];pending.clear();for(const root of roots)translate(root);document.querySelectorAll('.edit51-head .edit51-actions').forEach(addSwitch);},40);}}).observe(document.body,{childList:true,subtree:true,characterData:true});

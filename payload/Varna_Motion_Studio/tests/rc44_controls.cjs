@@ -11,11 +11,15 @@ S.undo();assert.equal(S.exportGroups()[0].highlight37.color,'#aabbcc');S.redo();
 S.settings.caption38.enabled44=true;assert.deepEqual(plain(S.exportGroups()),on,'reenable restores exact output');
 S.settings.caption38.enabled44=false;S.saveSettings();S.settings.caption38.enabled44=true;S.loadSettings();assert.equal(S.settings.caption38.enabled44,false,'off survives reload');
 S.resetToDefaults();assert.equal(S.settings.caption38.enabled44,true,'reset uses compatible default');
+S.projectBrain.quickKeywordsOff88=true;assert.equal(S.exportGroups()[0].highlight37,null,'UI91 quick workflow gate suppresses only exported emphasis');delete S.projectBrain.quickKeywordsOff88;
 
 class E{constructor(){this.value='';this.checked=false;this.hidden=false;this.disabled=false;this.classList={contains:()=>false};}querySelector(){return new E();}querySelectorAll(){return [new E(),new E()];}after(){}addEventListener(){}get scrollTop(){return 0;}set scrollTop(v){}}
 const nodes=new Map(),el=s=>{if(!nodes.has(s))nodes.set(s,new E());return nodes.get(s);},timers=new Map();let serial=0,modelCalls=0,resolveModel;
 const H=require('../js/highlight38.js'),K=require('../js/keywords39.js');const g={id:1,text:'محصول LG جدید'};
 const state={settings:{caption38:{enabled44:false,auto:true,provider39:'model',modelFallback39:false}},groups:[g],source:{},projectBrain:{},current:()=>g,group:id=>id===g.id?g:null,text:g=>g.text,saveSettings(){},pushUndo(){}};
+// The coordinator now depends on the centralized state gate. Execute the real
+// production getter against this fixture rather than duplicating its policy.
+state.keywordsEnabled88=()=>vm.runInNewContext('('+S.keywordsEnabled88.toString()+')()',{S:state});
 const w={GHAFState:state,GHAFBridge:{outputBusy:false},VarnaCaptions37:ctx.window.VarnaCaptions37,VarnaHighlight38:H,VarnaKeywords39:K,GHAFNode:{available:true,chatRole:async()=>{modelCalls++;return new Promise(r=>resolveModel=r);}},VarnaActions:{refresh(){}},VarnaStudio37:{render(){}}};
 const ui={window:w,document:{createElement:()=>new E(),querySelector:el,querySelectorAll:()=>[],addEventListener(){},body:{classList:{contains:()=>false}}},MutationObserver:class{observe(){}},setInterval(){},setTimeout:(fn,ms)=>{if(ms===0){queueMicrotask(fn);return 0;}timers.set(++serial,{fn,ms});return serial;},clearTimeout:id=>timers.delete(id),console};
 vm.createContext(ui);vm.runInContext(source('studio38.js').split('const baseReveal38=')[0]+'})(window);',ui);

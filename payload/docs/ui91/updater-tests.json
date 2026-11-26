@@ -1,0 +1,111 @@
+{
+  "cases": [
+    {
+      "case": "Source apply",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "Varna Motion Studio UI91 with the original interactive V is ready. Reopen After Effects.\nPrevious UI backup: /tmp/varna-ui91-update-2adaany3/Source with spaces/.varna-ui91-merged-backup"
+    },
+    {
+      "case": "Source idempotent apply",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "UI91 is already active."
+    },
+    {
+      "case": "rollback refuses a post-update edit",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "message": "A UI91 file changed after installation: js/liquid48.js. Keep the backup and restore manually."
+    },
+    {
+      "case": "Source exact rollback",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "Restored the previous UI. Reopen After Effects."
+    },
+    {
+      "case": "Source idempotent rollback",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "The previous UI is already active."
+    },
+    {
+      "case": "WithEngine apply",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "Varna Motion Studio UI91 with the original interactive V is ready. Reopen After Effects.\nPrevious UI backup: /tmp/varna-ui91-update-2adaany3/WithEngine with spaces/.varna-ui91-merged-backup"
+    },
+    {
+      "case": "WithEngine idempotent apply",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "UI91 is already active."
+    },
+    {
+      "case": "WithEngine exact rollback",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "Restored the previous UI. Reopen After Effects."
+    },
+    {
+      "case": "WithEngine idempotent rollback",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "The previous UI is already active."
+    },
+    {
+      "case": "WithoutEngine apply",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "Varna Motion Studio UI91 with the original interactive V is ready. Reopen After Effects.\nPrevious UI backup: /tmp/varna-ui91-update-2adaany3/WithoutEngine with spaces/.varna-ui91-merged-backup"
+    },
+    {
+      "case": "WithoutEngine idempotent apply",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "UI91 is already active."
+    },
+    {
+      "case": "WithoutEngine exact rollback",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "Restored the previous UI. Reopen After Effects."
+    },
+    {
+      "case": "WithoutEngine idempotent rollback",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "message": "The previous UI is already active."
+    },
+    {
+      "case": "preflight refuses payload",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "message": "Update archive checksum mismatch: js/flow77.js. Extract the ZIP again."
+    },
+    {
+      "case": "preflight refuses target",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "message": "This file is different from UI85: js/app.js"
+    },
+    {
+      "case": "preflight refuses index",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "message": "This update requires Varna Motion Studio 4.5 RC47 with UI85.1 (with or without engine)."
+    },
+    {
+      "case": "preflight refuses asset",
+      "expectedSuccess": false,
+      "exitCode": 1,
+      "message": "Required asset missing: assets/varna-logo.svg. Use the complete Varna installation, including its assets folder."
+    }
+  ],
+  "payloadFiles": 42,
+  "nativeWindowsInstallerTested": false,
+  "adobeExecuted": false,
+  "unchangedEngineProfiles": true,
+  "integrationCommit": "a2ad4a89a99933f56245e760f2d3f41847e662c3"
+}

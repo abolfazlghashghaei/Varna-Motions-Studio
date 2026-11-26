@@ -9,7 +9,20 @@ function label(n,fa,english){labels.push([n,fa,english]);n.textContent=en()?engl
 function button(fa,english,handler,cls='btn secondary'){const n=label(node('button',cls),fa,english);n.type='button';n.onclick=handler;return n;}
 const look=node('section','bg-look81'),motion=node('section','bg-motion81'),common=node('section','bg-common81'),tabs=node('div','bg-tabs81');
 tabs.setAttribute('role','tablist');const lookTab=button('ظاهر پس‌زمینه','Appearance',()=>choose('look')),motionTab=button('انیمیشن پس‌زمینه','Animation',()=>choose('motion'));
-for(const b of [lookTab,motionTab])b.setAttribute('role','tab');tabs.append(lookTab,motionTab);
+const tabPairs=[['look',lookTab,look],['motion',motionTab,motion]];
+for(const [name,button,panel] of tabPairs){
+ button.id='background-tab-'+name;panel.id='background-panel-'+name;
+ button.setAttribute('role','tab');button.setAttribute('aria-controls',panel.id);
+ panel.setAttribute('role','tabpanel');panel.setAttribute('aria-labelledby',button.id);panel.tabIndex=0;
+ tabs.append(button);
+}
+tabs.addEventListener('keydown',event=>{
+ const index=tabPairs.findIndex(([,button])=>button===event.target);
+ if(index<0||!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+ event.preventDefault();
+ const next=event.key==='Home'?0:event.key==='End'?tabPairs.length-1:1-index;
+ choose(tabPairs[next][0]);tabPairs[next][1].focus();
+});
 const scope=$('#bgScope')?.closest('label');if(scope)common.append(scope);
 const existing=Array.from(page.children);for(const n of existing)look.append(n);
 // Keep original controls connected while resolving/moving them by their IDs.
@@ -49,7 +62,7 @@ page.append(common,tabs,look,motion);page.dataset.bgWorkspace81='true';
 // reserve rows after the real timing controls move to the Animation workspace.
 for(const n of look.querySelectorAll('.form-grid'))if(!n.children.length)n.hidden=true;
 function current(){return $('#bgScope').value==='selected'&&S.current()?S.bgFor(S.current()):S.settings.bg;}
-function choose(value){tab=value==='motion'?'motion':'look';look.hidden=tab!=='look';motion.hidden=tab!=='motion';lookTab.setAttribute('aria-selected',String(tab==='look'));motionTab.setAttribute('aria-selected',String(tab==='motion'));try{localStorage.setItem('VARNA_BG_TAB81',tab);}catch(_){}document.dispatchEvent(new CustomEvent('varna:workspacepage67'));if(tab==='motion')w.VarnaReflowUI67?.animate();}
+function choose(value){tab=value==='motion'?'motion':'look';look.hidden=tab!=='look';motion.hidden=tab!=='motion';for(const [name,button] of tabPairs){button.setAttribute('aria-selected',String(tab===name));button.tabIndex=tab===name?0:-1;}try{localStorage.setItem('VARNA_BG_TAB81',tab);}catch(_){}document.dispatchEvent(new CustomEvent('varna:workspacepage67'));if(tab==='motion')w.VarnaReflowUI67?.animate();}
 function renderGallery(){
  const value=category.value||'all',rank={soft:0,quick:1,cinema:2,bold:3,spring:4,precise:5},items=all.filter(p=>value==='all'||p.category===value).sort((a,b)=>rank[a.id.split(':')[1]]-rank[b.id.split(':')[1]]),selected=phase84==='out'?current().motion81?.outPreset:current().motion81?.preset;
  select.replaceChildren();const empty=node('option');empty.textContent=en()?'Choose a motion preset':'یک طرح حرکت انتخاب کن';empty.value='';select.append(empty);

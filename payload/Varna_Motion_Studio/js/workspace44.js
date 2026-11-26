@@ -51,7 +51,19 @@ const note=document.createElement('p');note.id='keywordNote44';note.className='h
 const update=document.createElement('button');update.id='keywordUpdate44';update.type='button';update.className='btn secondary';update.textContent='به‌روزرسانی ظاهر خروجی موجود';card.append(update);
 const updateStatus=document.createElement('p');updateStatus.id='keywordUpdateStatus44';updateStatus.className='hint';updateStatus.setAttribute('role','status');card.append(updateStatus);
 update.onclick=async()=>{if(w.GHAFBridge.outputBusy){updateStatus.textContent='پس از پایان ساخت خروجی دوباره اجرا کن.';return;}if(!S.groups.length){updateStatus.textContent='ابتدا کپشن وارد کن.';return;}update.disabled=true;try{const result=await w.GHAFBridge.call('refreshCaptionStyles',{groups:S.exportGroups(),updateMotion:true},{timeout:180000});updateStatus.textContent=result.updated?'ظاهر '+result.updated+' کپشن موجود به‌روز شد.':'خروجی قبلی در کامپ فعال پیدا نشد؛ خروجی بعدی از این تنظیم استفاده می‌کند.';}catch(e){updateStatus.textContent='به‌روزرسانی انجام نشد: '+e.message;}finally{update.disabled=false;}};
-$('#keywordsEnabled44').onchange=()=>{S.pushUndo();S.settings.caption38=S.settings.caption38||{};S.settings.caption38.enabled44=$('#keywordsEnabled44').checked;S.saveSettings();sync();w.VarnaActions.refresh();w.VarnaStudio37.render();if(S.settings.caption38.enabled44)w.VarnaHighlightUI38.schedule();};
+$('#keywordsEnabled44').onchange=()=>{
+ const enabled=$('#keywordsEnabled44').checked;
+ if (enabled && S.projectBrain?.quickKeywordsOff88 && S.settings.caption38?.enabled44!==false) {
+  w.VarnaActions.setQuickKeywordsOff88(false);
+  return;
+ }
+ S.pushUndo();
+ S.settings.caption38=S.settings.caption38||{};
+ S.settings.caption38.enabled44=enabled;
+ if (enabled && S.projectBrain?.quickKeywordsOff88) w.VarnaActions.setQuickKeywordsOff88(false);
+ S.saveSettings();sync();w.VarnaActions.refresh();w.VarnaStudio37.render();
+ if(S.keywordsEnabled88())w.VarnaHighlightUI38.schedule();
+};
 // Native fieldsets enforce pointer AND keyboard disabling, without changing stored values.
 const dependencies=[];
 const autoRow=$('#autoHighlight38').closest('label'),autoGate=document.createElement('fieldset');autoGate.className='dependent44';autoGate.setAttribute('aria-label','پیشنهاد خودکار');autoRow.before(autoGate);autoGate.append(autoRow);
@@ -74,14 +86,17 @@ dependent('mbRotation',['mbRot']);
 dependent('bgGradientEnabled',['bgGradientColor2','bgGradientAngle','bgGradientBalance','bgGradientHandleEditor']);
 dependent('bgRimGradient',['bgRimColor2','bgRimAngle','bgRimBalance']);
 function sync(){
- const enabled=S.settings.caption38?.enabled44!==false;autoGate.disabled=$('#suggestionMode39').value==='manual';autoGate.classList.toggle('feature-muted44',autoGate.disabled);$('#keywordsEnabled44').checked=enabled;
- controls.disabled=!enabled;controls.hidden=!enabled;note.hidden=enabled;$('#keywordState44').textContent=enabled?'روشن':'خاموش';card.dataset.featureEnabled44=String(enabled);
+ const enabled=S.keywordsEnabled88();autoGate.disabled=$('#suggestionMode39').value==='manual';autoGate.classList.toggle('feature-muted44',autoGate.disabled);$('#keywordsEnabled44').checked=enabled;
+ controls.disabled=!enabled;controls.hidden=!enabled;note.hidden=enabled;
+ const projectOff=S.projectBrain?.quickKeywordsOff88===true;
+ const message=projectOff?'تأکید واژه‌ها برای این پروژه خاموش است. برای پیش‌نمایش و خروجی بعدی، همین‌جا می‌توانی روشنش کنی.':'خاموش: انتخاب‌های قبلی محفوظ‌اند. برای تغییر لایه‌های موجود، ظاهر خروجی را به‌روزرسانی کن.';
+ if(note.textContent!==message)note.textContent=message;$('#keywordState44').textContent=enabled?'روشن':'خاموش';card.dataset.featureEnabled44=String(enabled);
  const preflight=$('#outputAnalyze41');if(preflight){preflight.disabled=!enabled;preflight.closest('label')?.classList.toggle('feature-muted44',!enabled);preflight.title=enabled?'':'کلمات مهم از کلید اصلی خاموش شده است.';}
  if(lastEnabled!==enabled){if(!enabled)w.VarnaHighlightUI38.cancel();lastEnabled=enabled;w.VarnaStudio37.render();}
  for(const {toggle,groups,state}of dependencies){state.textContent=toggle.checked?'روشن':'خاموش';for(const group of groups){group.disabled=!toggle.checked;group.classList.toggle('feature-muted44',!toggle.checked);}}
  $('#uiSpacing44').value=document.body.dataset.density==='comfortable'?'comfortable':'compact';
 }
-document.addEventListener('change',sync);document.addEventListener('varna:page',sync);setInterval(()=>{if(!document.hidden)sync();},500);
+document.addEventListener('varna:keywords88',sync);document.addEventListener('change',sync);document.addEventListener('varna:page',sync);setInterval(()=>{if(!document.hidden)sync();},500);
 size(saved.size,false);sync();
 w.VarnaWorkspace44={size:(v)=>size(v,true),sync,preference:()=>saved.size};
 })(window);

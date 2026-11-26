@@ -1,0 +1,155 @@
+@layer varna-compact91 {
+  html[data-ui91] body [data-hidden91] { display:none !important; }
+  html[data-ui91] body[data-flow-shell77] {
+    --compact-gap91:6px;
+    --compact-field91:32px;
+  }
+  html[data-ui91] body[data-flow-shell77] [data-numeric-compact91].numeric37 {
+    display:grid !important; grid-template-columns:minmax(0,1fr) !important;
+    min-width:0 !important; width:100% !important; min-height:var(--compact-field91) !important;
+    padding:0 !important;
+  }
+  html[data-ui91] body[data-flow-shell77] [data-numeric-compact91] > .numeric37-value {
+    width:100% !important; min-width:0 !important; height:var(--compact-field91) !important;
+    min-height:var(--compact-field91) !important; cursor:ew-resize; padding:0 4px !important;
+    font-variant-numeric:tabular-nums; text-align:center;
+  }
+  html[data-ui91] body[data-flow-shell77] [data-numeric-compact91] > :is(.numeric37-slider,.numeric37-handle) {
+    display:none !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .line-panel91,
+  html[data-ui91] body[data-flow-shell77] #page-table details.flat-section69:not(.flat-preview69):not([data-table-editor91]) {
+    margin:4px 0 !important; padding:0 !important;
+    border:0 !important; border-radius:0 !important; border-block-start:1px solid var(--vp-line) !important;
+    background:transparent !important; box-shadow:none !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .line-panel91 > summary,
+  html[data-ui91] body[data-flow-shell77] #page-table details.flat-section69:not(.flat-preview69):not([data-table-editor91]) > summary {
+    cursor:pointer; min-height:32px !important; padding:6px 8px !important;
+    font-size:max(12px, 12px) !important; color:var(--vp-text) !important;
+  }
+  html[data-ui91] body[data-flow-shell77] :is(.curve-row91,.curve-points49,.shape-fields91,.shape-options91,.motion-mode91,.bg-common-fields91,.bg-animation-switches91) {
+    min-width:0 !important; gap:var(--compact-gap91) !important; margin:4px 0 !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .curve-row91 {
+    display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:stretch;
+  }
+  html[data-ui91] body[data-flow-shell77] .curve-editor49 {
+    display:block !important; margin:0 auto !important; width:100% !important;
+    height:clamp(128px,24vh,178px) !important; max-height:178px !important; aspect-ratio:auto !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .curve-editor49 .handle49 {stroke-width:2; touch-action:none;}
+  html[data-ui91] body[data-flow-shell77] .curve-monitor91 {
+    display:grid; grid-template-rows:minmax(0,1fr) auto; min-width:0;
+    background:var(--vp-field); border:1px solid var(--vp-line); border-radius:8px; overflow:hidden;
+  }
+  html[data-ui91] .curve-surface91 {
+    min-height:84px; position:relative; display:grid; place-items:center;
+    background-image:linear-gradient(var(--vp-line) 1px,transparent 1px),linear-gradient(90deg,var(--vp-line) 1px,transparent 1px);
+    background-size:16px 16px;
+  }
+  html[data-ui91] .curve-shape91 { border:1px solid var(--vp-accent); border-radius:5px; background:var(--vp-glass); }
+  html[data-ui91] .curve-track91 { position:absolute; inset-inline:14px; bottom:12px; height:1px; background:var(--vp-edge); direction:ltr; }
+  html[data-ui91] .curve-dot91 { position:absolute; left:100%; top:50%; transform:translate(-50%,-50%); width:7px; height:7px; border-radius:50%; background:var(--vp-secondary); }
+  html[data-ui91] .curve-monitor-bar91 { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:3px; padding:4px; border-top:1px solid var(--vp-line); }
+  html[data-ui91] .curve-monitor-bar91 output {font:12px/1.2 Varna Mono,monospace; color:var(--vp-muted);}
+  html[data-ui91] body[data-flow-shell77] .curve-points49 {
+    display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; direction:ltr;
+  }
+  html[data-ui91] body[data-flow-shell77] .curve-points49 .property-pair49 {
+    direction:ltr !important;
+    display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:4px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .shape-fields91 {
+    display:grid !important; grid-template-columns:repeat(7,minmax(56px,1fr)) !important;
+  }
+  html[data-ui91] body[data-flow-shell77] :is(.shape-fields91,.curve-points49,.motion-feel-grid,.bg-common-fields91) .control {
+    min-width:0 !important; margin:0 !important; padding:0 !important; border:0 !important;
+    background:transparent !important;
+  }
+  html[data-ui91] body[data-flow-shell77] :is(.shape-options91,.bg-animation-switches91,.motion-mode91) {
+    display:flex !important; flex-wrap:wrap !important; align-items:center !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .speech-segmentation91 {
+    display:flex !important; flex-wrap:wrap !important; align-items:center !important; gap:6px !important;
+    margin:4px 0 !important; padding:4px 0 !important; border-block-start:1px solid var(--vp-line);
+  }
+  html[data-ui91] body[data-flow-shell77] .speech-segmentation91 input[type=number] {width:60px !important; min-width:50px !important; min-height:30px !important;}
+  html[data-ui91] body[data-flow-shell77] .speech-segmentation91 label {margin:0 !important;}
+  html[data-ui91] body[data-flow-shell77] .speech-tool91 {display:flex !important; gap:4px !important; min-width:0 !important;}
+  html[data-ui91] body[data-flow-shell77] .speech-tool91 input {flex:1 1 68px !important; min-width:0 !important;}
+  html[data-ui91] body[data-flow-shell77] .speech-tool91 button {flex:0 0 auto !important;}
+  html[data-ui91] .speech-scan-status91:empty {display:none !important;}
+  html[data-ui91] body[data-flow-shell77] .motion-mode91 {
+    display:grid !important; grid-template-columns:minmax(80px,1fr) minmax(160px,2fr) !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .motion-mode91 .mode-switch {
+    display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    margin:0 !important; padding:0 !important; min-height:0 !important; gap:4px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .motion-mode91 .mode {min-height:32px !important; padding:4px 6px !important;}
+  html[data-ui91] body[data-flow-shell77] .motion-feel-grid {
+    display:grid !important; grid-template-columns:repeat(7,minmax(0,1fr)) !important; gap:6px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .motion-feel-grid > label {grid-column:span 1 !important;}
+  html[data-ui91] body[data-flow-shell77] .bg-common-fields91 {
+    display:grid !important; grid-template-columns:repeat(auto-fit,minmax(108px,1fr)) !important;
+  }
+  html[data-ui91] body[data-flow-shell77] .bg-animation-card81 .reflow-reference67 {
+    margin:0 0 6px !important; padding:0 !important; background:var(--vp-field) !important;
+  }
+  html[data-ui91] body[data-flow-shell77] #bgReflowCanvas67 {
+    width:100% !important; height:auto !important; max-height:126px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] #page-bg .paint-stop-track {
+    min-height:24px !important; height:24px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] #page-bg .paint-stop::-webkit-slider-thumb {
+    width:12px !important; height:12px !important; border-width:1px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] #page-table .vp-inspector89 #tableAlignment48 {
+    border-bottom:1px solid var(--vp-line) !important;
+  }
+  html[data-ui91] body[data-flow-shell77] #page-table .vp-inspector89 #tableAlignment48 .context-margin90 {
+    flex:1 1 85px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] #page-table .vp-inspector89 #tableAlignment48 .align-group48 {
+    flex:0 0 auto !important;
+  }
+  html[data-ui91] body[data-flow-shell77] :is(#page-table,#page-easing49,#page-motion) .flat-intro69 {
+    display:none !important;
+  }
+  html[data-ui91] body[data-flow-shell77] #page-table .flat-preview69 { padding:0 !important; }
+  html[data-ui91] body[data-flow-shell77] #page-table .cell-inspector { margin:4px 0 !important; }
+  @media(max-width:620px){
+    html[data-ui91] body[data-flow-shell77] .motion-feel-grid {grid-template-columns:repeat(12,minmax(0,1fr)) !important;}
+    html[data-ui91] body[data-flow-shell77] .motion-feel-grid > label {grid-column:span 3 !important;}
+    html[data-ui91] body[data-flow-shell77] .motion-feel-grid > label:nth-of-type(-n+3) {grid-column:span 4 !important;}
+    html[data-ui91] body[data-flow-shell77] .shape-fields91 {grid-template-columns:repeat(4,minmax(0,1fr)) !important;}
+  }
+}
+
+/* The old cached particle V replaces the supplied static V in its existing slot. */
+html[data-ui91] .studio-brand-art87[data-original-v91] { --v48-glyph:var(--vp-accent); }
+html[data-ui91] .studio-brand-art87[data-original-v91]::before,
+html[data-ui91] .studio-brand-art87[data-original-v91]::after { content: none; }
+html[data-ui91] .studio-brand-art87 #varnaAtmosphere48 { position:absolute; inset:0; background:transparent; filter:none; }
+html[data-ui91] .studio-brand-art87 #varnaGlyphs48 { display:block; width:100%; height:100%; }
+
+@layer varna-compact91 {
+  /* Incoming legacy layers fix these editing targets at 14/24px with !important.
+     Override the hit boxes here; the authored 8/10px handle artwork stays unchanged. */
+  html[data-ui91] body[data-flow-shell77] #tableViewport89 .vp-handle89 {
+    width:32px !important; height:32px !important;
+    min-width:32px !important; min-height:32px !important;
+    max-width:32px !important; max-height:32px !important;
+  }
+  html[data-ui91] body[data-flow-shell77] #tableEditor .table-resize-handle.row {
+    height:32px !important; min-height:32px !important;
+  }
+  /* The legacy toolbar gives every direct child flex:0 0 auto. Let each new
+     contextual group shrink and wrap instead of overflowing a 300px panel. */
+  html[data-ui91] body[data-flow-shell77] .vp-toolbar89 > .context-tools90 {
+    flex:1 1 auto !important; min-inline-size:0; max-inline-size:100%;
+  }
+}

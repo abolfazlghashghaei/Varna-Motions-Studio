@@ -1,0 +1,198 @@
+{
+  "fontFloor": 12,
+  "targetFloor": 32,
+  "layerSupportFromChromium": 99,
+  "replacedHasSelectors": 4,
+  "colorMixFallback": true,
+  "changes": [
+    {
+      "file": "Varna_Motion_Studio/css/ui/compact91.css",
+      "line": 5,
+      "property": "--compact-field91",
+      "before": "30px",
+      "after": "32px"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/compact91.css",
+      "line": 29,
+      "property": "font-size",
+      "before": "12px",
+      "after": "max(12px, 12px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/compact91.css",
+      "line": 55,
+      "property": "font",
+      "before": "10px/1.2 Varna Mono,monospace",
+      "after": "12px/1.2 Varna Mono,monospace"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/context90.css",
+      "line": 15,
+      "property": "font-size",
+      "before": "11px",
+      "after": "max(12px, 11px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/context90.css",
+      "line": 42,
+      "property": "font-size",
+      "before": "11px",
+      "after": "max(12px, 11px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/context90.css",
+      "line": 72,
+      "property": "font-size",
+      "before": "11px",
+      "after": "max(12px, 11px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/context90.css",
+      "line": 89,
+      "property": "font-size",
+      "before": "11px",
+      "after": "max(12px, 11px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/context90.css",
+      "line": 97,
+      "property": "font-size",
+      "before": "11px",
+      "after": "max(12px, 11px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 173,
+      "property": "font-size",
+      "before": "11px",
+      "after": "max(12px, 11px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 213,
+      "property": "font",
+      "before": "550 10px/1.1 inherit",
+      "after": "550 12px/1.1 inherit"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 253,
+      "property": "font-size",
+      "before": "12px",
+      "after": "max(12px, 12px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 321,
+      "property": "font-size",
+      "before": "11px",
+      "after": "max(12px, 11px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 347,
+      "property": "font-size",
+      "before": "15px",
+      "after": "max(12px, 15px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 365,
+      "property": "font-size",
+      "before": "clamp(14px,4vw,23px)",
+      "after": "max(12px, clamp(14px,4vw,23px))"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 371,
+      "property": "font-size",
+      "before": "12px",
+      "after": "max(12px, 12px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 372,
+      "property": "font-size",
+      "before": "11px",
+      "after": "max(12px, 11px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/viewport89.css",
+      "line": 479,
+      "property": "font-size",
+      "before": "12px",
+      "after": "max(12px, 12px)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 15,
+      "property": "font-size",
+      "before": "var(--ui-font-section)",
+      "after": "max(12px, var(--ui-font-section))"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 276,
+      "property": "font-size",
+      "before": "var(--ui-font-label)",
+      "after": "max(12px, var(--ui-font-label))"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 411,
+      "property": "font-size",
+      "before": "clamp(1.65rem,4.5vw,3.45rem)",
+      "after": "max(12px, clamp(1.65rem,4.5vw,3.45rem))"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 419,
+      "property": "font-size",
+      "before": "var(--ui-font-label)",
+      "after": "max(12px, var(--ui-font-label))"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 483,
+      "property": "font-size",
+      "before": "var(--ui-font-label)",
+      "after": "max(12px, var(--ui-font-label))"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 521,
+      "property": "font-size",
+      "before": "var(--ui-font-label)",
+      "after": "max(12px, var(--ui-font-label))"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 600,
+      "property": "font-size",
+      "before": "clamp(1.55rem,4.45vw,3.25rem)",
+      "after": "max(12px, clamp(1.55rem,4.45vw,3.25rem))"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 768,
+      "property": "font-size",
+      "before": "0",
+      "after": "max(12px, 0)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 1010,
+      "property": "font-size",
+      "before": "1.1rem",
+      "after": "max(12px, 1.1rem)"
+    },
+    {
+      "file": "Varna_Motion_Studio/css/ui/studio88.css",
+      "line": 1110,
+      "property": "font-size",
+      "before": "max(1rem,14px)",
+      "after": "max(12px, max(1rem,14px))"
+    }
+  ]
+}

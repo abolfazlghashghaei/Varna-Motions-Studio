@@ -1,0 +1,14 @@
+{
+  "deliveryKind": "complete-plugin",
+  "ui": 91,
+  "browserCases": 54,
+  "browserErrors": [],
+  "actualPluginControllers": true,
+  "standaloneUIIncluded": false,
+  "originalInteractiveV": true,
+  "tableBuildPayloadVerified": true,
+  "productFiles": 7909,
+  "originalLibraryFiles": 4429,
+  "nativeAdobeExecuted": false,
+  "nativeWindowsInstallerExecuted": false
+}

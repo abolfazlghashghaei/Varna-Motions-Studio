@@ -16,14 +16,44 @@ $('#page-templates .page-head h1').textContent='استایل‌های متن';
 function applyLook(id,legacy){try{const g=S.current(),scope=$('#nativeScope50').value;if(!g)throw Error('ابتدا متن وارد یا انتخاب کن.');let look;if(legacy){const entry=w.VarnaTemplateCatalog38.find(x=>x.id===id);look=w.VarnaWordMotion39.templateStyle(entry,[]);}else look=C.nativeLook(id,fonts(),S.styleFor(g).fontPS);if(!w.VarnaWordUI39.apply(look.word,{scope,style:look.style,color:look.color}))throw Error('استایل اعمال نشد.');if(look.bg){S.setBg(scope,Object.assign({},scope==='all'?S.settings.bg:S.bgFor(g),look.bg));S.undoStack.pop();}w.VarnaActions.refresh();$('#nativeStatus50').textContent='استایل و حرکت روی متن اعمال شد · '+(look.style.fontPS||S.styleFor(g).fontPS)+' · بدون ورود پروژهٔ قالب';if(S.settings.livePreview)awaitPreview();}catch(e){$('#nativeStatus50').textContent=e.message;}}
 function awaitPreview(){w.VarnaActions.previewCurrent().catch(e=>$('#nativeStatus50').textContent=e.message);}
 let lookPage66=0;const lookPager66=document.createElement('nav');lookPager66.className='action-inline';lookPager66.setAttribute('aria-label','صفحهٔ استایل‌ها');lookPager66.innerHTML='<button class="btn tiny" id="lookPrevious66">قبلی</button><output id="lookPage66" role="status"></output><button class="btn tiny" id="lookNext66">بعدی</button>';$('#nativeGrid50').before(lookPager66);$('#lookPrevious66').onclick=()=>{lookPage66--;renderLooks();};$('#lookNext66').onclick=()=>{lookPage66++;renderLooks();};for(const [value,title]of [['fa','فارسی'],['en','English']]){const option=document.createElement('option');option.value=value;option.textContent=title;$('#nativeCollection50').append(option);}
-function renderLooks(){const legacy=$('#nativeCollection50').value==='legacy',entries=legacy?w.VarnaTemplateCatalog38:C.looks.filter(x=>!['fa','en'].includes($('#nativeCollection50').value)||x.id.indexOf($('#nativeCollection50').value+'-')===0),root=$('#nativeGrid50');root.replaceChildren();const pages=Math.max(1,Math.ceil(entries.length/4));lookPage66=Math.max(0,Math.min(pages-1,lookPage66));$('#lookPage66').textContent=(lookPage66+1)+' / '+pages;$('#lookPrevious66').disabled=lookPage66===0;$('#lookNext66').disabled=lookPage66===pages-1;for(const spec of entries.slice(lookPage66*4,lookPage66*4+4)){const b=document.createElement('button');b.type='button';b.className='native-style50';const preview=document.createElement('span'),title=document.createElement('strong');preview.className='preview-text50';preview.textContent=legacy?(S.current()?S.text(S.current()).slice(0,35):'Varna Motion'):spec.sample;preview.style.color=spec.color||'var(--u-text)';preview.style.background=spec.fill||'transparent';preview.style.fontFamily=(spec.fonts||['Vazirmatn']).map(f=>'"'+f+'"').join(',')+',sans-serif';title.textContent=spec.name||spec.label;b.append(preview,title);b.onclick=()=>applyLook(spec.id,legacy);root.append(b);}}
+function renderLooks(){const legacy=$('#nativeCollection50').value==='legacy',entries=legacy?(w.VarnaTemplateCatalog38||[]):C.looks.filter(x=>!['fa','en'].includes($('#nativeCollection50').value)||x.id.indexOf($('#nativeCollection50').value+'-')===0),root=$('#nativeGrid50');root.replaceChildren();const pages=Math.max(1,Math.ceil(entries.length/4));lookPage66=Math.max(0,Math.min(pages-1,lookPage66));$('#lookPage66').textContent=(lookPage66+1)+' / '+pages;$('#lookPrevious66').disabled=lookPage66===0;$('#lookNext66').disabled=lookPage66===pages-1;for(const spec of entries.slice(lookPage66*4,lookPage66*4+4)){const b=document.createElement('button');b.type='button';b.className='native-style50';const preview=document.createElement('span'),title=document.createElement('strong');preview.className='preview-text50';preview.textContent=legacy?(S.current()?S.text(S.current()).slice(0,35):'Varna Motion'):spec.sample;preview.style.color=spec.color||'var(--u-text)';preview.style.background=spec.fill||'transparent';preview.style.fontFamily=(spec.fonts||['Vazirmatn']).map(f=>'"'+f+'"').join(',')+',sans-serif';title.textContent=spec.name||spec.label;b.append(preview,title);b.onclick=()=>applyLook(spec.id,legacy);root.append(b);}}
 $('#nativeCollection50').onchange=renderLooks;renderLooks();
 // Exact AE pixels and the local editable design are separate viewing modes.
 const table=card('tableFrameCard50','قاب افتر و طراحی جدول','<div class="action-inline"><button type="button" class="btn secondary" id="tableFrame50">خواندن فریم واقعی افتر</button><button type="button" class="btn secondary" id="tableBackground50">شات پشت جدول</button><button type="button" class="btn secondary" id="tableDesign50">طراحی تعاملی</button></div><p role="status" id="tableFrameStatus50"></p>',$('#page-table .table-preview-card'));
-const stage=$('#tablePreviewStage'),frame=document.createElement('img');frame.id='tableFrameImage50';frame.alt='فریم خوانده‌شده از افتر';frame.hidden=true;stage.prepend(frame);let frameBusy=false,frameMode='',folder=null;
-async function readFrame(mode){if(frameBusy)return;frameBusy=true;try{const t=w.VarnaTable50.timeline();if(!t.compId)throw Error('ابتدا اطلاعات کامپوزیشن را بخوان.');if(!folder)folder=w.GHAFNode.makeMotionTemp();const time=+$('#tablePreviewTime').value||0;if(mode==='full')await B.call('buildVarnaTable',w.VarnaTable50.payload(true));const r=await B.call('renderTableFrame50',{compId:t.compId,time,folder,mode},{timeout:180000}),data=await w.GHAFNode.waitFrame(r.path,()=>false);frame.src=data;frame.hidden=false;frameMode=mode;stage.dataset.frameMode50=mode;$('#tableFrameStatus50').textContent='فریم افتر · '+r.time.toFixed(2)+' ثانیه'+(mode==='full'?' · برای بازتاب تغییرات دوباره بخوان':' · جدول روی شات قابل جابه‌جایی است');}catch(e){$('#tableFrameStatus50').textContent=e.message;}finally{frameBusy=false;}}
-$('#tableFrame50').onclick=()=>readFrame('full');$('#tableBackground50').onclick=()=>readFrame('background');$('#tableDesign50').onclick=()=>{frame.hidden=true;frameMode='';delete stage.dataset.frameMode50;w.VarnaTable50.render();};
-$('#page-table').addEventListener('input',()=>{if(frameMode)$('#tableFrameStatus50').textContent='زمان تغییر کرد؛ فریم را تازه‌سازی کن.';});w.addEventListener('unload',()=>{if(folder)w.GHAFNode.cleanMotionTemp(folder);});
+const stage=$('#tablePreviewStage'),frame=document.createElement('img');frame.id='tableFrameImage50';frame.alt='فریم خوانده‌شده از افتر';frame.hidden=true;stage.prepend(frame);
+let frameBusy=false,frameMode='',captureRevision=0;
+async function readFrame(mode,quality){
+ if(frameBusy)return;
+ frameBusy=true;
+ const revision=++captureRevision;
+ const note=$('#tableFrameStatus50');
+ note.textContent='در حال خواندن فریم افتر…';
+ try{
+  await w.VarnaTable50.enqueue(async()=>{
+   const t=w.VarnaTable50.timeline();
+   if(t.compId==null)throw Error('ابتدا اطلاعات کامپوزیشن را بخوان.');
+   const folder=w.GHAFNode.makeMotionTemp();
+   try{
+    const time=+$('#tablePreviewTime').value||0;
+    if(mode==='full')await B.call('buildVarnaTable',w.VarnaTable50.payload(true));
+    const r=await B.call('renderTableFrame50',{compId:t.compId,time,folder,mode},{timeout:180000});
+    if(r.compId!==t.compId)throw Error('کامپوزیشن تغییر کرد.');
+    const data=await w.GHAFNode.waitFrame(r.path,()=>revision!==captureRevision);
+    const source=quality==='draft'&&w.VarnaFrameSource89?.scale?await w.VarnaFrameSource89.scale(data,480):data;
+    if(revision!==captureRevision)return;
+    frame.src=source;frame.hidden=false;frameMode=mode;stage.dataset.frameMode50=mode;
+    note.textContent='فریم افتر · '+r.time.toFixed(2)+' ثانیه';
+   }finally{w.GHAFNode.cleanMotionTemp(folder);}
+  });
+ }catch(e){if(revision===captureRevision)note.textContent=e.message;}
+ finally{
+  frameBusy=false;
+  document.dispatchEvent(new Event('varna:tablerender89'));
+ }
+}
+w.VarnaFrameSource89={table:readFrame};
+$('#tableFrame50').onclick=()=>readFrame('full');$('#tableBackground50').onclick=()=>readFrame('background');$('#tableDesign50').onclick=()=>{captureRevision++;frame.hidden=true;frameMode='';delete stage.dataset.frameMode50;w.VarnaTable50.render();};
+$('#page-table').addEventListener('input',()=>{if(frameMode)$('#tableFrameStatus50').textContent='زمان تغییر کرد؛ فریم را تازه‌سازی کن.';});
 // Additional spacing travels through the existing cellSettings payload.
 const inspector=$('#cellAlignScope48')?.closest('.cell-inspector')||$('#cellFontSize').closest('.cell-inspector');
 if(inspector){const options=document.createElement('div');options.className='form-grid two';options.innerHTML=num('cellPadding50','فاصلهٔ متن از لبه · px',12,0,200)+num('cellTracking50','فاصلهٔ حروف',0,-200,600);inspector.append(options);for(const [id,key]of [['cellPadding50','textPadding50'],['cellTracking50','tracking50']])$('#'+id).oninput=()=>{const cell=w.VarnaTable50.selected();cell[key]=+$('#'+id).value;w.VarnaTable50.render();};document.addEventListener('click',e=>{if(e.target.closest('#tableEditor')){const s=w.VarnaTable50.selected();$('#cellPadding50').value=s.textPadding50??12;$('#cellTracking50').value=s.tracking50??0;w.VarnaNumeric37.refresh();}});}

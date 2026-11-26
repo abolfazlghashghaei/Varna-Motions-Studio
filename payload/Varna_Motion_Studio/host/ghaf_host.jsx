@@ -1507,6 +1507,33 @@ GHAFHost.buildVarnaTable=function(encoded){
         // Shared controller moves the whole glass plane, dividers and text together.
         if(unified){var handle=c.layers.addNull();created.push(handle);handle.name=tag+'_surface_control';handle.inPoint=start;handle.outPoint=end;handle.property('ADBE Transform Group').property('ADBE Position').setValue([c.width/2,c.height/2]);for(var hi=0;hi<created.length-1;hi++){created[hi].parent=handle;created[hi].property('ADBE Transform Group').property('ADBE Opacity').expression='value * parent.transform.opacity / 100';}handle.property('ADBE Transform Group').property('ADBE Position').setValue([centerX,centerY]);GHAFHost._tableSurfaceEntry(handle,surfaceEntry,start,Math.min(end,start+anim));}else{for(var pi=0;pi<created.length;pi++){var pp=created[pi].property('ADBE Transform Group').property('ADBE Position'),pv=pp.value; if(dx||dy){if(pp.numKeys){for(var pk=1;pk<=pp.numKeys;pk++){var kv=pp.keyValue(pk);pp.setValueAtKey(pk,[kv[0]+dx,kv[1]+dy]);}}else pp.setValue([pv[0]+dx,pv[1]+dy]);}}}
         for(var anim66=0;anim66<created.length;anim66++){var target66=created[anim66];GHAFHost._tableMotion66(target66,p,!unified||/_surface_control$/.test(target66.name));}
+        // Apply the panel's local transform to the table as one group.
+        // Parent at neutral scale/rotation, then transform around the chosen pivot.
+        var transform89=p.transform89;
+        if(transform89){
+          function parameter89(name,fallback){var value=Number(transform89[name]);return isFinite(value)?value:fallback;}
+          var r89=Math.max(-3600,Math.min(3600,parameter89('rotation',0)));
+          var s89=Math.max(1,Math.min(600,parameter89('scale',100)));
+          var o89=Math.max(0,Math.min(100,parameter89('opacity',100)));
+          var ax89=Math.max(-width*2,Math.min(width*2,parameter89('ax',0)));
+          var ay89=Math.max(-height*2,Math.min(height*2,parameter89('ay',0)));
+          if(r89!==0||s89!==100||o89!==100||ax89!==0||ay89!==0){
+            var members89=created.slice(0),g89=c.layers.addNull();created.push(g89);
+            g89.name=tag+'_transform';g89.inPoint=start;g89.outPoint=end;
+            var props89=g89.property('ADBE Transform Group');
+            props89.property('ADBE Anchor Point').setValue([0,0]);
+            props89.property('ADBE Position').setValue([centerX+ax89,centerY+ay89]);
+            for(var n89=0;n89<members89.length;n89++){
+              var child89=members89[n89];
+              if(unified&&child89!==handle)continue;
+              child89.parent=g89;
+              if(o89!==100)child89.property('ADBE Transform Group').property('ADBE Opacity').expression='value * parent.transform.opacity / 100';
+            }
+            props89.property('ADBE Rotate Z').setValue(r89);
+            props89.property('ADBE Scale').setValue([s89,s89]);
+            props89.property('ADBE Opacity').setValue(o89);
+          }
+        }
         if(!p.preview&&p.entrySound66&&p.entrySound66.enabled===true){var textOwners66=created.slice(0);for(var si66=0;si66<textOwners66.length;si66++){var textOwner66=textOwners66[si66];if(!/_text$/.test(textOwner66.name))continue;var cues66=GHAFHost._entrySound66(textOwner66,{text:String(textOwner66.property('ADBE Text Properties').property('ADBE Text Document').value.text),start:textOwner66.inPoint,end:textOwner66.outPoint},p.entrySound66);for(var ci66=0;ci66<cues66.length;ci66++)created.push(cues66[ci66]);}}
         for(var gi=0;gi<created.length;gi++){created[gi].guideLayer=!!p.preview;created[gi].shy=!!p.preview;}GHAFHost._deleteLayers(oldPreview);if(!p.preview)c.time=start;app.endUndoGroup();return GHAFHost._ok({layers:created.length,tag:tag,start:start,end:end});
     }catch(e){for(i=created.length-1;i>=0;i--)try{created[i].remove();}catch(ignore){}app.endUndoGroup();return GHAFHost._err(e.toString());}

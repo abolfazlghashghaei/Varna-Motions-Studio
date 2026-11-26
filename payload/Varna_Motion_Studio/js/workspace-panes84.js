@@ -1,6 +1,8 @@
 /* Resizable work areas: original control nodes, original handlers and project data.
    Only workspace dimensions are stored locally; previews never create host layers. */
 (function(w){'use strict';if(!document.documentElement.hasAttribute('data-ui77'))return;
+if(document.documentElement.hasAttribute('data-ui91'))return; // UI91 owns the viewport and property layout.
+
 const $=(s,r=document)=>r.querySelector(s),en=()=>w.VarnaI18n52?.language()==='en',t=(fa,english)=>en()?english:fa,labels=[];
 function el(tag,cls){const n=document.createElement(tag);if(cls)n.className=cls;return n;}
 function text(n,fa,english){labels.push([n,fa,english]);n.textContent=t(fa,english);return n;}

@@ -1,0 +1,12 @@
+{
+  "fullPackage": "/workspace/delivery-ui91",
+  "ui": 91,
+  "productFiles": 7909,
+  "originalLibraryFiles": 4429,
+  "sourceFilesCopied": 49,
+  "sourceFilesReused": 3430,
+  "baseDeliveryUnchanged": true,
+  "nativeAdobeTested": false,
+  "fullPreparerCases": 7,
+  "assembledBrowserCases": 54
+}

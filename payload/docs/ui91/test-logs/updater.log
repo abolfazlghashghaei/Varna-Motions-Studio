@@ -1,0 +1,1 @@
+PASS UI91 updater: 17 fixture cases; exact rollback, idempotency, 3 engine profiles, integrity rejection and corrected restore launcher. Real Windows/Adobe untested.

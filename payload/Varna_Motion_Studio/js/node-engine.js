@@ -54,6 +54,36 @@
     }catch(e){return {level:'Unknown',packs:[],version:''};}
   };
 
+  // Resolve only named tools in configured folders and PATH. Scanning does not execute anything.
+  api.findSpeechTool91=function(tool,configured,modelFolder,chosenFolder){
+    const names={ffmpeg:['ffmpeg'],whisper:['whisper-cli']}[tool];
+    if(!names)return '';
+    const windows=process.platform==='win32';
+    const executableNames=names.map(name=>name+(windows?'.exe':''));
+    const clean=value=>String(value||'').trim().replace(/^"(.*)"$/,'$1');
+    const isTool=file=>{
+      try{
+        if(!executableNames.some(name=>windows?name===path.basename(file).toLowerCase():name===path.basename(file)))return false;
+        if(!fs.statSync(file).isFile())return false;
+        if(!windows)fs.accessSync(file,fs.constants.X_OK);
+        return true;
+      }catch(_){return false;}
+    };
+    const current=clean(configured),models=clean(modelFolder),chosen=clean(chosenFolder);
+    if(!chosen&&current&&path.isAbsolute(current)&&isTool(current))return path.normalize(current);
+    const roots=chosen?[chosen]:[
+      current,path.dirname(current),models,path.dirname(models),api.defaults.root,
+      ...(process.env.PATH||'').split(path.delimiter)
+    ];
+    const folders=new Set(roots.map(clean).filter(folder=>path.isAbsolute(folder)));
+    const subfolders=['','bin','Release',path.join('bin','Release'),path.join('build','bin'),path.join('build','bin','Release')];
+    for(const folder of folders)for(const subfolder of subfolders)for(const name of executableNames){
+      const candidate=path.join(folder,subfolder,name);
+      if(isTool(candidate))return candidate;
+    }
+    return '';
+  };
+
   api.listModels=function(input){
     input=input||api.defaults.models;
     if(!exists(input)) return [];
